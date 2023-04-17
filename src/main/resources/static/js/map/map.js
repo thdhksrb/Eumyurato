@@ -1,25 +1,3 @@
-var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-var options = { //지도를 생성할 때 필요한 기본 옵션
-    center: new kakao.maps.LatLng(37.54, 126.96), //지도의 중심좌표.
-    level: 7 //지도의 레벨(확대, 축소 정도)
-};
-
-var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-
-// 지도를 표시하는 div 크기를 변경하는 함수입니다
-function resizeMap() {
-    var mapContainer = document.getElementById('map');
-    mapContainer.style.width = '650px';
-    mapContainer.style.height = '650px';
-}
-
-function relayout() {
-
-    // 지도를 표시하는 div 크기를 변경한 이후 지도가 정상적으로 표출되지 않을 수도 있습니다
-    // 크기를 변경한 이후에는 반드시  map.relayout 함수를 호출해야 합니다
-    // window의 resize 이벤트에 의한 크기변경은 map.relayout 함수가 자동으로 호출됩니다
-    map.relayout();
-}
 //toggler
 $(document).ready(function(){
     $('#kt_mega_menu_toggle').on('click', function(){
@@ -27,22 +5,38 @@ $(document).ready(function(){
     });
 });
 
-//ajax
-$(document).ready(function() {
-    // 서버로부터 데이터를 가져와서 처리하는 코드
-    $.ajax({
-        url: "getPerformanceData.php",
-        success: function(data) {
-            // 가져온 데이터를 기반으로 리스트를 생성하는 코드
-            var performanceList = $('#performanceList');
-            $.each(data, function(i, item) {
-                var listItem = $('<li>');
-                var image = $('<img>').attr('src', item.poster);
-                var artist = $('<div>').text(item.artist).addClass('artist');
-                var datetime = $('<div>').text(item.datetime).addClass('datetime');
-                listItem.append(image).append(artist).append(datetime);
-                performanceList.append(listItem);
+
+// 지도 객체 생성
+var container = document.getElementById('map');
+var options = {
+    center: new kakao.maps.LatLng(37.54, 126.96),
+    level: 7
+};
+var map = new kakao.maps.Map(container, options);
+
+// HTML 사이드바 요소 가져오기
+var festivals = document.getElementById('festivals');
+
+// 모든 마커 정보를 가져와서 출력
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'festival.json');
+xhr.onload = function () {
+    if (xhr.status === 200) {
+        var data = JSON.parse(xhr.responseText);
+        for (var i = 0; i < data.records.length; i++) {
+            var record = data.records[i];
+            var marker = new kakao.maps.Marker({
+                map: map,
+                position: new kakao.maps.LatLng(record.위도, record.경도),
+                title: record.축제명
             });
+            var li = document.createElement('li');
+            li.innerHTML = '<h3>' + record.축제명 + '</h3>' +
+                '<p><strong>개최장소: </strong>' + record.개최장소 + '</p>' +
+                '<p><strong>축제기간: </strong>' + record.축제시작일자 + ' - ' + record.축제종료일자 + '</p>' +
+                '<p><strong>축제내용: </strong>' + record.축제내용 + '</p>';
+            festivals.appendChild(li);
         }
-    });
-});
+    }
+};
+xhr.send();
