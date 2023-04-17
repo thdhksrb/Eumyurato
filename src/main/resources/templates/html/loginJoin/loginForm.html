@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<!--
+Author: Keenthemes
+Product Name: Start - Bootstrap 5 HTML Multipurpose Admin Dashboard Template
+Purchase: https://themes.getbootstrap.com/product/start-multipurpose-admin-dashboard-theme/
+Website: http://www.keenthemes.com
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Dribbble: www.dribbble.com/keenthemes
+Like: www.facebook.com/keenthemes
+License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
+-->
+<html lang="en">
+<!--begin::Head-->
+
+<head>
+    <base href="../">
+    <title>Start - Bootstrap 5 HTML Multipurpose Admin Dashboard Template by Keenthemes</title>
+    <meta charset="utf-8"/>
+    <meta name="description"
+          content="Check out all the features of the Start admin panel. A large number of templates, components and widgets."/>
+    <meta name="keywords"
+          content="Start, bootstrap, bootstrap 5, admin themes, free admin themes, bootstrap admin, bootstrap dashboard, html admin theme, html template"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:locale" content="en_US"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="Start - Bootstrap 5 HTML Multipurpose Admin Dashboard Template"/>
+    <meta property="og:url"
+          content="https://themes.getbootstrap.com/product/start-multipurpose-admin-dashboard-theme/"/>
+    <meta property="og:site_name" content="Keenthemes | Start"/>
+    <link rel="canonical" href="https://preview.keenthemes.com/start"/>
+    <link rel="shortcut icon" href="assets/media/logos/favicon.ico"/>
+    <!--begin::Fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"/>
+    <!--end::Fonts-->
+    <!--begin::Global Stylesheets Bundle(used by all pages)-->
+    <link href="/static/css/loginJoin/loginJoin2.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/css/loginJoin/loginJoin1.css" rel="stylesheet" type="text/css"/>
+    <!--end::Global Stylesheets Bundle-->
+</head>
+<!--end::Head-->
+<!--begin::Body-->
+
+<body id="kt_body" class="bg-white">
+<!--begin::Main-->
+<div class="d-flex flex-column flex-root">
+    <!--begin::Login-->
+    <div class="d-flex flex-column flex-lg-row flex-column-fluid" id="kt_login">
+        <!--begin::Aside-->
+        <!--사이드-->
+        <div class="d-flex flex-column flex-lg-row-auto bg-primary pt-15 pt-lg-0" id="leftArea">
+            <!--begin::Aside Top-->
+            <div class="d-flex flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
+                <!--begin::Aside Logo-->
+                <a href="../dist/index.html" class="mb-6">
+                    <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
+                        <img alt="로고" src="/static/img/E114_logo.png" class="h-450px h-lg-450px"/>
+                    </div>
+                </a>
+                <!--end::Aside Logo-->
+            </div>
+        </div>
+
+        <style>
+            #leftArea {
+                position: fixed;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                z-index: 9999;
+                background-color: #007bff; /* 배경색 설정 */
+            }
+
+            @media (max-width: 992px) {
+                #leftArea {
+                    position: static;
+                    background-color: #007bff; /* 배경색 설정 */
+                }
+            }
+        </style>
+
+        <!--사이드-->
+        <!--begin::Aside-->
+        <!--begin::Content-->
+        <!--로그인폼-->
+        <div class="login-content flex-lg-row-fluid d-flex flex-column justify-content-center position-relative overflow-hidden py-10 py-lg-20 px-10 p-lg-7 mx-auto mw-450px w-100">
+            <!--begin::Wrapper-->
+            <div class="d-flex flex-column-fluid flex-center py-10">
+                <!--begin::Signin Form-->
+                <form class="form w-100" novalidate="novalidate" id="kt_login_signin_form"
+                      data-after-login-url="../dist/index.html">
+                    <!--begin::Title-->
+                    <div class="pb-5 pb-lg-15">
+                        <h3 class="fw-bolder text-dark display-6">Welcome to Eumyurato</h3>
+                    </div>
+                    <!--begin::Title-->
+                    <!--begin::Form group-->
+                    <div class="fv-row mb-10">
+                        <label class="form-label fs-6 fw-bolder text-dark">아이디</label>
+                        <input class="form-control form-control-lg form-control-solid" type="text" name="username"
+                               autocomplete="off" style="border-color: #0099FF;"/>
+                    </div>
+                    <!--end::Form group-->
+                    <!--begin::Form group-->
+                    <div class="fv-row mb-10">
+                        <div class="d-flex justify-content-between mt-n5">
+                            <label class="form-label fs-6 fw-bolder text-dark pt-5">비밀번호</label>
+                        </div>
+                        <input class="form-control form-control-lg form-control-solid" type="password"
+                               name="password" autocomplete="off" style="border-color: #0099FF;"/>
+                    </div>
+                    <!--end::Form group-->
+                    <!--begin::Action-->
+                    <div class="pb-lg-0 pb-5 d-flex align-items-center justify-content-between">
+                        <!-- d-flex, align-items-center, justify-content-between 클래스 추가 -->
+                        <div> <!-- 왼쪽에 정렬할 텍스트 -->
+                            <a href="#" target="_blank"
+                               class="text-gray-600 text-hover-primary ms-3" id="kt_login_signin_form_id_reset_button">아이디
+                                찾기</a>
+                            <a target="_blank"
+                               class="text-gray-600 text-hover-primary ms-3">|</a>
+                            <a href="#" target="_blank"
+                               class="text-gray-600 text-hover-primary ms-3"
+                               id="kt_login_signin_form_password_reset_button">비밀번호 찾기</a>
+                            <!-- 왼쪽에 정렬할 텍스트와의 간격을 조정 -->
+                            <a target="_blank"
+                               class="text-gray-600 text-hover-primary ms-3">|</a>
+                            <a href="#" class="text-gray-600 text-hover-primary ms-3" id="kt_login_signup_choose_form">회원가입</a>
+                        </div>
+                        <button type="submit" id="kt_login_signin_form_submit_button"
+                                class="btn btn-primary-ex fw-bolder fs-6 px-8 py-4">로그인
+                        </button> <!-- 오른쪽에 정렬할 버튼 -->
+                    </div>
+                    <!--end::Action-->
+                </form>
+            </div>
+        </div>
+	</div>
+</div>
+</body>
+</html>
