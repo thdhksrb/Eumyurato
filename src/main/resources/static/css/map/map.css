@@ -1,0 +1,69 @@
+* {margin: 0px; padding: 0px; box-sizing: border-box;}
+a {text-decoration: none; color: #000;}
+li {list-style: none;}
+
+.wrap {width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;}
+.left-side {width: 70%; height: 100vh; background: #888;}
+.sideMenu {width: 30%; height: 100vh; display: flex; flex-flow: column nowrap; font-size: 18px;}
+.nav_top {background: #c4cee9; width: 100%; height: 25%; display: flex; flex-flow: column; align-items: center; justify-content: center;}
+.nav_top > div {width: 100%; height: 33.33%; display: flex; align-items: center;}
+.nav_hd {justify-content: space-between; padding: 0% 5%;}
+.nav_srBox {justify-content: center; padding: 0% 5%;}
+.nav_srBox > input {padding: 15px; width: 80%; border-radius: 10px; border: 2px solid #062d92; font-size: 16px; outline: none; margin-right: 10px;}
+.categoryWrap {justify-content: center; gap: 10px;}
+.categoryWrap > a {display: block; width: 21%; padding: 2% 0%; background: #062d92; text-align: center; border-radius: 10px; font-size: 15px; color: #fff;}
+.categoryWrap > a:hover {background: #3662cf;}
+.nav_bt {width: 100%; height: 75%; background: #ffffff;}
+.nav_toggleBtn {display: none;}
+
+@media screen and (max-width: 800px) {
+    .sideMenu {
+        width: 0%;
+        transition: 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+        position: absolute;
+        z-index: 1000;
+        background-color: #fff;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .left-side {
+        width: 100%;
+        transition: 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+
+    .nav_toggleBtn {
+        display: block;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1001;
+    }
+
+    .sideMenu.active {
+        width: 70%;
+    }
+
+    .left-side.active {
+        width: 30%;
+    }
+}
+.nav_bt {
+    padding: 20px;
+}
+/*fonts.css*/
+@font-face {
+    font-family: 'NanumGothicLight'; /*font 이름*/
+    font-style: 'normal'; /* font 스타일 정의 (기울임, 일반) */
+    font-weight: 400; /* font 굵기 정의 */
+    /* 브라우저&디바이스 환경에 따른 font 파일 위치 정의 */
+./assets/NanumGothicLight.ttf
+src: url('/assets/NanumGothicLight.ttf'); /* IE9 Compat Modes */
+}
+
+/* 폰트 적용 */
+.body {
+    font-family: 'font-name';
+}
+
+
