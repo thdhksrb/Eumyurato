@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--begin::Global Stylesheets Bundle(used by all pages)-->
+    <link th:href="@{/css/plugins_bundle.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/style_bundle.css}" rel="stylesheet" type="text/css" />
+    <!--end::Global Stylesheets Bundle-->
+    <title>EUMYURATO :: MAP</title>
+
+    <style>
+        * {margin: 0px; padding: 0px; box-sizing: border-box;}
+        a {text-decoration: none; color: #000;}
+        li {list-style: none;}
+
+        .wrap {width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;}
+        .left-side {width: 70%; height: 100vh; background: #888;}
+        .sideMenu {width: 30%; height: 100vh; display: flex; flex-flow: column nowrap; font-size: 18px;}
+        .nav_top {background: #c4cee9; width: 100%; height: 25%; display: flex; flex-flow: column; align-items: center; justify-content: center;}
+        .nav_top > div {width: 100%; height: 33.33%; display: flex; align-items: center;}
+        .nav_hd {justify-content: space-between; padding: 0% 5%;}
+        .nav_srBox {justify-content: center; padding: 0% 5%;}
+        .nav_srBox > input {padding: 15px; width: 80%; border-radius: 10px; border: 2px solid #062d92; font-size: 16px; outline: none; margin-right: 10px;}
+        .categoryWrap {justify-content: center; gap: 10px;}
+        .categoryWrap > a {display: block; width: 21%; padding: 2% 0%; background: #062d92; text-align: center; border-radius: 10px; font-size: 15px; color: #fff;}
+        .categoryWrap > a:hover {background: #3662cf;}
+        .nav_bt {width: 100%; height: 75%; background: #ffffff;}
+        .nav_toggleBtn {display: none;}
+
+        @media screen and (max-width: 800px) {
+            .sideMenu {
+                width: 0%;
+                transition: 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+                position: absolute;
+                z-index: 1000;
+                background-color: #fff;
+                height: 100vh;
+                overflow: hidden;
+            }
+
+            .left-side {
+                width: 100%;
+                transition: 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+            }
+
+            .nav_toggleBtn {
+                display: block;
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 1001;
+            }
+
+            .sideMenu.active {
+                width: 70%;
+            }
+
+            .left-side.active {
+                width: 30%;
+            }
+        }
+        .nav_bt {
+            padding: 20px;
+        }
+        /*fonts.css*/
+        @font-face {
+            font-family: 'NanumGothicLight'; /*font 이름*/
+            font-style: 'normal'; /* font 스타일 정의 (기울임, 일반) */
+            font-weight: 400; /* font 굵기 정의 */
+            /* 브라우저&디바이스 환경에 따른 font 파일 위치 정의 */
+        ./assets/NanumGothicLight.ttf
+            src: url('/assets/NanumGothicLight.ttf'); /* IE9 Compat Modes */
+        }
+
+        /* 폰트 적용 */
+        .body {
+            font-family: 'font-name';
+        }
+    </style>
+
+</head>
+<body>
+<div class="wrap">
+    <div class="left-side">
+        <div id="map" style="width:100%;height:100%;"></div>
+        <div class="nav_toggleBtn">
+            <button class="btn btn-icon btn-accent me-2 me-lg-6" id="kt_mega_menu_toggle">
+                <!--begin::Svg Icon | path: icons/duotune/general/gen059.svg-->
+                <span class="svg-icon svg-icon-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 16 15" fill="none">
+                <rect y="6" width="16" height="3" rx="1.5" fill="black" />
+                <rect opacity="0.3" y="12" width="8" height="3" rx="1.5" fill="black" />
+                <rect opacity="0.3" width="12" height="3" rx="1.5" fill="black" />
+            </svg>
+        </span>
+                <!--end::Svg Icon-->
+            </button>
+        </div>
+
+    </div>
+    <div class="sideMenu">
+        <div class="d-flex align-items-center">
+
+        </div>
+        <div class="nav_top">
+            <div class="nav_hd">
+                <a href="javascript:;"><img th:src="@{/assets/logo.png}" alt="logo"></a>
+                <div class="loginBox">
+
+                    <button class="btn btn-icon btn-sm btn-light-info fw-bolder pulse pulse-danger" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" id="kt_activities_toggle">
+                        <span class="position-absolute fs-6">3</span>
+                        <span class="pulse-ring"></span>
+                    </button> <!--notification-->
+
+                    <a href="javascript:;"><img th:src="@{/assets/com013.svg}" alt="userBtn"/></a> <!--my page-->
+                    <a href="javascript:;"><img th:src="@{/assets/arr076.svg}" alt="logoutBtn"/></a> <!--Logout-->
+                </div>
+            </div>
+
+            <div class="nav_srBox">
+                <input type="text" placeholder="Search...">
+                <a href="javascript:;"><img th:src="@{/assets/gen021.svg}" alt="searchBtn"/></a>
+
+            </div>
+
+            <div class="categoryWrap">
+                <a href="javascript:;">전체</a>
+                <a href="javascript:;">버스킹</a>
+                <a href="javascript:;">연극장</a>
+                <a href="javascript:;">지역축제</a>
+                <a href="javascript:;">즐겨찾기</a>
+            </div>
+        </div>
+        <div class="nav_bt">
+            <!-- 공연정보 -->
+            <div class="conInfo">
+            <h1>공연정보</h1>
+                <ul id="performanceList"></ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--begin::Global Javascript Bundle(used by all pages)-->
+<script th:src="@{/js/plugins_bundle.js}"></script>
+<script th:src="@{/js/scripts_bundle.js}"></script>
+<!--end::Global Javascript Bundle-->
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7d3db9b1c5514ded8407b245af6bb384"></script>
+<script>
+    var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+    var options = { //지도를 생성할 때 필요한 기본 옵션
+        center: new kakao.maps.LatLng(37.54, 126.96), //지도의 중심좌표.
+        level: 7 //지도의 레벨(확대, 축소 정도)
+    };
+
+    var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+
+    // 지도를 표시하는 div 크기를 변경하는 함수입니다
+    function resizeMap() {
+        var mapContainer = document.getElementById('map');
+        mapContainer.style.width = '650px';
+        mapContainer.style.height = '650px';
+    }
+
+    function relayout() {
+
+        // 지도를 표시하는 div 크기를 변경한 이후 지도가 정상적으로 표출되지 않을 수도 있습니다
+        // 크기를 변경한 이후에는 반드시  map.relayout 함수를 호출해야 합니다
+        // window의 resize 이벤트에 의한 크기변경은 map.relayout 함수가 자동으로 호출됩니다
+        map.relayout();
+    }
+    //toggler
+    $(document).ready(function(){
+        $('#kt_mega_menu_toggle').on('click', function(){
+            $('.mapWrap, .sideMenu').toggleClass('active');
+        });
+    });
+
+    //ajax
+    $(document).ready(function() {
+        // 서버로부터 데이터를 가져와서 처리하는 코드
+        $.ajax({
+            url: "getPerformanceData.php",
+            success: function(data) {
+                // 가져온 데이터를 기반으로 리스트를 생성하는 코드
+                var performanceList = $('#performanceList');
+                $.each(data, function(i, item) {
+                    var listItem = $('<li>');
+                    var image = $('<img>').attr('src', item.poster);
+                    var artist = $('<div>').text(item.artist).addClass('artist');
+                    var datetime = $('<div>').text(item.datetime).addClass('datetime');
+                    listItem.append(image).append(artist).append(datetime);
+                    performanceList.append(listItem);
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>
