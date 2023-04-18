@@ -10,11 +10,10 @@ Dribbble: www.dribbble.com/keenthemes
 Like: www.facebook.com/keenthemes
 License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
 -->
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <!--begin::Head-->
 
 <head>
-    <base href="../">
     <title>Start - Bootstrap 5 HTML Multipurpose Admin Dashboard Template by Keenthemes</title>
     <meta charset="utf-8"/>
     <meta name="description"
@@ -28,14 +27,17 @@ License: For each use you must have a valid license purchased only from above li
     <meta property="og:url"
           content="https://themes.getbootstrap.com/product/start-multipurpose-admin-dashboard-theme/"/>
     <meta property="og:site_name" content="Keenthemes | Start"/>
+
+
     <link rel="canonical" href="https://preview.keenthemes.com/start"/>
     <link rel="shortcut icon" href="assets/media/logos/favicon.ico"/>
     <!--begin::Fonts-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"/>
     <!--end::Fonts-->
     <!--begin::Global Stylesheets Bundle(used by all pages)-->
-    <link href="/static/css/pay/pay1.css" rel="stylesheet" type="text/css"/>
-    <link href="/static/css/pay/pay2.css" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/pay/pay1.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/pay/pay2.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/pay/calenderPay.css}" rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
 </head>
 <!--end::Head-->
@@ -52,16 +54,15 @@ License: For each use you must have a valid license purchased only from above li
             <!-- begin::Aside Top -->
             <div class="d-flex flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
                 <!-- begin::Aside Logo -->
-                <a href="../dist/index.html" class="mb-6">
+                <a th:href="@{../dist/index.html}" class="mb-6">
                     <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
-                        <img alt="로고" src="/static/img/E114_logo.png" class="h-450px h-lg-450px"/>
+                        <img alt="로고" th:src="@{/img/E114_logo.png}" class="h-450px h-lg-450px"/>
                     </div>
                 </a>
                 <!-- end::Aside Logo -->
             </div>
         </div>
         <!-- end::Aside -->
-
         <div class="d-flex flex-column flex-lg-row-auto flex-column-fluid" id="rightArea"
              style="display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; max-width: 75.8%; overflow-x: hidden;">
             <div class="d-flex flex-wrap"
@@ -70,20 +71,38 @@ License: For each use you must have a valid license purchased only from above li
                     헤드 영역~~
                 </div>
             </div>
-
             <div class="d-flex flex-wrap"
                  style="width: 100%; height: 600px; background-color:#AFB2C2; margin-bottom: 0;">
-                <div style="color:#ffffff; background-color:#ff0000; width: 400px; height: 500px; padding: 20px !important; margin:auto; margin-left: 50px;">
-                    헤드 영역~~
-                </div>
+                <div class="center">
+                    <table class="Calendar">
+                        <thead>
+                        <tr>
+                            <td onClick="prevCalendar();" style="cursor:pointer;">&#60;</td>
+                            <td colspan="5">
+                                <span id="calYear"></span>년
+                                <span id="calMonth"></span>월
+                            </td>
+                            <td onClick="nextCalendar();" style="cursor:pointer;">&#62;</td>
+                        </tr>
+                        <tr>
+                            <td>일</td>
+                            <td>월</td>
+                            <td>화</td>
+                            <td>수</td>
+                            <td>목</td>
+                            <td>금</td>
+                            <td>토</td>
+                        </tr>
+                        </thead>
 
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
                 <div style="color:#ffffff; background-color:#ff0000; width: 500px; height: 300px; padding: 20px !important; margin:auto; margin-left: 50px;">
                     헤드 영역~~
                 </div>
-
             </div>
-
-
             <div class="d-flex flex-wrap" style="width: 100%; height: 188px; background-color:#F2C2C2; margin-bottom: 0;">
                 <div class="fs-3" style="color:#ffffff; background-color:#ff0000; width: 150px; height: 50px; margin-top: 10px; margin-left: 72%;">
                     후원금액 : 6000원
@@ -93,16 +112,11 @@ License: For each use you must have a valid license purchased only from above li
                         style=" width: 200px; height: 50px; margin-left: auto; margin-right: 30px;">후원 하기
                 </button>
             </div>
-
-
-
-
         </div>
-
-
     </div>
 </div>
+<script type="text/javascript" th:src="@{/js/pay/calenderPay.js}"></script>
+
+
 </body>
-
-
 </html>
