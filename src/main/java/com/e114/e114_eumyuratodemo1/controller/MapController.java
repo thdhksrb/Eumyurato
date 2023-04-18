@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MapController {
     @GetMapping("/map")
     public String showMap() {
-        return "html/pay/pay1";
+        return "html/pay/pay2";
     }
 }
