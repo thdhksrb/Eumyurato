@@ -41,6 +41,18 @@ xhr.onload = function () {
                 position: new kakao.maps.LatLng(record.위도, record.경도),
                 title: record.축제명
             });
+
+            // 마커에 표시할 인포윈도우를 생성합니다
+            var infowindow = new kakao.maps.InfoWindow({
+                content: data.records[i].축제명 // 인포윈도우에 표시할 내용
+            });
+
+            // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+            // 이벤트 리스너로는 클로저를 만들어 등록합니다
+            // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+            kakao.maps.event.addListener(marker, 'click', clickMakerListener(map, marker, infowindow));
+            kakao.maps.event.addListener(map, 'click', clickMapListener(infowindow));
+
             var li = document.createElement('li');
             li.innerHTML = '<h3>' + record.축제명 + '</h3>' +
                 '<p><strong>개최장소: </strong>' + record.개최장소 + '</p>' +
@@ -48,6 +60,23 @@ xhr.onload = function () {
                 '<p><strong>축제내용: </strong>' + record.축제내용 + '</p>';
             festivals.appendChild(li);
         }
+
+// 인포윈도우를 표시하는 클로저를 만드는 함수입니다
+        function clickMakerListener(map, marker, infowindow) {
+            return function() {
+                infowindow.open(map, marker);
+            };
+        }
+
+// 인포윈도우를 닫는 클로저를 만드는 함수입니다
+        function clickMapListener(infowindow) {
+            return function () {
+                infowindow.close();
+            };
+        }
+
+
     }
 };
+
 xhr.send();
