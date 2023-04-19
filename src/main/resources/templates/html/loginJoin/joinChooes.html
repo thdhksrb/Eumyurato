@@ -43,11 +43,13 @@ License: For each use you must have a valid license purchased only from above li
 
 <body id="kt_body" class="bg-white">
 <!--begin::Main-->
-<div class="d-flex flex-column flex-root flex-lg-row flex-column-fluid">
+<div class="d-flex flex-column flex-root">
     <!--begin::Login-->
+    <div class="d-flex flex-column flex-lg-row flex-column-fluid" id="kt_login">
         <!--begin::Aside-->
         <!--사이드-->
-        <div class="d-flex flex-column flex-lg-row-auto bg-primary pt-15 pt-lg-0" id="leftArea">
+
+        <div class="d-flex flex-column flex-lg-row-auto bg-primary pt-15 pt-lg-0 center" id="leftArea">
             <!--begin::Aside Top-->
             <div class="d-flex flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
                 <!--begin::Aside Logo-->
@@ -59,23 +61,42 @@ License: For each use you must have a valid license purchased only from above li
                 <!--end::Aside Logo-->
             </div>
         </div>
-
-
-    <div class="login-content flex-lg-row-fluid d-flex flex-column position-relative overflow-hidden py-10 py-lg-20 px-10 p-lg-7 mx-auto mw-450px w-100" style="justify-content: center; align-items: center; transform: translate(50%, 0%)">
-            <!--begin::Signin Form-->
-            <div class="wrapper-btn">
-                <button type="submit" id="btn1"
-                        class="btn btn-primary fw-bolder fs-3 px-8 py-4 mb-15 custom-btn">일반회원 회원가입
-                </button>
-                <button type="submit" id="btn2"
-                        class="btn btn-primary fw-bolder fs-3 px-8 py-4 mb-15 custom-btn">아티스트회원 회원가입
-                </button>
-                <button type="submit" id="btn3"
-                        class="btn btn-primary fw-bolder fs-3 px-8 py-4 mb-15 custom-btn">기업회원 회원가입
-                </button>
+        <div class="d-flex flex-column flex-lg-row-auto bg-primary pt-15 pt-lg-0 d-none d-lg-flex" id="leftArea2">
+            <div class="d-flex flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
+                <!--begin::Aside Logo-->
+                <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
+                    <img alt="로고" src="/static/img/E114_logo.png" class="h-450px h-lg-450px"/>
+                </div>
+                <!--end::Aside Logo-->
             </div>
         </div>
 
+
+        <!--사이드-->
+        <!--begin::Aside-->
+        <!--begin::Content-->
+        <!--로그인폼-->
+        <div class="login-content flex-lg-row-fluid d-flex flex-column overflow-hidden py-10 py-lg-20 px-10 p-lg-7 mx-auto mw-450px w-100 text-center" >
+            <!--begin::Wrapper-->
+            <!--begin::Signin Form-->
+            <form class="form w-100 " novalidate="novalidate" id="kt_login_signin_form">
+            <div class="wrapper-btn">
+                <button type="submit" id="btn1"
+                        class="btn btn-primary fw-bolder fs-3 px-8 py-4 my-3 me-4 mb-15 custom-btn">일반회원 회원가입
+                </button>
+                <button type="submit" id="btn2"
+                        class="btn btn-primary fw-bolder fs-3 px-8 py-4 my-3 me-4 mb-15 custom-btn">아티스트회원 회원가입
+                </button>
+                <button type="submit" id="btn3"
+                        class="btn btn-primary fw-bolder fs-3 px-8 py-4 my-3 me-4 mb-15 custom-btn">기업회원 회원가입
+                </button>
+            </div>
+
+
+                <!--end::Action-->
+            </form>
+        </div>
+    </div>
 </div>
 </body>
 </html>

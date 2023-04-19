@@ -2343,7 +2343,10 @@ progress {
 
 @media (prefers-reduced-motion: reduce) {
     .form-control {
-        transition: none
+        transition: none;
+    }
+    .login-btn{
+        transition:none;
     }
 }
 
