@@ -49561,6 +49561,7 @@ body {
     padding: 10px;
     max-width: 450px;
     margin: 0 auto;
+    position: relative;
 }
 
 /* 폼 그룹의 스타일 */
@@ -49582,13 +49583,27 @@ body {
     top: 0;
     bottom: 0;
     z-index: 9999;
-    background-color: #007bff; /* 배경색 설정 */
+    background-color: #007bff;
 }
 
+#leftArea2 {
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 9998;
+    background-color: #007bff;
+}
 
-@media (max-width: 992px) {
+@media screen and (max-width: 992px) {
     #leftArea {
         position: static;
+        z-index: 2;
+        background-color: #007bff; /* 배경색 설정 */
+    }
+    #leftArea2 {
+        display: none;
+        position: static;
+        z-index: 1;
         background-color: #007bff; /* 배경색 설정 */
     }
 
