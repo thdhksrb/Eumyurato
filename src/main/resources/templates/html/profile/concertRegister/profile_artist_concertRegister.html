@@ -10,7 +10,7 @@ Dribbble: www.dribbble.com/keenthemes
 Like: www.facebook.com/keenthemes
 License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
 -->
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <!--begin::Head-->
 <head><base href="../">
 	<title>profile_mainpage</title>
@@ -30,10 +30,9 @@ License: For each use you must have a valid license purchased only from above li
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 	<!--end::Fonts-->
 	<!--begin::Page Vendor Stylesheets(used by this page)-->
-	<link href="/static/css/profile/profile3.css" rel="stylesheet" type="text/css" />
+	<link href="/static/css/profile/profile1.css" rel="stylesheet" type="text/css" />
 	<!--end::Page Vendor Stylesheets-->
 	<!--begin::Global Stylesheets Bundle(used by all pages)-->
-	<link href="/static/css/profile/profile1.css" rel="stylesheet" type="text/css" />
 	<link href="/static/css/profile/profile2.css" rel="stylesheet" type="text/css" />
 
 	<!--end::Global Stylesheets Bundle-->
@@ -89,6 +88,11 @@ License: For each use you must have a valid license purchased only from above li
 										<div class="menu-item" style="margin: 3px">
 											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
 												<span class="menu-title">종합</span>
+											</a>
+										</div>
+										<div class="menu-item" style="margin: 3px">
+											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
+												<span class="menu-title">접속률</span>
 											</a>
 										</div>
 										<div class="menu-item" style="margin: 3px">
@@ -152,13 +156,14 @@ License: For each use you must have a valid license purchased only from above li
 							<!--begin::Dropdown-->
 					<!--		<button class="btn btn-icon btn-sm btn-light-danger fw-bolder pulse pulse-danger" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" id="kt_activities_toggle">
 								<span class="position-absolute fs-6">3</span> -->
-					<!--			<span class="pulse-ring"></span>	-->
+					<!--		<span class="pulse-ring"></span>	-->
 							</button>
-					<!--		<button class="btn btn-icon fw-bolder" >
-								<img src="/static/img/logout.png" alt="로그아웃" width="24" height="24" href="account.html" />
-							</button>	-->
-							<a href="main/resources/templates/html/main/main.html" height="2" width="5"/>
+						<!--	<button class="btn btn-icon fw-bolder" >
+								<img src="/static/img/logout.png" width="24" height="24" href="../main/main.html" />
+							</button> -->
+							<a href="../../main/main.html" height="2" width="5">
 								<img src="/static/img/logout.png" width="24" height="24">
+							</a>
 							<!--begin::Menu-->
 
 
@@ -176,6 +181,10 @@ License: For each use you must have a valid license purchased only from above li
 									<path opacity="0.3" d="M21 14H3C2.4 14 2 13.6 2 13V11C2 10.4 2.4 10 3 10H21C21.6 10 22 10.4 22 11V13C22 13.6 21.6 14 21 14ZM22 20V18C22 17.4 21.6 17 21 17H3C2.4 17 2 17.4 2 18V20C2 20.6 2.4 21 3 21H21C21.6 21 22 20.6 22 20Z" fill="black" />
 								</svg>
 							</span>
+							<div id="sidebarContent">
+								<!-- 사이드바 내용을 이곳에 추가 -->
+
+							</div>
 							<!--end::Svg Icon-->
 						</button>
 
@@ -189,50 +198,134 @@ License: For each use you must have a valid license purchased only from above li
 				<!--end::Container-->
 			</div>
 			<div>
-				<div class="container">
-					<div style="color:#ffffff; background-color:#8ac297; padding:25px; height: 400px; margin-top: 30px; margin-bottom: 30px;">
-						검색영역~~
-					</div>
-				</div>
+				<div class="login-content flex-lg-row-fluid d-flex flex-column position-relative overflow-hidden py-10 py-lg-20 px-10 p-lg-7 mx-auto mw-600px w-100">
+					<!--begin::Wrapper-->
+					<div class="d-flex flex-column-fluid flex-center py-10">
+						<!--begin::Signin Form-->
+						<form class="form w-100" novalidate="novalidate">
+							<!--begin::Title-->
+							<div class="pb-5 pb-lg-1">
+								<h3 class="fw-bolder text-dark display-6">소규모 공연 등록</h3>
+							</div>
+							<!--begin::Image input-->
+							<div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url(/static/img/다운로드.jpg) ">
+								<!--begin::Image preview wrapper-->
+								<div class="image-input-wrapper w-400px h-400px" style="background-image: url(/static/img/다운로드.jpg)"></div>
+								<!--end::Image preview wrapper-->
 
-				<!-- 검색 영역과 카테고리 영역 사이에 공백을 추가 -->
-				<div class="mx-2" style="margin-top: 30px; margin-bottom: 30px;"></div>
+								<!--begin::Edit button-->
+								<label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+									   data-kt-image-input-action="change"
+									   data-bs-toggle="tooltip"
+									   data-bs-dismiss="click"
+									   title="Change avatar">
+									<i class="bi bi-pencil-fill fs-7"></i>
 
-				<div class="container">
-					<div style="color:#000000; background-color:#FFFFFF; padding:25px;  height: 600px;">
-						<table class="table table-rounded table-striped border gy-7 gs-7">
-							<thead>
-							<tr class="fw-bold fs-6 text-gray-800 border-bottom border-gray-200">
-								<th>Name</th>
-								<th>Position</th>
-								<th>Office</th>
-								<th>Age</th>
-								<th>Start date</th>
-								<th>Salary</th>
-							</tr>
-							</thead>
-							<tbody>
-							<tr>
-								<td>Tiger Nixon</td>
-								<td>System Architect</td>
-								<td>Edinburgh</td>
-								<td>61</td>
-								<td>2011/04/25</td>
-								<td>$320,800</td>
-							</tr>
-							<tr>
-								<td>Garrett Winters</td>
-								<td>Accountant</td>
-								<td>Tokyo</td>
-								<td>63</td>
-								<td>2011/07/25</td>
-								<td>$170,750</td>
-							</tr>
-							</tbody>
-						</table>
-					</div>
-					<div style="margin-top:20px;">
-						<!-- 리스트 내용 -->
+									<!--begin::Inputs-->
+									<input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+									<input type="hidden" name="avatar_remove" />
+									<!--end::Inputs-->
+								</label>
+								<!--end::Edit button-->
+
+								<!--begin::Cancel button-->
+								<span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+									  data-kt-image-input-action="cancel"
+									  data-bs-toggle="tooltip"
+									  data-bs-dismiss="click"
+									  title="Cancel avatar">
+         							<i class="bi bi-x fs-2"></i>
+     							</span>
+								<!--end::Cancel button-->
+
+								<!--begin::Remove button-->
+								<span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+									  data-kt-image-input-action="remove"
+									  data-bs-toggle="tooltip"
+									  data-bs-dismiss="click"
+									  title="Remove avatar">
+         							<i class="bi bi-x fs-2"></i>
+     							</span>
+								<!--end::Remove button-->
+							</div>
+							<!--end::Image input-->
+
+							<div class="fv-row mb-5">
+								<label class="form-label fs-6 fw-bolder text-dark pt-5">공연명</label>
+								<input class="form-control form-control-lg form-control-solid" type="text" placeholder=""
+									   name="fullname" autocomplete="off" style="border-color: #0099FF;"/>
+							</div>
+							<div class="fv-row mb-5">
+								<label class="form-label fs-6 fw-bolder text-dark pt-5">공연 위치</label>
+								<label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
+								<input class="form-control form-control-lg form-control-solid" type="text" placeholder=""
+									   name="password" autocomplete="off" style="border-color: #0099FF;"/>
+							</div>
+
+							<div class=" fv-row mb-5">
+								<label class="form-label fs-6 fw-bolder text-dark pt-5">공연자명</label>
+								<input class="form-control form-control-lg form-control-solid" type="text" placeholder=""
+									   name="cpassword" autocomplete="off" style="border-color: #0099FF;"/>
+							</div>
+							<div class=" fv-row mb-5">
+								<label class="form-label fs-6 fw-bolder text-dark pt-5">공연 시작 시간</label>
+								<label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
+								<!--                        <input class="form-control form-control-lg form-control-solid" type="text" placeholder=""
+                                                               name="fullname" autocomplete="off" style="border-color: #0099FF;"/>-->
+
+								<div id="bir_wrap">
+
+									<!-- BIRTH_YY -->
+									<div id="bir_yy">
+                            			<span class="box">
+                                			<input type="text" id="yy" class="int form-control form-control-lg form-control-solid" maxlength="4" placeholder="년(4자)" style="border-color: #0099FF;">
+                            			</span>
+									</div>
+
+									<!-- BIRTH_MM -->
+									<div id="bir_mm">
+										<span class="box ">
+                                			<select class="form-select" aria-label="Select example" id="mm" style="border-color: #0099FF;">
+                                    			<option>월</option>
+                                    			<option value="01">1</option>
+                                    			<option value="02">2</option>
+                                    			<option value="03">3</option>
+                                    			<option value="04">4</option>
+                                    			<option value="05">5</option>
+                                    			<option value="06">6</option>
+                                    			<option value="07">7</option>
+                                    			<option value="08">8</option>
+                                    			<option value="09">9</option>
+                                    			<option value="10">10</option>
+                                    			<option value="11">11</option>
+                                    			<option value="12">12</option>
+                                			</select>
+                            			</span>
+									</div>
+
+									<!-- BIRTH_DD -->
+									<div id="bir_dd">
+                            			<span class="box">
+                                			<input type="text" id="dd" class="int form-control form-control-lg form-control-solid" maxlength="2" placeholder="일" style="border-color: #0099FF;">
+                            			</span>
+									</div>
+
+								</div>
+							</div>
+							<div class="fv-row mb-10 mt-10"> <!-- mt-5를 추가하여 위쪽에 5단위의 빈 공간을 추가 -->
+								<div class="d-flex flex-wrap justify-content-center pb-lg-0 pb-5">
+									<!-- justify-content-end 클래스를 추가하여 오른쪽으로 정렬 -->
+									<button type="submit" class="btn btn-primary fw-bolder fs-4 px-8 py-4 my-3 me-4">공연 등록
+									</button>
+								</div>
+							</div>
+
+							<!--end::Form group-->
+							<!--begin::Form group-->
+
+
+							<!--end::Form group-->
+						</form>
 					</div>
 				</div>
 			</div>
