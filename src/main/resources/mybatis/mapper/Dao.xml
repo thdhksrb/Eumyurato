@@ -11,6 +11,6 @@
     <select id="viewSmallConcert" resultType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
         SELECT *
             FROM small_concert
-        ORDER BY startDate
+
     </select>
 </mapper>

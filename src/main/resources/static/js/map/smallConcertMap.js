@@ -25,6 +25,8 @@ map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPLEFT);
 var zoomControl = new kakao.maps.ZoomControl();
 map.addControl(zoomControl, kakao.maps.ControlPosition.LEFT);
 
+// HTML 사이드바 요소 가져오기
+var concert = document.getElementById('concert');
 
 // 주소-좌표 변환 객체를 생성
 var geocoder = new kakao.maps.services.Geocoder();
@@ -58,6 +60,22 @@ xhr.onload = function () {
                         // 마커에 클릭 이벤트를 등록
                         kakao.maps.event.addListener(marker, 'click', clickMakerListener(map, marker, infowindow));
                         kakao.maps.event.addListener(map, 'click', clickMapListener(infowindow));
+
+                        var li = document.createElement('li');
+                        li.id=record.id;
+                        var startDate = new Date(record.startDate);
+                        var lastDate = new Date(record.lastDate);
+                        li.innerHTML = '<h3>' + record.name + '</h3>' +
+                            '<p><strong>개최장소: </strong>' + record.location + '</p>' +
+                            '<p><strong>축제기간: </strong>' + formatDate(startDate) + ' ~ ' + formatDate(lastDate) + '</p>' +
+                            '<p><strong>공연자: </strong>' + record.pname + '</p>';
+                        li.style.padding='18px';
+                        li.style.borderTop = '1px solid #ccc';
+                        concert.appendChild(li);
+
+                        li.addEventListener('click',function(){
+                            goToDetailPage(record.id);
+                        })
                     }
                 });
             })(record);
@@ -78,4 +96,22 @@ function clickMapListener(infowindow) {
     return function () {
         infowindow.close();
     };
+}
+
+function formatDate(date) {
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    return year + '.' + padZero(month) + '.' + padZero(day);
+}
+
+function padZero(num) {
+    return (num < 10 ? '0' : '') + num;
+}
+
+function goToDetailPage(id){
+
+    var detailPageUrl = '/smallconcert/detail?id=' + id;
+
+    window.location.href = detailPageUrl;
 }
