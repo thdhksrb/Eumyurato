@@ -84,6 +84,12 @@ xhr.onload = function () {
 };
 xhr.send();
 
+
+
+
+
+
+
 // 인포윈도우를 표시하는 클로저를 만드는 함수
 function clickMakerListener(map, marker, infowindow) {
     return function() {
@@ -115,3 +121,4 @@ function goToDetailPage(id){
 
     window.location.href = detailPageUrl;
 }
+
