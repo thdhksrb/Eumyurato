@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--begin::Global Stylesheets Bundle(used by all pages)-->
+    <link th:href="@{/css/plugins_bundle.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/style_bundle.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/map/map.css}" rel="stylesheet" type="text/css" />
+    <!--end::Global Stylesheets Bundle-->
+    <title>EUMYURATO :: MAP</title>
+</head>
+<body>
+<div class="wrap">
+    <div class="left-side">
+        <div id="map" style="width:100%;height:100%;"></div>
+        <div class="nav_toggleBtn">
+            <button class="btn btn-icon btn-accent me-2 me-lg-6" id="kt_mega_menu_toggle">
+                <!--begin::Svg Icon | path: icons/duotune/general/gen059.svg-->
+                <span class="svg-icon svg-icon-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 16 15" fill="none">
+                <rect y="6" width="16" height="3" rx="1.5" fill="black" />
+                <rect opacity="0.3" y="12" width="8" height="3" rx="1.5" fill="black" />
+                <rect opacity="0.3" width="12" height="3" rx="1.5" fill="black" />
+            </svg>
+        </span>
+                <!--end::Svg Icon-->
+            </button>
+        </div>
+
+    </div>
+    <div class="sideMenu">
+        <div class="d-flex align-items-center">
+
+        </div>
+        <div class="nav_top">
+            <div class="nav_hd">
+                <a href="javascript:;"><img th:src="@{/assets/logo.png}" alt="logo"></a>
+                <div class="loginBox">
+
+                    <button class="btn btn-icon btn-sm btn-light-info fw-bolder pulse pulse-danger" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" id="kt_activities_toggle">
+                        <span class="position-absolute fs-6">3</span>
+                        <span class="pulse-ring"></span>
+                    </button> <!--notification-->
+
+                    <a href="javascript:;"><img th:src="@{/assets/com013.svg}" alt="userBtn"/></a> <!--my page-->
+                    <a href="javascript:;"><img th:src="@{/assets/arr076.svg}" alt="logoutBtn"/></a> <!--Logout-->
+                </div>
+            </div>
+
+            <div class="nav_srBox">
+                <input type="text" placeholder="Search...">
+                <a href="javascript:;"><img th:src="@{/assets/gen021.svg}" alt="searchBtn"/></a>
+
+            </div>
+
+            <div class="categoryWrap">
+                <a href="javascript:;">전체</a>
+                <a href="javascript:;">버스킹</a>
+                <a href="javascript:;">연극장</a>
+                <a href="javascript:;">지역축제</a>
+                <a href="javascript:;">즐겨찾기</a>
+            </div>
+        </div>
+        <div class="nav_bt">
+            <!-- 공연정보 -->
+            <div class="conInfo">
+            <h1>공연정보</h1>
+                <ul id="festivals"></ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--begin::Global Javascript Bundle(used by all pages)-->
+<script th:src="@{/js/plugins_bundle.js}"></script>
+<script th:src="@{/js/scripts_bundle.js}"></script>
+<!--end::Global Javascript Bundle-->
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8e0cac0abc5f71a7357818037fc4b48c"></script>
+<script th:src="@{/js/map/smallConcertMap.js}"></script>
+</body>
+</html>
+
