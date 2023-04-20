@@ -6,7 +6,12 @@
     <title>Eumyurato</title>
     <link rel="icon" type="image/x-icon" th:href="@{/img/E114_logo.png}"/>
     <meta charset="utf-8"/>
-
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link th:href="@{/css/loginJoin/loginJoin2.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{/css/loginJoin/loginJoin1.css}" rel="stylesheet" type="text/css"/>
     <!--end::Global Stylesheets Bundle-->
@@ -60,7 +65,7 @@
                         <label class="form-label fs-6 fw-bolder text-dark pt-5">아이디</label>
                         <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
                         <input class="form-control form-control-lg form-control-solid" type="text" placeholder=""
-                               name="fullname" autocomplete="off" style="border-color: #0099FF;"/>
+                               name="id" autocomplete="off" style="border-color: #0099FF;"/>
                     </div>
 
                     <div class="fv-row mb-5">
@@ -95,9 +100,7 @@
                         <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
                         <!--                        <input class="form-control form-control-lg form-control-solid" type="text" placeholder=""
                                                        name="fullname" autocomplete="off" style="border-color: #0099FF;"/>-->
-
                         <div id="bir_wrap">
-
                             <!-- BIRTH_YY -->
                             <div id="bir_yy">
                             <span class="box">
