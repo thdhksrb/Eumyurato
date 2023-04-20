@@ -1,41 +1,14 @@
 <!DOCTYPE html>
-<!--
-Author: Keenthemes
-Product Name: Start - Bootstrap 5 HTML Multipurpose Admin Dashboard Template
-Purchase: https://themes.getbootstrap.com/product/start-multipurpose-admin-dashboard-theme/
-Website: http://www.keenthemes.com
-Contact: support@keenthemes.com
-Follow: www.twitter.com/keenthemes
-Dribbble: www.dribbble.com/keenthemes
-Like: www.facebook.com/keenthemes
-License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
--->
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <!--begin::Head-->
 
 <head>
-    <base href="../">
     <title>Eumyurato</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/img/E114_logo.png}"/>
     <meta charset="utf-8"/>
-    <meta name="description"
-          content="Check out all the features of the Start admin panel. A large number of templates, components and widgets."/>
-    <meta name="keywords"
-          content="Start, bootstrap, bootstrap 5, admin themes, free admin themes, bootstrap admin, bootstrap dashboard, html admin theme, html template"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta property="og:locale" content="en_US"/>
-    <meta property="og:type" content="article"/>
-    <meta property="og:title" content="Start - Bootstrap 5 HTML Multipurpose Admin Dashboard Template"/>
-    <meta property="og:url"
-          content="https://themes.getbootstrap.com/product/start-multipurpose-admin-dashboard-theme/"/>
-    <meta property="og:site_name" content="Keenthemes | Start"/>
-    <link rel="canonical" href="https://preview.keenthemes.com/start"/>
-    <link rel="shortcut icon" href="assets/media/logos/favicon.ico"/>
-    <!--begin::Fonts-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"/>
-    <!--end::Fonts-->
-    <!--begin::Global Stylesheets Bundle(used by all pages)-->
-    <link href="/static/css/loginJoin/loginJoin2.css" rel="stylesheet" type="text/css"/>
-    <link href="/static/css/loginJoin/loginJoin1.css" rel="stylesheet" type="text/css"/>
+
+    <link th:href="@{/css/loginJoin/loginJoin2.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/loginJoin/loginJoin1.css}" rel="stylesheet" type="text/css"/>
     <!--end::Global Stylesheets Bundle-->
 </head>
 <!--end::Head-->
@@ -46,16 +19,13 @@ License: For each use you must have a valid license purchased only from above li
 <div class="d-flex flex-column flex-root">
     <!--begin::Login-->
     <div class="d-flex flex-column flex-lg-row flex-column-fluid" id="kt_login">
-        <!--begin::Aside-->
-        <!--사이드-->
-
         <div class="d-flex flex-column flex-lg-row-auto bg-primary pt-15 pt-lg-0 center" id="leftArea">
             <!--begin::Aside Top-->
             <div class="d-flex flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
                 <!--begin::Aside Logo-->
-                <a href="../dist/index.html" class="mb-6">
+                <a th:href="@{/main}" class="mb-6">
                     <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
-                        <img alt="로고" src="/static/img/E114_logo.png" class="h-450px h-lg-450px"/>
+                        <img alt="로고" th:src="@{/img/E114_logo.png}" class="h-450px h-lg-450px"/>
                     </div>
                 </a>
                 <!--end::Aside Logo-->
@@ -65,32 +35,34 @@ License: For each use you must have a valid license purchased only from above li
             <div class="d-flex flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
                 <!--begin::Aside Logo-->
                 <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
-                    <img alt="로고" src="/static/img/E114_logo.png" class="h-450px h-lg-450px"/>
+                    <img alt="로고" th:src="@{/img/E114_logo.png}" class="h-450px h-lg-450px"/>
                 </div>
                 <!--end::Aside Logo-->
             </div>
         </div>
 
-
         <!--사이드-->
         <!--begin::Aside-->
         <!--begin::Content-->
         <!--로그인폼-->
-        <div class="login-content flex-lg-row-fluid d-flex flex-column overflow-hidden py-10 py-lg-20 px-10 p-lg-7 mx-auto mw-450px w-100 text-center" >
+        <div class="login-content flex-lg-row-fluid d-flex flex-column overflow-hidden py-10 py-lg-20 px-10 p-lg-7 mx-auto mw-450px w-100 text-center">
             <!--begin::Wrapper-->
             <!--begin::Signin Form-->
             <form class="form w-100 " novalidate="novalidate" id="kt_login_signin_form">
-            <div class="wrapper-btn">
-                <button type="submit" id="btn1"
-                        class="btn btn-primary fw-bolder fs-3 px-8 py-4 my-3 me-4 mb-15 custom-btn">일반회원 회원가입
-                </button>
-                <button type="submit" id="btn2"
-                        class="btn btn-primary fw-bolder fs-3 px-8 py-4 my-3 me-4 mb-15 custom-btn">아티스트회원 회원가입
-                </button>
-                <button type="submit" id="btn3"
-                        class="btn btn-primary fw-bolder fs-3 px-8 py-4 my-3 me-4 mb-15 custom-btn">기업회원 회원가입
-                </button>
-            </div>
+                <div class="wrapper-btn">
+                    <button type="button" id="btn1"
+                            class="btn btn-primary fw-bolder fs-3 px-8 py-4 my-3 me-4 mb-15 custom-btn"
+                            th:onclick="|location.href='@{/common}'|">일반회원 회원가입
+                    </button>
+                    <button type="button" id="btn2"
+                            class="btn btn-primary fw-bolder fs-3 px-8 py-4 my-3 me-4 mb-15 custom-btn"
+                            th:onclick="|location.href='@{/artist}'|">아티스트회원 회원가입
+                    </button>
+                    <button type="button" id="btn3"
+                            class="btn btn-primary fw-bolder fs-3 px-8 py-4 my-3 me-4 mb-15 custom-btn"
+                            th:onclick="|location.href='@{/enterprise}'|">기업회원 회원가입
+                    </button>
+                </div>
 
 
                 <!--end::Action-->

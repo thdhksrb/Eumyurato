@@ -19,4 +19,7 @@ public class MapController {
     public String table() {
         return "html/pay/pay2";
     }
+
+
 }
+
