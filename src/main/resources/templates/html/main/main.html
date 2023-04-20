@@ -14,13 +14,17 @@
     <div class="container">
         <a class="navbar-brand" href="#page-top"><img th:src="@{/img/logo_name.png}"></a>
     </div>
-    <button type="submit" class="btn btn-primary fw-bolder fs-5 px-5 py-2 my-3 me-5" th:onclick="|location.href='@{/login}'|">로그인</button>
+    <button type="submit" class="btn btn-primary fw-bolder fs-5 px-5 py-2 my-3 me-5"
+            th:onclick="|location.href='@{/login}'|">로그인
+    </button>
 </nav>
 <!-- Masthead-->
 <header class="masthead bg-primary text-white text-center">
     <div class="container d-flex align-items-center flex-column">
         <!-- Masthead Avatar Image-->
-        <img class="masthead-avatar mb-5" th:src="@{/img/logo_CLICK.PNG}" alt="..." style="width: 400px; height: 400px;"/>
+        <a th:href="@{/map}">
+            <img class="masthead-avatar mb-5" th:src="@{/img/logo_CLICK.PNG}" alt="..."
+                 style="width: 400px; height: 400px;"/></a>
         <!-- Masthead Heading-->
         <h1 class="masthead-heading text-uppercase mb-0" style="color: #000000">음 유 라 토</h1>
         <!-- Icon Divider-->
@@ -30,7 +34,8 @@
             <div class="divider-custom-line"></div>
         </div>
         <!-- Masthead Subheading-->
-        <p class="masthead-subheading font-weight-light mb-0" style="color: #000000">사용자들에게 다양한 소규모 공연과 버스킹의 정보 및 기회를 제공하여
+        <p class="masthead-subheading font-weight-light mb-0" style="color: #000000">사용자들에게 다양한 소규모 공연과 버스킹의 정보 및 기회를
+            제공하여
             <br>예술과 문화를 즐길 수 있는 경험을 제공하는 서비스</p>
     </div>
 </header>
@@ -85,7 +90,8 @@
                 <a class="btn btn-outline-light btn-social mx-1" th:href="@{#}"><i class="fab fa-fw fa-facebook-f"></i></a>
                 <a class="btn btn-outline-light btn-social mx-1" th:href="@{#}"><i class="fab fa-fw fa-twitter"></i></a>
                 <a class="btn btn-outline-light btn-social mx-1" th:href="@{#}"><i class="fab fa-fw fa-linkedin-in"></i></a>
-                <a class="btn btn-outline-light btn-social mx-1" th:href="@{#}"><i class="fab fa-fw fa-dribbble"></i></a>
+                <a class="btn btn-outline-light btn-social mx-1" th:href="@{#}"><i
+                        class="fab fa-fw fa-dribbble"></i></a>
             </div>
             <!-- Footer About Text-->
             <div class="col-lg-4">
