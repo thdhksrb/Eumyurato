@@ -10,7 +10,7 @@ Dribbble: www.dribbble.com/keenthemes
 Like: www.facebook.com/keenthemes
 License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
 -->
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <!--begin::Head-->
 <head><base href="../">
 	<title>profile_mainpage</title>
@@ -30,11 +30,11 @@ License: For each use you must have a valid license purchased only from above li
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 	<!--end::Fonts-->
 	<!--begin::Page Vendor Stylesheets(used by this page)-->
-	<link href="/static/css/profile/profile2.css" rel="stylesheet" type="text/css" />
+	<link href="/static/css/profile/profile3.css" rel="stylesheet" type="text/css" />
 	<!--end::Page Vendor Stylesheets-->
 	<!--begin::Global Stylesheets Bundle(used by all pages)-->
 	<link href="/static/css/profile/profile1.css" rel="stylesheet" type="text/css" />
-	<link href="/static/css/profile/profile3.css" rel="stylesheet" type="text/css" />
+	<link href="/static/css/profile/profile2.css" rel="stylesheet" type="text/css" />
 
 	<!--end::Global Stylesheets Bundle-->
 </head>
@@ -76,36 +76,11 @@ License: For each use you must have a valid license purchased only from above li
 												<span class="menu-title">예약 내역</span>
 											</a>
 										</div>
-										<div class="menu-item" style="margin: 3px">
-											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
-												<span class="menu-title">공연 등록</span>
-											</a>
-										</div>
-										<div class="menu-item" style="margin: 3px">
-											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
-												<span class="menu-title">공연 관리</span>
-											</a>
-										</div>
 									</div>
 								</div>
 								<div class="menu-item">
 									<h4 class="menu-content mb-0 fs-6 fw-bold text-uppercase" style="color: black"><b>통합 정보 조회</b></h4>
 									<div class="menu-sub menu-fit menu-sub-accordion show pb-10">
-										<div class="menu-item" style="margin: 3px">
-											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
-												<span class="menu-title">종합</span>
-											</a>
-										</div>
-										<div class="menu-item" style="margin: 3px">
-											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
-												<span class="menu-title">접속률</span>
-											</a>
-										</div>
-										<div class="menu-item" style="margin: 3px">
-											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
-												<span class="menu-title">성별</span>
-											</a>
-										</div>
 										<div class="menu-item" style="margin: 3px">
 											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
 												<span class="menu-title">팔로우</span>
@@ -167,8 +142,9 @@ License: For each use you must have a valid license purchased only from above li
 						<!--	<button class="btn btn-icon fw-bolder" >
 								<img src="/static/img/logout.png" width="24" height="24" href="../main/main.html" />
 							</button> -->
-							<a href="main/resources/templates/html/main/main.html" height="2" width="5"/>
+							<a href="../../main/main.html" height="2" width="5">
 								<img src="/static/img/logout.png" width="24" height="24">
+							</a>
 							<!--begin::Menu-->
 
 
@@ -203,35 +179,36 @@ License: For each use you must have a valid license purchased only from above li
 				<!--end::Container-->
 			</div>
 			<div>
-				<div class="login-content flex-lg-row-fluid d-flex flex-column justify-content-center position-relative overflow-hidden py-10 py-lg-10 px-10 p-lg-7 mx-3 mw-550px w-100">
+				<div class="login-content flex-lg-row-fluid d-flex flex-column position-relative overflow-hidden py-10 py-lg-20 px-10 p-lg-7 mx-auto mw-600px w-100">
 					<!--begin::Wrapper-->
-					<div class="d-flex flex-column-fluid flex-center py-2">
+					<div class="d-flex flex-column-fluid flex-center py-10">
 						<!--begin::Signin Form-->
-						<form class="form w-auto" novalidate="novalidate">
+						<form class="" novalidate="novalidate" style="width: 440px">
 							<!--begin::Title-->
 							<div class="pb-5 pb-lg-1">
 								<h3 class="fw-bolder text-dark display-6">내 계정</h3>
 							</div>
+							<!--begin::Image input-->
+							<div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url(/static/img/다운로드.jpg)">
+								<!--begin::Image preview wrapper-->
+								<div class="image-input-wrapper w-125px h-125px" style="background-image: url(/static/img/다운로드.jpg)"></div>
+								<!--end::Image preview wrapper-->
+
+							</div>
+							<!--end::Image input-->
 							<div class="fv-row mb-5">
 								<label class="form-label fs-6 fw-bolder text-dark pt-5">아이디</label>
 								<input class="form-control form-control-lg form-control-solid" type="text" placeholder=""
 									   name="fullname" autocomplete="off" style="border-color: #0099FF;"/>
-							</div>
-
-							<div class="fv-row mb-5">
-								<label class="form-label fs-6 fw-bolder text-dark pt-5">비밀번호</label>
-								<input class="form-control form-control-lg form-control-solid" type="password" placeholder=""
-									   name="password" autocomplete="off" style="border-color: #0099FF;"/>
 							</div>
 							<div class=" fv-row mb-5">
 								<label class="form-label fs-6 fw-bolder text-dark pt-5">이름</label>
 								<input class="form-control form-control-lg form-control-solid" type="text" placeholder=""
 									   name="fullname" autocomplete="off" style="border-color: #0099FF;"/>
 							</div>
-
 							<div class=" fv-row mb-5">
-								<label class="form-label fs-6 fw-bolder text-dark pt-5">주소</label>
-								<input class="form-control form-control-lg form-control-solid" type="email"
+								<label class="form-label fs-6 fw-bolder text-dark pt-5">닉네임</label>
+								<input class="form-control form-control-lg form-control-solid" type="text" placeholder=""
 									   name="fullname" autocomplete="off" style="border-color: #0099FF;"/>
 							</div>
 							<div class=" fv-row mb-5">
@@ -239,23 +216,26 @@ License: For each use you must have a valid license purchased only from above li
 								<input class="form-control form-control-lg form-control-solid" type="text" placeholder=""
 									   name="fullname" autocomplete="off" style="border-color: #0099FF;"/>
 							</div>
-
 							<div class=" fv-row mb-5">
-								<label class="form-label fs-6 fw-bolder text-dark pt-5">본인 확인 이메일</label>
-								<label class="form-label fs-8 fw-bolder text-dark pt-5">(선택)</label>
-								<input class="form-control form-control-lg form-control-solid" type="text" placeholder="you@example.com"
+								<label class="form-label fs-6 fw-bolder text-dark pt-5">성별</label>
+								<input class="form-control form-control-lg form-control-solid" type="text" placeholder=""
+									   name="fullname" autocomplete="off" style="border-color: #0099FF;"/>
+							</div>
+							<div class=" fv-row mb-5">
+								<label class="form-label fs-6 fw-bolder text-dark pt-5">이메일</label>
+								<input class="form-control form-control-lg form-control-solid" type="email" placeholder=""
 									   name="email" autocomplete="off" style="border-color: #0099FF;"/>
 							</div>
-
 							<div class=" fv-row mb-5">
-								<label class="form-label fs-6 fw-bolder text-dark pt-5">대표 휴대번호</label>
+								<label class="form-label fs-6 fw-bolder text-dark pt-5">휴대번호</label>
 
 								<input class="form-control form-control-lg form-control-solid" type="text" placeholder=""
-									   name="email" autocomplete="off" style="border-color: #0099FF; "/>
+									   name="email" autocomplete="off" style="border-color: #0099FF; ">
 							</div>
 
 							<!--end::Form group-->
 							<!--begin::Form group-->
+
 
 							<!--end::Form group-->
 						</form>
