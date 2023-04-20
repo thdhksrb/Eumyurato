@@ -66,8 +66,9 @@
         <div class="nav_bt">
             <!-- 공연정보 -->
             <div class="conInfo">
-            <h1>공연정보</h1>
-                <ul id="festivals"></ul>
+            <h1>소규모 공연정보</h1>
+                <ul id="concert"></ul>
+
             </div>
         </div>
     </div>
@@ -77,8 +78,8 @@
 <script th:src="@{/js/scripts_bundle.js}"></script>
 <!--end::Global Javascript Bundle-->
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8e0cac0abc5f71a7357818037fc4b48c"></script>
-<script th:src="@{/js/map/map.js}"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8e0cac0abc5f71a7357818037fc4b48c&libraries=services"></script>
+<script th:src="@{/js/map/smallConcertMap.js}"></script>
 </body>
 </html>
 
