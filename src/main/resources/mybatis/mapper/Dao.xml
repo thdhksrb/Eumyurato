@@ -9,7 +9,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.e114.e114_eumyuratodemo1.jdbc.IDAO">
     <select id="viewSmallConcert" resultType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
-        SELECT id, name, location,pname, startDate, lastDate, image
+        SELECT *
             FROM small_concert
         ORDER BY startDate
     </select>
