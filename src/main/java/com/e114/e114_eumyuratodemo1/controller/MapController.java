@@ -33,6 +33,7 @@ public class MapController {
         return "html/pay/pay2";
     }
 
+
     @GetMapping("/smallconcert")
     public String smallConcert(){
 
@@ -48,4 +49,6 @@ public class MapController {
         return list;
     }
 
+
 }
+

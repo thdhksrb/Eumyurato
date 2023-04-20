@@ -204,12 +204,12 @@ sup {
 }
 
 a {
-    color: #20d489;
+    color: #062d92;
     text-decoration: none
 }
 
 a:hover {
-    color: #16925e;
+    color: #b7c2df;
     text-decoration: underline
 }
 
@@ -2343,7 +2343,10 @@ progress {
 
 @media (prefers-reduced-motion: reduce) {
     .form-control {
-        transition: none
+        transition: none;
+    }
+    .login-btn{
+        transition:none;
     }
 }
 
@@ -2523,12 +2526,11 @@ textarea.form-control-lg {
     font-weight: 500;
     line-height: 1.5;
     color: #181c32;
-    background-color: #fff;
+    background-color: #f5f8fa;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%237E8299' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
     background-repeat: no-repeat;
     background-position: right 1rem center;
     background-size: 16px 12px;
-    border: 1px solid #e4e6ef;
     border-radius: .65rem;
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, .075);
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
@@ -2629,8 +2631,8 @@ textarea.form-control-lg {
 }
 
 .form-check-input:checked {
-    background-color: #20d489;
-    border-color: #20d489
+    background-color: #062d92;
+    border-color: #062d92
 }
 
 .form-check-input:checked[type=checkbox] {
@@ -2642,8 +2644,8 @@ textarea.form-control-lg {
 }
 
 .form-check-input[type=checkbox]:indeterminate {
-    background-color: #20d489;
-    border-color: #20d489;
+    background-color: #062d92;
+    border-color: #062d92;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23FFFFFF' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10h8'/%3e%3c/svg%3e")
 }
 
@@ -3000,11 +3002,11 @@ textarea.form-control-lg {
 }
 
 .form-check-input.is-valid, .was-validated .form-check-input:valid {
-    border-color: #00b2ff
+    border-color: #062d92
 }
 
 .form-check-input.is-valid:checked, .was-validated .form-check-input:valid:checked {
-    background-color: #00b2ff
+    background-color: #062d92
 }
 
 .form-check-input.is-valid:focus, .was-validated .form-check-input:valid:focus {
@@ -3120,7 +3122,7 @@ textarea.form-control-lg {
     display: inline-block;
     font-weight: 500;
     line-height: 1.5;
-    color: #181c32;
+    color: #062d92;
     text-align: center;
     vertical-align: middle;
     cursor: pointer;
@@ -3140,7 +3142,7 @@ textarea.form-control-lg {
 }
 
 .btn:hover {
-    color: #181c32;
+    color: #b7c2df;
     text-decoration: none
 }
 
@@ -3244,8 +3246,8 @@ textarea.form-control-lg {
 
 .btn-primary-ex {
     color: #fff;
-    background-color: #B7C2DF;
-    border-color: #B7C2DF;
+    background-color: #294BA1;
+    border-color: #062D92;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 1px rgba(0, 0, 0, .075)
 }
 
@@ -32318,7 +32320,7 @@ textarea.form-control-lg {
 
 .text-hover-primary:hover {
     transition: color .2s ease, background-color .2s ease;
-    color: #20d489 !important
+    color: #062d92 !important
 }
 
 .text-hover-primary:hover i {
@@ -38571,9 +38573,9 @@ a:hover {
 }
 
 .btn.btn-primary {
-    color: #fff;
-    border-color: #20d489;
-    background-color: #20d489
+    color: #ffffff;
+    border-color: #062d92;
+    background-color: #294BA1;
 }
 
 .btn.btn-primary i {
@@ -38595,8 +38597,8 @@ a:hover {
 
 .btn-check:active + .btn.btn-primary, .btn-check:checked + .btn.btn-primary, .btn.btn-primary.active, .btn.btn-primary.show, .btn.btn-primary:active:not(.btn-active), .btn.btn-primary:focus:not(.btn-active), .btn.btn-primary:hover:not(.btn-active), .show > .btn.btn-primary {
     color: #fff;
-    border-color: #19b674;
-    background-color: #19b674 !important
+    border-color: #294BA1;
+    background-color: #062d92 !important
 }
 
 .btn-check:active + .btn.btn-primary i, .btn-check:checked + .btn.btn-primary i, .btn.btn-primary.active i, .btn.btn-primary.show i, .btn.btn-primary:active:not(.btn-active) i, .btn.btn-primary:focus:not(.btn-active) i, .btn.btn-primary:hover:not(.btn-active) i, .show > .btn.btn-primary i {
@@ -38620,16 +38622,16 @@ a:hover {
 .btn.btn-light-primary {
     color: #ffffff;
     border-color: #e4fff4;
-    background-color: #b7c2df
+    background-color: #294BA1
 }
 
 .btn.btn-light-primary i {
-    color: #20d489
+    color: #062D92
 }
 
 .btn.btn-light-primary .svg-icon svg [fill]:not(.permanent):not(g) {
     transition: fill .3s ease;
-    fill: #20d489
+    fill: #294BA1
 }
 
 .btn.btn-light-primary .svg-icon svg:hover [fill]:not(.permanent):not(g) {
@@ -38637,13 +38639,13 @@ a:hover {
 }
 
 .btn.btn-light-primary.dropdown-toggle:after {
-    color: #20d489
+    color: #062D92
 }
 
 .btn-check:active + .btn.btn-light-primary, .btn-check:checked + .btn.btn-light-primary, .btn.btn-light-primary.active, .btn.btn-light-primary.show, .btn.btn-light-primary:active:not(.btn-active), .btn.btn-light-primary:focus:not(.btn-active), .btn.btn-light-primary:hover:not(.btn-active), .show > .btn.btn-light-primary {
     color: #fff;
     border-color: #20d489;
-    background-color: #20d489 !important
+    background-color: #062D92 !important
 }
 
 .btn-check:active + .btn.btn-light-primary i, .btn-check:checked + .btn.btn-light-primary i, .btn.btn-light-primary.active i, .btn.btn-light-primary.show i, .btn.btn-light-primary:active:not(.btn-active) i, .btn.btn-light-primary:focus:not(.btn-active) i, .btn.btn-light-primary:hover:not(.btn-active) i, .show > .btn.btn-light-primary i {
@@ -41803,7 +41805,7 @@ code:not([class*=language-]) {
 }
 
 .form-check.form-check-solid .form-check-input:checked {
-    background-color: #20d489
+    background-color: #062d92
 }
 
 .form-check.form-check-success .form-check-input:checked {
@@ -48962,7 +48964,7 @@ body a:active, body a:focus, body a:hover, html a:active, html a:focus, html a:h
 body {
     display: flex;
     flex-direction: column;
-    color: #181c32
+    color: #000000
 }
 
 router-outlet {
@@ -49527,3 +49529,90 @@ body {
     width: 140px;
     height: 40px;
 }
+
+#bir_wrap {
+    display: table;
+    width: 100%;
+}
+
+#bir_yy {
+    display: table-cell;
+    width: 147px;
+
+}
+
+#bir_mm {
+    display: table-cell;
+    width: 147px;
+    vertical-align: middle;
+}
+
+#bir_dd {
+    display: table-cell;
+    width: 147px;
+}
+
+#bir_mm, #bir_dd {
+    padding-left: 10px;
+}
+
+.login-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    max-width: 450px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* 폼 그룹의 스타일 */
+.fv-row {
+    margin-bottom: 10px;
+}
+
+/* 액션 그룹의 스타일 */
+.pb-lg-0 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 0;
+}
+
+#leftArea {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 9999;
+    background-color: #007bff;
+}
+
+#leftArea2 {
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 9998;
+    background-color: #007bff;
+}
+
+@media screen and (max-width: 992px) {
+    #leftArea {
+        position: static;
+        z-index: 2;
+        background-color: #007bff; /* 배경색 설정 */
+    }
+    #leftArea2 {
+        display: none;
+        position: static;
+        z-index: 1;
+        background-color: #007bff; /* 배경색 설정 */
+    }
+
+    #rightArea {
+        transform: translate(0%, 20%);
+        /* 오른쪽 영역의 스타일을 조정하여 반응형으로 맞춤 */
+    }
+}
+

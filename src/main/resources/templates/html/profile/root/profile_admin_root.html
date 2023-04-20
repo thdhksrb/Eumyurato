@@ -10,7 +10,7 @@ Dribbble: www.dribbble.com/keenthemes
 Like: www.facebook.com/keenthemes
 License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
 -->
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <!--begin::Head-->
 <head><base href="../">
 	<title>profile_mainpage</title>
@@ -30,10 +30,9 @@ License: For each use you must have a valid license purchased only from above li
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 	<!--end::Fonts-->
 	<!--begin::Page Vendor Stylesheets(used by this page)-->
-	<link href="/static/css/profile/profile3.css" rel="stylesheet" type="text/css" />
+	<link href="/static/css/profile/profile1.css" rel="stylesheet" type="text/css" />
 	<!--end::Page Vendor Stylesheets-->
 	<!--begin::Global Stylesheets Bundle(used by all pages)-->
-	<link href="/static/css/profile/profile1.css" rel="stylesheet" type="text/css" />
 	<link href="/static/css/profile/profile2.css" rel="stylesheet" type="text/css" />
 
 	<!--end::Global Stylesheets Bundle-->
@@ -61,22 +60,22 @@ License: For each use you must have a valid license purchased only from above li
 								<div class="menu-item here show">
 									<h4 class="menu-content mb-0 fs-6 fw-bold text-uppercase" style="color: black"><b>마이페이지</b></h4>
 									<div class="menu-sub menu-fit menu-sub-accordion show pb-10">
-										<div class="menu-item">
+										<div class="menu-item" style="margin: 3px">
 											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
 												<span class="menu-title">내 계정</span>
 											</a>
 										</div>
-										<div class="menu-item">
+										<div class="menu-item" style="margin: 3px">
 											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
 												<span class="menu-title">계정 정보 수정</span>
 											</a>
 										</div>
-										<div class="menu-item">
+										<div class="menu-item" style="margin: 3px">
 											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
 												<span class="menu-title">예약 내역</span>
 											</a>
 										</div>
-										<div class="menu-item">
+										<div class="menu-item" style="margin: 3px">
 											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
 												<span class="menu-title">공연 관리</span>
 											</a>
@@ -86,27 +85,27 @@ License: For each use you must have a valid license purchased only from above li
 								<div class="menu-item">
 									<h4 class="menu-content mb-0 fs-6 fw-bold text-uppercase" style="color: black"><b>통합 정보 조회</b></h4>
 									<div class="menu-sub menu-fit menu-sub-accordion show pb-10">
-										<div class="menu-item">
+										<div class="menu-item" style="margin: 3px">
 											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
 												<span class="menu-title">종합</span>
 											</a>
 										</div>
-										<div class="menu-item">
+										<div class="menu-item" style="margin: 3px">
 											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
 												<span class="menu-title">접속률</span>
 											</a>
 										</div>
-										<div class="menu-item">
+										<div class="menu-item" style="margin: 3px">
 											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
 												<span class="menu-title">성별</span>
 											</a>
 										</div>
-										<div class="menu-item">
+										<div class="menu-item" style="margin: 3px">
 											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
 												<span class="menu-title">팔로우</span>
 											</a>
 										</div>
-										<div class="menu-item">
+										<div class="menu-item" style="margin: 3px">
 											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
 												<span class="menu-title">즐겨찾기</span>
 											</a>
@@ -157,11 +156,14 @@ License: For each use you must have a valid license purchased only from above li
 							<!--begin::Dropdown-->
 					<!--		<button class="btn btn-icon btn-sm btn-light-danger fw-bolder pulse pulse-danger" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" id="kt_activities_toggle">
 								<span class="position-absolute fs-6">3</span> -->
-								<span class="pulse-ring"></span>
+					<!--		<span class="pulse-ring"></span>	-->
 							</button>
-							<button class="btn btn-icon fw-bolder" >
-								<img src="/static/img/logout.png" alt="로그아웃" width="24" height="24" href="account.html" />
-							</button>
+						<!--	<button class="btn btn-icon fw-bolder" >
+								<img src="/static/img/logout.png" width="24" height="24" href="../main/main.html" />
+							</button> -->
+							<a href="../../main/main.html" height="2" width="5">
+								<img src="/static/img/logout.png" width="24" height="24">
+							</a>
 							<!--begin::Menu-->
 
 
@@ -179,6 +181,10 @@ License: For each use you must have a valid license purchased only from above li
 									<path opacity="0.3" d="M21 14H3C2.4 14 2 13.6 2 13V11C2 10.4 2.4 10 3 10H21C21.6 10 22 10.4 22 11V13C22 13.6 21.6 14 21 14ZM22 20V18C22 17.4 21.6 17 21 17H3C2.4 17 2 17.4 2 18V20C2 20.6 2.4 21 3 21H21C21.6 21 22 20.6 22 20Z" fill="black" />
 								</svg>
 							</span>
+							<div id="sidebarContent">
+								<!-- 사이드바 내용을 이곳에 추가 -->
+
+							</div>
 							<!--end::Svg Icon-->
 						</button>
 
@@ -192,50 +198,36 @@ License: For each use you must have a valid license purchased only from above li
 				<!--end::Container-->
 			</div>
 			<div>
-				<div class="container">
-					<div style="color:#ffffff; background-color:#8ac297; padding:25px; height: 400px; margin-top: 30px; margin-bottom: 30px;">
-						검색영역~~
-					</div>
-				</div>
+				<div class="login-content flex-lg-row-fluid d-flex flex-column position-relative overflow-hidden py-10 py-lg-20 px-10 p-lg-7 mx-auto mw-600px w-100">
+					<!--begin::Wrapper-->
+					<div class="d-flex flex-column-fluid flex-center py-10">
+						<!--begin::Signin Form-->
+						<form class="form w-100" novalidate="novalidate">
+							<!--begin::Title-->
+							<div class="pb-5 pb-lg-1">
+								<h3 class="fw-bolder text-dark text-center" style="margin: 10px">고객님의 개인정보 보호를 위해 본인 확인을 진행합니다.</h3>
+								<h3 class="fw-bolder text-dark text-center">비밀번호를 입력해주세요.</h3>
+							</div>
+							<div class="fv-row mb-5">
+								<label class="form-label fs-6 fw-bolder text-dark pt-5">비밀번호</label>
+								<input class="form-control form-control-lg form-control-solid" type="password" placeholder=""
+									   name="password" autocomplete="off" style="border-color: #0099FF;"/>
+							</div>
+							<div>
+								<div class="d-flex flex-wrap justify-content-center pb-lg-0 pb-5">
+									<!-- justify-content-end 클래스를 추가하여 오른쪽으로 정렬 -->
+									<button type="submit" class="btn btn-primary fw-bolder fs-3 custom-btn">확인
+									</button>
+								</div>
 
-				<!-- 검색 영역과 카테고리 영역 사이에 공백을 추가 -->
-				<div class="mx-2" style="margin-top: 30px; margin-bottom: 30px;"></div>
+							</div>
 
-				<div class="container">
-					<div style="color:#000000; background-color:#FFFFFF; padding:25px;  height: 600px;">
-						<table class="table table-rounded table-striped border gy-7 gs-7">
-							<thead>
-							<tr class="fw-bold fs-6 text-gray-800 border-bottom border-gray-200">
-								<th>Name</th>
-								<th>Position</th>
-								<th>Office</th>
-								<th>Age</th>
-								<th>Start date</th>
-								<th>Salary</th>
-							</tr>
-							</thead>
-							<tbody>
-							<tr>
-								<td>Tiger Nixon</td>
-								<td>System Architect</td>
-								<td>Edinburgh</td>
-								<td>61</td>
-								<td>2011/04/25</td>
-								<td>$320,800</td>
-							</tr>
-							<tr>
-								<td>Garrett Winters</td>
-								<td>Accountant</td>
-								<td>Tokyo</td>
-								<td>63</td>
-								<td>2011/07/25</td>
-								<td>$170,750</td>
-							</tr>
-							</tbody>
-						</table>
-					</div>
-					<div style="margin-top:20px;">
-						<!-- 리스트 내용 -->
+							<!--end::Form group-->
+							<!--begin::Form group-->
+
+
+							<!--end::Form group-->
+						</form>
 					</div>
 				</div>
 			</div>
