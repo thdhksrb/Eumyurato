@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -48,6 +49,22 @@ public class MapController {
 
         return list;
     }
+
+    @GetMapping("/smallconcert/detail/{id}/json")
+    @ResponseBody
+    public SmallConcertDTO detailJson(@PathVariable("id") int id) {
+        SmallConcertDTO dto = dao.selectConcert(id);
+
+        return dto;
+    }
+
+    @GetMapping("/smallconcert/detail/{id}")
+    public String detail() {
+
+
+        return "html/detail/detail";
+    }
+
 
 
 }
