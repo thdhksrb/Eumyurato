@@ -100,26 +100,10 @@ License: For each use you must have a valid license purchased only from above li
         </div>
     </div>
 </div>
-<script type="text/javascript" th:src="@{/js/pay/calenderPay.js}"></script>
 <!--jQuery 기본 js파일-->
 <script th:src="@{http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js}"></script>
 <!--jQuery UI 라이브러리 js파일-->
 <script th:src="@{http://code.jquery.com/ui/1.8.18/jquery-ui.min.js}"></script>
-<script>
-    $(function() {
-        $( "#testDatepicker" ).datepicker({dateFormat: 'yy-mm-dd',showOn: "both",
-            buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
-            buttonImageOnly: true,
-            buttonText: "선택",
-            yearSuffix: "년",
-            monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-            dayNamesMin: ['일','월','화','수','목','금','토'],
-            minDate: 0,
-            maxDate: "+1M",
-            showMonthAfterYear: true
-        });
-        $('#datepicker').datepicker('setDate', 'today');
-    });
-</script>
+<script th:src="@{/js/pay/calender.js}"></script>
 </body>
 </html>

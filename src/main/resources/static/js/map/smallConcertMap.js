@@ -62,13 +62,14 @@ xhr.onload = function () {
                         kakao.maps.event.addListener(marker, 'mouseout', clickMapListener(infowindow));
                         kakao.maps.event.addListener(marker, 'click', modal(record));
 
+
                         var li = document.createElement('li');
                         li.id=record.id;
                         var startDate = new Date(record.startDate);
                         var lastDate = new Date(record.lastDate);
                         li.innerHTML = '<h3>' + record.name + '</h3>' +
-                            '<p><strong>개최장소: </strong>' + record.location + '</p>' +
-                            '<p><strong>축제기간: </strong>' + formatDate(startDate) + ' ~ ' + formatDate(lastDate) + '</p>' +
+                            '<p><strong>장소: </strong>' + record.location + '</p>' +
+                            '<p><strong>공연 일자: </strong>' + formatDate(startDate) + ' ~ ' + formatDate(lastDate) + '</p>' +
                             '<p><strong>공연자: </strong>' + record.pname + '</p>';
                         li.style.padding='18px';
                         li.style.borderTop = '1px solid #ccc';
@@ -100,6 +101,11 @@ function modal(record) {
 
         // 모달 창을 띄움
         $('#kt_modal_1').modal('show');
+
+        $('#viewDetail').on('click', function() {
+            var id = record.id;
+            goToDetailPage(id);
+        });
     };
 }
 
