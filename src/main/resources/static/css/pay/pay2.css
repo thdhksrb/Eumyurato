@@ -38571,9 +38571,9 @@ a:hover {
 }
 
 .btn.btn-primary {
-    color: #fff;
-    border-color: #20d489;
-    background-color: #20d489
+    color: #ffffff;
+    border-color: #062d92;
+    background-color: #294BA1;
 }
 
 .btn.btn-primary i {
@@ -38595,8 +38595,8 @@ a:hover {
 
 .btn-check:active + .btn.btn-primary, .btn-check:checked + .btn.btn-primary, .btn.btn-primary.active, .btn.btn-primary.show, .btn.btn-primary:active:not(.btn-active), .btn.btn-primary:focus:not(.btn-active), .btn.btn-primary:hover:not(.btn-active), .show > .btn.btn-primary {
     color: #fff;
-    border-color: #19b674;
-    background-color: #19b674 !important
+    border-color: #294BA1;
+    background-color: #062d92 !important
 }
 
 .btn-check:active + .btn.btn-primary i, .btn-check:checked + .btn.btn-primary i, .btn.btn-primary.active i, .btn.btn-primary.show i, .btn.btn-primary:active:not(.btn-active) i, .btn.btn-primary:focus:not(.btn-active) i, .btn.btn-primary:hover:not(.btn-active) i, .show > .btn.btn-primary i {
