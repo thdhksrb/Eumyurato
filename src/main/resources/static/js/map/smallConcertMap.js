@@ -130,7 +130,7 @@ function padZero(num) {
 
 function goToDetailPage(id){
 
-    var detailPageUrl = '/smallconcert/detail?id=' + id;
+    var detailPageUrl = '/smallconcert/detail/' + id;
 
     window.location.href = detailPageUrl;
 }
