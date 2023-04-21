@@ -47,11 +47,11 @@
         </div>
 
 
-        <div class="login-content flex-lg-row-fluid d-flex flex-column position-relative overflow-hidden py-10 py-lg-20 px-10 p-lg-7 mx-auto mw-600px w-100">
+        <div class="login-content flex-lg-row-fluid d-flex flex-column position-relative overflow-hidden py-10 py-lg-20 px-10 p-lg-7 mw-550px w-100">
             <!--begin::Wrapper-->
             <div class="d-flex flex-column-fluid flex-center py-10">
                 <!--begin::Signin Form-->
-                <form class="form w-100" novalidate="novalidate">
+                <form class="form w-100" novalidate method="post">
                     <!--begin::Title-->
                     <div class="pb-5 pb-lg-1">
                         <h3 class="fw-bolder text-dark display-6">회원가입</h3>
@@ -64,14 +64,22 @@
                     <div class="fv-row mb-5">
                         <label class="form-label fs-6 fw-bolder text-dark pt-5">아이디</label>
                         <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
-                        <input class="form-control form-control-lg form-control-solid" type="text" placeholder=""
-                               name="fullname" autocomplete="off" style="border-color: #0099FF;"/>
+                        <div class="d-flex align-items-center">
+                            <input class="form-control form-control-lg form-control-solid me-2" type="text"
+                                   placeholder="5~20자의 영문 소문자, 숫자만 사용 가능합니다."
+                                   name="id" id="id" autocomplete="off"
+                                   style="border-color: #0099FF; width: 350px; height: 40px;">
+                            <button type="submit"
+                                    class="btn btn-primary fw-bolder fs-5 px-2 py-3 my-3 text-center"
+                                    style=" width: 150px; height: 45px;">중복 확인
+                            </button>
+                        </div>
                     </div>
 
                     <div class="fv-row mb-5">
                         <label class="form-label fs-6 fw-bolder text-dark pt-5">비밀번호</label>
                         <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
-                        <input class="form-control form-control-lg form-control-solid" type="password" placeholder=""
+                        <input class="form-control form-control-lg form-control-solid" type="password" placeholder="8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요."
                                name="password" autocomplete="off" style="border-color: #0099FF;"/>
                     </div>
 
@@ -103,20 +111,20 @@
                             <input class="form-control form-control-lg form-control-solid me-2" type="email"
                                    placeholder=" - 없이 입력"
                                    name="email" autocomplete="off"
-                                   style="border-color: #0099FF; width: 360px; height: 50px;">
+                                   style="border-color: #0099FF; width: 350px; height: 40px;">
                             <button type="submit"
-                                    class="btn btn-primary fw-bolder fs-6 px-2 py-3 my-3 text-center"
-                                    style=" width: 200px; height: 50px;">인증번호 받기
+                                    class="btn btn-primary fw-bolder fs-5 px-2 py-3 my-3 text-center"
+                                    style=" width: 150px; height: 45px;">인증번호 받기
                             </button>
                         </div>
                         <div class="d-flex align-items-center">
                             <input class="form-control form-control-lg form-control-solid me-2" type="email"
                                    placeholder=""
                                    name="email" autocomplete="off"
-                                   style="border-color: #0099FF; width: 360px; height: 40px;">
+                                   style="border-color: #0099FF; width: 350px; height: 40px;">
                             <button type="submit"
-                                    class="btn btn-primary fw-bolder fs-6 px-2 py-3 my-3 text-center"
-                                    style=" width: 200px; height: 50px;">인증번호 인증
+                                    class="btn btn-primary fw-bolder fs-5 px-2 py-3 my-3 text-center"
+                                    style=" width: 150px; height: 45px;">인증번호 인증
                             </button>
                         </div>
                     </div>
@@ -128,10 +136,10 @@
                             <input class="form-control form-control-lg form-control-solid me-2" type="email"
                                    placeholder=" - 없이 입력"
                                    name="email" autocomplete="off"
-                                   style="border-color: #0099FF; width: 360px; height: 40px;">
+                                   style="border-color: #0099FF; width: 300px; height: 40px;">
                             <button type="submit"
-                                    class="btn btn-primary fw-bolder fs-6 px-2 py-3 my-3 text-center"
-                                    style=" width: 200px; height: 50px;">사업자등록번호 인증
+                                    class="btn btn-primary fw-bolder fs-5 px-2 py-3 my-3 text-center"
+                                    style=" width: 200px; height: 45px;">사업자등록번호 인증
                             </button>
                         </div>
                     </div>
