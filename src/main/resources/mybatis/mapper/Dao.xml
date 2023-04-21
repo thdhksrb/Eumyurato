@@ -19,4 +19,10 @@
         WHERE id = #{param1}
 
     </select>
+    <select id="selectConcertTime" resultType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
+        SELECT *
+        FROM small_concert
+        WHERE id = #{param1} AND
+
+    </select>
 </mapper>

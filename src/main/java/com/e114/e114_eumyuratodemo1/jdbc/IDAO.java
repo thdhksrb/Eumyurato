@@ -9,4 +9,5 @@ import java.util.List;
 public interface IDAO {
     public List<SmallConcertDTO> viewSmallConcert();
     public SmallConcertDTO selectConcert(int id);
+    public SmallConcertDTO selectConcertTime(int id);
 }
