@@ -58,8 +58,9 @@ xhr.onload = function () {
                         });
 
                         // 마커에 클릭 이벤트를 등록
-                        kakao.maps.event.addListener(marker, 'click', clickMakerListener(map, marker, infowindow));
-                        kakao.maps.event.addListener(map, 'click', clickMapListener(infowindow));
+                        kakao.maps.event.addListener(marker, 'mouseover', clickMakerListener(map, marker, infowindow));
+                        kakao.maps.event.addListener(marker, 'mouseout', clickMapListener(infowindow));
+                        kakao.maps.event.addListener(marker, 'click', modal(record));
 
                         var li = document.createElement('li');
                         li.id=record.id;
@@ -84,11 +85,23 @@ xhr.onload = function () {
 };
 xhr.send();
 
+// 클릭 이벤트 핸들러 함수
+function modal(record) {
+    return function() {
+        // 모달 창에 정보를 채움
+        var modalTitle = document.querySelector('.modal-title');
+        modalTitle.textContent = record.name;
 
+        var modalBody = document.querySelector('.modal-body');
+        modalBody.innerHTML = '<p><strong>개최 장소: </strong>' + record.location + '</p>' +
+            '<p><strong>공연 일자: </strong>' + formatDate(new Date(record.startDate)) + ' - ' +
+            formatDate(new Date(record.lastDate)) + '</p>' +
+            '<p><strong>공연자: </strong>' + record.pname + '</p>';
 
-
-
-
+        // 모달 창을 띄움
+        $('#kt_modal_1').modal('show');
+    };
+}
 
 // 인포윈도우를 표시하는 클로저를 만드는 함수
 function clickMakerListener(map, marker, infowindow) {
@@ -117,7 +130,7 @@ function padZero(num) {
 
 function goToDetailPage(id){
 
-    var detailPageUrl = '/smallconcert/detail?id=' + id;
+    var detailPageUrl = '/smallconcert/detail/' + id;
 
     window.location.href = detailPageUrl;
 }

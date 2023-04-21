@@ -13,4 +13,10 @@
             FROM small_concert
 
     </select>
+    <select id="selectConcert" resultType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
+        SELECT *
+        FROM small_concert
+        WHERE id = #{param1}
+
+    </select>
 </mapper>
