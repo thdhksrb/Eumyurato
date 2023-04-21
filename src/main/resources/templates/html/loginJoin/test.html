@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/static/css/test.css" rel="stylesheet" type="text/css"/>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"
+            integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<div class="wrapper">
+    <form id="frmtest">
+        <div class="form-field">
+            <label class="label-form" for="username">성명</label>
+            <input type="text" class="form-control" name="username" id="username" required>
+        </div>
+
+        <div class="form-field">
+            <label class="label-form" for="password">비밀번호</label>
+            <input type="password" class="form-control" name="password" id="password" required>
+        </div>
+
+        <div class="form-field">
+            <label class="label-form" for="password_confirm">비밀번호 재확인</label>
+            <input type="password" class="form-control" name="password_confirm" id="password_confirm" required>
+        </div>
+
+        <div class="form-field">
+            <label class="label-form" for="email">이메일 주소</label>
+            <input type="email" class="form-control" name="email" id="email" required>
+        </div>
+
+        <div class="form-field">
+            <label class="label-form" for="tel">연락처</label>
+            <input type="tel" class="form-control" name="tel" id="tel" required>
+        </div>
+
+        <div class="form-field">
+            <input type="checkbox" name="chk_agree" id="chk_agree" required>
+            <label for="chk_agree">약관에 동의합니다</label>
+        </div>
+
+        <div class="form-field">
+            <button type="submit" class="button-submit">제출하기</button>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript" src="/static/js/test.js"></script>
+</body>
+</html>
