@@ -5,6 +5,7 @@ $(document).ready(function(){
     });
 });
 
+
 // 지도 객체 생성
 var container = document.getElementById('map');
 var options = {
@@ -57,9 +58,9 @@ xhr.onload = function () {
                         });
 
                         // 마커에 클릭 이벤트를 등록
+                        kakao.maps.event.addListener(marker, 'mouseover', clickMakerListener(map, marker, infowindow));
+                        kakao.maps.event.addListener(marker, 'mouseout', clickMapListener(infowindow));
                         kakao.maps.event.addListener(marker, 'click', modal(record));
-                        kakao.maps.event.addListener(marker, 'mouseover', mouseoverListener(map, marker, infowindow));
-                        kakao.maps.event.addListener(marker, 'mouseout', mouseoutListener(infowindow));
 
                         var li = document.createElement('li');
                         li.id=record.id;
@@ -84,20 +85,6 @@ xhr.onload = function () {
 };
 xhr.send();
 
-// 인포윈도우를 표시하는 클로저를 만드는 함수
-function mouseoverListener(map, marker, infowindow) {
-    return function() {
-        infowindow.open(map, marker);
-    };
-}
-
-// 인포윈도우를 닫는 클로저를 만드는 함수
-function mouseoutListener(infowindow) {
-    return function () {
-        infowindow.close();
-    };
-}
-
 // 클릭 이벤트 핸들러 함수
 function modal(record) {
     return function() {
@@ -113,6 +100,20 @@ function modal(record) {
 
         // 모달 창을 띄움
         $('#kt_modal_1').modal('show');
+    };
+}
+
+// 인포윈도우를 표시하는 클로저를 만드는 함수
+function clickMakerListener(map, marker, infowindow) {
+    return function() {
+        infowindow.open(map, marker);
+    };
+}
+
+// 인포윈도우를 닫는 클로저를 만드는 함수
+function clickMapListener(infowindow) {
+    return function () {
+        infowindow.close();
     };
 }
 

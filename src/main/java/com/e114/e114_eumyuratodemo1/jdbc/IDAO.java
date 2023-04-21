@@ -8,4 +8,5 @@ import java.util.List;
 @Mapper
 public interface IDAO {
     public List<SmallConcertDTO> viewSmallConcert();
+    public SmallConcertDTO selectConcert(int id);
 }
