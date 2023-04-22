@@ -77,22 +77,29 @@ License: For each use you must have a valid license purchased only from above li
             </div>
             <div class="d-flex flex-wrap"
                  style="width: 100%; height: 600px; background-color:#AFB2C2; margin-bottom: 0;">
+
                 <div class="center">
 
-                    <input type="text" id="testDatepicker">
-
+                    <input type="text" id="datepicker">
+                    <button id="search-btn">선택</button>
                 </div>
-                <div style="color:#ffffff; background-color:#ff0000; width: 500px; height: 300px; padding: 20px !important; margin:auto; margin-left: 50px;">
 
+
+                <div style="color:#000000; background-color:#ffffff; width: 500px; height: 300px; padding: 20px !important; margin:auto; margin-left: 50px;">
+                    <div style="float: left; margin-right: 20px;">
+                        <p style="font-size: 10px">회차 선택</p>
+                        <ul id="schedules"></ul>
+                    </div>
+                    <div style="float: left;">
+                        <p style="font-size: 10px">좌석 선택</p>
+                    </div>
                 </div>
             </div>
-            <div class="d-flex flex-wrap" style="width: 100%; height: 188px; background-color:#F2C2C2; margin-bottom: 0;">
-                <div class="fs-3" style="color:#ffffff; background-color:#ff0000; width: 150px; height: 50px; margin-top: 10px; margin-left: 72%;">
-                    후원금액 : 6000원
-                </div>
+            <div class="d-flex flex-wrap" style="width: 100%; height: 188px; background-color:#FFFFFF; margin-bottom: 0;">
+
                 <button type="button"
                         class="btn btn-primary fw-bolder fs-1 px-2 py-3 my-3 text-center"
-                        style=" width: 200px; height: 50px; margin-left: auto; margin-right: 30px;">후원 하기
+                        style=" width: 200px; height: 50px; margin-left: auto; margin-right: 30px;">좌석 선택
                 </button>
             </div>
         </div>

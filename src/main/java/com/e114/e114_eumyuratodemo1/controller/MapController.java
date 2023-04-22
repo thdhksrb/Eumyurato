@@ -1,16 +1,16 @@
 package com.e114.e114_eumyuratodemo1.controller;
 
-import com.e114.e114_eumyuratodemo1.dto.DateDTO;
+import com.e114.e114_eumyuratodemo1.dto.SchedulesDTO;
 import com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO;
 import com.e114.e114_eumyuratodemo1.jdbc.IDAO;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class MapController {
@@ -61,6 +61,11 @@ public class MapController {
     }
 
     @GetMapping("/smallconcert/detail/{id}/calender")
+    public String calenderPage(){
+        return "html/pay/pay1";
+    }
+
+    @PostMapping("/smallconcert/detail/{id}/calender")
     public String calender(){
         return "html/pay/pay1";
     }
@@ -68,11 +73,13 @@ public class MapController {
 
     @PostMapping("/smallconcert/detail/{id}/calender/json")
     @ResponseBody
-    public String calenderJson(@PathVariable("id") int id, @RequestBody DateDTO dateDTO){
+    public ResponseEntity<Map<String, SchedulesDTO>> calenderJson(@PathVariable("id") int id, @RequestBody Map<String, String> data){
+        String selectedDate = data.get("selectedDate");
+        System.out.println(selectedDate);
 
-        System.out.println(dateDTO);
-
-        return "ㅋㅋ";
+        Map<String, SchedulesDTO> response = new HashMap<>();
+        response.put("message", dao.selectConcertTime(id,selectedDate));
+        return ResponseEntity.ok().body(response);
     }
 
 

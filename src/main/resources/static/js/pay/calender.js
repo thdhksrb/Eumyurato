@@ -1,5 +1,5 @@
 $(function() {
-    $( "#testDatepicker" ).datepicker({dateFormat: 'yy-mm-dd',showOn: "both",
+    $( "#datepicker" ).datepicker({dateFormat: 'yy-mm-dd',showOn: "both",
         buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
         buttonImageOnly: true,
         buttonText: "선택",
@@ -13,12 +13,13 @@ $(function() {
     $('#datepicker').datepicker('setDate', 'today');
 });
 
-const testDatepicker = document.querySelector('#testDatepicker');
+const searchBtn = document.querySelector('#search-btn');
+const datePicker  = document.querySelector('#datepicker');
 var url = location.pathname;
 var id = url.match(/\d+/)[0];
 
-testDatepicker.addEventListener('change', () => {
-    const selectedDate = testDatepicker.value;
+searchBtn.addEventListener('click', () => {
+    const selectedDate = datePicker.value;
 
     // Create JSON data
     const data = { selectedDate };
@@ -33,3 +34,5 @@ testDatepicker.addEventListener('change', () => {
         .then(data => console.log(data))
         .catch(error => console.error(error));
 });
+
+
