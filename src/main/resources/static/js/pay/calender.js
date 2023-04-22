@@ -15,6 +15,7 @@ $(function() {
 
 const searchBtn = document.querySelector('#search-btn');
 const datePicker  = document.querySelector('#datepicker');
+const schedulesUl = document.querySelector('#schedules');
 var url = location.pathname;
 var id = url.match(/\d+/)[0];
 
@@ -31,8 +32,26 @@ searchBtn.addEventListener('click', () => {
         body: JSON.stringify(data),
     })
         .then(response => response.json())
-        .then(data => console.log(data))
+        .then(schedules => {
+            // Clear current schedules
+            schedulesUl.innerHTML = '';
+
+            // If there are no schedules, show message
+            if (schedules.message == null) {
+                const li = document.createElement('li');
+                li.textContent = '선택한 날짜에 해당하는 회차 정보가 없습니다.';
+                schedulesUl.appendChild(li);
+                console.log(schedules);
+            } else {
+                // Add schedules to list
+                const schedule = schedules.message;
+                const li = document.createElement('li');
+                li.textContent = schedule.conDate;
+                schedulesUl.appendChild(li);
+                console.log(schedules);
+            }
+
+        })
         .catch(error => console.error(error));
 });
-
 
