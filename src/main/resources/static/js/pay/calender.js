@@ -12,3 +12,24 @@ $(function() {
     });
     $('#datepicker').datepicker('setDate', 'today');
 });
+
+const testDatepicker = document.querySelector('#testDatepicker');
+var url = location.pathname;
+var id = url.match(/\d+/)[0];
+
+testDatepicker.addEventListener('change', () => {
+    const selectedDate = testDatepicker.value;
+
+    // Create JSON data
+    const data = { selectedDate };
+
+    // Send AJAX request
+    fetch('/smallconcert/detail/' + id + '/calender/json', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+    })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error(error));
+});
