@@ -65,13 +65,14 @@ public class MapController {
         return "html/pay/pay1";
     }
 
+
     @PostMapping("/smallconcert/detail/{id}/calender/json")
     @ResponseBody
-    public String calender(@PathVariable("id") int id, @RequestBody DateDTO dateDTO){
+    public String calenderJson(@PathVariable("id") int id, @RequestBody DateDTO dateDTO){
 
+        System.out.println(dateDTO);
 
-
-        return "";
+        return "ㅋㅋ";
     }
 
 

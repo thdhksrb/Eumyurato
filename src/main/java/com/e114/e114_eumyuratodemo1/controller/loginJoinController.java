@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class loginJoinController {
+    @GetMapping("/root")
+    public String root() {return "html/root";}
 
     @GetMapping("/main")
     public String main() {
