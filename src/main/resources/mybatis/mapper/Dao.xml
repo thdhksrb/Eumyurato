@@ -19,10 +19,10 @@
         WHERE id = #{param1}
 
     </select>
-    <select id="selectConcertTime" resultType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
+    <select id="selectConcertTime" resultType="com.e114.e114_eumyuratodemo1.dto.SchedulesDTO">
         SELECT *
-        FROM small_concert
-        WHERE id = #{param1} AND
+        FROM schedules
+        WHERE conId = #{param1} AND DATE_FORMAT(conDate, '%Y-%m-%d') = #{param2}
 
     </select>
 </mapper>
