@@ -95,5 +95,31 @@ public class MapController {
         return dao.selectBooked(id,day);
     }
 
+    @PostMapping ("/smallconcert/detail/{id}/calendar/{day}/pay")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> pay(@PathVariable("id")int id,@PathVariable("day")String day,@RequestBody Map<String, List<String>> data){
+        List<String> selectedSeats = data.get("selectedSeats");
+        int length = selectedSeats.size();
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("seat", selectedSeats);
+        response.put("count", length);
+        response.put("concert", dao.selectConcert(id));
+        response.put("schedule", dao.selectConcertTime(id,day));
+
+
+        return ResponseEntity.ok().body(response);
+    }
+
+    @GetMapping("/smallconcert/detail/{id}/calendar/{day}/pay")
+    public String payPage(){
+        return "html/pay/pay3";
+    }
+
+
+
+
+
+
 }
 
