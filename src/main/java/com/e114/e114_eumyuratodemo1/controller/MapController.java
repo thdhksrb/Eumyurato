@@ -87,7 +87,13 @@ public class MapController {
         return "html/pay/pay2";
     }
 
+    @GetMapping("/smallconcert/detail/{id}/calendar/{day}/json")
+    @ResponseBody
+    public List<String> seat(@PathVariable("id")int id,@PathVariable("day")String day){
 
+        System.out.println(dao.selectBooked(id,day));
+        return dao.selectBooked(id,day);
+    }
 
 }
 
