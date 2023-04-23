@@ -5,7 +5,8 @@
     <title>Eumyurato</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" th:href="@{/img/E114_logo.png}"/>
-
+    <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css}"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link th:href="@{/css/main/main.css}" rel="stylesheet"/>
 </head>
 <body id="page-top">
@@ -69,8 +70,63 @@
 </div>
 <!-- Contact Section-->
 <section class="page-section" id="contact">
+    <div class="divider-custom divider-light">
+        <h2 class="masthead-heading text-uppercase mb-0">공 지 사 항 </h2>
+    </div>
+    <div class="divider-custom-line"></div>
+    <!--begin::Accordion-->
+    <div class="accordion" id="kt_accordion_1">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="kt_accordion_1_header_1">
+                <button class="accordion-button fs-4 fw-bold" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#kt_accordion_1_body_1" aria-expanded="true"
+                        aria-controls="kt_accordion_1_body_1">
+                    Accordion Item #1
+                </button>
+            </h2>
+            <div id="kt_accordion_1_body_1" class="accordion-collapse collapse show"
+                 aria-labelledby="kt_accordion_1_header_1" data-bs-parent="#kt_accordion_1">
+                <div class="accordion-body">
+                    ...
+                </div>
+            </div>
+        </div>
 
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="kt_accordion_1_header_2">
+                <button class="accordion-button fs-4 fw-bold collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#kt_accordion_1_body_2" aria-expanded="false"
+                        aria-controls="kt_accordion_1_body_2">
+                    Accordion Item #2
+                </button>
+            </h2>
+            <div id="kt_accordion_1_body_2" class="accordion-collapse collapse"
+                 aria-labelledby="kt_accordion_1_header_2" data-bs-parent="#kt_accordion_1">
+                <div class="accordion-body">
+                    ...
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="kt_accordion_1_header_3">
+                <button class="accordion-button fs-4 fw-bold collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#kt_accordion_1_body_3" aria-expanded="false"
+                        aria-controls="kt_accordion_1_body_3">
+                    Accordion Item #3
+                </button>
+            </h2>
+            <div id="kt_accordion_1_body_3" class="accordion-collapse collapse"
+                 aria-labelledby="kt_accordion_1_header_3" data-bs-parent="#kt_accordion_1">
+                <div class="accordion-body">
+                    ...
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end::Accordion-->
 </section>
+
 <!-- Footer-->
 <footer class="footer text-center">
     <div class="container">

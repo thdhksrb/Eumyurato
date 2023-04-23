@@ -80,3 +80,11 @@ input:not([type=checkbox]) + label {
     display: block;
     margin-top: 6px
 }
+
+.valid-feedback {
+    display: none;
+    width: 100%;
+    margin-top: .5rem;
+    font-size: .925rem;
+    color: #ff0000
+}
