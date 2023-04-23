@@ -84,20 +84,9 @@ public class MapController {
 
     @GetMapping("/smallconcert/detail/{id}/calendar/{day}")
     public String seatPage(){
-
-
-
         return "html/pay/pay2";
     }
 
-    @GetMapping("/smallconcert/detail/{id}/calendar/{day}/json")
-    @ResponseBody
-    public String seat(@PathVariable("day")String day){
-
-
-
-        return "html/pay/pay2";
-    }
 
 
 }
