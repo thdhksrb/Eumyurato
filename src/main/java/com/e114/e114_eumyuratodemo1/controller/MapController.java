@@ -1,8 +1,10 @@
 package com.e114.e114_eumyuratodemo1.controller;
 
+import com.e114.e114_eumyuratodemo1.dto.DataDTO;
 import com.e114.e114_eumyuratodemo1.dto.SchedulesDTO;
 import com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO;
 import com.e114.e114_eumyuratodemo1.jdbc.IDAO;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,9 @@ public class MapController {
 
     @Autowired
     private IDAO dao;
+
+    @Autowired
+    private DataDTO dto;
 
     @GetMapping("/map")
     public String showMap() {
@@ -107,19 +112,25 @@ public class MapController {
         response.put("concert", dao.selectConcert(id));
         response.put("schedule", dao.selectConcertTime(id,day));
 
+        dto.setMyData(response);
 
         return ResponseEntity.ok().body(response);
     }
 
     @GetMapping("/smallconcert/detail/{id}/calendar/{day}/pay")
     public String payPage(){
+
+
         return "html/pay/pay3";
     }
 
+    @GetMapping("/smallconcert/detail/{id}/calendar/{day}/pay/json")
+    @ResponseBody
+    public DataDTO payPageData(){
 
 
-
-
+        return dto;
+    }
 
 }
 
