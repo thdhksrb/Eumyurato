@@ -23,3 +23,8 @@ $.ajax({
     }
 });
 
+const reservation = document.querySelector('#reservation');
+
+reservation.addEventListener('click', () => {
+    window.location.href = `/smallconcert/detail/${id}/calendar`;
+});

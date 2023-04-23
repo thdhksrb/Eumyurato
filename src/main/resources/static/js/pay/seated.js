@@ -5,10 +5,10 @@ const seatWrapper = document.querySelector(".seat-wrapper");
 let clicked = "";
 let div = "";
 
-for (let i = 0; i < 7; i++) {
+for (let i = 1; i <= 7; i++) {
     div = document.createElement("div");
     seatWrapper.append(div);
-    for (let j = 0; j < 7; j++) {
+    for (let j = 1; j <= 7; j++) {
         const input = document.createElement('input');
         input.type = "button";
         input.name = "seats"
@@ -42,20 +42,38 @@ for (let i = 0; i < 7; i++) {
     }
 }
 
+const resetButton = document.querySelector('#reset');
+resetButton.addEventListener('click', function() {
+    const clickedSeats = document.querySelectorAll('.clicked');
+    clickedSeats.forEach(seat => {
+        seat.classList.remove('clicked');
+    });
+    selectedSeats = [];
+    const selectedSeatElement = document.querySelector('.selected-seat');
+    selectedSeatElement.textContent = '선택좌석: ';
+});
+
+const searchButton = document.querySelector('#search-btn');
+searchButton.addEventListener('click', function() {
+    const selectedSeatElement = document.querySelector('.selected-seat');
+    selectedSeatElement.textContent = '선택좌석: ' + selectedSeats.join(', ');
+});
+
+
 function mapping(input, i, j) {
-    if (i === 0) {
+    if (i === 1) {
         input.value = "A" + j;
-    } else if (i === 1) {
-        input.value = "B" + j;
     } else if (i === 2) {
-        input.value = "C" + j;
+        input.value = "B" + j;
     } else if (i === 3) {
-        input.value = "D" + j;
+        input.value = "C" + j;
     } else if (i === 4) {
-        input.value = "E" + j;
+        input.value = "D" + j;
     } else if (i === 5) {
-        input.value = "F" + j;
+        input.value = "E" + j;
     } else if (i === 6) {
+        input.value = "F" + j;
+    } else if (i === 7) {
         input.value = "G" + j;
     }
 }

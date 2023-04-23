@@ -1,16 +1,16 @@
 package com.e114.e114_eumyuratodemo1.controller;
 
-import com.e114.e114_eumyuratodemo1.dto.DateDTO;
+import com.e114.e114_eumyuratodemo1.dto.SchedulesDTO;
 import com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO;
 import com.e114.e114_eumyuratodemo1.jdbc.IDAO;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class MapController {
@@ -60,21 +60,40 @@ public class MapController {
         return "html/detail/detail";
     }
 
-    @GetMapping("/smallconcert/detail/{id}/calender")
-    public String calender(){
+    @GetMapping("/smallconcert/detail/{id}/calendar")
+    public String calendarPage(){
         return "html/pay/pay1";
     }
 
-    @PostMapping("/smallconcert/detail/{id}/calender/json")
-    @ResponseBody
-    public String calender(@PathVariable("id") int id, @RequestBody DateDTO dateDTO){
-
-
-
-        return "";
+    @PostMapping("/smallconcert/detail/{id}/calendar")
+    public String calendar(){
+        return "html/pay/pay1";
     }
 
 
+    @PostMapping("/smallconcert/detail/{id}/calendar/json")
+    @ResponseBody
+    public ResponseEntity<Map<String, SchedulesDTO>> calendarJson(@PathVariable("id") int id, @RequestBody Map<String, String> data){
+        String selectedDate = data.get("selectedDate");
+        System.out.println(selectedDate);
+
+        Map<String, SchedulesDTO> response = new HashMap<>();
+        response.put("message", dao.selectConcertTime(id,selectedDate));
+        return ResponseEntity.ok().body(response);
+    }
+
+    @GetMapping("/smallconcert/detail/{id}/calendar/{day}")
+    public String seatPage(){
+        return "html/pay/pay2";
+    }
+
+    @GetMapping("/smallconcert/detail/{id}/calendar/{day}/json")
+    @ResponseBody
+    public List<String> seat(@PathVariable("id")int id,@PathVariable("day")String day){
+
+        System.out.println(dao.selectBooked(id,day));
+        return dao.selectBooked(id,day);
+    }
 
 }
 

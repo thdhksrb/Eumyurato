@@ -1,40 +1,18 @@
 <!DOCTYPE html>
-<!--
-Author: Keenthemes
-Product Name: Start - Bootstrap 5 HTML Multipurpose Admin Dashboard Template
-Purchase: https://themes.getbootstrap.com/product/start-multipurpose-admin-dashboard-theme/
-Website: http://www.keenthemes.com
-Contact: support@keenthemes.com
-Follow: www.twitter.com/keenthemes
-Dribbble: www.dribbble.com/keenthemes
-Like: www.facebook.com/keenthemes
-License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
--->
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <!--begin::Head-->
-<head><base href="../">
-	<title>profile_mainpage</title>
+<head>
+	<title>Eumyurato</title>
+	<link rel="icon" type="image/x-icon" th:href="@{/img/E114_logo.png}"/>
 	<meta charset="utf-8" />
-	<meta name="description" content="Check out all the features of the Start admin panel. A large number of templates, components and widgets." />
-	<meta name="keywords" content="Start, bootstrap, bootstrap 5, admin themes, free admin themes, bootstrap admin, bootstrap dashboard, html admin theme, html template" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta property="og:locale" content="en_US" />
-	<meta property="og:type" content="article" />
-	<meta property="og:title" content="Start - Bootstrap 5 HTML Multipurpose Admin Dashboard Template" />
-	<meta property="og:url" content="https://themes.getbootstrap.com/product/start-multipurpose-admin-dashboard-theme/" />
-	<meta property="og:site_name" content="Keenthemes | Start" />
-	<link rel="canonical" href="https://preview.keenthemes.com/start" />
-	<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
-
-	<!--begin::Fonts-->
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
-	<!--end::Fonts-->
-	<!--begin::Page Vendor Stylesheets(used by this page)-->
-	<link href="/static/css/profile/profile1.css" rel="stylesheet" type="text/css" />
-	<!--end::Page Vendor Stylesheets-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<!--begin::Global Stylesheets Bundle(used by all pages)-->
-	<link href="/static/css/profile/profile2.css" rel="stylesheet" type="text/css" />
-
+	<link th:href="@{/css/profile/profile1.css}" rel="stylesheet" type="text/css" />
+	<link th:href="@{/css/profile/profile2.css}" rel="stylesheet" type="text/css" />
+	<link th:href="@{/css/profile/profile3.css}" rel="stylesheet" type="text/css" />
 	<!--end::Global Stylesheets Bundle-->
 </head>
 <!--end::Head-->
@@ -61,22 +39,22 @@ License: For each use you must have a valid license purchased only from above li
 									<h4 class="menu-content mb-0 fs-6 fw-bold text-uppercase" style="color: black"><b>마이페이지</b></h4>
 									<div class="menu-sub menu-fit menu-sub-accordion show pb-10">
 										<div class="menu-item" style="margin: 3px">
-											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
+											<a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/ent}">
 												<span class="menu-title">내 계정</span>
 											</a>
 										</div>
 										<div class="menu-item" style="margin: 3px">
-											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
+											<a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/ent/modify}">
 												<span class="menu-title">계정 정보 수정</span>
 											</a>
 										</div>
 										<div class="menu-item" style="margin: 3px">
-											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
+											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/ent/modify}">
 												<span class="menu-title">예약 내역</span>
 											</a>
 										</div>
 										<div class="menu-item" style="margin: 3px">
-											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
+											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/ent/management}">
 												<span class="menu-title">공연 관리</span>
 											</a>
 										</div>
@@ -125,7 +103,9 @@ License: For each use you must have a valid license purchased only from above li
 				<div class="container-xxl d-flex align-items-stretch justify-content-between">
 					<!--begin::Left-->
 					<div class="container">
-						<a class="navbar-brand" href="/templates/html/main/main.html"><img src="/static/img/logo_name.png" width="250" height="45"></a>
+						<a class="navbar-brand" href="/templates/html/main/main.html">
+							<img th:src="@{/img/logo_name.png}" width="250" height="45">
+						</a>
 					</div>
 					<!--end::Left-->
 					<!--begin::Right-->
@@ -156,8 +136,8 @@ License: For each use you must have a valid license purchased only from above li
 						<!--	<button class="btn btn-icon fw-bolder" >
 								<img src="/static/img/logout.png" width="24" height="24" href="../main/main.html" />
 							</button> -->
-							<a href="../../main/main.html" height="2" width="5">
-								<img src="/static/img/logout.png" width="24" height="24">
+							<a th:href="@{main/main.html}" height="2" width="5">
+								<img th:src="@{/img/logout.png}" width="24" height="24">
 							</a>
 							<!--begin::Menu-->
 
@@ -199,7 +179,7 @@ License: For each use you must have a valid license purchased only from above li
 						<!--begin::Signin Form-->
 						<form class="form w-auto" novalidate="novalidate">
 							<!--begin::Title-->
-							<div class="container">
+		<!--					<div class="container">
 								<div style="color:#000000; background-color:#FFFFFF; padding:25px;  height: 600px;">
 									<div style="display: flex; align-items: center; margin-bottom: 20px;">
 										<h4 style="font-size: 24px; flex-grow: 1;"><strong>공연관리</strong></h4>
@@ -315,7 +295,7 @@ License: For each use you must have a valid license purchased only from above li
 									<div style="margin-top:20px;">
 
 									</div>
-								</div>
+								</div>	-->
 
 							<!--end::Form group-->
 							<!--begin::Form group-->

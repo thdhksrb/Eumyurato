@@ -30,9 +30,10 @@ License: For each use you must have a valid license purchased only from above li
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 	<!--end::Fonts-->
 	<!--begin::Page Vendor Stylesheets(used by this page)-->
-	<link href="/static/css/profile/profile1.css" rel="stylesheet" type="text/css" />
+	<link href="/static/css/profile/profile3.css" rel="stylesheet" type="text/css" />
 	<!--end::Page Vendor Stylesheets-->
 	<!--begin::Global Stylesheets Bundle(used by all pages)-->
+	<link href="/static/css/profile/profile1.css" rel="stylesheet" type="text/css" />
 	<link href="/static/css/profile/profile2.css" rel="stylesheet" type="text/css" />
 
 	<!--end::Global Stylesheets Bundle-->
@@ -61,22 +62,22 @@ License: For each use you must have a valid license purchased only from above li
 									<h4 class="menu-content mb-0 fs-6 fw-bold text-uppercase" style="color: black"><b>마이페이지</b></h4>
 									<div class="menu-sub menu-fit menu-sub-accordion show pb-10">
 										<div class="menu-item" style="margin: 3px">
-											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
+											<a class="text-dark text-hover-primary ms-3 py-2" href="../../profile/account/profile_artist_account.html">
 												<span class="menu-title">내 계정</span>
 											</a>
 										</div>
 										<div class="menu-item" style="margin: 3px">
-											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
+											<a class="text-dark text-hover-primary ms-3 py-2" href="../../profile/accountModify/profile_artist_accountModify.html">
 												<span class="menu-title">계정 정보 수정</span>
 											</a>
 										</div>
 										<div class="menu-item" style="margin: 3px">
-											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
+											<a class="text-dark text-hover-primary ms-3 py-2" href="../../profile/accountModify/profile_artist_accountModify.html">
 												<span class="menu-title">예약 내역</span>
 											</a>
 										</div>
 										<div class="menu-item" style="margin: 3px">
-											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
+											<a class="text-dark text-hover-primary ms-3 py-2" href="../../profile/concertManagement/profile_artist_concertmanagement.html">
 												<span class="menu-title">공연 관리</span>
 											</a>
 										</div>
@@ -125,7 +126,9 @@ License: For each use you must have a valid license purchased only from above li
 				<div class="container-xxl d-flex align-items-stretch justify-content-between">
 					<!--begin::Left-->
 					<div class="container">
-						<a class="navbar-brand" href="/templates/html/main/main.html"><img src="/static/img/logo_name.png" width="250" height="45"></a>
+						<a class="navbar-brand" href="/templates/html/main/main.html">
+							<img src="/static/img/logo_name.png" width="250" height="45">
+						</a>
 					</div>
 					<!--end::Left-->
 					<!--begin::Right-->
@@ -156,7 +159,7 @@ License: For each use you must have a valid license purchased only from above li
 						<!--	<button class="btn btn-icon fw-bolder" >
 								<img src="/static/img/logout.png" width="24" height="24" href="../main/main.html" />
 							</button> -->
-							<a href="../../main/main.html" height="2" width="5">
+							<a href="main/main.html" height="2" width="5">
 								<img src="/static/img/logout.png" width="24" height="24">
 							</a>
 							<!--begin::Menu-->
@@ -199,11 +202,11 @@ License: For each use you must have a valid license purchased only from above li
 						<!--begin::Signin Form-->
 						<form class="form w-auto" novalidate="novalidate">
 							<!--begin::Title-->
-							<div class="container">
+	<!--						<div class="container">
 								<div style="color:#000000; background-color:#FFFFFF; padding:25px;  height: 600px;">
 									<div style="display: flex; align-items: center; margin-bottom: 20px;">
 										<h4 style="font-size: 24px; flex-grow: 1;"><strong>공연관리</strong></h4>
-										<a href="../root/profile_artist_root.html" class="btn btn-primary" style="margin-left: 10px;">공연 등록</a>
+										<a th:href="@{/profile/artist/register}" class="btn btn-primary" style="margin-left: 10px;">공연 등록</a>
 									</div>
 									<div>
 										<div class="row mt-3">
@@ -316,7 +319,7 @@ License: For each use you must have a valid license purchased only from above li
 									<div style="margin-top:20px;">
 
 									</div>
-								</div>
+								</div>	-->
 
 							<!--end::Form group-->
 							<!--begin::Form group-->

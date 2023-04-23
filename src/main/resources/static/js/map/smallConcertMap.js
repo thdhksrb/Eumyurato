@@ -62,7 +62,6 @@ xhr.onload = function () {
                         kakao.maps.event.addListener(marker, 'mouseout', clickMapListener(infowindow));
                         kakao.maps.event.addListener(marker, 'click', modal(record));
 
-
                         var li = document.createElement('li');
                         li.id=record.id;
                         var startDate = new Date(record.startDate);
@@ -102,6 +101,7 @@ function modal(record) {
         // 모달 창을 띄움
         $('#kt_modal_1').modal('show');
 
+        //모달 창에서 상세보기 클릭 시 상세보기 페이지로 이동
         $('#viewDetail').on('click', function() {
             var id = record.id;
             goToDetailPage(id);

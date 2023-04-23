@@ -62,17 +62,22 @@ License: For each use you must have a valid license purchased only from above li
 									<h4 class="menu-content mb-0 fs-6 fw-bold text-uppercase" style="color: black"><b>마이페이지</b></h4>
 									<div class="menu-sub menu-fit menu-sub-accordion show pb-10">
 										<div class="menu-item" style="margin: 3px">
-											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
+											<a class="text-dark text-hover-primary ms-3 py-2" href="../../profile/account/profile_admin_account.html">
 												<span class="menu-title">내 계정</span>
 											</a>
 										</div>
 										<div class="menu-item" style="margin: 3px">
-											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
+											<a class="text-dark text-hover-primary ms-3 py-2" href="../../profile/accountModify/profile_admin_accountModify.html">
 												<span class="menu-title">계정 정보 수정</span>
 											</a>
 										</div>
 										<div class="menu-item" style="margin: 3px">
-											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
+											<a class="text-dark text-hover-primary ms-3 py-2" href="../../profile/reservation/profile_admin_reservation.html">
+												<span class="menu-title">예약 내역</span>
+											</a>
+										</div>
+										<div class="menu-item" style="margin: 3px">
+											<a class="text-dark text-hover-primary ms-3 py-2" href="../../profile/concertManagement/profile_admin_concertmanagement.html">
 												<span class="menu-title">공연 관리</span>
 											</a>
 										</div>
@@ -196,11 +201,11 @@ License: For each use you must have a valid license purchased only from above li
 
 				<!-- 검색 영역과 카테고리 영역 사이에 공백을 추가 -->
 				<div class="mx-2" style="margin-top: 30px; margin-bottom: 30px;"></div>
-<!--
-				<div class="container">
+
+		<!--		<div class="container">
 					<div style="color:#000000; background-color:#FFFFFF; padding:25px;  height: 600px;">
-						<div style="margin-bottom: 20px">
-						<h4 style="font-size: 24px"><strong>통합 정보 조회</strong></h4>
+						<div style="display: flex; align-items: center; margin-bottom: 20px;">
+							<h4 style="font-size: 24px; flex-grow: 1;"><strong>통합정보</strong></h4>
 						</div>
 						<div>
 							<div class="row mt-3">
@@ -208,45 +213,41 @@ License: For each use you must have a valid license purchased only from above li
 									<div class="col">
 										<input type="hidden" name="size" th:value="${pageRequestDTO.size}">
 										<div class="input-group">
-											<div class="input-group-prepend">
+											<div class="input-group-prepend" style="margin-right: 3px">
 												<select class="form-select" name="type">
 													<option value="">---</option>
-													<option value="t" th:selected="${pageRequestDTO.type =='t'}">회원 아이디</option>
-													<option value="c" th:selected="${pageRequestDTO.type =='c'}">회원 분류</option>
-													<option value="w" th:selected="${pageRequestDTO.type =='w'}">회원 이름</option>
+													<option value="t" th:selected="${pageRequestDTO.type =='t'}">활동명</option>
+													<option value="c" th:selected="${pageRequestDTO.type =='c'}">공연명</option>
+													<option value="w" th:selected="${pageRequestDTO.type =='w'}">공연 일자</option>
 													<option value="tc" th:selected="${pageRequestDTO.type =='tc'}">제목 내용</option>
 													<option value="tcw" th:selected="${pageRequestDTO.type =='tcw'}">제목 내용 작성자</option>
 												</select>
 											</div>
-											<input type="text" class="form-control" name="keyword" th:value="${pageRequestDTO.keyword}">
-											<div class="input-group-append">
-												<button class="btn btn-outline-secondary searchBtn" type="submit">Search</button>
-												<button class="btn btn-outline-secondary clearBtn" type="button">Clear</button>
+											<input type="text" class="form-control" name="keyword" style="margin-right: 10px;" th:value="${pageRequestDTO.keyword}">
+											<div class="input-group-append" style="margin-right: 3px">
+												<button class="btn btn-primary searchBtn" type="submit">Search</button>
+												<button class="btn btn-primary clearBtn" type="button">Clear</button>
 											</div>
 										</div>
 									</div>
 								</form>
 							</div>
 
-
 							<div class="row mt-3">
 								<div class="col">
 
 									<div class="card">
-										<div class="card-header">
-											회원 정보
-										</div>
 										<div class="card-body" >
-											<h5 class="card-title">회원 정보 </h5>
+											<h5 class="card-title">공연 정보 </h5>
 
 											<table class="table">
 												<thead>
 												<tr>
-													<th scope="col">회원 아이디</th>
-													<th scope="col">비밀번호</th>
-													<th scope="col">회원 분류</th>
-													<th scope="col">회원 등록날짜</th>
-													<th scope="col">이메일</th>
+													<th scope="col">활동명</th>
+													<th scope="col">공연명</th>
+													<th scope="col">공연 일자</th>
+													<th scope="col">공연 위치</th>
+													<th scope="col">조회수</th>
 												</tr>
 												</thead>
 
@@ -293,31 +294,13 @@ License: For each use you must have a valid license purchased only from above li
 								</div>
 							</div>
 
-							<div class="modal" tabindex="-1">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title">Modal title</h5>
-											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-										</div>
-										<div class="modal-body">
-											<p>Modal body text goes here.</p>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-											<button type="button" class="btn btn-primary">Save changes</button>
-										</div>
-									</div>
-								</div>
-							</div>
-
 
 
 						</div>
-					<div style="margin-top:20px;">
+						<div style="margin-top:20px;">
 
-					</div>
-				</div>	-->
+						</div>
+					</div>	-->
 			</div>
 			<!--end::Header-->
 			<!--begin::Main-->
