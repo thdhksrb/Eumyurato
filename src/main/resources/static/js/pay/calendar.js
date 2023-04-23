@@ -26,7 +26,7 @@ searchBtn.addEventListener('click', () => {
     const data = { selectedDate };
 
     // Send AJAX request
-    fetch('/smallconcert/detail/' + id + '/calender/json', {
+    fetch('/smallconcert/detail/' + id + '/calendar/json', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
@@ -42,6 +42,7 @@ searchBtn.addEventListener('click', () => {
                 li.textContent = '선택한 날짜에 해당하는 회차 정보가 없습니다.';
                 schedulesUl.appendChild(li);
                 console.log(schedules);
+                selectSeat.disabled = true;
             } else {
                 // Add schedules to list
                 const schedule = schedules.message;
@@ -49,9 +50,16 @@ searchBtn.addEventListener('click', () => {
                 li.textContent = schedule.conDate;
                 schedulesUl.appendChild(li);
                 console.log(schedules);
+                selectSeat.disabled = false;
             }
 
         })
         .catch(error => console.error(error));
 });
 
+const selectSeat = document.querySelector('#selectSeat');
+
+selectSeat.addEventListener('click', () => {
+    const selectedDate = datePicker.value;
+    window.location.href = `/smallconcert/detail/${id}/calendar/${selectedDate}`;
+});

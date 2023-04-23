@@ -60,20 +60,20 @@ public class MapController {
         return "html/detail/detail";
     }
 
-    @GetMapping("/smallconcert/detail/{id}/calender")
-    public String calenderPage(){
+    @GetMapping("/smallconcert/detail/{id}/calendar")
+    public String calendarPage(){
         return "html/pay/pay1";
     }
 
-    @PostMapping("/smallconcert/detail/{id}/calender")
-    public String calender(){
+    @PostMapping("/smallconcert/detail/{id}/calendar")
+    public String calendar(){
         return "html/pay/pay1";
     }
 
 
-    @PostMapping("/smallconcert/detail/{id}/calender/json")
+    @PostMapping("/smallconcert/detail/{id}/calendar/json")
     @ResponseBody
-    public ResponseEntity<Map<String, SchedulesDTO>> calenderJson(@PathVariable("id") int id, @RequestBody Map<String, String> data){
+    public ResponseEntity<Map<String, SchedulesDTO>> calendarJson(@PathVariable("id") int id, @RequestBody Map<String, String> data){
         String selectedDate = data.get("selectedDate");
         System.out.println(selectedDate);
 
@@ -82,6 +82,22 @@ public class MapController {
         return ResponseEntity.ok().body(response);
     }
 
+    @GetMapping("/smallconcert/detail/{id}/calendar/{day}")
+    public String seatPage(){
+
+
+
+        return "html/pay/pay2";
+    }
+
+    @GetMapping("/smallconcert/detail/{id}/calendar/{day}/json")
+    @ResponseBody
+    public String seat(@PathVariable("day")String day){
+
+
+
+        return "html/pay/pay2";
+    }
 
 
 }
