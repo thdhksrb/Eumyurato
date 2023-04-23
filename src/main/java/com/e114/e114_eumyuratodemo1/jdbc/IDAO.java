@@ -11,4 +11,5 @@ public interface IDAO {
     public List<SmallConcertDTO> viewSmallConcert();
     public SmallConcertDTO selectConcert(int id);
     public SchedulesDTO selectConcertTime(int id, String conDate);
+    public List<String> selectBooked(int conId,String conDate);
 }

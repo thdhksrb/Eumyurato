@@ -42,6 +42,24 @@ for (let i = 1; i <= 7; i++) {
     }
 }
 
+const resetButton = document.querySelector('#reset');
+resetButton.addEventListener('click', function() {
+    const clickedSeats = document.querySelectorAll('.clicked');
+    clickedSeats.forEach(seat => {
+        seat.classList.remove('clicked');
+    });
+    selectedSeats = [];
+    const selectedSeatElement = document.querySelector('.selected-seat');
+    selectedSeatElement.textContent = '선택좌석: ';
+});
+
+const searchButton = document.querySelector('#search-btn');
+searchButton.addEventListener('click', function() {
+    const selectedSeatElement = document.querySelector('.selected-seat');
+    selectedSeatElement.textContent = '선택좌석: ' + selectedSeats.join(', ');
+});
+
+
 function mapping(input, i, j) {
     if (i === 1) {
         input.value = "A" + j;
