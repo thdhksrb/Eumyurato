@@ -30,9 +30,10 @@ License: For each use you must have a valid license purchased only from above li
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 	<!--end::Fonts-->
 	<!--begin::Page Vendor Stylesheets(used by this page)-->
-	<link href="/static/css/profile/profile1.css" rel="stylesheet" type="text/css" />
+	<link href="/static/css/profile/profile3.css" rel="stylesheet" type="text/css" />
 	<!--end::Page Vendor Stylesheets-->
 	<!--begin::Global Stylesheets Bundle(used by all pages)-->
+	<link href="/static/css/profile/profile1.css" rel="stylesheet" type="text/css" />
 	<link href="/static/css/profile/profile2.css" rel="stylesheet" type="text/css" />
 
 	<!--end::Global Stylesheets Bundle-->
@@ -61,22 +62,22 @@ License: For each use you must have a valid license purchased only from above li
 									<h4 class="menu-content mb-0 fs-6 fw-bold text-uppercase" style="color: black"><b>마이페이지</b></h4>
 									<div class="menu-sub menu-fit menu-sub-accordion show pb-10">
 										<div class="menu-item" style="margin: 3px">
-											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
+											<a class="text-dark text-hover-primary ms-3 py-2" href="../../profile/account/profile_artist_account.html">
 												<span class="menu-title">내 계정</span>
 											</a>
 										</div>
 										<div class="menu-item" style="margin: 3px">
-											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
+											<a class="text-dark text-hover-primary ms-3 py-2" href="../../profile/accountModify/profile_artist_accountModify.html">
 												<span class="menu-title">계정 정보 수정</span>
 											</a>
 										</div>
 										<div class="menu-item" style="margin: 3px">
-											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
+											<a class="text-dark text-hover-primary ms-3 py-2" href="../../profile/accountModify/profile_artist_accountModify.html">
 												<span class="menu-title">예약 내역</span>
 											</a>
 										</div>
 										<div class="menu-item" style="margin: 3px">
-											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
+											<a class="text-dark text-hover-primary ms-3 py-2" href="../../profile/concertManagement/profile_artist_concertmanagement.html">
 												<span class="menu-title">공연 관리</span>
 											</a>
 										</div>
@@ -125,7 +126,9 @@ License: For each use you must have a valid license purchased only from above li
 				<div class="container-xxl d-flex align-items-stretch justify-content-between">
 					<!--begin::Left-->
 					<div class="container">
-						<a class="navbar-brand" href="/templates/html/main/main.html"><img src="/static/img/logo_name.png" width="250" height="45"></a>
+						<a class="navbar-brand" href="/templates/html/main/main.html">
+							<img src="/static/img/logo_name.png" width="250" height="45">
+						</a>
 					</div>
 					<!--end::Left-->
 					<!--begin::Right-->
@@ -156,7 +159,7 @@ License: For each use you must have a valid license purchased only from above li
 						<!--	<button class="btn btn-icon fw-bolder" >
 								<img src="/static/img/logout.png" width="24" height="24" href="../main/main.html" />
 							</button> -->
-							<a href="../../main/main.html" height="2" width="5">
+							<a href="main/main.html" height="2" width="5">
 								<img src="/static/img/logout.png" width="24" height="24">
 							</a>
 							<!--begin::Menu-->
@@ -200,48 +203,52 @@ License: For each use you must have a valid license purchased only from above li
 						<form class="form w-100" novalidate="novalidate">
 							<!--begin::Title-->
 							<div class="pb-5 pb-lg-1">
-								<h3 class="fw-bolder text-dark display-6">내 계정</h3>
+								<h3 class="fw-bolder text-dark display-6 text-center">내 계정</h3>
 							</div>
 							<!--begin::Image input-->
-							<div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url(/static/img/다운로드.jpg)">
+							<div class="image-input image-input-outline" data-kt-image-input="true" style="display: flex; justify-content: center; align-items: center">
 								<!--begin::Image preview wrapper-->
-								<div class="image-input-wrapper w-125px h-125px" style="background-image: url(/static/img/다운로드.jpg)"></div>
-								<!--end::Image preview wrapper-->
+								<div style="position: relative;">
+									<img src="/static/img/다운로드.jpg" alt="프로필사진" />
 
-								<!--begin::Edit button-->
-								<label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
-									   data-kt-image-input-action="change"
-									   data-bs-toggle="tooltip"
-									   data-bs-dismiss="click"
-									   title="Change avatar">
-									<i class="bi bi-pencil-fill fs-7"></i>
+									<!--begin::Edit button-->
+									<label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+										   data-kt-image-input-action="change"
+										   data-bs-toggle="tooltip"
+										   data-bs-dismiss="click"
+										   title="Change avatar"
+										   style="position: absolute; right: -10px; top: -10px;">
+										<i class="bi bi-pencil-fill fs-7"></i>
 
-									<!--begin::Inputs-->
-									<input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
-									<input type="hidden" name="avatar_remove" />
-									<!--end::Inputs-->
-								</label>
-								<!--end::Edit button-->
+										<!--begin::Inputs-->
+										<input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+										<input type="hidden" name="avatar_remove" />
+										<!--end::Inputs-->
+									</label>
+									<!--end::Edit button-->
 
-								<!--begin::Cancel button-->
-								<span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
-									  data-kt-image-input-action="cancel"
-									  data-bs-toggle="tooltip"
-									  data-bs-dismiss="click"
-									  title="Cancel avatar">
-         							<i class="bi bi-x fs-2"></i>
-     							</span>
-								<!--end::Cancel button-->
+									<!--begin::Cancel button-->
+									<span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+										  data-kt-image-input-action="cancel"
+										  data-bs-toggle="tooltip"
+										  data-bs-dismiss="click"
+										  title="Cancel avatar"
+										  style="position: absolute; left: -10px; top: -10px;">
+										<i class="bi bi-x fs-2"></i>
+    								</span>
+									<!--end::Cancel button-->
 
-								<!--begin::Remove button-->
-								<span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
-									  data-kt-image-input-action="remove"
-									  data-bs-toggle="tooltip"
-									  data-bs-dismiss="click"
-									  title="Remove avatar">
-         							<i class="bi bi-x fs-2"></i>
-     							</span>
-								<!--end::Remove button-->
+									<!--begin::Remove button-->
+									<span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+										  data-kt-image-input-action="remove"
+										  data-bs-toggle="tooltip"
+										  data-bs-dismiss="click"
+										  title="Remove avatar"
+										  style="position: absolute; right: -10px; bottom: -10px;">
+      									<i class="bi bi-x fs-2"></i>
+									</span>
+									<!--end::Remove button-->
+								</div>
 							</div>
 							<!--end::Image input-->
 							<div class="text-end">

@@ -1,32 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>사용자 정보</title>
+<!--
+Author: Keenthemes
+Product Name: Start - Bootstrap 5 HTML Multipurpose Admin Dashboard Template
+Purchase: https://themes.getbootstrap.com/product/start-multipurpose-admin-dashboard-theme/
+Website: http://www.keenthemes.com
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Dribbble: www.dribbble.com/keenthemes
+Like: www.facebook.com/keenthemes
+License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
+-->
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<!--begin::Head-->
+<head><base href="../">
+    <title>profile_mainpage</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="Check out all the features of the Start admin panel. A large number of templates, components and widgets." />
+    <meta name="keywords" content="Start, bootstrap, bootstrap 5, admin themes, free admin themes, bootstrap admin, bootstrap dashboard, html admin theme, html template" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Start - Bootstrap 5 HTML Multipurpose Admin Dashboard Template" />
+    <meta property="og:url" content="https://themes.getbootstrap.com/product/start-multipurpose-admin-dashboard-theme/" />
+    <meta property="og:site_name" content="Keenthemes | Start" />
+    <link rel="canonical" href="https://preview.keenthemes.com/start" />
+    <link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+
+    <!--begin::Fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    <!--end::Fonts-->
+    <!--begin::Page Vendor Stylesheets(used by this page)-->
+    <link href="/static/css/profile/profile3.css" rel="stylesheet" type="text/css" />
+    <!--end::Page Vendor Stylesheets-->
+    <!--begin::Global Stylesheets Bundle(used by all pages)-->
+    <link href="/static/css/profile/profile1.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/profile/profile2.css" rel="stylesheet" type="text/css" />
+
+    <!--end::Global Stylesheets Bundle-->
 </head>
 <meta charset="utf-8" />
 <body>
-<table>
-    <tr>
-        <th>사용자 이름</th>
-        <th>이메일</th>
-        <th>비밀번호</th>
-    </tr>
-    <tr>
-        <td>사용자1</td>
-        <td>user1@example.com</td>
-        <td>*********</td>
-    </tr>
-    <tr>
-        <td>사용자2</td>
-        <td>user2@example.com</td>
-        <td>*********</td>
-    </tr>
-    <tr>
-        <td>사용자3</td>
-        <td>user3@example.com</td>
-        <td>*********</td>
-    </tr>
-    <!-- 추가적인 사용자 정보를 여기에 추가하십시오 -->
-</table>
+<form action="/submit" method="post">
+    <label for="myDate">날짜:</label>
+    <input type="date" id="myDate" name="myDate">
+    <br>
+    <label for="myTime">시간:</label>
+    <input type="time" id="myTime" name="myTime">
+    <br>
+    <input type="submit" value="제출">
+</form>
 </body>
 </html>
