@@ -205,14 +205,12 @@ License: For each use you must have a valid license purchased only from above li
 						<form class="form w-100" novalidate="novalidate">
 							<!--begin::Title-->
 							<div class="pb-5 pb-lg-1">
-								<h3 class="fw-bolder text-dark display-6">내 계정</h3>
+								<h3 class="fw-bolder text-dark display-6 text-center">내 계정</h3>
 							</div>
 							<!--begin::Image input-->
-							<div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url(/static/img/다운로드.jpg)">
-								<!--begin::Image preview wrapper-->
-								<div class="image-input-wrapper w-125px h-125px" style="background-image: url(/static/img/다운로드.jpg)"></div>
-								<!--end::Image preview wrapper-->
-
+								<div class="image-input image-input-outline" data-kt-image-input="true" style="display: flex; justify-content: center; align-items: center">
+									<!--begin::Image preview wrapper-->
+									<img src="/static/img/다운로드.jpg" alt="프로필사진"/>
 								<!--begin::Edit button-->
 								<label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
 									   data-kt-image-input-action="change"
@@ -227,7 +225,6 @@ License: For each use you must have a valid license purchased only from above li
 									<!--end::Inputs-->
 								</label>
 								<!--end::Edit button-->
-
 								<!--begin::Cancel button-->
 								<span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
 									  data-kt-image-input-action="cancel"
@@ -239,11 +236,12 @@ License: For each use you must have a valid license purchased only from above li
 								<!--end::Cancel button-->
 
 								<!--begin::Remove button-->
-								<span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+
+								<span class="btn btn-icon btn-circle btn-active-color-primary w-30px h-25px bg-white shadow"
 									  data-kt-image-input-action="remove"
 									  data-bs-toggle="tooltip"
 									  data-bs-dismiss="click"
-									  title="Remove avatar">
+									  title="Remove avatar" style="float: left;">
          							<i class="bi bi-x fs-2"></i>
      							</span>
 								<!--end::Remove button-->

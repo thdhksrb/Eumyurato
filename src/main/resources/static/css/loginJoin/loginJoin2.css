@@ -2945,7 +2945,7 @@ textarea.form-control-lg {
     width: 100%;
     margin-top: .5rem;
     font-size: .925rem;
-    color: #00b2ff
+    color: #ff0000
 }
 
 .valid-tooltip {
@@ -3034,7 +3034,7 @@ textarea.form-control-lg {
     width: 100%;
     margin-top: .5rem;
     font-size: .925rem;
-    color: #f1416c
+    color: #ff0000
 }
 
 .invalid-tooltip {
@@ -49615,4 +49615,13 @@ body {
         /* 오른쪽 영역의 스타일을 조정하여 반응형으로 맞춤 */
     }
 }
+
+#uid-feedback {
+    margin-top: 5px;
+}
+
+#nid-empty {
+    margin-top: 0;
+}
+
 
