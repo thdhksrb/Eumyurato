@@ -66,4 +66,12 @@ src: url('/assets/NanumGothicLight.ttf'); /* IE9 Compat Modes */
     font-family: 'font-name';
 }
 
+li h3,
+li p {
+    transition: color 0.3s ease-in-out;
+}
 
+li:hover h3,
+li:hover p {
+    color: #062d91;
+}
