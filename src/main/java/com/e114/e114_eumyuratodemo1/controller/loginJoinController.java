@@ -10,7 +10,7 @@ public class loginJoinController {
 
     @GetMapping("/main")
     public String main() {
-        return "html/main/main";
+        return "main1";
     }
 
     @GetMapping("/login")
