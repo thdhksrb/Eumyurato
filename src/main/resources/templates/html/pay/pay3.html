@@ -16,6 +16,7 @@ License: For each use you must have a valid license purchased only from above li
 <head>
     <title>Eumyurato :: Reservation</title>
     <link rel="icon" type="image/x-icon" th:href="@{/img/E114_logo.png}"/>
+    <meta charset="utf-8"/>
     <meta name="description"
           content="Check out all the features of the Start admin panel. A large number of templates, components and widgets."/>
     <meta name="keywords"
@@ -38,7 +39,10 @@ License: For each use you must have a valid license purchased only from above li
     <link th:href="@{/css/pay/pay1.css}" rel="stylesheet" type="text/css" />
     <link th:href="@{/css/pay/pay2.css}" rel="stylesheet" type="text/css" />
     <link th:href="@{/css/pay/calenderPay.css}" rel="stylesheet" type="text/css" />
+<!--    jQuery UI CSS파일-->
+    <link rel="stylesheet" th:href="@{http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css}" type="text/css"/>
     <!--end::Global Stylesheets Bundle-->
+    <script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -72,33 +76,38 @@ License: For each use you must have a valid license purchased only from above li
                 </div>
             </div>
             <div class="d-flex flex-wrap"
-                 style="width: 100%; height: 600px; background-color:#d8d8d8; margin-bottom: 0; display: flex; justify-content: center; align-items: center;">
-                <div class="seatback" style="color:#000000; background-color:#ffffff; width: 500px; height: 500px; padding: 20px !important; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                    <div class="seat-wrapper"></div>
-                    <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px">
-                        <button type="button" id="reset" class="btn btn-secondary fw-bolder px-2 py-3 text-center" style="width: 80px; height: 40px; font-size: 13px; margin-left: auto; display: flex; justify-content: center; align-items: center;">
-                            <span>초기화</span>
-                        </button>
-                        <button type="button" id="search-btn" class="btn btn-primary fw-bolder px-2 py-3 text-center" style="width: 80px; height: 40px; font-size: 13px; margin-left: 10px; display: flex; justify-content: center; align-items: center;">
-                            <span>선택</span>
-                        </button>
+                 style="width: 100%; height: 600px; background-color:#d8d8d8; margin-bottom: 0;">
+
+                <div class="center" style="width:300px">
+
+
+
+
+
+                </div>
+
+
+                <div style="color:#000000; background-color:#ffffff; width: 500px; height: 300px; padding: 20px !important; margin:auto; margin-left: 50px;">
+                    <div style="float: left; margin-right: 20px;">
+                        <h1>예매 정보</h1>
+                        <ul id="reservList" style="list-style-type: none; font-size: 15px"></ul>
                     </div>
                 </div>
             </div>
-            <div class="d-flex flex-wrap" style="width: 100%; height: 188px; background-color:#ffffff; margin-bottom: 0;">
-                <div class="fs-3" style="color:#000000; background-color:#ffffff; width: 150px; height: 50px; margin-top: 10px; margin-left: 72%;">
-                    <span class="selected-seat" style="font-size: 20px">선택좌석: </span>
-                </div>
-                <button type="button" id="selectCompleted"
+            <div class="d-flex flex-wrap" style="width: 100%; height: 188px; background-color:#FFFFFF; margin-bottom: 0;">
+
+                <button type="button" id="selectSeat"
                         class="btn btn-primary fw-bolder fs-1 px-2 py-3 my-3 text-center"
-                        style=" width: 200px; height: 50px; margin-left: auto; margin-right: 30px;">좌석선택완료
+                        style=" width: 200px; height: 50px; margin-left: auto; margin-right: 30px;">결제하기
                 </button>
             </div>
         </div>
     </div>
 </div>
-<script type="text/javascript" th:src="@{/js/pay/seated.js}"></script>
-
-
+<!--jQuery 기본 js파일-->
+<script th:src="@{http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js}"></script>
+<!--jQuery UI 라이브러리 js파일-->
+<script th:src="@{http://code.jquery.com/ui/1.8.18/jquery-ui.min.js}"></script>
+<script th:src="@{/js/pay/reservList.js}"></script>
 </body>
 </html>

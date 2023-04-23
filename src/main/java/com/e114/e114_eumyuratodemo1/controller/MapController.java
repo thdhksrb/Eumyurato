@@ -1,8 +1,10 @@
 package com.e114.e114_eumyuratodemo1.controller;
 
+import com.e114.e114_eumyuratodemo1.dto.DataDTO;
 import com.e114.e114_eumyuratodemo1.dto.SchedulesDTO;
 import com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO;
 import com.e114.e114_eumyuratodemo1.jdbc.IDAO;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,9 @@ public class MapController {
 
     @Autowired
     private IDAO dao;
+
+    @Autowired
+    private DataDTO dto;
 
     @GetMapping("/map")
     public String showMap() {
@@ -93,6 +98,38 @@ public class MapController {
 
         System.out.println(dao.selectBooked(id,day));
         return dao.selectBooked(id,day);
+    }
+
+    @PostMapping ("/smallconcert/detail/{id}/calendar/{day}/pay")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> pay(@PathVariable("id")int id,@PathVariable("day")String day,@RequestBody Map<String, List<String>> data){
+        List<String> selectedSeats = data.get("selectedSeats");
+        int length = selectedSeats.size();
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("seat", selectedSeats);
+        response.put("count", length);
+        response.put("concert", dao.selectConcert(id));
+        response.put("schedule", dao.selectConcertTime(id,day));
+
+        dto.setMyData(response);
+
+        return ResponseEntity.ok().body(response);
+    }
+
+    @GetMapping("/smallconcert/detail/{id}/calendar/{day}/pay")
+    public String payPage(){
+
+
+        return "html/pay/pay3";
+    }
+
+    @GetMapping("/smallconcert/detail/{id}/calendar/{day}/pay/json")
+    @ResponseBody
+    public DataDTO payPageData(){
+
+
+        return dto;
     }
 
 }
