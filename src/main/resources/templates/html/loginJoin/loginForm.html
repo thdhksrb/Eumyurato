@@ -28,7 +28,7 @@
             <!--begin::Aside Top-->
             <div class="d-flex flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
                 <!--begin::Aside Logo-->
-                <a th:href="@{/main}" class="mb-6">
+                <a th:href="@{/}" class="mb-6">
                     <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
                         <img alt="로고" th:src="@{/img/E114_logo.png}" class="h-450px h-lg-450px"/>
                     </div>
@@ -54,7 +54,7 @@
         <div class="login-content flex-lg-row-fluid d-flex flex-column overflow-hidden py-10 py-lg-20 px-10 p-lg-7 mx-auto mw-450px w-100">
             <!--begin::Wrapper-->
             <!--begin::Signin Form-->
-            <form class="form w-100  needs-validation" id="kt_login_signin_form" novalidate>
+            <form class="form w-100  needs-validation" id="kt_login_signin_form" novalidate method="post">
                 <!--th:data-after-login-url="@{/html/main/main1.html}"-->
                 <!--begin::Title-->
                 <div class="pb-5 pb-lg-15">
