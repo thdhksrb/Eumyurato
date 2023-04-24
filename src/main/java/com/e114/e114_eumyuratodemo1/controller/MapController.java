@@ -115,9 +115,8 @@ public class MapController {
 
         dto.setMyData(response);
 
-
-        mapService.insertSeat(id,day,selectedSeats);
-        System.out.println("ok");
+        int result = mapService.insertSeat(id,day,selectedSeats);
+        System.out.println(result);
 
         return ResponseEntity.ok().body(response);
     }
