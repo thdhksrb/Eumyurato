@@ -15,7 +15,7 @@ public class loginJoinController {
 
     @GetMapping("/")
     public String main1() {
-        return "home";
+        return "html/main/home";
     }
 
     @GetMapping("/home")
