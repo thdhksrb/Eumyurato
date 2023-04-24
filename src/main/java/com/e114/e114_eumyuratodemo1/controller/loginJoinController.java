@@ -15,12 +15,12 @@ public class loginJoinController {
 
     @GetMapping("/")
     public String main1() {
-        return "home";
+        return "html/main/home";
     }
 
     @GetMapping("/home")
     public String main2() {
-        return "main1";
+        return "html/main/main1";
     }
 
     @GetMapping("/login")
