@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- MemberMapper.xml -->
+<mapper namespace="com.e114.e114_eumyuratodemo1.jdbc.CommonMemberDAO">
+    <select id="findById" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
+        SELECT * FROM Common_Member WHERE id=#{id}
+    </select>
+
+    <select id="findByPwd" parameterType="java.lang.String" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
+        SELECT * FROM common_member WHERE pwd = #{pwd}
+    </select>
+</mapper>
+

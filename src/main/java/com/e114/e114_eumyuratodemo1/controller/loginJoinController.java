@@ -1,9 +1,17 @@
 package com.e114.e114_eumyuratodemo1.controller;
 
+import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
 import com.e114.e114_eumyuratodemo1.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class loginJoinController {
@@ -15,18 +23,32 @@ public class loginJoinController {
 
     @GetMapping("/")
     public String main1() {
-        return "home";
+        return "html/main/home";
     }
 
     @GetMapping("/home")
     public String main2() {
-        return "main1";
+        return "html/main/main1";
     }
 
     @GetMapping("/login")
-    public String login() {
-        return "html/loginJoin/loginForm1";
+    public String registerPage() {
+        return "html/loginJoin/loginform1";
     }
+
+    @PostMapping("/login")
+    public String login(@RequestParam("id") String id,
+                        @RequestParam("pwd") String pwd,
+                        HttpSession session) {
+        CommonMemberDTO commonMemberDTO = userService.login(id, pwd);
+        if (commonMemberDTO != null) {
+            session.setAttribute("loginUser", commonMemberDTO);
+            return "redirect:/home";
+        } else {
+            return "redirect:/login?error";
+        }
+    }
+
 
     @GetMapping("/login_art")
     public String login_art() {
