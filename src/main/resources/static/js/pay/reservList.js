@@ -14,12 +14,14 @@ $.ajax({
         li.append($('<p>').html('<strong>공연 일자: </strong>' + data.myData.concert.startDate + ' ~ ' + data.myData.concert.lastDate));
         li.append($('<p>').html('<strong>장소: </strong>' + data.myData.concert.location));
         li.append($('<p>').html('<strong>공연자: </strong>' + data.myData.concert.pname));
-        li.append($('<p>').html('<strong>선택내역</strong>'));
+        li.append($('<h2>').html('<strong>*선택내역*</strong>'));
         li.append($('<p>').html('<strong>날짜: </strong>' + day));
         li.append($('<p>').html('<strong>시간: </strong>' + data.myData.schedule.conDate));
-        li.append($('<p>').html('<strong>매수: </strong>' + data.myData.count));
+        li.append($('<p>').html('<strong>매수: </strong>' + data.myData.count +'매'));
         li.append($('<p>').html('<strong>좌석: </strong>' + data.myData.seat));
-        li.append($('<p>').html('<strong>가격: </strong>' + data.myData.concert.price * data.myData.count));
+        li.append($('<p>').html('<strong>가격: </strong>' + data.myData.concert.price * data.myData.count + '원'))
+        li.append($('<input>').attr({ type: 'radio', id: 'onSite', checked: true }));
+        li.append($('<label>').attr('for', 'onSite').html('현장수령'));
 
         ReservList.append(li);
     },
