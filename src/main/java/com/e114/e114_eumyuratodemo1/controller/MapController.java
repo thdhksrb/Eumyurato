@@ -3,7 +3,9 @@ package com.e114.e114_eumyuratodemo1.controller;
 import com.e114.e114_eumyuratodemo1.dto.DataDTO;
 import com.e114.e114_eumyuratodemo1.dto.SchedulesDTO;
 import com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO;
+import com.e114.e114_eumyuratodemo1.jdbc.IDAO;
 import com.e114.e114_eumyuratodemo1.service.MapService;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -145,8 +147,6 @@ public class MapController {
         return dto;
     }
 
-
-
     @GetMapping("/smallconcert/detail/{id}/calendar/{day}/pay/kakao")
     @ResponseBody
     public String kakaoPay(){
@@ -154,7 +154,7 @@ public class MapController {
             URL url = new URL("https://kapi.kakao.com/v1/payment/ready");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
-            connection.setRequestProperty("Authorization","KakaoAK cf9e2097c6a459fbf9422ba7e27a4a33");
+            connection.setRequestProperty("Authorization","KakaoAK 51728ed0dc1cc881ebce676fb8920a0c");
             connection.setRequestProperty("Content-type","application/x-www-form-urlencoded;charset=utf-8");
             connection.setDoOutput(true);
             String param = "cid=TC0ONETIME&partner_order_id=partner_order_id&partner_user_id=partner_user_id&item_name=초코파이&quantity=1&total_amount=2200&tax_free_amount=0&approval_url=http://localhost:8081/kakaopay/success&cancel_url=http://localhost:8081/kakaopay/fail&fail_url=http://localhost:8081/kakaopay/fail";
@@ -179,7 +179,7 @@ public class MapController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "fail";
+        return "ok";
     }
 
     @GetMapping("/kakaopay/success")
