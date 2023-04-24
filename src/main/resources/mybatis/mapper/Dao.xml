@@ -32,6 +32,15 @@
                             ON schedules.id = booked.sId
         WHERE schedules.conId = #{param1} AND DATE_FORMAT(schedules.conDate, '%Y-%m-%d') = #{param2}
     </select>
+    <insert id="insertSeat" parameterType="java.util.Map">
+        <foreach collection="seat" item="seatNum" separator=";">
+            INSERT INTO booked (sId, seatNum)
+            SELECT id, #{seatNum}
+            FROM schedules
+            WHERE conId = #{conId} AND DATE_FORMAT(schedules.conDate, '%Y-%m-%d') = #{conDate}
+        </foreach>
+    </insert>
+
 
 
 
