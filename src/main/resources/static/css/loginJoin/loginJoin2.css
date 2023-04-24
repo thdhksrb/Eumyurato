@@ -38746,7 +38746,7 @@ a:hover {
 .btn-check:active + .btn.btn-secondary, .btn-check:checked + .btn.btn-secondary, .btn.btn-secondary.active, .btn.btn-secondary.show, .btn.btn-secondary:active:not(.btn-active), .btn.btn-secondary:focus:not(.btn-active), .btn.btn-secondary:hover:not(.btn-active), .show > .btn.btn-secondary {
     color: #3f4254;
     border-color: #b5b5c3;
-    background-color: #b5b5c3 !important
+    background-color: #0099ff !important
 }
 
 .btn-check:active + .btn.btn-secondary i, .btn-check:checked + .btn.btn-secondary i, .btn.btn-secondary.active i, .btn.btn-secondary.show i, .btn.btn-secondary:active:not(.btn-active) i, .btn.btn-secondary:focus:not(.btn-active) i, .btn.btn-secondary:hover:not(.btn-active) i, .show > .btn.btn-secondary i {
