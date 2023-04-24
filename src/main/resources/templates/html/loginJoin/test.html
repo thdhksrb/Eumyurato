@@ -4,7 +4,7 @@
 
 <head>
     <title>Eumyurato</title>
-    <link rel="icon" type="image/x-icon" th:href="@{/img/E114_logo.png}"/>
+    <link rel="icon" type="image/x-icon" href="/static/img/E114_logo.png"/>
     <meta charset="utf-8"/>
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -12,8 +12,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link th:href="@{/css/loginJoin/loginJoin2.css}" rel="stylesheet" type="text/css"/>
-    <link th:href="@{/css/loginJoin/loginJoin1.css}" rel="stylesheet" type="text/css"/>
+    <link href="/static/css/loginJoin/loginJoin2.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/css/loginJoin/loginJoin1.css" rel="stylesheet" type="text/css"/>
     <!--end::Global Stylesheets Bundle-->
 </head>
 <!--end::Head-->
@@ -30,7 +30,7 @@
                 <!--begin::Aside Logo-->
                 <a th:href="@{/main}" class="mb-6">
                     <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
-                        <img alt="로고" th:src="@{/img/E114_logo.png}" class="h-450px h-lg-450px"/>
+                        <img alt="로고" src="/static/img/E114_logo.png" class="h-450px h-lg-450px"/>
                     </div>
                 </a>
                 <!--end::Aside Logo-->
@@ -40,7 +40,7 @@
             <div class="d-flex flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
                 <!--begin::Aside Logo-->
                 <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
-                    <img alt="로고" th:src="@{/img/E114_logo.png}" class="h-450px h-lg-450px"/>
+                    <img alt="로고" src="/static/img/E114_logo.png" class="h-450px h-lg-450px"/>
                 </div>
                 <!--end::Aside Logo-->
             </div>
@@ -91,18 +91,18 @@
                 </div>
                 <div class="pb-lg-0 pb-5 mt-5 d-flex align-items-center justify-content-center">
                     <div>
-                        <a th:href="@{/Idfind}"
+                        <a href="/templates/html/loginJoin/Idfind.html"
                            class="text-gray-600 text-hover-primary ms-3" id="kt_login_signin_form_id_reset_button">아이디
                             찾기</a>
                         <a target="_blank"
                            class="text-gray-600 text-hover-primary ms-3">|</a>
-                        <a th:href="@{/Pwfind}"
+                        <a href="/templates/html/loginJoin/pwfind.html"
                            class="text-gray-600 text-hover-primary ms-3"
                            id="kt_login_signin_form_password_reset_button">비밀번호 찾기</a>
                         <!-- 왼쪽에 정렬할 텍스트와의 간격을 조정 -->
                         <a target="_blank"
                            class="text-gray-600 text-hover-primary ms-3">|</a>
-                        <a th:href="@{/joinchooes}"
+                        <a href="/templates/html/loginJoin/joinChooes.html"
                            class="text-gray-600 text-hover-primary ms-3" id="kt_login_signup_choose_form">회원가입</a>
                     </div>
                 </div>
@@ -110,6 +110,6 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" th:src="@{/js/loginJoin/login.js}"></script>
+<script type="text/javascript" src="/static/js/loginJoin/login.js"></script>
 </body>
 </html>
