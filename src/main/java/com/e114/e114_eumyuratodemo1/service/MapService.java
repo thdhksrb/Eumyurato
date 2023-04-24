@@ -30,13 +30,15 @@ public class MapService {
     public List<String> selectBooked(int conId,String conDate){
         return dao.selectBooked(conId,conDate);
     };
-    public int insertSeat(int conId,String conDate,List<String> seat){
-        Map<String,Object> map = new HashMap<>();
-        map.put("conId",conId);
-        map.put("conDate",conDate);
-        map.put("seat",seat);
+
+    public int insertSeat(int conId, String conDate, List<String> seat) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("conId", conId);
+        map.put("conDate", conDate);
+        map.put("seat", seat);
         return dao.insertSeat(map);
-    };
+    }
+
 
 
 }

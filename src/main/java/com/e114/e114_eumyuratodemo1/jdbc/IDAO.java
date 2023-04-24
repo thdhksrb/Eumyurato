@@ -13,5 +13,6 @@ public interface IDAO {
     public SmallConcertDTO selectConcert(int id);
     public SchedulesDTO selectConcertTime(int id, String conDate);
     public List<String> selectBooked(int conId,String conDate);
-    public int insertSeat(Map<String,Object> map);
+    public int insertSeat(Map<String, Object> map);
+
 }
