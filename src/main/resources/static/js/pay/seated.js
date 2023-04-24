@@ -79,8 +79,18 @@ selectCompletedButton.addEventListener('click', function() {
     xhr.onload = function() {
         if (xhr.status === 200) {
             console.log(xhr.responseText);
-            // 성공적으로 예매가 완료되면 예매 완료 페이지로 이동합니다.
-            window.location.href = `/smallconcert/detail/${id}/calendar/${day}/pay`;
+
+            const response = JSON.parse(xhr.responseText);
+            const result = response.result;
+
+            if (result === 1) {
+                // 예약 성공 시 다음 페이지로 이동합니다.
+                window.location.href = `/smallconcert/detail/${id}/calendar/${day}/pay`;
+            } else {
+                // 실패한 경우 팝업창을 띄우고 페이지를 리로드합니다.
+                alert('이미 선택된 좌석입니다.');
+                location.reload();
+            }
         } else {
             console.error('Error: ' + xhr.status);
         }
@@ -92,9 +102,6 @@ selectCompletedButton.addEventListener('click', function() {
 
     xhr.send(JSON.stringify(data));
 });
-
-
-
 
 const resetButton = document.querySelector('#reset');
 resetButton.addEventListener('click', function() {

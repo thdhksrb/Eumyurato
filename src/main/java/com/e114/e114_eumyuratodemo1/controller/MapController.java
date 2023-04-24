@@ -7,6 +7,7 @@ import com.e114.e114_eumyuratodemo1.jdbc.ArtistMemberDAO;
 import com.e114.e114_eumyuratodemo1.jdbc.CommonMemberDAO;
 import com.e114.e114_eumyuratodemo1.jdbc.EnterpriseMemberDAO;
 import com.e114.e114_eumyuratodemo1.jdbc.IDAO;
+import com.e114.e114_eumyuratodemo1.service.MapService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ import java.util.Map;
 public class MapController {
 
     @Autowired
-    private IDAO dao;
+    private MapService mapService;
 
     @Autowired
     private DataDTO dto;
@@ -48,7 +49,7 @@ public class MapController {
     @ResponseBody
     public List<SmallConcertDTO> smallConcertJson() {
 
-        List<SmallConcertDTO> list = dao.viewSmallConcert();
+        List<SmallConcertDTO> list = mapService.viewSmallConcert();
 
         return list;
     }
@@ -56,7 +57,7 @@ public class MapController {
     @GetMapping("/smallconcert/detail/{id}/json")
     @ResponseBody
     public SmallConcertDTO detailJson(@PathVariable("id") int id) {
-        SmallConcertDTO dto = dao.selectConcert(id);
+        SmallConcertDTO dto = mapService.selectConcert(id);
 
         return dto;
     }
@@ -86,7 +87,7 @@ public class MapController {
         System.out.println(selectedDate);
 
         Map<String, SchedulesDTO> response = new HashMap<>();
-        response.put("message", dao.selectConcertTime(id,selectedDate));
+        response.put("message", mapService.selectConcertTime(id,selectedDate));
         return ResponseEntity.ok().body(response);
     }
 
@@ -99,8 +100,8 @@ public class MapController {
     @ResponseBody
     public List<String> seat(@PathVariable("id")int id,@PathVariable("day")String day){
 
-        System.out.println(dao.selectBooked(id,day));
-        return dao.selectBooked(id,day);
+        System.out.println(mapService.selectBooked(id,day));
+        return mapService.selectBooked(id,day);
     }
 
     @PostMapping ("/smallconcert/detail/{id}/calendar/{day}/pay")
@@ -112,10 +113,20 @@ public class MapController {
         Map<String, Object> response = new HashMap<>();
         response.put("seat", selectedSeats);
         response.put("count", length);
-        response.put("concert", dao.selectConcert(id));
-        response.put("schedule", dao.selectConcertTime(id,day));
+        response.put("concert", mapService.selectConcert(id));
+        response.put("schedule", mapService.selectConcertTime(id,day));
 
         dto.setMyData(response);
+
+        int result;
+        try {
+            mapService.insertSeat(id, day, selectedSeats);
+            result = 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = 0;
+        }
+        response.put("result", result);
 
         return ResponseEntity.ok().body(response);
     }
