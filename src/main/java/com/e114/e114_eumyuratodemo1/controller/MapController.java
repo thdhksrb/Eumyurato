@@ -143,5 +143,15 @@ public class MapController {
         return dto;
     }
 
+    @GetMapping("/payFail")
+    public String payFail(){
+        return "html/pay/payFail";
+    }
+
+    @GetMapping("/paySuccess")
+    public String paySuccess(){
+        return "html/pay/paySuccess";
+    }
+
 }
 
