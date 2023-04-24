@@ -1,58 +1,23 @@
 package com.e114.e114_eumyuratodemo1.dto;
 
-public class ArtistMemberDTO extends MemberDTO{
+import lombok.Data;
+
+import java.util.Map;
+
+@Data
+public class ArtistMemberDTO{
+    private String id;
+    private String pwd;
+    private String name;
     private String nid;
     private String sex;
-    private String brith;
+    private String birth;
+    private String email;
+    private String phone;
     private String genre;
-    private String registCon;
-    private String point;
+    private int adminNum;
+    private Map<String,String> registCon;
+    private int point;
+    private String image;
 
-    public String getNid() {
-        return nid;
-    }
-
-    public void setNid(String nid) {
-        this.nid = nid;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public String getBrith() {
-        return brith;
-    }
-
-    public void setBrith(String brith) {
-        this.brith = brith;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-
-    public String getRegistCon() {
-        return registCon;
-    }
-
-    public void setRegistCon(String registCon) {
-        this.registCon = registCon;
-    }
-
-    public String getPoint() {
-        return point;
-    }
-
-    public void setPoint(String point) {
-        this.point = point;
-    }
 }

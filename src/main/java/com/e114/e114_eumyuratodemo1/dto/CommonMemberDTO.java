@@ -1,58 +1,25 @@
 package com.e114.e114_eumyuratodemo1.dto;
 
-public class CommonMemberDTO extends MemberDTO{
+import lombok.Data;
+
+import java.util.Map;
+
+@Data
+public class CommonMemberDTO{
+    private String id;
+    private String pwd;
+    private String name;
     private String nid;
     private String sex;
     private String birth;
+    private String email;
+    private String phone;
     private String road;
     private String genre;
-    private String favorite;
+    private int adminNum;
+    private Map<String,String> favorite;
+    private int kakao;
+    private int google;
+    private String image;
 
-    public String getNid() {
-        return nid;
-    }
-
-    public void setNid(String nid) {
-        this.nid = nid;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public String getBirth() {
-        return birth;
-    }
-
-    public void setBirth(String birth) {
-        this.birth = birth;
-    }
-
-    public String getRoad() {
-        return road;
-    }
-
-    public void setRoad(String road) {
-        this.road = road;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-
-    public String getFavorite() {
-        return favorite;
-    }
-
-    public void setFavorite(String favorite) {
-        this.favorite = favorite;
-    }
 }
