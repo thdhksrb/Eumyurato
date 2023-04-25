@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--begin::Head-->
+<head>
+    <title>Eumyurato</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/img/E114_logo.png}"/>
+    <meta charset="utf-8"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!--begin::Global Stylesheets Bundle(used by all pages)-->
+    <link th:href="@{/css/profile/profile1.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/profile/profile2.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/profile/profile3.css}" rel="stylesheet" type="text/css"/>
+    <!--end::Global Stylesheets Bundle-->
+</head>
+<body>
+<h2>아티스트회원</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>NID</th>
+        <th>Sex</th>
+    </tr>
+    <tr th:each="artist : ${artists}">
+        <td th:text="${artist.id}"></td>
+        <td th:text="${artist.name}"></td>
+        <td th:text="${artist.nid}"></td>
+        <td th:text="${artist.sex}"></td>
+    </tr>
+</table>
+<h2>일반회원</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>NID</th>
+        <th>Sex</th>
+    </tr>
+    <tr th:each="common : ${commons}">
+        <td th:text="${common.id}"></td>
+        <td th:text="${common.name}"></td>
+        <td th:text="${common.nid}"></td>
+        <td th:text="${common.sex}"></td>
+    </tr>
+</table>
+
+</body>
+</html>
