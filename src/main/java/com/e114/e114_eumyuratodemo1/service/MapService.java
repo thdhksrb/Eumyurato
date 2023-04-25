@@ -1,5 +1,6 @@
 package com.e114.e114_eumyuratodemo1.service;
 
+import com.e114.e114_eumyuratodemo1.dto.DataDTO;
 import com.e114.e114_eumyuratodemo1.dto.SchedulesDTO;
 import com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO;
 import com.e114.e114_eumyuratodemo1.jdbc.IDAO;
@@ -37,7 +38,6 @@ public class MapService {
         return dao.selectBooked(conId,conDate);
     };
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     public int insertSeat(int conId, String conDate, List<String> seat) {
         Map<String, Object> map = new HashMap<>();
         map.put("conId", conId);
@@ -45,9 +45,9 @@ public class MapService {
         map.put("seat", seat);
         return dao.insertSeat(map);
     }
-    @Transactional(rollbackFor = Exception.class)
-    public void rollBack(){
-        throw new RuntimeException("rollback");
+
+    public void rollBack(DataDTO dto){
+
 
     }
 

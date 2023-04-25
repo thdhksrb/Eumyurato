@@ -10,14 +10,14 @@
 <mapper namespace="com.e114.e114_eumyuratodemo1.jdbc.IDAO">
     <select id="viewSmallConcert" resultType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
         SELECT *
-            FROM small_concert
-
+        FROM small_concert
+        WHERE (startDate &lt;= NOW() AND lastDate &gt;= NOW())
+           OR startDate = DATE_ADD(CURDATE(), INTERVAL 1 MONTH);
     </select>
     <select id="selectConcert" resultType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
         SELECT *
         FROM small_concert
         WHERE id = #{param1}
-
     </select>
     <select id="selectConcertTime" resultType="com.e114.e114_eumyuratodemo1.dto.SchedulesDTO">
         SELECT *

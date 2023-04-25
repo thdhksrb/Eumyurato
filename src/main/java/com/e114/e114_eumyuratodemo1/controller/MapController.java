@@ -167,11 +167,7 @@ public class MapController {
 
     @GetMapping("/kakaopay/fail")
     public String fail(){
-        try{
-            mapService.rollBack();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+            mapService.rollBack(dto);
         return "html/pay/payFail";
     }
 
