@@ -2,10 +2,12 @@ package com.e114.e114_eumyuratodemo1.jdbc;
 
 import com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface ArtistMemberDAO{
-    ArtistMemberDTO findById(String id);
+    ArtistMemberDTO  findById(@Param("id") String id);
+    String findPwdById(@Param("id") String id);
     ArtistMemberDTO findByPwd(String pwd);
     ArtistMemberDTO findByName(String name);
     ArtistMemberDTO findNid(String nid);

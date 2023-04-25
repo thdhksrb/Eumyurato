@@ -59,11 +59,11 @@
                     <h3 class="fw-bolder text-dark display-6">Welcome to Eumyurato</h3>
                     <br>
                     <div>
-                        <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" checked>
+                        <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off">
                         <a class="btn btn-secondary" for="option1"
                            style="font-weight: bold; background-color: #294ba1; color: #FFFFFF" th:href="@{/login}">일반 회원</a>
 
-                        <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off">
+                        <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off" checked>
                         <a class="btn btn-secondary ms-3" for="option2"
                            style="font-weight: bold; background-color: #294ba1; color: #FFFFFF">아티스트 회원</a>
 
@@ -87,7 +87,7 @@
                         <label class="form-label fs-6 fw-bolder text-dark pt-5">비밀번호</label>
                     </div>
                     <input type="password" class="form-control form-control-lg form-control-solid" required id="pw"
-                           name="pw" autocomplete="off" style="border-color: #0099FF;" maxLength="20"/>
+                           name="pwd" autocomplete="off" style="border-color: #0099FF;" maxLength="20"/>
                     <div class="invalid-feedback">
                         비밀번호를 입력해주세요.
                     </div>
