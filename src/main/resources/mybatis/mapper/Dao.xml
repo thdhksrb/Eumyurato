@@ -18,9 +18,11 @@
     </select>
     <select id="viewBusking" resultType="com.e114.e114_eumyuratodemo1.dto.BuskingDTO">
         <![CDATA[
-        SELECT *
-        FROM busking
-        WHERE  `date` >= NOW() AND `date` <= DATE_ADD(NOW(), INTERVAL 1 MONTH);
+        SELECT b.*, a.nid
+        FROM busking AS b
+                 INNER JOIN artist_member AS a
+                            ON b.artId = a.id
+        WHERE b.date >= NOW() AND b.date <= DATE_ADD(NOW(), INTERVAL 1 MONTH);
         ]]>
     </select>
     <select id="viewLocalFestival" resultType="com.e114.e114_eumyuratodemo1.dto.LocalFestivalDTO">
