@@ -31,6 +31,9 @@ var concert = document.getElementById('concert');
 // 주소-좌표 변환 객체를 생성
 var geocoder = new kakao.maps.services.Geocoder();
 
+var markers = [];
+
+
 // 모든 마커 정보를 가져와서 출력
 var xhr = new XMLHttpRequest();
 xhr.open('GET', '/all');
@@ -38,141 +41,194 @@ xhr.onload = function () {
     if (xhr.status === 200) {
         var data = JSON.parse(xhr.responseText);
 
-        for (var i = 0; i < data.busking.length; i++) {
-            var record = data.busking[i];
-            console.log(record);
-            // 클로저를 사용해서 변수를 캡처
-            (function(record) {
-                // 장소명과 주소로 좌표를 검색
-                geocoder.addressSearch(record.location, function(result, status) {
-                    // 정상적으로 검색이 완료됐으면
-                    if (status === kakao.maps.services.Status.OK) {
-                        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-                        var marker = new kakao.maps.Marker({
-                            map: map,
-                            position: coords
-                        });
+        viewBusking(data);
+        viewSmallConcert(data);
+        viewLocalFest(data);
 
-                        // 마커에 표시할 인포윈도우를 생성
-                        var infowindow = new kakao.maps.InfoWindow({
-                            content: record.name // 인포윈도우에 표시할 내용
-                        });
+        // 버튼 클릭 이벤트 핸들러 등록
+        var links = document.querySelectorAll('a');
+        links.forEach(function(link) {
+            link.addEventListener('click', function() {
+                var type = this.id;
+                clearConcert();
+                if (type === 'all') {
+                    viewBusking(data);
+                    viewSmallConcert(data);
+                    viewLocalFest(data);
+                } else if (type === 'busking') {
+                    viewBusking(data);
+                } else if (type === 'smallconcert') {
+                    viewSmallConcert(data);
+                } else if (type === 'localfestival') {
+                    viewLocalFest(data);
+                } else if (type === 'favorite') {
+                    // 즐겨찾기 뷰 함수 호출
+                }
+            });
+        });
 
-                        // 마커에 클릭 이벤트를 등록
-                        kakao.maps.event.addListener(marker, 'mouseover', clickMakerListener(map, marker, infowindow));
-                        kakao.maps.event.addListener(marker, 'mouseout', clickMapListener(infowindow));
-                        kakao.maps.event.addListener(marker, 'click', modalBusking(record));
-
-                        var li = document.createElement('li');
-                        li.id=record.id;
-                        var startDate = new Date(record.startDate);
-                        var lastDate = new Date(record.lastDate);
-                        li.innerHTML = '<h3>' + record.name + '</h3>' +
-                            '<p><strong>장소: </strong>' + record.location + '</p>' +
-                            '<p><strong>공연 일자: </strong>' + formatDate(date) + '</p>' +
-                            '<p><strong>공연자: </strong>' + record.artName + '</p>';
-                        li.style.padding='18px';
-                        li.style.borderTop = '1px solid #ccc';
-                        concert.appendChild(li);
-
-                        li.addEventListener('click',function(){
-                            goToDetailPage(record.id);
-                        })
-                    }
-                });
-            })(record);
-        }
-        for (var i = 0; i < data.smallConcert.length; i++) {
-            var record = data.smallConcert[i];
-            console.log(record);
-            // 클로저를 사용해서 변수를 캡처
-            (function(record) {
-                // 장소명과 주소로 좌표를 검색
-                geocoder.addressSearch(record.location, function(result, status) {
-                    // 정상적으로 검색이 완료됐으면
-                    if (status === kakao.maps.services.Status.OK) {
-                        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-                        var marker = new kakao.maps.Marker({
-                            map: map,
-                            position: coords
-                        });
-
-                        // 마커에 표시할 인포윈도우를 생성
-                        var infowindow = new kakao.maps.InfoWindow({
-                            content: record.name // 인포윈도우에 표시할 내용
-                        });
-
-                        // 마커에 클릭 이벤트를 등록
-                        kakao.maps.event.addListener(marker, 'mouseover', clickMakerListener(map, marker, infowindow));
-                        kakao.maps.event.addListener(marker, 'mouseout', clickMapListener(infowindow));
-                        kakao.maps.event.addListener(marker, 'click', modalSmall(record));
-
-                        var li = document.createElement('li');
-                        li.id=record.id;
-                        var startDate = new Date(record.startDate);
-                        var lastDate = new Date(record.lastDate);
-                        li.innerHTML = '<h3>' + record.name + '</h3>' +
-                            '<p><strong>장소: </strong>' + record.location + '</p>' +
-                            '<p><strong>공연 일자: </strong>' + formatDate(startDate) + ' ~ ' + formatDate(lastDate) + '</p>' +
-                            '<p><strong>공연자: </strong>' + record.pname + '</p>';
-                        li.style.padding='18px';
-                        li.style.borderTop = '1px solid #ccc';
-                        concert.appendChild(li);
-
-                        li.addEventListener('click',function(){
-                            goToDetailPage(record.id);
-                        })
-                    }
-                });
-            })(record);
-        }
-        for (var i = 0; i < data.localFestival.length; i++) {
-            var record = data.localFestival[i];
-            console.log(record);
-            // 클로저를 사용해서 변수를 캡처
-            (function(record) {
-                // 장소명과 주소로 좌표를 검색
-                geocoder.addressSearch(record.location, function(result, status) {
-                    // 정상적으로 검색이 완료됐으면
-                    if (status === kakao.maps.services.Status.OK) {
-                        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-                        var marker = new kakao.maps.Marker({
-                            map: map,
-                            position: coords
-                        });
-
-                        // 마커에 표시할 인포윈도우를 생성
-                        var infowindow = new kakao.maps.InfoWindow({
-                            content: record.name // 인포윈도우에 표시할 내용
-                        });
-
-                        // 마커에 클릭 이벤트를 등록
-                        kakao.maps.event.addListener(marker, 'mouseover', clickMakerListener(map, marker, infowindow));
-                        kakao.maps.event.addListener(marker, 'mouseout', clickMapListener(infowindow));
-                        kakao.maps.event.addListener(marker, 'click', modalLocal(record));
-
-                        var li = document.createElement('li');
-                        li.id=record.id;
-                        var startDate = new Date(record.startDate);
-                        var lastDate = new Date(record.lastDate);
-                        li.innerHTML = '<h3>' + record.name + '</h3>' +
-                            '<p><strong>장소: </strong>' + record.location + '</p>' +
-                            '<p><strong>개최 일자: </strong>' + formatDate(startDate) + ' ~ ' + formatDate(lastDate) + '</p>' +
-                            '<p><strong>주최측: </strong>' + record.org + '</p>';
-                        li.style.padding='18px';
-                        li.style.borderTop = '1px solid #ccc';
-                        concert.appendChild(li);
-
-                        li.addEventListener('click',function(){
-                            goToDetailPage(record.id);
-                        })
-                    }
-                });
-            })(record);
-        }
     }
 };
 xhr.send();
+
+function clearConcert() {
+    var concert = document.getElementById('concert');
+    while (concert.firstChild) {
+        concert.removeChild(concert.firstChild);
+    }
+
+    for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(null);
+    }
+    markers = [];
+}
+
+function viewBusking(data){
+    for (var i = 0; i < data.busking.length; i++) {
+        var record = data.busking[i];
+        console.log(record);
+        // 클로저를 사용해서 변수를 캡처
+        (function(record) {
+            // 장소명과 주소로 좌표를 검색
+            geocoder.addressSearch(record.location, function(result, status) {
+                // 정상적으로 검색이 완료됐으면
+                if (status === kakao.maps.services.Status.OK) {
+                    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+                    var marker = new kakao.maps.Marker({
+                        map: map,
+                        position: coords
+                    });
+                    markers.push(marker);
+
+                    // 마커에 표시할 인포윈도우를 생성
+                    var infowindow = new kakao.maps.InfoWindow({
+                        content: record.name // 인포윈도우에 표시할 내용
+                    });
+
+                    // 마커에 클릭 이벤트를 등록
+                    kakao.maps.event.addListener(marker, 'mouseover', clickMakerListener(map, marker, infowindow));
+                    kakao.maps.event.addListener(marker, 'mouseout', clickMapListener(infowindow));
+                    kakao.maps.event.addListener(marker, 'click', modalBusking(record));
+
+                    var li = document.createElement('li');
+                    li.id=record.id;
+                    var startDate = new Date(record.startDate);
+                    var lastDate = new Date(record.lastDate);
+                    li.innerHTML = '<h3>' + record.name + '</h3>' +
+                        '<p><strong>장소: </strong>' + record.location + '</p>' +
+                        '<p><strong>공연 일자: </strong>' + formatDate(date) + '</p>' +
+                        '<p><strong>공연자: </strong>' + record.artName + '</p>';
+                    li.style.padding='18px';
+                    li.style.borderTop = '1px solid #ccc';
+                    concert.appendChild(li);
+
+                    li.addEventListener('click',function(){
+                        goToDetailPage(record.id);
+                    })
+                }
+            });
+        })(record);
+    }
+}
+
+function viewSmallConcert(data){
+    for (var i = 0; i < data.smallConcert.length; i++) {
+        var record = data.smallConcert[i];
+        console.log(record);
+        // 클로저를 사용해서 변수를 캡처
+        (function(record) {
+            // 장소명과 주소로 좌표를 검색
+            geocoder.addressSearch(record.location, function(result, status) {
+                // 정상적으로 검색이 완료됐으면
+                if (status === kakao.maps.services.Status.OK) {
+                    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+                    var marker = new kakao.maps.Marker({
+                        map: map,
+                        position: coords
+                    });
+                    markers.push(marker);
+
+                    // 마커에 표시할 인포윈도우를 생성
+                    var infowindow = new kakao.maps.InfoWindow({
+                        content: record.name // 인포윈도우에 표시할 내용
+                    });
+
+                    // 마커에 클릭 이벤트를 등록
+                    kakao.maps.event.addListener(marker, 'mouseover', clickMakerListener(map, marker, infowindow));
+                    kakao.maps.event.addListener(marker, 'mouseout', clickMapListener(infowindow));
+                    kakao.maps.event.addListener(marker, 'click', modalSmall(record));
+
+                    var li = document.createElement('li');
+                    li.id=record.id;
+                    var startDate = new Date(record.startDate);
+                    var lastDate = new Date(record.lastDate);
+                    li.innerHTML = '<h3>' + record.name + '</h3>' +
+                        '<p><strong>장소: </strong>' + record.location + '</p>' +
+                        '<p><strong>공연 일자: </strong>' + formatDate(startDate) + ' ~ ' + formatDate(lastDate) + '</p>' +
+                        '<p><strong>공연자: </strong>' + record.pname + '</p>';
+                    li.style.padding='18px';
+                    li.style.borderTop = '1px solid #ccc';
+                    concert.appendChild(li);
+
+                    li.addEventListener('click',function(){
+                        goToDetailPage(record.id);
+                    })
+                }
+            });
+        })(record);
+    }
+}
+
+function viewLocalFest(data){
+    for (var i = 0; i < data.localFestival.length; i++) {
+        var record = data.localFestival[i];
+        console.log(record);
+        // 클로저를 사용해서 변수를 캡처
+        (function(record) {
+            // 장소명과 주소로 좌표를 검색
+            geocoder.addressSearch(record.location, function(result, status) {
+                // 정상적으로 검색이 완료됐으면
+                if (status === kakao.maps.services.Status.OK) {
+                    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+                    var marker = new kakao.maps.Marker({
+                        map: map,
+                        position: coords
+                    });
+                    markers.push(marker);
+
+                    // 마커에 표시할 인포윈도우를 생성
+                    var infowindow = new kakao.maps.InfoWindow({
+                        content: record.name // 인포윈도우에 표시할 내용
+                    });
+
+                    // 마커에 클릭 이벤트를 등록
+                    kakao.maps.event.addListener(marker, 'mouseover', clickMakerListener(map, marker, infowindow));
+                    kakao.maps.event.addListener(marker, 'mouseout', clickMapListener(infowindow));
+                    kakao.maps.event.addListener(marker, 'click', modalLocal(record));
+
+                    var li = document.createElement('li');
+                    li.id=record.id;
+                    var startDate = new Date(record.startDate);
+                    var lastDate = new Date(record.lastDate);
+                    li.innerHTML = '<h3>' + record.name + '</h3>' +
+                        '<p><strong>장소: </strong>' + record.location + '</p>' +
+                        '<p><strong>개최 일자: </strong>' + formatDate(startDate) + ' ~ ' + formatDate(lastDate) + '</p>' +
+                        '<p><strong>주최측: </strong>' + record.org + '</p>';
+                    li.style.padding='18px';
+                    li.style.borderTop = '1px solid #ccc';
+                    concert.appendChild(li);
+
+                    li.addEventListener('click',function(){
+                        goToDetailPage(record.id);
+                    })
+                }
+            });
+        })(record);
+    }
+}
+
+
+
 
 // 클릭 이벤트 핸들러 함수
 function modalBusking(record) {
