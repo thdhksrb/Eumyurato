@@ -4,6 +4,8 @@ import com.e114.e114_eumyuratodemo1.dto.SchedulesDTO;
 import com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO;
 import com.e114.e114_eumyuratodemo1.jdbc.IDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -35,7 +37,7 @@ public class MapService {
         return dao.selectBooked(conId,conDate);
     };
 
-
+    @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     public int insertSeat(int conId, String conDate, List<String> seat) {
         Map<String, Object> map = new HashMap<>();
         map.put("conId", conId);
@@ -43,8 +45,9 @@ public class MapService {
         map.put("seat", seat);
         return dao.insertSeat(map);
     }
-
+    @Transactional(rollbackFor = Exception.class)
     public void rollBack(){
+        throw new RuntimeException("rollback");
 
     }
 
