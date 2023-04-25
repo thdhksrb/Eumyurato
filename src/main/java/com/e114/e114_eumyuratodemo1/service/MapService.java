@@ -44,6 +44,10 @@ public class MapService {
         return dao.insertSeat(map);
     }
 
+    public void rollBack(){
+
+    }
+
     public String payService() throws IOException, MalformedURLException {
         URL url = new URL("https://kapi.kakao.com/v1/payment/ready");
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
