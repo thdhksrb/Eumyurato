@@ -9,10 +9,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.e114.e114_eumyuratodemo1.jdbc.IDAO">
     <select id="viewSmallConcert" resultType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
+         <![CDATA[
         SELECT *
         FROM small_concert
-        WHERE (startDate &lt;= NOW() AND lastDate &gt;= NOW())
-           OR startDate = DATE_ADD(CURDATE(), INTERVAL 1 MONTH);
+        WHERE (startDate <= NOW() AND lastDate >= NOW())
+           OR (startDate >= NOW() AND startDate <= DATE_ADD(NOW(), INTERVAL 1 MONTH));
+        ]]>
     </select>
     <select id="selectConcert" resultType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
         SELECT *
