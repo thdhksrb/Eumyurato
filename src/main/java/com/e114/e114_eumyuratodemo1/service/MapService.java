@@ -4,7 +4,13 @@ import com.e114.e114_eumyuratodemo1.dto.SchedulesDTO;
 import com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO;
 import com.e114.e114_eumyuratodemo1.jdbc.IDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,12 +37,44 @@ public class MapService {
         return dao.selectBooked(conId,conDate);
     };
 
+    @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     public int insertSeat(int conId, String conDate, List<String> seat) {
         Map<String, Object> map = new HashMap<>();
         map.put("conId", conId);
         map.put("conDate", conDate);
         map.put("seat", seat);
         return dao.insertSeat(map);
+    }
+    @Transactional(rollbackFor = Exception.class)
+    public void rollBack(){
+        throw new RuntimeException("rollback");
+
+    }
+
+    public String payService() throws IOException, MalformedURLException {
+        URL url = new URL("https://kapi.kakao.com/v1/payment/ready");
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("POST");
+        connection.setRequestProperty("Authorization","KakaoAK 51728ed0dc1cc881ebce676fb8920a0c");
+        connection.setRequestProperty("Content-type","application/x-www-form-urlencoded;charset=utf-8");
+        connection.setDoOutput(true);
+        String param = "cid=TC0ONETIME&partner_order_id=partner_order_id&partner_user_id=partner_user_id&item_name=초코파이&quantity=1&total_amount=2200&tax_free_amount=0&approval_url=http://localhost:8081/kakaopay/success&cancel_url=http://localhost:8081/kakaopay/fail&fail_url=http://localhost:8081/kakaopay/fail";
+        OutputStream outputStream = connection.getOutputStream();
+        DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
+        dataOutputStream.writeBytes(param);
+        dataOutputStream.close();
+
+        int result = connection.getResponseCode();
+
+        InputStream inputStream;
+        if(result==200){
+            inputStream = connection.getInputStream();
+        }else{
+            inputStream = connection.getErrorStream();
+        }
+        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+        return bufferedReader.readLine();
     }
 
 

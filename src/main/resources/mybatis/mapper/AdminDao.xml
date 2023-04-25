@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<beans xmlns="http://www.springframework.org/schema/beans"-->
+<!--       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+<!--       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">-->
+
+<!--</beans>-->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.e114.e114_eumyuratodemo1.jdbc.MemberDAO">
+    <select id="getArtistMembers" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
+        select id, name, nid, sex, birth, phone
+        from artist_member;
+    </select>
+
+    <select id="getCommonMembers" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
+        select id, name, nid, sex, birth, phone
+        from common_member;
+    </select>
+    <select id="searchArtistMembers" parameterType="map" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
+        SELECT id, name, nid, sex, birth, phone FROM artist_member
+        WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+
+    <select id="searchCommonMembers" parameterType="map" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
+        SELECT id, name, nid, sex, birth, phone FROM common_member
+        WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+</mapper>
