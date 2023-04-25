@@ -1,8 +1,6 @@
 package com.e114.e114_eumyuratodemo1.controller;
 
-import com.e114.e114_eumyuratodemo1.dto.DataDTO;
-import com.e114.e114_eumyuratodemo1.dto.SchedulesDTO;
-import com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO;
+import com.e114.e114_eumyuratodemo1.dto.*;
 import com.e114.e114_eumyuratodemo1.jdbc.IDAO;
 import com.e114.e114_eumyuratodemo1.service.MapService;
 import lombok.Data;
@@ -28,31 +26,52 @@ public class MapController {
     @Autowired
     private DataDTO dto;
 
+//    @GetMapping("/map")
+//    public String showMap() {
+//        return "html/map/map";
+//    }
+
+
+
     @GetMapping("/map")
-    public String showMap() {
-        return "html/map/map";
-    }
-
-
-    @GetMapping("/table")
-    public String table() {
-        return "html/pay/pay2";
-    }
-
-
-    @GetMapping("/smallconcert")
     public String smallConcert(){
 
-        return "html/map/smallConcertMap";
+        return "html/map/concertMap";
     }
 
-    @GetMapping("/smallconcert/json")
+    @GetMapping("/all")
     @ResponseBody
-    public List<SmallConcertDTO> smallConcertJson() {
+    public Map<String,List<?>> all() {
 
-        List<SmallConcertDTO> list = mapService.viewSmallConcert();
+        Map<String,List<?>> map = new HashMap<>();
 
-        return list;
+        List<SmallConcertDTO> smallConcert = mapService.viewSmallConcert();
+        List<BuskingDTO> busking = mapService.viewBusking();
+        List<LocalFestivalDTO> localFestival = mapService.viewLocalFestival();
+
+        map.put("smallConcert",smallConcert);
+        map.put("busking",busking);
+        map.put("localFestival",localFestival);
+
+        return map;
+    }
+
+    @GetMapping("/{type}")
+    @ResponseBody
+    public List<?> getData(@PathVariable String type) {
+        switch (type) {
+            case "smallconcert":
+                List<SmallConcertDTO> smallConcertList = mapService.viewSmallConcert();
+                return smallConcertList;
+            case "busking":
+                List<BuskingDTO> buskingList = mapService.viewBusking();
+                return buskingList;
+            case "localfestival":
+                List<LocalFestivalDTO> localFestivalList = mapService.viewLocalFestival();
+                return localFestivalList;
+            default:
+                return null;
+        }
     }
 
     @GetMapping("/smallconcert/detail/{id}/json")
@@ -167,7 +186,12 @@ public class MapController {
 
     @GetMapping("/kakaopay/fail")
     public String fail(){
-            mapService.rollBack(dto);
+        List<String> seat = (List<String>) (dto.getMyData().get("seat"));
+        SchedulesDTO schedulesDTO = (SchedulesDTO)(dto.getMyData().get("schedule"));
+        int schedulesId = schedulesDTO.getId();
+
+        mapService.rollBackInsertSeat(schedulesId,seat);
+
         return "html/pay/payFail";
     }
 

@@ -9,9 +9,24 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.e114.e114_eumyuratodemo1.jdbc.IDAO">
     <select id="viewSmallConcert" resultType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
-         <![CDATA[
+        <![CDATA[
         SELECT *
         FROM small_concert
+        WHERE (startDate <= NOW() AND lastDate >= NOW())
+           OR (startDate >= NOW() AND startDate <= DATE_ADD(NOW(), INTERVAL 1 MONTH));
+        ]]>
+    </select>
+    <select id="viewBusking" resultType="com.e114.e114_eumyuratodemo1.dto.BuskingDTO">
+        <![CDATA[
+        SELECT *
+        FROM busking
+        WHERE  `date` >= NOW() AND `date` <= DATE_ADD(NOW(), INTERVAL 1 MONTH);
+        ]]>
+    </select>
+    <select id="viewLocalFestival" resultType="com.e114.e114_eumyuratodemo1.dto.LocalFestivalDTO">
+        <![CDATA[
+        SELECT *
+        FROM local_festival
         WHERE (startDate <= NOW() AND lastDate >= NOW())
            OR (startDate >= NOW() AND startDate <= DATE_ADD(NOW(), INTERVAL 1 MONTH));
         ]]>
@@ -20,6 +35,7 @@
         SELECT *
         FROM small_concert
         WHERE id = #{param1}
+
     </select>
     <select id="selectConcertTime" resultType="com.e114.e114_eumyuratodemo1.dto.SchedulesDTO">
         SELECT *
