@@ -1,9 +1,12 @@
 package com.e114.e114_eumyuratodemo1.service;
 
+import com.e114.e114_eumyuratodemo1.dto.BuskingDTO;
+import com.e114.e114_eumyuratodemo1.dto.LocalFestivalDTO;
 import com.e114.e114_eumyuratodemo1.dto.SchedulesDTO;
 import com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO;
 import com.e114.e114_eumyuratodemo1.jdbc.IDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +30,15 @@ public class MapService {
         return dao.viewSmallConcert();
     };
 
+    public List<BuskingDTO> viewBusking(){
+        return dao.viewBusking();
+    };
+
+    public List<LocalFestivalDTO> viewLocalFestival(){
+        return dao.viewLocalFestival();
+    };
+
+
     public SmallConcertDTO selectConcert(int id){
         return dao.selectConcert(id);
     };
@@ -37,7 +49,7 @@ public class MapService {
         return dao.selectBooked(conId,conDate);
     };
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
+
     public int insertSeat(int conId, String conDate, List<String> seat) {
         Map<String, Object> map = new HashMap<>();
         map.put("conId", conId);
@@ -45,9 +57,12 @@ public class MapService {
         map.put("seat", seat);
         return dao.insertSeat(map);
     }
-    @Transactional(rollbackFor = Exception.class)
-    public void rollBack(){
-        throw new RuntimeException("rollback");
+
+    public void rollBackInsertSeat(int schedulesId,List<String> seat){
+        Map<String,Object> map = new HashMap<>();
+        map.put("schedulesId",schedulesId);
+        map.put("seat",seat);
+        dao.deleteSeat(map);
 
     }
 

@@ -9,9 +9,27 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.e114.e114_eumyuratodemo1.jdbc.IDAO">
     <select id="viewSmallConcert" resultType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
+        <![CDATA[
         SELECT *
-            FROM small_concert
-
+        FROM small_concert
+        WHERE (startDate <= NOW() AND lastDate >= NOW())
+           OR (startDate >= NOW() AND startDate <= DATE_ADD(NOW(), INTERVAL 1 MONTH));
+        ]]>
+    </select>
+    <select id="viewBusking" resultType="com.e114.e114_eumyuratodemo1.dto.BuskingDTO">
+        <![CDATA[
+        SELECT *
+        FROM busking
+        WHERE  `date` >= NOW() AND `date` <= DATE_ADD(NOW(), INTERVAL 1 MONTH);
+        ]]>
+    </select>
+    <select id="viewLocalFestival" resultType="com.e114.e114_eumyuratodemo1.dto.LocalFestivalDTO">
+        <![CDATA[
+        SELECT *
+        FROM local_festival
+        WHERE (startDate <= NOW() AND lastDate >= NOW())
+           OR (startDate >= NOW() AND startDate <= DATE_ADD(NOW(), INTERVAL 1 MONTH));
+        ]]>
     </select>
     <select id="selectConcert" resultType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
         SELECT *
@@ -19,6 +37,7 @@
         WHERE id = #{param1}
 
     </select>
+
     <select id="selectConcertTime" resultType="com.e114.e114_eumyuratodemo1.dto.SchedulesDTO">
         SELECT *
         FROM schedules
@@ -40,6 +59,12 @@
             WHERE conId = #{conId} AND DATE_FORMAT(schedules.conDate, '%Y-%m-%d') = #{conDate}
         </foreach>
     </insert>
+    <delete id="deleteSeat" parameterType="java.util.Map">
+        <foreach collection="seat" item="seatNum" separator=";">
+        DELETE FROM booked
+        WHERE sId = #{schedulesId} AND seatNum = #{seatNum}
+        </foreach>
+    </delete>
 
 
 

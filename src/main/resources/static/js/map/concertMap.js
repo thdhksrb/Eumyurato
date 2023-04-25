@@ -33,10 +33,11 @@ var geocoder = new kakao.maps.services.Geocoder();
 
 // 모든 마커 정보를 가져와서 출력
 var xhr = new XMLHttpRequest();
-xhr.open('GET', '/smallconcert/json');
+xhr.open('GET', '/all');
 xhr.onload = function () {
     if (xhr.status === 200) {
         var data = JSON.parse(xhr.responseText);
+        console.log(data);
         for (var i = 0; i < data.length; i++) {
             var record = data[i];
 
