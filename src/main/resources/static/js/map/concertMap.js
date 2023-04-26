@@ -123,7 +123,7 @@ function viewBusking(data){
                     concert.appendChild(li);
 
                     li.addEventListener('click',function(){
-                        goToDetailPage(record.id);
+                        goToBuskingDetail(record.id);
                     })
                 }
             });
@@ -171,7 +171,7 @@ function viewSmallConcert(data){
                     concert.appendChild(li);
 
                     li.addEventListener('click',function(){
-                        goToDetailPage(record.id);
+                        goToSmallConcertDetail(record.id);
                     })
                 }
             });
@@ -219,7 +219,7 @@ function viewLocalFest(data){
                     concert.appendChild(li);
 
                     li.addEventListener('click',function(){
-                        goToDetailPage(record.id);
+                        goToLocalDetail(record.id);
                     })
                 }
             });
@@ -248,7 +248,7 @@ function modalBusking(record) {
         //모달 창에서 상세보기 클릭 시 상세보기 페이지로 이동
         $('#viewDetail').on('click', function() {
             var id = record.id;
-            goToDetailPage(id);
+            goToBuskingDetail(id);
         });
     };
 }
@@ -272,7 +272,7 @@ function modalLocal(record) {
         //모달 창에서 상세보기 클릭 시 상세보기 페이지로 이동
         $('#viewDetail').on('click', function() {
             var id = record.id;
-            goToDetailPage(id);
+            goToLocalDetail(id);
         });
     };
 }
@@ -326,10 +326,23 @@ function padZero(num) {
     return (num < 10 ? '0' : '') + num;
 }
 
-function goToDetailPage(id){
+function goToSmallConcertDetail(id){
 
     var detailPageUrl = '/smallconcert/detail/' + id;
 
     window.location.href = detailPageUrl;
 }
 
+//지역축제 디테일 페이지
+function goToLocalDetail(id){
+    var detailPageUrl = '/local_festival/detail/' + id;
+
+    window.location.href = detailPageUrl;
+}
+
+//버스킹 디테일 페이지
+function goToBuskingDetail(id){
+    var detailPageUrl = '/busking/detail/' + id;
+
+    window.location.href = detailPageUrl;
+}
