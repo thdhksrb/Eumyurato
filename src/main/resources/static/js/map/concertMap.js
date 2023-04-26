@@ -112,12 +112,11 @@ function viewBusking(data){
 
                     var li = document.createElement('li');
                     li.id=record.id;
-                    var startDate = new Date(record.startDate);
-                    var lastDate = new Date(record.lastDate);
+
                     li.innerHTML = '<h3>' + record.name + '</h3>' +
                         '<p><strong>장소: </strong>' + record.location + '</p>' +
-                        '<p><strong>공연 일자: </strong>' + formatDate(date) + '</p>' +
-                        '<p><strong>공연자: </strong>' + record.artName + '</p>';
+                        '<p><strong>공연 일자: </strong>' + record.date + '</p>' +
+                        '<p><strong>공연자: </strong>' + record.nid + '</p>';
                     li.style.padding='18px';
                     li.style.borderTop = '1px solid #ccc';
                     concert.appendChild(li);
@@ -239,8 +238,8 @@ function modalBusking(record) {
 
         var modalBody = document.querySelector('.modal-body');
         modalBody.innerHTML = '<p><strong>버스킹 장소: </strong>' + record.location + '</p>' +
-            '<p><strong>공연 일자: </strong>' + formatDate(new Date(record.startDate)) + '</p>' +
-            '<p><strong>공연자: </strong>' + record.artName + '</p>';
+            '<p><strong>공연 일자: </strong>' + record.date + '</p>' +
+            '<p><strong>공연자: </strong>' + record.nid + '</p>';
 
         // 모달 창을 띄움
         $('#kt_modal_1').modal('show');
