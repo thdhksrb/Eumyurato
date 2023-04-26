@@ -56,18 +56,18 @@
 
             </div>
 
-            <div class="categoryWrap">
-                <a href="javascript:;">전체</a>
-                <a href="javascript:;">버스킹</a>
-                <a href="javascript:;">연극장</a>
-                <a href="javascript:;">지역축제</a>
-                <a href="javascript:;">즐겨찾기</a>
+            <div class="categoryWrap" style="color: #FFFFFF" >
+                <a id="all">전체</a>
+                <a id="busking">버스킹</a>
+                <a id="smallconcert">소규모공연</a>
+                <a id="localfestival">지역축제</a>
+                <a id="favorite">즐겨찾기</a>
             </div>
         </div>
         <div class="nav_bt">
             <!-- 공연정보 -->
             <div class="conInfo">
-            <h1>소규모 공연정보</h1>
+            <h1>지역축제 및 공연정보</h1>
                 <ul id="concert" style="cursor: pointer"></ul>
 
             </div>
@@ -101,7 +101,7 @@
 <!--end::Global Javascript Bundle-->
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8e0cac0abc5f71a7357818037fc4b48c&libraries=services"></script>
-<script th:src="@{/js/map/smallConcertMap.js}"></script>
+<script th:src="@{/js/map/concertMap.js}"></script>
 </body>
 </html>
 
