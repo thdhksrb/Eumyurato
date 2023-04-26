@@ -28,7 +28,7 @@ $.ajax({
         // 첫 번째 Ajax 호출이 완료된 후에 두 번째 Ajax 호출을 실행
         $('#pay').click(function (){
             $.ajax({
-                url:'/smallconcert/detail/'+id+'/calendar/' +day+ '/pay/kakao',
+                url:'/pay/kakao',
                 dataType: 'json',
                 success:function (data){
                     var box = data.next_redirect_pc_url;
