@@ -3,19 +3,18 @@ var url = location.pathname;
 var id = url.match(/\d+/)[0];
 
 $.ajax({
-    url: '/busking/detail/'+id+'/donation',
-    method: 'POST',
+    url: '/busking/detail/'+id+'/donation/json',
     dataType: 'json',
-    success: function(response) {
-        // var li = $('<li>');
-        console.log(response.dto.name);
+    success: function(data) {
+        var li = $('<li>');
+        console.log(data);
 
 
-        // li.append($('<h2>').html(data.name));
-        // li.append($('<h2>').html(data.nid));
+        li.append($('<h2>').html(data.name));
+        li.append($('<h2>').html(data.nid));
 
 
-        // buskerInfo.append(li);
+        buskerInfo.append(li);
 
     //     // 첫 번째 Ajax 호출이 완료된 후에 두 번째 Ajax 호출을 실행
     //     $('#pay').click(function (){
@@ -36,3 +35,4 @@ $.ajax({
         console.log('AJAX Error: ' + status + error);
     }
 });
+
