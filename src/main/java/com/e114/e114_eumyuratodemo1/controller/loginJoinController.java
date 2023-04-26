@@ -5,7 +5,11 @@ import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO;
 import com.e114.e114_eumyuratodemo1.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +28,13 @@ public class loginJoinController {
     public String root() {return "html/root";}
 
     @GetMapping("/")
-    public String main1() {
+    public String main1(Model model) {
+/*        String id = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        // token에 저장되어 있는 인증된 사용자의 id 값
+
+        CommonMemberDTO commonMemberDTO = userService.getId(id);
+        commonMemberDTO.setPwd(null);  // password는 보이지 않도록 null로 설정
+        model.addAttribute("user", commonMemberDTO);*/
         return "html/main/home";
     }
 
@@ -35,7 +45,10 @@ public class loginJoinController {
 
     @GetMapping("/login")
     public String registerPage() {
-        return "html/loginJoin/loginform1";
+/*        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof AnonymousAuthenticationToken)
+            return "/login";*/
+        return "html/loginJoin/loginForm1";
     }
 
     @PostMapping("/login")
