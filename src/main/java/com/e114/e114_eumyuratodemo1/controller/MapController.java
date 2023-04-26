@@ -1,14 +1,18 @@
 package com.e114.e114_eumyuratodemo1.controller;
 
 import com.e114.e114_eumyuratodemo1.dto.*;
+import com.e114.e114_eumyuratodemo1.jdbc.IDAO;
 import com.e114.e114_eumyuratodemo1.service.MapService;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -188,26 +192,13 @@ public class MapController {
         return "error";
     }
 
-    @GetMapping("/pay/kakao/donation")
-    @ResponseBody
-    public String kakaoDonation(){
-        try {
-            return mapService.donationService();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "error";
-    }
-
     @GetMapping("/kakaopay/success")
-    public String successPay(){
+    public String success(){
         return "html/pay/paySuccess";
     }
 
     @GetMapping("/kakaopay/fail")
-    public String failPay(){
+    public String fail(){
         List<String> seat = (List<String>) (dto.getMyData().get("seat"));
         SchedulesDTO schedulesDTO = (SchedulesDTO)(dto.getMyData().get("schedule"));
         int schedulesId = schedulesDTO.getId();
@@ -217,18 +208,30 @@ public class MapController {
         return "html/pay/payFail";
     }
 
-    @GetMapping("/kakaopay/success/donation")
-    public String successDonation(){
+    @GetMapping("/pay/kakao/donation")
+    @ResponseBody
+    public String kakaoDonation(){
+        try {
+            return mapService.payService();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "error";
+    }
 
+    @GetMapping("/kakaopay/success/donation")
+    public String donationSuccess(){
         return "html/pay/paySuccess";
     }
 
     @GetMapping("/kakaopay/fail/donation")
-    public String failDonation(){
-
+    public String donationFail(){
 
         return "html/pay/payFail";
     }
+
 
 
 

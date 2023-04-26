@@ -98,7 +98,7 @@ public class MapService {
         return bufferedReader.readLine();
     }
 
-    public String donationService() throws IOException, MalformedURLException {
+    public String payDonation() throws IOException, MalformedURLException {
         URL url = new URL("https://kapi.kakao.com/v1/payment/ready");
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("POST");
@@ -123,7 +123,6 @@ public class MapService {
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
         return bufferedReader.readLine();
     }
-
 
 
 }
