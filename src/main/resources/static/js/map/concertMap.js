@@ -295,7 +295,7 @@ function modalSmall(record) {
         //모달 창에서 상세보기 클릭 시 상세보기 페이지로 이동
         $('#viewDetail').on('click', function() {
             var id = record.id;
-            goToDetailPage(id);
+            goToSmallConcertDetail(id);
         });
     };
 }
