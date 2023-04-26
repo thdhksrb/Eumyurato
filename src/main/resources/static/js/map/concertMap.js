@@ -112,18 +112,17 @@ function viewBusking(data){
 
                     var li = document.createElement('li');
                     li.id=record.id;
-                    var startDate = new Date(record.startDate);
-                    var lastDate = new Date(record.lastDate);
+
                     li.innerHTML = '<h3>' + record.name + '</h3>' +
                         '<p><strong>장소: </strong>' + record.location + '</p>' +
-                        '<p><strong>공연 일자: </strong>' + formatDate(date) + '</p>' +
-                        '<p><strong>공연자: </strong>' + record.artName + '</p>';
+                        '<p><strong>공연 일자: </strong>' + record.date + '</p>' +
+                        '<p><strong>공연자: </strong>' + record.nid + '</p>';
                     li.style.padding='18px';
                     li.style.borderTop = '1px solid #ccc';
                     concert.appendChild(li);
 
                     li.addEventListener('click',function(){
-                        goToDetailPage(record.id);
+                        goToBuskingDetail(record.id);
                     })
                 }
             });
@@ -171,7 +170,7 @@ function viewSmallConcert(data){
                     concert.appendChild(li);
 
                     li.addEventListener('click',function(){
-                        goToDetailPage(record.id);
+                        goToSmallConcertDetail(record.id);
                     })
                 }
             });
@@ -219,7 +218,7 @@ function viewLocalFest(data){
                     concert.appendChild(li);
 
                     li.addEventListener('click',function(){
-                        goToDetailPage(record.id);
+                        goToLocalDetail(record.id);
                     })
                 }
             });
@@ -239,8 +238,8 @@ function modalBusking(record) {
 
         var modalBody = document.querySelector('.modal-body');
         modalBody.innerHTML = '<p><strong>버스킹 장소: </strong>' + record.location + '</p>' +
-            '<p><strong>공연 일자: </strong>' + formatDate(new Date(record.startDate)) + '</p>' +
-            '<p><strong>공연자: </strong>' + record.artName + '</p>';
+            '<p><strong>공연 일자: </strong>' + record.date + '</p>' +
+            '<p><strong>공연자: </strong>' + record.nid + '</p>';
 
         // 모달 창을 띄움
         $('#kt_modal_1').modal('show');
@@ -248,7 +247,7 @@ function modalBusking(record) {
         //모달 창에서 상세보기 클릭 시 상세보기 페이지로 이동
         $('#viewDetail').on('click', function() {
             var id = record.id;
-            goToDetailPage(id);
+            goToBuskingDetail(id);
         });
     };
 }
@@ -272,7 +271,7 @@ function modalLocal(record) {
         //모달 창에서 상세보기 클릭 시 상세보기 페이지로 이동
         $('#viewDetail').on('click', function() {
             var id = record.id;
-            goToDetailPage(id);
+            goToLocalDetail(id);
         });
     };
 }
@@ -326,10 +325,23 @@ function padZero(num) {
     return (num < 10 ? '0' : '') + num;
 }
 
-function goToDetailPage(id){
+function goToSmallConcertDetail(id){
 
     var detailPageUrl = '/smallconcert/detail/' + id;
 
     window.location.href = detailPageUrl;
 }
 
+//지역축제 디테일 페이지
+function goToLocalDetail(id){
+    var detailPageUrl = '/local_festival/detail/' + id;
+
+    window.location.href = detailPageUrl;
+}
+
+//버스킹 디테일 페이지
+function goToBuskingDetail(id){
+    var detailPageUrl = '/busking/detail/' + id;
+
+    window.location.href = detailPageUrl;
+}

@@ -39,6 +39,22 @@
         WHERE id = #{param1}
 
     </select>
+    <select id="selectLocal" resultType="com.e114.e114_eumyuratodemo1.dto.LocalFestivalDTO">
+        SELECT *
+        FROM local_festival
+        WHERE id = #{param1}
+
+    </select>
+    <select id="selectBusking" resultType="com.e114.e114_eumyuratodemo1.dto.BuskingDTO">
+        <![CDATA[
+        SELECT b.*, a.nid
+        FROM busking AS b
+                 INNER JOIN artist_member AS a
+                            ON b.artId = a.id
+        WHERE b.date >= NOW() AND b.date <= DATE_ADD(NOW(), INTERVAL 1 MONTH) AND b.id = #{param1};
+        ]]>
+
+    </select>
 
     <select id="selectConcertTime" resultType="com.e114.e114_eumyuratodemo1.dto.SchedulesDTO">
         SELECT *

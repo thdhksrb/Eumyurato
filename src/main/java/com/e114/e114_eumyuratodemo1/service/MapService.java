@@ -48,6 +48,12 @@ public class MapService {
     public List<String> selectBooked(int conId,String conDate){
         return dao.selectBooked(conId,conDate);
     };
+    public LocalFestivalDTO selectLocal(int id){
+        return dao.selectLocal(id);
+    }
+    public BuskingDTO selectBusking(int id){
+        return dao.selectBusking(id);
+    }
 
 
     public int insertSeat(int conId, String conDate, List<String> seat) {
