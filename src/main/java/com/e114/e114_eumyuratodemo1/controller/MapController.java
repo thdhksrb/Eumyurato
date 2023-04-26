@@ -179,7 +179,7 @@ public class MapController {
         return dto;
     }
 
-    @GetMapping("/smallconcert/detail/{id}/calendar/{day}/pay/kakao")
+    @GetMapping("/pay/kakao")
     @ResponseBody
     public String kakaoPay(){
         try {
@@ -204,6 +204,30 @@ public class MapController {
         int schedulesId = schedulesDTO.getId();
 
         mapService.rollBackInsertSeat(schedulesId,seat);
+
+        return "html/pay/payFail";
+    }
+
+    @GetMapping("/pay/kakao/donation")
+    @ResponseBody
+    public String kakaoDonation(){
+        try {
+            return mapService.payService();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "error";
+    }
+
+    @GetMapping("/kakaopay/success/donation")
+    public String donationSuccess(){
+        return "html/pay/paySuccess";
+    }
+
+    @GetMapping("/kakaopay/fail/donation")
+    public String donationFail(){
 
         return "html/pay/payFail";
     }

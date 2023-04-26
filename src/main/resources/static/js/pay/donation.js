@@ -14,20 +14,20 @@ $.ajax({
 
         buskerInfo.append(li);
 
-    //     // 첫 번째 Ajax 호출이 완료된 후에 두 번째 Ajax 호출을 실행
-    //     $('#pay').click(function (){
-    //         $.ajax({
-    //             url:'/smallconcert/detail/'+id+'/calendar/' +day+ '/pay/kakao',
-    //             dataType: 'json',
-    //             success:function (data){
-    //                 var box = data.next_redirect_pc_url;
-    //                 window.location.href = box;
-    //             },
-    //             error:function (error){
-    //                 alert(error);
-    //             }
-    //         });
-    //     });
+        // 첫 번째 Ajax 호출이 완료된 후에 두 번째 Ajax 호출을 실행
+        $('#pay').click(function (){
+            $.ajax({
+                url:'/pay/kakao/donation',
+                dataType: 'json',
+                success:function (data){
+                    var box = data.next_redirect_pc_url;
+                    window.location.href = box;
+                },
+                error:function (error){
+                    alert(error);
+                }
+            });
+        });
     },
     error: function(xhr, status, error) {
         console.log('AJAX Error: ' + status + error);
