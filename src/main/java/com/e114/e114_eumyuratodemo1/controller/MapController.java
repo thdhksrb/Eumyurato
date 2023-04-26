@@ -107,12 +107,6 @@ public class MapController {
     }
 
     @PostMapping("/smallconcert/detail/{id}/calendar")
-    public String calendar(){
-        return "html/pay/pay1";
-    }
-
-
-    @PostMapping("/smallconcert/detail/{id}/calendar/json")
     @ResponseBody
     public ResponseEntity<Map<String, SchedulesDTO>> calendarJson(@PathVariable("id") int id, @RequestBody Map<String, String> data){
         String selectedDate = data.get("selectedDate");
@@ -189,6 +183,24 @@ public class MapController {
             e.printStackTrace();
         }
         return "error";
+    }
+
+    @GetMapping("/busking/detail/{id}/donation")
+    public String donation(){
+        return "html/pay/buskingDonation";
+    }
+
+
+
+    @PostMapping("/busking/detail/{id}/donation")
+    @ResponseBody
+    public ResponseEntity<Map<String,Object>> donationData(@PathVariable("id") int id){
+        Map<String, Object> response = new HashMap<>();
+        BuskingDTO dto= mapService.selectBusking(id);
+
+        response.put("dto",dto);
+
+        return ResponseEntity.ok().body(response);
     }
 
     @GetMapping("/kakaopay/success")
