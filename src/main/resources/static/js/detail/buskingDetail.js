@@ -16,7 +16,22 @@ $.ajax({
 
         detailList.append(li);
 
-        price.append($('<p>').html('<strong>티켓가격: </strong><span style="color:red">' + data.price.toLocaleString() + '</span>원'));
+        // 이미지 URL을 가져온다.
+        var imageUrl = data.image;
+
+        // 이미지 요소를 생성한다.
+        var img = document.createElement("img");
+        img.src = imageUrl;
+        img.style.objectFit = "contain";
+        img.style.width = "100%";
+        img.style.height = "100%";
+
+        // 이미지 요소를 포함할 div를 찾는다.
+        var posterContainer = document.getElementById("posterContainer");
+
+        // div에 이미지 요소를 추가한다.
+        posterContainer.appendChild(img);
+
     },
     error: function(xhr, status, error) {
         console.log('AJAX Error: ' + status + error);

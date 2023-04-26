@@ -79,3 +79,8 @@ li:hover p {
 .categoryWrap a:hover {
     cursor: pointer;
 }
+
+.conInfo {
+    height: 637px; /* 스크롤바가 나타날 최대 높이 */
+    overflow-y: scroll; /* 세로 스크롤바를 보이게 한다. */
+}
