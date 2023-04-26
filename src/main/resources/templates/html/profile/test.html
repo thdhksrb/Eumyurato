@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--begin::Head-->
+
+<head>
+    <title>Eumyurato</title>
+    <link href="/static/img/E114_logo.png" rel="icon" type="image/x-icon"/>
+    <meta charset="utf-8"/>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="/static/css/loginJoin/loginJoin2.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/css/loginJoin/loginJoin1.css" rel="stylesheet" type="text/css"/>
+    <!--end::Global Stylesheets Bundle-->
+</head>
+<!--end::Head-->
+<!--begin::Body-->
+
+<body class="bg-white" id="kt_body">
+<!--begin::Main-->
+<div class="d-flex flex-column flex-root">
+    <!--begin::Login-->
+    <header class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+        <div class="container d-flex justify-content-between align-items-center m-lg-2">
+            <a class="navbar-brand" href="#page-top">
+                <img src="/static/img/logo_name.png" style="width: 250px; height: 50px">
+            </a>
+            <div class="d-flex align-items-center">
+                <button class="btn btn-icon btn-sm btn-active-bg-accent me-5" id="kt_drawer_chat_toggle">
+                <span class="svg-icon svg-icon-1 svg-icon-dark">
+                    <svg fill="none" style="height: 35px; width: 35px;" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 4V16C2 16.6 2.4 17 3 17H13L16.6 20.6C17.1 21.1 18 20.8 18 20V17H21C21.6 17 22 16.6 22 16V4C22 3.4 21.6 3 21 3H3C2.4 3 2 3.4 2 4Z" fill="black" opacity="0.3"/>
+                        <path d="M18 9H6C5.4 9 5 8.6 5 8C5 7.4 5.4 7 6 7H18C18.6 7 19 7.4 19 8C19 8.6 18.6 9 18 9ZM16 12C16 11.4 15.6 11 15 11H6C5.4 11 5 11.4 5 12C5 12.6 5.4 13 6 13H15C15.6 13 16 12.6 16 12Z" fill="black"/>
+                    </svg>
+                </span>
+                </button>
+                <img src="/static/img/logout.png" style="height: 30px; width: 30px;">
+            </div>
+        </div>
+    </header>
+    <nav style="width: 200px; height: 100%; background-color: #ffffff; top: 70px; left: 0;" >
+        <div class="menu-wrapper menu-column menu-fit mt-10">
+            <div class="menu-sub menu-fit menu-sub-accordion show mb-20">
+                <h2 class="menu-content mb-1 mt-10 ms-14" style="font-weight: bold">마이페이지</h2>
+                <div class="separator border-dark my-1 ms-9 text-center" style="width: 130px"></div>
+                <div class="menu-item ms-15 mt-2 mb-2">
+                    <a class="text-dark text-hover-primary py-2 fs-5"
+                       href="../dist/index.html"
+                       target="_blank">내 계정</a>
+                </div>
+                <div class="menu-item ms-15 mt-2 mb-2">
+                    <a class="text-dark text-hover-primary py-2 fs-5"
+                       href="../dist/index.html"
+                       target="_blank">계정 정보 수정</a>
+                </div>
+                <div class="menu-item ms-15 mt-2 mb-2">
+                    <a class="text-dark text-hover-primary py-2 fs-5"
+                       href="../dist/index.html"
+                       target="_blank">예약 내역</a>
+                </div>
+                <div class="menu-item ms-15 mt-2 mb-2">
+                    <a class="text-dark text-hover-primary py-2 fs-5"
+                       href="../dist/index.html"
+                       target="_blank">공연 관리</a>
+                </div>
+            </div>
+            <div class="menu-wrapper menu-column menu-fit mt-1">
+                <div class="menu-sub menu-fit menu-sub-accordion show">
+                    <h2 class="menu-content mb-1 mt-10 ms-10" style="font-weight: bold">통합 정보 조회</h2>
+                    <div class="separator border-dark my-1 ms-7 text-center" style="width: 140px"></div>
+                    <div class="menu-item ms-15 mt-1 mt-2 mb-2">
+                        <a class="text-dark text-hover-primary py-2 fs-5"
+                           href="../dist/index.html"
+                           target="_blank">종합</a>
+                    </div>
+                    <div class="menu-item ms-15 mt-2 mb-2">
+                        <a class="text-dark text-hover-primary py-2 fs-5"
+                           href="../dist/index.html"
+                           target="_blank">성별</a>
+                    </div>
+                    <div class="menu-item ms-15 mt-2 mb-2">
+                        <a class="text-dark text-hover-primary py-2 fs-5"
+                           href="../dist/index.html"
+                           target="_blank">팔로우</a>
+                    </div>
+                    <div class="menu-item ms-15 mt-2 mb-2">
+                        <a class="text-dark text-hover-primary py-2 fs-5"
+                           href="../dist/index.html"
+                           target="_blank">즐겨찾기</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+<!--begin::Main-->
+<div class="d-flex flex-column flex-root">
+
+    <div class="login-content flex-lg-row-fluid d-flex flex-column overflow-hidden py-10 py-lg-20 px-10 p-lg-7 mx-auto mw-450px w-100">
+        <!--begin::Wrapper-->
+        <!--begin::Signin Form-->
+        <form class="form w-100  needs-validation" id="kt_login_signin_form" novalidate>
+            <!--th:data-after-login-url="@{/html/main/home.html}"-->
+            <!--begin::Title-->
+            <div class="pb-5 pb-lg-15">
+                <h3 class="fw-bolder text-dark display-6">Welcome to Eumyurato</h3>
+            </div>
+            <!--begin::Title-->
+            <!--begin::Form group-->
+            <div class="fv-row mb-10">
+                <label class="form-label fs-6 fw-bolder text-dark">아이디</label>
+                <input autocomplete="off" class="form-control form-control-lg form-control-solid" id="id" maxLength="20"
+                       name="id"
+                       required style="border-color: #0099FF;" type="text"/>
+                <div class="invalid-feedback">
+                    아이디를 입력해주세요.
+                </div>
+            </div>
+
+            <div class="fv-row mb-10">
+                <div class="d-flex justify-content-between mt-n5">
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5">비밀번호</label>
+                </div>
+                <input autocomplete="off" class="form-control form-control-lg form-control-solid" id="pw" maxLength="20"
+                       name="pw" required style="border-color: #0099FF;" type="password"/>
+                <div class="invalid-feedback">
+                    비밀번호를 입력해주세요.
+                </div>
+            </div>
+
+            <!--end::Form group-->
+            <!--begin::Action-->
+            <div class="pb-lg-0 pb-5 d-flex align-items-center justify-content-between">
+
+                <button class="btn btn-primary fw-bolder fs-4 py-3" id="login_button"
+                        style="width: 400px;" type="submit">로그인
+                </button>
+
+            </div>
+            <div class="pb-lg-0 pb-5 mt-5 d-flex align-items-center justify-content-center">
+                <div>
+                    <a class="text-gray-600 text-hover-primary ms-3"
+                       href="/templates/html/loginJoin/Idfind.html" id="kt_login_signin_form_id_reset_button">아이디
+                        찾기</a>
+                    <a class="text-gray-600 text-hover-primary ms-3"
+                       target="_blank">|</a>
+                    <a class="text-gray-600 text-hover-primary ms-3"
+                       href="/templates/html/loginJoin/pwfind.html"
+                       id="kt_login_signin_form_password_reset_button">비밀번호 찾기</a>
+                    <!-- 왼쪽에 정렬할 텍스트와의 간격을 조정 -->
+                    <a class="text-gray-600 text-hover-primary ms-3"
+                       target="_blank">|</a>
+                    <a class="text-gray-600 text-hover-primary ms-3"
+                       href="/templates/html/loginJoin/joinChooes.html" id="kt_login_signup_choose_form">회원가입</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+<script src="/static/js/loginJoin/login.js" type="text/javascript"></script>
+</body>
+</html>
