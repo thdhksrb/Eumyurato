@@ -23,8 +23,8 @@ $.ajax({
     }
 });
 
-const reservation = document.querySelector('#reservation');
+const donation = document.querySelector('#donation');
 
-reservation.addEventListener('click', () => {
-    window.location.href = `/smallconcert/detail/${id}/calendar`;
+donation.addEventListener('click', () => {
+    window.location.href = `/busking/detail/${id}/donation`;
 });
