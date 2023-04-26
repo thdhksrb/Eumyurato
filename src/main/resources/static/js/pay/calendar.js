@@ -26,7 +26,7 @@ searchBtn.addEventListener('click', () => {
     const data = { selectedDate };
 
     // Send AJAX request
-    fetch('/smallconcert/detail/' + id + '/calendar/json', {
+    fetch('/smallconcert/detail/' + id + '/calendar', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),

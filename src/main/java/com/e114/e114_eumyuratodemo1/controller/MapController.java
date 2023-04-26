@@ -26,13 +26,6 @@ public class MapController {
     @Autowired
     private DataDTO dto;
 
-//    @GetMapping("/map")
-//    public String showMap() {
-//        return "html/map/map";
-//    }
-
-
-
     @GetMapping("/map")
     public String smallConcert(){
 
@@ -55,38 +48,50 @@ public class MapController {
 
         return map;
     }
+    @GetMapping("/smallconcert/detail/{id}")
+    public String smallConcertDetail() {
 
-    @GetMapping("/{type}")
-    @ResponseBody
-    public List<?> getData(@PathVariable String type) {
-        switch (type) {
-            case "smallconcert":
-                List<SmallConcertDTO> smallConcertList = mapService.viewSmallConcert();
-                return smallConcertList;
-            case "busking":
-                List<BuskingDTO> buskingList = mapService.viewBusking();
-                return buskingList;
-            case "localfestival":
-                List<LocalFestivalDTO> localFestivalList = mapService.viewLocalFestival();
-                return localFestivalList;
-            default:
-                return null;
-        }
+
+        return "html/detail/smallConcertDetail";
     }
 
     @GetMapping("/smallconcert/detail/{id}/json")
     @ResponseBody
-    public SmallConcertDTO detailJson(@PathVariable("id") int id) {
+    public SmallConcertDTO smallConcertDetailJson(@PathVariable("id") int id) {
         SmallConcertDTO dto = mapService.selectConcert(id);
 
         return dto;
     }
 
-    @GetMapping("/smallconcert/detail/{id}")
-    public String detail() {
+    @GetMapping("/local_festival/detail/{id}")
+    public String localDetail() {
 
 
-        return "html/detail/detail";
+        return "html/detail/localDetail";
+    }
+
+    @GetMapping("/local_festival/detail/{id}/json")
+    @ResponseBody
+    public LocalFestivalDTO localDetailJson(@PathVariable("id") int id) {
+        LocalFestivalDTO dto = mapService.selectLocal(id);
+
+        return dto;
+    }
+
+    @GetMapping("/busking/detail/{id}")
+    public String buskingDetail() {
+
+
+        return "html/detail/buskingDetail";
+    }
+
+    @GetMapping("/busking/detail/{id}/json")
+    @ResponseBody
+    public BuskingDTO buskinDetailJson(@PathVariable("id") int id) {
+        BuskingDTO dto = mapService.selectBusking(id);
+        System.out.println(dto);
+
+        return dto;
     }
 
     @GetMapping("/smallconcert/detail/{id}/calendar")
@@ -95,12 +100,6 @@ public class MapController {
     }
 
     @PostMapping("/smallconcert/detail/{id}/calendar")
-    public String calendar(){
-        return "html/pay/pay1";
-    }
-
-
-    @PostMapping("/smallconcert/detail/{id}/calendar/json")
     @ResponseBody
     public ResponseEntity<Map<String, SchedulesDTO>> calendarJson(@PathVariable("id") int id, @RequestBody Map<String, String> data){
         String selectedDate = data.get("selectedDate");
@@ -123,7 +122,7 @@ public class MapController {
         System.out.println(mapService.selectBooked(id,day));
         return mapService.selectBooked(id,day);
     }
-
+    //seated.js에서 좌석정보 넘겨줌
     @PostMapping ("/smallconcert/detail/{id}/calendar/{day}/pay")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> pay(@PathVariable("id")int id,@PathVariable("day")String day,@RequestBody Map<String, List<String>> data){
@@ -162,6 +161,20 @@ public class MapController {
     @ResponseBody
     public DataDTO payPageData(){
 
+
+        return dto;
+    }
+
+    @GetMapping("/busking/detail/{id}/donation")
+    public String donation(){
+        return "html/pay/buskingDonation";
+    }
+
+    @GetMapping("/busking/detail/{id}/donation/json")
+    @ResponseBody
+    public BuskingDTO donationData(@PathVariable("id") int id){
+
+        BuskingDTO dto = mapService.selectBusking(id);
 
         return dto;
     }
