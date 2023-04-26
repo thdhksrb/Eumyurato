@@ -219,6 +219,7 @@ public class MapController {
 
     @GetMapping("/kakaopay/success/donation")
     public String successDonation(){
+
         return "html/pay/paySuccess";
     }
 
