@@ -7,12 +7,10 @@ $.ajax({
     dataType: 'json',
     success: function(data) {
         var li = $('<li>');
-        console.log(data);
-
+        console.log(data.name);
 
         li.append($('<h2>').html(data.name));
         li.append($('<h2>').html(data.nid));
-
 
         buskerInfo.append(li);
 
@@ -36,3 +34,17 @@ $.ajax({
     }
 });
 
+const price = document.querySelector('#price');
+const output = document.querySelector('#output');
+
+const resetButton = document.querySelector("#reset");
+resetButton.addEventListener('click',function (){
+    price.value = '';
+    output.textContent = '금액 : ';
+});
+
+const searchButton = document.querySelector("#search-btn");
+searchButton.addEventListener('click', function (){
+    const priceValue = price.value;
+    output.textContent = '금액 : ' + priceValue + '원';
+});
