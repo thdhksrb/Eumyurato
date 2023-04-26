@@ -1,18 +1,14 @@
 package com.e114.e114_eumyuratodemo1.controller;
 
 import com.e114.e114_eumyuratodemo1.dto.*;
-import com.e114.e114_eumyuratodemo1.jdbc.IDAO;
 import com.e114.e114_eumyuratodemo1.service.MapService;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -179,7 +175,7 @@ public class MapController {
         return dto;
     }
 
-    @GetMapping("/smallconcert/detail/{id}/calendar/{day}/pay/kakao")
+    @GetMapping("/pay/kakao")
     @ResponseBody
     public String kakaoPay(){
         try {
@@ -192,13 +188,26 @@ public class MapController {
         return "error";
     }
 
+    @GetMapping("/pay/kakao/donation")
+    @ResponseBody
+    public String kakaoDonation(){
+        try {
+            return mapService.donationService();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "error";
+    }
+
     @GetMapping("/kakaopay/success")
-    public String success(){
+    public String successPay(){
         return "html/pay/paySuccess";
     }
 
     @GetMapping("/kakaopay/fail")
-    public String fail(){
+    public String failPay(){
         List<String> seat = (List<String>) (dto.getMyData().get("seat"));
         SchedulesDTO schedulesDTO = (SchedulesDTO)(dto.getMyData().get("schedule"));
         int schedulesId = schedulesDTO.getId();
@@ -208,6 +217,17 @@ public class MapController {
         return "html/pay/payFail";
     }
 
+    @GetMapping("/kakaopay/success/donation")
+    public String successDonation(){
+        return "html/pay/paySuccess";
+    }
+
+    @GetMapping("/kakaopay/fail/donation")
+    public String failDonation(){
+
+
+        return "html/pay/payFail";
+    }
 
 
 
