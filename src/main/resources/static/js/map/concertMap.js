@@ -226,9 +226,6 @@ function viewLocalFest(data){
     }
 }
 
-
-
-
 // 클릭 이벤트 핸들러 함수
 function modalBusking(record) {
     return function() {
@@ -295,7 +292,7 @@ function modalSmall(record) {
         //모달 창에서 상세보기 클릭 시 상세보기 페이지로 이동
         $('#viewDetail').on('click', function() {
             var id = record.id;
-            goToDetailPage(id);
+            goToSmallConcertDetail(id);
         });
     };
 }
@@ -348,12 +345,12 @@ function goToBuskingDetail(id){
 
 function getContent(record) {
 
-    let result = `<div class="infowindow">
-    <div class="infowindow-img-container">
+    let result = `<div class="infowindow" style="width: 200px; height: 200px; overflow: auto;">
+    <div class="infowindow-img-container" style="display: flex; justify-content: center; align-items: center;">
       <img src="${record.image}" class="infowindow-img" alt="...">
     </div>
     <div class="infowindow-body">
-      <h1 class="infowindow-title">${record.name}</h1>
+      <h2 class="infowindow-title">${record.name}</h2>
     </div>
   </div>`;
 
@@ -367,4 +364,5 @@ function getContent(record) {
 
     return result;
 }
+
 
