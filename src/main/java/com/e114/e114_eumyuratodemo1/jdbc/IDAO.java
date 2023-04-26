@@ -14,11 +14,13 @@ public interface IDAO {
     public List<SmallConcertDTO> viewSmallConcert();
     public List<BuskingDTO> viewBusking();
     public List<LocalFestivalDTO> viewLocalFestival();
-    public SmallConcertDTO selectConcert(int id);
+
     public SchedulesDTO selectConcertTime(int id, String conDate);
     public List<String> selectBooked(int conId,String conDate);
     public int insertSeat(Map<String, Object> map);
     public int deleteSeat(Map<String, Object> map);
     public LocalFestivalDTO selectLocal(int id);
+    public SmallConcertDTO selectConcert(int id);
+    public BuskingDTO selectBusking(int id);
 
 }

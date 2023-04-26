@@ -51,6 +51,9 @@ public class MapService {
     public LocalFestivalDTO selectLocal(int id){
         return dao.selectLocal(id);
     }
+    public BuskingDTO selectBusking(int id){
+        return dao.selectBusking(id);
+    }
 
 
     public int insertSeat(int conId, String conDate, List<String> seat) {

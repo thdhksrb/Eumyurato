@@ -84,6 +84,22 @@ public class MapController {
         return "html/detail/localDetail";
     }
 
+    @GetMapping("/busking/detail/{id}/json")
+    @ResponseBody
+    public BuskingDTO buskinDetailJson(@PathVariable("id") int id) {
+        BuskingDTO dto = mapService.selectBusking(id);
+        System.out.println(dto);
+
+        return dto;
+    }
+
+    @GetMapping("/busking/detail/{id}")
+    public String buskingDetail() {
+
+
+        return "html/detail/buskingDetail";
+    }
+
 
     @GetMapping("/smallconcert/detail/{id}/calendar")
     public String calendarPage(){

@@ -12,6 +12,6 @@ public class BuskingDTO {
     private String location;
     private int viewCount;
     private String image;
-    private String artName;
+    private String nid;
 
 }
