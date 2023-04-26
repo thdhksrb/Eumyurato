@@ -26,10 +26,6 @@ public class MapController {
     @Autowired
     private DataDTO dto;
 
-//    @GetMapping("/map")
-//    public String showMap() {
-//        return "html/map/map";
-//    }
 
 
 
@@ -56,38 +52,38 @@ public class MapController {
         return map;
     }
 
-    @GetMapping("/{type}")
-    @ResponseBody
-    public List<?> getData(@PathVariable String type) {
-        switch (type) {
-            case "smallconcert":
-                List<SmallConcertDTO> smallConcertList = mapService.viewSmallConcert();
-                return smallConcertList;
-            case "busking":
-                List<BuskingDTO> buskingList = mapService.viewBusking();
-                return buskingList;
-            case "localfestival":
-                List<LocalFestivalDTO> localFestivalList = mapService.viewLocalFestival();
-                return localFestivalList;
-            default:
-                return null;
-        }
-    }
 
     @GetMapping("/smallconcert/detail/{id}/json")
     @ResponseBody
-    public SmallConcertDTO detailJson(@PathVariable("id") int id) {
+    public SmallConcertDTO smallConcertDetailJson(@PathVariable("id") int id) {
         SmallConcertDTO dto = mapService.selectConcert(id);
 
         return dto;
     }
 
+
     @GetMapping("/smallconcert/detail/{id}")
-    public String detail() {
+    public String smallConcertDetail() {
 
 
-        return "html/detail/detail";
+        return "html/detail/smallConcertDetail";
     }
+
+    @GetMapping("/local_festival/detail/{id}/json")
+    @ResponseBody
+    public LocalFestivalDTO localDetailJson(@PathVariable("id") int id) {
+        LocalFestivalDTO dto = mapService.selectLocal(id);
+
+        return dto;
+    }
+
+    @GetMapping("/local_festival/detail/{id}")
+    public String localDetail() {
+
+
+        return "html/detail/localDetail";
+    }
+
 
     @GetMapping("/smallconcert/detail/{id}/calendar")
     public String calendarPage(){

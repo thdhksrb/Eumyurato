@@ -19,5 +19,6 @@ public interface IDAO {
     public List<String> selectBooked(int conId,String conDate);
     public int insertSeat(Map<String, Object> map);
     public int deleteSeat(Map<String, Object> map);
+    public LocalFestivalDTO selectLocal(int id);
 
 }

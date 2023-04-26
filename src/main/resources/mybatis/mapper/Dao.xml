@@ -39,6 +39,13 @@
         WHERE id = #{param1}
 
     </select>
+    <select id="selectLocal" resultType="com.e114.e114_eumyuratodemo1.dto.LocalFestivalDTO">
+        SELECT *
+        FROM local_festival
+        WHERE id = #{param1}
+
+    </select>
+
     <select id="selectConcertTime" resultType="com.e114.e114_eumyuratodemo1.dto.SchedulesDTO">
         SELECT *
         FROM schedules
@@ -60,6 +67,12 @@
             WHERE conId = #{conId} AND DATE_FORMAT(schedules.conDate, '%Y-%m-%d') = #{conDate}
         </foreach>
     </insert>
+    <delete id="deleteSeat" parameterType="java.util.Map">
+        <foreach collection="seat" item="seatNum" separator=";">
+        DELETE FROM booked
+        WHERE sId = #{schedulesId} AND seatNum = #{seatNum}
+        </foreach>
+    </delete>
 
 
 
