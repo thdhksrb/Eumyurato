@@ -3,19 +3,16 @@ var url = location.pathname;
 var id = url.match(/\d+/)[0];
 
 $.ajax({
-    url: '/busking/detail/'+id+'/donation',
-    method: 'POST',
+    url: '/busking/detail/'+id+'/donation/json',
     dataType: 'json',
-    success: function(response) {
-        // var li = $('<li>');
-        console.log(response.dto.name);
+    success: function(data) {
+        var li = $('<li>');
+        console.log(data.name);
 
+        li.append($('<h2>').html(data.name));
+        li.append($('<h2>').html(data.nid));
 
-        // li.append($('<h2>').html(data.name));
-        // li.append($('<h2>').html(data.nid));
-
-
-        // buskerInfo.append(li);
+        buskerInfo.append(li);
 
     //     // 첫 번째 Ajax 호출이 완료된 후에 두 번째 Ajax 호출을 실행
     //     $('#pay').click(function (){
@@ -35,4 +32,19 @@ $.ajax({
     error: function(xhr, status, error) {
         console.log('AJAX Error: ' + status + error);
     }
+});
+
+const price = document.querySelector('#price');
+const output = document.querySelector('#output');
+
+const resetButton = document.querySelector("#reset");
+resetButton.addEventListener('click',function (){
+    price.value = '';
+    output.textContent = '금액 : ';
+});
+
+const searchButton = document.querySelector("#search-btn");
+searchButton.addEventListener('click', function (){
+    const priceValue = price.value;
+    output.textContent = '금액 : ' + priceValue + '원';
 });
