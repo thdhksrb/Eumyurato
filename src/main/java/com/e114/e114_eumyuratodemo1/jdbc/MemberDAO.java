@@ -23,4 +23,5 @@ public interface MemberDAO {
     List<ReservationDTO> searchReservations(Map<String, String> params);
 
     EnterpriseMemberDTO getAdminInfoById(String adminId);
+
 }

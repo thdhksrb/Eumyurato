@@ -8,6 +8,7 @@ function setMemberSearch() {
 
     column.value = MemberDropdown.value;
     keyword.value = searchValue.value;
+
 };
 
 function resetMemberList() {
@@ -25,6 +26,7 @@ function setEntMemberSearch() {
     keyword2.value = searchValue2.value;
 
 };
+
 
 function resetEntMemberList() {
     document.querySelector('form[action="/profile/admin/total/entSearch"]').reset();
