@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.e114.e114_eumyuratodemo1.mapper.UserMapper">
+
+    <resultMap id="userResultMap" type="com.e114.e114_eumyuratodemo1.dto.User">
+        <id column="id" property="id"/>
+        <result column="email" property="email"/>
+        <result column="password" property="password"/>
+        <collection property="roles" ofType="String">
+            <result column="role"/>
+        </collection>
+    </resultMap>
+
+    <select id="findByEmail" resultMap="userResultMap">
+        SELECT id, email, password
+        FROM users
+        WHERE email = #{email}
+    </select>
+
+</mapper>

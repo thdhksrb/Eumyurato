@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>My Page</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU0Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+  <h1>My Page</h1>
+  <hr>
+  <div th:if="${user == null}">
+    <p>로그인 후 이용해주세요.</p>
+  </div>
+  <div th:if="${user != null}">
+    <p>아이디: <span th:text="${user.id}"></span></p>
+    <p>이름: <span th:text="${user.name}"></span></p>
+    <p>이메일: <span th:text="${user.email}"></span></p>
+    <p>전화번호: <span th:text="${user.phone}"></span></p>
+    <p>권한: <span th:text="${user.adminNum}"></span></p>
+  </div>
+</div>
+</body>
+</html>
