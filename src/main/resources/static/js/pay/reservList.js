@@ -14,7 +14,7 @@ $.ajax({
         li.append($('<p>').html('<strong>공연 일자: </strong>' + data.myData.concert.startDate + ' ~ ' + data.myData.concert.lastDate));
         li.append($('<p>').html('<strong>장소: </strong>' + data.myData.concert.location));
         li.append($('<p>').html('<strong>공연자: </strong>' + data.myData.concert.pname));
-        li.append($('<h2>').html('<strong>*선택내역*</strong>'));
+        li.append($('<h2 style="margin-top: 20px; margin-bottom: 20px;">').html('<strong>*선택내역*</strong>'));
         li.append($('<p>').html('<strong>날짜: </strong>' + day));
         li.append($('<p>').html('<strong>시간: </strong>' + data.myData.schedule.conDate));
         li.append($('<p>').html('<strong>매수: </strong>' + data.myData.count +'매'));
