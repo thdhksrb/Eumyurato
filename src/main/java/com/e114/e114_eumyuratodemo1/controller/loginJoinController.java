@@ -12,9 +12,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class loginJoinController {
@@ -41,19 +44,63 @@ public class loginJoinController {
         return "html/loginJoin/loginForm1";
     }
 
+
     @PostMapping("/login")
     public String login(@RequestParam("id") String id,
                         @RequestParam("pwd") String pwd,
-                        HttpSession session) {
+                        HttpSession session,
+                        HttpServletResponse response) {
         CommonMemberDTO commonMemberDTO = userService.login(id, pwd);
         if (commonMemberDTO != null) {
+            List<String> roles = userService.getUserRoles(id);
+            String token = jwtTokenProvider.createToken(commonMemberDTO.getId(), roles);
+            response.setHeader("Authorization", "Bearer " + token);
+            commonMemberDTO.setRoles(roles);
             session.setAttribute("user", commonMemberDTO);
-            return "html/loginJoin/mypage";
+            return "/mypage";
         } else {
             return "redirect:/login?error";
         }
     }
+    @GetMapping("/mypage")
+    public String mypage(HttpSession session, Model model) {
+        CommonMemberDTO user = (CommonMemberDTO) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login?error";
+        } else {
+            List<String> roles = userService.getUserRoles(user.getId());
+            user.setRoles(roles);
+            model.addAttribute("user", user);
+            return "html/loginJoin/mypage";
+        }
+    }
 
+    @GetMapping("/token")
+    @ResponseBody
+    public String getToken(HttpSession session) {
+        CommonMemberDTO user = (CommonMemberDTO) session.getAttribute("user");
+        if (user == null) {
+            return "로그인 후 이용해주세요.";
+        } else {
+            List<String> roles = userService.getUserRoles(user.getId());
+            String token = jwtTokenProvider.createToken(user.getId(), roles);
+            return "발행된 토큰 값: " + token;
+        }
+    }
+
+
+    /*    @PostMapping("/login")
+        public String login(@RequestParam("id") String id,
+                            @RequestParam("pwd") String pwd,
+                            HttpSession session) {
+            CommonMemberDTO commonMemberDTO = userService.login(id, pwd);
+            if (commonMemberDTO != null) {
+                session.setAttribute("user", commonMemberDTO);
+                return "html/loginJoin/mypage";
+            } else {
+                return "redirect:/login?error";
+            }
+        }*/
     @GetMapping("/login_art")
     public String login_art() {
         return "html/loginJoin/loginform2";
@@ -126,17 +173,6 @@ public class loginJoinController {
     @Autowired
     private CommonMemberDAO commonMemberDAO;
 
-    @GetMapping("/mypage")
-    public String getMyPage(HttpServletRequest request, Model model) {
-        String token = jwtTokenProvider.resolveToken(request);
-        if (token != null && jwtTokenProvider.validateToken(token)) {
-            CommonMemberDTO commonMemberDTO = commonMemberDAO.findById(jwtTokenProvider.getUserPk(token));
-            model.addAttribute("user", commonMemberDTO);
-            return "html/loginJoin/mypage";
-        } else {
-            return "redirect:/login";
-        }
-    }
 
 
 }

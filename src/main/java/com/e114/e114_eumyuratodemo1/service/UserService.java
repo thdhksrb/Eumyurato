@@ -6,12 +6,17 @@ import com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO;
 import com.e114.e114_eumyuratodemo1.jdbc.ArtistMemberDAO;
 import com.e114.e114_eumyuratodemo1.jdbc.CommonMemberDAO;
 import com.e114.e114_eumyuratodemo1.jdbc.EnterpriseMemberDAO;
+import com.e114.e114_eumyuratodemo1.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
+    @Autowired
+    private UserMapper userMapper;
 
     @Autowired
     private CommonMemberDAO commonMemberDAO;
@@ -48,7 +53,13 @@ public class UserService {
             return null;
         }
     }
+
+
+    public List<String> getUserRoles(String userId) {
+        return userMapper.findRolesByUserId(userId);
+    }
 }
+
 
 
 

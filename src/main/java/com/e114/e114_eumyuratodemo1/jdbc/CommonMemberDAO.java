@@ -8,7 +8,6 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Mapper
-@Repository
 public interface CommonMemberDAO {
  CommonMemberDTO findById(@Param("id") String id);
  CommonMemberDTO findByPwd(String pwd);

@@ -27,11 +27,20 @@ public class CommonMemberDTO{
     private String genre;
     private int adminNum;
     private Map<String,String> favorite;
-    private int kakao;
-    private int google;
+    private boolean kakao;
+    private boolean google;
     private String image;
 
+    private List<GrantedAuthority> authorities;
+
     public List<GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + adminNum));
+        return authorities;
+    }
+
+    public void setAuthorities(List<GrantedAuthority> authorities) {
+        this.authorities = authorities;
+    }
+
+    public void setRoles(List<String> roles) {
     }
 }
