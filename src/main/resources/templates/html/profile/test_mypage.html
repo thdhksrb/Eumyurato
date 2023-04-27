@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--begin::Head-->
+
+<head>
+    <title>Eumyurato</title>
+    <link rel="icon" type="image/x-icon" href="/static/img/E114_logo.png"/>
+    <meta charset="utf-8"/>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="/static/css/profile/profile1.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/css/profile/profile2.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/css/profile/profile3.css" rel="stylesheet" type="text/css"/>
+    <!--end::Global Stylesheets Bundle-->
+</head>
+<!--end::Head-->
+<!--begin::Body-->
+
+<body id="kt_body" class="bg-white">
+<header class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+
+    <div class="container ms-lg-1">
+        <a class="navbar-brand" href="#page-top"><img src="/static/img/logo_name.png"
+                                                      style="width: 200px; height: 40px"></a>
+    </div>
+
+    <div class="justify-content-end" style="margin-right: 100px">
+        <img src="/static/img/logout.png" style="height: 30px; width: 30px;">
+    </div>
+</header>
+<!--begin::Main-->
+<div class="d-flex flex-column flex-root" style="max-width: 100%">
+    <!--begin::Login-->
+    <div class="d-flex flex-column flex-lg-row flex-column-fluid" id="kt_login">
+        <div class="d-flex flex-column flex-lg-row-auto bg-primary pt-15 pt-lg-0 center" id="leftArea">
+            <!--begin::Aside Top-->
+            <div class="d-flex flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
+                <!--begin::Aside Logo-->
+                <nav style="width: 300px; height: 100%; background-color: #ffffff; position: fixed; top: 80px; left: 0;">
+                    <div class="menu-wrapper menu-column menu-fit mt-10">
+                        <div class="menu-sub menu-fit menu-sub-accordion show mb-20">
+                            <h2 class="menu-content mb-1 mt-10 ms-14" style="font-weight: bold; text-align: left">
+                                마이페이지</h2>
+                            <div class="separator border-dark my-1 ms-9 text-center" style="width: 130px"></div>
+                            <div class="menu-item ms-15 mt-2 mb-2" style="text-align: left">
+                                <a class="text-dark text-hover-primary py-2 fs-5"
+                                   href="../dist/index.html"
+                                   target="_blank">내 계정</a>
+                            </div>
+                            <div class="menu-item ms-15 mt-2 mb-2" style="text-align: left">
+                                <a class="text-dark text-hover-primary py-2 fs-5"
+                                   href="../dist/index.html"
+                                   target="_blank">계정 정보 수정</a>
+                            </div>
+                            <div class="menu-item ms-15 mt-2 mb-2" style="text-align: left">
+                                <a class="text-dark text-hover-primary py-2 fs-5"
+                                   href="../dist/index.html"
+                                   target="_blank">예약 내역</a>
+                            </div>
+                            <div class="menu-item ms-15 mt-2 mb-2" style="text-align: left">
+                                <a class="text-dark text-hover-primary py-2 fs-5"
+                                   href="../dist/index.html"
+                                   target="_blank">공연 관리</a>
+                            </div>
+                        </div>
+                        <div class="menu-wrapper menu-column menu-fit mt-1">
+                            <div class="menu-sub menu-fit menu-sub-accordion show">
+                                <h2 class="menu-content mb-1 mt-10 ms-10" style="font-weight: bold; text-align: left">통합
+                                    정보 조회</h2>
+                                <div class="separator border-dark my-1 ms-7 text-center" style="width: 140px"></div>
+                                <div class="menu-item ms-15 mt-1 mt-2 mb-2" style="text-align: left">
+                                    <a class="text-dark text-hover-primary py-2 fs-5"
+                                       href="../dist/index.html"
+                                       target="_blank">종합</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+                <!--end::Aside Logo-->
+            </div>
+        </div>
+
+        <!--사이드-->
+        <!--begin::Aside-->
+        <!--begin::Content-->
+        <!--로그인폼-->
+
+            <div class="login-content flex-lg-row-fluid d-flex flex-column overflow-hidden py-10 py-lg-20 px-10 p-lg-7 mx-auto mw-450px w-100 main-content"
+                 style="background-color: #f5e6d2;">
+                <!--begin::Wrapper-->
+                <!--begin::Signin Form-->
+                <form class="form w-100  needs-validation" id="kt_login_signin_form" novalidate method="post">
+                    <!--th:data-after-login-url="@{/html/main/home.html}"-->
+                    <!--begin::Title-->
+                    <div class="pb-5 pb-lg-10 justify-content-center text-center ">
+                        <h3 class="fw-bolder text-dark display-6">내 계정</h3>
+                        <br>
+                        <div class="image-input image-input-outline" data-kt-image-input="true"
+                             style="display: flex; justify-content: center; align-items: center;">
+                            <img alt="프로필사진" src="/static/img/다운로드.jpg"/>
+                        </div>
+                    </div>
+
+                    <div class="fv-row mb-5">
+                        <label class="form-label fs-6 fw-bolder text-dark pt-5">아이디</label>
+                        <input autocomplete="off" class="form-control form-control-lg form-control-solid"
+                               name="fullname"
+                               placeholder="" style="border-color: #0099FF;" type="text"/>
+                    </div>
+                    <div class="fv-row mb-5">
+                        <label class="form-label fs-6 fw-bolder text-dark pt-5">이름</label>
+                        <input autocomplete="off" class="form-control form-control-lg form-control-solid"
+                               name="fullname"
+                               placeholder="" style="border-color: #0099FF;" type="text"/>
+                    </div>
+                    <div class="fv-row mb-5">
+                        <label class="form-label fs-6 fw-bolder text-dark pt-5">활동명</label>
+                        <input autocomplete="off" class="form-control form-control-lg form-control-solid"
+                               name="nickname"
+                               placeholder="" style="border-color: #0099FF;" type="text"/>
+                    </div>
+                    <div class="fv-row mb-5">
+                        <label class="form-label fs-6 fw-bolder text-dark pt-5">생년월일</label>
+                        <input autocomplete="off" class="form-control form-control-lg form-control-solid"
+                               name="text"
+                               placeholder="" style="border-color: #0099FF;" type="text"/>
+                    </div>
+                    <div class="fv-row mb-5">
+                        <label class="form-label fs-6 fw-bolder text-dark pt-5">성별</label>
+                        <input autocomplete="off" class="form-control form-control-lg form-control-solid"
+                               name="sex"
+                               placeholder="" style="border-color: #0099FF;" type="text"/>
+                    </div>
+                    <div class="fv-row mb-5">
+                        <label class="form-label fs-6 fw-bolder text-dark pt-5">이메일</label>
+                        <input autocomplete="off" class="form-control form-control-lg form-control-solid"
+                               name="email"
+                               placeholder="" style="border-color: #0099FF;" type="email"/>
+                    </div>
+                    <div class="fv-row mb-5">
+                        <label class="form-label fs-6 fw-bolder text-dark pt-5">휴대번호</label>
+
+                        <input autocomplete="off" class="form-control form-control-lg form-control-solid"
+                               name="phone"
+                               placeholder="" style="border-color: #0099FF;" type="text">
+                    </div>
+                </form>
+            </div>
+
+    </div>
+</div>
+</body>
+</html>

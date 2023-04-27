@@ -31269,3 +31269,7 @@ body {
     border: 1px solid #f5f8fa !important;
     border-radius: .65rem
 }
+
+.main-content {
+    margin-top: 500rem; /* Adjust this value to provide more or less space below the navbar */
+}
