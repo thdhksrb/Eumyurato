@@ -26,4 +26,6 @@ public interface IDAO {
     public int upViewCountBusking(int id);
     public int upViewCountLocalFestival(int id);
 
+    public int saveDonation(int price, int id);
+
 }

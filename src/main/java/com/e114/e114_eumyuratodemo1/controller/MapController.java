@@ -225,6 +225,20 @@ public class MapController {
         return "html/pay/paySuccess";
     }
 
+    @PostMapping("/kakaopay/success/donation")
+    public ResponseEntity<Void> saveDonation(@RequestBody Map<String, String> data) {
+        String priceStr = data.get("price");
+        int price = Integer.parseInt(priceStr);
+        String idStr = data.get("id");
+        int id = Integer.parseInt(idStr);
+
+        System.out.println(price);
+        System.out.println(id);
+
+        mapService.saveDonation(price, id);
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping("/kakaopay/fail/donation")
     public String donationFail(){
 

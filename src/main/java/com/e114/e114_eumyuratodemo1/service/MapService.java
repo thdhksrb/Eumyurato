@@ -133,5 +133,8 @@ public class MapService {
         return bufferedReader.readLine();
     }
 
+    public int saveDonation(int price, int id){
+        return dao.saveDonation(price, id);
+    }
 
 }
