@@ -1,51 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.e114.e114_eumyuratodemo1.mapper.UserMapper">
-    <!-- User 테이블 가져오기 -->
-    <select id="getUserList" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
-        SELECT *
-        FROM common_member
-    </select>
 
-    <!-- 회원 정보 가져오기 -->
-    <select id="getUserById" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
+    <resultMap id="userResultMap" type="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
+        <result column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="email" property="email" />
+        <result column="phone" property="phone" />
+        <result column="admin_num" property="adminNum" />
+    </resultMap>
+
+    <resultMap id="userRoleResultMap" type="java.lang.String">
+        <result column="role" />
+    </resultMap>
+
+    <select id="findById" resultMap="userResultMap">
         SELECT *
         FROM common_member
         WHERE id = #{id}
     </select>
 
-    <select id="getUserByPwd" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
-        SELECT *
-        FROM common_member
-        WHERE pwd = #{pwd}
+    <select id="findRolesByUserId" resultType="string">
+        SELECT r.role_name
+        FROM common_member u
+                 JOIN user_role ur ON u.id = ur.user_id
+                 JOIN role r ON ur.role_id = r.id
+        WHERE u.id = #{id}
     </select>
 
-<!--    &lt;!&ndash; 회원가입 &ndash;&gt;
-    <insert id="insertUser">
-        INSERT INTO User
-            (name, username, email, password, address, phone, website, company)
-        VALUES
-            (#{name}, #{username}, #{email}, #{password}, #{address}, #{phone}, #{website}, #{company})
-    </insert>
-
-    &lt;!&ndash; 회원정보 수정 &ndash;&gt;
-    <update id="updateUser">
-        UPDATE User
-        SET name = #{name},
-            username = #{username},
-            email = #{email},
-            password = #{password},
-            address = #{address},
-            phone = #{phone},
-            website = #{website},
-            company = #{company}
-        WHERE id = #{id}
-    </update>
-
-    &lt;!&ndash; 탈퇴 &ndash;&gt;
-    <delete id="deleteUser">
-        DELETE
-        FROM User
-        WHERE id = #{id}
-    </delete>-->
 </mapper>

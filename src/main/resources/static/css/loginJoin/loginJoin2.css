@@ -49580,15 +49580,7 @@ body {
     padding-bottom: 0;
 }
 
-#leftArea0 {
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 9999;
-    background-color: #007bff;
-}
-#leftArea1 {
+#leftArea {
     position: fixed;
     left: 0;
     top: 0;
@@ -49606,18 +49598,11 @@ body {
 }
 
 @media screen and (max-width: 992px) {
-    #leftArea0 {
+    #leftArea {
         position: static;
         z-index: 2;
         background-color: #007bff; /* 배경색 설정 */
     }
-    #leftArea1 {
-        display: none;
-        position: static;
-        z-index: 2;
-        background-color: #007bff; /* 배경색 설정 */
-    }
-
     #leftArea2 {
         display: none;
         position: static;

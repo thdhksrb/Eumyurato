@@ -1,23 +1,23 @@
 package com.e114.e114_eumyuratodemo1.controller;
 
+import com.e114.e114_eumyuratodemo1.config.JWT.JwtTokenProvider;
 import com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO;
+import com.e114.e114_eumyuratodemo1.jdbc.CommonMemberDAO;
 import com.e114.e114_eumyuratodemo1.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 @Controller
 public class loginJoinController {
@@ -25,16 +25,12 @@ public class loginJoinController {
     private UserService userService;
 
     @GetMapping("/root")
-    public String root() {return "html/root";}
+    public String root() {
+        return "html/root";
+    }
 
     @GetMapping("/")
-    public String main1(Model model) {
-/*        String id = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        // token에 저장되어 있는 인증된 사용자의 id 값
-
-        CommonMemberDTO commonMemberDTO = userService.getId(id);
-        commonMemberDTO.setPwd(null);  // password는 보이지 않도록 null로 설정
-        model.addAttribute("user", commonMemberDTO);*/
+    public String main1() {
         return "html/main/home";
     }
 
@@ -45,25 +41,66 @@ public class loginJoinController {
 
     @GetMapping("/login")
     public String registerPage() {
-/*        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication instanceof AnonymousAuthenticationToken)
-            return "/login";*/
         return "html/loginJoin/loginForm1";
     }
+
 
     @PostMapping("/login")
     public String login(@RequestParam("id") String id,
                         @RequestParam("pwd") String pwd,
-                        HttpSession session) {
+                        HttpSession session,
+                        HttpServletResponse response) {
         CommonMemberDTO commonMemberDTO = userService.login(id, pwd);
         if (commonMemberDTO != null) {
-            session.setAttribute("loginUser", commonMemberDTO);
-            return "redirect:/home";
+            List<String> roles = userService.getUserRoles(id);
+            String token = jwtTokenProvider.createToken(commonMemberDTO.getId(), roles);
+            response.setHeader("Authorization", "Bearer " + token);
+            commonMemberDTO.setRoles(roles);
+            session.setAttribute("user", commonMemberDTO);
+            return "/mypage";
         } else {
             return "redirect:/login?error";
         }
     }
+    @GetMapping("/mypage")
+    public String mypage(HttpSession session, Model model) {
+        CommonMemberDTO user = (CommonMemberDTO) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login?error";
+        } else {
+            List<String> roles = userService.getUserRoles(user.getId());
+            user.setRoles(roles);
+            model.addAttribute("user", user);
+            return "html/loginJoin/mypage";
+        }
+    }
 
+    @GetMapping("/token")
+    @ResponseBody
+    public String getToken(HttpSession session) {
+        CommonMemberDTO user = (CommonMemberDTO) session.getAttribute("user");
+        if (user == null) {
+            return "로그인 후 이용해주세요.";
+        } else {
+            List<String> roles = userService.getUserRoles(user.getId());
+            String token = jwtTokenProvider.createToken(user.getId(), roles);
+            return "발행된 토큰 값: " + token;
+        }
+    }
+
+
+    /*    @PostMapping("/login")
+        public String login(@RequestParam("id") String id,
+                            @RequestParam("pwd") String pwd,
+                            HttpSession session) {
+            CommonMemberDTO commonMemberDTO = userService.login(id, pwd);
+            if (commonMemberDTO != null) {
+                session.setAttribute("user", commonMemberDTO);
+                return "html/loginJoin/mypage";
+            } else {
+                return "redirect:/login?error";
+            }
+        }*/
     @GetMapping("/login_art")
     public String login_art() {
         return "html/loginJoin/loginform2";
@@ -71,8 +108,8 @@ public class loginJoinController {
 
     @PostMapping("/login_art")
     public String loginArt(@RequestParam("id") String id,
-                        @RequestParam("pwd") String pwd,
-                        HttpSession session) {
+                           @RequestParam("pwd") String pwd,
+                           HttpSession session) {
         ArtistMemberDTO artistMemberDTO = userService.loginArt(id, pwd);
         if (artistMemberDTO != null) {
             session.setAttribute("loginUser", artistMemberDTO);
@@ -89,8 +126,8 @@ public class loginJoinController {
 
     @PostMapping("/login_enter")
     public String loginenter(@RequestParam("id") String id,
-                           @RequestParam("pwd") String pwd,
-                           HttpSession session) {
+                             @RequestParam("pwd") String pwd,
+                             HttpSession session) {
         EnterpriseMemberDTO enterpriseMemberDTO = userService.loginenter(id, pwd);
         if (enterpriseMemberDTO != null) {
             session.setAttribute("loginUser", enterpriseMemberDTO);
@@ -129,6 +166,14 @@ public class loginJoinController {
     public String enterprise() {
         return "html/loginJoin/joinForm_3";
     }
+
+
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
+    @Autowired
+    private CommonMemberDAO commonMemberDAO;
+
+
 
 }
 
