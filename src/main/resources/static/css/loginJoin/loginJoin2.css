@@ -49580,7 +49580,15 @@ body {
     padding-bottom: 0;
 }
 
-#leftArea {
+#leftArea0 {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 9999;
+    background-color: #007bff;
+}
+#leftArea1 {
     position: fixed;
     left: 0;
     top: 0;
@@ -49598,11 +49606,18 @@ body {
 }
 
 @media screen and (max-width: 992px) {
-    #leftArea {
+    #leftArea0 {
         position: static;
         z-index: 2;
         background-color: #007bff; /* 배경색 설정 */
     }
+    #leftArea1 {
+        display: none;
+        position: static;
+        z-index: 2;
+        background-color: #007bff; /* 배경색 설정 */
+    }
+
     #leftArea2 {
         display: none;
         position: static;
@@ -49624,22 +49639,4 @@ body {
     margin-top: 0;
 }
 
-@media (max-width: 768px) { /* 페이지 너비가 768px 이하인 경우 */
-    nav {
-        position: static;
-        display: none;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        height: 50px;
-        z-index: 999;
-        background-color: #ffffff;
-    }
-}
-
-@media (min-width: 769px) { /* 페이지 너비가 769px 이상인 경우 */
-    nav {
-        position: fixed; /* 기존의 position: fixed를 해제 */
-    }
-}
 
