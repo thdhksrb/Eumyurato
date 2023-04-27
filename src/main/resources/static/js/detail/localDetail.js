@@ -38,3 +38,11 @@ $.ajax({
     }
 });
 
+function changeStar() {
+    var starImg = document.getElementById("star-img");
+    if (starImg.getAttribute("src") === "/assets/star.png") {
+        starImg.setAttribute("src", "/assets/fullstar.png");
+    } else {
+        starImg.setAttribute("src", "/assets/star.png");
+    }
+}

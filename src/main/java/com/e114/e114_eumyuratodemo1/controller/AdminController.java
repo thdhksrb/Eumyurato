@@ -113,7 +113,7 @@ public class AdminController {
 
         model.addAttribute("ents", ents);
 
-        return "html/profile/total/profile_admin_total";
+        return "html/profile/total/profile_admin_total2";
     }
 
     @GetMapping("/profile/admin/total/entSearch")
@@ -126,7 +126,7 @@ public class AdminController {
 
         model.addAttribute("ents", ents);
 
-        return "html/profile/total/profile_admin_total";
+        return "html/profile/total/profile_admin_total2";
     }
 
     @GetMapping("/logout")
