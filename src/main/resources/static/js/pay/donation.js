@@ -16,6 +16,8 @@ $.ajax({
 
         // 첫 번째 Ajax 호출이 완료된 후에 두 번째 Ajax 호출을 실행
         $('#pay').click(function (){
+            localStorage.setItem('price',priceValue);
+            localStorage.setItem('id',id);
             $.ajax({
                 url:'/pay/kakao/donation',
                 dataType: 'json',
@@ -36,7 +38,7 @@ $.ajax({
 
 const price = document.querySelector('#price');
 const output = document.querySelector('#output');
-
+let priceValue;
 const resetButton = document.querySelector("#reset");
 resetButton.addEventListener('click',function (){
     price.value = '';
@@ -45,6 +47,6 @@ resetButton.addEventListener('click',function (){
 
 const searchButton = document.querySelector("#search-btn");
 searchButton.addEventListener('click', function (){
-    const priceValue = price.value;
+    priceValue = price.value;
     output.textContent = '금액 : ' + priceValue + '원';
 });

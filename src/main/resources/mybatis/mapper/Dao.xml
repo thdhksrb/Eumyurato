@@ -102,6 +102,13 @@
         WHERE id = #{param1}
     </update>
 
+    <update id="saveDonation">
+        UPDATE artist_member
+        SET point = point + #{param1}
+        WHERE id = (
+        SELECT artId FROM busking WHERE id = #{param2})
+    </update>
+
 
 
 
