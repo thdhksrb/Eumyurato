@@ -1,18 +1,14 @@
 package com.e114.e114_eumyuratodemo1.controller;
 
 import com.e114.e114_eumyuratodemo1.dto.*;
-import com.e114.e114_eumyuratodemo1.jdbc.IDAO;
 import com.e114.e114_eumyuratodemo1.service.MapService;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,8 +45,9 @@ public class MapController {
         return map;
     }
     @GetMapping("/smallconcert/detail/{id}")
-    public String smallConcertDetail() {
+    public String smallConcertDetail(@PathVariable("id") int id) {
 
+        mapService.upViewCountSmallConcert(id);
 
         return "html/detail/smallConcertDetail";
     }
@@ -64,8 +61,9 @@ public class MapController {
     }
 
     @GetMapping("/local_festival/detail/{id}")
-    public String localDetail() {
+    public String localDetail(@PathVariable("id") int id) {
 
+        mapService.upViewCountLocalFestival(id);
 
         return "html/detail/localDetail";
     }
@@ -79,8 +77,9 @@ public class MapController {
     }
 
     @GetMapping("/busking/detail/{id}")
-    public String buskingDetail() {
+    public String buskingDetail(@PathVariable("id") int id) {
 
+        mapService.upViewCountBusking(id);
 
         return "html/detail/buskingDetail";
     }

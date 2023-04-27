@@ -22,5 +22,8 @@ public interface IDAO {
     public LocalFestivalDTO selectLocal(int id);
     public SmallConcertDTO selectConcert(int id);
     public BuskingDTO selectBusking(int id);
+    public int upViewCountSmallConcert(int id);
+    public int upViewCountBusking(int id);
+    public int upViewCountLocalFestival(int id);
 
 }

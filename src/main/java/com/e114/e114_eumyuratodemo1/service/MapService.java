@@ -6,9 +6,6 @@ import com.e114.e114_eumyuratodemo1.dto.SchedulesDTO;
 import com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO;
 import com.e114.e114_eumyuratodemo1.jdbc.IDAO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -53,6 +50,18 @@ public class MapService {
     }
     public BuskingDTO selectBusking(int id){
         return dao.selectBusking(id);
+    }
+
+    public int upViewCountSmallConcert(int id){
+        return dao.upViewCountSmallConcert(id);
+    }
+
+    public int upViewCountBusking(int id){
+        return dao.upViewCountBusking(id);
+    }
+
+    public int upViewCountLocalFestival(int id){
+        return dao.upViewCountLocalFestival(id);
     }
 
 
