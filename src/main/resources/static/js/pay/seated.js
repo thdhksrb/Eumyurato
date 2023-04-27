@@ -8,9 +8,6 @@ var url = location.pathname;
 var id = url.match(/\d+/)[0];
 var day = url.match(/(\d{4}-\d{2}-\d{2})/)[0];
 
-
-
-
 const xhr = new XMLHttpRequest();
 xhr.onload = function() {
     if (xhr.status === 200) {
@@ -34,7 +31,6 @@ xhr.onload = function() {
                 if (response.includes(input.value)) {
                     input.disabled = true;
                 }
-
 
                 input.addEventListener('click', function(e) {
                     console.log(e.target.value);
@@ -67,8 +63,6 @@ xhr.onload = function() {
 };
 xhr.open('GET', 'http://localhost:8081/smallconcert/detail/'+id+'/calendar/'+day+'/json');
 xhr.send();
-
-
 
 const selectCompletedButton = document.querySelector('#selectCompleted');
 selectCompletedButton.addEventListener('click', function() {

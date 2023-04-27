@@ -102,7 +102,7 @@ function viewBusking(data){
 
                     // 마커에 표시할 인포윈도우를 생성
                     var infowindow = new kakao.maps.InfoWindow({
-                        content: record.name // 인포윈도우에 표시할 내용
+                        content: getContent(record) // 인포윈도우에 표시할 내용
                     });
 
                     // 마커에 클릭 이벤트를 등록
@@ -149,7 +149,7 @@ function viewSmallConcert(data){
 
                     // 마커에 표시할 인포윈도우를 생성
                     var infowindow = new kakao.maps.InfoWindow({
-                        content: record.name // 인포윈도우에 표시할 내용
+                        content: getContent(record) // 인포윈도우에 표시할 내용
                     });
 
                     // 마커에 클릭 이벤트를 등록
@@ -197,7 +197,7 @@ function viewLocalFest(data){
 
                     // 마커에 표시할 인포윈도우를 생성
                     var infowindow = new kakao.maps.InfoWindow({
-                        content: record.name // 인포윈도우에 표시할 내용
+                        content: getContent(record) // 인포윈도우에 표시할 내용
                     });
 
                     // 마커에 클릭 이벤트를 등록
@@ -225,9 +225,6 @@ function viewLocalFest(data){
         })(record);
     }
 }
-
-
-
 
 // 클릭 이벤트 핸들러 함수
 function modalBusking(record) {
@@ -295,7 +292,7 @@ function modalSmall(record) {
         //모달 창에서 상세보기 클릭 시 상세보기 페이지로 이동
         $('#viewDetail').on('click', function() {
             var id = record.id;
-            goToDetailPage(id);
+            goToSmallConcertDetail(id);
         });
     };
 }
@@ -345,3 +342,27 @@ function goToBuskingDetail(id){
 
     window.location.href = detailPageUrl;
 }
+
+function getContent(record) {
+
+    let result = `<div class="infowindow" style="width: 200px; height: 200px; overflow: auto;">
+    <div class="infowindow-img-container" style="display: flex; justify-content: center; align-items: center;">
+      <img src="${record.image}" class="infowindow-img" alt="...">
+    </div>
+    <div class="infowindow-body">
+      <h2 class="infowindow-title">${record.name}</h2>
+    </div>
+  </div>`;
+
+    // 이미지 크기를 작게 조정
+    const imgStyle = "max-width: 150px; max-height: 150px;";
+    result = result.replace('class="infowindow-img"', `class="infowindow-img" style="${imgStyle}"`);
+
+    // 공연 이름을 가운데로 정렬
+    const titleStyle = "text-align: center;";
+    result = result.replace('class="infowindow-title"', `class="infowindow-title" style="${titleStyle}"`);
+
+    return result;
+}
+
+
