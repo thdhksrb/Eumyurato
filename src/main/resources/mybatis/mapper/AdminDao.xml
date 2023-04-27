@@ -10,13 +10,19 @@
 <mapper namespace="com.e114.e114_eumyuratodemo1.jdbc.MemberDAO">
     <select id="getArtistMembers" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
         select id, name, nid, sex, birth, phone
-        from artist_member;
+        from artist_member
     </select>
 
     <select id="getCommonMembers" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
         select id, name, nid, sex, birth, phone
-        from common_member;
+        from common_member
     </select>
+
+    <select id="getEntMembers" resultType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
+        select id, name, num, email, phone
+        from enterprise_member
+    </select>
+
     <select id="searchArtistMembers" parameterType="map" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
         SELECT id, name, nid, sex, birth, phone FROM artist_member
         WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
@@ -26,4 +32,33 @@
         SELECT id, name, nid, sex, birth, phone FROM common_member
         WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
     </select>
+
+    <select id="searchEntMembers" parameterType="map" resultType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
+        SELECT id, name, num, email, phone FROM enterprise_member
+        WHERE ${column2} LIKE CONCAT('%', #{keyword2}, '%')
+    </select>
+
+    <select id="getReservationList" resultType="com.e114.e114_eumyuratodemo1.dto.ReservationDTO">
+        SELECT * FROM reservation
+    </select>
+
+    <select id="searchReservations" parameterType="map" resultType="com.e114.e114_eumyuratodemo1.dto.ReservationDTO">
+        SELECT id, sid, cid, payTime, viewDate, memberNum, reservPay
+        FROM reservation
+        WHERE 1 = 1
+        <if test="column == 'cid'">
+            AND cid = #{keyword}
+        </if>
+        <if test="column == 'sid'">
+            AND sid = #{keyword}
+        </if>
+    </select>
+    
+    <select id="getAdminInfoById" resultType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
+        SELECT id, pwd, name, num, email, phone
+        FROM enterprise_member
+        WHERE id = #{adminId} AND adminNum = 0
+    </select>
+
+
 </mapper>

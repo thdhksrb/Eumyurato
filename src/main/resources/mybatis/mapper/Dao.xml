@@ -84,6 +84,31 @@
         </foreach>
     </delete>
 
+    <update id="upViewCountSmallConcert">
+        UPDATE small_concert
+        SET viewCount = viewCount + 1
+        WHERE id = #{param1}
+    </update>
+
+    <update id="upViewCountBusking">
+        UPDATE busking
+        SET viewCount = viewCount + 1
+        WHERE id = #{param1}
+    </update>
+
+    <update id="upViewCountLocalFestival">
+        UPDATE local_festival
+        SET viewCount = viewCount + 1
+        WHERE id = #{param1}
+    </update>
+
+    <update id="saveDonation">
+        UPDATE artist_member
+        SET point = point + #{param1}
+        WHERE id = (
+        SELECT artId FROM busking WHERE id = #{param2})
+    </update>
+
 
 
 
