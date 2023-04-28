@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace를 지정 -->
 <mapper namespace="com.e114.e114_eumyuratodemo1.mapper.UserMapper">
 
+    <!-- CommonMemberDTO에 대한 resultMap 설정 -->
     <resultMap id="userResultMap" type="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
         <result column="id" property="id" />
         <result column="name" property="name" />
@@ -10,16 +12,19 @@
         <result column="admin_num" property="adminNum" />
     </resultMap>
 
+    <!-- 권한 정보를 조회하는 select문의 resultMap 설정 -->
     <resultMap id="userRoleResultMap" type="java.lang.String">
         <result column="role" />
     </resultMap>
 
+    <!-- id를 이용하여 CommonMemberDTO를 조회하는 select문 -->
     <select id="findById" resultMap="userResultMap">
         SELECT *
         FROM common_member
         WHERE id = #{id}
     </select>
 
+    <!-- id를 이용하여 권한 정보를 조회하는 select문 -->
     <select id="findRolesByUserId" resultType="string">
         SELECT r.role_name
         FROM common_member u

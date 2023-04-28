@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+ //로그인 요청 처리, 사용자 아이디에 해당하는 권한 정보 조회를 담당
 @Service
 public class UserService {
     @Autowired
@@ -21,6 +22,8 @@ public class UserService {
     @Autowired
     private CommonMemberDAO commonMemberDAO;
 
+    // 로그인 요청 처리, 사용자 아이디와 비밀번호를 받아 DB에서 일치하는 사용자 정보를 찾습니다.
+// 찾은 경우 사용자 정보를 반환하고, 일치하는 정보가 없는 경우 null을 반환합니다.
     public CommonMemberDTO login(String id, String pwd) {
         CommonMemberDTO commonMemberDTO = commonMemberDAO.findById(id);
         if (commonMemberDTO != null && commonMemberDTO.getPwd().equals(pwd)) {
@@ -33,6 +36,8 @@ public class UserService {
     @Autowired
     private ArtistMemberDAO artistMemberDAO;
 
+    // 아티스트 회원용 로그인 요청 처리, 사용자 아이디와 비밀번호를 받아 DB에서 일치하는 사용자 정보를 찾습니다.
+    // 찾은 경우 사용자 정보를 반환하고, 일치하는 정보가 없는 경우 null을 반환합니다.
     public ArtistMemberDTO loginArt(String id, String pwd) {
         ArtistMemberDTO artistMemberDTO = artistMemberDAO.findById(id);
         if (artistMemberDTO != null && artistMemberDTO.getPwd().equals(pwd)) {
@@ -45,6 +50,8 @@ public class UserService {
     @Autowired
     private EnterpriseMemberDAO enterpriseMemberDAO;
 
+    // 기업 회원용 로그인 요청 처리, 사용자 아이디와 비밀번호를 받아 DB에서 일치하는 사용자 정보를 찾습니다.
+    // 찾은 경우 사용자 정보를 반환하고, 일치하는 정보가 없는 경우 null을 반환합니다.
     public EnterpriseMemberDTO loginenter(String id, String pwd) {
         EnterpriseMemberDTO enterpriseMemberDTO = enterpriseMemberDAO.findById(id);
         if (enterpriseMemberDTO != null && enterpriseMemberDTO.getPwd().equals(pwd)) {
@@ -54,7 +61,7 @@ public class UserService {
         }
     }
 
-
+    // 사용자 아이디에 해당하는 권한 정보를 DB에서 조회합니다.
     public List<String> getUserRoles(String userId) {
         return userMapper.findRolesByUserId(userId);
     }

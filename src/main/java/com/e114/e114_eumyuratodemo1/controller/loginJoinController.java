@@ -4,7 +4,6 @@ import com.e114.e114_eumyuratodemo1.config.JWT.JwtTokenProvider;
 import com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO;
-import com.e114.e114_eumyuratodemo1.jdbc.CommonMemberDAO;
 import com.e114.e114_eumyuratodemo1.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,8 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -23,6 +21,10 @@ import java.util.List;
 public class loginJoinController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
+
 
     @GetMapping("/root")
     public String root() {
@@ -34,73 +36,36 @@ public class loginJoinController {
         return "html/main/home";
     }
 
-    @GetMapping("/home")
+ /*   @GetMapping("/common")
     public String main2() {
         return "html/main/main1";
     }
 
-    @GetMapping("/login")
-    public String registerPage() {
-        return "html/loginJoin/loginForm1";
+    @GetMapping("/artist")
+    public String main3() {
+        return "html/main/main3";
     }
 
+    @GetMapping("/enterprise")
+    public String registerPage() {
+        return "html/loginJoin/loginForm1"; // 로그인 페이지로 이동
+    }
+*/
 
     @PostMapping("/login")
-    public String login(@RequestParam("id") String id,
-                        @RequestParam("pwd") String pwd,
-                        HttpSession session,
-                        HttpServletResponse response) {
-        CommonMemberDTO commonMemberDTO = userService.login(id, pwd);
+    public String login(@RequestParam("id") String id, @RequestParam("pwd") String pwd, HttpSession session) {
+        CommonMemberDTO commonMemberDTO = userService.login(id, pwd); // 사용자 정보 조회
         if (commonMemberDTO != null) {
-            List<String> roles = userService.getUserRoles(id);
-            String token = jwtTokenProvider.createToken(commonMemberDTO.getId(), roles);
-            response.setHeader("Authorization", "Bearer " + token);
-            commonMemberDTO.setRoles(roles);
-            session.setAttribute("user", commonMemberDTO);
-            return "/mypage";
+            List<String> roles = userService.getUserRoles(id); // 사용자의 권한 정보 조회
+            String token = jwtTokenProvider.createToken(commonMemberDTO.getId(), roles); // JWT 토큰 생성
+            commonMemberDTO.setRoles(roles); // 사용자 정보에 권한 정보 추가
+            session.setAttribute("user", commonMemberDTO); // HttpSession에 사용자 정보 저장
+            return "redirect:/mypage"; // 마이페이지로 이동
         } else {
-            return "redirect:/login?error";
-        }
-    }
-    @GetMapping("/mypage")
-    public String mypage(HttpSession session, Model model) {
-        CommonMemberDTO user = (CommonMemberDTO) session.getAttribute("user");
-        if (user == null) {
-            return "redirect:/login?error";
-        } else {
-            List<String> roles = userService.getUserRoles(user.getId());
-            user.setRoles(roles);
-            model.addAttribute("user", user);
-            return "html/loginJoin/mypage";
+            return "redirect:/login?error"; // 에러 페이지로 이동
         }
     }
 
-    @GetMapping("/token")
-    @ResponseBody
-    public String getToken(HttpSession session) {
-        CommonMemberDTO user = (CommonMemberDTO) session.getAttribute("user");
-        if (user == null) {
-            return "로그인 후 이용해주세요.";
-        } else {
-            List<String> roles = userService.getUserRoles(user.getId());
-            String token = jwtTokenProvider.createToken(user.getId(), roles);
-            return "발행된 토큰 값: " + token;
-        }
-    }
-
-
-    /*    @PostMapping("/login")
-        public String login(@RequestParam("id") String id,
-                            @RequestParam("pwd") String pwd,
-                            HttpSession session) {
-            CommonMemberDTO commonMemberDTO = userService.login(id, pwd);
-            if (commonMemberDTO != null) {
-                session.setAttribute("user", commonMemberDTO);
-                return "html/loginJoin/mypage";
-            } else {
-                return "redirect:/login?error";
-            }
-        }*/
     @GetMapping("/login_art")
     public String login_art() {
         return "html/loginJoin/loginform2";
@@ -168,12 +133,39 @@ public class loginJoinController {
     }
 
 
-    @Autowired
-    private JwtTokenProvider jwtTokenProvider;
-    @Autowired
-    private CommonMemberDAO commonMemberDAO;
+    @GetMapping("/mypage")
+    public String mypage(HttpSession session, Model model) {
+        // 세션에서 현재 로그인된 사용자 정보를 가져온다
+        CommonMemberDTO user = (CommonMemberDTO) session.getAttribute("user");
+        if (user == null) { // 로그인되어있지 않으면 로그인 페이지로 이동
+            return "redirect:/login?error";
+        } else {
+            // 현재 사용자가 가진 권한 정보를 가져와 사용자 객체에 추가
+            List<String> roles = userService.getUserRoles(user.getId());
+            user.setRoles(roles);
+            // 모델에 사용자 정보를 담아 마이페이지 화면을 반환
+            model.addAttribute("user", user);
+            return "html/loginJoin/mypage";
+        }
+    }
 
 
+    // 토큰 정보를 반환하는 API
+    @GetMapping("/token")
+    @ResponseBody
+    public String getToken(HttpSession session) {
+        // 세션에서 현재 로그인된 사용자 정보를 가져온다
+        CommonMemberDTO user = (CommonMemberDTO) session.getAttribute("user");
+        if (user == null) { // 로그인되어있지 않으면 에러 메시지 반환
+            return "로그인 후 이용해주세요.";
+        } else {
+            // 현재 사용자가 가진 권한 정보를 가져와 JWT 토큰을 생성
+            List<String> roles = userService.getUserRoles(user.getId());
+            String token = jwtTokenProvider.createToken(user.getId(), roles);
+            // 생성된 토큰 값 반환
+            return "발행된 토큰 값: " + token;
+        }
+    }
 
 }
 

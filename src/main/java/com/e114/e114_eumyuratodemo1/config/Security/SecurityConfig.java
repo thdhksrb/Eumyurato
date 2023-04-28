@@ -51,3 +51,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // JwtAuthenticationFilter를 UsernamePasswordAuthenticationFilter 전에 넣는다
     }
 }
+
+
+/*
+*@EnableWebSecurity: Spring Security를 사용하기 위한 애노테이션입니다.
+WebSecurityConfigurerAdapter: Spring Security에서 제공하는 클래스로 HTTP 요청에 대한 보안 설정을 구성합니다.
+JwtTokenProvider, CommonMemberDAO: JWT 토큰을 이용한 인증을 위한 JwtTokenProvider 클래스와 유저 정보 조회를 위한 CommonMemberDAO 클래스를 필드로 가지고 있습니다.
+passwordEncoder(): 비밀번호 암호화를 위해 PasswordEncoder를 Bean으로 등록합니다.
+authenticationManagerBean(): Spring Security에서 인증 처리를 담당하는 AuthenticationManager를 Bean으로 등록합니다.
+configure(): HttpSecurity를 통해 HTTP 요청에 대한 보안 설정을 구성합니다. httpBasic()과 csrf()를 각각 비활성화시키고, 세션을 사용하지 않도록 설정합니다. authorizeRequests()를 이용하여 경로에 대한 권한을 설정하고, addFilterBefore()를 이용하여 JWT 인증 필터를 추가합니다.
+* */
