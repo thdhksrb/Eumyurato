@@ -71,29 +71,35 @@
 
                 </div>
 
-                <div style="color:#000000; background-color:#ffffff; width: 500px; height: 300px; padding: 20px !important; margin:auto; margin-left: 50px;">
-                    <div style="float: left; margin-right: 20px;">
-                        <h1>지원할 공연</h1>
+                <div style="color:#000000; background-color:#ffffff; width: 500px; height: 300px; padding: 30px; margin:auto; margin-left: 50px; display: flex; flex-direction: column;">
+                    <div style="flex-basis: 70%; padding-bottom: 20px;">
+                        <h1 style="margin-bottom: 20px">지원할 공연</h1>
                         <ul id="buskerInfo" style="list-style-type: none; font-size: 15px"></ul>
                     </div>
-                    <div>
-                        <input id="price" type="text">
-                        <button type="button" id="reset" class="btn btn-secondary fw-bolder px-2 py-3 text-center" style="width: 80px; height: 40px; font-size: 13px; margin-left: auto; display: flex; justify-content: center; align-items: center;">
+                    <div style="flex-basis: 30%; text-align: center;">
+                        <input id="price" type="text" placeholder="후원금액 입력" style="margin-right: 10px;">
+                        <button type="button" id="reset" class="btn btn-secondary fw-bolder px-2 py-3 text-center" style="width: 80px; height: 40px; font-size: 13px; margin-right: 10px;">
                             <span>초기화</span>
                         </button>
-                        <button type="button" id="search-btn" class="btn btn-primary fw-bolder px-2 py-3 text-center" style="width: 80px; height: 40px; font-size: 13px; margin-left: 10px; display: flex; justify-content: center; align-items: center;">
+                        <button type="button" id="search-btn" class="btn btn-primary fw-bolder px-2 py-3 text-center" style="width: 80px; height: 40px; font-size: 13px;">
                             <span>선택</span>
                         </button>
                     </div>
                 </div>
             </div>
-            <div class="d-flex flex-wrap" style="width: 100%; height: 188px; background-color:#FFFFFF; margin-bottom: 0;">
-                <div id="output"></div>
-                <button type="button" id="pay"
-                        class="btn btn-primary fw-bolder fs-1 px-2 py-3 my-3 text-center"
-                        style=" width: 200px; height: 50px; margin-left: auto; margin-right: 30px;">결제하기
-                </button>
+            <div class="d-flex justify-content-end align-items-end" style="width: 100%; height: 80px; background-color:#ffffff; margin-bottom: 0;">
+                <div class="d-inline-flex align-items-center" style="color:#000000; background-color:#ffffff; height: 50px;">
+                    <span class="output" style="font-size: 18px; font-weight: bold;">후원금액: </span>
+                </div>
+                <div class="d-inline-flex align-items-center" style="color:#000000; background-color:#ffffff; height: 50px; margin-left: 20px;">
+                    <button type="button" id="pay"
+                            class="btn btn-primary fw-bolder fs-1 px-2 py-3 my-3 text-center"
+                            style=" width: 200px; height: 50px;">결제하기
+                    </button>
+                </div>
             </div>
+
+
         </div>
     </div>
 </div>
