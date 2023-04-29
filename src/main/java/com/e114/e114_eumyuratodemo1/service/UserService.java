@@ -9,7 +9,10 @@ import com.e114.e114_eumyuratodemo1.jdbc.EnterpriseMemberDAO;
 import com.e114.e114_eumyuratodemo1.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -61,11 +64,21 @@ public class UserService {
         }
     }
 
-    // 사용자 아이디에 해당하는 권한 정보를 DB에서 조회합니다.
-    public List<String> getUserRoles(String userId) {
-        return userMapper.findRolesByUserId(userId);
-    }
-}
+     // 사용자 아이디에 해당하는 권한 정보를 DB에서 조회합니다.
+     public List<String> getUserRoles(String userId) {
+         return userMapper.findRolesByUserId(userId);
+     }
+
+     @Configuration
+     public class AppConfig {
+
+         @Bean
+         public RestTemplate restTemplate() {
+             return new RestTemplate();
+         }
+     }
+ }
+
 
 
 

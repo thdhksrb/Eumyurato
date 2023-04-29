@@ -87,6 +87,10 @@ public class JwtTokenProvider {
             return false;
         }
     }
+
+    public Date getExpirationDateFromToken (String token) {
+        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getExpiration();
+    }
 }
 
 

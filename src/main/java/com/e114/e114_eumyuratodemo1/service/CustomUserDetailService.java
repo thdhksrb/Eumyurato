@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 
+
 @Service
 public class CustomUserDetailService implements UserDetailsService {
 
@@ -42,6 +43,7 @@ public class CustomUserDetailService implements UserDetailsService {
                 commonMemberDTO.getAuthorities()
         );
     }
+
 }
 
 /*@Service : 스프링에서 사용하는 서비스 계층에 사용되는 어노테이션입니다.

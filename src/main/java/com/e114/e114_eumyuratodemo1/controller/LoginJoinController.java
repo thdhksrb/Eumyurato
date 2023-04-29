@@ -1,77 +1,75 @@
 package com.e114.e114_eumyuratodemo1.controller;
 
 import com.e114.e114_eumyuratodemo1.config.JWT.JwtTokenProvider;
-import com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
-import com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO;
 import com.e114.e114_eumyuratodemo1.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.http.HttpHeaders;
+import org.springframework.web.client.RestTemplate;
 
-
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
-public class loginJoinController {
+public class LoginJoinController {
     @Autowired
     private UserService userService;
 
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
-
-    @GetMapping("/root")
-    public String root() {
-        return "html/root";
-    }
+    @Autowired
+    private RestTemplate restTemplate;
 
     @GetMapping("/")
-    public String main1() {
+    public String main() {
         return "html/main/home";
     }
 
- /*   @GetMapping("/common")
-    public String main2() {
-        return "html/main/main1";
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("token"); // 세션에서 토큰 정보 제거
+        return "redirect:/"; // 로그아웃 후 메인 홈페이지로 이동
     }
 
-    @GetMapping("/artist")
-    public String main3() {
-        return "html/main/main3";
+
+    @GetMapping("/login-common")
+    public String login() {
+        return "html/loginJoin/loginform1";
     }
 
-    @GetMapping("/enterprise")
-    public String registerPage() {
-        return "html/loginJoin/loginForm1"; // 로그인 페이지로 이동
-    }
-*/
-
-    @PostMapping("/login")
-    public String login(@RequestParam("id") String id, @RequestParam("pwd") String pwd, HttpSession session) {
+    @PostMapping("/login-common")
+    public String login(@RequestParam("id") String id, @RequestParam("pwd") String pwd, HttpSession session, Model model) {
         CommonMemberDTO commonMemberDTO = userService.login(id, pwd); // 사용자 정보 조회
         if (commonMemberDTO != null) {
-            List<String> roles = userService.getUserRoles(id); // 사용자의 권한 정보 조회
-            String token = jwtTokenProvider.createToken(commonMemberDTO.getId(), roles); // JWT 토큰 생성
-            commonMemberDTO.setRoles(roles); // 사용자 정보에 권한 정보 추가
-            session.setAttribute("user", commonMemberDTO); // HttpSession에 사용자 정보 저장
-            return "redirect:/mypage"; // 마이페이지로 이동
+            List<String> roles = userService.getUserRoles(commonMemberDTO.getId()); // 사용자의 권한 정보 조회
+            String token = jwtTokenProvider.createToken(id, roles); // JWT 토큰 생성
+            session.setAttribute("token", token); // HttpSession에 토큰 저장
+            model.addAttribute("user", commonMemberDTO);
+            model.addAttribute("tokenExpiration", jwtTokenProvider.getExpirationDateFromToken(token)); // 토큰 유효시간 모델에 추가
+            return "/html/main/main1"; // main1 페이지로 리다이렉트
         } else {
             return "redirect:/login?error"; // 에러 페이지로 이동
         }
     }
+}
 
-    @GetMapping("/login_art")
+
+/*    @GetMapping("/login-art")
     public String login_art() {
         return "html/loginJoin/loginform2";
     }
 
-    @PostMapping("/login_art")
+    @PostMapping("/login-art")
     public String loginArt(@RequestParam("id") String id,
                            @RequestParam("pwd") String pwd,
                            HttpSession session) {
@@ -84,12 +82,17 @@ public class loginJoinController {
         }
     }
 
-    @GetMapping("/login_enter")
+    @GetMapping("/artist")
+    public String main3() {
+        return "html/main/main3";
+    }
+
+    @GetMapping("/login-enter")
     public String login_enter() {
         return "html/loginJoin/loginform3";
     }
 
-    @PostMapping("/login_enter")
+    @PostMapping("/login-enter")
     public String loginenter(@RequestParam("id") String id,
                              @RequestParam("pwd") String pwd,
                              HttpSession session) {
@@ -100,6 +103,11 @@ public class loginJoinController {
         } else {
             return "redirect:/login?error";
         }
+    }
+
+    @GetMapping("/enterprise")
+    public String registerPage() {
+        return "html/loginJoin/loginForm1"; // 로그인 페이지로 이동
     }
 
     @GetMapping("/Idfind")
@@ -117,17 +125,17 @@ public class loginJoinController {
         return "html/loginJoin/joinChooes";
     }
 
-    @GetMapping("/common")
+    @GetMapping("/common-join")
     public String common() {
         return "html/loginJoin/joinForm_1";
     }
 
-    @GetMapping("/artist")
+    @GetMapping("/artist-join")
     public String artist() {
         return "html/loginJoin/joinForm_2";
     }
 
-    @GetMapping("/enterprise")
+    @GetMapping("/enterprise-join")
     public String enterprise() {
         return "html/loginJoin/joinForm_3";
     }
@@ -149,7 +157,6 @@ public class loginJoinController {
         }
     }
 
-
     // 토큰 정보를 반환하는 API
     @GetMapping("/token")
     @ResponseBody
@@ -165,7 +172,21 @@ public class loginJoinController {
             // 생성된 토큰 값 반환
             return "발행된 토큰 값: " + token;
         }
-    }
+    }*/
 
-}
+    /*    @PostMapping("/login")
+    public String login(@RequestParam("id") String id, @RequestParam("pwd") String pwd, HttpSession session) {
+        CommonMemberDTO commonMemberDTO = userService.login(id, pwd); // 사용자 정보 조회
+        if (commonMemberDTO != null) {
+            List<String> roles = userService.getUserRoles(id); // 사용자의 권한 정보 조회
+            String token = jwtTokenProvider.createToken(commonMemberDTO.getId(), roles); // JWT 토큰 생성
+            commonMemberDTO.setRoles(roles); // 사용자 정보에 권한 정보 추가
+            session.setAttribute("user", commonMemberDTO); // HttpSession에 사용자 정보 저장
+            return "redirect:/mypage"; // 마이페이지로 이동
+        } else {
+            return "redirect:/login?error"; // 에러 페이지로 이동
+        }
+        */
+
+
 

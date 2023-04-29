@@ -129,12 +129,12 @@ public class AdminController {
         return "html/profile/total/profile_admin_total2";
     }
 
-    @GetMapping("/logout")
+/*    @GetMapping("/logout")
     public String logout(HttpServletRequest request) {
         HttpSession session = request.getSession();
         session.invalidate(); // 세션 초기화
         return "redirect:/home";
-    }
+    }*/
 
     @GetMapping("/profile/admin/reservation")
     public String reservationList(Model model) {
