@@ -26,7 +26,7 @@
             <!--begin::Aside Top-->
             <div class="d-flex flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
                 <!--begin::Aside Logo-->
-                <a th:href="@{/main}" class="mb-6">
+                <a th:href="@{/}" class="mb-6">
                     <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
                         <img alt="로고" th:src="@{/img/E114_logo.png}" class="h-450px h-lg-450px"/>
                     </div>
@@ -134,59 +134,19 @@
                         </div>
                     </div>
 
-                    <div class="fv-row mb-5" id="bir" required>
+                    <div class=" fv-row mb-5">
                         <label class="form-label fs-6 fw-bolder text-dark pt-5">생년월일</label>
                         <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
-                        <div id="bir_wrap">
-                            <!-- BIRTH_YY -->
-                            <div id="bir_yy">
-        <span class="box" style="height: 45px;">
-          <input type="text" name="yy" id="yy"
-                 class="int form-control form-control-lg form-control-solid"
-                 maxlength="4" placeholder="년(4자)" style="border-color: #0099FF; height: 45px"/>
-        </span>
-                            </div>
-
-                            <!-- BIRTH_MM -->
-                            <div id="bir_mm" name="bir_mm">
-        <span class="box">
-          <select class="form-select" aria-label="Select example" id="mm" name="mm"
-                  style="border-color: #0099FF; height: 45px;"/>
-            <option>월</option>
-            <option value="01">1</option>
-            <option value="02">2</option>
-            <option value="03">3</option>
-            <option value="04">4</option>
-            <option value="05">5</option>
-            <option value="06">6</option>
-            <option value="07">7</option>
-            <option value="08">8</option>
-            <option value="09">9</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-            </select>
-        </span>
-                            </div>
-
-                            <!-- BIRTH_DD -->
-                            <div id="bir_dd">
-        <span class="box">
-          <input type="text" id="dd" name="dd"
-                 class="int form-control form-control-lg form-control-solid"
-                 placeholder="일" style="border-color: #0099FF;"/>
-        </span>
-                            </div>
-
+                        <input class="form-control form-control-lg form-control-solid" type="date"
+                               placeholder="you@example.com" name="birth" id="birth" autocomplete="off"
+                               style="border-color: #0099FF;" required/>
+                        <div>
+                            <div class="invalid-feedback" id="bir-empty">필수 입력 정보입니다.</div>
+                            <div class="invalid-feedback" id="bir-invalid">숫자만 입력해주세요.</div>
+                            <div class="invalid-feedback" id="bir-year-invalid">년도를 다시 확인해주세요.</div>
+                            <div class="invalid-feedback" id="bir-month-invalid">월을 다시 확인해주세요.</div>
+                            <div class="invalid-feedback" id="bir-day-invalid">일을 다시 확인해주세요.</div>
                         </div>
-
-                        <!-- 에러 메시지 -->
-                        <div id="bir-empty" class="invalid-feedback">필수 입력 정보입니다.</div>
-                        <div id="bir-invalid" class="invalid-feedback">숫자만 입력해주세요.</div>
-                        <div id="bir-year-invalid" class="invalid-feedback">년도를 다시 확인해주세요.</div>
-                        <div id="bir-month-invalid" class="invalid-feedback">월을 다시 확인해주세요.</div>
-                        <div id="bir-day-invalid" class="invalid-feedback">일을 다시 확인해주세요.</div>
-
                     </div>
 
                     <div class="fv-row mb-5">
@@ -209,7 +169,7 @@
 
                     <div>
 
-                        <div class=" fv-row mb-5">
+                        <div class=" fv-row mb-5" required>
                             <label class="form-label fs-6 fw-bolder text-dark pt-5">이메일</label>
                             <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
                             <input class="form-control form-control-lg form-control-solid" type="email"
@@ -223,37 +183,17 @@
 
                     </div>
 
-                    <div class="fv-row mb-5" required>
-                        <label class="form-label fs-6 fw-bolder text-dark pt-5">휴대번호</label>
-                        <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
-                        <div class="d-flex align-items-center">
-                            <input class="form-control form-control-lg form-control-solid me-2" type="tel"
-                                   placeholder="" name="num1" id="num1" autocomplete="off"
-                                   style="border-color: #0099FF; width: 350px; height: 40px;"/>
-                            <button type="button" class="btn btn-primary fw-bolder fs-5 px-2 py-3 my-3 text-center"
-                                    style="width: 150px; height: 45px;">인증번호 받기
-                            </button>
-                        </div>
-                        <div>
-                            <div class="invalid-feedback" id="num1-empty">필수 입력 정보입니다.</div>
-                            <div class="invalid-feedback" id="num1-invalid">숫자만 입력 가능합니다.</div>
-                        </div>
-                    </div>
-
-
-                    <div class="fv-row mb-5" id="tel1" name="tel" required>
-                        <div class="d-flex align-items-center">
-                            <input class="form-control form-control-lg form-control-solid me-2" type="tel"
-                                   placeholder="" name="num2" id="num2" autocomplete="off"
-                                   style="border-color: #0099FF; width: 350px; height: 40px;">
-                            <button type="button"
-                                    class="btn btn-primary fw-bolder fs-5 px-2 py-3 my-3 text-center"
-                                    style="width: 150px; height: 45px;">인증번호 인증
-                            </button>
-                        </div>
-                        <div>
-                            <div class="invalid-feedback" id="num2-empty">필수 입력 정보입니다.</div>
-                            <div class="invalid-feedback" id="num2-invalid">숫자만 입력 가능합니다.</div>
+                    <div>
+                        <div class=" fv-row mb-5" required>
+                            <label class="form-label fs-6 fw-bolder text-dark pt-5">휴대번호</label>
+                            <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
+                            <input autocomplete="off" class="form-control form-control-lg form-control-solid"
+                                   id="num1" name="num1" placeholder="-제외 입력하시오"
+                                   style="border-color: #0099FF;" type="tel"/>
+                            <div>
+                                <div class="invalid-feedback" id="num1-empty">필수 입력 정보입니다.</div>
+                                <div class="invalid-feedback" id="num1-invalid">숫자만 입력 가능합니다.</div>
+                            </div>
                         </div>
                     </div>
 
