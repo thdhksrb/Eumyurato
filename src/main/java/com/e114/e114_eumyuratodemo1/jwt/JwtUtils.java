@@ -40,7 +40,7 @@ public class JwtUtils {
                 .claim("roles", roles)
                 .setIssuedAt(now) //토큰발행일자
                 .setExpiration(expiration)
-                .signWith(secretKey)
+                .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
 
         System.out.println("JwtUtils accessToken : " + accessToken);
@@ -63,7 +63,7 @@ public class JwtUtils {
                 .setIssuedAt(now) //토큰발행일자
                 .setId(UUID.randomUUID().toString())
                 .setExpiration(expiration)
-                .signWith(secretKey)
+                .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
 
         System.out.println("JwtUtils refreshToken : " + refreshToken);
