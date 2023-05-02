@@ -33,4 +33,10 @@ public interface AdminMemberDAO {
 
 
     public int registerSmallConcert(Map<String, String> map);   // 소규모 공연 등록
+
+    void deleteBusking(int id);
+    void deleteSmallConcert(int id);
+    void deleteLocalFestival(int id);
+
+
 }

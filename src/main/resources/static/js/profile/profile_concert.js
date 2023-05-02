@@ -14,8 +14,8 @@
         getEvents('busking');
     };
 
-    function getEvents(category) {
-        fetch(`/profile/admin/management?category=${category}`, {
+    function getEvents(category, page = 1) {
+        fetch(`/profile/admin/management?category=${category}&page=${page}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -29,67 +29,35 @@
             })
             .then((data) => {
                 showColumns(category);
-                displayEvents(data, category);
+                displayEvents(data, category, page);
             })
             .catch((error) => {
                 console.error('fetch 작동에 문제가 있습니다.', error);
             });
     }
 
-    // function displayEvents(events, category) {
-    //     const eventList = document.getElementById('eventList');
-    //     eventList.innerHTML = '';
-    //
-    //     events.forEach((event) => {
-    //         const eventItem = document.createElement('div');
-    //         let eventHTML = '';
-    //
-    //         switch (category) {
-    //             case 'busking':
-    //                 // 버스킹 공연에 대한 HTML 구조를 생성
-    //                 eventHTML = `
-    //                 <h3>${event.name}</h3>
-    //                 <p>${event.artId}</p>
-    //                 <p>${event.location}</p>
-    //                 <p>${event.date}</p>
-    //                 <p>${event.regDate}</p>
-    //                 `;
-    //                 break;
-    //             case 'smallconcert':
-    //                 // 소규모 공연에 대한 HTML 구조를 생성
-    //                 eventHTML = `
-    //                 <h3>${event.name}</h3>
-    //                 <p>${event.enterId}</p>
-    //                 <p>${event.pname}</p>
-    //                 <p>${event.location}</p>
-    //                 <p>${event.startDate} - ${event.lastDate}</p>
-    //                 <p>${event.price}</p>
-    //                 `;
-    //                 break;
-    //             case 'localfestival':
-    //                 // 지역 축제에 대한 HTML 구조를 생성
-    //                 eventHTML = `
-    //                 <h3>${event.name}</h3>
-    //                 <p>${event.org}</p>
-    //                 <p>${event.location}</p>
-    //                 <p>${event.startDate} - ${event.lastDate}</p>
-    //                 `;
-    //                 break;
-    //             default:
-    //                 break;
-    //         }
-    //
-    //         eventItem.innerHTML = eventHTML;
-    //         eventList.appendChild(eventItem);
-    //     });
-    // }
-
-    function displayEvents(events, category) {
+    function displayEvents(events, category, currentPage) {
         const eventTbody = document.getElementById('eventTbody');
         eventTbody.innerHTML = '';
 
-        events.forEach((event) => {
+        const eventsPerPage = 5;
+        const start = (currentPage - 1) * eventsPerPage;
+        const end = start + eventsPerPage;
+
+        events.slice(start, end).forEach((event) => {
             const eventRow = eventTbody.insertRow();
+            const eventId = event.id;
+
+            // 각 이벤트 행에 삭제 버튼 추가
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = '삭제';
+            deleteButton.classList.add('delete-btn'); //버튼 class 지정
+            deleteButton.setAttribute('data-category', category);
+            deleteButton.setAttribute('data-id', eventId);
+            deleteButton.addEventListener('click', () => {
+                console.log(category, eventId);
+                deleteConcert(category,eventId);
+            });
 
             // 기본 공통 컬럼
 
@@ -101,6 +69,7 @@
                     eventRow.insertCell().textContent = event.location;
                     eventRow.insertCell().textContent = event.date;
                     eventRow.insertCell().textContent = event.regDate;
+                    eventRow.insertCell().appendChild(deleteButton);
                     break;
 
                 case 'smallconcert':
@@ -111,6 +80,7 @@
                     eventRow.insertCell().textContent = event.location;
                     eventRow.insertCell().textContent = event.startDate + ' - ' + event.lastDate;
                     eventRow.insertCell().textContent = event.price;
+                    eventRow.insertCell().appendChild(deleteButton);
                     break;
 
                 case 'localfestival':
@@ -119,12 +89,15 @@
                     eventRow.insertCell().textContent = event.org;
                     eventRow.insertCell().textContent = event.location;
                     eventRow.insertCell().textContent = event.startDate + ' - ' + event.lastDate;
+                    eventRow.insertCell().appendChild(deleteButton);
                     break;
 
                 default:
                     break;
             }
         });
+
+        createPagination(events.length, eventsPerPage, currentPage, category);
     }
 
     function showColumns(category) {
@@ -139,5 +112,45 @@
         // 선택한 행사의 컬럼만 표시합니다.
         for (let i = 0; i < categoryColumns.length; i++) {
             categoryColumns[i].style.display = 'table-cell';
+        }
+    }
+
+    function deleteConcert(category,eventId){
+        fetch(`/profile/admin/management?category=${category.toLowerCase()}&id=${eventId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then(() => {
+                alert('이벤트 삭제가 완료되었습니다.');
+                getEvents(category);
+            })
+            .catch((error) => {
+                console.error('이벤트 삭제 중 에러가 발생했습니다.', error);
+            });
+    }
+
+    function createPagination(totalEvents, eventsPerPage, currentPage, category) {
+        const totalPages = Math.ceil(totalEvents / eventsPerPage);
+        const paginationEl = document.querySelector('.pagination');
+
+        paginationEl.innerHTML = '';
+
+        for (let i = 1; i <= totalPages; i++) {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = '#';
+            a.textContent = i;
+            if (i === currentPage) {
+                li.classList.add('active');
+            }
+            a.addEventListener('click', (event) => {
+                event.preventDefault();
+                getEvents(category, i);
+                scrollToTop();
+            });
+            li.appendChild(a);
+            paginationEl.appendChild(li);
         }
     }

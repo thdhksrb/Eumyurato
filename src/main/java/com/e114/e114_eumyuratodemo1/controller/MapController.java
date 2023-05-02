@@ -211,7 +211,7 @@ public class MapController {
     @ResponseBody
     public String kakaoDonation(){
         try {
-            return mapService.payService();
+            return mapService.payDonation();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
