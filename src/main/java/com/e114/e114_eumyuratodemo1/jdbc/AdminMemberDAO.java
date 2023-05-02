@@ -26,4 +26,11 @@ public interface AdminMemberDAO {
     List<BuskingDTO> getBuskings();     // 버스킹 목록 불러오기
     List<SmallConcertDTO> getSmallConcerts();   // 소규모 공연 불러오기
     List<LocalFestivalDTO> getLocalFestivals(); // 지역축제 불러오기
+
+
+
+
+
+
+    public int registerSmallConcert(Map<String, String> map);   // 소규모 공연 등록
 }

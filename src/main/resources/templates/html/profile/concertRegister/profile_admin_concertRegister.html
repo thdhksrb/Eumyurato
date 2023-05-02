@@ -67,7 +67,8 @@
                             </a>
                         </div>
                         <div class="menu-item" style="margin: 3px">
-                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/admin/management/view}">
+                            <a class="text-dark text-hover-primary ms-3 py-2"
+                               th:href="@{/profile/admin/management/view}">
                                 <span class="menu-title">공연 관리</span>
                             </a>
                         </div>
@@ -108,123 +109,133 @@
         <!--begin::Aside-->
         <!--begin::Content-->
         <!--메인폼-->
-        <div class="login-content flex-lg-row-fluid d-flex flex-column overflow-hidden py-10 py-lg-20 px-10 p-lg-7 mx-auto mw-1000px w-100" style="display: flex">
+        <div class="login-content flex-lg-row-fluid d-flex flex-column overflow-hidden py-10 py-lg-20 px-10 p-lg-7 mx-auto mw-1000px w-100"
+             style="display: flex">
             <!--begin::Wrapper-->
             <!--begin::Signin Form-->
-            <form class="form w-450px  needs-validation text-center" id="kt_login_signin_form" novalidate>
-                <div class="pb-5 pb-lg-1">
-                    <h3 class="fw-bolder text-dark display-6 text-center">소규모 공연 등록</h3>
-                </div>
-                <!--begin::Image input-->
-                <div class="image-input image-input-outline" data-kt-image-input="true"
-                     style="display: flex; justify-content: center; align-items: center">
-                    <!--begin::Image preview wrapper-->
-                    <div style="position: relative;">
-                        <img th:src="@{/img/다운로드.jpg}" alt="프로필사진"/>
-                        <!--end::Image preview wrapper-->
+            <div class="form w-450px  needs-validation text-center" id="kt_login_signin_form" novalidate>
+                <form action="/profile/admin/register" method="post">
+                    <div class="pb-5 pb-lg-1">
+                        <h3 class="fw-bolder text-dark display-6 text-center">소규모 공연 등록</h3>
+                    </div>
+                    <!--begin::Image input-->
+                    <div class="image-input image-input-outline" data-kt-image-input="true"
+                         style="display: flex; justify-content: center; align-items: center">
+                        <!--begin::Image preview wrapper-->
+                        <div style="position: relative;">
+                            <img th:src="@{/img/다운로드.jpg}" alt="프로필사진"/>
+                            <!--end::Image preview wrapper-->
 
-                        <!--begin::Edit button-->
-                        <!--begin::Edit button-->
-                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
-                               data-kt-image-input-action="change"
-                               data-bs-toggle="tooltip"
-                               data-bs-dismiss="click"
-                               title="Change avatar"
-                               style="position: absolute; right: -10px; top: -10px;">
-                            <i class="bi bi-pencil-fill fs-7"></i>
+                            <!--begin::Edit button-->
+                            <!--begin::Edit button-->
+                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+                                   data-kt-image-input-action="change"
+                                   data-bs-toggle="tooltip"
+                                   data-bs-dismiss="click"
+                                   title="Change avatar"
+                                   style="position: absolute; right: -10px; top: -10px;">
+                                <i class="bi bi-pencil-fill fs-7"></i>
 
-                            <!--begin::Inputs-->
-                            <input type="file" name="avatar" accept=".png, .jpg, .jpeg"/>
-                            <input type="hidden" name="avatar_remove"/>
-                            <!--end::Inputs-->
-                        </label>
-                        <!--end::Edit button-->
+                                <!--begin::Inputs-->
+                                <input type="file" name="avatar" accept=".png, .jpg, .jpeg"/>
+                                <input type="hidden" name="avatar_remove"/>
+                                <!--end::Inputs-->
+                            </label>
+                            <!--end::Edit button-->
 
-                        <!--begin::Cancel button-->
-                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
-                              data-kt-image-input-action="cancel"
-                              data-bs-toggle="tooltip"
-                              data-bs-dismiss="click"
-                              title="Cancel avatar"
-                              style="position: absolute; left: -10px; top: -10px;">
+                            <!--begin::Cancel button-->
+                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+                                  data-kt-image-input-action="cancel"
+                                  data-bs-toggle="tooltip"
+                                  data-bs-dismiss="click"
+                                  title="Cancel avatar"
+                                  style="position: absolute; left: -10px; top: -10px;">
 										<i class="bi bi-x fs-2"></i>
     								</span>
-                        <!--end::Cancel button-->
+                            <!--end::Cancel button-->
 
-                        <!--begin::Remove button-->
-                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
-                              data-kt-image-input-action="remove"
-                              data-bs-toggle="tooltip"
-                              data-bs-dismiss="click"
-                              title="Remove avatar"
-                              style="position: absolute; right: -10px; bottom: -10px;">
+                            <!--begin::Remove button-->
+                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+                                  data-kt-image-input-action="remove"
+                                  data-bs-toggle="tooltip"
+                                  data-bs-dismiss="click"
+                                  title="Remove avatar"
+                                  style="position: absolute; right: -10px; bottom: -10px;">
       									<i class="bi bi-x fs-2"></i>
 									</span>
-                    </div>
-                    <!--end::Remove button-->
-                </div>
-                <!--end::Image input-->
-
-                <div class="fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">공연명</label>
-                    <input class="form-control form-control-lg form-control-solid" type="text"
-                           placeholder=""
-                           name="name" autocomplete="off" style="border-color: #0099FF;"/>
-                </div>
-                <div class="fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">주소</label>
-                    <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
-                    <input class="form-control form-control-lg form-control-solid" type="text"
-                           placeholder=""
-                           name="address" autocomplete="off" style="border-color: #0099FF;"/>
-                </div>
-
-                <div class=" fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">공연자(기업) 명</label>
-                    <input class="form-control form-control-lg form-control-solid" type="text"
-                           placeholder=""
-                           name="pname" autocomplete="off" style="border-color: #0099FF;"/>
-                </div>
-                <div class=" fv-row mb-5">
-                    <div>
-
-                        <div class=" fv-row mb-5">
-                            <label class="form-label fs-6 fw-bolder text-dark pt-5">공연 시작 일자</label>
-                            <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
-                            <input autocomplete="off" class="form-control form-control-lg form-control-solid"
-                                   id="birth1" name="birth1" placeholder="" required
-                                   style="border-color: #0099FF;" type="date"/>
-                            <div>
-                                <div class="invalid-feedback" id="date-empty1">필수 입력 정보입니다.</div>
-                            </div>
-
-                            <label class="form-label fs-6 fw-bolder text-dark pt-5">공연 마감 일자</label>
-                            <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
-                            <input autocomplete="off" class="form-control form-control-lg form-control-solid"
-                                   id="birth2" name="birth2" placeholder="" required
-                                   style="border-color: #0099FF;" type="date"/>
-                            <div>
-                                <div class="invalid-feedback" id="date-empty2">필수 입력 정보입니다.</div>
-                            </div>
                         </div>
+                        <!--end::Remove button-->
+                    </div>
+                    <!--end::Image input-->
 
+                    <div class="fv-row mb-5">
+                        <label class="form-label fs-6 fw-bolder text-dark pt-5">공연명</label>
+                        <input class="form-control form-control-lg form-control-solid" type="text"
+                               placeholder=""
+                               name="name" autocomplete="off" style="border-color: #0099FF;"/>
                     </div>
-                </div>
-                <div class=" fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">가격</label>
-                    <input class="form-control form-control-lg form-control-solid" type="text"
-                           placeholder=""
-                           name="cpassword" autocomplete="off" style="border-color: #0099FF;"/>
-                </div>
-                <div class="fv-row mb-10 mt-10"> <!-- mt-5를 추가하여 위쪽에 5단위의 빈 공간을 추가 -->
-                    <div class="d-flex flex-wrap justify-content-center pb-lg-0 pb-5">
-                        <!-- justify-content-end 클래스를 추가하여 오른쪽으로 정렬 -->
-                        <button type="submit" class="btn btn-primary fw-bolder fs-4 px-8 py-4 my-3 me-4"
-                                th:href="@{profile/admin/management/view}">공연 등록
-                        </button>
+                    <div class="fv-row mb-5">
+                        <label class="form-label fs-6 fw-bolder text-dark pt-5">기업명</label>
+                        <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
+                        <input class="form-control form-control-lg form-control-solid" type="text"
+                               placeholder=""
+                               name="enterId" autocomplete="off" style="border-color: #0099FF;"/>
                     </div>
-                </div>
-            </form>
+                    <div class="fv-row mb-5">
+                        <label class="form-label fs-6 fw-bolder text-dark pt-5">주소</label>
+                        <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
+                        <input class="form-control form-control-lg form-control-solid" type="text"
+                               placeholder=""
+                               name="location" autocomplete="off" style="border-color: #0099FF;"/>
+                    </div>
+
+                    <div class=" fv-row mb-5">
+                        <label class="form-label fs-6 fw-bolder text-dark pt-5">공연자(기업) 명</label>
+                        <input class="form-control form-control-lg form-control-solid" type="text"
+                               placeholder=""
+                               name="pname" autocomplete="off" style="border-color: #0099FF;"/>
+                    </div>
+                    <div class=" fv-row mb-5">
+                        <div>
+
+                            <div class=" fv-row mb-5">
+                                <label class="form-label fs-6 fw-bolder text-dark pt-5">공연 시작 일자</label>
+                                <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
+                                <input autocomplete="off" class="form-control form-control-lg form-control-solid"
+                                       id="startDate" name="startDate" placeholder="" required
+                                       style="border-color: #0099FF;" type="date"/>
+                                <div>
+                                    <div class="invalid-feedback" id="date-empty1">필수 입력 정보입니다.</div>
+                                </div>
+
+                                <label class="form-label fs-6 fw-bolder text-dark pt-5">공연 마감 일자</label>
+                                <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
+                                <input autocomplete="off" class="form-control form-control-lg form-control-solid"
+                                       id="lastDate" name="lastDate" placeholder="" required
+                                       style="border-color: #0099FF;" type="date"/>
+                                <div>
+                                    <div class="invalid-feedback" id="date-empty2">필수 입력 정보입니다.</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class=" fv-row mb-5">
+                        <label class="form-label fs-6 fw-bolder text-dark pt-5">가격</label>
+                        <input class="form-control form-control-lg form-control-solid" type="text"
+                               placeholder=""
+                               name="price" autocomplete="off" style="border-color: #0099FF;"/>
+                    </div>
+                    <div class="fv-row mb-10 mt-10"> <!-- mt-5를 추가하여 위쪽에 5단위의 빈 공간을 추가 -->
+                        <div class="d-flex flex-wrap justify-content-center pb-lg-0 pb-5">
+                            <!-- justify-content-end 클래스를 추가하여 오른쪽으로 정렬 -->
+                            <button type="submit" class="btn btn-primary fw-bolder fs-4 px-8 py-4 my-3 me-4"
+                                    th:href="@{profile/admin/management/view}">공연 등록
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

@@ -72,4 +72,10 @@
         select * from local_festival
     </select>
 
+    <insert id="registerSmallConcert">
+        insert into small_concert(name, enterId, location, pname, startDate, lastDate, price) values (#{name}, #{enterId},#{location}, #{pname}, #{startDate}, #{lastDate}, #{price})
+    </insert>
+
+
+
 </mapper>

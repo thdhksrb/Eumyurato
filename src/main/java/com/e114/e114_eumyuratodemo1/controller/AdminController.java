@@ -63,6 +63,31 @@ public class AdminController {
         return "html/profile/concertRegister/profile_admin_concertRegister";
     }
 
+    @PostMapping("/profile/admin/register")
+    public String smallConcertRegister(HttpServletRequest request){
+
+        Map<String, String> map = new HashMap<String, String>();
+        String name = request.getParameter("name");
+        String enterId = request.getParameter("enterId");
+        String location = request.getParameter("location");
+        String pname = request.getParameter("pname");
+        String startDate = request.getParameter("startDate");
+        String lastDate = request.getParameter("lastDate");
+        String price = request.getParameter("price");
+
+        map.put("name", name);
+        map.put("enterId", enterId);
+        map.put("location", location);
+        map.put("pname", pname);
+        map.put("startDate", startDate);
+        map.put("lastDate", lastDate);
+        map.put("price", price);
+
+        memberDAO.registerSmallConcert(map);
+
+        return "redirect:/profile/admin/management/view";
+    }
+
     @GetMapping("/profile/admin/total")
     public String getCommonsAndArtistsList(Model model){
         List<ArtistMemberDTO> artists = memberDAO.getArtistMembers();

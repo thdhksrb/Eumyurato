@@ -59,4 +59,3 @@ function setReservationsSearch() {
 function resetReservations() {
     window.location.href = "/profile/admin/reservation";
 };
-
