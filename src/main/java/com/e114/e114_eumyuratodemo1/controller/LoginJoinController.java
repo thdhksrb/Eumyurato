@@ -5,13 +5,13 @@ import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO;
 import com.e114.e114_eumyuratodemo1.jdbc.CommonMemberDAO;
 import com.e114.e114_eumyuratodemo1.service.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
@@ -21,7 +21,6 @@ import java.util.Map;
 @Controller
 public class LoginJoinController {
 
-    private static final Logger logger = LoggerFactory.getLogger(LoginJoinController.class);
     @Autowired
     private UserService userService;
 
@@ -29,7 +28,9 @@ public class LoginJoinController {
     private CommonMemberDAO commonMemberDAO;
 
     @GetMapping("/")
-    public String main() {
+    public String main(HttpSession session) {
+        System.out.println(session.getAttribute("loginUser"));
+
         return "html/main/home";
     }
 
@@ -42,21 +43,23 @@ public class LoginJoinController {
     @PostMapping("/login-common")
     public String login(@RequestParam("id") String id,
                         @RequestParam("pwd") String pwd,
-                        HttpSession session, RedirectAttributes redirectAttributes) {
+                        HttpSession session, RedirectAttributes redirectAttributes) throws JsonProcessingException {
         CommonMemberDTO commonMemberDTO = userService.login(id, pwd);
         if (commonMemberDTO != null) {
             session.setAttribute("loginUser", commonMemberDTO);
-            return "redirect:/common";
+            String loginUserJson = new ObjectMapper().writeValueAsString(commonMemberDTO);
+            redirectAttributes.addFlashAttribute("loginUserJson", loginUserJson);
+            return "redirect:/";
         } else {
             redirectAttributes.addFlashAttribute("loginError", "아이디와 비밀번호를 다시 확인해주세요.");
             return "redirect:/login-common";
         }
     }
 
-    @GetMapping("/common")
-    public String main1() {
-        return "html/main/main1";
-    }
+//    @GetMapping("/test")
+//    public String main1() {
+//        return "html/main/test";
+//    }
 
     //아티스트 로그인
     @GetMapping("/login-art")
@@ -67,21 +70,23 @@ public class LoginJoinController {
     @PostMapping("/login-art")
     public String loginArt(@RequestParam("id") String id,
                            @RequestParam("pwd") String pwd,
-                           HttpSession session, RedirectAttributes redirectAttributes) {
+                           HttpSession session, RedirectAttributes redirectAttributes) throws JsonProcessingException {
         ArtistMemberDTO artistMemberDTO = userService.loginArt(id, pwd);
         if (artistMemberDTO != null) {
             session.setAttribute("loginUser", artistMemberDTO);
-            return "redirect:/artist";
+            String loginUserJson = new ObjectMapper().writeValueAsString(artistMemberDTO);
+            redirectAttributes.addFlashAttribute("loginUserJson",loginUserJson);
+            return "redirect:/";
         } else {
             redirectAttributes.addFlashAttribute("loginError", "아이디와 비밀번호를 다시 확인해주세요.");
             return "redirect:/login-art";
         }
     }
 
-    @GetMapping("/artist")
-    public String main2() {
-        return "html/main/main2";
-    }
+//    @GetMapping("/artist")
+//    public String main2() {
+//        return "html/main/main2";
+//    }
 
     //기업 로그인
     @GetMapping("/login-enter")
@@ -92,21 +97,23 @@ public class LoginJoinController {
     @PostMapping("/login-enter")
     public String loginenter(@RequestParam("id") String id,
                              @RequestParam("pwd") String pwd,
-                             HttpSession session, RedirectAttributes redirectAttributes) {
+                             HttpSession session, RedirectAttributes redirectAttributes) throws JsonProcessingException {
         EnterpriseMemberDTO enterpriseMemberDTO = userService.loginenter(id, pwd);
         if (enterpriseMemberDTO != null) {
             session.setAttribute("loginUser", enterpriseMemberDTO);
-            return "redirect:/enterprise";
+            String loginUserJson = new ObjectMapper().writeValueAsString(enterpriseMemberDTO);
+            redirectAttributes.addFlashAttribute("loginUserJson",loginUserJson);
+            return "redirect:/";
         } else {
             redirectAttributes.addFlashAttribute("loginError", "아이디와 비밀번호를 다시 확인해주세요.");
             return "redirect:/login-enter";
         }
     }
 
-    @GetMapping("/enterprise")
-    public String registerPage() {
-        return "html/main/main3"; // 로그인 페이지로 이동
-    }
+//    @GetMapping("/enterprise")
+//    public String registerPage() {
+//        return "html/main/main3"; // 로그인 페이지로 이동
+//    }
 
 //로그 아웃
 @GetMapping("/logout")
