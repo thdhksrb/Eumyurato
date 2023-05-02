@@ -10,7 +10,7 @@ $.ajax({
         console.log(data.name);
 
         li.append($('<h2>').html(data.name));
-        li.append($('<h2>').html(data.nid));
+        li.append($('<h2>').html('아티스트 : ' + data.nid));
 
         buskerInfo.append(li);
 
@@ -37,16 +37,16 @@ $.ajax({
 });
 
 const price = document.querySelector('#price');
-const output = document.querySelector('#output');
+const output = document.querySelector('.output');
 let priceValue;
 const resetButton = document.querySelector("#reset");
 resetButton.addEventListener('click',function (){
     price.value = '';
-    output.textContent = '금액 : ';
+    output.textContent = '후원금액 : ';
 });
 
 const searchButton = document.querySelector("#search-btn");
 searchButton.addEventListener('click', function (){
     priceValue = price.value;
-    output.textContent = '금액 : ' + priceValue + '원';
+    output.textContent = '후원금액 : ' + priceValue + '원';
 });
