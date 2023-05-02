@@ -72,4 +72,17 @@
         select * from local_festival
     </select>
 
+    <delete id="deleteBusking">
+        DELETE FROM busking WHERE id = #{param1}
+    </delete>
+
+    <delete id="deleteSmallConcert">
+        DELETE FROM small_concert WHERE id = #{param1}
+    </delete>
+
+    <delete id="deleteLocalFestival">
+        DELETE FROM local_festival WHERE id = #{param1}
+    </delete>
+
+
 </mapper>

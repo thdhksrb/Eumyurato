@@ -1,0 +1,39 @@
+.pagination li {
+    display: inline-block;
+    margin-right: 5px;
+    border-radius: 3px;
+}
+
+.pagination li a {
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+.pagination li.active a {
+    background-color: #294ba1;
+    border-color: #294ba1;
+    color: #fff;
+}
+
+.pagination li a:hover {
+    background-color: #b7c2df;
+    color: #ffffff;
+}
+
+.delete-btn {
+    background-color: #294ba1;
+    border: 2px solid #294ba1;
+    border-radius: 5px;
+    color: #fff;
+    padding: 8px 16px;
+    transition: all 0.3s ease-in-out;
+}
+
+.delete-btn:hover {
+    background-color: #b7c2df;
+    border: 2px solid #b7c2df;
+}

@@ -2,6 +2,7 @@ package com.e114.e114_eumyuratodemo1.jdbc;
 
 import com.e114.e114_eumyuratodemo1.dto.*;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -26,4 +27,10 @@ public interface AdminMemberDAO {
     List<BuskingDTO> getBuskings();     // 버스킹 목록 불러오기
     List<SmallConcertDTO> getSmallConcerts();   // 소규모 공연 불러오기
     List<LocalFestivalDTO> getLocalFestivals(); // 지역축제 불러오기
+
+    void deleteBusking(int id);
+    void deleteSmallConcert(int id);
+    void deleteLocalFestival(int id);
+
+
 }
