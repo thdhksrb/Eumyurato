@@ -1,4 +1,3 @@
-/*
 package com.e114.e114_eumyuratodemo1.config;
 
 import com.e114.e114_eumyuratodemo1.jwt.JwtInterceptor;
@@ -37,4 +36,3 @@ public class WebConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/static/");
     }
 }
-*/
