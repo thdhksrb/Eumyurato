@@ -126,6 +126,7 @@ l
                 </div>
             </form>
             <br>
+            <!--/*@thymesVar id="loginError" type="com"*/-->
             <div th:if="${loginError}" class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong>로그인 실패!</strong> [[${loginError}]]
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

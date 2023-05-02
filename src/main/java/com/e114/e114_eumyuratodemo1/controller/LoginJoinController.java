@@ -67,13 +67,14 @@ public class LoginJoinController {
     @PostMapping("/login-art")
     public String loginArt(@RequestParam("id") String id,
                            @RequestParam("pwd") String pwd,
-                           HttpSession session) {
+                           HttpSession session, RedirectAttributes redirectAttributes) {
         ArtistMemberDTO artistMemberDTO = userService.loginArt(id, pwd);
         if (artistMemberDTO != null) {
             session.setAttribute("loginUser", artistMemberDTO);
             return "redirect:/artist";
         } else {
-            return "redirect:/login?error";
+            redirectAttributes.addFlashAttribute("loginError", "아이디와 비밀번호를 다시 확인해주세요.");
+            return "redirect:/login-art";
         }
     }
 
@@ -91,13 +92,14 @@ public class LoginJoinController {
     @PostMapping("/login-enter")
     public String loginenter(@RequestParam("id") String id,
                              @RequestParam("pwd") String pwd,
-                             HttpSession session) {
+                             HttpSession session, RedirectAttributes redirectAttributes) {
         EnterpriseMemberDTO enterpriseMemberDTO = userService.loginenter(id, pwd);
         if (enterpriseMemberDTO != null) {
             session.setAttribute("loginUser", enterpriseMemberDTO);
             return "redirect:/enterprise";
         } else {
-            return "redirect:/login?error";
+            redirectAttributes.addFlashAttribute("loginError", "아이디와 비밀번호를 다시 확인해주세요.");
+            return "redirect:/login-enter";
         }
     }
 
@@ -105,6 +107,13 @@ public class LoginJoinController {
     public String registerPage() {
         return "html/main/main3"; // 로그인 페이지로 이동
     }
+
+//로그 아웃
+@GetMapping("/logout")
+public String logout(HttpSession session) {
+    session.removeAttribute("token"); // 세션에서 토큰 정보 제거
+    return "redirect:/"; // 로그아웃 후 메인 홈페이지로 이동
+}
 
     @GetMapping("/Idfind")
     public String idfind() {
@@ -174,12 +183,6 @@ public class LoginJoinController {
         return "html/loginJoin/joinForm_3";
     }
 
-
-    @GetMapping("/logout")
-    public String logout(HttpSession session) {
-        session.removeAttribute("token"); // 세션에서 토큰 정보 제거
-        return "redirect:/"; // 로그아웃 후 메인 홈페이지로 이동
-    }
 }
 
 /*    @GetMapping("/mypage")
