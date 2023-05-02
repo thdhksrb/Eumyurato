@@ -53,8 +53,6 @@ public class LoginJoinController {
         }
     }
 
-
-
     @GetMapping("/common")
     public String main1() {
         return "html/main/main1";
@@ -143,13 +141,11 @@ public class LoginJoinController {
             @RequestParam("genre") String genre,
             Model model) {
 
-        logger.info("commonJoinRegister() 실행됨!");
 
         boolean result = userService.register(id, pwd, name, nid, sex, birth, email, phone, road, genre);
         if (result) {
             return "redirect:/login-common";
         } else {
-            model.addAttribute("error", "회원가입에 실패하였습니다.");
             return "redirect:/common-join?error";
         }
     }

@@ -4,7 +4,7 @@
 <mapper namespace="com.e114.e114_eumyuratodemo1.jdbc.CommonMemberDAO">
     <insert id="insert" parameterType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
         INSERT INTO common_member (id, pwd, name, nid, birth, sex, email, phone, road, genre,
-                                   admin_num)
+                                   adminNum)
         VALUES (#{id}, #{pwd}, #{name}, #{nid}, #{birth}, #{sex}, #{email}, #{phone}, #{road}, #{genre},
                 #{adminNum})
     </insert>
