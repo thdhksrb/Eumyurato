@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -43,13 +44,19 @@ public class LoginJoinController {
     @PostMapping("/login-common")
     public String login(@RequestParam("id") String id,
                         @RequestParam("pwd") String pwd,
+                        @RequestParam(name = "prevUrl", required = false) String prevUrl,
                         HttpSession session, RedirectAttributes redirectAttributes) throws JsonProcessingException {
         CommonMemberDTO commonMemberDTO = userService.login(id, pwd);
         if (commonMemberDTO != null) {
             session.setAttribute("loginUser", commonMemberDTO);
             String loginUserJson = new ObjectMapper().writeValueAsString(commonMemberDTO);
             redirectAttributes.addFlashAttribute("loginUserJson", loginUserJson);
-            return "redirect:/";
+            System.out.println("prevUrl: "+ prevUrl);
+            if(StringUtils.hasText(prevUrl) && !prevUrl.equalsIgnoreCase("null")){
+                return "redirect:" + prevUrl;
+            }else{
+                return "redirect:/";
+            }
         } else {
             redirectAttributes.addFlashAttribute("loginError", "아이디와 비밀번호를 다시 확인해주세요.");
             return "redirect:/login-common";

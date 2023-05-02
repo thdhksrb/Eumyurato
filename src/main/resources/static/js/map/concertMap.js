@@ -7,7 +7,7 @@ window.onload = function() {
         userNameElem.innerText = loginUser.name;
 
         const logoutBtn = document.createElement("a");
-        logoutBtn.setAttribute("href", "/logout");
+        logoutBtn.setAttribute("href", "/map");
         logoutBtn.onclick = function() {
             window.sessionStorage.removeItem("loginUser");
         };
@@ -24,6 +24,14 @@ window.onload = function() {
         navLogout.querySelector("#logoutBtn").appendChild(logoutBtn);
     } else {
         // 로그인 상태가 아닌 경우
+        const loginBtn = document.getElementById("loginBtn");
+        loginBtn.onclick = function() {
+
+            window.sessionStorage.setItem("prevUrl",window.location.href);
+
+            window.location.assign("/login-common");
+        };
+
         const navLogin = document.getElementById("navLogin");
         navLogin.style.display = "flex";
 
@@ -31,11 +39,6 @@ window.onload = function() {
         navLogout.style.display = "none";
     }
 };
-
-
-
-
-
 
 
 //toggler
