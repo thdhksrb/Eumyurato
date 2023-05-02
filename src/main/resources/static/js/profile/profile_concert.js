@@ -14,8 +14,8 @@
         getEvents('busking');
     };
 
-    function getEvents(category) {
-        fetch(`/profile/admin/management?category=${category}`, {
+    function getEvents(category, page = 1) {
+        fetch(`/profile/admin/management?category=${category}&page=${page}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -29,24 +29,29 @@
             })
             .then((data) => {
                 showColumns(category);
-                displayEvents(data, category);
+                displayEvents(data, category, page);
             })
             .catch((error) => {
                 console.error('fetch 작동에 문제가 있습니다.', error);
             });
     }
 
-    function displayEvents(events, category) {
+    function displayEvents(events, category, currentPage) {
         const eventTbody = document.getElementById('eventTbody');
         eventTbody.innerHTML = '';
 
-        events.forEach((event) => {
+        const eventsPerPage = 5;
+        const start = (currentPage - 1) * eventsPerPage;
+        const end = start + eventsPerPage;
+
+        events.slice(start, end).forEach((event) => {
             const eventRow = eventTbody.insertRow();
             const eventId = event.id;
 
             // 각 이벤트 행에 삭제 버튼 추가
             const deleteButton = document.createElement('button');
             deleteButton.textContent = '삭제';
+            deleteButton.classList.add('delete-btn'); //버튼 class 지정
             deleteButton.setAttribute('data-category', category);
             deleteButton.setAttribute('data-id', eventId);
             deleteButton.addEventListener('click', () => {
@@ -91,6 +96,8 @@
                     break;
             }
         });
+
+        createPagination(events.length, eventsPerPage, currentPage, category);
     }
 
     function showColumns(category) {
@@ -122,4 +129,28 @@
             .catch((error) => {
                 console.error('이벤트 삭제 중 에러가 발생했습니다.', error);
             });
+    }
+
+    function createPagination(totalEvents, eventsPerPage, currentPage, category) {
+        const totalPages = Math.ceil(totalEvents / eventsPerPage);
+        const paginationEl = document.querySelector('.pagination');
+
+        paginationEl.innerHTML = '';
+
+        for (let i = 1; i <= totalPages; i++) {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = '#';
+            a.textContent = i;
+            if (i === currentPage) {
+                li.classList.add('active');
+            }
+            a.addEventListener('click', (event) => {
+                event.preventDefault();
+                getEvents(category, i);
+                scrollToTop();
+            });
+            li.appendChild(a);
+            paginationEl.appendChild(li);
+        }
     }

@@ -15,6 +15,7 @@
     <link th:href="@{/css/profile/profile1.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{/css/profile/profile2.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{/css/profile/profile3.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/profile/pagination.css}" rel="stylesheet" type="text/css"/>
     <!--end::Global Stylesheets Bundle-->
 </head>
 <!--end::Head-->
@@ -155,6 +156,13 @@
                                         </thead>
                                         <tbody id="eventTbody">
                                         </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <td colspan="16">
+                                                <ul class="pagination"></ul>
+                                            </td>
+                                        </tr>
+                                        </tfoot>
                                     </table>
                                 </div>
                             </div>
