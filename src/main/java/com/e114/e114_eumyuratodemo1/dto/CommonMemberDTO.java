@@ -1,10 +1,13 @@
 package com.e114.e114_eumyuratodemo1.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-
+import lombok.NoArgsConstructor;
 import java.util.Map;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CommonMemberDTO{
     private String id;
     private String pwd;
@@ -18,8 +21,8 @@ public class CommonMemberDTO{
     private String genre;
     private int adminNum;
     private Map<String,String> favorite;
-    private int kakao;
-    private int google;
+    private boolean kakao;
+    private boolean google;
     private String image;
 
 }
