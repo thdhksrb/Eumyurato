@@ -22,7 +22,6 @@ public class MapService {
     @Autowired
     private IDAO dao;
 
-
     public List<SmallConcertDTO> viewSmallConcert(){
         return dao.viewSmallConcert();
     };
@@ -35,13 +34,14 @@ public class MapService {
         return dao.viewLocalFestival();
     };
 
-
     public SmallConcertDTO selectConcert(int id){
         return dao.selectConcert(id);
     };
+
     public SchedulesDTO selectConcertTime(int id, String conDate){
         return dao.selectConcertTime(id,conDate);
     };
+
     public List<String> selectBooked(int conId,String conDate){
         return dao.selectBooked(conId,conDate);
     };
@@ -55,15 +55,12 @@ public class MapService {
     public int upViewCountSmallConcert(int id){
         return dao.upViewCountSmallConcert(id);
     }
-
     public int upViewCountBusking(int id){
         return dao.upViewCountBusking(id);
     }
-
     public int upViewCountLocalFestival(int id){
         return dao.upViewCountLocalFestival(id);
     }
-
 
     public int insertSeat(int conId, String conDate, List<String> seat) {
         Map<String, Object> map = new HashMap<>();
@@ -136,5 +133,6 @@ public class MapService {
     public int saveDonation(int price, int id){
         return dao.saveDonation(price, id);
     }
+    public int saveDonationNum(int price, int id, String userId) {return dao.saveDonationNum(price, id, userId);}
 
 }

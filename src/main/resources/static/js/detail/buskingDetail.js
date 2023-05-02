@@ -84,7 +84,12 @@ $.ajax({
 const donation = document.querySelector('#donation');
 
 donation.addEventListener('click', () => {
+    const loginUserJson = window.sessionStorage.getItem("loginUser");
+    if (loginUserJson !== null) {
     window.location.href = `/busking/detail/${id}/donation`;
+    }else {
+        alert("로그인 후 이용해주세요.");
+    }
 });
 
 function changeStar() {
