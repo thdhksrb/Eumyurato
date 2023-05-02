@@ -28,7 +28,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-web-services'
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.0'
-    implementation 'org.springframework:spring-web:5.3.14'
 
 
     //JWT
@@ -36,8 +35,6 @@ dependencies {
     runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
     runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
 
-    //로그 확인 용
-    implementation 'ch.qos.logback:logback-classic:1.2.6'
 
 
 
