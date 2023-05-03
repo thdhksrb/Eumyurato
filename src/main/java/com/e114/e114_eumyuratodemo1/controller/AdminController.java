@@ -1,18 +1,14 @@
 package com.e114.e114_eumyuratodemo1.controller;
 
 
-import com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO;
-import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
-import com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO;
-import com.e114.e114_eumyuratodemo1.dto.ReservationDTO;
-import com.e114.e114_eumyuratodemo1.jdbc.MemberDAO;
+import com.e114.e114_eumyuratodemo1.dto.*;
+import com.e114.e114_eumyuratodemo1.jdbc.AdminMemberDAO;
+import com.e114.e114_eumyuratodemo1.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -24,7 +20,10 @@ import java.util.Map;
 public class AdminController {
 
     @Autowired
-    private MemberDAO memberDAO;
+    private AdminMemberDAO memberDAO;
+
+    @Autowired
+    private AdminService adminService;
 
     @GetMapping("/profile/admin/root")
     public String adminRoot(){
@@ -50,8 +49,9 @@ public class AdminController {
         return "html/profile/accountModify/profile_admin_accountModify";
     }
 
-    @GetMapping("/profile/admin/management")
+    @GetMapping("/profile/admin/management/view")
     public String adminAccountManagement(){
+
         return "html/profile/concertManagement/profile_admin_concertmanagement";
     }
 
@@ -129,12 +129,12 @@ public class AdminController {
         return "html/profile/total/profile_admin_total2";
     }
 
-    @GetMapping("/logout")
+/*    @GetMapping("/logout")
     public String logout(HttpServletRequest request) {
         HttpSession session = request.getSession();
         session.invalidate(); // 세션 초기화
         return "redirect:/home";
-    }
+    }*/
 
     @GetMapping("/profile/admin/reservation")
     public String reservationList(Model model) {
@@ -161,6 +161,34 @@ public class AdminController {
     public String searchReservations(){
 
         return "html/profile/reservation/profile_admin_reservation";
+    }
+
+    @GetMapping("/profile/admin/management")
+    public ResponseEntity<?> getEventList(@RequestParam("category") String category) {
+        List<?> eventList;
+
+        switch (category) {
+            case "busking":
+                eventList = adminService.viewAllBusking();
+                break;
+            case "localfestival":
+                eventList = adminService.viewAllLocalFestival();
+                break;
+            case "smallconcert":
+                eventList = adminService.viewAllSmallConcert();
+                break;
+            default:
+                return ResponseEntity.badRequest().body("잘못된 카테고리입니다.");
+        }
+
+        return ResponseEntity.ok(eventList);
+    }
+
+    @DeleteMapping("/profile/admin/management")
+    public ResponseEntity<Void> deleteConcert(@RequestParam("category") String category, @RequestParam("id") int id){
+        System.out.println(category +","+ id);
+        adminService.deleteEvent(category, id);
+        return ResponseEntity.ok().build();
     }
 
 }

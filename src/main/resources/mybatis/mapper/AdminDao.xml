@@ -7,7 +7,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.e114.e114_eumyuratodemo1.jdbc.MemberDAO">
+<mapper namespace="com.e114.e114_eumyuratodemo1.jdbc.AdminMemberDAO">
     <select id="getArtistMembers" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
         select id, name, nid, sex, birth, phone
         from artist_member
@@ -59,6 +59,30 @@
         FROM enterprise_member
         WHERE id = #{adminId} AND adminNum = 0
     </select>
+
+    <select id="getBuskings" resultType="com.e114.e114_eumyuratodemo1.dto.BuskingDTO">
+        select * from busking
+    </select>
+
+    <select id="getSmallConcerts" resultType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
+        select * from small_concert
+    </select>
+
+    <select id="getLocalFestivals" resultType="com.e114.e114_eumyuratodemo1.dto.LocalFestivalDTO">
+        select * from local_festival
+    </select>
+
+    <delete id="deleteBusking">
+        DELETE FROM busking WHERE id = #{param1}
+    </delete>
+
+    <delete id="deleteSmallConcert">
+        DELETE FROM small_concert WHERE id = #{param1}
+    </delete>
+
+    <delete id="deleteLocalFestival">
+        DELETE FROM local_festival WHERE id = #{param1}
+    </delete>
 
 
 </mapper>

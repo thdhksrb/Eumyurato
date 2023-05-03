@@ -2,11 +2,13 @@ package com.e114.e114_eumyuratodemo1.controller;
 
 import com.e114.e114_eumyuratodemo1.dto.*;
 import com.e114.e114_eumyuratodemo1.service.MapService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.util.HashMap;
@@ -211,7 +213,7 @@ public class MapController {
     @ResponseBody
     public String kakaoDonation(){
         try {
-            return mapService.payService();
+            return mapService.payDonation();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -226,16 +228,20 @@ public class MapController {
     }
 
     @PostMapping("/kakaopay/success/donation")
-    public ResponseEntity<Void> saveDonation(@RequestBody Map<String, String> data) {
+    public ResponseEntity<Void> saveDonation(@RequestBody Map<String, String> data, HttpSession session) {
+
         String priceStr = data.get("price");
         int price = Integer.parseInt(priceStr);
+
         String idStr = data.get("id");
         int id = Integer.parseInt(idStr);
 
-        System.out.println(price);
-        System.out.println(id);
+        CommonMemberDTO loginUser = (CommonMemberDTO)session.getAttribute("loginUser");
+        String userId = loginUser.getId();
 
         mapService.saveDonation(price, id);
+        mapService.saveDonationNum(price, id, userId);
+
         return ResponseEntity.ok().build();
     }
 
