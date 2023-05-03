@@ -4,6 +4,8 @@ import com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 public interface ArtistMemberDAO{
     ArtistMemberDTO  findById(@Param("id") String id);
@@ -21,4 +23,6 @@ public interface ArtistMemberDAO{
     ArtistMemberDTO findPoint(String point);
     ArtistMemberDTO findIByImage(String image);
 
+    //아이디 찾기
+    List<String> findUserIdsByNameAndEmail(@Param("name") String name, @Param("email") String email);
 }

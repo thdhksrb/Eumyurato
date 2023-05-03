@@ -10,7 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
 
 
 //로그인 요청 처리, 사용자 아이디에 해당하는 권한 정보 조회를 담당
@@ -123,7 +124,22 @@ public class UserService {
         return result == 1;
     }
 
+    // 아이디 찾기
 
+    @Autowired
+    public UserService(CommonMemberDAO commonMemberDAO, ArtistMemberDAO artistMemberDAO, EnterpriseMemberDAO enterpriseMemberDAO) {
+        this.commonMemberDAO = commonMemberDAO;
+        this.artistMemberDAO = artistMemberDAO;
+        this.enterpriseMemberDAO = enterpriseMemberDAO;
+    }
+
+    public List<String> findUserIdsByNameAndEmail(String name, String email) {
+        List<String> userIds = new ArrayList<>();
+        userIds.addAll(commonMemberDAO.findUserIdsByNameAndEmail(name, email));
+        userIds.addAll(artistMemberDAO.findUserIdsByNameAndEmail(name, email));
+        userIds.addAll(enterpriseMemberDAO.findUserIdsByNameAndEmail(name, email));
+        return userIds;
+    }
 }
 
 

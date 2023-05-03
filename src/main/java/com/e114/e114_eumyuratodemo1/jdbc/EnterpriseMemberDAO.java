@@ -4,6 +4,8 @@ import com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 public interface EnterpriseMemberDAO{
     EnterpriseMemberDTO findById(@Param("id") String id);
@@ -16,5 +18,6 @@ public interface EnterpriseMemberDAO{
     EnterpriseMemberDTO findByAdminNum(String adminNum);
     EnterpriseMemberDTO findIByImage(String image);
 
-
+//아이디 찾기
+List<String> findUserIdsByNameAndEmail(@Param("name") String name, @Param("email") String email);
 }
