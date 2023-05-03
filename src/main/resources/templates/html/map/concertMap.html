@@ -48,8 +48,7 @@
 <!--                    <a href="javascript:;"><img th:src="@{/assets/com013.svg}" alt="userBtn"/></a> &lt;!&ndash;my page&ndash;&gt;-->
 <!--                    <a href="javascript:;"><img th:src="@{/assets/arr076.svg}" alt="logoutBtn"/></a> &lt;!&ndash;Logout&ndash;&gt;-->
                     <div id="navLogin">
-                    <button type="button" class="btn btn-primary fw-bolder fs-5 px-5 py-2 my-3 me-5" id="loginBtn"
-                            th:onclick="|location.href='@{/login-common}'|">로그인</button>
+                    <button type="button" class="btn btn-primary fw-bolder fs-5 px-5 py-2 my-3 me-5" id="loginBtn">로그인</button>
                     </div>
 
                     <div style="margin-right: 60px;" id="navLogout">
@@ -103,7 +102,13 @@
         </div>
     </div>
 </div>
-
+<script th:inline="javascript">
+    const loginUserJson = /*[[${loginUserJson}]]*/ null;
+    if (loginUserJson !== null) {
+        const loginUser = JSON.parse(loginUserJson);
+        window.sessionStorage.setItem("loginUser", loginUserJson);
+    }
+</script>
 
 <!--begin::Global Javascript Bundle(used by all pages)-->
 <script th:src="@{/js/plugins_bundle.js}"></script>

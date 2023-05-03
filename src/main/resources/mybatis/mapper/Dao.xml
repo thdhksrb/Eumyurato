@@ -109,7 +109,9 @@
         SELECT artId FROM busking WHERE id = #{param2})
     </update>
 
-
-
+    <insert id="saveDonationNum">
+        insert into artist_donation (buskId, comId, point)
+        values (#{param2}, #{param3}, #{param1})
+    </insert>
 
 </mapper>

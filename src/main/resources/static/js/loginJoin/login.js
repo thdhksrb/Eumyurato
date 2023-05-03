@@ -8,10 +8,16 @@
     Array.prototype.slice.call(forms)
         .forEach(function (form) {
             form.addEventListener('submit', function (event) {
+
                 if (!form.checkValidity()) {
                     event.preventDefault()
                     event.stopPropagation()
                 }
+                const prevUrl = window.sessionStorage.getItem("prevUrl");
+                window.sessionStorage.removeItem("prevUrl");
+                form.setAttribute('action', '/login-common?prevUrl=' + encodeURIComponent(prevUrl));
+
+
 
                 form.classList.add('was-validated')
             }, false)

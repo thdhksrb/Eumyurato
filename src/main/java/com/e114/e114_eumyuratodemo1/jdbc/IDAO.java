@@ -16,16 +16,22 @@ public interface IDAO {
     public List<LocalFestivalDTO> viewLocalFestival();
 
     public SchedulesDTO selectConcertTime(int id, String conDate);
+
     public List<String> selectBooked(int conId,String conDate);
+
     public int insertSeat(Map<String, Object> map);
+
     public int deleteSeat(Map<String, Object> map);
+
     public LocalFestivalDTO selectLocal(int id);
     public SmallConcertDTO selectConcert(int id);
     public BuskingDTO selectBusking(int id);
+
     public int upViewCountSmallConcert(int id);
     public int upViewCountBusking(int id);
     public int upViewCountLocalFestival(int id);
 
     public int saveDonation(int price, int id);
+    public int saveDonationNum(int price, int id, String userId);
 
 }
