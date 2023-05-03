@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Mapper
 public interface CommonMemberDAO {
  CommonMemberDTO findById(@Param("id") String id);
@@ -29,4 +31,7 @@ public interface CommonMemberDAO {
  CommonMemberDTO useById(String id); // 아이디 중복 확인
  CommonMemberDTO useByNid(String nid); //비번 중복 확인
  // 회원 정보 수정, 삭제 등의 메소드 추가 가능
+
+ //아이디 찾기
+ List<String> findUserIdsByNameAndEmail(@Param("name") String name, @Param("email") String email);
 }
