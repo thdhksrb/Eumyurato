@@ -14,6 +14,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link href="/static/css/loginJoin/loginJoin2.css" rel="stylesheet" type="text/css"/>
     <link href="/static/css/loginJoin/loginJoin1.css" rel="stylesheet" type="text/css"/>
+
+    <!-- 그래프 js-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!--end::Global Stylesheets Bundle-->
 </head>
 <!--end::Head-->
@@ -49,11 +52,24 @@
 
         <!--사이드-->
         <!--begin::Aside-->
+
+
+
         <!--begin::Content-->
         <!--로그인폼-->
         <div class="login-content flex-lg-row-fluid d-flex flex-column overflow-hidden py-10 py-lg-20 px-10 p-lg-7 mx-auto mw-450px w-100">
             <!--begin::Wrapper-->
             <!--begin::Signin Form-->
+
+            <!-- 그래프 그리는 부분-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 mx-auto">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <!-- 그래프 그리는 부분-->
             <form class="form w-100  needs-validation" id="kt_login_signin_form" novalidate>
                 <!--th:data-after-login-url="@{/html/main/home.html}"-->
                 <!--begin::Title-->
