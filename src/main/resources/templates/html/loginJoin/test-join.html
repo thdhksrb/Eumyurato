@@ -11,8 +11,8 @@
             integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA=="
             referrerpolicy="no-referrer"
             src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
-    <link rel="stylesheet" th:href="@{/css/loginJoin/loginJoin2.css}" type="text/css"/>
-    <link rel="stylesheet" th:href="@{/css/loginJoin/loginJoin1.css}" type="text/css"/>
+    <link rel="stylesheet" href="/static/css/loginJoin/loginJoin2.css" type="text/css"/>
+    <link rel="stylesheet" href="/static/css/loginJoin/loginJoin1.css" type="text/css"/>
     <!--end::Global Stylesheets Bundle-->
 </head>
 <!--end::Head-->
@@ -29,7 +29,7 @@
                 <!--begin::Aside Logo-->
                 <a class="mb-6" th:href="@{/}">
                     <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
-                        <img alt="로고" class="h-450px h-lg-450px" th:src="@{/img/E114_logo.png}"/>
+                        <img alt="로고" class="h-450px h-lg-450px" src="/static/img/E114_logo.png"/>
                     </div>
                 </a>
                 <!--end::Aside Logo-->
@@ -39,7 +39,7 @@
             <div class="d-flex flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
                 <!--begin::Aside Logo-->
                 <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
-                    <img alt="로고" class="h-450px h-lg-450px" th:src="@{/img/E114_logo.png}"/>
+                    <img alt="로고" class="h-450px h-lg-450px" src="/static/img/E114_logo.png"/>
                 </div>
                 <!--end::Aside Logo-->
             </div>
@@ -185,105 +185,157 @@
                         <div class=" fv-row mb-5">
                             <label class="form-label fs-6 fw-bolder text-dark pt-5">이메일</label>
                             <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
-                            <input autocomplete="off" class="form-control form-control-lg form-control-solid"
-                                   id="email" name="email" placeholder="you@example.com" required
-                                   style="border-color: #0099FF;" type="email"/>
+                            <div class="d-flex align-items-center">
+                                <input autocomplete="off" class="form-control form-control-lg form-control-solid me-2 input_email"
+                                       id="email" name="email" placeholder="인증할 이메일을 입력해주세요."
+                                       required
+                                       style="border-color: #0099FF; width: 350px; height: 40px;" type="email"/>
+                                <button class="btn btn-primary fw-bolder fs-5 px-2 py-3 my-3 text-center RFCBtn"
+                                        style="width: 150px; height: 45px;" type="button" disabled>인증코드 발송
+                                </button>
+
+                                <p class="email_msg msg">
+                                    [email 메세지]
+                                </p>
+
+                                <!-- 이메일 변경 -->
+                                <div class="misspell_box">
+                                    <span>이메일을 잘못 입력하셨나요?</span>
+                                    <button class="email_change">[이메일 변경]</button>
+                                </div>
+                            </div>
+
+                            <div class="auth_container">
+
+                                <h3>인증 코드</h3>
+
+                                <!-- 인증 코드 -->
+                                <div class="auth_box">
+
+                                    <!-- 인증코드 입력창 컨테이너 -->
+                                    <div class="input_container">
+                                        <!-- 입력창 -->
+                                        <input type="text" class="input input_auth" placeholder="받은 인증코드를 입력해주세요.">
+                                        <!-- 유효시간 타이머 -->
+                                        <span class="timer"></span>
+                                    </div>
+
+                                    <button class="AuthBtn" disabled>인증코드 확인</button>
+
+                                </div>
+
+                                <!-- 인증코드 재발송 -->
+                                <div class="ReRFCBox">
+                                    <span>인증코드를 받지 못하셨나요?</span>
+                                    <button class="ReRFCBtn">[인증코드 재발송]</button>
+
+                                </div>
+
+                                <!-- 인증코드 상태 메세지 -->
+                                <p class="auth_msg msg">
+                                    [인증코드 메세지]
+                                </p>
+
+                            </div>
+
                             <div>
                                 <div class="invalid-feedback" id="email-empty">필수 입력 정보입니다.</div>
                                 <div class="invalid-feedback" id="email-invalid">이메일 형식이 아닙니다.</div>
                             </div>
                         </div>
 
-                    </div>
-
-                    <div>
-                        <div class=" fv-row mb-5">
-                            <label class="form-label fs-6 fw-bolder text-dark pt-5">휴대번호</label>
-                            <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
-                            <input autocomplete="off" class="form-control form-control-lg form-control-solid"
-                                   id="phone" name="phone" placeholder="-제외 입력하시오"
-                                   required style="border-color: #0099FF;" type="tel"/>
-                            <div>
-                                <div class="invalid-feedback" id="num1-empty">필수 입력 정보입니다.</div>
-                                <div class="invalid-feedback" id="num1-invalid">숫자만 입력 가능합니다.</div>
+                        <div>
+                            <div class=" fv-row mb-5">
+                                <label class="form-label fs-6 fw-bolder text-dark pt-5">휴대번호</label>
+                                <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
+                                <input autocomplete="off" class="form-control form-control-lg form-control-solid"
+                                       id="phone" name="phone" placeholder="-제외 입력하시오"
+                                       required style="border-color: #0099FF;" type="tel"/>
+                                <div>
+                                    <div class="invalid-feedback" id="num1-empty">필수 입력 정보입니다.</div>
+                                    <div class="invalid-feedback" id="num1-invalid">숫자만 입력 가능합니다.</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="separator border-dark my-10" style="border-width: 2px;"></div>
-                    <div class="fv-row mb-5">
-                        <label class="form-label fs-5 fw-bolder text-dark pt-0">유입 경로</label>
-                        <div class="d-flex mt-3 mb-5">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" id="inlineRadio1" name="road"
-                                       type="radio" value="검색">
-                                <label class="form-check-label" for="inlineRadio1">검색</label>
-                            </div>
-                            <div class="form-check form-check-inline ms-3 me-3">
-                                <input class="form-check-input" id="inlineRadio2" name="road"
-                                       type="radio" value="광고">
-                                <label class="form-check-label" for="inlineRadio2">광고</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" id="inlineRadio3" name="road"
-                                       type="radio" value="지인추천">
-                                <label class="form-check-label" for="inlineRadio3">지인 추천</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" id="inlineRadio4" name="road"
-                                       type="radio" value="기타">
-                                <label class="form-check-label" for="inlineRadio4">기타</label>
+                        <div class="separator border-dark my-10" style="border-width: 2px;"></div>
+                        <div class="fv-row mb-5">
+                            <label class="form-label fs-5 fw-bolder text-dark pt-0">유입 경로</label>
+                            <div class="d-flex mt-3 mb-5">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" id="inlineRadio1" name="road"
+                                           type="radio" value="검색">
+                                    <label class="form-check-label" for="inlineRadio1">검색</label>
+                                </div>
+                                <div class="form-check form-check-inline ms-3 me-3">
+                                    <input class="form-check-input" id="inlineRadio2" name="road"
+                                           type="radio" value="광고">
+                                    <label class="form-check-label" for="inlineRadio2">광고</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" id="inlineRadio3" name="road"
+                                           type="radio" value="지인추천">
+                                    <label class="form-check-label" for="inlineRadio3">지인 추천</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" id="inlineRadio4" name="road"
+                                           type="radio" value="기타">
+                                    <label class="form-check-label" for="inlineRadio4">기타</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="separator border-dark my-10" style="border-width: 2px;"></div>
-                    <div class="fv-row mb-5">
-                        <label class="form-label fs-5 fw-bolder text-dark pt-0">선호 장르</label>
-                        <div class="d-flex mt-3 mb-5">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" id="Radio1" name="genre" type="radio"
-                                       value="가요">
-                                <label class="form-check-label" for="Radio1">가요</label>
-                            </div>
-                            <div class="form-check form-check-inline ms-3 me-3">
-                                <input class="form-check-input" id="Radio2" name="genre" type="radio"
-                                       value="발라드">
-                                <label class="form-check-label" for="Radio2">발라드</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" id="Radio3" name="genre" type="radio"
-                                       value="힙합">
-                                <label class="form-check-label" for="Radio3">힙합</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" id="Radio4" name="genre" type="radio"
-                                       value="댄스">
-                                <label class="form-check-label" for="Radio4">댄스</label>
+                        <div class="separator border-dark my-10" style="border-width: 2px;"></div>
+                        <div class="fv-row mb-5">
+                            <label class="form-label fs-5 fw-bolder text-dark pt-0">선호 장르</label>
+                            <div class="d-flex mt-3 mb-5">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" id="Radio1" name="genre" type="radio"
+                                           value="가요">
+                                    <label class="form-check-label" for="Radio1">가요</label>
+                                </div>
+                                <div class="form-check form-check-inline ms-3 me-3">
+                                    <input class="form-check-input" id="Radio2" name="genre" type="radio"
+                                           value="발라드">
+                                    <label class="form-check-label" for="Radio2">발라드</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" id="Radio3" name="genre" type="radio"
+                                           value="힙합">
+                                    <label class="form-check-label" for="Radio3">힙합</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" id="Radio4" name="genre" type="radio"
+                                           value="댄스">
+                                    <label class="form-check-label" for="Radio4">댄스</label>
 
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" id="Radio5" name="genre" type="radio"
-                                       value="기타">
-                                <label class="form-check-label" for="Radio5">기타</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" id="Radio5" name="genre" type="radio"
+                                           value="기타">
+                                    <label class="form-check-label" for="Radio5">기타</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="separator border-dark my-10" style="border-width: 2px;"></div>
+                        <div class="separator border-dark my-10" style="border-width: 2px;"></div>
 
-                    <div class="fv-row mb-10 mt-10">
-                        <div class="form-check form-check-inline form-check-custom form-check-solid mb-5">
-                            <input class="form-check-input" id="chk_agree" name="chk_agree" required type="checkbox"
-                                   value="1"/>
-                            <label class="form-check-label fw-bold text-gray-600" for="chk_agree">I Agree the <a
-                                    class="ms-1" href="#">terms and conditions</a>.</label>
+                        <div class="fv-row mb-10 mt-10">
+                            <div class="form-check form-check-inline form-check-custom form-check-solid mb-5">
+                                <input class="form-check-input" id="chk_agree" name="chk_agree" required type="checkbox"
+                                       value="1"/>
+                                <label class="form-check-label fw-bold text-gray-600" for="chk_agree">I Agree the <a
+                                        class="ms-1" href="#">terms and conditions</a>.</label>
+                            </div>
+                            <div class="invalid-feedback" id="chk_agree-invalid" style="display: none;">약관에 동의해주세요.
+                            </div>
                         </div>
-                        <div class="invalid-feedback" id="chk_agree-invalid" style="display: none;">약관에 동의해주세요.</div>
-                    </div>
-                    <div class="d-flex flex-wrap justify-content-center pb-lg-0 pb-5">
-                        <!-- justify-content-end 클래스를 추가하여 오른쪽으로 정렬 -->
-                        <button class="btn btn-primary fw-bolder fs-4 px-8 py-4 my-3 me-4" type="submit" id="joinButton">회원 가입 완료</button>
-                    </div>
+                        <div class="d-flex flex-wrap justify-content-center pb-lg-0 pb-5">
+                            <!-- justify-content-end 클래스를 추가하여 오른쪽으로 정렬 -->
+                            <button class="btn btn-primary fw-bolder fs-4 px-8 py-4 my-3 me-4" type="submit"
+                                    id="joinButton">회원 가입 완료
+                            </button>
+                        </div>
+                        </div>
                 </form>
             </div>
         </div>

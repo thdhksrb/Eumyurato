@@ -8,6 +8,7 @@ import com.e114.e114_eumyuratodemo1.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -128,10 +130,19 @@ public String logout(HttpSession session) {
     session.removeAttribute("token"); // 세션에서 토큰 정보 제거
     return "redirect:/"; // 로그아웃 후 메인 홈페이지로 이동
 }
-
+// 아이디 찾기
     @GetMapping("/Idfind")
     public String idfind() {
         return "html/loginJoin/Idfind";
+    }
+
+    // 아이디 찾기 기능을 처리하는 메서드 추가
+    @PostMapping("/findUserId")
+    public ResponseEntity<List<String>> findUserId(@RequestBody Map<String, String> params) {
+        String name = params.get("name");
+        String email = params.get("email");
+        List<String> userIds = userService.findUserIdsByNameAndEmail(name, email);
+        return ResponseEntity.ok(userIds);
     }
 
     @GetMapping("/Pwfind")
