@@ -33,4 +33,5 @@ public interface AdminMemberDAO {
     void deleteLocalFestival(int id);
 
 
+
 }
