@@ -5,13 +5,16 @@ import com.e114.e114_eumyuratodemo1.dto.*;
 import com.e114.e114_eumyuratodemo1.jdbc.AdminMemberDAO;
 import com.e114.e114_eumyuratodemo1.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,6 +61,20 @@ public class AdminController {
     @GetMapping("/profile/admin/register")
     public String adminAccountRegister(){
         return "html/profile/concertRegister/profile_admin_concertRegister";
+    }
+
+    @PostMapping("/profile/admin/register")
+    public ResponseEntity<?> concertRegister(@RequestPart("registerDTO") SmallConcertDTO smallConcertDTO, @RequestPart(value = "imgFile",required = false) MultipartFile imgFile) throws IOException {
+        System.out.println(smallConcertDTO);
+        System.out.println("controller img:" + imgFile);
+        if(imgFile==null){
+            adminService.saveConcertWithoutImage(smallConcertDTO);
+            System.out.println("img null");
+        }
+        else {
+            adminService.saveConcert(smallConcertDTO, imgFile);
+        }
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/profile/admin/total")
