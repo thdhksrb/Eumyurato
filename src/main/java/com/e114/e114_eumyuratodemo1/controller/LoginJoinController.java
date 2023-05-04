@@ -4,6 +4,7 @@ import com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO;
 import com.e114.e114_eumyuratodemo1.jdbc.CommonMemberDAO;
+import com.e114.e114_eumyuratodemo1.jwt.JwtUtils;
 import com.e114.e114_eumyuratodemo1.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,7 +17,10 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.net.http.HttpResponse;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +33,9 @@ public class LoginJoinController {
 
     @Autowired
     private CommonMemberDAO commonMemberDAO;
+
+    @Autowired
+    private JwtUtils jwtUtils;
 
     @GetMapping("/")
     public String main(HttpSession session) {
@@ -44,31 +51,38 @@ public class LoginJoinController {
     }
 
     @PostMapping("/login-common")
-    public String login(@RequestParam("id") String id,
+    public void login(@RequestParam("id") String id,
                         @RequestParam("pwd") String pwd,
                         @RequestParam(name = "prevUrl", required = false) String prevUrl,
-                        HttpSession session, RedirectAttributes redirectAttributes) throws JsonProcessingException {
+                        HttpSession session, RedirectAttributes redirectAttributes, HttpServletResponse response) throws IOException {
         CommonMemberDTO commonMemberDTO = userService.login(id, pwd);
         if (commonMemberDTO != null) {
-            session.setAttribute("loginUser", commonMemberDTO);
-            String loginUserJson = new ObjectMapper().writeValueAsString(commonMemberDTO);
-            redirectAttributes.addFlashAttribute("loginUserJson", loginUserJson);
-            System.out.println("prevUrl: "+ prevUrl);
+//            session.setAttribute("loginUser", commonMemberDTO);
+//            String loginUserJson = new ObjectMapper().writeValueAsString(commonMemberDTO);
+//            redirectAttributes.addFlashAttribute("loginUserJson", loginUserJson);
+//            System.out.println("prevUrl: "+ prevUrl);
+
+
+            String jwtToken =
+                    jwtUtils.createAccessToken(commonMemberDTO.getAdminNum(),commonMemberDTO.getId(),commonMemberDTO.getName());
+
+            response.setHeader("Authorization","Bearer " + jwtToken);
+
             if(StringUtils.hasText(prevUrl) && !prevUrl.equalsIgnoreCase("null")){
-                return "redirect:" + prevUrl;
+
+//                return "redirect:" + prevUrl;
+                response.sendRedirect("/" + prevUrl);
             }else{
-                return "redirect:/";
+                response.sendRedirect("/");
+//                return "redirect:/";
             }
         } else {
-            redirectAttributes.addFlashAttribute("loginError", "아이디와 비밀번호를 다시 확인해주세요.");
-            return "redirect:/login-common";
+//            return "redirect:/login-common";
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "아이디와 비밀번호를 다시 확인해주세요.");
         }
     }
 
-//    @GetMapping("/test")
-//    public String main1() {
-//        return "html/main/test";
-//    }
+
 
     //아티스트 로그인
     @GetMapping("/login-art")
