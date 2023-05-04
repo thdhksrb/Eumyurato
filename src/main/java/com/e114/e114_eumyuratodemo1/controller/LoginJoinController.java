@@ -81,26 +81,25 @@ public class LoginJoinController {
         return "html/loginJoin/loginForm2";
     }
 
-    @PostMapping("/login-art")
-    public String loginArt(@RequestParam("id") String id,
-                           @RequestParam("pwd") String pwd,
-                           HttpSession session, RedirectAttributes redirectAttributes) throws JsonProcessingException {
+    @PostMapping("/login-art/token")
+    @ResponseBody
+    public Map<String, String> loginArt(@RequestParam("id") String id,
+                                        @RequestParam("pwd") String pwd,
+                                        HttpServletResponse response) throws IOException {
         ArtistMemberDTO artistMemberDTO = userService.loginArt(id, pwd);
         if (artistMemberDTO != null) {
-            session.setAttribute("loginUser", artistMemberDTO);
-            String loginUserJson = new ObjectMapper().writeValueAsString(artistMemberDTO);
-            redirectAttributes.addFlashAttribute("loginUserJson",loginUserJson);
-            return "redirect:/";
+            String jwtToken =
+                    jwtUtils.createAccessToken(artistMemberDTO.getAdminNum(), artistMemberDTO.getId(), artistMemberDTO.getName());
+
+            response.setHeader("Authorization", "Bearer " + jwtToken);
+            Map<String, String> result = new HashMap<>();
+            result.put("jwtToken", jwtToken);
+            return result;
         } else {
-            redirectAttributes.addFlashAttribute("loginError", "아이디와 비밀번호를 다시 확인해주세요.");
-            return "redirect:/login-art";
+            return null;
         }
     }
 
-//    @GetMapping("/artist")
-//    public String main2() {
-//        return "html/main/main2";
-//    }
 
     //기업 로그인
     @GetMapping("/login-enter")
@@ -108,19 +107,22 @@ public class LoginJoinController {
         return "html/loginJoin/loginForm3";
     }
 
-    @PostMapping("/login-enter")
-    public String loginenter(@RequestParam("id") String id,
-                             @RequestParam("pwd") String pwd,
-                             HttpSession session, RedirectAttributes redirectAttributes) throws JsonProcessingException {
+    @PostMapping("/login-enter/token")
+    @ResponseBody
+    public Map<String, String> loginenter(@RequestParam("id") String id,
+                                          @RequestParam("pwd") String pwd,
+                                          HttpServletResponse response) throws IOException {
         EnterpriseMemberDTO enterpriseMemberDTO = userService.loginenter(id, pwd);
         if (enterpriseMemberDTO != null) {
-            session.setAttribute("loginUser", enterpriseMemberDTO);
-            String loginUserJson = new ObjectMapper().writeValueAsString(enterpriseMemberDTO);
-            redirectAttributes.addFlashAttribute("loginUserJson",loginUserJson);
-            return "redirect:/";
+            String jwtToken =
+                    jwtUtils.createAccessToken(enterpriseMemberDTO.getAdminNum(), enterpriseMemberDTO.getId(), enterpriseMemberDTO.getName());
+
+            response.setHeader("Authorization", "Bearer " + jwtToken);
+            Map<String, String> result = new HashMap<>();
+            result.put("jwtToken", jwtToken);
+            return result;
         } else {
-            redirectAttributes.addFlashAttribute("loginError", "아이디와 비밀번호를 다시 확인해주세요.");
-            return "redirect:/login-enter";
+            return null;
         }
     }
 

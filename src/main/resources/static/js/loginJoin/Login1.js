@@ -40,11 +40,6 @@ function submitForm(event) {
                     event.preventDefault()
                     event.stopPropagation()
                 }
-                const prevUrl = window.sessionStorage.getItem("prevUrl");
-                window.sessionStorage.removeItem("prevUrl");
-                form.setAttribute('action', '/login-common?prevUrl=' + encodeURIComponent(prevUrl));
-
-
 
                 form.classList.add('was-validated')
             }, false)
