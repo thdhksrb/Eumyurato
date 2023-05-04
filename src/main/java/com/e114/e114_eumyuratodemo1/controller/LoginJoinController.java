@@ -57,10 +57,10 @@ public class LoginJoinController {
                         HttpSession session, RedirectAttributes redirectAttributes, HttpServletResponse response) throws IOException {
         CommonMemberDTO commonMemberDTO = userService.login(id, pwd);
         if (commonMemberDTO != null) {
-            session.setAttribute("loginUser", commonMemberDTO);
-            String loginUserJson = new ObjectMapper().writeValueAsString(commonMemberDTO);
-            redirectAttributes.addFlashAttribute("loginUserJson", loginUserJson);
-            System.out.println("prevUrl: "+ prevUrl);
+//            session.setAttribute("loginUser", commonMemberDTO);
+//            String loginUserJson = new ObjectMapper().writeValueAsString(commonMemberDTO);
+//            redirectAttributes.addFlashAttribute("loginUserJson", loginUserJson);
+//            System.out.println("prevUrl: "+ prevUrl);
 
 
             String jwtToken =
@@ -71,15 +71,14 @@ public class LoginJoinController {
             if(StringUtils.hasText(prevUrl) && !prevUrl.equalsIgnoreCase("null")){
 
 //                return "redirect:" + prevUrl;
-                response.sendRedirect("/"+prevUrl);  // 수정
+                response.sendRedirect("/" + prevUrl);
             }else{
                 response.sendRedirect("/");
 //                return "redirect:/";
             }
         } else {
-            redirectAttributes.addFlashAttribute("loginError", "아이디와 비밀번호를 다시 확인해주세요.");
 //            return "redirect:/login-common";
-            response.sendRedirect("/login-common"); // 수정
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "아이디와 비밀번호를 다시 확인해주세요.");
         }
     }
 
