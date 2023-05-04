@@ -3,6 +3,7 @@ package com.e114.e114_eumyuratodemo1.jdbc;
 import com.e114.e114_eumyuratodemo1.dto.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -32,6 +33,7 @@ public interface AdminMemberDAO {
     void deleteSmallConcert(int id);
     void deleteLocalFestival(int id);
 
-
+    void saveConcertWithoutImage(SmallConcertDTO smallConcertDTO);
+    void saveConcert(SmallConcertDTO smallConcertDTO);
 
 }

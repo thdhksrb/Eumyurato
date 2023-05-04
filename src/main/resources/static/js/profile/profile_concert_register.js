@@ -26,7 +26,7 @@ function sample4_execDaumPostcode() {
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
             document.getElementById('sample4_postcode').value = data.zonecode;
             document.getElementById("sample4_roadAddress").value = roadAddr;
-            document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+            document.getElementById("sample4_extraAddress").value = '';
 
             // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
             if(roadAddr !== ''){
@@ -53,50 +53,52 @@ function sample4_execDaumPostcode() {
         }
     }).open();
 }
+
 $(document).ready(function() {
     var defaultImage = '/img/default.jpg';
     $('#previewImage').attr('src', defaultImage);
-
-    $('input[name="avatar"]').on('change', function () {
-        var file = $(this)[0].files[0];
-        var formData = new FormData();
-        formData.append('file', file);
-
-        $.ajax({
-            url: '/image/upload',
-            type: 'POST',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function (data) {
-                $('#previewImage').attr('src', data.imageUrl);
-                $('#previewImage').css('display', 'inline-block');
-                $('input[name="image"]').val(data.imagePath);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log(textStatus + ': ' + errorThrown);
-            }
-        });
+    $('input[type="file"]').on('change', function(event) {
+        var file = event.target.files[0];
+        var imageUrl = URL.createObjectURL(file);
+        $('#previewImage').attr('src', imageUrl);
     });
-
-    $('form').submit(function (event) {
-        event.preventDefault();
-        var formData = new FormData(this);
-        $.ajax({
-            url: '/profile/admin/register',
-            type: 'POST',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function (result) {
-                // 공연 등록 완료 시 처리
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log(textStatus + ': ' + errorThrown);
-            }
-        });
+    $('#concertRegister').on('click', function(event) {
+        event.preventDefault(); // 기본 동작(페이지 이동) 방지
+        concertRegister(); // 함수 실행
     });
 });
+
+function concertRegister() {
+    var formData = new FormData();
+    var fileInput = document.querySelector('input[name="avatar"]');
+    var file = fileInput.files[0];
+    formData.append('imgFile', file);
+    var data = {
+        name: $("input[name='name']").val(),
+        pname: $("input[name='pname']").val(),
+        location: $("input[name='sample4_roadAddress']").val(),
+        enterId: $("input[name='enterId']").val(),
+        startDate: $("input[name='startDate']").val(),
+        lastDate: $("input[name='lastDate']").val(),
+        price: $("input[name='price']").val()
+    };
+    formData.append('registerDTO', new Blob([JSON.stringify(data)], { type: 'application/json' }));
+    console.log(formData);
+    $.ajax({
+        type: 'POST',
+        url: '/profile/admin/register',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function() {
+            alert('공연등록 성공');
+            window.location.href = '/profile/admin/management/view';
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(textStatus + ': ' + errorThrown);
+        }
+    });
+}
 
 
 
