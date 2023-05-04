@@ -12,9 +12,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <!--begin::Global Stylesheets Bundle(used by all pages)-->
+    <link type="text/css" th:href="@{https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css}" rel="stylesheet" />
     <link th:href="@{/css/profile/profile1.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{/css/profile/profile2.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{/css/profile/profile3.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/profile/datepicker.css}" rel="stylesheet" type="text/css"/>
     <!--end::Global Stylesheets Bundle-->
 </head>
 <!--end::Head-->
@@ -166,10 +168,12 @@
 
                 <div class="fv-row mb-5">
                     <label class="form-label fs-6 fw-bolder text-dark pt-5">공연명</label>
+                    <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
                     <input class="form-control form-control-lg form-control-solid" type="text"
                            placeholder=""
                            name="name" autocomplete="off" style="border-color: #0099FF;"/>
                     <label class="form-label fs-6 fw-bolder text-dark pt-5">공연자</label>
+                    <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
                     <input class="form-control form-control-lg form-control-solid" type="text"
                            placeholder=""
                            name="pname" autocomplete="off" style="border-color: #0099FF;"/>
@@ -179,20 +183,20 @@
                     <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
                     <div style="display: flex; align-items: center;">
                         <input type="text" id="sample4_postcode" class="form-control form-control-lg form-control-solid" placeholder="우편번호"
-                               autocomplete="off" style="border-color: #0099FF; width: 250px; margin-right: 50px;">
+                               autocomplete="off" style="border-color: #0099FF; width: 250px; margin-right: 50px;" readonly>
                         <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn btn-primary fw-bolder fs-4 px-8 py-4 my-3 me-4">
                     </div>
                     <input type="text" id="sample4_roadAddress" name="sample4_roadAddress" class="form-control form-control-lg form-control-solid" placeholder="주소"
-                           autocomplete="off" style="border-color: #0099FF;"><br>
+                           autocomplete="off" style="border-color: #0099FF;" readonly><br>
                     <input type="text" id="sample4_detailAddress" class="form-control form-control-lg form-control-solid" placeholder="상세주소"
                            autocomplete="off" style="border-color: #0099FF;">
                 </div>
 
                 <div class=" fv-row mb-5">
                     <label class="form-label fs-6 fw-bolder text-dark pt-5">기업 ID</label>
+                    <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
                     <input class="form-control form-control-lg form-control-solid" type="text"
-                           placeholder=""
-                           name="enterId" autocomplete="off" style="border-color: #0099FF;"/>
+                           name="enterId" id="enterId" autocomplete="off" style="border-color: #0099FF;"/>
                 </div>
                 <div class=" fv-row mb-5">
                     <div>
@@ -200,18 +204,18 @@
                         <div class=" fv-row mb-5">
                             <label class="form-label fs-6 fw-bolder text-dark pt-5">공연 시작 일자</label>
                             <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
-                            <input autocomplete="off" class="form-control form-control-lg form-control-solid"
+                            <input autocomplete="off" class="form-control form-control-lg form-control-solid datepicker"
                                    id="startDate" name="startDate" placeholder="" required
-                                   style="border-color: #0099FF;" type="date"/>
+                                   style="border-color: #0099FF;" type="text"/>
                             <div>
                                 <div class="invalid-feedback" id="date-empty1">필수 입력 정보입니다.</div>
                             </div>
 
                             <label class="form-label fs-6 fw-bolder text-dark pt-5">공연 마감 일자</label>
                             <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
-                            <input autocomplete="off" class="form-control form-control-lg form-control-solid"
+                            <input autocomplete="off" class="form-control form-control-lg form-control-solid datepicker"
                                    id="lastDate" name="lastDate" placeholder="" required
-                                   style="border-color: #0099FF;" type="date"/>
+                                   style="border-color: #0099FF;" type="text"/>
                             <div>
                                 <div class="invalid-feedback" id="date-empty2">필수 입력 정보입니다.</div>
                             </div>
@@ -221,9 +225,9 @@
                 </div>
                 <div class=" fv-row mb-5">
                     <label class="form-label fs-6 fw-bolder text-dark pt-5">가격</label>
+                    <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
                     <input class="form-control form-control-lg form-control-solid" type="text"
-                           placeholder=""
-                           name="price" autocomplete="off" style="border-color: #0099FF;"/>
+                           name="price" id="price" autocomplete="off" style="border-color: #0099FF;"/>
                 </div>
                 <div class="fv-row mb-10 mt-10"> <!-- mt-5를 추가하여 위쪽에 5단위의 빈 공간을 추가 -->
                     <div class="d-flex flex-wrap justify-content-center pb-lg-0 pb-5">
@@ -241,5 +245,39 @@
 <script type="text/javascript" th:src="@{/js/profile/profile_concert_register.js}"></script>
 <!--우편번호 API-->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<!--datepicker용-->
+<script type="text/javascript" th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/1.12.1/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js}"></script>
+<!-- 캘린더 옵션 { -->
+<script>
+    $.datepicker.setDefaults({
+        closeText: "닫기",
+        prevText: "이전달",
+        nextText: "다음달",
+        currentText: "오늘",
+        monthNames: ["1월", "2월", "3월", "4월", "5월", "6월",
+            "7월", "8월", "9월", "10월", "11월", "12월"
+        ],
+        monthNamesShort: ["1월", "2월", "3월", "4월", "5월", "6월",
+            "7월", "8월", "9월", "10월", "11월", "12월"
+        ],
+        dayNames: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"],
+        dayNamesShort: ["일", "월", "화", "수", "목", "금", "토"],
+        dayNamesMin: ["일", "월", "화", "수", "목", "금", "토"],
+        weekHeader: "주",
+        dateFormat: "yy.m.d", // 날짜형태 예)yy년 m월 d일
+        firstDay: 0,
+        isRTL: false,
+        showMonthAfterYear: true,
+        yearSuffix: "년"
+    })
+
+    $(".datepicker").datepicker({
+        minDate: 0
+    })
+
+    $('#startDate, #lastDate').datepicker('setDate', 'today');
+</script>
+<!-- } -->
 </body>
 </html>

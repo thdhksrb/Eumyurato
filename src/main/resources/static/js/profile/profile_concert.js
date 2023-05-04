@@ -92,7 +92,8 @@ function getEvents(category, page = 1, searchColumn = null, searchKeyword = '') 
                     eventRow.insertCell().textContent = event.enterId;
                     eventRow.insertCell().textContent = event.pname;
                     eventRow.insertCell().textContent = event.location;
-                    eventRow.insertCell().textContent = event.startDate + ' - ' + event.lastDate;
+                    eventRow.insertCell().textContent = event.startDate;
+                    eventRow.insertCell().textContent = event.lastDate;
                     eventRow.insertCell().textContent = event.price;
                     eventRow.insertCell().appendChild(deleteButton);
                     break;
@@ -102,7 +103,8 @@ function getEvents(category, page = 1, searchColumn = null, searchKeyword = '') 
                     eventRow.insertCell().textContent = event.name;
                     eventRow.insertCell().textContent = event.org;
                     eventRow.insertCell().textContent = event.location;
-                    eventRow.insertCell().textContent = event.startDate + ' - ' + event.lastDate;
+                    eventRow.insertCell().textContent = event.startDate;
+                    eventRow.insertCell().textContent = event.lastDate;
                     eventRow.insertCell().appendChild(deleteButton);
                     break;
 
