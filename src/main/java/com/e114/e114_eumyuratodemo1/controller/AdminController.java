@@ -1,6 +1,5 @@
 package com.e114.e114_eumyuratodemo1.controller;
 
-
 import com.e114.e114_eumyuratodemo1.dto.*;
 import com.e114.e114_eumyuratodemo1.jdbc.AdminMemberDAO;
 import com.e114.e114_eumyuratodemo1.service.AdminService;
@@ -121,6 +120,40 @@ public class AdminController {
         }
 
         return ResponseEntity.ok(memberList);
+    }
+
+    @GetMapping("/profile/admin/total/commonMember")
+    @ResponseBody
+    public Map<String, Object> getCommonMember() {
+
+        List<Map<String, Object>> genderCounts = adminService.commonGenderCount();
+        List<Map<String, Object>> genreCounts = adminService.commonGenreCount();
+        List<Map<String, Object>> roadCounts = adminService.commonRoadCount();
+
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("genderCounts", genderCounts);
+        resultMap.put("genreCounts", genreCounts);
+        resultMap.put("roadCounts", roadCounts);
+
+        return resultMap;
+    }
+
+    @GetMapping("/profile/admin/total/artistMember")
+    @ResponseBody
+    public Map<String, Object> getArtistMember() {
+
+        System.out.println(adminService.artistPointTop());
+
+        List<Map<String, Object>> genderCounts = adminService.artistGenderCount();
+        List<Map<String, Object>> genreCounts = adminService.artistGenreCount();
+        List<Map<String, Object>> points = adminService.artistPointTop();
+
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("genderCounts", genderCounts);
+        resultMap.put("genreCounts", genreCounts);
+        resultMap.put("points", points);
+
+        return resultMap;
     }
 
 /*    @GetMapping("/logout")

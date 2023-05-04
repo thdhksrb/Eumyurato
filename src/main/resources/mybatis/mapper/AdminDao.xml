@@ -109,4 +109,42 @@
         INSERT INTO small_concert (enterId, name, location, pname, price, startDate, lastDate, image)
         VALUES (#{enterId}, #{name}, #{location}, #{pname}, #{price}, #{startDate}, #{lastDate}, #{image})
     </insert>
+
+    <select id="getCommonGender" resultType="map">
+        SELECT sex, COUNT(*) as count
+        FROM common_member
+        GROUP BY sex;
+    </select>
+
+    <select id="getCommonGenre" resultType="map">
+        SELECT genre, COUNT(*) as count
+        FROM common_member
+        GROUP BY genre;
+    </select>
+
+    <select id="getCommonRoad" resultType="map">
+        SELECT road, COUNT(*) as count
+        FROM common_member
+        GROUP BY road;
+    </select>
+
+    <select id="getArtistGender" resultType="map">
+        SELECT sex, COUNT(*) as count
+        FROM artist_member
+        GROUP BY sex;
+    </select>
+
+    <select id="getArtistGenre" resultType="map">
+        SELECT genre, COUNT(*) as count
+        FROM artist_member
+        GROUP BY genre;
+    </select>
+
+    <select id="getArtistPoint" resultType="map">
+        SELECT id, nid, point
+        FROM artist_member
+        ORDER BY point DESC
+            LIMIT 10;
+    </select>
+
 </mapper>

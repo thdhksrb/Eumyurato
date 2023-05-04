@@ -39,4 +39,13 @@ public interface AdminMemberDAO {
     void saveConcertWithoutImage(SmallConcertDTO smallConcertDTO);
     void saveConcert(SmallConcertDTO smallConcertDTO);
 
+    //일반 회원
+    List<Map<String, Object>> getCommonGender();
+    List<Map<String, Object>>  getCommonGenre();
+    List<Map<String, Object>> getCommonRoad();
+
+    //아티스트 회원
+    List<Map<String, Object>> getArtistGender();
+    List<Map<String, Object>> getArtistGenre();
+    List<Map<String, Object>> getArtistPoint();
 }
