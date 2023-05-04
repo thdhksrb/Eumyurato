@@ -764,3 +764,8 @@
     border: 1px solid #999
 }
 
+.postcode-container {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}

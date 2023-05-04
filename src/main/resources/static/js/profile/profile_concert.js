@@ -1,50 +1,54 @@
+let currentCategory = 'busking';
+getEvents(currentCategory);
+
 document.getElementById('buskingBtn').addEventListener('click', () => {
-    getEvents('busking');
-    updateSearchColumns('busking'); // 추가된 부분
+    currentCategory = 'busking';
+    getEvents(currentCategory);
 });
 
 document.getElementById('smallConcertBtn').addEventListener('click', () => {
-    getEvents('smallconcert');
-    updateSearchColumns('smallconcert'); // 추가된 부분
+    currentCategory = 'smallconcert';
+    getEvents(currentCategory);
 });
 
 document.getElementById('localFestivalBtn').addEventListener('click', () => {
-    getEvents('localfestival');
-    updateSearchColumns('localfestival'); // 추가된 부분
+    currentCategory = 'localfestival';
+    getEvents(currentCategory);
 });
 
-window.onload = function() {
-    getEvents('busking');
-    updateSearchColumns('busking'); // 추가된 부분
-};
+document.getElementById('searchBtn').addEventListener('click', () => {
+    const searchColumn = document.getElementById('searchColumn').value;
+    const searchKeyword = document.getElementById('searchKeyword').value;
 
-    function getEvents(category, page = 1) {
-        let url = `/profile/admin/management?category=${category}&page=${page}`;
-        if (column && keyword) {
-            url += `&column=${column}&keyword=${keyword}`;
-        }
+    getEvents(currentCategory, 1, searchColumn, searchKeyword);
+});
 
-        fetch(url , {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-            .then((response) => {
-                if (response.ok) {
-                    return response.json();
-                }
-                throw new Error('응답에 문제가 있습니다.');
-            })
-            .then((data) => {
-                showColumns(category);
-                updateSearchColumns(category); // 추가된 부분
-                displayEvents(data, category, page);
-            })
-            .catch((error) => {
-                console.error('fetch 작동에 문제가 있습니다.', error);
-            });
+function getEvents(category, page = 1, searchColumn = null, searchKeyword = '') {
+    let url = `/profile/admin/management?category=${category}&page=${page}`;
+    if (searchColumn && searchKeyword) {
+        url += `&column=${searchColumn}&keyword=${searchKeyword}`;
     }
+
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then((response) => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error('응답에 문제가 있습니다.');
+        })
+        .then((data) => {
+            showColumns(category);
+            displayEvents(data, category, page);
+        })
+        .catch((error) => {
+            console.error('fetch 작동에 문제가 있습니다.', error);
+        });
+}
 
     function displayEvents(events, category, currentPage) {
         const eventTbody = document.getElementById('eventTbody');
@@ -165,41 +169,42 @@ window.onload = function() {
         }
     }
 
-    const searchColumns = {
-        busking: [
-            { value: 'name', text: '공연명' },
-            { value: 'artId', text: '아티스트명' },
-            { value: 'location', text: '위치' }
-        ],
-        smallconcert: [
-            { value: 'name', text: '공연명' },
-            { value: 'enterId', text: '기업명' },
-            { value: 'pname', text: '공연자명' },
-            { value: 'location', text: '위치' }
-            // 필요한 경우 추가 검색 컬럼 옵션을 추가하세요.
-        ],
-        localfestival: [
-            { value: 'name', text: '축제명' },
-            { value: 'org', text: '주최기관' },
-            { value: 'location', text: '위치' }
-            // 필요한 경우 추가 검색 컬럼 옵션을 추가하세요.
-        ],
-    };
+function showColumns(category) {
+    const columns = document.querySelectorAll('th');
+    const categoryColumns = document.querySelectorAll(`th.${category}`);
 
-    function updateSearchColumns(category) {
-        const searchColumnSelect = document.getElementById('searchColumn');
-        searchColumnSelect.innerHTML = '<option value="">검색 컬럼 선택</option>';
-
-        searchColumns[category].forEach((column) => {
-            const option = document.createElement('option');
-            option.value = column.value;
-            option.textContent = column.text;
-            searchColumnSelect.appendChild(option);
-        });
+    // 모든 컬럼을 숨깁니다.
+    for (let i = 0; i < columns.length; i++) {
+        columns[i].style.display = 'none';
     }
 
-    document.getElementById('searchBtn').addEventListener('click', () => {
-        const column = document.getElementById('searchColumn').value;
-        const keyword = document.getElementById('searchKeyword').value;
-        getEvents(currentCategory, 1, column, keyword);
-    });
+    // 선택한 행사의 컬럼만 표시합니다.
+    for (let i = 0; i < categoryColumns.length; i++) {
+        categoryColumns[i].style.display = 'table-cell';
+    }
+
+    // 드롭다운 옵션을 업데이트합니다.
+    updateDropdownOptions(category);
+}
+
+function updateDropdownOptions(category) {
+    const options = document.querySelectorAll('#searchColumn option');
+    const categoryOptions = document.querySelectorAll(`#searchColumn option.${category}`);
+
+    // 모든 옵션을 숨깁니다.
+    for (let i = 0; i < options.length; i++) {
+        options[i].style.display = 'none';
+    }
+
+    // 선택한 카테고리의 옵션만 표시합니다.
+    for (let i = 0; i < categoryOptions.length; i++) {
+        categoryOptions[i].style.display = 'block';
+    }
+
+    // 첫 번째 표시된 옵션을 선택합니다.
+    const firstVisibleOption = document.querySelector(`#searchColumn option.${category}`);
+    if (firstVisibleOption) {
+        firstVisibleOption.selected = true;
+    }
+}
+

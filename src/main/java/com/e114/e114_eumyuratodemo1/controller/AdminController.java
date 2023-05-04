@@ -5,23 +5,19 @@ import com.e114.e114_eumyuratodemo1.dto.*;
 import com.e114.e114_eumyuratodemo1.jdbc.AdminMemberDAO;
 import com.e114.e114_eumyuratodemo1.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class AdminController {
@@ -32,24 +28,21 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-    private static String UPLOAD_DIR = "uploads/";
-    private static final List<String> ALLOWED_EXTENSIONS = Arrays.asList("jpg", "jpeg", "png", "gif");
-    private static final List<String> ALLOWED_MIME_TYPES = Arrays.asList("image/jpeg", "image/png", "image/gif");
-
     @GetMapping("/profile/admin/root")
     public String adminRoot(){
-        return "html/profile/account/profile_admin_account";
+        return "html/profile/root/profile_admin_root";
     }
 
-    @GetMapping("/profile/admin/account")
-    public String adminAccount(HttpServletRequest request){
-        Map<String, String> map = new HashMap<String, String>();
+    @PostMapping("/profile/admin/root")
+    public String adminRootPost(){
+        return "redirect:/board/admin";
+    }
 
-        String id = request.getParameter("id");
+    @GetMapping("/profile/admin/{adminId}")
+    public String adminAccount(@PathVariable("adminId") String adminId, Model model){
+        EnterpriseMemberDTO admin = memberDAO.getAdminInfoById(adminId);
 
-        map.put("id", id);
-
-        memberDAO.getAdminInfoById(map);
+        model.addAttribute("admin", admin);
 
         return "html/profile/account/profile_admin_account";
     }
@@ -72,72 +65,18 @@ public class AdminController {
     }
 
     @PostMapping("/profile/admin/register")
-    public String handleFileUpload(@RequestParam("avatar") MultipartFile file, SmallConcertDTO smallConcertDTO,
-                                   RedirectAttributes redirectAttributes) {
-        // 파일 저장 경로 설정
-        String uploadDirectory = "uploads";
-        Path uploadPath = Paths.get(uploadDirectory);
-
-        // 파일 형식 제한 (예: .png, .jpg, .jpeg)
-        String originalFilename = file.getOriginalFilename();
-        String fileExtension = originalFilename.substring(originalFilename.lastIndexOf(".")).toLowerCase();
-        if (!fileExtension.matches(".png|.jpg|.jpeg")) {
-            redirectAttributes.addFlashAttribute("message", "지원하지 않는 파일 형식입니다. (.png, .jpg, .jpeg 만 가능)");
-            return "redirect:/profile/admin/register";
+    public ResponseEntity<?> concertRegister(@RequestPart("registerDTO") SmallConcertDTO smallConcertDTO, @RequestPart(value = "imgFile",required = false) MultipartFile imgFile) throws IOException {
+        System.out.println(smallConcertDTO);
+        System.out.println("controller img:" + imgFile);
+        if(imgFile==null){
+            adminService.saveConcertWithoutImage(smallConcertDTO);
+            System.out.println("img null");
         }
-
-        try {
-            // 파일 이름 중복 처리
-            String uniqueFilename = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS")) + "_" + originalFilename;
-
-            // 파일 저장
-            if (!Files.exists(uploadPath)) {
-                Files.createDirectories(uploadPath);
-            }
-            Path filePath = uploadPath.resolve(uniqueFilename);
-            file.transferTo(filePath.toFile());
-
-            // 업로드된 파일 경로를 DTO에 설정
-            smallConcertDTO.setImage(filePath.toString());
-
-            // DTO를 이용해 공연 정보 저장
-            adminService.registerSmallConcert(smallConcertDTO);
-
-        } catch (IOException e) {
-            // 파일 업로드 예외 처리
-            e.printStackTrace();
-            redirectAttributes.addFlashAttribute("message", "파일 업로드 중 오류가 발생했습니다.");
-            return "redirect:/profile/admin/register";
+        else {
+            adminService.saveConcert(smallConcertDTO, imgFile);
         }
-
-        // 처리 후 리다이렉트 또는 반환할 뷰 이름 설정
-        return "redirect:/profile/admin/management/view";
+        return ResponseEntity.ok().build();
     }
-
-//    @PostMapping("/profile/admin/register")
-//    public String smallConcertRegister(HttpServletRequest request){
-//
-//        Map<String, String> map = new HashMap<String, String>();
-//        String name = request.getParameter("name");
-//        String enterId = request.getParameter("enterId");
-//        String location = request.getParameter("location");
-//        String pname = request.getParameter("pname");
-//        String startDate = request.getParameter("startDate");
-//        String lastDate = request.getParameter("lastDate");
-//        String price = request.getParameter("price");
-//
-//        map.put("name", name);
-//        map.put("enterId", enterId);
-//        map.put("location", location);
-//        map.put("pname", pname);
-//        map.put("startDate", startDate);
-//        map.put("lastDate", lastDate);
-//        map.put("price", price);
-//
-//        memberDAO.registerSmallConcert(map);
-//
-//        return "redirect:/profile/admin/management/view";
-//    }
 
     @GetMapping("/profile/admin/total")
     public String getCommonsAndArtistsList(Model model){
@@ -158,8 +97,10 @@ public class AdminController {
         params.put("column", column);
         params.put("keyword", keyword);
 
+        List<ArtistMemberDTO> artists = memberDAO.searchArtistMembers(params);
         List<CommonMemberDTO> commons = memberDAO.searchCommonMembers(params);
 
+        model.addAttribute("artists", artists);
         model.addAttribute("commons", commons);
 
         return "html/profile/total/profile_admin_total";
@@ -171,8 +112,10 @@ public class AdminController {
         params.put("column", column);
         params.put("keyword", keyword);
 
+        List<ArtistMemberDTO> artists = memberDAO.searchArtistMembers(params);
         List<CommonMemberDTO> commons = memberDAO.searchCommonMembers(params);
 
+        model.addAttribute("artists", artists);
         model.addAttribute("commons", commons);
 
         return "html/profile/total/profile_admin_total";

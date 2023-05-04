@@ -2,6 +2,8 @@ package com.e114.e114_eumyuratodemo1.jdbc;
 
 import com.e114.e114_eumyuratodemo1.dto.*;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -21,13 +23,11 @@ public interface AdminMemberDAO {
     List<ReservationDTO> getReservationList();  // 예약 내역 목록 불러오기
     List<ReservationDTO> searchReservations(Map<String, String> params  );  // 예약 내역 검색
 
-    EnterpriseMemberDTO getAdminInfoById(Map<String, String> params);   // 내 계정 정보 불러오기 기능 (test용)
+    EnterpriseMemberDTO getAdminInfoById(String adminId);   // 내 계정 정보 불러오기 기능 (test용)
 
     List<BuskingDTO> getBuskings();     // 버스킹 목록 불러오기
     List<SmallConcertDTO> getSmallConcerts();   // 소규모 공연 불러오기
     List<LocalFestivalDTO> getLocalFestivals(); // 지역축제 불러오기
-
-    void registerSmallConcert(SmallConcertDTO smallConcertDTO);   // 소규모 공연 등록
 
     void deleteBusking(int id);
     void deleteSmallConcert(int id);
@@ -36,5 +36,7 @@ public interface AdminMemberDAO {
     List<BuskingDTO> searchBuskings(Map<String, String> params);
     List<SmallConcertDTO> searchSmallConcerts(Map<String, String> params);
     List<LocalFestivalDTO> searchLocalFestivals(Map<String, String> params);
+    void saveConcertWithoutImage(SmallConcertDTO smallConcertDTO);
+    void saveConcert(SmallConcertDTO smallConcertDTO);
 
 }

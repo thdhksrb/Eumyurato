@@ -123,9 +123,25 @@
                         <a th:href="@{/profile/admin/register}" class="btn btn-primary">공연 등록</a>
                     </div>
                     <div class="search-container">
-                        <select id="searchColumn"></select>
-                        <input type="text" id="searchKeyword" placeholder="검색어 입력">
-                        <button id="searchBtn">검색</button>
+                        <select id="searchColumn" style="width: 10%; height: 40px; border-radius: 5px;">
+                            <!-- 버스킹 공연 옵션 -->
+                            <option class="busking" value="name">공연명</option>
+                            <option class="busking" value="artId">아티스트명</option>
+                            <option class="busking" value="location">위치</option>
+
+                            <!-- 소규모 공연 옵션 -->
+                            <option class="smallconcert" value="name">공연명</option>
+                            <option class="smallconcert" value="enterId">기업아이디</option>
+                            <option class="smallconcert" value="pname">공연자명</option>
+                            <option class="smallconcert" value="location">위치</option>
+
+                            <!-- 지역 축제 옵션 -->
+                            <option class="localfestival" value="name">축제명</option>
+                            <option class="localfestival" value="org">주최 기관</option>
+                            <option class="localfestival" value="location">위치</option>
+                        </select>
+                        <input type="text" id="searchKeyword" placeholder="검색어 입력" style="width: 30%; height: 40px; border-radius: 5px; border: 1px solid #cccad4">
+                        <button class="btn btn-primary" id="searchBtn" style="width: 10%;" >Search</button>
                     </div>
                     <div>
                         <div class="container mt-5">
