@@ -80,14 +80,14 @@ public class JwtUtils {
         try {
             Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token);
             return true;
-        }
-        catch(io.jsonwebtoken.security.SignatureException e) {
+        } catch (io.jsonwebtoken.security.SignatureException e) {
             logger.info("잘못된 토큰 서명입니다.");
-        }catch(ExpiredJwtException e) {
+        } catch (ExpiredJwtException e) {
             logger.info("만료된 토큰입니다.");
-        }catch(IllegalArgumentException | MalformedJwtException e) {
+        } catch (IllegalArgumentException | MalformedJwtException e) {
             logger.info("잘못된 토큰입니다.");
-        }return false;
+        }
+        return false;
     }
 
     public String getRole(String token) {
@@ -106,7 +106,7 @@ public class JwtUtils {
     public String getAccessToken(HttpServletRequest httpServletRequest) {
         String bearerToken = httpServletRequest.getHeader(AUTHORIZATION_HEADER);
         System.out.println("JwtUtils getAccessToken : " + bearerToken);
-        if(StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
+        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
             return bearerToken.substring(7);
         }
         return null;
@@ -115,7 +115,7 @@ public class JwtUtils {
     //reaquest Header에서 refresh토큰 정보 꺼내오기
     public String getRefreshToken(HttpServletRequest httpServletRequest) {
         Cookie[] cookies = httpServletRequest.getCookies();
-        if(cookies != null) {
+        if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("refreshToken")) {
                     System.out.println("JwtUtils getRefreshToken : " + cookie.getValue());
@@ -126,16 +126,18 @@ public class JwtUtils {
         return null;
     }
 
-    // role에 따라서 페이지 이동을 다르게 하는 메서드 - 비회원, tutor, tutee, admin
-    public String authByRole(HttpServletRequest httpServletRequest ,String notLoginURI, String tuteeURI, String tutorURI, String adminURI){
+    // role에 따라서 페이지 이동을 다르게 하는 메서드 - 비회원, admin, common, artist, enter
+    public String authByRole(HttpServletRequest httpServletRequest, String notLoginURI, String commonURI, String artistURI, String enterURL, String adminURI) {
         String token = getAccessToken(httpServletRequest);
-        if (token == null){
+        if (token == null) {
             return notLoginURI;
-        }else if(getRole(token).equals("tutee")){
-            return tuteeURI;
-        }else if(getRole(token).equals("tutor")){
-            return tutorURI;
-        }else if(getRole(token).equals("admin")){
+        } else if (getRole(token).equals("common")) {
+            return commonURI;
+        } else if (getRole(token).equals("artist")) {
+            return artistURI;
+        } else if (getRole(token).equals("enter")) {
+            return enterURL;
+        } else if (getRole(token).equals("admin")) {
             return adminURI;
         }
         return null;
@@ -145,7 +147,7 @@ public class JwtUtils {
 //    public String authByRole(String token){
     public String authByRole(HttpServletRequest request, String adminURI) {
         String token = getAccessToken(request);
-        System.out.println("authByRole: "+token);
+        System.out.println("authByRole: " + token);
         if (getRole(token).equals("admin")) {
             return adminURI;
         }
@@ -154,19 +156,20 @@ public class JwtUtils {
 //        return getRole(token);
     }
 
-    // role에 따라서 페이지 이동을 다르게 하는 메서드 - admin, tutor, tutee
-    public String authByRole(HttpServletRequest httpServletRequest ,String tuteeURI, String tutorURI, String adminURI){
+    // role에 따라서 페이지 이동을 다르게 하는 메서드 - admin, common, artist, enter
+    public String authByRole(HttpServletRequest httpServletRequest, String commonURI, String artistURI, String enterURL, String adminURI) {
         String token = getAccessToken(httpServletRequest);
-        if(getRole(token).equals("tutee")){
-            return tuteeURI;
-        }else if(getRole(token).equals("tutor")){
-            return tutorURI;
-        }else if(getRole(token).equals("admin")){
+        if (getRole(token).equals("common")) {
+            return commonURI;
+        } else if (getRole(token).equals("artist")) {
+            return artistURI;
+        } else if (getRole(token).equals("enter")) {
+            return enterURL;
+        } else if (getRole(token).equals("admin")) {
             return adminURI;
         }
         return null;
     }
-
 
 
 }
