@@ -153,6 +153,8 @@ public String logout(HttpSession session) {
     session.removeAttribute("token"); // 세션에서 토큰 정보 제거
     return "redirect:/"; // 로그아웃 후 메인 홈페이지로 이동
 }
+
+
 // 아이디 찾기
     @GetMapping("/Idfind")
     public String idfind() {
