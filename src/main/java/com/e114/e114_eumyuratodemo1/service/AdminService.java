@@ -17,8 +17,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
+import java.util.Map;
 
 @Service
 public class AdminService {
@@ -80,6 +82,27 @@ public class AdminService {
         System.out.println("service DTO : " + smallConcertDTO);
         System.out.println(smallConcertDTO.getImage());
         dao.saveConcert(smallConcertDTO);
+    }
+
+    public List<BuskingDTO> searchBuskings(String column, String keyword) {
+        Map<String, String> params = new HashMap<>();
+        params.put("column", column);
+        params.put("keyword", keyword);
+        return dao.searchBuskings(params);
+    }
+
+    public List<SmallConcertDTO> searchSmallConcerts(String column, String keyword) {
+        Map<String, String> params = new HashMap<>();
+        params.put("column", column);
+        params.put("keyword", keyword);
+        return dao.searchSmallConcerts(params);
+    }
+
+    public List<LocalFestivalDTO> searchLocalFestivals(String column, String keyword) {
+        Map<String, String> params = new HashMap<>();
+        params.put("column", column);
+        params.put("keyword", keyword);
+        return dao.searchLocalFestivals(params);
     }
 
 }

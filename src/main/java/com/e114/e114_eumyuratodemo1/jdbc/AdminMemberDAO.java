@@ -33,6 +33,9 @@ public interface AdminMemberDAO {
     void deleteSmallConcert(int id);
     void deleteLocalFestival(int id);
 
+    List<BuskingDTO> searchBuskings(Map<String, String> params);
+    List<SmallConcertDTO> searchSmallConcerts(Map<String, String> params);
+    List<LocalFestivalDTO> searchLocalFestivals(Map<String, String> params);
     void saveConcertWithoutImage(SmallConcertDTO smallConcertDTO);
     void saveConcert(SmallConcertDTO smallConcertDTO);
 

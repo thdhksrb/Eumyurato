@@ -60,6 +60,7 @@ public class AdminController {
 
     @GetMapping("/profile/admin/register")
     public String adminAccountRegister(){
+
         return "html/profile/concertRegister/profile_admin_concertRegister";
     }
 
@@ -90,8 +91,8 @@ public class AdminController {
         return "html/profile/total/profile_admin_total";
     }
 
-    @PostMapping("/profile/admin/total/search")
-    public String searchPostMembers(@RequestParam("column") String column, @RequestParam("keyword") String keyword, Model model) {
+    @PostMapping("/profile/admin/total/commSearch")
+    public String searchCommonMembers(@RequestParam("column") String column, @RequestParam("keyword") String keyword, Model model) {
         Map<String, String> params = new HashMap<>();
         params.put("column", column);
         params.put("keyword", keyword);
@@ -105,8 +106,8 @@ public class AdminController {
         return "html/profile/total/profile_admin_total";
     }
 
-    @GetMapping("/profile/admin/total/search")
-    public String searchGetMembers(@RequestParam("column") String column, @RequestParam("keyword") String keyword, Model model) {
+    @GetMapping("/profile/admin/total/commSearch")
+    public String GetCommonMembers(@RequestParam("column") String column, @RequestParam("keyword") String keyword, Model model) {
         Map<String, String> params = new HashMap<>();
         params.put("column", column);
         params.put("keyword", keyword);
@@ -118,32 +119,58 @@ public class AdminController {
         model.addAttribute("commons", commons);
 
         return "html/profile/total/profile_admin_total";
+    }
+
+    @PostMapping("/profile/admin/total/artSearch")
+    public String searchArtMembers(@RequestParam("column2") String column2, @RequestParam("keyword2") String keyword2, Model model) {
+        Map<String, String> params = new HashMap<>();
+        params.put("column2", column2);
+        params.put("keyword2", keyword2);
+
+        List<ArtistMemberDTO> artists = memberDAO.searchArtistMembers(params);
+
+        model.addAttribute("artists", artists);
+
+        return "html/profile/total/profile_admin_total2";
+    }
+
+    @GetMapping("/profile/admin/total/artSearch")
+    public String getArtMembers(@RequestParam("column2") String column2, @RequestParam("keyword2") String keyword2, Model model) {
+        Map<String, String> params = new HashMap<>();
+        params.put("column2", column2);
+        params.put("keyword2", keyword2);
+
+        List<ArtistMemberDTO> artists = memberDAO.searchArtistMembers(params);
+
+        model.addAttribute("artists", artists);
+
+        return "html/profile/total/profile_admin_total2";
     }
 
     @PostMapping("/profile/admin/total/entSearch")
-    public String searchPostEnts(@RequestParam("column2") String column2, @RequestParam("keyword2") String keyword2, Model model) {
+    public String searchPostEnts(@RequestParam("column3") String column3, @RequestParam("keyword3") String keyword3, Model model) {
         Map<String, String> params = new HashMap<>();
-        params.put("column2", column2);
-        params.put("keyword2", keyword2);
+        params.put("column3", column3);
+        params.put("keyword3", keyword3);
 
         List<EnterpriseMemberDTO> ents = memberDAO.searchEntMembers(params);
 
         model.addAttribute("ents", ents);
 
-        return "html/profile/total/profile_admin_total2";
+        return "html/profile/total/profile_admin_total3";
     }
 
     @GetMapping("/profile/admin/total/entSearch")
-    public String searchGetEnts(@RequestParam("column2") String column2, @RequestParam("keyword2") String keyword2, Model model) {
+    public String searchGetEnts(@RequestParam("column3") String column3, @RequestParam("keyword3") String keyword3, Model model) {
         Map<String, String> params = new HashMap<>();
-        params.put("column2", column2);
-        params.put("keyword2", keyword2);
+        params.put("column3", column3);
+        params.put("keyword3", keyword3);
 
         List<EnterpriseMemberDTO> ents = memberDAO.searchEntMembers(params);
 
         model.addAttribute("ents", ents);
 
-        return "html/profile/total/profile_admin_total2";
+        return "html/profile/total/profile_admin_total3";
     }
 
 /*    @GetMapping("/logout")
@@ -181,21 +208,39 @@ public class AdminController {
     }
 
     @GetMapping("/profile/admin/management")
-    public ResponseEntity<?> getEventList(@RequestParam("category") String category) {
+    public ResponseEntity<?> getEventList(@RequestParam("category") String category,
+                                          @RequestParam(value = "column", required = false) String column,
+                                          @RequestParam(value = "keyword", required = false) String keyword) {
         List<?> eventList;
 
-        switch (category) {
-            case "busking":
-                eventList = adminService.viewAllBusking();
-                break;
-            case "localfestival":
-                eventList = adminService.viewAllLocalFestival();
-                break;
-            case "smallconcert":
-                eventList = adminService.viewAllSmallConcert();
-                break;
-            default:
-                return ResponseEntity.badRequest().body("잘못된 카테고리입니다.");
+        if (column != null && keyword != null) {
+            switch (category) {
+                case "busking":
+                    eventList = adminService.searchBuskings(column, keyword);
+                    break;
+                case "localfestival":
+                    eventList = adminService.searchLocalFestivals(column, keyword);
+                    break;
+                case "smallconcert":
+                    eventList = adminService.searchSmallConcerts(column, keyword);
+                    break;
+                default:
+                    return ResponseEntity.badRequest().body("잘못된 카테고리입니다.");
+            }
+        } else {
+            switch (category) {
+                case "busking":
+                    eventList = adminService.viewAllBusking();
+                    break;
+                case "localfestival":
+                    eventList = adminService.viewAllLocalFestival();
+                    break;
+                case "smallconcert":
+                    eventList = adminService.viewAllSmallConcert();
+                    break;
+                default:
+                    return ResponseEntity.badRequest().body("잘못된 카테고리입니다.");
+            }
         }
 
         return ResponseEntity.ok(eventList);

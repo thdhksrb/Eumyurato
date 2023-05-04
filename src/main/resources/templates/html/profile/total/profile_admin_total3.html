@@ -121,17 +121,16 @@
                     </div>
 
                     <!-- 일반회원, 아티스트회원 조회 -->
-                    <div id="commonMembers" style="display: block;">
+                    <div id="commonMembers" style="display: none;">
                         <div class="container mt-5">
                             <div class="row">
                                 <div class="col-md-12">
                                     <form action="/profile/admin/total/commSearch" method="post">
                                         <!-- 검색 필드 드롭다운 -->
                                         <select id="CommonDropdown" class="text-center"
-                                                style="width: 10%; height: 40px; border-radius: 5px;">
+                                                style="width: 10%; height: 40px; border-radius: 5px; ">
                                             <option class="text-center" value="name">이름</option>
                                             <option class="text-center" value="sex">성별</option>
-                                            <option class="text-center" value="genre">장르</option>
                                         </select>
 
                                         <!-- 검색창 -->
@@ -195,7 +194,6 @@
                                                 style="width: 10%; height: 40px; border-radius: 5px; ">
                                             <option class="text-center" value="name">이름</option>
                                             <option class="text-center" value="sex">성별</option>
-                                            <option class="text-center" value="genre">장르</option>
                                         </select>
 
                                         <!-- 검색창 -->
@@ -252,7 +250,7 @@
                         </div>
                     </div>
                     <!-- 기업회원 조회 -->
-                    <div id="enterpriseMembers" style="display: none;">
+                    <div id="enterpriseMembers" style="display: block;">
                         <div class="container mt-5">
                             <div class="row">
                                 <div class="col-md-12">

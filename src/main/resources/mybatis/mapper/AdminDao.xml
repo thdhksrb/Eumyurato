@@ -9,12 +9,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.e114.e114_eumyuratodemo1.jdbc.AdminMemberDAO">
     <select id="getArtistMembers" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
-        select id, name, nid, sex, birth, phone
+        select id, name, nid, sex, birth, phone, genre
         from artist_member
     </select>
 
     <select id="getCommonMembers" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
-        select id, name, nid, sex, birth, phone
+        select id, name, nid, sex, birth, phone, genre
         from common_member
     </select>
 
@@ -24,18 +24,18 @@
     </select>
 
     <select id="searchArtistMembers" parameterType="map" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
-        SELECT id, name, nid, sex, birth, phone FROM artist_member
-        WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
+        SELECT id, name, nid, sex, birth, phone, genre FROM artist_member
+        WHERE ${column2} LIKE CONCAT('%', #{keyword2}, '%')
     </select>
 
     <select id="searchCommonMembers" parameterType="map" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
-        SELECT id, name, nid, sex, birth, phone FROM common_member
+        SELECT id, name, nid, sex, birth, phone, genre FROM common_member
         WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
     </select>
 
     <select id="searchEntMembers" parameterType="map" resultType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
         SELECT id, name, num, email, phone FROM enterprise_member
-        WHERE ${column2} LIKE CONCAT('%', #{keyword2}, '%')
+        WHERE ${column3} LIKE CONCAT('%', #{keyword3}, '%')
     </select>
 
     <select id="getReservationList" resultType="com.e114.e114_eumyuratodemo1.dto.ReservationDTO">
@@ -57,7 +57,7 @@
     <select id="getAdminInfoById" resultType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
         SELECT id, pwd, name, num, email, phone
         FROM enterprise_member
-        WHERE id = #{adminId} AND adminNum = 0
+        WHERE id = #{id} AND adminNum = 0
     </select>
 
     <select id="getBuskings" resultType="com.e114.e114_eumyuratodemo1.dto.BuskingDTO">
@@ -71,6 +71,22 @@
     <select id="getLocalFestivals" resultType="com.e114.e114_eumyuratodemo1.dto.LocalFestivalDTO">
         select * from local_festival
     </select>
+
+    <select id="searchBuskings" resultType="com.e114.e114_eumyuratodemo1.dto.BuskingDTO">
+        SELECT * FROM busking WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+
+    <select id="searchSmallConcerts" resultType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
+        SELECT * FROM small_concert WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+
+    <select id="searchLocalFestivals" resultType="com.e114.e114_eumyuratodemo1.dto.LocalFestivalDTO">
+        SELECT * FROM local_festival WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+
+    <insert id="registerSmallConcert">
+        insert into small_concert(name, enterId, location, pname, startDate, lastDate, price, image) values (#{name}, #{enterId},#{location}, #{pname}, #{startDate}, #{lastDate}, #{price}, #{image})
+    </insert>
 
     <delete id="deleteBusking">
         DELETE FROM busking WHERE id = #{param1}
