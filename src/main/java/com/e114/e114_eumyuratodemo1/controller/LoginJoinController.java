@@ -40,7 +40,7 @@ public class LoginJoinController {
     //일반 로그인
     @GetMapping("/login-common")
     public String login() {
-        return "html/loginJoin/loginform1";
+        return "html/loginJoin/loginForm1";
     }
 
     @PostMapping("/login-common")
@@ -73,7 +73,7 @@ public class LoginJoinController {
     //아티스트 로그인
     @GetMapping("/login-art")
     public String login_art() {
-        return "html/loginJoin/loginform2";
+        return "html/loginJoin/loginForm2";
     }
 
     @PostMapping("/login-art")
@@ -100,7 +100,7 @@ public class LoginJoinController {
     //기업 로그인
     @GetMapping("/login-enter")
     public String login_enter() {
-        return "html/loginJoin/loginform3";
+        return "html/loginJoin/loginForm3";
     }
 
     @PostMapping("/login-enter")
@@ -206,6 +206,32 @@ public String logout(HttpSession session) {
     @GetMapping("/enterprise-join")
     public String enterprise() {
         return "html/loginJoin/joinForm_3";
+    }
+
+    @GetMapping("/mypage")
+    public String mypage(Model model, HttpSession session) {
+        Object loginUser = session.getAttribute("loginUser");
+        int adminNum = -1;
+        if (loginUser instanceof CommonMemberDTO) {
+            adminNum = ((CommonMemberDTO) loginUser).getAdminNum();
+        } else if (loginUser instanceof ArtistMemberDTO) {
+            adminNum = ((ArtistMemberDTO) loginUser).getAdminNum();
+        } else if (loginUser instanceof EnterpriseMemberDTO) {
+            adminNum = ((EnterpriseMemberDTO) loginUser).getAdminNum();
+        }
+
+        switch (adminNum) {
+            case 0: // 관리자
+                return "redirect:/profile/admin/account";
+            case 1: // 일반 회원
+                return "redirect:/profile/admin/modify";
+            case 2: // 아티스트 회원
+                return "redirect:/profile/admin/management/view";
+            case 3: // 기업 회원
+                return "redirect:/enterprise-page";
+            default:
+                return "redirect:/login-common";
+        }
     }
 
 }

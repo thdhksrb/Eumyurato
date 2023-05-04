@@ -8,7 +8,9 @@ import com.e114.e114_eumyuratodemo1.jdbc.AdminMemberDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AdminService {
@@ -52,6 +54,30 @@ public class AdminService {
         }
     }
 
+    public void registerSmallConcert(SmallConcertDTO smallConcertDTO) {
+        dao.registerSmallConcert(smallConcertDTO);
+    }
+
+    public List<BuskingDTO> searchBuskings(String column, String keyword) {
+        Map<String, String> params = new HashMap<>();
+        params.put("column", column);
+        params.put("keyword", keyword);
+        return dao.searchBuskings(params);
+    }
+
+    public List<SmallConcertDTO> searchSmallConcerts(String column, String keyword) {
+        Map<String, String> params = new HashMap<>();
+        params.put("column", column);
+        params.put("keyword", keyword);
+        return dao.searchSmallConcerts(params);
+    }
+
+    public List<LocalFestivalDTO> searchLocalFestivals(String column, String keyword) {
+        Map<String, String> params = new HashMap<>();
+        params.put("column", column);
+        params.put("keyword", keyword);
+        return dao.searchLocalFestivals(params);
+    }
 
 }
 

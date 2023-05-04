@@ -1,21 +1,30 @@
-    document.getElementById('buskingBtn').addEventListener('click', () => {
-        getEvents('busking');
-    });
+document.getElementById('buskingBtn').addEventListener('click', () => {
+    getEvents('busking');
+    updateSearchColumns('busking'); // 추가된 부분
+});
 
-    document.getElementById('smallConcertBtn').addEventListener('click', () => {
-        getEvents('smallconcert');
-    });
+document.getElementById('smallConcertBtn').addEventListener('click', () => {
+    getEvents('smallconcert');
+    updateSearchColumns('smallconcert'); // 추가된 부분
+});
 
-    document.getElementById('localFestivalBtn').addEventListener('click', () => {
-        getEvents('localfestival');
-    });
+document.getElementById('localFestivalBtn').addEventListener('click', () => {
+    getEvents('localfestival');
+    updateSearchColumns('localfestival'); // 추가된 부분
+});
 
-    window.onload = function() {
-        getEvents('busking');
-    };
+window.onload = function() {
+    getEvents('busking');
+    updateSearchColumns('busking'); // 추가된 부분
+};
 
     function getEvents(category, page = 1) {
-        fetch(`/profile/admin/management?category=${category}&page=${page}`, {
+        let url = `/profile/admin/management?category=${category}&page=${page}`;
+        if (column && keyword) {
+            url += `&column=${column}&keyword=${keyword}`;
+        }
+
+        fetch(url , {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -29,6 +38,7 @@
             })
             .then((data) => {
                 showColumns(category);
+                updateSearchColumns(category); // 추가된 부분
                 displayEvents(data, category, page);
             })
             .catch((error) => {
@@ -154,3 +164,42 @@
             paginationEl.appendChild(li);
         }
     }
+
+    const searchColumns = {
+        busking: [
+            { value: 'name', text: '공연명' },
+            { value: 'artId', text: '아티스트명' },
+            { value: 'location', text: '위치' }
+        ],
+        smallconcert: [
+            { value: 'name', text: '공연명' },
+            { value: 'enterId', text: '기업명' },
+            { value: 'pname', text: '공연자명' },
+            { value: 'location', text: '위치' }
+            // 필요한 경우 추가 검색 컬럼 옵션을 추가하세요.
+        ],
+        localfestival: [
+            { value: 'name', text: '축제명' },
+            { value: 'org', text: '주최기관' },
+            { value: 'location', text: '위치' }
+            // 필요한 경우 추가 검색 컬럼 옵션을 추가하세요.
+        ],
+    };
+
+    function updateSearchColumns(category) {
+        const searchColumnSelect = document.getElementById('searchColumn');
+        searchColumnSelect.innerHTML = '<option value="">검색 컬럼 선택</option>';
+
+        searchColumns[category].forEach((column) => {
+            const option = document.createElement('option');
+            option.value = column.value;
+            option.textContent = column.text;
+            searchColumnSelect.appendChild(option);
+        });
+    }
+
+    document.getElementById('searchBtn').addEventListener('click', () => {
+        const column = document.getElementById('searchColumn').value;
+        const keyword = document.getElementById('searchKeyword').value;
+        getEvents(currentCategory, 1, column, keyword);
+    });

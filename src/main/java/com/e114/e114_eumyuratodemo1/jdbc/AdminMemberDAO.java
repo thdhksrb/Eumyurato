@@ -21,22 +21,20 @@ public interface AdminMemberDAO {
     List<ReservationDTO> getReservationList();  // 예약 내역 목록 불러오기
     List<ReservationDTO> searchReservations(Map<String, String> params  );  // 예약 내역 검색
 
-    EnterpriseMemberDTO getAdminInfoById(String adminId);   // 내 계정 정보 불러오기 기능 (test용)
+    EnterpriseMemberDTO getAdminInfoById(Map<String, String> params);   // 내 계정 정보 불러오기 기능 (test용)
 
     List<BuskingDTO> getBuskings();     // 버스킹 목록 불러오기
     List<SmallConcertDTO> getSmallConcerts();   // 소규모 공연 불러오기
     List<LocalFestivalDTO> getLocalFestivals(); // 지역축제 불러오기
 
-
-
-
-
-
-    public int registerSmallConcert(Map<String, String> map);   // 소규모 공연 등록
+    void registerSmallConcert(SmallConcertDTO smallConcertDTO);   // 소규모 공연 등록
 
     void deleteBusking(int id);
     void deleteSmallConcert(int id);
     void deleteLocalFestival(int id);
 
+    List<BuskingDTO> searchBuskings(Map<String, String> params);
+    List<SmallConcertDTO> searchSmallConcerts(Map<String, String> params);
+    List<LocalFestivalDTO> searchLocalFestivals(Map<String, String> params);
 
 }
