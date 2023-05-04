@@ -1,4 +1,4 @@
-window.onload = function() {
+/*window.onload = function() {
     const loginUserJson = window.sessionStorage.getItem("loginUser");
     if (loginUserJson !== null) {
         // 로그인 상태인 경우
@@ -32,4 +32,7 @@ window.onload = function() {
         const navLogout = document.getElementById("navLogout");
         navLogout.style.display = "none";
     }
-};
+};*/
+
+
+

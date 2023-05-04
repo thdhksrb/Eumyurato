@@ -17,6 +17,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -45,6 +46,23 @@ public class LoginJoinController {
         return "html/main/home";
     }
 
+    @GetMapping("/profile")
+    public String profile(HttpServletRequest request){
+        String commonURI =  "/profile/common";
+        String artistURI = "/profile/artist";
+        String enterURI = "/profile/enter";
+        String adminURI = "/profile/admin/root";
+        String notloginURI = "/login-common";
+
+        String URI = jwtUtils.authByRole(request, commonURI, artistURI, enterURI, adminURI);
+
+        if(URI == null){
+            return notloginURI;
+        }else{
+            return URI;
+        }
+    }
+
     //일반 로그인
     @GetMapping("/login-common")
     public String login() {
@@ -71,8 +89,6 @@ public class LoginJoinController {
             return null;
         }
     }
-
-
 
 
     //아티스트 로그인
