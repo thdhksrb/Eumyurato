@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<!--begin::Head-->
+<head>
+    <base href="../">
+    <title>Eumyurato</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/img/E114_logo.png}"/>
+    <meta charset="utf-8"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!--begin::Global Stylesheets Bundle(used by all pages)-->
+    <link th:href="@{/css/profile/profile1.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/profile/profile2.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/profile/profile3.css}" rel="stylesheet" type="text/css"/>
+    <!--end::Global Stylesheets Bundle-->
+</head>
+<!--end::Head-->
+<!--begin::Body-->
+
+<body class="bg-white" id="kt_body">
+<!--begin::Main-->
+<div class="d-flex flex-column flex-root">
+    <!--begin::Login-->
+    <div class="d-flex flex-column flex-lg-row flex-column-fluid" id="kt_login">
+        <div class="d-flex flex-column flex-lg-row-auto bg-primary pt-15 pt-lg-0 center" id="leftArea0">
+            <!--begin::Aside Top-->
+            <div class="d-flex flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
+                <!--begin::Aside Logo-->
+                <a class="mb-6" th:href="@{/main}">
+                    <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
+                        <img alt="로고" id="logo1" th:src="@{/img/logo_name.png}" style="width: 400px; height: 70px;"/>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="flex-column flex-lg-row-auto bg-primary pt-15 pt-lg-0 center" id="leftArea1">
+            <!--begin::Aside Top-->
+            <div class="flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
+                <!--begin::Aside Logo-->
+                <a class="mb-6" th:href="@{/main}">
+                    <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
+                        <img alt="로고" id="logo2" th:src="@{/img/logo_name.png}"
+                             style="width: 400px; height: 70px; margin-top: 80px;"/>
+                    </div>
+                </a>
+                <div class="menu-wrapper menu-column menu-fit mt-10">
+                    <div class="menu-sub menu-fit menu-sub-accordion show mb-20">
+                        <h1 class="menu-content mb-1 mt-10 text-center" style="font-weight: bold">마이페이지</h1>
+                        <div class="separator border-dark my-1 mx-auto" style="width: 60%; border-width: 3px;"></div>
+                        <div class="menu-item" style="margin: 3px">
+                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/admin}">
+                                <span class="menu-title">내 계정</span>
+                            </a>
+                        </div>
+                        <div class="menu-item" style="margin: 3px">
+                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/admin/modify}">
+                                <span class="menu-title">계정 정보 수정</span>
+                            </a>
+                        </div>
+                        <div class="menu-item" style="margin: 3px">
+                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/admin/reservation}">
+                                <span class="menu-title">예약 내역</span>
+                            </a>
+                        </div>
+                        <div class="menu-item" style="margin: 3px">
+                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/admin/management/view}">
+                                <span class="menu-title">공연 관리</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="menu-wrapper menu-column menu-fit mt-1">
+                        <div class="menu-sub menu-fit menu-sub-accordion show">
+                            <h1 class="menu-content mb-1 mt-10 text-center" style="font-weight: bold">통합 정보 조회</h1>
+                            <div class="separator border-dark my-1 mx-auto"
+                                 style="width: 60%; border-width: 3px;"></div>
+                            <div class="menu-item" style="margin: 3px">
+                                <a class="text-dark text-hover-primary ms-3 py-2"
+                                   th:href="@{/profile/admin/total}">
+                                    <span class="menu-title">종합</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="ms-5 me-15" style="position: relative; top: 200px; left: 300px;" th:href="@{/logout}">
+                <img th:src="@{/img/logout.png}" style="height: 30px; width: 30px;">
+            </a>
+        </div>
+
+        <div class="d-flex flex-column flex-lg-row-auto bg-primary pt-15 pt-lg-0 d-none d-lg-flex" id="leftArea2">
+            <div class="d-flex flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
+                <!--begin::Aside Logo-->
+                <a class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
+                    <img alt="로고" th:src="@{/img/logo_name.png}" style="width: 400px; height: 70px;">
+                </a>
+                <!--end::Aside Logo-->
+            </div>
+        </div>
+
+        <!--사이드-->
+        <!--begin::Aside-->
+        <!--begin::Content-->
+        <!--메인폼-->
+        <div class="login-content flex-lg-row-fluid d-flex flex-column overflow-hidden py-10 py-lg-20 px-10 p-lg-7 mx-auto mw-1000px w-100"
+             style="display: flex">
+            <!--begin::Wrapper-->
+            <!--begin::Signin Form-->
+            <div class="form w-1000px  needs-validation text-center" id="kt_login_signin_form" novalidate>
+                <div style="color:#000000; background-color:#FFFFFF; padding:25px;  height: 600px;">
+                    <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                        <h4 style="font-size: 24px; flex-grow: 1;"><strong>종합 정보</strong></h4>
+                        <button class="btn btn-primary" id="showCommons" type="button">일반 회원 보기</button>
+                        <button class="btn btn-primary" id="showArtists" type="button">아티스트 회원 보기</button>
+                        <button class="btn btn-primary" id="showEnterprises" type="button">기업 회원 보기</button>
+                    </div>
+
+                    <!-- 일반회원, 아티스트회원 조회 -->
+                    <div id="commonMembers" style="display: block;">
+                        <div class="container mt-5">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form action="/profile/admin/total/commSearch" method="post">
+                                        <!-- 검색 필드 드롭다운 -->
+                                        <select id="CommonDropdown" class="text-center"
+                                                style="width: 10%; height: 40px; border-radius: 5px;">
+                                            <option class="text-center" value="name">이름</option>
+                                            <option class="text-center" value="sex">성별</option>
+                                            <option class="text-center" value="genre">장르</option>
+                                        </select>
+
+                                        <!-- 검색창 -->
+                                        <input type="text" id="searchValue" name="searchValue" placeholder=""
+                                               style="width: 30%; height: 40px; border-radius: 5px; border: 1px solid #cccad4">
+
+                                        <!-- 검색 필드와 검색 값 전달용 hidden input -->
+                                        <input type="hidden" id="column" name="column">
+                                        <input type="hidden" id="keyword" name="keyword">
+
+                                        <button class="btn btn-primary" type="submit" onclick="setCommonMemberSearch()"
+                                                style="width: 10%;">Search
+                                        </button>
+                                        <button class="btn btn-primary" type="button" onclick="resetCommonMemberList()"
+                                                style="width: 10%;">Reset
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container">
+                            <div style="color:#000000; background-color:#FFFFFF; padding:25px;  height: 600px;">
+                                <table class="table table-rounded table-striped border gy-7 gs-7">
+                                    <thead>
+                                    <tr class="fw-bold fs-6 text-gray-800 border-bottom border-gray-200">
+                                        <th>ID</th>
+                                        <th>NAME</th>
+                                        <th>NICKNAME</th>
+                                        <th>SEX</th>
+                                        <th>BIRTH</th>
+                                        <th>PHONE</th>
+                                        <th>GENRE</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="common : ${commons}">
+                                        <td th:text="${common.id}"></td>
+                                        <td th:text="${common.name}"></td>
+                                        <td th:text="${common.nid}"></td>
+                                        <td th:text="${common.sex}"></td>
+                                        <td th:text="${common.birth}"></td>
+                                        <td th:text="${common.phone}"></td>
+                                        <td th:text="${common.genre}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div style="margin-top:20px;">
+                                <!-- 리스트 내용 -->
+                            </div>
+                        </div>
+                    </div>
+                    <div id="artistMembers" style="display: none;">
+                        <div class="container mt-5">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form action="/profile/admin/total/artSearch" method="post">
+                                        <!-- 검색 필드 드롭다운 -->
+                                        <select id="ArtistDropdown" class="text-center"
+                                                style="width: 10%; height: 40px; border-radius: 5px; ">
+                                            <option class="text-center" value="name">이름</option>
+                                            <option class="text-center" value="sex">성별</option>
+                                            <option class="text-center" value="genre">장르</option>
+                                        </select>
+
+                                        <!-- 검색창 -->
+                                        <input type="text" id="searchValue2" name="searchValue2" placeholder=""
+                                               style="width: 30%; height: 40px; border-radius: 5px; border: 1px solid #cccad4">
+
+                                        <!-- 검색 필드와 검색 값 전달용 hidden input -->
+                                        <input type="hidden" id="column2" name="column">
+                                        <input type="hidden" id="keyword2" name="keyword">
+
+                                        <button class="btn btn-primary" type="submit" onclick="setArtMemberSearch()"
+                                                style="width: 10%;">Search
+                                        </button>
+                                        <button class="btn btn-primary" type="button" onclick="resetArtMemberList()"
+                                                style="width: 10%;">Reset
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container">
+                            <div style="color:#000000; background-color:#FFFFFF; padding:25px;  height: 600px;">
+                                <table class="table table-rounded table-striped border gy-7 gs-7">
+                                    <thead>
+                                    <tr class="fw-bold fs-6 text-gray-800 border-bottom border-gray-200">
+                                        <th>ID</th>
+                                        <th>NAME</th>
+                                        <th>NICKNAME</th>
+                                        <th>SEX</th>
+                                        <th>BIRTH</th>
+                                        <th>PHONE</th>
+                                        <th>GENRE</th>
+                                        <th>POINT</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="artist : ${artists}">
+                                        <td th:text="${artist.id}"></td>
+                                        <td th:text="${artist.name}"></td>
+                                        <td th:text="${artist.nid}"></td>
+                                        <td th:text="${artist.sex}"></td>
+                                        <td th:text="${artist.birth}"></td>
+                                        <td th:text="${artist.phone}"></td>
+                                        <td th:text="${artist.genre}"></td>
+                                        <td th:text="${artist.point}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div style="margin-top:20px;">
+                                <!-- 리스트 내용 -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 기업회원 조회 -->
+                    <div id="enterpriseMembers" style="display: none;">
+                        <div class="container mt-5">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form action="/profile/admin/total/entSearch" method="post">
+                                        <!-- 검색 필드 드롭다운 -->
+                                        <select id="EntDropdown" class="text-center"
+                                                style="width: 10%; height: 40px; border-radius: 5px; ">
+                                            <option class="text-center" value="name">기업명</option>
+                                            <option class="text-center" value="num">사업자 등록번호</option>
+                                        </select>
+
+                                        <!-- 검색창 -->
+                                        <input type="text" id="searchValue3" name="searchValue2" placeholder=""
+                                               style="width: 30%; height: 40px; border-radius: 5px; border: 1px solid #cccad4">
+
+                                        <!-- 검색 필드와 검색 값 전달용 hidden input -->
+                                        <input type="hidden" id="column3" name="column2">
+                                        <input type="hidden" id="keyword3" name="keyword2">
+
+                                        <button class="btn btn-primary" type="submit" onclick="setEntMemberSearch()"
+                                                style="width: 10%;">Search
+                                        </button>
+                                        <button class="btn btn-primary" type="button" onclick="resetEntMemberList()"
+                                                style="width: 10%;">Reset
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container">
+                            <div style="color:#000000; background-color:#FFFFFF; padding:25px;  height: 600px;">
+                                <table class="table table-rounded table-striped border gy-7 gs-7">
+                                    <thead>
+                                    <tr class="fw-bold fs-6 text-gray-800 border-bottom border-gray-200">
+                                        <th>ID</th>
+                                        <th>NAME</th>
+                                        <th>NUM</th>
+                                        <th>EMAIL</th>
+                                        <th>PHONE</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="ent : ${ents}">
+                                        <td th:text="${ent.id}"></td>
+                                        <td th:text="${ent.name}"></td>
+                                        <td th:text="${ent.num}"></td>
+                                        <td th:text="${ent.email}"></td>
+                                        <td th:text="${ent.phone}"></td>
+                                    </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                            <div style="margin-top:20px;">
+                                <!-- 리스트 내용 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script type="text/javascript" th:src="@{/js/profile/profile_account.js}"></script>
+</body>
+</html>

@@ -9,33 +9,33 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.e114.e114_eumyuratodemo1.jdbc.AdminMemberDAO">
     <select id="getArtistMembers" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
-        select id, name, nid, sex, birth, phone, genre
+        select *
         from artist_member
     </select>
 
     <select id="getCommonMembers" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
-        select id, name, nid, sex, birth, phone, genre
+        select *
         from common_member
     </select>
 
     <select id="getEntMembers" resultType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
-        select id, name, num, email, phone
+        select *
         from enterprise_member
     </select>
 
-    <select id="searchArtistMembers" parameterType="map" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
-        SELECT id, name, nid, sex, birth, phone, genre FROM artist_member
-        WHERE ${column2} LIKE CONCAT('%', #{keyword2}, '%')
-    </select>
-
-    <select id="searchCommonMembers" parameterType="map" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
-        SELECT id, name, nid, sex, birth, phone, genre FROM common_member
+    <select id="searchCommonMembers" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
+        SELECT * FROM common_member
         WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
     </select>
 
-    <select id="searchEntMembers" parameterType="map" resultType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
-        SELECT id, name, num, email, phone FROM enterprise_member
-        WHERE ${column3} LIKE CONCAT('%', #{keyword3}, '%')
+    <select id="searchArtistMembers" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
+        SELECT * FROM artist_member
+        WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+
+    <select id="searchEntMembers" resultType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
+        SELECT * FROM enterprise_member
+        WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
     </select>
 
     <select id="getReservationList" resultType="com.e114.e114_eumyuratodemo1.dto.ReservationDTO">

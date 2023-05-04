@@ -81,7 +81,7 @@
                                  style="width: 60%; border-width: 3px;"></div>
                             <div class="menu-item" style="margin: 3px">
                                 <a class="text-dark text-hover-primary ms-3 py-2"
-                                   th:href="@{/profile/admin/total}">
+                                   th:href="@{/profile/admin/total/view}">
                                     <span class="menu-title">종합</span>
                                 </a>
                             </div>
@@ -117,10 +117,10 @@
                 <div style="color:#000000; background-color:#FFFFFF; padding:25px;  height: 600px;">
                     <div style="display: flex; align-items: center; margin-bottom: 20px;">
                         <h4 style="font-size: 24px; flex-grow: 1;"><strong>공연 정보</strong></h4>
-                        <button class="btn btn-primary" id="buskingBtn">버스킹 공연</button>
-                        <button class="btn btn-primary" id="smallConcertBtn">소규모 공연</button>
-                        <button class="btn btn-primary" id="localFestivalBtn">지역 축제</button>
-                        <a th:href="@{/profile/admin/register}" class="btn btn-primary">공연 등록</a>
+                        <button class="text-gray-600 text-hover-primary ms-3" id="buskingBtn">버스킹 공연</button>
+                        <button class="text-gray-600 text-hover-primary ms-3" id="smallConcertBtn">소규모 공연</button>
+                        <button class="text-gray-600 text-hover-primary ms-3" id="localFestivalBtn">지역 축제</button>
+                        <a th:href="@{/profile/admin/register}" class="text-gray-600 text-hover-primary ms-3">공연 등록</a>
                     </div>
                     <div class="search-container">
                         <select id="searchColumn" style="width: 10%; height: 40px; border-radius: 5px;">
