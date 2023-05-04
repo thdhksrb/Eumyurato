@@ -40,7 +40,7 @@ public class LoginJoinController {
     //일반 로그인
     @GetMapping("/login-common")
     public String login() {
-        return "html/loginJoin/loginform1";
+        return "html/loginJoin/loginForm1";
     }
 
     @PostMapping("/login-common")
@@ -73,7 +73,7 @@ public class LoginJoinController {
     //아티스트 로그인
     @GetMapping("/login-art")
     public String login_art() {
-        return "html/loginJoin/loginform2";
+        return "html/loginJoin/loginForm2";
     }
 
     @PostMapping("/login-art")
@@ -100,7 +100,7 @@ public class LoginJoinController {
     //기업 로그인
     @GetMapping("/login-enter")
     public String login_enter() {
-        return "html/loginJoin/loginform3";
+        return "html/loginJoin/loginForm3";
     }
 
     @PostMapping("/login-enter")
