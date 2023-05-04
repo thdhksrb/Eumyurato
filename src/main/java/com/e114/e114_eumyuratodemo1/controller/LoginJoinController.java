@@ -22,6 +22,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.net.http.HttpResponse;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -50,11 +51,12 @@ public class LoginJoinController {
         return "html/loginJoin/loginForm1";
     }
 
-    @PostMapping("/login-common")
-    public void login(@RequestParam("id") String id,
-                        @RequestParam("pwd") String pwd,
-                        @RequestParam(name = "prevUrl", required = false) String prevUrl,
-                        HttpSession session, RedirectAttributes redirectAttributes, HttpServletResponse response) throws IOException {
+    @PostMapping("/login-common/token")
+    @ResponseBody
+    public Map<String, String> login(@RequestParam("id") String id,
+                                     @RequestParam("pwd") String pwd,
+                                     @RequestParam(name = "prevUrl", required = false) String prevUrl,
+                                     HttpSession session, RedirectAttributes redirectAttributes, HttpServletResponse response) throws IOException {
         CommonMemberDTO commonMemberDTO = userService.login(id, pwd);
         if (commonMemberDTO != null) {
 //            session.setAttribute("loginUser", commonMemberDTO);
@@ -63,24 +65,32 @@ public class LoginJoinController {
 //            System.out.println("prevUrl: "+ prevUrl);
 
 
+            System.out.println(id);
+            System.out.println(pwd);
+
             String jwtToken =
-                    jwtUtils.createAccessToken(commonMemberDTO.getAdminNum(),commonMemberDTO.getId(),commonMemberDTO.getName());
+                    jwtUtils.createAccessToken(commonMemberDTO.getAdminNum(), commonMemberDTO.getId(), commonMemberDTO.getName());
 
-            response.setHeader("Authorization","Bearer " + jwtToken);
+            response.setHeader("Authorization", "Bearer " + jwtToken);
 
-            if(StringUtils.hasText(prevUrl) && !prevUrl.equalsIgnoreCase("null")){
+            if (StringUtils.hasText(prevUrl) && !prevUrl.equalsIgnoreCase("null")) {
 
 //                return "redirect:" + prevUrl;
                 response.sendRedirect("/" + prevUrl);
-            }else{
-                response.sendRedirect("/");
-//                return "redirect:/";
+                return null;
+            } else {
+                Map<String, String> result = new HashMap<>();
+                result.put("jwtToken", jwtToken);
+                return result;
             }
         } else {
-//            return "redirect:/login-common";
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "아이디와 비밀번호를 다시 확인해주세요.");
+            return null;
+
         }
+
     }
+
 
 
 
