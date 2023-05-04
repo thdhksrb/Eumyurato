@@ -84,5 +84,13 @@
         DELETE FROM local_festival WHERE id = #{param1}
     </delete>
 
+    <insert id="saveConcertWithoutImage" parameterType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
+        INSERT INTO small_concert (name, pname, location, enterId, startDate, lastDate, price)
+        VALUES (#{name}, #{pname}, #{location}, #{enterId}, #{startDate}, #{lastDate}, #{price})
+    </insert>
 
+    <insert id="saveConcert" parameterType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
+        INSERT INTO small_concert (enterId, name, location, pname, price, startDate, lastDate, image)
+        VALUES (#{enterId}, #{name}, #{location}, #{pname}, #{price}, #{startDate}, #{lastDate}, #{image})
+    </insert>
 </mapper>
