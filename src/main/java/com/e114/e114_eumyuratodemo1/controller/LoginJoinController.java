@@ -59,36 +59,17 @@ public class LoginJoinController {
                                      HttpSession session, RedirectAttributes redirectAttributes, HttpServletResponse response) throws IOException {
         CommonMemberDTO commonMemberDTO = userService.login(id, pwd);
         if (commonMemberDTO != null) {
-//            session.setAttribute("loginUser", commonMemberDTO);
-//            String loginUserJson = new ObjectMapper().writeValueAsString(commonMemberDTO);
-//            redirectAttributes.addFlashAttribute("loginUserJson", loginUserJson);
-//            System.out.println("prevUrl: "+ prevUrl);
-
-
-            System.out.println(id);
-            System.out.println(pwd);
 
             String jwtToken =
                     jwtUtils.createAccessToken(commonMemberDTO.getAdminNum(), commonMemberDTO.getId(), commonMemberDTO.getName());
 
             response.setHeader("Authorization", "Bearer " + jwtToken);
-
-            if (StringUtils.hasText(prevUrl) && !prevUrl.equalsIgnoreCase("null")) {
-
-//                return "redirect:" + prevUrl;
-                response.sendRedirect("/" + prevUrl);
-                return null;
-            } else {
-                Map<String, String> result = new HashMap<>();
-                result.put("jwtToken", jwtToken);
-                return result;
-            }
+            Map<String, String> result = new HashMap<>();
+            result.put("jwtToken", jwtToken);
+            return result;
         } else {
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "아이디와 비밀번호를 다시 확인해주세요.");
             return null;
-
         }
-
     }
 
 

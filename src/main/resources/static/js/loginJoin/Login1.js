@@ -1,6 +1,3 @@
-
-
-
 function submitForm(event) {
     event.preventDefault(); // 제출 버튼의 기본 동작 막기
 
@@ -15,26 +12,17 @@ function submitForm(event) {
                 // 폼 제출 성공
                 const jwtToken = xhr.getResponseHeader('Authorization').replace('Bearer ', '');
                 console.log(jwtToken);
-
-
-
-
-
-
-
+                sessionStorage.setItem('jwtToken', jwtToken);
+                window.location.href = '/';
             } else {
                 // 폼 제출 실패
                 console.error(xhr.statusText);
             }
         }
     };
-
     var formData = new FormData(form);
     xhr.send(formData);
 }
-
-
-
 
 
 (function () {
