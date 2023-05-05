@@ -10,6 +10,8 @@
     <!-- Popper JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!--graph-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!--begin::Global Stylesheets Bundle(used by all pages)-->
     <link th:href="@{/css/profile/profile1.css}" rel="stylesheet" type="text/css"/>
@@ -17,6 +19,7 @@
     <link th:href="@{/css/profile/profile3.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{/css/profile/pagination.css}" rel="stylesheet" type="text/css"/>
     <!--end::Global Stylesheets Bundle-->
+
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -112,6 +115,28 @@
         <div class="login-content flex-lg-row-fluid d-flex flex-column overflow-hidden py-10 py-lg-20 px-10 p-lg-7 mx-auto mw-1000px w-100"
              style="display: flex">
             <!--begin::Wrapper-->
+            <div class="form w-1000px  needs-validation text-center" id="graph" novalidate>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 mx-auto">
+                            <canvas id="myChart"></canvas>
+                            <div id="common">
+                            <button id="genderButton">성별</button>
+                            <button id="roadButton">유입경로</button>
+                            <button id="genreButton">장르</button>
+                            </div>
+                            <div id="artist" style="display: none;">
+                                <button id="genderBtn">성별</button>
+                                <button id="genreBtn">장르</button>
+                                <button id="point">포인트</button>
+                            </div>
+                            <div id="enter" style="display: none;">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!--begin::Signin Form-->
             <div class="form w-1000px  needs-validation text-center" id="kt_login_signin_form" novalidate>
                 <div style="color:#000000; background-color:#FFFFFF; padding:25px;  height: 600px;">
@@ -214,5 +239,6 @@
 </div>
 </div>
 <script type="text/javascript" th:src="@{/js/profile/profile_member.js}"></script>
+<script type="text/javascript" th:src="@{/js/profile/profile_graph.js}"></script>
 </body>
 </html>

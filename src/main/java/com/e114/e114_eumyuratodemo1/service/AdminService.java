@@ -135,6 +135,27 @@ public class AdminService {
         dao.saveConcert(smallConcertDTO);
     }
 
+    //일반 회원
+    public List<Map<String, Object>>  commonGenderCount(){
+        return dao.getCommonGender();
+    }
+    public List<Map<String, Object>>  commonGenreCount(){
+        return dao.getCommonGenre();
+    }
+    public List<Map<String, Object>>  commonRoadCount(){
+        return dao.getCommonRoad();
+    }
+
+    //아티스트 회원
+    public List<Map<String, Object>>  artistGenderCount(){
+        return dao.getArtistGender();
+    }
+    public List<Map<String, Object>>  artistGenreCount(){
+        return dao.getArtistGenre();
+    }
+    public List<Map<String, Object>>  artistPointTop(){
+        return dao.getArtistPoint();
+    }
 
 
 }
