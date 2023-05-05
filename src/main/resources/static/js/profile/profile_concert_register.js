@@ -55,6 +55,8 @@ function sample4_execDaumPostcode() {
 }
 
 $(document).ready(function() {
+
+    //프로필 이미지 사용자가 업로드한 이미지로 변경
     var defaultImage = '/img/default.jpg';
     $('#previewImage').attr('src', defaultImage);
     $('input[type="file"]').on('change', function(event) {
@@ -62,12 +64,43 @@ $(document).ready(function() {
         var imageUrl = URL.createObjectURL(file);
         $('#previewImage').attr('src', imageUrl);
     });
+
+    //마감일 검사
+    $('#lastDate').on('change', function() {
+        checkEndDate();
+    });
+
+    //enterId 검사
+    $('#enterId').on('change', function() {
+        var enterID = $('#enterId').val();
+        var regex = /^[a-zA-Z0-9]+$/;
+
+        if(!regex.test(enterID)){
+            alert('기업 ID에는 영문자와 숫자만 입력 가능합니다.');
+            $(this).val("");
+        }
+    });
+
+    //가격 검사
+    $('#price').on('change', function() {
+        var price = $('#price').val();
+        var num = /^[0-9]+$/;
+
+        if(!num.test(price)){
+            alert('가격은 숫자만 입력 가능합니다.');
+            $(this).val("");
+        }
+    });
+
+    //등록 버튼 클릭 시 실행
     $('#concertRegister').on('click', function(event) {
         event.preventDefault(); // 기본 동작(페이지 이동) 방지
+        clickCheck();
         concertRegister(); // 함수 실행
     });
 });
 
+//폼 데이터 넘기는 부분
 function concertRegister() {
     var formData = new FormData();
     var fileInput = document.querySelector('input[name="avatar"]');
@@ -100,5 +133,61 @@ function concertRegister() {
     });
 }
 
+//input 필수값 받기
+function clickCheck(){
+    var name = $("input[name='name']").val();
+    var pname = $("input[name='pname']").val();
+    var location = $("input[name='sample4_roadAddress']").val();
+    var enterId = $("input[name='enterId']").val();
+    var startDate = $("input[name='startDate']").val();
+    var lastDate = $("input[name='lastDate']").val();
+    var price = $("input[name='price']").val();
 
+    // 값이 비어있을 경우 경고창 출력
+    if (!name) {
+        alert("공연명은 필수 입력입니다.");
+        event.preventDefault();
+        return;
+    }
+    if (!pname) {
+        alert("공연자명은 필수 입력입니다.");
+        event.preventDefault();
+        return;
+    }
+    if (!location) {
+        alert("주소는 필수 입력입니다.");
+        event.preventDefault();
+        return;
+    }
+    if (!enterId) {
+        alert("기업명은 필수 입력입니다.");
+        event.preventDefault();
+        return;
+    }
+    if (!startDate) {
+        alert("시작일은 필수 입력입니다.");
+        event.preventDefault();
+        return;
+    }
+    if (!lastDate) {
+        alert("종료일은 필수 입력입니다.");
+        event.preventDefault();
+        return;
+    }
+    if (!price) {
+        alert("가격은 필수 입력입니다.");
+        event.preventDefault();
+        return;
+    }
+}
 
+//마감일이 시작일 이전이 될 수 없게함
+function checkEndDate() {
+    var startDate = $('#startDate').datepicker('getDate');
+    var lastDate = $('#lastDate').datepicker('getDate');
+
+    if (lastDate < startDate) {
+        alert('마감일자는 시작일자 이후여야 합니다.');
+        $('#lastDate').val('');
+    }
+}

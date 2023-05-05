@@ -33,7 +33,22 @@ public interface AdminMemberDAO {
     void deleteSmallConcert(int id);
     void deleteLocalFestival(int id);
 
+    List<BuskingDTO> searchBuskings(Map<String, String> params);
+    List<SmallConcertDTO> searchSmallConcerts(Map<String, String> params);
+    List<LocalFestivalDTO> searchLocalFestivals(Map<String, String> params);
     void saveConcertWithoutImage(SmallConcertDTO smallConcertDTO);
     void saveConcert(SmallConcertDTO smallConcertDTO);
 
+    //일반 회원
+    List<Map<String, Object>> getCommonGender();
+    List<Map<String, Object>>  getCommonGenre();
+    List<Map<String, Object>> getCommonRoad();
+
+    //아티스트 회원
+    List<Map<String, Object>> getArtistGender();
+    List<Map<String, Object>> getArtistGenre();
+    List<Map<String, Object>> getArtistPoint();
+    List<Map<String, Object>> getArtistPointAvg();
+    List<Map<String, Object>> getArtistBuskingIng();
+    List<Map<String, Object>> getArtistBuskingAll();
 }

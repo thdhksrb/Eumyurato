@@ -47,7 +47,6 @@ public class JwtUtils {
         return accessToken;
     }
 
-
     //토큰 유효성 검증 수행
     public boolean validateToken(String token) {
 
@@ -59,11 +58,14 @@ public class JwtUtils {
             return true;
         }
         catch(io.jsonwebtoken.security.SignatureException e) {
-            logger.info("잘못된 토큰 서명입니다.");
+            System.out.printf("잘못된 토큰 서명입니다.");
+            //logger.info("잘못된 토큰 서명입니다.");
         }catch(ExpiredJwtException e) {
-            logger.info("만료된 토큰입니다.");
+            System.out.printf("만료된 토큰입니다.");
+            //logger.info("만료된 토큰입니다.");
         }catch(IllegalArgumentException | MalformedJwtException e) {
-            logger.info("잘못된 토큰입니다.");
+            System.out.println("잘못된 토큰입니다.");
+            //logger.info("잘못된 토큰입니다.");
         }return false;
     }
 
@@ -95,44 +97,22 @@ public class JwtUtils {
         return null;
     }
 
-    // role에 따라서 페이지 이동을 다르게 하는 메서드 - 비회원, tutor, tutee, admin
-    public String authByRole(HttpServletRequest httpServletRequest ,String notLoginURI, String tuteeURI, String tutorURI, String adminURI){
+
+    // role에 따라서 페이지 이동을 다르게 하는 메서드 - 비회원, comnon, artist, enter, admin
+    public String authByRole(HttpServletRequest httpServletRequest ,String commonURI, String artistURI, String enterURI, String adminURI){
         String token = getAccessToken(httpServletRequest);
         if (token == null){
-            return notLoginURI;
-        }else if(getRole(token).equals("tutee")){
-            return tuteeURI;
-        }else if(getRole(token).equals("tutor")){
-            return tutorURI;
-        }else if(getRole(token).equals("admin")){
+            return null;
+        }else if(getRole(token).equals("1")){
+            return commonURI;
+        }else if(getRole(token).equals("2")) {
+            return artistURI;
+        }else if(getRole(token).equals("3")){
+                return enterURI;
+        }else if(getRole(token).equals("0")){
             return adminURI;
         }
         return null;
     }
-
-    // role에 따라서 페이지 이동을 다르게 하는 메서드 - admin
-    public String authByRole(HttpServletRequest request, String adminURI) {
-        String token = getAccessToken(request);
-        System.out.println("authByRole: "+token);
-        if (getRole(token).equals("admin")) {
-            return adminURI;
-        }
-        return null;
-    }
-
-    // role에 따라서 페이지 이동을 다르게 하는 메서드 - admin, tutor, tutee
-    public String authByRole(HttpServletRequest httpServletRequest ,String tuteeURI, String tutorURI, String adminURI){
-        String token = getAccessToken(httpServletRequest);
-        if(getRole(token).equals("tutee")){
-            return tuteeURI;
-        }else if(getRole(token).equals("tutor")){
-            return tutorURI;
-        }else if(getRole(token).equals("admin")){
-            return adminURI;
-        }
-        return null;
-    }
-
-
 
 }

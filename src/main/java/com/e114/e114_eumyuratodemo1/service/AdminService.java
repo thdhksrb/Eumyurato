@@ -1,9 +1,7 @@
 package com.e114.e114_eumyuratodemo1.service;
 
 
-import com.e114.e114_eumyuratodemo1.dto.BuskingDTO;
-import com.e114.e114_eumyuratodemo1.dto.LocalFestivalDTO;
-import com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO;
+import com.e114.e114_eumyuratodemo1.dto.*;
 import com.e114.e114_eumyuratodemo1.jdbc.AdminMemberDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,8 +15,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
+import java.util.Map;
 
 @Service
 public class AdminService {
@@ -28,6 +28,39 @@ public class AdminService {
 
     @Autowired
     AdminMemberDAO dao;
+
+    public List<CommonMemberDTO> viewAllCommons(){
+        return dao.getCommonMembers();
+    };
+
+    public List<ArtistMemberDTO> viewAllArtists(){
+        return dao.getArtistMembers();
+    };
+
+    public List<EnterpriseMemberDTO> viewAllEnters(){
+        return dao.getEntMembers();
+    };
+
+    public List<CommonMemberDTO> searchCommons(String column, String keyword){
+        Map<String, String> params = new HashMap<>();
+        params.put("column", column);
+        params.put("keyword", keyword);
+        return dao.searchCommonMembers(params);
+    };
+
+    public List<ArtistMemberDTO> searchArtists(String column, String keyword){
+        Map<String, String> params = new HashMap<>();
+        params.put("column", column);
+        params.put("keyword", keyword);
+        return dao.searchArtistMembers(params);
+    };
+
+    public List<EnterpriseMemberDTO> searchEnters(String column, String keyword){
+        Map<String, String> params = new HashMap<>();
+        params.put("column", column);
+        params.put("keyword", keyword);
+        return dao.searchEntMembers(params);
+    };
 
     public List<BuskingDTO> viewAllBusking() {
         return dao.getBuskings();
@@ -46,6 +79,26 @@ public class AdminService {
     }
 
     ;
+    public List<BuskingDTO> searchBuskings(String column, String keyword) {
+        Map<String, String> params = new HashMap<>();
+        params.put("column", column);
+        params.put("keyword", keyword);
+        return dao.searchBuskings(params);
+    }
+
+    public List<SmallConcertDTO> searchSmallConcerts(String column, String keyword) {
+        Map<String, String> params = new HashMap<>();
+        params.put("column", column);
+        params.put("keyword", keyword);
+        return dao.searchSmallConcerts(params);
+    }
+
+    public List<LocalFestivalDTO> searchLocalFestivals(String column, String keyword) {
+        Map<String, String> params = new HashMap<>();
+        params.put("column", column);
+        params.put("keyword", keyword);
+        return dao.searchLocalFestivals(params);
+    }
 
     public void deleteEvent(String category, int id) {
         String query = null;
@@ -82,5 +135,35 @@ public class AdminService {
         dao.saveConcert(smallConcertDTO);
     }
 
+    //일반 회원
+    public List<Map<String, Object>>  commonGenderCount(){
+        return dao.getCommonGender();
+    }
+    public List<Map<String, Object>>  commonGenreCount(){
+        return dao.getCommonGenre();
+    }
+    public List<Map<String, Object>>  commonRoadCount(){
+        return dao.getCommonRoad();
+    }
+
+    //아티스트 회원
+    public List<Map<String, Object>>  artistGenderCount(){
+        return dao.getArtistGender();
+    }
+    public List<Map<String, Object>>  artistGenreCount(){
+        return dao.getArtistGenre();
+    }
+    public List<Map<String, Object>>  artistPointTop(){
+        return dao.getArtistPoint();
+    }
+    public List<Map<String, Object>>  artistPointAvg(){
+        return dao.getArtistPointAvg();
+    }
+    public List<Map<String, Object>>  artistBuskingIng(){
+        return dao.getArtistBuskingIng();
+    }
+    public List<Map<String, Object>>  artistBuskingAll(){
+        return dao.getArtistBuskingAll();
+    }
 }
 

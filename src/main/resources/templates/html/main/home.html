@@ -32,11 +32,14 @@
         <a class="navbar-brand" href="#page-top"><img th:src="@{/img/logo_name.png}"></a>
     </div>
     <div style="margin-right: 60px;">
-        <a id="mypageBtn" href="/mypage" style="width: 30px; height: 30px;"><img th:src="@{/img/person.png}" style="width: 30px; height: 30px"/></a>
-        <span id="userName" style="margin-left: 10px; font-weight: bold; font-size: large;"></span>님
-        <a id="logoutBtn" style="margin-left: 20px;"/>
+        <a id="mypageBtn" style="width: 30px; height: 30px;"><img th:src="@{/img/person.png}" style="width: 30px; height: 30px; cursor:pointer;"/>
+        <span id="userName" style="margin-left: 10px; font-weight: bold; font-size: large; cursor:pointer;"></span>님</a>
+        <a id="logoutBtn" href="/logout" style="margin-left: 20px;"></a>
     </div>
 </nav>
+
+
+
 
 <!-- Masthead-->
 <header class="masthead bg-primary text-white text-center">
@@ -415,5 +418,6 @@
     }
 </script>
 <script th:src="@{/js/main/home.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jwt-decode/2.2.0/jwt-decode.min.js"></script>
 </body>
 </html>

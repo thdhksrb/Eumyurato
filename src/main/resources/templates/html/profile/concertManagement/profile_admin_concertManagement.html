@@ -81,7 +81,7 @@
                                  style="width: 60%; border-width: 3px;"></div>
                             <div class="menu-item" style="margin: 3px">
                                 <a class="text-dark text-hover-primary ms-3 py-2"
-                                   th:href="@{/profile/admin/total}">
+                                   th:href="@{/profile/admin/total/view}">
                                     <span class="menu-title">종합</span>
                                 </a>
                             </div>
@@ -109,7 +109,7 @@
         <!--begin::Aside-->
         <!--begin::Content-->
         <!--메인폼-->
-        <div class="login-content flex-lg-row-fluid d-flex flex-column overflow-hidden py-10 py-lg-20 px-10 p-lg-7 mx-auto mw-1000px w-100"
+        <div class="login-content flex-lg-row-fluid d-flex flex-column overflow-auto py-10 py-lg-20 px-10 p-lg-7 mx-auto mw-1000px w-100"
              style="display: flex">
             <!--begin::Wrapper-->
             <!--begin::Signin Form-->
@@ -117,18 +117,38 @@
                 <div style="color:#000000; background-color:#FFFFFF; padding:25px;  height: 600px;">
                     <div style="display: flex; align-items: center; margin-bottom: 20px;">
                         <h4 style="font-size: 24px; flex-grow: 1;"><strong>공연 정보</strong></h4>
-                        <button class="btn btn-primary" id="buskingBtn">버스킹 공연</button>
-                        <button class="btn btn-primary" id="smallConcertBtn">소규모 공연</button>
-                        <button class="btn btn-primary" id="localFestivalBtn">지역 축제</button>
-                        <a th:href="@{/profile/admin/register}" class="btn btn-primary">공연 등록</a>
+                        <button class="text-gray-600 text-hover-primary ms-3" id="buskingBtn">버스킹 공연</button>
+                        <button class="text-gray-600 text-hover-primary ms-3" id="smallConcertBtn">소규모 공연</button>
+                        <button class="text-gray-600 text-hover-primary ms-3" id="localFestivalBtn">지역 축제</button>
+                        <a th:href="@{/profile/admin/register}" class="text-gray-600 text-hover-primary ms-3">공연 등록</a>
                     </div>
+                    <div class="search-container">
+                        <select id="searchColumn" style="width: 10%; height: 40px; border-radius: 5px;">
+                            <!-- 버스킹 공연 옵션 -->
+                            <option class="busking" value="name">공연명</option>
+                            <option class="busking" value="artId">아티스트명</option>
+                            <option class="busking" value="location">위치</option>
 
+                            <!-- 소규모 공연 옵션 -->
+                            <option class="smallconcert" value="name">공연명</option>
+                            <option class="smallconcert" value="enterId">기업아이디</option>
+                            <option class="smallconcert" value="pname">공연자명</option>
+                            <option class="smallconcert" value="location">위치</option>
+
+                            <!-- 지역 축제 옵션 -->
+                            <option class="localfestival" value="name">축제명</option>
+                            <option class="localfestival" value="org">주최 기관</option>
+                            <option class="localfestival" value="location">위치</option>
+                        </select>
+                        <input type="text" id="searchKeyword" placeholder="검색어 입력" style="width: 30%; height: 40px; border-radius: 5px; border: 1px solid #cccad4">
+                        <button class="btn btn-primary" id="searchBtn" style="width: 10%;" >Search</button>
+                    </div>
                     <div>
                         <div class="container mt-5">
                             <div class="row">
                                 <div class="col-md-12">
                                     <table class="table table-rounded table-striped border gy-7 gs-7" id="eventTable">
-                                        <thead id="eventThead">
+                                        <thead id="eventThead" style="position: sticky; top: 0">
                                         <tr class="fw-bold fs-6 text-gray-800 border-bottom border-gray-200">
                                             <!-- 기본 공통 컬럼 -->
 
@@ -144,14 +164,16 @@
                                             <th class="smallconcert" style="display: none">기업아이디</th>
                                             <th class="smallconcert" style="display: none">공연자명</th>
                                             <th class="smallconcert" style="display: none">위치</th>
-                                            <th class="smallconcert" style="display: none">공연 일자</th>
+                                            <th class="smallconcert" style="display: none">공연 시작일자</th>
+                                            <th class="smallconcert" style="display: none">공연 마감일자</th>
                                             <th class="smallconcert" style="display: none">공연 가격</th>
 
                                             <!-- 지역 축제 컬럼 -->
                                             <th class="localfestival" style="display: none">축제명</th>
                                             <th class="localfestival" style="display: none">주최 기관</th>
                                             <th class="localfestival" style="display: none">위치</th>
-                                            <th class="localfestival" style="display: none">축제 기간</th>
+                                            <th class="localfestival" style="display: none">축제 시작일자</th>
+                                            <th class="localfestival" style="display: none">축제 마감일자</th>
                                         </tr>
                                         </thead>
                                         <tbody id="eventTbody">

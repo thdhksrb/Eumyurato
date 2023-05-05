@@ -1,30 +1,30 @@
-let currentCategory = 'busking';
-getEvents(currentCategory);
+let currentCategory = 'common';
+getMembers(currentCategory);
 
-document.getElementById('buskingBtn').addEventListener('click', () => {
-    currentCategory = 'busking';
-    getEvents(currentCategory);
+document.getElementById('commonBtn').addEventListener('click', () => {
+    currentCategory = 'common';
+    getMembers(currentCategory);
 });
 
-document.getElementById('smallConcertBtn').addEventListener('click', () => {
-    currentCategory = 'smallconcert';
-    getEvents(currentCategory);
+document.getElementById('artistBtn').addEventListener('click', () => {
+    currentCategory = 'artist';
+    getMembers(currentCategory);
 });
 
-document.getElementById('localFestivalBtn').addEventListener('click', () => {
-    currentCategory = 'localfestival';
-    getEvents(currentCategory);
+document.getElementById('enterpriseBtn').addEventListener('click', () => {
+    currentCategory = 'enterprise';
+    getMembers(currentCategory);
 });
 
 document.getElementById('searchBtn').addEventListener('click', () => {
     const searchColumn = document.getElementById('searchColumn').value;
     const searchKeyword = document.getElementById('searchKeyword').value;
 
-    getEvents(currentCategory, 1, searchColumn, searchKeyword);
+    getMembers(currentCategory, 1, searchColumn, searchKeyword);
 });
 
-function getEvents(category, page = 1, searchColumn = null, searchKeyword = '') {
-    let url = `/profile/admin/management?category=${category}&page=${page}`;
+function getMembers(category, page = 1, searchColumn = null, searchKeyword = '') {
+    let url = `/profile/admin/total?category=${category}&page=${page}`;
     if (searchColumn && searchKeyword) {
         url += `&column=${searchColumn}&keyword=${searchKeyword}`;
     }
@@ -43,69 +43,75 @@ function getEvents(category, page = 1, searchColumn = null, searchKeyword = '') 
         })
         .then((data) => {
             showColumns(category);
-            displayEvents(data, category, page);
+            displayMembers(data, category, page);
         })
         .catch((error) => {
             console.error('fetch 작동에 문제가 있습니다.', error);
         });
 }
 
-    function displayEvents(events, category, currentPage) {
-        const eventTbody = document.getElementById('eventTbody');
-        eventTbody.innerHTML = '';
+    function displayMembers(members, category, currentPage) {
+        const memberTbody = document.getElementById('memberTbody');
+        memberTbody.innerHTML = '';
 
-        const eventsPerPage = 5;
-        const start = (currentPage - 1) * eventsPerPage;
-        const end = start + eventsPerPage;
+        const membersPerPage = 5;
+        const start = (currentPage - 1) * membersPerPage;
+        const end = start + membersPerPage;
 
-        events.slice(start, end).forEach((event) => {
-            const eventRow = eventTbody.insertRow();
-            const eventId = event.id;
+        members.slice(start, end).forEach((member) => {
+            const memberRow = memberTbody.insertRow();
+            const memberId = member.id;
 
             // 각 이벤트 행에 삭제 버튼 추가
             const deleteButton = document.createElement('button');
             deleteButton.textContent = '삭제';
             deleteButton.classList.add('delete-btn'); //버튼 class 지정
             deleteButton.setAttribute('data-category', category);
-            deleteButton.setAttribute('data-id', eventId);
+            deleteButton.setAttribute('data-id', memberId);
             deleteButton.addEventListener('click', () => {
-                console.log(category, eventId);
-                deleteConcert(category,eventId);
+                console.log(category, memberId);
+                deleteConcert(category,memberId);
             });
 
             // 기본 공통 컬럼
 
             switch (category) {
-                case 'busking':
-                    // 버스킹 공연에 대한 데이터를 생성
-                    eventRow.insertCell().textContent = event.name;
-                    eventRow.insertCell().textContent = event.artId;
-                    eventRow.insertCell().textContent = event.location;
-                    eventRow.insertCell().textContent = event.date;
-                    eventRow.insertCell().textContent = event.regDate;
-                    eventRow.insertCell().appendChild(deleteButton);
+                case 'common':
+                    // 일반 회원에 대한 데이터를 생성
+                    memberRow.insertCell().textContent = member.id;
+                    memberRow.insertCell().textContent = member.name;
+                    memberRow.insertCell().textContent = member.nid;
+                    memberRow.insertCell().textContent = member.sex;
+                    memberRow.insertCell().textContent = member.birth;
+                    memberRow.insertCell().textContent = member.email;
+                    memberRow.insertCell().textContent = member.phone;
+                    memberRow.insertCell().textContent = member.road;
+                    memberRow.insertCell().textContent = member.genre;
+                    memberRow.insertCell().appendChild(deleteButton);
                     break;
 
-                case 'smallconcert':
-                    // 소규모 공연에 대한 데이터를 생성
-                    eventRow.insertCell().textContent = event.name;
-                    eventRow.insertCell().textContent = event.enterId;
-                    eventRow.insertCell().textContent = event.pname;
-                    eventRow.insertCell().textContent = event.location;
-                    eventRow.insertCell().textContent = event.startDate;
-                    eventRow.insertCell().textContent = event.lastDate;
-                    eventRow.insertCell().textContent = event.price;
-                    eventRow.insertCell().appendChild(deleteButton);
+                case 'artist':
+                    // 아티스트 회원에 대한 데이터를 생성
+                    memberRow.insertCell().textContent = member.id;
+                    memberRow.insertCell().textContent = member.name;
+                    memberRow.insertCell().textContent = member.nid;
+                    memberRow.insertCell().textContent = member.sex;
+                    memberRow.insertCell().textContent = member.birth;
+                    memberRow.insertCell().textContent = member.email;
+                    memberRow.insertCell().textContent = member.phone;
+                    memberRow.insertCell().textContent = member.genre;
+                    memberRow.insertCell().textContent = member.point;
+                    memberRow.insertCell().appendChild(deleteButton);
                     break;
 
-                case 'localfestival':
-                    // 지역 축제에 대한 데이터를 생성
-                    eventRow.insertCell().textContent = event.name;
-                    eventRow.insertCell().textContent = event.org;
-                    eventRow.insertCell().textContent = event.location;
-                    eventRow.insertCell().textContent = event.startDate;
-                    eventRow.insertCell().textContent = event.lastDate;
-                    eventRow.insertCell().appendChild(deleteButton);
+                case 'enterprise':
+                    // 기업 회원에 대한 데이터를 생성
+                    memberRow.insertCell().textContent = member.id;
+                    memberRow.insertCell().textContent = member.name;
+                    memberRow.insertCell().textContent = member.num;
+                    memberRow.insertCell().textContent = member.email;
+                    memberRow.insertCell().textContent = member.phone;
+                    memberRow.insertCell().appendChild(deleteButton);
                     break;
 
                 default:
@@ -113,7 +119,7 @@ function getEvents(category, page = 1, searchColumn = null, searchKeyword = '') 
             }
         });
 
-        createPagination(events.length, eventsPerPage, currentPage, category);
+        createPagination(members.length, membersPerPage, currentPage, category);
     }
 
     function showColumns(category) {
@@ -131,8 +137,8 @@ function getEvents(category, page = 1, searchColumn = null, searchKeyword = '') 
         }
     }
 
-    function deleteConcert(category,eventId){
-        fetch(`/profile/admin/management?category=${category.toLowerCase()}&id=${eventId}`, {
+    function deleteConcert(category,memberId){
+        fetch(`/profile/admin/total?category=${category.toLowerCase()}&id=${memberId}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -140,15 +146,15 @@ function getEvents(category, page = 1, searchColumn = null, searchKeyword = '') 
         })
             .then(() => {
                 alert('이벤트 삭제가 완료되었습니다.');
-                getEvents(category);
+                getMembers(category);
             })
             .catch((error) => {
                 console.error('이벤트 삭제 중 에러가 발생했습니다.', error);
             });
     }
 
-    function createPagination(totalEvents, eventsPerPage, currentPage, category) {
-        const totalPages = Math.ceil(totalEvents / eventsPerPage);
+    function createPagination(totalMembers, membersPerPage, currentPage, category) {
+        const totalPages = Math.ceil(totalMembers / membersPerPage);
         const paginationEl = document.querySelector('.pagination');
 
         paginationEl.innerHTML = '';
@@ -163,7 +169,7 @@ function getEvents(category, page = 1, searchColumn = null, searchKeyword = '') 
             }
             a.addEventListener('click', (event) => {
                 event.preventDefault();
-                getEvents(category, i);
+                getMembers(category, i);
                 scrollToTop();
             });
             li.appendChild(a);
