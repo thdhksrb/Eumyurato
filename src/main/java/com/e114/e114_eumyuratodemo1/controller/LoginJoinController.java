@@ -164,11 +164,6 @@ public class LoginJoinController {
         }
     }
 
-//    @GetMapping("/enterprise")
-//    public String registerPage() {
-//        return "html/main/main3"; // 로그인 페이지로 이동
-//    }
-
 //로그 아웃
 @GetMapping("/logout")
 public String logout(HttpSession session, HttpServletResponse response) {
