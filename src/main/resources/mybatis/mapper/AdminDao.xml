@@ -4,33 +4,33 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.e114.e114_eumyuratodemo1.jdbc.AdminMemberDAO">
     <select id="getArtistMembers" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
-        select id, name, nid, sex, birth, phone
+        select *
         from artist_member
     </select>
 
     <select id="getCommonMembers" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
-        select id, name, nid, sex, birth, phone
+        select *
         from common_member
     </select>
 
     <select id="getEntMembers" resultType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
-        select id, name, num, email, phone
+        select *
         from enterprise_member
     </select>
 
-    <select id="searchArtistMembers" parameterType="map" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
-        SELECT id, name, nid, sex, birth, phone FROM artist_member
+    <select id="searchCommonMembers" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
+        SELECT * FROM common_member
         WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
     </select>
 
-    <select id="searchCommonMembers" parameterType="map" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
-        SELECT id, name, nid, sex, birth, phone FROM common_member
+    <select id="searchArtistMembers" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
+        SELECT * FROM artist_member
         WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
     </select>
 
-    <select id="searchEntMembers" parameterType="map" resultType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
-        SELECT id, name, num, email, phone FROM enterprise_member
-        WHERE ${column2} LIKE CONCAT('%', #{keyword2}, '%')
+    <select id="searchEntMembers" resultType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
+        SELECT * FROM enterprise_member
+        WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
     </select>
 
     <select id="getReservationList" resultType="com.e114.e114_eumyuratodemo1.dto.ReservationDTO">
@@ -52,7 +52,7 @@
     <select id="getAdminInfoById" resultType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
         SELECT id, pwd, name, num, email, phone
         FROM enterprise_member
-        WHERE id = #{adminId} AND adminNum = 0
+        WHERE id = #{id} AND adminNum = 0
     </select>
 
     <select id="getBuskings" resultType="com.e114.e114_eumyuratodemo1.dto.BuskingDTO">
@@ -66,6 +66,22 @@
     <select id="getLocalFestivals" resultType="com.e114.e114_eumyuratodemo1.dto.LocalFestivalDTO">
         select * from local_festival
     </select>
+
+    <select id="searchBuskings" resultType="com.e114.e114_eumyuratodemo1.dto.BuskingDTO">
+        SELECT * FROM busking WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+
+    <select id="searchSmallConcerts" resultType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
+        SELECT * FROM small_concert WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+
+    <select id="searchLocalFestivals" resultType="com.e114.e114_eumyuratodemo1.dto.LocalFestivalDTO">
+        SELECT * FROM local_festival WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+
+    <insert id="registerSmallConcert">
+        insert into small_concert(name, enterId, location, pname, startDate, lastDate, price, image) values (#{name}, #{enterId},#{location}, #{pname}, #{startDate}, #{lastDate}, #{price}, #{image})
+    </insert>
 
     <delete id="deleteBusking">
         DELETE FROM busking WHERE id = #{param1}
@@ -88,4 +104,60 @@
         INSERT INTO small_concert (enterId, name, location, pname, price, startDate, lastDate, image)
         VALUES (#{enterId}, #{name}, #{location}, #{pname}, #{price}, #{startDate}, #{lastDate}, #{image})
     </insert>
+
+    <select id="getCommonGender" resultType="map">
+        SELECT sex, COUNT(*) as count
+        FROM common_member
+        GROUP BY sex;
+    </select>
+
+    <select id="getCommonGenre" resultType="map">
+        SELECT genre, COUNT(*) as count
+        FROM common_member
+        GROUP BY genre;
+    </select>
+
+    <select id="getCommonRoad" resultType="map">
+        SELECT road, COUNT(*) as count
+        FROM common_member
+        GROUP BY road;
+    </select>
+
+    <select id="getArtistGender" resultType="map">
+        SELECT sex, COUNT(*) as count
+        FROM artist_member
+        GROUP BY sex;
+    </select>
+
+    <select id="getArtistGenre" resultType="map">
+        SELECT genre, COUNT(*) as count
+        FROM artist_member
+        GROUP BY genre;
+    </select>
+
+    <select id="getArtistPoint" resultType="map">
+        SELECT id, nid, point
+        FROM artist_member
+        ORDER BY point DESC
+            LIMIT 10;
+    </select>
+
+    <select id="getArtistPointAvg" resultType="map">
+        SELECT CAST(ROUND(AVG(point)) AS SIGNED) AS avg_point
+        FROM artist_member;
+    </select>
+
+    <select id="getArtistBuskingIng" resultType="map">
+        <![CDATA[
+        SELECT COUNT(*) AS busking_ing
+        FROM busking
+        WHERE date >= CURDATE();
+        ]]>
+    </select>
+
+    <select id="getArtistBuskingAll" resultType="map">
+        SELECT COUNT(*) AS all_busking
+        FROM busking;
+    </select>
+
 </mapper>
