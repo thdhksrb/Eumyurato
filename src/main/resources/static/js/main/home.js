@@ -38,9 +38,15 @@ window.onload = function() {
     const jwtToken = window.sessionStorage.getItem("jwtToken");
     if (jwtToken !== null) {
         // 로그인 상태인 경우
+        // 토큰을 '.'으로 분리한 후, 두 번째 부분(payload)만 추출
+        const payloadBase64Url = jwtToken.split('.')[1];
+
+        // Base64Url 디코딩
+        const payloadBase64 = payloadBase64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const payload = JSON.parse(atob(payloadBase64));
+        const decodedName = decodeURIComponent(escape(payload.name));
         const userNameElem = document.getElementById("userName");
-        const decodedToken = jwt_decode(jwtToken);
-        userNameElem.innerText = decodedToken.name;
+        userNameElem.innerText = decodedName;
 
         const logoutBtn = document.createElement("a");
         logoutBtn.setAttribute("href", "/logout");
@@ -68,4 +74,6 @@ window.onload = function() {
         navLogout.style.display = "none";
     }
 };
+
+
 
