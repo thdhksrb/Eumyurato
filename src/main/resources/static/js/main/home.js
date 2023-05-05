@@ -38,6 +38,7 @@ window.onload = function() {
     const jwtToken = window.sessionStorage.getItem("jwtToken");
     if (jwtToken !== null) {
         // 로그인 상태인 경우
+
         // 토큰을 '.'으로 분리한 후, 두 번째 부분(payload)만 추출
         const payloadBase64Url = jwtToken.split('.')[1];
 
@@ -48,6 +49,12 @@ window.onload = function() {
         const userNameElem = document.getElementById("userName");
         userNameElem.innerText = decodedName;
 
+        const mypageBtn = document.getElementById("mypageBtn");
+        mypageBtn.onclick = function (){
+            window.location.href = "/profile/admin/root";
+        }
+
+        // 로그아웃
         const logoutBtn = document.createElement("a");
         logoutBtn.setAttribute("href", "/logout");
         logoutBtn.onclick = function() {

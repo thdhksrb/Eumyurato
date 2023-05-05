@@ -48,11 +48,11 @@ public class LoginJoinController {
 
     @GetMapping("/profile")
     public String profile(HttpServletRequest request){
-        String commonURI =  "/profile/common";
-        String artistURI = "/profile/artist";
-        String enterURI = "/profile/enter";
-        String adminURI = "/profile/admin/root";
-        String notloginURI = "/login-common";
+        String commonURI =  "html/profile/account/profile_common_account";
+        String artistURI = "html/profile/account/profile_artist_account";
+        String enterURI = "html/profile/account/profile_enterprise_account";
+        String adminURI = "html/profile/root/profile_admin_root";
+        String notloginURI = "html/loginJoin/loginForm1";
 
         String URI = jwtUtils.authByRole(request, commonURI, artistURI, enterURI, adminURI);
 

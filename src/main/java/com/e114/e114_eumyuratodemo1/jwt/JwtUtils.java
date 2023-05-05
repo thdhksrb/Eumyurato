@@ -112,31 +112,4 @@ public class JwtUtils {
         return null;
     }
 
-/*
-    // role에 따라서 페이지 이동을 다르게 하는 메서드 - admin
-    public String authByRole(HttpServletRequest request, String adminURI) {
-        String token = getAccessToken(request);
-        System.out.println("authByRole: "+token);
-        if (getRole(token).equals("admin")) {
-            return adminURI;
-        }
-        return null;
-    }
-
-    // role에 따라서 페이지 이동을 다르게 하는 메서드 - admin, tutor, tutee
-    public String authByRole(HttpServletRequest httpServletRequest ,String tuteeURI, String tutorURI, String adminURI){
-        String token = getAccessToken(httpServletRequest);
-        if(getRole(token).equals("tutee")){
-            return tuteeURI;
-        }else if(getRole(token).equals("tutor")){
-            return tutorURI;
-        }else if(getRole(token).equals("admin")){
-            return adminURI;
-        }
-        return null;
-    }
-
-
-*/
-
 }
