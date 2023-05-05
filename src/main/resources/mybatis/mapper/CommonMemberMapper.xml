@@ -2,12 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- CommonMemberMapper.xml -->
 <mapper namespace="com.e114.e114_eumyuratodemo1.jdbc.CommonMemberDAO">
-    <insert id="insert" parameterType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
-        INSERT INTO common_member (id, pwd, name, nid, birth, sex, email, phone, road, genre,
-                                   adminNum)
-        VALUES (#{id}, #{pwd}, #{name}, #{nid}, #{birth}, #{sex}, #{email}, #{phone}, #{road}, #{genre},
-                #{adminNum})
-    </insert>
 
     <select id="findById" parameterType="java.lang.String" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
         SELECT *
@@ -21,6 +15,13 @@
         WHERE pwd = #{pwd}
     </select>
 
+    <!--회원가입-->
+    <insert id="insert" parameterType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
+        INSERT INTO common_member (id, pwd, name, nid, birth, sex, email, phone, road, genre,
+                                   adminNum)
+        VALUES (#{id}, #{pwd}, #{name}, #{nid}, #{birth}, #{sex}, #{email}, #{phone}, #{road}, #{genre},
+                #{adminNum})
+    </insert>
 
     <select id="findByAdminNum" parameterType="int" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
         SELECT *
@@ -28,6 +29,7 @@
         WHERE admin_num = #{adminNum}
     </select>
 
+    <!--중복체크-->
     <select id="useById" parameterType="java.lang.String" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
         SELECT *
         FROM common_member
@@ -40,6 +42,8 @@
         WHERE nid = #{nid}
     </select>
 
+
+
    <!--아이디 찾기-->
     <select id="findUserIdsByNameAndEmail" resultType="String">
         SELECT id
@@ -51,5 +55,6 @@
     <update id="updatePw" >
         update member set pw = #{pw} where id = #{id}
     </update>
+
 </mapper>
 

@@ -38,6 +38,32 @@ idInput.addEventListener("input", function () {
     }
 });
 
+
+// 아이디 중복 버튼 이벤트 핸들러
+const duplicateBtn1 = document.querySelector("#id ~ button[type='button']");
+duplicateBtn1.addEventListener("click", function() {
+    const idInput = document.getElementById("id");
+    const idValue = idInput.value.trim();
+    if (idValue !== "") {
+        // 서버로 중복 검사 요청
+        fetch(`/checkIdDuplicate/${idValue}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.duplicate) {
+                    document.getElementById("uid-duplicate").style.display = "block";
+                    document.getElementById(`uid-available`).style.display = "none";
+                } else if (!data.duplicate){
+                    document.getElementById(`uid-available`).style.display = "block";
+                    document.getElementById("uid-duplicate").style.display = "none";
+                } else{
+                    document.getElementById(`uid-available`).style.display = "none";
+                    document.getElementById("uid-duplicate").style.display = "none";
+                }
+            })
+            .catch(error => console.error(error));
+    }
+});
+
 // 비밀번호 유효성 검사
 pwdInput.addEventListener("input", function () {
     const pwdValue = pwdInput.value.trim();
@@ -178,27 +204,6 @@ nameInput.addEventListener("checkbox", function () {
 });
 
 
-// 아이디 중복 버튼 이벤트 핸들러
-const duplicateBtn1 = document.querySelector("#id ~ button[type='button']");
-duplicateBtn1.addEventListener("click", function() {
-    const idInput = document.getElementById("id");
-    const idValue = idInput.value.trim();
-    if (idValue !== "") {
-        // 서버로 중복 검사 요청
-        fetch(`/checkIdDuplicate/${idValue}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.duplicate) {
-                    document.getElementById("uid-duplicate").style.display = "block";
-                    document.getElementById(`uid-available`).style.display = "none";
-                } else {
-                    document.getElementById(`uid-available`).style.display = "block";
-                    document.getElementById("uid-duplicate").style.display = "none";
-                }
-            })
-            .catch(error => console.error(error));
-    }
-});
 
 // 닉네임 중복 검사 버튼 이벤트 핸들러
 const duplicateBtn2 = document.querySelector("#duplicateBtn2");

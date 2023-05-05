@@ -93,7 +93,7 @@ $(document).ready(function() {
     });
 
     //등록 버튼 클릭 시 실행
-    $('#concertRegster').on('click', function(event) {
+    $('#concertRegister').on('click', function(event) {
         event.preventDefault(); // 기본 동작(페이지 이동) 방지
         clickCheck();
         concertRegister(); // 함수 실행

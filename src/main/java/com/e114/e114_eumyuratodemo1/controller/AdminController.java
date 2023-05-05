@@ -2,6 +2,7 @@ package com.e114.e114_eumyuratodemo1.controller;
 
 import com.e114.e114_eumyuratodemo1.dto.*;
 import com.e114.e114_eumyuratodemo1.jdbc.AdminMemberDAO;
+import com.e114.e114_eumyuratodemo1.jwt.JwtUtils;
 import com.e114.e114_eumyuratodemo1.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -146,12 +147,16 @@ public class AdminController {
         List<Map<String, Object>> genreCounts = adminService.artistGenreCount();
         List<Map<String, Object>> points = adminService.artistPointTop();
         List<Map<String, Object>> pointAvg = adminService.artistPointAvg();
+        List<Map<String, Object>> buskingIng = adminService.artistBuskingIng();
+        List<Map<String, Object>> buskingAll = adminService.artistBuskingAll();
 
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("genderCounts", genderCounts);
         resultMap.put("genreCounts", genreCounts);
         resultMap.put("points", points);
         resultMap.put("pointAvg", pointAvg);
+        resultMap.put("buskingIng",buskingIng);
+        resultMap.put("buskingAll",buskingAll);
 
         return resultMap;
     }

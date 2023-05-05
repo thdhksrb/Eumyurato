@@ -207,18 +207,12 @@
                             <input autocomplete="off" class="form-control form-control-lg form-control-solid datepicker"
                                    id="startDate" name="startDate" placeholder="" required
                                    style="border-color: #0099FF;" type="text"/>
-                            <div>
-                                <div class="invalid-feedback" id="date-empty1">필수 입력 정보입니다.</div>
-                            </div>
 
                             <label class="form-label fs-6 fw-bolder text-dark pt-5">공연 마감 일자</label>
                             <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
                             <input autocomplete="off" class="form-control form-control-lg form-control-solid datepicker"
                                    id="lastDate" name="lastDate" placeholder="" required
                                    style="border-color: #0099FF;" type="text"/>
-                            <div>
-                                <div class="invalid-feedback" id="date-empty2">필수 입력 정보입니다.</div>
-                            </div>
                         </div>
 
                     </div>
@@ -233,7 +227,7 @@
                     <div class="d-flex flex-wrap justify-content-center pb-lg-0 pb-5">
                         <!-- justify-content-end 클래스를 추가하여 오른쪽으로 정렬 -->
                         <button type="submit" class="btn btn-primary fw-bolder fs-4 px-8 py-4 my-3 me-4"
-                                th:href="@{profile/admin/management/view}" id="concertRegister">공연 등록
+                                 id="concertRegister">공연 등록
                         </button>
                     </div>
                 </div>
@@ -242,12 +236,12 @@
     </div>
 </div>
 </div>
-<script type="text/javascript" th:src="@{/js/profile/profile_concert_register.js}"></script>
 <!--우편번호 API-->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!--datepicker용-->
 <script type="text/javascript" th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/1.12.1/jquery.min.js}"></script>
 <script type="text/javascript" th:src="@{https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/profile/profile_concert_register.js}"></script>
 <!-- 캘린더 옵션 { -->
 <script>
     $.datepicker.setDefaults({
