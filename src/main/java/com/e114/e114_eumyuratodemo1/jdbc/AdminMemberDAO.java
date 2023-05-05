@@ -51,4 +51,8 @@ public interface AdminMemberDAO {
     List<Map<String, Object>> getArtistPointAvg();
     List<Map<String, Object>> getArtistBuskingIng();
     List<Map<String, Object>> getArtistBuskingAll();
+
+    //기업 회원
+    List<Map<String, Object>> getEnterConcertIng();
+    List<Map<String, Object>> getEnterConcertAll();
 }

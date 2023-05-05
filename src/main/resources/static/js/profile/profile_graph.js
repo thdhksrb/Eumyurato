@@ -18,6 +18,7 @@ $('#artistBtn').on('click', function() {
     $('#artist').show();
 
     $('#artistSpan').show();
+    $('#enterSpan').hide();
 
     getArtistMember();
 });
@@ -28,6 +29,13 @@ $('#enterpriseBtn').on('click', function() {
     $('#artist').hide();
 
     $('#artistSpan').hide();
+    $('#enterSpan').show();
+
+    const ctx = document.getElementById('myChart').getContext('2d');
+    if (Chart.getChart("myChart")) {
+        Chart.getChart("myChart")?.destroy();
+    }
+    getEnterMember();
 
 });
 
@@ -84,6 +92,26 @@ function getArtistMember(){
             const buskAll = response.buskingAll[0].all_busking;
             const buskEl = document.getElementById('buskingCount');
             buskEl.innerHTML = `전체 버스킹 수 : ${buskAll}`;
+        },
+        error: function(error) {
+            console.log(error);
+        },
+    });
+}
+
+//기업회원 데이터 불러오기
+function getEnterMember() {
+    $.ajax({
+        url: '/profile/admin/total/enterMember',
+        type: 'GET',
+        success: function(response) {
+            const ongoingConcert = response.concertIng[0].concert_ing;
+            const conNowEl = document.getElementById('afterTodayConcert');
+            conNowEl.innerHTML = `현재 진행 중인 공연 : ${ongoingConcert}`;
+
+            const concertAll = response.concertAll[0].concert_all;
+            const conEl = document.getElementById('concertCount');
+            conEl.innerHTML = `전체 공연 수 : ${concertAll}`;
         },
         error: function(error) {
             console.log(error);
