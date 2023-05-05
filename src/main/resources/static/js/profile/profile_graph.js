@@ -6,6 +6,7 @@ $('#commonBtn').on('click', function() {
     $('#common').show();
     $('#enter').hide();
     $('#artist').hide();
+    $('#avg').hide();
 
     getCommonMember();
 });
@@ -22,6 +23,7 @@ $('#enterpriseBtn').on('click', function() {
     $('#common').hide();
     $('#enter').show();
     $('#artist').hide();
+    $('#avg').hide();
 
 });
 
@@ -57,13 +59,20 @@ function getArtistMember(){
             console.log(response);
             drawGenderChart(response);
             $('#genderBtn').on('click', function() {
+                $('#avg').hide();
                 drawGenderChart(response);
             });
             $('#genreBtn').on('click', function() {
+                $('#avg').hide();
                 drawGenreChart(response);
             });
             $('#point').on('click', function() {
                 drawPointChart(response);
+                $('#avg').show();
+                const pointAvg = response.pointAvg[0].avg_point;
+                const avgEl = document.getElementById('avg');
+                avgEl.innerHTML = `포인트 평균: ${pointAvg}`;
+
             });
         },
         error: function(error) {

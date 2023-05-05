@@ -120,17 +120,17 @@
                     <div class="row">
                         <div class="col-md-8 mx-auto">
                             <canvas id="myChart"></canvas>
-                            <div id="common">
+                            <div id="common" style="margin-top: 15px;">
                             <button id="genderButton">성별</button>
                             <button id="roadButton">유입경로</button>
                             <button id="genreButton">장르</button>
                             </div>
-                            <div id="artist" style="display: none;">
+                            <div id="artist" style="display: none; margin-top: 15px;">
                                 <button id="genderBtn">성별</button>
                                 <button id="genreBtn">장르</button>
                                 <button id="point">포인트</button>
                             </div>
-                            <div id="enter" style="display: none;">
+                            <div id="enter" style="display: none; margin-top: 15px;">
 
                             </div>
                         </div>
@@ -148,7 +148,7 @@
                         <a target="_blank" class="text-gray-600 text-hover-primary ms-3">|</a>
                         <button class="text-gray-600 ms-3 fs-5" id="enterpriseBtn">기업 회원</button>
                     </div>
-                    <div class="search-container">
+                    <span class="search-container">
                         <select id="searchColumn" style="width: 10%; height: 40px; border-radius: 5px;">
                             <!-- 일반 회원 옵션 -->
                             <option class="common" value="id">아이디</option>
@@ -178,7 +178,9 @@
                         </select>
                         <input type="text" id="searchKeyword" placeholder="검색어 입력" style="width: 30%; height: 40px; border-radius: 5px; border: 1px solid #cccad4">
                         <button class="btn btn-primary" id="searchBtn" style="width: 10%;" >Search</button>
-                    </div>
+                    </span>
+                    <span id="avg" style="font-size: 20px; margin-left: 10px; display: none;"></span>
+                    <span id="concertCounts">하이하이</span>
                     <div>
                         <div class="container mt-5">
                             <div class="row">

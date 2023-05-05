@@ -156,7 +156,9 @@ public class AdminService {
     public List<Map<String, Object>>  artistPointTop(){
         return dao.getArtistPoint();
     }
-
+    public List<Map<String, Object>>  artistPointAvg(){
+        return dao.getArtistPointAvg();
+    }
 
 }
 

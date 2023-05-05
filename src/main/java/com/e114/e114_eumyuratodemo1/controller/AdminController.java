@@ -142,16 +142,16 @@ public class AdminController {
     @ResponseBody
     public Map<String, Object> getArtistMember() {
 
-        System.out.println(adminService.artistPointTop());
-
         List<Map<String, Object>> genderCounts = adminService.artistGenderCount();
         List<Map<String, Object>> genreCounts = adminService.artistGenreCount();
         List<Map<String, Object>> points = adminService.artistPointTop();
+        List<Map<String, Object>> pointAvg = adminService.artistPointAvg();
 
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("genderCounts", genderCounts);
         resultMap.put("genreCounts", genreCounts);
         resultMap.put("points", points);
+        resultMap.put("pointAvg", pointAvg);
 
         return resultMap;
     }
