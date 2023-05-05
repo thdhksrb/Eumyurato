@@ -160,4 +160,18 @@
         FROM busking;
     </select>
 
+    <select id="getEnterConcertIng" resultType="map">
+        <![CDATA[
+        SELECT COUNT(*) AS concert_ing
+        FROM small_concert
+        WHERE startDate <= CURDATE() AND lastDate >= CURDATE();
+        ]]>
+    </select>
+
+    <select id="getEnterConcertAll" resultType="map">
+        SELECT COUNT(*) AS concert_all
+        FROM small_concert;
+    </select>
+
+
 </mapper>
