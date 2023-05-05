@@ -6,23 +6,17 @@ import com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO;
 import com.e114.e114_eumyuratodemo1.jdbc.CommonMemberDAO;
 import com.e114.e114_eumyuratodemo1.jwt.JwtUtils;
 import com.e114.e114_eumyuratodemo1.service.UserService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.net.http.HttpResponse;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -48,8 +42,8 @@ public class LoginJoinController {
     }
 
     @GetMapping("/profile")
-    public String profile(HttpServletRequest request){
-        String commonURI =  "html/profile/account/profile_common_account";
+    public String profile(HttpServletRequest request) {
+        String commonURI = "html/profile/account/profile_common_account";
         String artistURI = "html/profile/account/profile_artist_account";
         String enterURI = "html/profile/account/profile_enterprise_account";
         String adminURI = "html/profile/root/profile_admin_root";
@@ -57,9 +51,9 @@ public class LoginJoinController {
 
         String URI = jwtUtils.authByRole(request, commonURI, artistURI, enterURI, adminURI);
 
-        if(URI == null){
+        if (URI == null) {
             return notloginURI;
-        }else{
+        } else {
             return URI;
         }
     }
@@ -73,22 +67,13 @@ public class LoginJoinController {
     @PostMapping("/login-common/token")
     @ResponseBody
     public Map<String, String> login(@RequestParam("id") String id,
-                                     @RequestParam("pwd") String pwd,
-                                     @RequestParam(name = "prevUrl", required = false) String prevUrl,
-                                     HttpSession session, RedirectAttributes redirectAttributes, HttpServletResponse response) throws IOException {
+                                     @RequestParam("pwd") String pwd, HttpServletResponse response) throws IOException {
         CommonMemberDTO commonMemberDTO = userService.login(id, pwd);
         if (commonMemberDTO != null) {
 
             String accessToken =
                     jwtUtils.createAccessToken(commonMemberDTO.getAdminNum(), commonMemberDTO.getId(), commonMemberDTO.getName());
-            String refreshToken =
-                    jwtUtils.createRefreshToken(commonMemberDTO.getAdminNum(), commonMemberDTO.getId(), commonMemberDTO.getName());
-            Cookie cookie = new Cookie("refreshToken",refreshToken);
-
-            cookie.setHttpOnly(true);
-            cookie.setPath("/");
             response.setHeader("Authorization", "Bearer " + accessToken);
-            response.addCookie(cookie);
 
             Map<String, String> result = new HashMap<>();
             result.put("jwtToken", accessToken);
@@ -108,20 +93,13 @@ public class LoginJoinController {
     @PostMapping("/login-art/token")
     @ResponseBody
     public Map<String, String> loginArt(@RequestParam("id") String id,
-                                        @RequestParam("pwd") String pwd,
-                                        HttpServletResponse response) throws IOException {
+                                        @RequestParam("pwd") String pwd, HttpServletResponse response) throws IOException {
         ArtistMemberDTO artistMemberDTO = userService.loginArt(id, pwd);
         if (artistMemberDTO != null) {
             String jwtToken =
                     jwtUtils.createAccessToken(artistMemberDTO.getAdminNum(), artistMemberDTO.getId(), artistMemberDTO.getName());
-            String refreshToken =
-                    jwtUtils.createRefreshToken(artistMemberDTO.getAdminNum(), artistMemberDTO.getId(), artistMemberDTO.getName());
-            Cookie cookie = new Cookie("refreshToken",refreshToken);
-
-            cookie.setHttpOnly(true);
-            cookie.setPath("/");
             response.setHeader("Authorization", "Bearer " + jwtToken);
-            response.addCookie(cookie);
+
 
             Map<String, String> result = new HashMap<>();
             result.put("jwtToken", jwtToken);
@@ -141,20 +119,13 @@ public class LoginJoinController {
     @PostMapping("/login-enter/token")
     @ResponseBody
     public Map<String, String> loginenter(@RequestParam("id") String id,
-                                          @RequestParam("pwd") String pwd,
-                                          HttpServletResponse response) throws IOException {
+                                          @RequestParam("pwd") String pwd, HttpServletResponse response) throws IOException {
         EnterpriseMemberDTO enterpriseMemberDTO = userService.loginenter(id, pwd);
         if (enterpriseMemberDTO != null) {
             String jwtToken =
                     jwtUtils.createAccessToken(enterpriseMemberDTO.getAdminNum(), enterpriseMemberDTO.getId(), enterpriseMemberDTO.getName());
-            String refreshToken =
-                    jwtUtils.createRefreshToken(enterpriseMemberDTO.getAdminNum(), enterpriseMemberDTO.getId(), enterpriseMemberDTO.getName());
-            Cookie cookie = new Cookie("refreshToken",refreshToken);
-
-            cookie.setHttpOnly(true);
-            cookie.setPath("/");
             response.setHeader("Authorization", "Bearer " + jwtToken);
-            response.addCookie(cookie);
+
 
             Map<String, String> result = new HashMap<>();
             result.put("jwtToken", jwtToken);
@@ -164,23 +135,16 @@ public class LoginJoinController {
         }
     }
 
-//로그 아웃
-@GetMapping("/logout")
-public String logout(HttpSession session, HttpServletResponse response) {
-    session.removeAttribute("token"); // 세션에서 토큰 정보 제거
+    //로그 아웃
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("token"); // 세션에서 토큰 정보 제거
 
-    //쿠키
-    Cookie cookie = new Cookie("refreshToken","");
-    cookie.setHttpOnly(true);
-    cookie.setPath("/");
-    cookie.setMaxAge(0);
-    response.addCookie(cookie);
-
-    return "redirect:/"; // 로그아웃 후 메인 홈페이지로 이동
-}
+        return "redirect:/"; // 로그아웃 후 메인 홈페이지로 이동
+    }
 
 
-// 아이디 찾기
+    // 아이디 찾기
     @GetMapping("/Idfind")
     public String idfind() {
         return "html/loginJoin/Idfind";
@@ -233,13 +197,15 @@ public String logout(HttpSession session, HttpServletResponse response) {
             return "redirect:/common-join?error";
         }
     }
-   //중복 확인
+
+    //중복 확인
     @GetMapping("/checkIdDuplicate/{id}")
     public ResponseEntity<Map<String, Boolean>> checkIdDuplicate(@PathVariable String id) {
         boolean duplicate = commonMemberDAO.useById(id) != null;
         Map<String, Boolean> response = Collections.singletonMap("duplicate", duplicate);
         return ResponseEntity.ok(response);
     }
+
     @GetMapping("/checkNidDuplicate/{nid}")
     public ResponseEntity<Map<String, Boolean>> checkNidDuplicate(@PathVariable String nid) {
         boolean duplicate = commonMemberDAO.useByNid(nid) != null;
