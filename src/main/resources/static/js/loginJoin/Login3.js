@@ -1,3 +1,30 @@
+function submitForm(event) {
+    event.preventDefault(); // 제출 버튼의 기본 동작 막기
+
+    var form = document.getElementById("kt_login_signin_form");
+    var xhr = new XMLHttpRequest();
+
+    xhr.open("POST", "/login-enter/token", true);
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                // 폼 제출 성공
+                const jwtToken = xhr.getResponseHeader('Authorization').replace('Bearer ', '');
+                console.log(jwtToken);
+                sessionStorage.setItem('jwtToken', jwtToken);
+                window.location.href = '/';
+            } else {
+                // 폼 제출 실패
+                console.error(xhr.statusText);
+            }
+        }
+    };
+    var formData = new FormData(form);
+    xhr.send(formData);
+}
+
+
 (function () {
     'use strict'
 
@@ -13,8 +40,6 @@
                     event.preventDefault()
                     event.stopPropagation()
                 }
-
-
 
                 form.classList.add('was-validated')
             }, false)

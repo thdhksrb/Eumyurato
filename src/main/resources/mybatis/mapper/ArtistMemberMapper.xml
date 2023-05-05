@@ -7,7 +7,7 @@
     </select>
 
     <select id="findByPwd" parameterType="java.lang.String" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
-        SELECT pwd FROM artist_member WHERE id=#{id}
+        SELECT pwd FROM artist_member WHERE pwd=#{pwd}
     </select>
 
     <!--아이디 찾기-->
