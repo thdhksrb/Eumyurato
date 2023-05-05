@@ -159,6 +159,11 @@ public class AdminService {
     public List<Map<String, Object>>  artistPointAvg(){
         return dao.getArtistPointAvg();
     }
-
+    public List<Map<String, Object>>  artistBuskingIng(){
+        return dao.getArtistBuskingIng();
+    }
+    public List<Map<String, Object>>  artistBuskingAll(){
+        return dao.getArtistBuskingAll();
+    }
 }
 

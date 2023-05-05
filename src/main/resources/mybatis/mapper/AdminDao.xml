@@ -152,4 +152,17 @@
         FROM artist_member;
     </select>
 
+    <select id="getArtistBuskingIng" resultType="map">
+        <![CDATA[
+        SELECT COUNT(*) AS busking_ing
+        FROM busking
+        WHERE date >= CURDATE();
+        ]]>
+    </select>
+
+    <select id="getArtistBuskingAll" resultType="map">
+        SELECT COUNT(*) AS all_busking
+        FROM busking;
+    </select>
+
 </mapper>

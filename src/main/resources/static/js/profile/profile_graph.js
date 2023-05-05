@@ -6,7 +6,8 @@ $('#commonBtn').on('click', function() {
     $('#common').show();
     $('#enter').hide();
     $('#artist').hide();
-    $('#avg').hide();
+
+    $('#artistSpan').hide();
 
     getCommonMember();
 });
@@ -16,6 +17,8 @@ $('#artistBtn').on('click', function() {
     $('#enter').hide();
     $('#artist').show();
 
+    $('#artistSpan').show();
+
     getArtistMember();
 });
 
@@ -23,7 +26,8 @@ $('#enterpriseBtn').on('click', function() {
     $('#common').hide();
     $('#enter').show();
     $('#artist').hide();
-    $('#avg').hide();
+
+    $('#artistSpan').hide();
 
 });
 
@@ -56,8 +60,8 @@ function getArtistMember(){
         url: '/profile/admin/total/artistMember',
         type: 'GET',
         success: function(response) {
-            console.log(response);
             drawGenderChart(response);
+            $('#avg').hide();
             $('#genderBtn').on('click', function() {
                 $('#avg').hide();
                 drawGenderChart(response);
@@ -71,9 +75,15 @@ function getArtistMember(){
                 $('#avg').show();
                 const pointAvg = response.pointAvg[0].avg_point;
                 const avgEl = document.getElementById('avg');
-                avgEl.innerHTML = `포인트 평균: ${pointAvg}`;
-
+                avgEl.innerHTML = `포인트 평균 : ${pointAvg}`;
             });
+            const ongoingBusk = response.buskingIng[0].busking_ing;
+            const buskNowEl = document.getElementById('afterTodayBusking');
+            buskNowEl.innerHTML = `현재 진행 중인 버스킹 : ${ongoingBusk}`;
+
+            const buskAll = response.buskingAll[0].all_busking;
+            const buskEl = document.getElementById('buskingCount');
+            buskEl.innerHTML = `전체 버스킹 수 : ${buskAll}`;
         },
         error: function(error) {
             console.log(error);
