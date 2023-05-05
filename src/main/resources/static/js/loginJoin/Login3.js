@@ -4,7 +4,7 @@ function submitForm(event) {
     var form = document.getElementById("kt_login_signin_form");
     var xhr = new XMLHttpRequest();
 
-    xhr.open("POST", "/login-enter/token", true);
+    xhr.open("POST", "/loginjoin/enterprise/login-token", true);
 
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -13,7 +13,7 @@ function submitForm(event) {
                 const jwtToken = xhr.getResponseHeader('Authorization').replace('Bearer ', '');
                 console.log(jwtToken);
                 sessionStorage.setItem('jwtToken', jwtToken);
-                window.location.href = '/';
+                window.location.href = '/home';
             } else {
                 // 폼 제출 실패
                 console.error(xhr.statusText);
