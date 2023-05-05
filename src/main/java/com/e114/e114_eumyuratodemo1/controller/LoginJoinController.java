@@ -4,6 +4,7 @@ import com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO;
 import com.e114.e114_eumyuratodemo1.jdbc.CommonMemberDAO;
+import com.e114.e114_eumyuratodemo1.jwt.JwtUtils;
 import com.e114.e114_eumyuratodemo1.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,8 +17,14 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.net.http.HttpResponse;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,11 +37,31 @@ public class LoginJoinController {
     @Autowired
     private CommonMemberDAO commonMemberDAO;
 
+    @Autowired
+    private JwtUtils jwtUtils;
+
     @GetMapping("/")
     public String main(HttpSession session) {
         System.out.println(session.getAttribute("loginUser"));
 
         return "html/main/home";
+    }
+
+    @GetMapping("/profile")
+    public String profile(HttpServletRequest request){
+        String commonURI =  "html/profile/account/profile_common_account";
+        String artistURI = "html/profile/account/profile_artist_account";
+        String enterURI = "html/profile/account/profile_enterprise_account";
+        String adminURI = "html/profile/root/profile_admin_root";
+        String notloginURI = "html/loginJoin/loginForm1";
+
+        String URI = jwtUtils.authByRole(request, commonURI, artistURI, enterURI, adminURI);
+
+        if(URI == null){
+            return notloginURI;
+        }else{
+            return URI;
+        }
     }
 
     //일반 로그인
@@ -43,32 +70,34 @@ public class LoginJoinController {
         return "html/loginJoin/loginForm1";
     }
 
-    @PostMapping("/login-common")
-    public String login(@RequestParam("id") String id,
-                        @RequestParam("pwd") String pwd,
-                        @RequestParam(name = "prevUrl", required = false) String prevUrl,
-                        HttpSession session, RedirectAttributes redirectAttributes) throws JsonProcessingException {
+    @PostMapping("/login-common/token")
+    @ResponseBody
+    public Map<String, String> login(@RequestParam("id") String id,
+                                     @RequestParam("pwd") String pwd,
+                                     @RequestParam(name = "prevUrl", required = false) String prevUrl,
+                                     HttpSession session, RedirectAttributes redirectAttributes, HttpServletResponse response) throws IOException {
         CommonMemberDTO commonMemberDTO = userService.login(id, pwd);
         if (commonMemberDTO != null) {
-            session.setAttribute("loginUser", commonMemberDTO);
-            String loginUserJson = new ObjectMapper().writeValueAsString(commonMemberDTO);
-            redirectAttributes.addFlashAttribute("loginUserJson", loginUserJson);
-            System.out.println("prevUrl: "+ prevUrl);
-            if(StringUtils.hasText(prevUrl) && !prevUrl.equalsIgnoreCase("null")){
-                return "redirect:" + prevUrl;
-            }else{
-                return "redirect:/";
-            }
+
+            String accessToken =
+                    jwtUtils.createAccessToken(commonMemberDTO.getAdminNum(), commonMemberDTO.getId(), commonMemberDTO.getName());
+            String refreshToken =
+                    jwtUtils.createRefreshToken(commonMemberDTO.getAdminNum(), commonMemberDTO.getId(), commonMemberDTO.getName());
+            Cookie cookie = new Cookie("refreshToken",refreshToken);
+
+            cookie.setHttpOnly(true);
+            cookie.setPath("/");
+            response.setHeader("Authorization", "Bearer " + accessToken);
+            response.addCookie(cookie);
+
+            Map<String, String> result = new HashMap<>();
+            result.put("jwtToken", accessToken);
+            return result;
         } else {
-            redirectAttributes.addFlashAttribute("loginError", "아이디와 비밀번호를 다시 확인해주세요.");
-            return "redirect:/login-common";
+            return null;
         }
     }
 
-//    @GetMapping("/test")
-//    public String main1() {
-//        return "html/main/test";
-//    }
 
     //아티스트 로그인
     @GetMapping("/login-art")
@@ -76,26 +105,32 @@ public class LoginJoinController {
         return "html/loginJoin/loginForm2";
     }
 
-    @PostMapping("/login-art")
-    public String loginArt(@RequestParam("id") String id,
-                           @RequestParam("pwd") String pwd,
-                           HttpSession session, RedirectAttributes redirectAttributes) throws JsonProcessingException {
+    @PostMapping("/login-art/token")
+    @ResponseBody
+    public Map<String, String> loginArt(@RequestParam("id") String id,
+                                        @RequestParam("pwd") String pwd,
+                                        HttpServletResponse response) throws IOException {
         ArtistMemberDTO artistMemberDTO = userService.loginArt(id, pwd);
         if (artistMemberDTO != null) {
-            session.setAttribute("loginUser", artistMemberDTO);
-            String loginUserJson = new ObjectMapper().writeValueAsString(artistMemberDTO);
-            redirectAttributes.addFlashAttribute("loginUserJson",loginUserJson);
-            return "redirect:/";
+            String jwtToken =
+                    jwtUtils.createAccessToken(artistMemberDTO.getAdminNum(), artistMemberDTO.getId(), artistMemberDTO.getName());
+            String refreshToken =
+                    jwtUtils.createRefreshToken(artistMemberDTO.getAdminNum(), artistMemberDTO.getId(), artistMemberDTO.getName());
+            Cookie cookie = new Cookie("refreshToken",refreshToken);
+
+            cookie.setHttpOnly(true);
+            cookie.setPath("/");
+            response.setHeader("Authorization", "Bearer " + jwtToken);
+            response.addCookie(cookie);
+
+            Map<String, String> result = new HashMap<>();
+            result.put("jwtToken", jwtToken);
+            return result;
         } else {
-            redirectAttributes.addFlashAttribute("loginError", "아이디와 비밀번호를 다시 확인해주세요.");
-            return "redirect:/login-art";
+            return null;
         }
     }
 
-//    @GetMapping("/artist")
-//    public String main2() {
-//        return "html/main/main2";
-//    }
 
     //기업 로그인
     @GetMapping("/login-enter")
@@ -103,33 +138,48 @@ public class LoginJoinController {
         return "html/loginJoin/loginForm3";
     }
 
-    @PostMapping("/login-enter")
-    public String loginenter(@RequestParam("id") String id,
-                             @RequestParam("pwd") String pwd,
-                             HttpSession session, RedirectAttributes redirectAttributes) throws JsonProcessingException {
+    @PostMapping("/login-enter/token")
+    @ResponseBody
+    public Map<String, String> loginenter(@RequestParam("id") String id,
+                                          @RequestParam("pwd") String pwd,
+                                          HttpServletResponse response) throws IOException {
         EnterpriseMemberDTO enterpriseMemberDTO = userService.loginenter(id, pwd);
         if (enterpriseMemberDTO != null) {
-            session.setAttribute("loginUser", enterpriseMemberDTO);
-            String loginUserJson = new ObjectMapper().writeValueAsString(enterpriseMemberDTO);
-            redirectAttributes.addFlashAttribute("loginUserJson",loginUserJson);
-            return "redirect:/";
+            String jwtToken =
+                    jwtUtils.createAccessToken(enterpriseMemberDTO.getAdminNum(), enterpriseMemberDTO.getId(), enterpriseMemberDTO.getName());
+            String refreshToken =
+                    jwtUtils.createRefreshToken(enterpriseMemberDTO.getAdminNum(), enterpriseMemberDTO.getId(), enterpriseMemberDTO.getName());
+            Cookie cookie = new Cookie("refreshToken",refreshToken);
+
+            cookie.setHttpOnly(true);
+            cookie.setPath("/");
+            response.setHeader("Authorization", "Bearer " + jwtToken);
+            response.addCookie(cookie);
+
+            Map<String, String> result = new HashMap<>();
+            result.put("jwtToken", jwtToken);
+            return result;
         } else {
-            redirectAttributes.addFlashAttribute("loginError", "아이디와 비밀번호를 다시 확인해주세요.");
-            return "redirect:/login-enter";
+            return null;
         }
     }
 
-//    @GetMapping("/enterprise")
-//    public String registerPage() {
-//        return "html/main/main3"; // 로그인 페이지로 이동
-//    }
-
 //로그 아웃
 @GetMapping("/logout")
-public String logout(HttpSession session) {
+public String logout(HttpSession session, HttpServletResponse response) {
     session.removeAttribute("token"); // 세션에서 토큰 정보 제거
+
+    //쿠키
+    Cookie cookie = new Cookie("refreshToken","");
+    cookie.setHttpOnly(true);
+    cookie.setPath("/");
+    cookie.setMaxAge(0);
+    response.addCookie(cookie);
+
     return "redirect:/"; // 로그아웃 후 메인 홈페이지로 이동
 }
+
+
 // 아이디 찾기
     @GetMapping("/Idfind")
     public String idfind() {
@@ -183,7 +233,7 @@ public String logout(HttpSession session) {
             return "redirect:/common-join?error";
         }
     }
-
+   //중복 확인
     @GetMapping("/checkIdDuplicate/{id}")
     public ResponseEntity<Map<String, Boolean>> checkIdDuplicate(@PathVariable String id) {
         boolean duplicate = commonMemberDAO.useById(id) != null;
