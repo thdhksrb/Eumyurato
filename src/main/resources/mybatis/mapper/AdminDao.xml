@@ -147,4 +147,9 @@
             LIMIT 10;
     </select>
 
+    <select id="getArtistPointAvg" resultType="map">
+        SELECT CAST(ROUND(AVG(point)) AS SIGNED) AS avg_point
+        FROM artist_member;
+    </select>
+
 </mapper>
