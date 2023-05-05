@@ -17,6 +17,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -78,12 +79,19 @@ public class LoginJoinController {
         CommonMemberDTO commonMemberDTO = userService.login(id, pwd);
         if (commonMemberDTO != null) {
 
-            String jwtToken =
+            String accessToken =
                     jwtUtils.createAccessToken(commonMemberDTO.getAdminNum(), commonMemberDTO.getId(), commonMemberDTO.getName());
+            String refreshToken =
+                    jwtUtils.createRefreshToken(commonMemberDTO.getAdminNum(), commonMemberDTO.getId(), commonMemberDTO.getName());
+            Cookie cookie = new Cookie("refreshToken",refreshToken);
 
-            response.setHeader("Authorization", "Bearer " + jwtToken);
+            cookie.setHttpOnly(true);
+            cookie.setPath("/");
+            response.setHeader("Authorization", "Bearer " + accessToken);
+            response.addCookie(cookie);
+
             Map<String, String> result = new HashMap<>();
-            result.put("jwtToken", jwtToken);
+            result.put("jwtToken", accessToken);
             return result;
         } else {
             return null;
@@ -106,8 +114,15 @@ public class LoginJoinController {
         if (artistMemberDTO != null) {
             String jwtToken =
                     jwtUtils.createAccessToken(artistMemberDTO.getAdminNum(), artistMemberDTO.getId(), artistMemberDTO.getName());
+            String refreshToken =
+                    jwtUtils.createRefreshToken(artistMemberDTO.getAdminNum(), artistMemberDTO.getId(), artistMemberDTO.getName());
+            Cookie cookie = new Cookie("refreshToken",refreshToken);
 
+            cookie.setHttpOnly(true);
+            cookie.setPath("/");
             response.setHeader("Authorization", "Bearer " + jwtToken);
+            response.addCookie(cookie);
+
             Map<String, String> result = new HashMap<>();
             result.put("jwtToken", jwtToken);
             return result;
@@ -132,8 +147,15 @@ public class LoginJoinController {
         if (enterpriseMemberDTO != null) {
             String jwtToken =
                     jwtUtils.createAccessToken(enterpriseMemberDTO.getAdminNum(), enterpriseMemberDTO.getId(), enterpriseMemberDTO.getName());
+            String refreshToken =
+                    jwtUtils.createRefreshToken(enterpriseMemberDTO.getAdminNum(), enterpriseMemberDTO.getId(), enterpriseMemberDTO.getName());
+            Cookie cookie = new Cookie("refreshToken",refreshToken);
 
+            cookie.setHttpOnly(true);
+            cookie.setPath("/");
             response.setHeader("Authorization", "Bearer " + jwtToken);
+            response.addCookie(cookie);
+
             Map<String, String> result = new HashMap<>();
             result.put("jwtToken", jwtToken);
             return result;
@@ -149,8 +171,16 @@ public class LoginJoinController {
 
 //로그 아웃
 @GetMapping("/logout")
-public String logout(HttpSession session) {
+public String logout(HttpSession session, HttpServletResponse response) {
     session.removeAttribute("token"); // 세션에서 토큰 정보 제거
+
+    //쿠키
+    Cookie cookie = new Cookie("refreshToken","");
+    cookie.setHttpOnly(true);
+    cookie.setPath("/");
+    cookie.setMaxAge(0);
+    response.addCookie(cookie);
+
     return "redirect:/"; // 로그아웃 후 메인 홈페이지로 이동
 }
 

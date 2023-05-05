@@ -20,7 +20,10 @@ public class JwtUtils {
     private static final Key secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
     //accessToken 만료시간 설정
-    public final static long ACCESS_TOKEN_VALIDATION_SECOND = 1000L * 60 * 60 * 12; //12시간
+    public final static long ACCESS_TOKEN_VALIDATION_SECOND = 1000L * 60 * 60 * 1; //1시간
+
+    //RefreshToken 만료시간 설정
+    public final static long REFRESH_TOKEN_VALIDATION_SECOND = 1000L * 60 * 60 * 24; //1일
 
     public static final String AUTHORIZATION_HEADER = "Authorization";
 
@@ -47,6 +50,29 @@ public class JwtUtils {
         return accessToken;
     }
 
+    public String createRefreshToken(int roles, String userid, String name) {
+
+        System.out.println("createRefreshToken");
+
+        //토큰 만료 시간 설정(refresh token)
+        Date now = new Date();
+        Date expiration = new Date(now.getTime() + REFRESH_TOKEN_VALIDATION_SECOND);
+
+        //refreshToken 생성
+        String refreshToken = Jwts.builder()
+                .setSubject(userid)
+                .claim("roles", roles)
+                .claim("name",name)
+                .setIssuedAt(now) //토큰발행일자
+                .setId(UUID.randomUUID().toString())
+                .setExpiration(expiration)
+                .signWith(secretKey)
+                .compact();
+
+        System.out.println("JwtUtils refreshToken : " + refreshToken);
+
+        return refreshToken;
+    }
 
     //토큰 유효성 검증 수행
     public boolean validateToken(String token) {
@@ -59,11 +85,14 @@ public class JwtUtils {
             return true;
         }
         catch(io.jsonwebtoken.security.SignatureException e) {
-            logger.info("잘못된 토큰 서명입니다.");
+            System.out.printf("잘못된 토큰 서명입니다.");
+            //logger.info("잘못된 토큰 서명입니다.");
         }catch(ExpiredJwtException e) {
-            logger.info("만료된 토큰입니다.");
+            System.out.printf("만료된 토큰입니다.");
+            //logger.info("만료된 토큰입니다.");
         }catch(IllegalArgumentException | MalformedJwtException e) {
-            logger.info("잘못된 토큰입니다.");
+            System.out.println("잘못된 토큰입니다.");
+            //logger.info("잘못된 토큰입니다.");
         }return false;
     }
 
@@ -91,6 +120,20 @@ public class JwtUtils {
         System.out.println("JwtUtils getAccessToken : " + bearerToken);
         if(StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
             return bearerToken.substring(7);
+        }
+        return null;
+    }
+
+    //reaquest Header에서 refresh토큰 정보 꺼내오기
+    public String getRefreshToken(HttpServletRequest httpServletRequest) {
+        Cookie[] cookies = httpServletRequest.getCookies();
+        if(cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("refreshToken")) {
+                    System.out.println("JwtUtils getRefreshToken : " + cookie.getValue());
+                    return cookie.getValue();
+                }
+            }
         }
         return null;
     }
