@@ -28,7 +28,7 @@
             <div class="d-flex flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
                 <!--begin::Aside Logo-->
 <!--end::Head-->
-                <a th:href="@{/}" class="mb-6">
+                <a th:href="@{/home}" class="mb-6">
                     <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
                         <img alt="로고" th:src="@{/img/E114_logo.png}" class="h-450px h-lg-450px"/>
                     </div>
@@ -83,7 +83,7 @@
                 <div class="d-flex flex-wrap justify-content-center pb-lg-0 pb-5">
                     <!-- justify-content-end 클래스를 추가하여 오른쪽으로 정렬 -->
                     <button type="submit" class="btn btn-primary fw-bolder fs-5 px-8 py-3 my-2 me-5">아이디 찾기</button>
-                    <button type="button" class="btn btn-light-primary fw-bolder fs-5 px-10 py-3 my-2" th:onclick="|location.href='@{/login-common}'|">취소</button>
+                    <button type="button" class="btn btn-light-primary fw-bolder fs-5 px-10 py-3 my-2" th:onclick="|location.href='@{/loginjoin/common/login}'|">취소</button>
                 </div>
             </form>
         </div>

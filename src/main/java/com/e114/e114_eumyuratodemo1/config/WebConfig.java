@@ -4,7 +4,6 @@ import com.e114.e114_eumyuratodemo1.jwt.JwtInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
@@ -21,7 +20,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(jwtInterceptor())
                 .addPathPatterns("/**")
                 .excludePathPatterns("/map")
-               // .excludePathPatterns("/login-common")
+                .excludePathPatterns("/login-common")
                 .excludePathPatterns("/login-art")
                 .excludePathPatterns("/login-enter")
                 .excludePathPatterns("/Idfind")
