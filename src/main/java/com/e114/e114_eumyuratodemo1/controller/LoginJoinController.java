@@ -40,20 +40,25 @@ public class LoginJoinController {
         return "html/main/home";
     }
 
-    @GetMapping("/profile")
-    public String profile(HttpServletRequest request) {
-        String commonURI = "html/profile/account/profile_common_account";
-        String artistURI = "html/profile/account/profile_artist_account";
-        String enterURI = "html/profile/account/profile_enterprise_account";
-        String adminURI = "html/profile/root/profile_admin_root";
+    @PostMapping("/profile")
+    @ResponseBody
+    public Map<String, String> profile(HttpServletRequest request) {
+        String commonURI = "/profile/common/account";
+        String artistURI = "/profile/artist/account";
+        String enterURI = "/profile/ent/account";
+        String adminURI = "/profile/admin/account";
         String notloginURI = "/loginjoin/common/login";
 
         String URI = jwtUtils.authByRole(request, commonURI, artistURI, enterURI, adminURI);
 
         if (URI == null) {
-            return notloginURI;
+            Map<String, String> result = new HashMap<>();
+            result.put("URI", notloginURI);
+            return result;
         } else {
-            return URI;
+            Map<String, String> result = new HashMap<>();
+            result.put("URI", URI);
+            return result;
         }
     }
 
@@ -185,8 +190,8 @@ public class LoginJoinController {
             @RequestParam("birth") String birth,
             @RequestParam("email") String email,
             @RequestParam("phone") String phone,
-            @RequestParam(value = "road", required = false) String road,
-            @RequestParam(value = "genre", required = false) String genre,
+            @RequestParam("road") String road,
+            @RequestParam("genre") String genre,
             Model model) {
 
 
@@ -197,34 +202,6 @@ public class LoginJoinController {
             return "redirect:/loginjoin/common/join?error";
         }
     }
-
-    // 아티스트 가입
-    @GetMapping("/loginjoin/artist/join")
-    public String artist() {
-        return "html/loginJoin/joinForm_2";
-    }
-
-    @PostMapping("/loginjoin/artist/join")
-    public String artistJoinRegister(
-            @RequestParam("id") String id,
-            @RequestParam("pwd") String pwd,
-            @RequestParam("name") String name,
-            @RequestParam("nid") String nid,
-            @RequestParam("sex") String sex,
-            @RequestParam("birth") String birth,
-            @RequestParam("email") String email,
-            @RequestParam("phone") String phone,
-            @RequestParam("genre") String genre,
-            Model model) {
-
-        boolean result = userService.artistregister(id, pwd, name, nid, sex, birth, email, phone, genre);
-        if (result) {
-            return "redirect:/loginjoin/artist/login";
-        } else {
-            return "redirect:/loginjoin/artist/join?error";
-        }
-    }
-
 
     //중복 확인
     @GetMapping("/checkIdDuplicate/{id}")
@@ -241,6 +218,11 @@ public class LoginJoinController {
         return ResponseEntity.ok(response);
     }
 
+
+    @GetMapping("/loginjoin/artist/join")
+    public String artist() {
+        return "html/loginJoin/joinForm_2";
+    }
 
     @GetMapping("/loginjoin/enterprise/join")
     public String enterprise() {
@@ -271,11 +253,6 @@ public class LoginJoinController {
             default:
                 return "redirect:/login-common";
         }
-    }
-
-    @GetMapping("/loginjoin/jointest")
-    public String jointest() {
-        return "html/loginJoin/joinForm-test";
     }
 
 }

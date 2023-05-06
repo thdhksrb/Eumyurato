@@ -26,7 +26,13 @@ public class WebConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/logout")
                 .excludePathPatterns("/findUserId")
                 .excludePathPatterns("/checkIdDuplicate/{id}")
-                .excludePathPatterns("/checkNidDuplicate/{nid}");
+                .excludePathPatterns("/checkNidDuplicate/{nid}")
+        ;
     }
 
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("/static/**")
+//                .addResourceLocations("classpath:/static/");
+//    }
 }
