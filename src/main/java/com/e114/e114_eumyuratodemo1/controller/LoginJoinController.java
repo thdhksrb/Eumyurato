@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,7 +33,7 @@ public class LoginJoinController {
     @Autowired
     private JwtUtils jwtUtils;
 
-    @GetMapping("/")
+    @GetMapping("/home")
     public String main(HttpSession session) {
         System.out.println(session.getAttribute("loginUser"));
 
@@ -59,12 +58,12 @@ public class LoginJoinController {
     }
 
     //일반 로그인
-    @GetMapping("/login-common")
+    @GetMapping("/loginjoin/common/login")
     public String login() {
         return "html/loginJoin/loginForm1";
     }
 
-    @PostMapping("/login-common/token")
+    @PostMapping("/loginjoin/common/login-token")
     @ResponseBody
     public Map<String, String> login(@RequestParam("id") String id,
                                      @RequestParam("pwd") String pwd, HttpServletResponse response) throws IOException {
@@ -85,12 +84,12 @@ public class LoginJoinController {
 
 
     //아티스트 로그인
-    @GetMapping("/login-art")
+    @GetMapping("/loginjoin/artist/login")
     public String login_art() {
         return "html/loginJoin/loginForm2";
     }
 
-    @PostMapping("/login-art/token")
+    @PostMapping("/loginjoin/artist/login-token")
     @ResponseBody
     public Map<String, String> loginArt(@RequestParam("id") String id,
                                         @RequestParam("pwd") String pwd, HttpServletResponse response) throws IOException {
@@ -111,12 +110,12 @@ public class LoginJoinController {
 
 
     //기업 로그인
-    @GetMapping("/login-enter")
+    @GetMapping("/loginjoin/enterprise/login")
     public String login_enter() {
         return "html/loginJoin/loginForm3";
     }
 
-    @PostMapping("/login-enter/token")
+    @PostMapping("/loginjoin/enterprise/login-token")
     @ResponseBody
     public Map<String, String> loginenter(@RequestParam("id") String id,
                                           @RequestParam("pwd") String pwd, HttpServletResponse response) throws IOException {
@@ -140,12 +139,12 @@ public class LoginJoinController {
     public String logout(HttpSession session) {
         session.removeAttribute("token"); // 세션에서 토큰 정보 제거
 
-        return "redirect:/"; // 로그아웃 후 메인 홈페이지로 이동
+        return "redirect:/home"; // 로그아웃 후 메인 홈페이지로 이동
     }
 
 
     // 아이디 찾기
-    @GetMapping("/Idfind")
+    @GetMapping("/loginjoin/Idfind")
     public String idfind() {
         return "html/loginJoin/Idfind";
     }
@@ -159,23 +158,24 @@ public class LoginJoinController {
         return ResponseEntity.ok(userIds);
     }
 
-    @GetMapping("/Pwfind")
+    @GetMapping("/loginjoin/Pwfind")
     public String Pwfind() {
         return "html/loginJoin/pwfind";
     }
 
-    @GetMapping("/joinchooes")
+    //회원가입
+    @GetMapping("/loginjoin/joinchooes")
     public String joinchooes() {
         return "html/loginJoin/joinChooes";
     }
 
     //일반 회원가입
-    @GetMapping("/common-join")
+    @GetMapping("/loginjoin/common/join")
     public String commonJoin() {
         return "html/loginJoin/joinForm_1";
     }
 
-    @PostMapping("/common-join")
+    @PostMapping("/loginjoin/common/join")
     public String commonJoinRegister(
             @RequestParam("id") String id,
             @RequestParam("pwd") String pwd,
@@ -192,9 +192,9 @@ public class LoginJoinController {
 
         boolean result = userService.register(id, pwd, name, nid, sex, birth, email, phone, road, genre);
         if (result) {
-            return "redirect:/login-common";
+            return "redirect:/loginjoin/common/login";
         } else {
-            return "redirect:/common-join?error";
+            return "redirect:/loginjoin/common/join?error";
         }
     }
 
@@ -214,12 +214,12 @@ public class LoginJoinController {
     }
 
 
-    @GetMapping("/artist-join")
+    @GetMapping("/loginjoin/artist/join")
     public String artist() {
         return "html/loginJoin/joinForm_2";
     }
 
-    @GetMapping("/enterprise-join")
+    @GetMapping("/loginjoin/enterprise/join")
     public String enterprise() {
         return "html/loginJoin/joinForm_3";
     }
