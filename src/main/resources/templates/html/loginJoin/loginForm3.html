@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <!--begin::Head-->
-
+l
 <head>
     <title>Eumyurato</title>
     <link rel="icon" type="image/x-icon" th:href="@{/img/E114_logo.png}"/>
@@ -12,8 +12,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link th:href="@{/css/loginJoin/loginJoin2.css}" rel="stylesheet" type="text/css"/>
+
     <link th:href="@{/css/loginJoin/loginJoin1.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/loginJoin/loginJoin2.css}" rel="stylesheet" type="text/css"/>
     <!--end::Global Stylesheets Bundle-->
 </head>
 <!--end::Head-->
@@ -28,7 +29,7 @@
             <!--begin::Aside Top-->
             <div class="d-flex flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
                 <!--begin::Aside Logo-->
-                <a th:href="@{/}" class="mb-6">
+                <a th:href="@{/home}" class="mb-6">
                     <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
                         <img alt="로고" th:src="@{/img/E114_logo.png}" class="h-450px h-lg-450px"/>
                     </div>
@@ -61,11 +62,13 @@
                     <div>
                         <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off">
                         <a class="btn btn-secondary" for="option1"
-                           style="font-weight: bold; background-color: #294ba1; color: #FFFFFF" th:href="@{/login-common}">일반 회원</a>
+                           style="font-weight: bold; background-color: #294ba1; color: #FFFFFF"
+                           th:href="@{/loginjoin/common/login}">일반 회원</a>
 
                         <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off">
                         <a class="btn btn-secondary ms-3" for="option2"
-                           style="font-weight: bold; background-color: #294ba1; color: #FFFFFF" th:href="@{/login-art}">아티스트 회원</a>
+                           style="font-weight: bold; background-color: #294ba1; color: #FFFFFF"
+                           th:href="@{/loginjoin/artist/login}">아티스트 회원</a>
 
                         <input type="radio" class="btn-check" name="options" id="option3" autocomplete="off" checked>
                         <a class="btn btn-secondary ms-3" for="option3"
@@ -108,18 +111,18 @@
                 </div>
                 <div class="pb-lg-0 pb-5 mt-5 d-flex align-items-center justify-content-center">
                     <div>
-                        <a th:href="@{/Idfind}"
+                        <a th:href="@{/loginjoin/Idfind}"
                            class="text-gray-600 text-hover-primary ms-3" id="kt_login_signin_form_id_reset_button">아이디
                             찾기</a>
                         <a target="_blank"
                            class="text-gray-600 text-hover-primary ms-3">|</a>
-                        <a th:href="@{/Pwfind}"
+                        <a th:href="@{/loginjoin/Pwfind}"
                            class="text-gray-600 text-hover-primary ms-3"
                            id="kt_login_signin_form_password_reset_button">비밀번호 찾기</a>
                         <!-- 왼쪽에 정렬할 텍스트와의 간격을 조정 -->
                         <a target="_blank"
                            class="text-gray-600 text-hover-primary ms-3">|</a>
-                        <a th:href="@{/joinchooes}"
+                        <a th:href="@{/loginjoin/joinchooes}"
                            class="text-gray-600 text-hover-primary ms-3" id="kt_login_signup_choose_form">회원가입</a>
                     </div>
                 </div>
