@@ -51,6 +51,9 @@ window.onload = function() {
 
         const mypageBtn = document.getElementById("mypageBtn");
         mypageBtn.onclick = function (){
+
+
+
             window.location.href = "/profile/admin/root";
         }
 

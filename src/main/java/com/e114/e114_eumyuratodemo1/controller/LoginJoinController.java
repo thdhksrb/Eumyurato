@@ -40,20 +40,25 @@ public class LoginJoinController {
         return "html/main/home";
     }
 
-    @GetMapping("/profile")
-    public String profile(HttpServletRequest request) {
-        String commonURI = "html/profile/account/profile_common_account";
-        String artistURI = "html/profile/account/profile_artist_account";
-        String enterURI = "html/profile/account/profile_enterprise_account";
-        String adminURI = "html/profile/root/profile_admin_root";
-        String notloginURI = "html/loginJoin/loginForm1";
+    @PostMapping("/profile")
+    @ResponseBody
+    public Map<String, String> profile(HttpServletRequest request) {
+        String commonURI = "/profile/common/account";
+        String artistURI = "/profile/artist/account";
+        String enterURI = "/profile/ent/account";
+        String adminURI = "/profile/admin/account";
+        String notloginURI = "/loginjoin/common/login";
 
         String URI = jwtUtils.authByRole(request, commonURI, artistURI, enterURI, adminURI);
 
         if (URI == null) {
-            return notloginURI;
+            Map<String, String> result = new HashMap<>();
+            result.put("URI", notloginURI);
+            return result;
         } else {
-            return URI;
+            Map<String, String> result = new HashMap<>();
+            result.put("URI", URI);
+            return result;
         }
     }
 
