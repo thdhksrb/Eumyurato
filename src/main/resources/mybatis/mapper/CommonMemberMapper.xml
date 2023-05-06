@@ -43,7 +43,6 @@
     </select>
 
 
-
    <!--아이디 찾기-->
     <select id="findUserIdsByNameAndEmail" resultType="String">
         SELECT id
