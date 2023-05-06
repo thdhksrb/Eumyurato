@@ -1,7 +1,6 @@
 package com.e114.e114_eumyuratodemo1.jdbc;
 
 import com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO;
-import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -28,7 +27,7 @@ public interface ArtistMemberDAO{
     int insert(ArtistMemberDTO artistMemberDTO);
 
     ArtistMemberDTO useById(String id); // 아이디 중복 확인
-    ArtistMemberDTO useByNid(String nid); //비번 중복 확인
+    ArtistMemberDTO useByNid(String nid); // 중복 확인
 
     //아이디 찾기
     List<String> findUserIdsByNameAndEmail(@Param("name") String name, @Param("email") String email);
