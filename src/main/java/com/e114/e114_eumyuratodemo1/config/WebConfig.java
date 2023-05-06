@@ -19,29 +19,14 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(jwtInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/map")
-                .excludePathPatterns("/login-common")
-                .excludePathPatterns("/login-art")
-                .excludePathPatterns("/login-enter")
-                .excludePathPatterns("/Idfind")
-                .excludePathPatterns("/Pwfind")
-                .excludePathPatterns("/joinchooes")
-                .excludePathPatterns("/common-join")
-                .excludePathPatterns("/artist-join")
-                .excludePathPatterns("/enterprise-join")
-//                .excludePathPatterns("/vendor/**")
-//                .excludePathPatterns("/static/**")
-//                .excludePathPatterns("/js/**")
-//                .excludePathPatterns("/css/**")
-//                .excludePathPatterns("/assets/**")
-//                .excludePathPatterns("/members/**")
-//                .excludePathPatterns("/error/**")
-        ;
+                .excludePathPatterns("/home")
+                .excludePathPatterns("/map/**")
+                .excludePathPatterns("/loginjoin/**")
+                .excludePathPatterns("/profile/**")
+                .excludePathPatterns("/logout")
+                .excludePathPatterns("/findUserId")
+                .excludePathPatterns("/checkIdDuplicate/{id}")
+                .excludePathPatterns("/checkNidDuplicate/{nid}");
     }
 
-//    @Override
-//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        registry.addResourceHandler("/static/**")
-//                .addResourceLocations("classpath:/static/");
-//    }
 }
