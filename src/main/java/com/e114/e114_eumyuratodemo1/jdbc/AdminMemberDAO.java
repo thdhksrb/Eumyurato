@@ -2,8 +2,6 @@ package com.e114.e114_eumyuratodemo1.jdbc;
 
 import com.e114.e114_eumyuratodemo1.dto.*;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
