@@ -20,7 +20,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(jwtInterceptor())
                 .addPathPatterns("/**")
                 .excludePathPatterns("/map")
-               // .excludePathPatterns("/login-common")
+                .excludePathPatterns("/login-common")
                 .excludePathPatterns("/login-art")
                 .excludePathPatterns("/login-enter")
                 .excludePathPatterns("/Idfind")

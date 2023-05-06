@@ -2,18 +2,14 @@ package com.e114.e114_eumyuratodemo1.controller;
 
 import com.e114.e114_eumyuratodemo1.dto.*;
 import com.e114.e114_eumyuratodemo1.jdbc.AdminMemberDAO;
-import com.e114.e114_eumyuratodemo1.jwt.JwtUtils;
 import com.e114.e114_eumyuratodemo1.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -29,17 +25,17 @@ public class AdminController {
     private AdminService adminService;
 
     @GetMapping("/profile/admin/root")
-    public String adminRoot(){
+    public String adminRoot() {
         return "html/profile/root/profile_admin_root";
     }
 
     @PostMapping("/profile/admin/root")
-    public String adminRootPost(){
+    public String adminRootPost() {
         return "redirect:/board/admin";
     }
 
     @GetMapping("/profile/admin/{adminId}")
-    public String adminAccount(@PathVariable("adminId") String adminId, Model model){
+    public String adminAccount(@PathVariable("adminId") String adminId, Model model) {
         EnterpriseMemberDTO admin = memberDAO.getAdminInfoById(adminId);
 
         model.addAttribute("admin", admin);
@@ -48,46 +44,45 @@ public class AdminController {
     }
 
     @GetMapping("/profile/admin/modify")
-    public String adminAccountModify(){
+    public String adminAccountModify() {
         return "html/profile/accountModify/profile_admin_accountModify";
     }
 
     @GetMapping("/profile/admin/management/view")
-    public String adminAccountManagement(){
+    public String adminAccountManagement() {
 
         return "html/profile/concertManagement/profile_admin_concertmanagement";
     }
 
     @GetMapping("/profile/admin/register")
-    public String adminAccountRegister(){
+    public String adminAccountRegister() {
 
         return "html/profile/concertRegister/profile_admin_concertRegister";
     }
 
     @PostMapping("/profile/admin/register")
-    public ResponseEntity<?> concertRegister(@RequestPart("registerDTO") SmallConcertDTO smallConcertDTO, @RequestPart(value = "imgFile",required = false) MultipartFile imgFile) throws IOException {
+    public ResponseEntity<?> concertRegister(@RequestPart("registerDTO") SmallConcertDTO smallConcertDTO, @RequestPart(value = "imgFile", required = false) MultipartFile imgFile) throws IOException {
         System.out.println(smallConcertDTO);
         System.out.println("controller img:" + imgFile);
-        if(imgFile==null){
+        if (imgFile == null) {
             adminService.saveConcertWithoutImage(smallConcertDTO);
             System.out.println("img null");
-        }
-        else {
+        } else {
             adminService.saveConcert(smallConcertDTO, imgFile);
         }
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/profile/admin/total/view")
-    public String adminTotalsview(){
+    public String adminTotalsview() {
 
         return "html/profile/total/profile_admin_total";
     }
 
     @GetMapping("/profile/admin/total")
     public ResponseEntity<?> getMemberList(@RequestParam("category") String category,
-                                          @RequestParam(value = "column", required = false) String column,
-                                          @RequestParam(value = "keyword", required = false) String keyword) {
+                                           @RequestParam(value = "column", required = false) String column,
+                                           @RequestParam(value = "keyword", required = false) String keyword) {
         List<?> memberList;
 
         if (column != null && keyword != null) {
@@ -155,8 +150,8 @@ public class AdminController {
         resultMap.put("genreCounts", genreCounts);
         resultMap.put("points", points);
         resultMap.put("pointAvg", pointAvg);
-        resultMap.put("buskingIng",buskingIng);
-        resultMap.put("buskingAll",buskingAll);
+        resultMap.put("buskingIng", buskingIng);
+        resultMap.put("buskingAll", buskingAll);
 
         return resultMap;
     }
@@ -177,8 +172,8 @@ public class AdminController {
     }
 
     @PostMapping("/profile/admin/reservation/search")
-    public String searchReservation(@RequestParam("column") String column, @RequestParam("keyword") String keyword, Model model){
-        Map<String, String > params = new HashMap<>();
+    public String searchReservation(@RequestParam("column") String column, @RequestParam("keyword") String keyword, Model model) {
+        Map<String, String> params = new HashMap<>();
         params.put("column", column);
         params.put("keyword", keyword);
 
@@ -190,7 +185,7 @@ public class AdminController {
     }
 
     @GetMapping("/profile/admin/reservation/search")
-    public String searchReservations(){
+    public String searchReservations() {
 
         return "html/profile/reservation/profile_admin_reservation";
     }
@@ -235,8 +230,8 @@ public class AdminController {
     }
 
     @DeleteMapping("/profile/admin/management")
-    public ResponseEntity<Void> deleteConcert(@RequestParam("category") String category, @RequestParam("id") int id){
-        System.out.println(category +","+ id);
+    public ResponseEntity<Void> deleteConcert(@RequestParam("category") String category, @RequestParam("id") int id) {
+        System.out.println(category + "," + id);
         adminService.deleteEvent(category, id);
         return ResponseEntity.ok().build();
     }

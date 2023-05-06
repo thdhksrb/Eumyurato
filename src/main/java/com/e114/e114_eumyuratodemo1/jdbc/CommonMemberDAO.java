@@ -1,11 +1,8 @@
 package com.e114.e114_eumyuratodemo1.jdbc;
 
 import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
