@@ -47,19 +47,20 @@ public class AdminController {
     }
 
     @PostMapping("/profile/admin/account")
-    public ResponseEntity<Map<String, Object>> adminAccountPost(HttpServletRequest request) {
-        // JWT 토큰에서 관리자 ID 추출
+    @ResponseBody
+    public ResponseEntity<Map<String, EnterpriseMemberDTO>> adminAccountPost(@RequestBody Map<String, String> data,HttpServletRequest request) {
         String token = jwtUtils.getAccessToken(request);
         String adminUserId = jwtUtils.getId(token);
+        System.out.println(adminUserId);
 
         // 관리자 정보 가져오기
         EnterpriseMemberDTO admin = memberDAO.getAdminInfoById(adminUserId);
 
         // 관리자 정보를 JSON 형태로 만들어 응답
-        Map<String, Object> responseData = new HashMap<>();
+        Map<String, EnterpriseMemberDTO> responseData = new HashMap<>();
         responseData.put("admin", admin);
 
-        return ResponseEntity.ok(responseData);
+        return ResponseEntity.ok().body(responseData);
     }
 
     @GetMapping("/profile/admin/modify")

@@ -1,264 +1,217 @@
 <!DOCTYPE html>
-<!--
-Author: Keenthemes
-Product Name: Start - Bootstrap 5 HTML Multipurpose Admin Dashboard Template
-Purchase: https://themes.getbootstrap.com/product/start-multipurpose-admin-dashboard-theme/
-Website: http://www.keenthemes.com
-Contact: support@keenthemes.com
-Follow: www.twitter.com/keenthemes
-Dribbble: www.dribbble.com/keenthemes
-Like: www.facebook.com/keenthemes
-License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
--->
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <!--begin::Head-->
 <head>
     <base href="../">
-    <title>profile_mainpage</title>
+    <title>Eumyurato</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/img/E114_logo.png}"/>
     <meta charset="utf-8"/>
-    <meta name="description"
-          content="Check out all the features of the Start admin panel. A large number of templates, components and widgets."/>
-    <meta name="keywords"
-          content="Start, bootstrap, bootstrap 5, admin themes, free admin themes, bootstrap admin, bootstrap dashboard, html admin theme, html template"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta property="og:locale" content="en_US"/>
-    <meta property="og:type" content="article"/>
-    <meta property="og:title" content="Start - Bootstrap 5 HTML Multipurpose Admin Dashboard Template"/>
-    <meta property="og:url"
-          content="https://themes.getbootstrap.com/product/start-multipurpose-admin-dashboard-theme/"/>
-    <meta property="og:site_name" content="Keenthemes | Start"/>
-    <link rel="canonical" href="https://preview.keenthemes.com/start"/>
-    <link rel="shortcut icon" href="assets/media/logos/favicon.ico"/>
-
-    <!--begin::Fonts-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"/>
-    <!--end::Fonts-->
-    <!--begin::Page Vendor Stylesheets(used by this page)-->
-    <link href="/static/css/profile/profile3.css" rel="stylesheet" type="text/css"/>
-    <!--end::Page Vendor Stylesheets-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!--begin::Global Stylesheets Bundle(used by all pages)-->
-    <link href="/static/css/profile/profile1.css" rel="stylesheet" type="text/css"/>
-    <link href="/static/css/profile/profile2.css" rel="stylesheet" type="text/css"/>
-
+    <link th:href="@{/css/profile/profile1.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/profile/profile2.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/profile/profile3.css}" rel="stylesheet" type="text/css"/>
     <!--end::Global Stylesheets Bundle-->
 </head>
 <!--end::Head-->
 <!--begin::Body-->
-<body id="kt_body"
-      class="header-fixed header-tablet-and-mobile-fixed aside-enabled aside-fixed aside-primary-disabled aside-secondary-enabled">
 
-<!--begin::Root-->
+<body class="bg-white" id="kt_body">
+<!--begin::Main-->
 <div class="d-flex flex-column flex-root">
-    <!--begin::Page-->
-    <div class="page d-flex flex-row flex-column-fluid">
-        <!--begin::Aside-->
-        <div id="kt_aside" class="aside bg-info" data-kt-drawer="true" data-kt-drawer-name="aside"
-             data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true"
-             data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start">
-            <!--begin::Secondary-->
-            <div class="aside-secondary d-flex flex-row-fluid bg-white">
-                <!--begin::Workspace-->
-                <div class="aside-workspace my-7 ps-5 pe-4 ps-lg-10 pe-lg-6" id="kt_aside_wordspace">
-                    <!--begin::Aside Menu-->
-                    <!--begin::Menu-->
-                    <div class="menu menu-column menu-rounded menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500 fw-bold fs-6"
-                         data-kt-menu="true">
-                        <div class="hover-scroll-y pe-4 pe-lg-5" id="kt_aside_menu_scroll" data-kt-scroll="true"
-                             data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_aside_logo"
-                             data-kt-scroll-wrappers="#kt_aside_wordspace" data-kt-scroll-offset="10px">
-                            <div class="menu-wrapper menu-column menu-fit">
-                                <div class="menu-item here show">
-                                    <h4 class="menu-content mb-0 fs-6 fw-bold text-uppercase" style="color: black"><b>마이페이지</b>
-                                    </h4>
-                                    <div class="menu-sub menu-fit menu-sub-accordion show pb-10">
-                                        <div class="menu-item" style="margin: 3px">
-                                            <a class="text-dark text-hover-primary ms-3 py-2"
-                                               href="../../profile/account/profile_artist_account.html">
-                                                <span class="menu-title">내 계정</span>
-                                            </a>
-                                        </div>
-                                        <div class="menu-item" style="margin: 3px">
-                                            <a class="text-dark text-hover-primary ms-3 py-2"
-                                               href="../../profile/accountModify/profile_artist_accountModify.html">
-                                                <span class="menu-title">계정 정보 수정</span>
-                                            </a>
-                                        </div>
-                                        <div class="menu-item" style="margin: 3px">
-                                            <a class="text-dark text-hover-primary ms-3 py-2"
-                                               href="../../profile/accountModify/profile_artist_accountModify.html">
-                                                <span class="menu-title">예약 내역</span>
-                                            </a>
-                                        </div>
-                                        <div class="menu-item" style="margin: 3px">
-                                            <a class="text-dark text-hover-primary ms-3 py-2"
-                                               href="../../profile/concertManagement/profile_artist_concertmanagement.html">
-                                                <span class="menu-title">공연 관리</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="menu-item">
-                                    <h4 class="menu-content mb-0 fs-6 fw-bold text-uppercase" style="color: black"><b>통합
-                                        정보 조회</b></h4>
-                                    <div class="menu-sub menu-fit menu-sub-accordion show pb-10">
-                                        <div class="menu-item" style="margin: 3px">
-                                            <a target="_blank" class="text-dark text-hover-primary ms-3 py-2"
-                                               href="../dist/index.html">
-                                                <span class="menu-title">종합</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <!--begin::Login-->
+    <div class="d-flex flex-column flex-lg-row flex-column-fluid" id="kt_login">
+        <div class="d-flex flex-column flex-lg-row-auto bg-primary pt-15 pt-lg-0 center" id="leftArea0">
+            <!--begin::Aside Top-->
+            <div class="d-flex flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
+                <!--begin::Aside Logo-->
+                <a class="mb-6" th:href="@{/main}">
+                    <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
+                        <img alt="로고" id="logo1" th:src="@{/img/logo_name.png}" style="width: 400px; height: 70px;"/>
                     </div>
-                    <!--end::Menu-->
-                </div>
-                <!--end::Workspace-->
+                </a>
             </div>
-            <!--end::Secondary-->
         </div>
-        <!--end::Aside-->
-        <!--begin::Wrapper-->
-        <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-            <!--begin::Header-->
-            <div id="kt_header" class="header" data-kt-sticky="true" data-kt-sticky-name="header"
-                 data-kt-sticky-offset="{default: '200px', lg: '300px'}">
-                <!--begin::Container-->
-                <div class="container-xxl d-flex align-items-stretch justify-content-between">
-                    <!--begin::Left-->
-                    <div class="container">
-                        <a class="navbar-brand" href="/templates/html/main/home.html">
-                            <img src="/static/img/logo_name.png" width="250" height="45">
-                        </a>
+
+        <div class="flex-column flex-lg-row-auto bg-primary pt-15 pt-lg-0 center" id="leftArea1">
+            <!--begin::Aside Top-->
+            <div class="flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
+                <!--begin::Aside Logo-->
+                <a class="mb-6" th:href="@{/main}">
+                    <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
+                        <img alt="로고" id="logo2" th:src="@{/img/logo_name.png}" style="width: 400px; height: 70px; margin-top: 80px;"/>
                     </div>
-                    <!--end::Left-->
-                    <!--begin::Right-->
-                    <div class="d-flex align-items-center">
-                        <div class="ms-1 ms-lg-6">
-                            </button>
-                            <a href="main/main.html" height="2" width="5">
-                                <img src="/static/img/logout.png" width="24" height="24">
+                </a>
+                <div class="menu-wrapper menu-column menu-fit mt-10">
+                    <div class="menu-sub menu-fit menu-sub-accordion show mb-20">
+                        <h1 class="menu-content mb-1 mt-10 text-center" style="font-weight: bold">마이페이지</h1>
+                        <div class="separator border-dark my-1 mx-auto" style="width: 60%; border-width: 3px;"></div>
+                        <div class="menu-item" style="margin: 3px">
+                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/artist/account}">
+                                <span class="menu-title">내 계정</span>
+                            </a>
+                        </div>
+                        <div class="menu-item" style="margin: 3px">
+                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/artist/modify}">
+                                <span class="menu-title">계정 정보 수정</span>
+                            </a>
+                        </div>
+                        <div class="menu-item" style="margin: 3px">
+                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/artist/reservation}">
+                                <span class="menu-title">예약 내역</span>
+                            </a>
+                        </div>
+                        <div class="menu-item" style="margin: 3px">
+                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/artist/management/view}">
+                                <span class="menu-title">공연 관리</span>
                             </a>
                         </div>
                     </div>
-                    <!--end::Right-->
-                </div>
-                <!--end::Container-->
-            </div>
-            <div>
-                <div class="login-content flex-lg-row-fluid d-flex flex-column position-relative overflow-hidden py-10 py-lg-20 px-10 p-lg-7 mx-auto mw-600px w-100">
-                    <!--begin::Wrapper-->
-                    <div class="d-flex flex-column-fluid flex-center py-10">
-                        <!--begin::Signin Form-->
-                        <form class="form w-100" novalidate="novalidate">
-                            <!--begin::Title-->
-                            <div class="pb-5 pb-lg-1">
-                                <h3 class="fw-bolder text-dark display-6 text-center">내 계정</h3>
+
+                    <div class="menu-wrapper menu-column menu-fit mt-1">
+                        <div class="menu-sub menu-fit menu-sub-accordion show">
+                            <h1 class="menu-content mb-1 mt-10 text-center" style="font-weight: bold">통합 정보 조회</h1>
+                            <div class="separator border-dark my-1 mx-auto" style="width: 60%; border-width: 3px;"></div>
+                            <div class="menu-item" style="margin: 3px">
+                                <a class="text-dark text-hover-primary ms-3 py-2"
+                                   th:href="@{/profile/artist/total/view}">
+                                    <span class="menu-title">종합</span>
+                                </a>
                             </div>
-                            <!--begin::Image input-->
-                            <div class="image-input image-input-outline" data-kt-image-input="true"
-                                 style="display: flex; justify-content: center; align-items: center">
-                                <!--begin::Image preview wrapper-->
-                                <div style="position: relative;">
-                                    <img src="/static/img/default.jpg" alt="프로필사진"/>
-                                    <!--begin::Edit button-->
-                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
-                                           data-kt-image-input-action="change"
-                                           data-bs-toggle="tooltip"
-                                           data-bs-dismiss="click"
-                                           title="Change avatar"
-                                           style="position: absolute; right: -10px; top: -10px;">
-                                        <i class="bi bi-pencil-fill fs-7"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="ms-5 me-15" style="position: relative; top: 200px; left: 300px;" th:href="@{/logout}">
+                <img th:src="@{/img/logout.png}" style="height: 30px; width: 30px;">
+            </a>
+        </div>
 
-                                        <!--begin::Inputs-->
-                                        <input type="file" name="avatar" accept=".png, .jpg, .jpeg"/>
-                                        <input type="hidden" name="avatar_remove"/>
-                                        <!--end::Inputs-->
-                                    </label>
-                                    <!--end::Edit button-->
+        <div class="d-flex flex-column flex-lg-row-auto bg-primary pt-15 pt-lg-0 d-none d-lg-flex" id="leftArea2">
+            <div class="d-flex flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
+                <!--begin::Aside Logo-->
+                <a class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
+                    <img alt="로고" th:src="@{/img/logo_name.png}" style="width: 400px; height: 70px;">
+                </a>
+                <!--end::Aside Logo-->
+            </div>
+        </div>
 
-                                    <!--begin::Cancel button-->
-                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
-                                          data-kt-image-input-action="cancel"
-                                          data-bs-toggle="tooltip"
-                                          data-bs-dismiss="click"
-                                          title="Cancel avatar"
-                                          style="position: absolute; left: -10px; top: -10px;">
+
+        <!--사이드-->
+        <!--begin::Aside-->
+        <!--begin::Content-->
+        <!--메인폼-->
+        <div class="login-content flex-lg-row-fluid d-flex flex-column overflow-hidden py-10 py-lg-20 px-10 p-lg-7 mx-auto mw-1000px w-100" style="display: flex">
+            <!--begin::Wrapper-->
+            <!--begin::Signin Form-->
+            <form class="form w-450px  needs-validation text-center" id="kt_login_signin_form" novalidate>
+                <div class="pb-5 pb-lg-1">
+                    <h3 class="fw-bolder text-dark display-6 text-center">내 계정</h3>
+                </div>
+                <!--begin::Image input-->
+                <div class="image-input image-input-outline" data-kt-image-input="true"
+                     style="display: flex; justify-content: center; align-items: center">
+                    <!--begin::Image preview wrapper-->
+                    <div style="position: relative;">
+                        <img th:src="@{/img/다운로드.jpg}" alt="프로필사진"/>
+                        <!--end::Image preview wrapper-->
+
+                        <!--begin::Edit button-->
+                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+                               data-kt-image-input-action="change"
+                               data-bs-toggle="tooltip"
+                               data-bs-dismiss="click"
+                               title="Change avatar"
+                               style="position: absolute; right: -10px; top: -10px;">
+                            <i class="bi bi-pencil-fill fs-7"></i>
+
+                            <!--begin::Inputs-->
+                            <input type="file" name="avatar" accept=".png, .jpg, .jpeg"/>
+                            <input type="hidden" name="avatar_remove"/>
+                            <!--end::Inputs-->
+                        </label>
+                        <!--end::Edit button-->
+
+                        <!--begin::Cancel button-->
+                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+                              data-kt-image-input-action="cancel"
+                              data-bs-toggle="tooltip"
+                              data-bs-dismiss="click"
+                              title="Cancel avatar"
+                              style="position: absolute; left: -10px; top: -10px;">
 										<i class="bi bi-x fs-2"></i>
     								</span>
-                                    <!--end::Cancel button-->
+                        <!--end::Cancel button-->
 
-                                    <!--begin::Remove button-->
-                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
-                                          data-kt-image-input-action="remove"
-                                          data-bs-toggle="tooltip"
-                                          data-bs-dismiss="click"
-                                          title="Remove avatar"
-                                          style="position: absolute; right: -10px; bottom: -10px;">
+                        <!--begin::Remove button-->
+                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+                              data-kt-image-input-action="remove"
+                              data-bs-toggle="tooltip"
+                              data-bs-dismiss="click"
+                              title="Remove avatar"
+                              style="position: absolute; right: -10px; bottom: -10px;">
       									<i class="bi bi-x fs-2"></i>
 									</span>
-                                    <!--end::Remove button-->
-                                </div>
-                            </div>
-                            <!--end::Image input-->
-                            <div class="text-end">
-                                <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
-                                <label class="form-label fs-8 fw-bolder pt-4" style="color: #AFB2C2">필수 입력
-                                    정보입니다.</label>
-                            </div>
-                            <div class="fv-row mb-5">
-                                <label class="form-label fs-6 fw-bolder text-dark pt-5">아이디</label>
-                                <input class="form-control form-control-lg form-control-solid" type="text"
-                                       placeholder=""
-                                       name="fullname" autocomplete="off" style="border-color: #0099FF;"/>
-                            </div>
+                    </div>
+                    <!--end::Remove button-->
+                </div>
+                <!--end::Image input-->
+                <div class="text-end">
+                    <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
+                    <label class="form-label fs-8 fw-bolder pt-4" style="color: #AFB2C2">필수 입력
+                        정보입니다.</label>
+                </div>
+                <div class="fv-row mb-5">
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5">아이디</label>
+                    <input class="form-control form-control-lg form-control-solid" type="text"
+                           placeholder=""
+                           name="id" autocomplete="off" style="border-color: #0099FF;"/>
+                </div>
 
-                            <div class="fv-row mb-5">
-                                <label class="form-label fs-6 fw-bolder text-dark pt-5">비밀번호</label>
-                                <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
-                                <input class="form-control form-control-lg form-control-solid" type="password"
-                                       placeholder=""
-                                       name="password" autocomplete="off" style="border-color: #0099FF;"/>
-                            </div>
+                <div class="fv-row mb-5">
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5">비밀번호</label>
+                    <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
+                    <input class="form-control form-control-lg form-control-solid" type="password"
+                           placeholder=""
+                           name="password" autocomplete="off" style="border-color: #0099FF;"/>
+                </div>
 
-                            <div class=" fv-row mb-5">
-                                <label class="form-label fs-6 fw-bolder text-dark pt-5">비밀번호 재확인</label>
-                                <input class="form-control form-control-lg form-control-solid" type="password"
-                                       placeholder=""
-                                       name="cpassword" autocomplete="off" style="border-color: #0099FF;"/>
-                            </div>
+                <div class=" fv-row mb-5">
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5">비밀번호 재확인</label>
+                    <input class="form-control form-control-lg form-control-solid" type="password"
+                           placeholder=""
+                           name="cpassword" autocomplete="off" style="border-color: #0099FF;"/>
+                </div>
 
-                            <div class=" fv-row mb-5">
-                                <label class="form-label fs-6 fw-bolder text-dark pt-5">이름</label>
-                                <input class="form-control form-control-lg form-control-solid" type="text"
-                                       placeholder=""
-                                       name="fullname" autocomplete="off" style="border-color: #0099FF;"/>
-                            </div>
-                            <div class=" fv-row mb-5">
-                                <label class="form-label fs-6 fw-bolder text-dark pt-5">활동명</label>
-                                <input class="form-control form-control-lg form-control-solid" type="text"
-                                       placeholder=""
-                                       name="fullname" autocomplete="off" style="border-color: #0099FF;"/>
-                            </div>
+                <div class=" fv-row mb-5">
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5">이름</label>
+                    <input class="form-control form-control-lg form-control-solid" type="text"
+                           placeholder=""
+                           name="fullname" autocomplete="off" style="border-color: #0099FF;"/>
+                </div>
+                <div class=" fv-row mb-5">
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5">생년월일</label>
+                    <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
+                    <!--                        <input class="form-control form-control-lg form-control-solid" type="text" placeholder=""
+                                                   name="fullname" autocomplete="off" style="border-color: #0099FF;"/>-->
 
-                            <div class=" fv-row mb-5">
-                                <label class="form-label fs-6 fw-bolder text-dark pt-5">생년월일</label>
-                                <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
+                    <div id="bir_wrap">
 
-                                <div id="bir_wrap">
-
-                                    <!-- BIRTH_YY -->
-                                    <div id="bir_yy">
+                        <!-- BIRTH_YY -->
+                        <div id="bir_yy">
                             			<span class="box">
                                 			<input type="text" id="yy"
                                                    class="int form-control form-control-lg form-control-solid"
                                                    maxlength="4" placeholder="년(4자)" style="border-color: #0099FF;">
                             			</span>
-                                    </div>
+                        </div>
 
-                                    <!-- BIRTH_MM -->
-                                    <div id="bir_mm">
+                        <!-- BIRTH_MM -->
+                        <div id="bir_mm">
 										<span class="box ">
                                 			<select class="form-select" aria-label="Select example" id="mm"
                                                     style="border-color: #0099FF;">
@@ -277,127 +230,123 @@ License: For each use you must have a valid license purchased only from above li
                                     			<option value="12">12</option>
                                 			</select>
                             			</span>
-                                    </div>
+                        </div>
 
-                                    <!-- BIRTH_DD -->
-                                    <div id="bir_dd">
+                        <!-- BIRTH_DD -->
+                        <div id="bir_dd">
                             			<span class="box">
                                 			<input type="text" id="dd"
                                                    class="int form-control form-control-lg form-control-solid"
                                                    maxlength="2" placeholder="일" style="border-color: #0099FF;">
                             			</span>
-                                    </div>
+                        </div>
 
-                                </div>
-                            </div>
-
-                            <div class="fv-row mb-5">
-                                <label class="form-label fs-6 fw-bolder text-dark pt-5">성별</label>
-                                <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
-                            </div>
-                            <div class="fv-row mb-5">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="sexRadioOptions" id="sexRadio1"
-                                           value="option1">
-                                    <label class="form-check-label" for="sexRadio1">남자</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="sexRadioOptions" id="sexRadio2"
-                                           value="option2">
-                                    <label class="form-check-label" for="sexRadio2">여자</label>
-                                </div>
-                            </div>
-
-                            <div class=" fv-row mb-5">
-                                <label class="form-label fs-6 fw-bolder text-dark pt-5">이메일</label>
-                                <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
-                                <input class="form-control form-control-lg form-control-solid" type="email"
-                                       placeholder="you@example.com"
-                                       name="email" autocomplete="off" style="border-color: #0099FF;"/>
-                            </div>
-
-                            <div class=" fv-row mb-5">
-                                <label class="form-label fs-6 fw-bolder text-dark pt-5">휴대번호</label>
-                                <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
-
-                                <div class="d-flex align-items-center">
-                                    <input class="form-control form-control-lg form-control-solid me-2" type="email"
-                                           placeholder="000-0000-0000"
-                                           name="email" autocomplete="off"
-                                           style="border-color: #0099FF; width: 360px; height: 40px;">
-                                    <button type="submit"
-                                            class="btn btn-primary fw-bolder fs-6 px-2 py-3 my-3 text-center"
-                                            style=" width: 200px; height: 50px;">인증번호 받기
-                                    </button>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <input class="form-control form-control-lg form-control-solid me-2" type="email"
-                                           placeholder=""
-                                           name="email" autocomplete="off"
-                                           style="border-color: #0099FF; width: 360px; height: 40px;">
-                                    <button type="submit"
-                                            class="btn btn-primary fw-bolder fs-6 px-2 py-3 my-3 text-center"
-                                            style=" width: 200px; height: 50px;">인증번호 인증
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="fv-row mb-5">
-                                <label class="form-label fs-5 fw-bolder text-dark pt-0">선호 장르</label>
-                                <div class="d-flex mt-3 mb-5">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions2"
-                                               id="Radio1" value="option1">
-                                        <label class="form-check-label" for="Radio1">가요</label>
-                                    </div>
-                                    <div class="form-check form-check-inline ms-3 me-3">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions2"
-                                               id="Radio2" value="option2">
-                                        <label class="form-check-label" for="Radio2">발라드</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions2"
-                                               id="Radio3" value="option3">
-                                        <label class="form-check-label" for="Radio3">힙합</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions2"
-                                               id="Radio4" value="option4">
-                                        <label class="form-check-label" for="Radio4">댄스</label>
-
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions2"
-                                               id="Radio5" value="option5">
-                                        <label class="form-check-label" for="Radio5">기타</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="separator border-dark my-10" style="border-width: 2px;"></div>
-
-                            <div class="fv-row mb-10 mt-10"> <!-- mt-5를 추가하여 위쪽에 5단위의 빈 공간을 추가 -->
-                                <div class="form-check form-check-inline form-check-custom form-check-solid mb-5">
-                                    <input class="form-check-input" type="checkbox" name="agree" id="kt_login_toc_agree"
-                                           value="1"/>
-                                    <label class="form-check-label fw-bold text-gray-600" for="kt_login_toc_agree">I
-                                        Agree the
-                                        <a href="#" class="ms-1">terms and conditions</a>.</label>
-
-                                </div>
-                                <div class="d-flex flex-wrap justify-content-center pb-lg-0 pb-5">
-                                    <!-- justify-content-end 클래스를 추가하여 오른쪽으로 정렬 -->
-                                    <button type="submit" class="btn btn-primary fw-bolder fs-4 px-8 py-4 my-3 me-4">회원
-                                        정보 수정
-                                    </button>
-                                </div>
-                            </div>
-                            <!--end::Form group-->
-                        </form>
                     </div>
                 </div>
-            </div>
-            <!--end::Header-->
+
+                <div class="fv-row mb-5">
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5">성별</label>
+                    <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
+                </div>
+                <div class="fv-row mb-5">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="sexRadioOptions" id="sexRadio1"
+                               value="option1">
+                        <label class="form-check-label" for="sexRadio1">남자</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="sexRadioOptions" id="sexRadio2"
+                               value="option2">
+                        <label class="form-check-label" for="sexRadio2">여자</label>
+                    </div>
+                </div>
+
+                <div class=" fv-row mb-5">
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5">이메일</label>
+                    <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
+                    <input class="form-control form-control-lg form-control-solid" type="email"
+                           placeholder="you@example.com"
+                           name="email" autocomplete="off" style="border-color: #0099FF;"/>
+                </div>
+
+                <div class=" fv-row mb-5">
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5">휴대번호</label>
+                    <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
+
+                    <div class="d-flex align-items-center">
+                        <input class="form-control form-control-lg form-control-solid me-2" type="email"
+                               placeholder="000-0000-0000"
+                               name="email" autocomplete="off"
+                               style="border-color: #0099FF; width: 360px; height: 40px;">
+                        <button type="submit"
+                                class="btn btn-primary fw-bolder fs-6 px-2 py-3 my-3 text-center"
+                                style=" width: 200px; height: 50px;">인증번호 받기
+                        </button>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <input class="form-control form-control-lg form-control-solid me-2" type="email"
+                               placeholder=""
+                               name="email" autocomplete="off"
+                               style="border-color: #0099FF; width: 360px; height: 40px;">
+                        <button type="submit"
+                                class="btn btn-primary fw-bolder fs-6 px-2 py-3 my-3 text-center"
+                                style=" width: 200px; height: 50px;">인증번호 인증
+                        </button>
+                    </div>
+                </div>
+                <div class="fv-row mb-5">
+                    <label class="form-label fs-5 fw-bolder text-dark pt-0">선호 장르</label>
+                    <div class="d-flex mt-3 mb-5">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions2"
+                                   id="Radio1" value="option1">
+                            <label class="form-check-label" for="Radio1">가요</label>
+                        </div>
+                        <div class="form-check form-check-inline ms-3 me-3">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions2"
+                                   id="Radio2" value="option2">
+                            <label class="form-check-label" for="Radio2">발라드</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions2"
+                                   id="Radio3" value="option3">
+                            <label class="form-check-label" for="Radio3">힙합</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions2"
+                                   id="Radio4" value="option4">
+                            <label class="form-check-label" for="Radio4">댄스</label>
+
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions2"
+                                   id="Radio5" value="option5">
+                            <label class="form-check-label" for="Radio5">기타</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="separator border-dark my-10" style="border-width: 2px;"></div>
+
+                <div class="fv-row mb-10 mt-10"> <!-- mt-5를 추가하여 위쪽에 5단위의 빈 공간을 추가 -->
+                    <div class="form-check form-check-inline form-check-custom form-check-solid mb-5">
+                        <input class="form-check-input" type="checkbox" name="agree" id="kt_login_toc_agree"
+                               value="1"/>
+                        <label class="form-check-label fw-bold text-gray-600" for="kt_login_toc_agree">I
+                            Agree the
+                            <a href="#" class="ms-1">terms and conditions</a>.</label>
+
+                    </div>
+                    <div class="d-flex flex-wrap justify-content-center pb-lg-0 pb-5">
+                        <!-- justify-content-end 클래스를 추가하여 오른쪽으로 정렬 -->
+                        <button type="submit" class="btn btn-primary fw-bolder fs-4 px-8 py-4 my-3 me-4">회원
+                            정보 수정
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jwt-decode/2.2.0/jwt-decode.min.js"></script>
 </body>
 </html>
