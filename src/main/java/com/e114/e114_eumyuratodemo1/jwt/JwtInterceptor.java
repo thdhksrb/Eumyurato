@@ -28,16 +28,20 @@ public class JwtInterceptor implements HandlerInterceptor {
         // 비회원일 때
         if (accessToken == null) {
             logger.debug("비회원 유저입니다 URI: {}", requestURI);
+            System.out.println("비회원"+requestURI);
             return true;
         } else { // 액세스, 리프래쉬 토큰 둘 다 있을 때
             logger.debug("access 존재합니다.");
+            System.out.println("존재합니다"+requestURI);
             if (jwtUtils.validateToken(accessToken)) {
                 //accesstoke이 유효할 때
                 logger.debug("유효한 access 토큰 정보입니다. URI: {}", requestURI);
+                System.out.println("유효"+requestURI);
                 return true;
             } else {
                 //둘 다 유효하지 않을 때
                 logger.debug("유효하지 않은 JWT 토큰입니다. uri: {}", requestURI);
+                System.out.println("유효하지않음"+requestURI);
                 return false;
             }
         }
