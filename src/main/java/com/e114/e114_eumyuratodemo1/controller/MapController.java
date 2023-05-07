@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.net.MalformedURLException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -135,12 +136,16 @@ public class MapController {
 
     @GetMapping("/smallconcert/detail/{id}/calendar/{day}/json")
     @ResponseBody
-    public List<String> seat(@PathVariable("id")int id,@PathVariable("day")String day){
+    public Map<String, List<String>> seat(@PathVariable("id")int id,@PathVariable("day")String day){
 
         System.out.println(mapService.selectBooked(id,day));
 
+        Map<String, List<String>> map = new HashMap<>();
 
-        return mapService.selectBooked(id,day);
+        map.put("temp",mapService.selectBookedTemp(id,day));
+        map.put("booked",mapService.selectBooked(id,day));
+
+        return map;
     }
     //seated.js에서 좌석정보 넘겨줌
     @PostMapping ("/smallconcert/detail/{id}/calendar/{day}/pay")
@@ -228,6 +233,7 @@ public class MapController {
 
         String conSeatStr = data.get("conSeat");
         String[] conSeatArr = conSeatStr.split(",");
+        List<String> seletedSeats = Arrays.asList(conSeatArr);
         int memberNum = conSeatArr.length;
 
         String conPriceStr = data.get("conPrice");
@@ -235,6 +241,9 @@ public class MapController {
 
         String token = jwtUtils.getAccessToken(request);
         String userId = jwtUtils.getId(token);
+
+        //booked 테이블에 저장
+        mapService.insertSeat(conId, conDate, seletedSeats);
 
         //스케줄 아이디 가져오기
         SchedulesDTO schedulesDTO = mapService.selectConcertTime(conId, conDate);
@@ -258,11 +267,6 @@ public class MapController {
 
     @GetMapping("/kakaopay/fail")
     public String fail(){
-        List<String> seat = (List<String>) (dto.getMyData().get("seat"));
-        SchedulesDTO schedulesDTO = (SchedulesDTO)(dto.getMyData().get("schedule"));
-        int schedulesId = schedulesDTO.getId();
-
-        mapService.rollBackInsertSeat(schedulesId,seat);
 
         return "html/pay/payFail";
     }

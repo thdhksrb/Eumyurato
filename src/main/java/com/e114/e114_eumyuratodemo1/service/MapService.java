@@ -47,6 +47,10 @@ public class MapService {
     public List<String> selectBooked(int conId,String conDate){
         return dao.selectBooked(conId,conDate);
     };
+    public List<String> selectBookedTemp(int conId,String conDate){
+        return dao.selectBookedTemp(conId,conDate);
+    };
+
     public LocalFestivalDTO selectLocal(int id){
         return dao.selectLocal(id);
     }

@@ -71,6 +71,14 @@
         WHERE schedules.conId = #{param1} AND DATE_FORMAT(schedules.conDate, '%Y-%m-%d') = #{param2}
     </select>
 
+    <select id="selectBookedTemp" resultType="String">
+        SELECT temp_booked.seatNum
+        FROM schedules
+                 INNER JOIN temp_booked
+                            ON schedules.id = temp_booked.sId
+        WHERE schedules.conId = #{param1} AND DATE_FORMAT(schedules.conDate, '%Y-%m-%d') = #{param2}
+    </select>
+
     <insert id="insertSeat" parameterType="java.util.Map">
         <foreach collection="seat" item="seatNum" separator=";">
             INSERT INTO booked (sId, seatNum)
