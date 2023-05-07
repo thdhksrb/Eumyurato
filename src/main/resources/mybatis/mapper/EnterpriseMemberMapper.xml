@@ -3,22 +3,50 @@
 <!-- ArtistMapper.xml -->
 <mapper namespace="com.e114.e114_eumyuratodemo1.jdbc.EnterpriseMemberDAO">
     <select id="findById" resultType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
-        SELECT * FROM enterprise_member WHERE id=#{id}
+        SELECT *
+        FROM enterprise_member
+        WHERE id = #{id}
     </select>
 
-    <select id="findByPwd" parameterType="java.lang.String" resultType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
-        SELECT pwd FROM enterprise WHERE pwd=#{pwd}
+    <select id="findByPwd" parameterType="java.lang.String"
+            resultType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
+        SELECT pwd
+        FROM enterprise_member
+        WHERE pwd = #{pwd}
+    </select>
+
+    <!--회원가입-->
+    <insert id="insert" parameterType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
+        INSERT INTO enterprise_member (id, pwd, name, num, email, phone, adminNum)
+        VALUES (#{id}, #{pwd}, #{name}, #{num}, #{email}, #{phone}, #{adminNum})
+    </insert>
+
+    <select id="findByAdminNum" parameterType="int" resultType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
+        SELECT *
+        FROM enterprise_member
+        WHERE admin_num = #{adminNum}
+    </select>
+
+    <!--중복체크-->
+    <select id="useById" parameterType="java.lang.String"
+            resultType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
+        SELECT *
+        FROM enterprise_member
+        WHERE id = #{id}
     </select>
 
     <!--아이디 찾기-->
     <select id="findUserIdsByNameAndEmail" resultType="String">
         SELECT id
         FROM enterprise_member
-        WHERE name = #{name} AND email = #{email}
+        WHERE name = #{name}
+          AND email = #{email}
     </select>
 
     <!--비밀번호 찾기-->
-    <update id="updatePw" >
-        update member set pw = #{pw} where id = #{id}
+    <update id="updatePw">
+        update member
+        set pw = #{pw}
+        where id = #{id}
     </update>
 </mapper>

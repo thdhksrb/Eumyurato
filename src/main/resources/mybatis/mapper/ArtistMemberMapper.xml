@@ -9,6 +9,32 @@
     <select id="findByPwd" parameterType="java.lang.String" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
         SELECT pwd FROM artist_member WHERE pwd=#{pwd}
     </select>
+    <!--회원가입-->
+    <insert id="insert" parameterType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
+        INSERT INTO artist_member (id, pwd, name, nid, birth, sex, email, phone, genre,
+                                   adminNum)
+        VALUES (#{id}, #{pwd}, #{name}, #{nid}, #{birth}, #{sex}, #{email}, #{phone}, #{genre},
+                #{adminNum})
+    </insert>
+
+    <select id="findByAdminNum" parameterType="int" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
+        SELECT *
+        FROM artist_member
+        WHERE admin_num = #{adminNum}
+    </select>
+
+    <!--중복체크-->
+    <select id="useById" parameterType="java.lang.String" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
+        SELECT *
+        FROM artist_member
+        WHERE id = #{id}
+    </select>
+
+    <select id="useByNid" parameterType="java.lang.String" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
+        SELECT *
+        FROM artist_member
+        WHERE nid = #{nid}
+    </select>
 
     <!--아이디 찾기-->
     <select id="findUserIdsByNameAndEmail" resultType="String">
@@ -19,6 +45,6 @@
 
     <!--비밀번호 찾기-->
     <update id="updatePw" >
-        update member set pw = #{pw} where id = #{id}
+        update artist_member set pw = #{pw} where id = #{id}
     </update>
 </mapper>
