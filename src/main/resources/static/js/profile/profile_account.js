@@ -1,3 +1,19 @@
+const jwtToken = sessionStorage.getItem("jwtToken");
+
+const xhr = new XMLHttpRequest();
+xhr.open("POST", "/profile/admin/account");
+xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+xhr.setRequestHeader("Authorization", "Bearer " + jwtToken);
+xhr.onload = function() {
+    if (xhr.status === 200) {
+        const responseData = JSON.parse(xhr.responseText);
+        console.log(responseData);
+
+    } else {
+        console.error('Request failed.  Returned status of ' + xhr.status);
+    }
+};
+xhr.send();
 
 // 회원정보 조회 기능
 function setCommonMemberSearch() {
@@ -86,3 +102,36 @@ function setReservationsSearch() {
 function resetReservations() {
     window.location.href = "/profile/admin/reservation";
 };
+
+// const xhr = new XMLHttpRequest();
+// xhr.open('POST', '/profile/admin/account');
+// xhr.setRequestHeader('Content-Type', 'application/json');
+// xhr.setRequestHeader('Authorization', `Bearer ${token}`);
+// xhr.send(JSON.stringify(data));
+
+
+// window.onload = function() {
+//     const xhr = new XMLHttpRequest();
+//     xhr.open("POST", "/profile/admin/account");
+//     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+//     xhr.setRequestHeader("Authorization", "Bearer " + jwtToken);
+//     xhr.onload = function() {
+//         if (xhr.status === 200) {
+//             // 응답이 성공한 경우, 응답 데이터를 파싱하여 값 추출
+//             const responseData = JSON.parse(xhr.responseText);
+//             const admin = responseData.admin;
+//
+//             // HTML 엘리먼트에 값을 설정하여 뷰에 표시
+//             document.querySelector("input[name='id']").value = admin.id;
+//             document.querySelector("input[name='fullname']").value = admin.name;
+//             document.querySelector("input[name='num']").value = admin.num;
+//             document.querySelector("input[name='email']").value = admin.email;
+//             document.querySelector("input[name='phone']").value = admin.phone;
+//         } else {
+//             // 요청이 실패한 경우, 콘솔에 로그 출력
+//             console.error('Request failed.  Returned status of ' + xhr.status);
+//         }
+//     };
+//     xhr.send();
+// };
+

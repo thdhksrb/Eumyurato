@@ -50,7 +50,7 @@
     </select>
     
     <select id="getAdminInfoById" resultType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
-        SELECT id, pwd, name, num, email, phone
+        SELECT *
         FROM enterprise_member
         WHERE id = #{id} AND adminNum = 0
     </select>
@@ -159,5 +159,19 @@
         SELECT COUNT(*) AS all_busking
         FROM busking;
     </select>
+
+    <select id="getEnterConcertIng" resultType="map">
+        <![CDATA[
+        SELECT COUNT(*) AS concert_ing
+        FROM small_concert
+        WHERE startDate <= CURDATE() AND lastDate >= CURDATE();
+        ]]>
+    </select>
+
+    <select id="getEnterConcertAll" resultType="map">
+        SELECT COUNT(*) AS concert_all
+        FROM small_concert;
+    </select>
+
 
 </mapper>

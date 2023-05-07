@@ -2,6 +2,7 @@ package com.e114.e114_eumyuratodemo1.controller;
 
 import com.e114.e114_eumyuratodemo1.dto.*;
 import com.e114.e114_eumyuratodemo1.jdbc.AdminMemberDAO;
+import com.e114.e114_eumyuratodemo1.jwt.JwtUtils;
 import com.e114.e114_eumyuratodemo1.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +27,9 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
+    @Autowired
+    private JwtUtils jwtUtils;
+
     @GetMapping("/profile/admin/root")
     public String adminRoot() {
         return "html/profile/root/profile_admin_root";
@@ -34,13 +40,27 @@ public class AdminController {
         return "redirect:/board/admin";
     }
 
-    @GetMapping("/profile/admin/{adminId}")
-    public String adminAccount(@PathVariable("adminId") String adminId, Model model) {
-        EnterpriseMemberDTO admin = memberDAO.getAdminInfoById(adminId);
-
-        model.addAttribute("admin", admin);
+    @GetMapping("/profile/admin/account")
+    public String adminAccount() {
 
         return "html/profile/account/profile_admin_account";
+    }
+
+    @PostMapping("/profile/admin/account")
+    @ResponseBody
+    public ResponseEntity<Map<String, EnterpriseMemberDTO>> adminAccountPost(@RequestBody Map<String, String> data,HttpServletRequest request) {
+        String token = jwtUtils.getAccessToken(request);
+        String adminUserId = jwtUtils.getId(token);
+        System.out.println(adminUserId);
+
+        // 관리자 정보 가져오기
+        EnterpriseMemberDTO admin = memberDAO.getAdminInfoById(adminUserId);
+
+        // 관리자 정보를 JSON 형태로 만들어 응답
+        Map<String, EnterpriseMemberDTO> responseData = new HashMap<>();
+        responseData.put("admin", admin);
+
+        return ResponseEntity.ok().body(responseData);
     }
 
     @GetMapping("/profile/admin/modify")
@@ -156,12 +176,19 @@ public class AdminController {
         return resultMap;
     }
 
-/*    @GetMapping("/logout")
-    public String logout(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        session.invalidate(); // 세션 초기화
-        return "redirect:/home";
-    }*/
+    @GetMapping("/profile/admin/total/enterMember")
+    @ResponseBody
+    public Map<String, Object> getEnterMember() {
+
+        List<Map<String, Object>> concertIng = adminService.enterConcertIng();
+        List<Map<String, Object>> concertAll = adminService.enterConcertAll();
+
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("concertIng", concertIng);
+        resultMap.put("concertAll", concertAll);
+
+        return resultMap;
+    }
 
     @GetMapping("/profile/admin/reservation")
     public String reservationList(Model model) {
