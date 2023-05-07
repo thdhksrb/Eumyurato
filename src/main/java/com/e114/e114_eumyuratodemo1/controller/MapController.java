@@ -2,6 +2,7 @@ package com.e114.e114_eumyuratodemo1.controller;
 
 import com.e114.e114_eumyuratodemo1.dto.*;
 import com.e114.e114_eumyuratodemo1.service.MapService;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -55,8 +56,19 @@ public class MapController {
 
     @GetMapping("/smallconcert/detail/{id}/json")
     @ResponseBody
-    public SmallConcertDTO smallConcertDetailJson(@PathVariable("id") int id) {
+    public SmallConcertDTO smallConcertDetailJson(@PathVariable("id") int id) throws IOException {
         SmallConcertDTO dto = mapService.selectConcert(id);
+
+        String imagePath = dto.getImage();
+        // 이미지 파일이 로컬에 저장된 파일인 경우
+        if (!imagePath.startsWith("https://")) {
+        //이미지 경로 바이트 형식으로 변환
+        InputStream inputStream = new FileInputStream(dto.getImage());
+        byte[] imageByteArray = IOUtils.toByteArray(inputStream);
+        inputStream.close();
+
+        dto.setImageByteArray(imageByteArray);
+        }
 
         return dto;
     }
@@ -120,6 +132,7 @@ public class MapController {
     public List<String> seat(@PathVariable("id")int id,@PathVariable("day")String day){
 
         System.out.println(mapService.selectBooked(id,day));
+
         return mapService.selectBooked(id,day);
     }
     //seated.js에서 좌석정보 넘겨줌

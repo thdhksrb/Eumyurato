@@ -49,6 +49,7 @@ $.ajax({
     url: '/smallconcert/detail/'+id+'/json',
     dataType: 'json',
     success: function(data) {
+        console.log(data);
         var li = $('<li>');
 
         li.append($('<p>').html('<strong>'+ data.name+ '</strong>'));
@@ -58,21 +59,19 @@ $.ajax({
 
         detailList.append(li);
 
-        // 이미지 URL을 가져온다.
-        var imageUrl = data.image;
-
-        // 이미지 요소 생성
-        var img = document.createElement("img");
-        img.src = imageUrl;
-        img.style.objectFit = "contain";
-        img.style.width = "100%";
-        img.style.height = "100%";
-
-        // 이미지 요소를 포함할 div
-        var posterContainer = document.getElementById("posterContainer");
-
-        // div에 이미지 요소 추가
-        posterContainer.appendChild(img);
+        if(data.imageByteArray === null) {
+            var imageUrl = data.image;
+            var img = document.getElementById("posterImg");
+            img.src = imageUrl;
+            img.style.display = "block";
+        } else {
+            var imageByteArray = data.imageByteArray;
+            var base64 = btoa(String.fromCharCode(...imageByteArray));
+            var imageUrl = "data:image/jpeg;base64," + base64;
+            var img = document.getElementById("posterImg");
+            img.src = imageUrl;
+            img.style.display = "block";
+        }
 
         price.append($('<p>').html('<strong>티켓가격: </strong><span style="color:red">' + data.price.toLocaleString() + '</span>원'));
     },
