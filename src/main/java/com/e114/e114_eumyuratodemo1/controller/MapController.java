@@ -322,6 +322,18 @@ public class MapController {
         return "html/pay/payFail";
     }
 
+    @PostMapping("/kakaopay/fail/donation")
+    @ResponseBody
+    public ResponseEntity<Map<String, BuskingDTO>> donationFailData(@RequestBody Map<String, String> data,HttpServletRequest request){
+
+        String idStr = data.get("id");
+        int id = Integer.parseInt(idStr);
+
+        Map<String, BuskingDTO> response = new HashMap<>();
+        response.put("message", mapService.selectBusking(id));
+
+        return ResponseEntity.ok().body(response);
+    }
 
 
 
