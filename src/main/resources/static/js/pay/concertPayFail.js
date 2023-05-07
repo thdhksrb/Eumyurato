@@ -23,7 +23,7 @@ xhr.onload = function() {
         conNameElement.innerText = '공연명 : ' + conName;
 
         const priceElement = document.getElementById('price');
-        priceElement.innerText = '취소금액 : ' + conPrice;
+        priceElement.innerText = '취소금액 : ' + conPrice +'원';
     } else {
         console.error(xhr.statusText);
     }
