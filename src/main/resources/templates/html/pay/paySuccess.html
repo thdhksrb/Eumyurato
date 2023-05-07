@@ -43,9 +43,11 @@
     <p style="font-size: 30px"><strong>결제가 완료되었습니다.</strong></p>
     <br>
     <br>
-    <p style="font-size: 15px"><strong>결제일시 : </strong></p>
-    <p style="font-size: 15px"><strong>상품명 : </strong></p>
-    <p style="font-size: 15px"><strong>결제금액 : </strong></p>
+    <div style ="display:flex; flex-direction:column; align-items:flex-start">
+    <p id="payTime" style="font-size: 15px; font-weight: bold"></p>
+    <p id="conName" style="font-size: 15px; font-weight: bold"></p>
+    <p id="price" style="font-size: 15px; font-weight: bold"></p>
+    </div>
     <button type="button" class="btn btn-primary fw-bolder fs-1 px-2 py-3 my-3 text-center" style="width: 200px; height: 50px; margin-left: auto; margin-right: 50px;"
             onclick="window.location.href='/home';">홈으로</button>
 

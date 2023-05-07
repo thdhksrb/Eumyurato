@@ -291,7 +291,7 @@ public class MapController {
 
     @PostMapping("/kakaopay/success/donation")
     @ResponseBody
-    public ResponseEntity<Void> saveDonation(@RequestBody Map<String, String> data,HttpServletRequest request) {
+    public ResponseEntity<Map<String, BuskingDTO>> saveDonation(@RequestBody Map<String, String> data,HttpServletRequest request) {
 
         System.out.println("시작");
 
@@ -310,7 +310,10 @@ public class MapController {
         mapService.saveDonation(price, id);
         mapService.saveDonationNum(price, id, userId);
 
-        return ResponseEntity.ok().build();
+        Map<String, BuskingDTO> response = new HashMap<>();
+        response.put("message", mapService.selectBusking(id));
+
+        return ResponseEntity.ok().body(response);
     }
 
     @GetMapping("/kakaopay/fail/donation")
