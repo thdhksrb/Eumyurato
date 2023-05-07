@@ -199,7 +199,33 @@ public class MapController {
 
     @GetMapping("/kakaopay/success")
     public String success(){
-        return "html/pay/paySuccess";
+
+
+        return "html/pay/concertPaySuccess";
+    }
+
+    @PostMapping("/kakaopay/success")
+    @ResponseBody
+    public ResponseEntity<Void> saveConcert(@RequestBody Map<String, String> data,HttpServletRequest request) {
+
+        System.out.println("시작");
+
+        String priceStr = data.get("price");
+        int price = Integer.parseInt(priceStr);
+
+        String idStr = data.get("id");
+        int id = Integer.parseInt(idStr);
+
+        String token = jwtUtils.getAccessToken(request);
+
+        String userId = jwtUtils.getId(token);
+
+        System.out.println("userid: " + userId);
+
+        mapService.saveDonation(price, id);
+        mapService.saveDonationNum(price, id, userId);
+
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/kakaopay/fail")
