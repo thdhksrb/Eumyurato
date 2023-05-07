@@ -224,7 +224,7 @@ public class MapController {
 
     @PostMapping("/kakaopay/success")
     @ResponseBody
-    public ResponseEntity<Void> saveConcert(@RequestBody Map<String, String> data,HttpServletRequest request) {
+    public ResponseEntity<Map<String, SmallConcertDTO>> saveConcert(@RequestBody Map<String, String> data,HttpServletRequest request) {
 
         String conDate = data.get("conDate");
 
@@ -262,13 +262,29 @@ public class MapController {
 
         System.out.println("완료");
 
-        return ResponseEntity.ok().build();
+        //콘서트 이름 보내주기
+        Map<String, SmallConcertDTO> response = new HashMap<>();
+        response.put("message", mapService.selectConcert(conId));
+
+        return ResponseEntity.ok().body(response);
     }
 
     @GetMapping("/kakaopay/fail")
     public String fail(){
 
-        return "html/pay/payFail";
+        return "html/pay/concertPayFail";
+    }
+
+    @PostMapping("/kakaopay/fail")
+    @ResponseBody
+    public ResponseEntity<Map<String, SmallConcertDTO>> failJson(@RequestBody Map<String, String> data){
+        String conIdStr = data.get("conId");
+        int conId = Integer.parseInt(conIdStr);
+
+        Map<String, SmallConcertDTO> response = new HashMap<>();
+        response.put("message", mapService.selectConcert(conId));
+
+        return ResponseEntity.ok().body(response);
     }
 
     @GetMapping("/pay/kakao/donation")
