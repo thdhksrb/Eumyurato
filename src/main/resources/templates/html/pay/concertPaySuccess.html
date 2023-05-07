@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--begin::Head-->
+
+<head>
+    <title>Eumyurato :: PaySuccess</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/img/E114_logo.png}"/>
+    <meta charset="utf-8"/>
+    <meta name="description"
+          content="Check out all the features of the Start admin panel. A large number of templates, components and widgets."/>
+    <meta name="keywords"
+          content="Start, bootstrap, bootstrap 5, admin themes, free admin themes, bootstrap admin, bootstrap dashboard, html admin theme, html template"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:locale" content="en_US"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="Start - Bootstrap 5 HTML Multipurpose Admin Dashboard Template"/>
+    <meta property="og:url"
+          content="https://themes.getbootstrap.com/product/start-multipurpose-admin-dashboard-theme/"/>
+    <meta property="og:site_name" content="Keenthemes | Start"/>
+
+
+    <link rel="canonical" href="https://preview.keenthemes.com/start"/>
+    <link rel="shortcut icon" href="assets/media/logos/favicon.ico"/>
+    <!--begin::Fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"/>
+    <!--end::Fonts-->
+    <!--begin::Global Stylesheets Bundle(used by all pages)-->
+    <link th:href="@{/css/pay/pay1.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/pay/pay2.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/pay/calenderPay.css}" rel="stylesheet" type="text/css" />
+    <!--    jQuery UI CSS파일-->
+    <link rel="stylesheet" th:href="@{http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css}" type="text/css"/>
+    <!--end::Global Stylesheets Bundle-->
+    <script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
+</head>
+<!--end::Head-->
+<!--begin::Body-->
+
+<body id="kt_body" class="bg-white">
+<!-- begin::Main -->
+<div class="d-flex justify-content-center align-items-center flex-column flex-root">
+    <img th:src="@{/img/E114_logo.png}" width="400px" height="400px">
+    <p style="font-size: 30px"><strong>결제가 완료되었습니다.</strong></p>
+    <br>
+    <br>
+    <p style="font-size: 15px"><strong>결제일시 : </strong></p>
+    <p style="font-size: 15px"><strong>상품명 : </strong></p>
+    <p style="font-size: 15px"><strong>결제금액 : </strong></p>
+    <button type="button" class="btn btn-primary fw-bolder fs-1 px-2 py-3 my-3 text-center" style="width: 200px; height: 50px; margin-left: auto; margin-right: 50px;"
+            onclick="window.location.href='/home';">홈으로</button>
+
+</div>
+<!--jQuery 기본 js파일-->
+<script th:src="@{http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js}"></script>
+<!--jQuery UI 라이브러리 js파일-->
+<script th:src="@{http://code.jquery.com/ui/1.8.18/jquery-ui.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/pay/concertPaySuccess.js}"></script>
+</body>
+</html>
