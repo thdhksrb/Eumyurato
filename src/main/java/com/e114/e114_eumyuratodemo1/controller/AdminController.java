@@ -5,6 +5,7 @@ import com.e114.e114_eumyuratodemo1.jdbc.AdminMemberDAO;
 import com.e114.e114_eumyuratodemo1.jwt.JwtUtils;
 import com.e114.e114_eumyuratodemo1.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,22 +47,42 @@ public class AdminController {
         return "html/profile/account/profile_admin_account";
     }
 
-    @PostMapping("/profile/admin/account")
+    @GetMapping("/profile/admin/data")
     @ResponseBody
-    public ResponseEntity<Map<String, EnterpriseMemberDTO>> adminAccountPost(@RequestBody Map<String, String> data,HttpServletRequest request) {
+    public ResponseEntity<?> getAdminData(HttpServletRequest request) {
         String token = jwtUtils.getAccessToken(request);
         String adminUserId = jwtUtils.getId(token);
-        System.out.println(adminUserId);
+        System.out.println("id : " + adminUserId);
 
-        // 관리자 정보 가져오기
-        EnterpriseMemberDTO admin = memberDAO.getAdminInfoById(adminUserId);
-
-        // 관리자 정보를 JSON 형태로 만들어 응답
-        Map<String, EnterpriseMemberDTO> responseData = new HashMap<>();
-        responseData.put("admin", admin);
-
-        return ResponseEntity.ok().body(responseData);
+        if (adminUserId != null) {
+            // ID를 이용해 관리자 정보를 가져옵니다.
+            EnterpriseMemberDTO admin = memberDAO.getAdminInfoById(adminUserId);
+            if (admin != null) {
+                return ResponseEntity.ok(admin);
+            } else {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized request");
+            }
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized request");
+        }
     }
+
+//    @PostMapping("/profile/admin/account")
+//    @ResponseBody
+//    public ResponseEntity<Map<String, EnterpriseMemberDTO>> adminAccountPost(@RequestBody Map<String, String> data,HttpServletRequest request) {
+//        String token = jwtUtils.getAccessToken(request);
+//        String adminUserId = jwtUtils.getId(token);
+//        System.out.println(adminUserId);
+//
+//        // 관리자 정보 가져오기
+//        EnterpriseMemberDTO admin = memberDAO.getAdminInfoById(adminUserId);
+//
+//        // 관리자 정보를 JSON 형태로 만들어 응답
+//        Map<String, EnterpriseMemberDTO> responseData = new HashMap<>();
+//        responseData.put("admin", admin);
+//
+//        return ResponseEntity.ok().body(responseData);
+//    }
 
     @GetMapping("/profile/admin/modify")
     public String adminAccountModify() {

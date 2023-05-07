@@ -7,7 +7,14 @@ xhr.setRequestHeader("Authorization", "Bearer " + jwtToken);
 xhr.onload = function() {
     if (xhr.status === 200) {
         const responseData = JSON.parse(xhr.responseText);
-        console.log(responseData);
+        const admin = responseData.admin;
+
+        // HTML 요소 선택 후 값 변경
+        document.querySelector('input[name="id"]').value = admin.id;
+        document.querySelector('input[name="fullname"]').value = admin.name;
+        document.querySelector('input[name="num"]').value = admin.num;
+        document.querySelector('input[name="email"]').value = admin.email;
+        document.querySelector('input[name="phone"]').value = admin.phone;
 
     } else {
         console.error('Request failed.  Returned status of ' + xhr.status);
