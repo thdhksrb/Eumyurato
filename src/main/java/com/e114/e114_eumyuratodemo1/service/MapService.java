@@ -3,17 +3,19 @@ package com.e114.e114_eumyuratodemo1.service;
 import com.e114.e114_eumyuratodemo1.dto.*;
 import com.e114.e114_eumyuratodemo1.jdbc.IDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-
-@org.springframework.stereotype.Service
+@EnableAsync
+@Service
 public class MapService {
 
     @Autowired
@@ -65,6 +67,24 @@ public class MapService {
         map.put("conDate", conDate);
         map.put("seat", seat);
         return dao.insertSeat(map);
+    }
+
+    @Async
+    public void deleteSeatTemp(Map<String, Object> map) throws InterruptedException {
+        Thread.sleep(30000);
+        dao.deleteSeatTemp(map);
+    }
+
+    public int insertSeatTemp(int conId, String conDate, List<String> seat) throws InterruptedException {
+        Map<String, Object> map = new HashMap<>();
+        map.put("conId", conId);
+        map.put("conDate", conDate);
+        map.put("seat", seat);
+
+        dao.insertSeatTemp(map);
+        deleteSeatTemp(map);
+        System.out.println("========================================================================");
+        return 0;
     }
 
     public void rollBackInsertSeat(int schedulesId,List<String> seat){

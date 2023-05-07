@@ -7,6 +7,7 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -157,7 +158,7 @@ public class MapController {
 
         int result;
         try {
-            mapService.insertSeat(id, day, selectedSeats);
+            mapService.insertSeatTemp(id, day, selectedSeats);
             result = 1;
         } catch (Exception e) {
             e.printStackTrace();
