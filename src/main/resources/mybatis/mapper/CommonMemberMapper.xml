@@ -52,7 +52,7 @@
 
     <!--비밀번호 찾기-->
     <update id="updatePassword">
-        update common_member set password = #{password} where id = #{id}
+        update common_member set pwd = #{pwd} where id = #{id}
     </update>
 
 

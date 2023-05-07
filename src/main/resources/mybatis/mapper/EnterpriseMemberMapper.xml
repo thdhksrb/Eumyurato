@@ -45,7 +45,7 @@
 
     <!--비밀번호 찾기-->
     <update id="updatePassword">
-        update enterprise_member set password = #{password} where id = #{id}
+        update enterprise_member set pwd = #{pwd} where id = #{id}
     </update>
 
 </mapper>

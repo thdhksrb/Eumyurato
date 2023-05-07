@@ -54,51 +54,57 @@
         <div class="login-content flex-lg-row-fluid d-flex flex-column overflow-hidden py-10 py-lg-20 px-10 p-lg-7 mx-auto mw-450px w-100">
             <!--begin::Wrapper-->
             <!--begin::Signin Form-->
-            <form class="form w-100  needs-validation" novalidate id="kt_login_signin_form"
-                  data-after-login-url="../dist/index.html">
+            <div class="modal fade" id="error_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">비밀번호 찾기 실패</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p id="error_message"></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <form class="form w-100 needs-validation" novalidate id="kt_login_signin_form" action="/loginjoin/Pwfind" method="post">
                 <div class="pb-5 pb-lg-1">
                     <h3 class="fw-bolder text-dark display-6">비밀번호 찾기</h3>
                     <p class="text-muted fw-bold fs-3">가입하신 이메일을 통해 찾을 수 있습니다.</p>
                 </div>
-
-                <!--end::Title-->
-                <!--begin::Form group-->
-                <div class=" fv-row mb-5">
+                <div class="fv-row mb-5">
                     <label class="form-label fs-6 fw-bolder text-dark pt-5">아이디</label>
-                    <input class="form-control form-control-lg form-control-solid" type="text" placeholder=""
-                           name="id" required autocomplete="off" style="border-color: #0099FF;" maxLength="20"/>
+                    <input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="id" required autocomplete="off" style="border-color: #0099FF;" maxLength="20" />
                     <div class="invalid-feedback">
                         아이디를 입력해주세요.
                     </div>
                 </div>
-                <div class=" fv-row mb-5">
+                <div class="fv-row mb-5">
                     <label class="form-label fs-6 fw-bolder text-dark pt-5">이름</label>
-                    <input class="form-control form-control-lg form-control-solid" type="text" placeholder=""
-                           name="name" required autocomplete="off" style="border-color: #0099FF;" maxLength="20"/>
+                    <input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="name" required autocomplete="off" style="border-color: #0099FF;" maxLength="20" />
                     <div class="invalid-feedback">
                         이름을 입력해주세요.
                     </div>
                 </div>
-                <div class=" fv-row mb-5">
+                <div class="fv-row mb-5">
                     <label class="form-label fs-6 fw-bolder text-dark pt-5">이메일</label>
-                    <input class="form-control form-control-lg form-control-solid" type="email"
-                           placeholder="you@example.com"
-                           name="email" required autocomplete="off" style="border-color: #0099FF;" maxLength="30"/>
+                    <input class="form-control form-control-lg form-control-solid" type="email" placeholder="you@example.com" name="email" required autocomplete="off" style="border-color: #0099FF;" maxLength="30" />
                     <div class="invalid-feedback">
                         이메일을 입력해주세요.
                     </div>
                 </div>
-                <!--end::Form group-->
-                <!--begin::Form group-->
                 <div class="d-flex flex-wrap justify-content-center pb-lg-0 pb-5">
-                    <!-- justify-content-end 클래스를 추가하여 오른쪽으로 정렬 -->
                     <button type="submit" class="btn btn-primary fw-bolder fs-6 px-8 py-4 my-3 me-4">비밀번호 찾기</button>
-                    <button type="button" class="btn btn-light-primary fw-bolder fs-6 px-8 py-4 my-4"
-                            th:onclick="|location.href='@{/loginjoin/common/login}'|">취소
-                    </button>
+                    <button type="button" class="btn btn-light-primary fw-bolder fs-6 px-8 py-4 my-4" th:onclick="|location.href='@{/loginjoin/common/login}'|">취소</button>
                 </div>
-                <!--end::Action-->
             </form>
+
         </div>
     </div>
 </div>

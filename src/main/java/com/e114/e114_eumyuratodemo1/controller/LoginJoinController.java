@@ -299,7 +299,7 @@ public class LoginJoinController {
                     enterpriseMemberDAO.updatePassword(enterpriseMember.getId(), tempPassword);
                     memberService.sendTempPasswordByEmail(enterpriseMember.getEmail(), tempPassword);
                     model.addAttribute("tempPasswordSent", true);
-                    return "loginjoin/find_password_result";
+                    return "redirect:/loginjoin/enterprise/login";
                 }
             } else {
                 // ArtistMemberDTO로 조회한 결과가 있는 경우
@@ -308,7 +308,7 @@ public class LoginJoinController {
                 artistMemberDAO.updatePassword(artistMember.getId(), tempPassword);
                 memberService.sendTempPasswordByEmail(artistMember.getEmail(), tempPassword);
                 model.addAttribute("tempPasswordSent", true);
-                return "loginjoin/find_password_result";
+                return "redirect:/loginjoin/artist/login";
             }
         } else {
             // CommonMemberDTO로 조회한 결과가 있는 경우
@@ -317,7 +317,7 @@ public class LoginJoinController {
             commonMemberDAO.updatePassword(member.getId(), tempPassword);
             memberService.sendTempPasswordByEmail(member.getEmail(), tempPassword);
             model.addAttribute("tempPasswordSent", true);
-            return "loginjoin/find_password_result";
+            return "redirect:/loginjoin/common/login";
         }
 
     }

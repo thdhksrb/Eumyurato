@@ -33,6 +33,6 @@ public interface ArtistMemberDAO{
     List<String> findUserIdsByNameAndEmail(@Param("name") String name, @Param("email") String email);
 
     // 비밀번호 변경
-    void updatePassword(@Param("id") String id, @Param("password") String password);
+    void updatePassword(@Param("id") String id, @Param("pwd") String password);
 
 }

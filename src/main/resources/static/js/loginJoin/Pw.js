@@ -24,6 +24,16 @@ $(function() {
                 var errorMessage = xhr.responseJSON.errorMessage;
                 $('#error_message').text(errorMessage);
                 $('#error_modal').modal('show');
+
+                // 서버 오류가 발생한 경우
+                if (!xhr.responseJSON) {
+                    $('#error_message').text('서버에서 오류가 발생했습니다.');
+                    $('#error_modal').modal('show');
+                }
+            },
+            complete: function(xhr, status) {
+                // 요청이 완료되면 로그인 페이지로 이동합니다.
+                window.location.href = "/loginjoin/common/login";
             }
         });
     });
