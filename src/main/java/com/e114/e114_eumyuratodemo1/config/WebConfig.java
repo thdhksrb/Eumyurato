@@ -4,6 +4,7 @@ import com.e114.e114_eumyuratodemo1.jwt.JwtInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
@@ -27,12 +28,18 @@ public class WebConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/findUserId")
                 .excludePathPatterns("/checkIdDuplicate/{id}")
                 .excludePathPatterns("/checkNidDuplicate/{nid}")
+                .excludePathPatterns("/static/**")
+                .excludePathPatterns("/js/**")
+                .excludePathPatterns("/css/**")
+                .excludePathPatterns("/assets/**")
+                .excludePathPatterns("/img/**")
+
         ;
     }
 
-//    @Override
-//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        registry.addResourceHandler("/static/**")
-//                .addResourceLocations("classpath:/static/");
-//    }
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/static/**")
+                .addResourceLocations("classpath:/static/");
+    }
 }

@@ -40,23 +40,18 @@
                 <a href="/"><img th:src="@{/assets/logo.png}" alt="logo"></a>
                 <div class="loginBox">
 
-<!--                    <button class="btn btn-icon btn-sm btn-light-info fw-bolder pulse pulse-danger" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" id="kt_activities_toggle">-->
-<!--                        <span class="position-absolute fs-6">3</span>-->
-<!--                        <span class="pulse-ring"></span>-->
-<!--                    </button> &lt;!&ndash;notification&ndash;&gt;-->
 
-<!--                    <a href="javascript:;"><img th:src="@{/assets/com013.svg}" alt="userBtn"/></a> &lt;!&ndash;my page&ndash;&gt;-->
-<!--                    <a href="javascript:;"><img th:src="@{/assets/arr076.svg}" alt="logoutBtn"/></a> &lt;!&ndash;Logout&ndash;&gt;-->
                     <div id="navLogin">
-                    <button type="button" class="btn btn-primary fw-bolder fs-5 px-5 py-2 my-3 me-5" id="loginBtn">로그인</button>
+                    <button type="button" class="btn btn-primary fw-bolder fs-5 px-5 py-2 my-3 me-5" id="loginBtn"
+                            th:onclick="|location.href='@{/loginjoin/common/login}'|">로그인</button>
+                    </div>
+                    <div style="margin-right: 20px;" id="navLogout">
+                        <a id="mypageBtn" style="width: 150px; height: 30px;"><img th:src="@{/img/person.png}" style="width: 30px; height: 30px; cursor:pointer;"/>
+                            <span id="userName" style="display: inline-block; margin-left: 10px; font-weight: bold; font-size: large; cursor:pointer;"></span>님</a>
+
+                        <a id="logoutBtn" href="/map" style="margin-left: 20px;"></a>
                     </div>
 
-                    <div style="margin-right: 60px;" id="navLogout">
-                        <a id="mypageBtn" href="/mypage" style="width: 30px; height: 30px;"><img th:src="@{/img/person.png}" style="width: 30px; height: 30px"/></a>
-                        <span id="userName" style="margin-left: 10px; font-weight: bold; font-size: large;"></span>님
-                        <a id="logoutBtn" style="margin-left: 20px;">
-                        </a>
-                    </div>
                 </div>
             </div>
 
@@ -118,6 +113,7 @@
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8e0cac0abc5f71a7357818037fc4b48c&libraries=services"></script>
 <script th:src="@{/js/map/concertMap.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jwt-decode/2.2.0/jwt-decode.min.js"></script>
 </body>
 </html>
 

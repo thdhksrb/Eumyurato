@@ -1,8 +1,6 @@
 package com.e114.e114_eumyuratodemo1.service;
 
-import com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
-import com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO;
 import com.e114.e114_eumyuratodemo1.jdbc.ArtistMemberDAO;
 import com.e114.e114_eumyuratodemo1.jdbc.CommonMemberDAO;
 import com.e114.e114_eumyuratodemo1.jdbc.EnterpriseMemberDAO;
@@ -16,10 +14,17 @@ import java.util.List;
 
 //로그인 요청 처리, 사용자 아이디에 해당하는 권한 정보 조회를 담당
 @Service
-public class UserService {
+public class CommonService {
 
     @Autowired
     private CommonMemberDAO commonMemberDAO;
+
+    @Autowired
+    private ArtistMemberDAO artistMemberDAO;
+
+    @Autowired
+    private EnterpriseMemberDAO enterpriseMemberDAO;
+
 
     // 로그인 요청 처리, 사용자 아이디와 비밀번호를 받아 DB에서 일치하는 사용자 정보를 찾습니다.
     // 찾은 경우 사용자 정보를 반환하고, 일치하는 정보가 없는 경우 null을 반환합니다.
@@ -32,35 +37,7 @@ public class UserService {
         }
     }
 
-    @Autowired
-    private ArtistMemberDAO artistMemberDAO;
-
-    // 아티스트 회원용 로그인 요청 처리, 사용자 아이디와 비밀번호를 받아 DB에서 일치하는 사용자 정보를 찾습니다.
-    // 찾은 경우 사용자 정보를 반환하고, 일치하는 정보가 없는 경우 null을 반환합니다.
-    public ArtistMemberDTO loginArt(String id, String pwd) {
-        ArtistMemberDTO artistMemberDTO = artistMemberDAO.findById(id);
-        if (artistMemberDTO != null && artistMemberDTO.getPwd().equals(pwd)) {
-            return artistMemberDTO;
-        } else {
-            return null;
-        }
-    }
-
-    @Autowired
-    private EnterpriseMemberDAO enterpriseMemberDAO;
-
-    // 기업 회원용 로그인 요청 처리, 사용자 아이디와 비밀번호를 받아 DB에서 일치하는 사용자 정보를 찾습니다.
-    // 찾은 경우 사용자 정보를 반환하고, 일치하는 정보가 없는 경우 null을 반환합니다.
-    public EnterpriseMemberDTO loginenter(String id, String pwd) {
-        EnterpriseMemberDTO enterpriseMemberDTO = enterpriseMemberDAO.findById(id);
-        if (enterpriseMemberDTO != null && enterpriseMemberDTO.getPwd().equals(pwd)) {
-            return enterpriseMemberDTO;
-        } else {
-            return null;
-        }
-    }
-
-    //회원가입
+    //일반 회원가입
     public boolean register(String id, String pwd, String name, String nid, String sex, String birth,
                             String email, String phone, String road,String genre) {
         // 회원 정보 유효성 검사
@@ -125,9 +102,8 @@ public class UserService {
     }
 
     // 아이디 찾기
-
     @Autowired
-    public UserService(CommonMemberDAO commonMemberDAO, ArtistMemberDAO artistMemberDAO, EnterpriseMemberDAO enterpriseMemberDAO) {
+    public CommonService(CommonMemberDAO commonMemberDAO, ArtistMemberDAO artistMemberDAO, EnterpriseMemberDAO enterpriseMemberDAO) {
         this.commonMemberDAO = commonMemberDAO;
         this.artistMemberDAO = artistMemberDAO;
         this.enterpriseMemberDAO = enterpriseMemberDAO;
