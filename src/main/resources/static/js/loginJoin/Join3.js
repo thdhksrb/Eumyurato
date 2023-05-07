@@ -4,9 +4,6 @@ const pwdInput = document.getElementById("pwd");
 const cpasswordInput = document.getElementById("cpassword");
 const nameInput = document.getElementById("name");
 const nidInput = document.getElementById("nid");
-const birthInput = document.getElementById("birth");
-const sexRadio1 = document.getElementById("sexRadio1");
-const sexRadio2 = document.getElementById("sexRadio2");
 const emailInput = document.getElementById("email");
 const phoneInput = document.getElementById("phone");
 
@@ -132,28 +129,6 @@ nameInput.addEventListener("input", function () {
     }
 });
 
-// 성별 라디오 버튼 유효성 검사
-nameInput.addEventListener("radio", function () {
-
-    if (!sexRadio1.checked && !sexRadio2.checked) {
-        document.getElementById("sexRadio_check").style.display = "block";
-    } else {
-        document.getElementById("sexRadio_check").style.display = "none";
-    }
-
-});
-
-// 생년월일 유효성 검사
-nameInput.addEventListener("date", function () {
-    const birthValue = birthInput.value.trim();
-
-    if (birthValue === "") { // 추가된 부분
-        document.getElementById("date-empty").style.display = "block";
-    } else {
-        document.getElementById("date-empty").style.display = "none";
-    }
-
-});
 
 // 이메일 유효성 검사
 nameInput.addEventListener("input", function () {
