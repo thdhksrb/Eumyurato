@@ -23,6 +23,12 @@ public interface ArtistMemberDAO{
     ArtistMemberDTO findPoint(String point);
     ArtistMemberDTO findIByImage(String image);
 
+    //회원 가입
+    int insert(ArtistMemberDTO artistMemberDTO);
+
+    ArtistMemberDTO useById(String id); // 아이디 중복 확인
+    ArtistMemberDTO useByNid(String nid); // 중복 확인
+
     //아이디 찾기
     List<String> findUserIdsByNameAndEmail(@Param("name") String name, @Param("email") String email);
 }

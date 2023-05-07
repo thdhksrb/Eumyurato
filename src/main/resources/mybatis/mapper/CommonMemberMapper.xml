@@ -43,8 +43,7 @@
     </select>
 
 
-
-   <!--아이디 찾기-->
+    <!--아이디 찾기-->
     <select id="findUserIdsByNameAndEmail" resultType="String">
         SELECT id
         FROM common_member
@@ -57,4 +56,3 @@
     </update>
 
 </mapper>
-
