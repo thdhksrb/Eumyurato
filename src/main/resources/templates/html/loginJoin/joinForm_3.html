@@ -49,7 +49,8 @@
             <!--begin::Wrapper-->
             <div class="d-flex flex-column-fluid flex-center py-10">
                 <!--begin::Signin Form-->
-                <form class="form w-100 needs-validation" novalidate id="myForm">
+                <form action="/loginjoin/enterprise/join" class="form w-100 needs-validation" id="myForm" method="post"
+                      novalidate>
                     <!--begin::Title-->
                     <div class="pb-5 pb-lg-1">
                         <h3 class="fw-bolder text-dark display-6">회원가입</h3>
@@ -61,19 +62,19 @@
                     </div>
 
                     <div class="fv-row mb-5">
-                        <label class="form-label fs-6 fw-bolder text-dark pt-5" for="uid">아이디</label>
-                        <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000" for="uid">*</label>
+                        <label class="form-label fs-6 fw-bolder text-dark pt-5" for="id">아이디</label>
+                        <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000" for="id">*</label>
                         <div class="d-flex align-items-center position-relative">
                             <input class="form-control form-control-lg form-control-solid me-2" type="text"
-                                   placeholder="" name="uid" id="uid" autocomplete="off"
+                                   placeholder="" name="id" id="id" autocomplete="off"
                                    style="border-color: #0099FF; width: 350px; height: 40px;" required>
                             <button type="button" class="btn btn-primary fw-bolder fs-5 px-2 py-3 my-3 text-center"
                                     style="width: 150px; height: 45px;">중복 확인
                             </button>
                             <div class="position-absolute w-100" style="top: 55px;">
-                                <div class="invalid-feedback" id="uid-empty">필수 입력 정보입니다.</div>
-                                <div class="invalid-feedback" id="uid-length">아이디는 5~20자의 영문, 숫자만 사용 가능합니다.</div>
-                                <div class="invalid-feedback" id="uid-alphanumeric">아이디는 5~20자의 영문, 숫자만 사용 가능합니다.</div>
+                                <div class="invalid-feedback" id="id-empty">필수 입력 정보입니다.</div>
+                                <div class="invalid-feedback" id="id-length">아이디는 5~20자의 영문, 숫자만 사용 가능합니다.</div>
+                                <div class="invalid-feedback" id="id-alphanumeric">아이디는 5~20자의 영문, 숫자만 사용 가능합니다.</div>
                             </div>
                         </div>
 
@@ -83,7 +84,7 @@
                         <label class="form-label fs-6 fw-bolder text-dark pt-5">비밀번호</label>
                         <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
                         <input class="form-control form-control-lg form-control-solid" type="password"
-                               placeholder="" name="password" id="password" autocomplete="off"
+                               placeholder="" name="pwd" id="pwd" autocomplete="off"
                                style="border-color: #0099FF;" required/>
                         <div>
                             <div id="password-empty" class="invalid-feedback">필수 입력 정보입니다.</div>
@@ -109,7 +110,7 @@
                         <label class="form-label fs-6 fw-bolder text-dark pt-5">기업 명</label>
                         <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
                         <input class="form-control form-control-lg form-control-solid" type="text" placeholder=""
-                               name="nid" id="nid" autocomplete="off" style="border-color: #0099FF;"
+                               name="name" id="name" autocomplete="off" style="border-color: #0099FF;"
                                required/>
                         <div>
                             <div id="nid-empty" class="invalid-feedback">필수 입력 정보입니다.</div>
@@ -133,37 +134,17 @@
 
                     </div>
 
-                    <div class="fv-row mb-5" required>
-                        <label class="form-label fs-6 fw-bolder text-dark pt-5">휴대번호</label>
-                        <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
-                        <div class="d-flex align-items-center">
-                            <input class="form-control form-control-lg form-control-solid me-2" type="tel"
-                                   placeholder="" name="num1" id="num1" autocomplete="off"
-                                   style="border-color: #0099FF; width: 350px; height: 40px;"/>
-                            <button type="button" class="btn btn-primary fw-bolder fs-5 px-2 py-3 my-3 text-center"
-                                    style="width: 150px; height: 45px;">인증번호 받기
-                            </button>
-                        </div>
-                        <div>
-                            <div class="invalid-feedback" id="num1-empty">필수 입력 정보입니다.</div>
-                            <div class="invalid-feedback" id="num1-invalid">숫자만 입력 가능합니다.</div>
-                        </div>
-                    </div>
-
-
-                    <div class="fv-row mb-5" id="tel1" name="tel" required>
-                        <div class="d-flex align-items-center">
-                            <input class="form-control form-control-lg form-control-solid me-2" type="tel"
-                                   placeholder="" name="num2" id="num2" autocomplete="off"
-                                   style="border-color: #0099FF; width: 350px; height: 40px;">
-                            <button type="button"
-                                    class="btn btn-primary fw-bolder fs-5 px-2 py-3 my-3 text-center"
-                                    style="width: 150px; height: 45px;">인증번호 인증
-                            </button>
-                        </div>
-                        <div>
-                            <div class="invalid-feedback" id="num2-empty">필수 입력 정보입니다.</div>
-                            <div class="invalid-feedback" id="num2-invalid">숫자만 입력 가능합니다.</div>
+                    <div>
+                        <div class=" fv-row mb-5">
+                            <label class="form-label fs-6 fw-bolder text-dark pt-5">휴대번호</label>
+                            <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
+                            <input autocomplete="off" class="form-control form-control-lg form-control-solid"
+                                   id="phone" name="phone" placeholder="-제외 입력하시오"
+                                   required style="border-color: #0099FF;" type="tel"/>
+                            <div>
+                                <div class="invalid-feedback" id="num1-empty">필수 입력 정보입니다.</div>
+                                <div class="invalid-feedback" id="num1-invalid">숫자만 입력 가능합니다.</div>
+                            </div>
                         </div>
                     </div>
 
@@ -172,12 +153,12 @@
                         <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
                         <div class="d-flex align-items-center">
                             <input class="form-control form-control-lg form-control-solid me-2" type="tel"
-                                   placeholder=" - 없이 입력" name="enter" id="enter" autocomplete="off"
-                                   style="border-color: #0099FF; width: 300px; height: 40px;">
-                            <button type="submit"
-                                    class="btn btn-primary fw-bolder fs-5 px-2 py-3 my-3 text-center"
-                                    style=" width: 200px; height: 45px;">사업자등록번호 인증
-                            </button>
+                                   placeholder=" - 없이 입력" name="num" id="num" autocomplete="off"
+                                   style="border-color: #0099FF;">
+                            <!--                            <button type="submit"
+                                                                class="btn btn-primary fw-bolder fs-5 px-2 py-3 my-3 text-center"
+                                                                style=" width: 200px; height: 45px;">사업자등록번호 인증
+                                                        </button>-->
                         </div>
                         <div class="position-relative">
                             <div class="invalid-feedback" id="enter-empty">필수 입력 정보입니다.</div>
@@ -185,39 +166,6 @@
                         </div>
                     </div>
 
-
-                    <div class="separator border-dark my-10" style="border-width: 2px;"></div>
-                    <div class="fv-row mb-5">
-                        <label class="form-label fs-5 fw-bolder text-dark pt-0">장르</label>
-                        <div class="d-flex mt-3 mb-5">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="Radio1"
-                                       value="option1">
-                                <label class="form-check-label" for="Radio1">가요</label>
-                            </div>
-                            <div class="form-check form-check-inline ms-3 me-3">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="Radio2"
-                                       value="option2">
-                                <label class="form-check-label" for="Radio2">발라드</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="Radio3"
-                                       value="option3">
-                                <label class="form-check-label" for="Radio3">힙합</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="Radio4"
-                                       value="option4">
-                                <label class="form-check-label" for="Radio4">댄스</label>
-
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="Radio5"
-                                       value="option5">
-                                <label class="form-check-label" for="Radio5">기타</label>
-                            </div>
-                        </div>
-                    </div>
                     <div class="separator border-dark my-10" style="border-width: 2px;"></div>
 
                     <div class="fv-row mb-10 mt-10">
@@ -231,7 +179,8 @@
                     </div>
                     <div class="d-flex flex-wrap justify-content-center pb-lg-0 pb-5">
                         <!-- justify-content-end 클래스를 추가하여 오른쪽으로 정렬 -->
-                        <button type="submit" class="btn btn-primary fw-bolder fs-4 px-8 py-4 my-3 me-4">회원 가입 완료
+                        <button class="btn btn-primary fw-bolder fs-4 px-8 py-4 my-3 me-4" type="submit"
+                                id="joinButton">회원 가입 완료
                         </button>
                     </div>
                 </form>

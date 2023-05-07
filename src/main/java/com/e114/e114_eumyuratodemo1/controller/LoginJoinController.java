@@ -5,7 +5,9 @@ import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO;
 import com.e114.e114_eumyuratodemo1.jdbc.CommonMemberDAO;
 import com.e114.e114_eumyuratodemo1.jwt.JwtUtils;
-import com.e114.e114_eumyuratodemo1.service.UserService;
+import com.e114.e114_eumyuratodemo1.service.ArtistService;
+import com.e114.e114_eumyuratodemo1.service.CommonService;
+import com.e114.e114_eumyuratodemo1.service.EnterpriseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -25,7 +27,13 @@ import java.util.Map;
 public class LoginJoinController {
 
     @Autowired
-    private UserService userService;
+    private CommonService commonService;
+
+    @Autowired
+    private ArtistService artistService;
+
+    @Autowired
+    private EnterpriseService enterpriseService;
 
     @Autowired
     private CommonMemberDAO commonMemberDAO;
@@ -72,7 +80,7 @@ public class LoginJoinController {
     @ResponseBody
     public Map<String, String> login(@RequestParam("id") String id,
                                      @RequestParam("pwd") String pwd, HttpServletResponse response) throws IOException {
-        CommonMemberDTO commonMemberDTO = userService.login(id, pwd);
+        CommonMemberDTO commonMemberDTO = commonService.login(id, pwd);
         if (commonMemberDTO != null) {
 
             String accessToken =
@@ -98,7 +106,7 @@ public class LoginJoinController {
     @ResponseBody
     public Map<String, String> loginArt(@RequestParam("id") String id,
                                         @RequestParam("pwd") String pwd, HttpServletResponse response) throws IOException {
-        ArtistMemberDTO artistMemberDTO = userService.loginArt(id, pwd);
+        ArtistMemberDTO artistMemberDTO = artistService.login(id, pwd);
         if (artistMemberDTO != null) {
             String jwtToken =
                     jwtUtils.createAccessToken(artistMemberDTO.getAdminNum(), artistMemberDTO.getId(), artistMemberDTO.getName());
@@ -124,7 +132,7 @@ public class LoginJoinController {
     @ResponseBody
     public Map<String, String> loginenter(@RequestParam("id") String id,
                                           @RequestParam("pwd") String pwd, HttpServletResponse response) throws IOException {
-        EnterpriseMemberDTO enterpriseMemberDTO = userService.loginenter(id, pwd);
+        EnterpriseMemberDTO enterpriseMemberDTO = enterpriseService.login(id, pwd);
         if (enterpriseMemberDTO != null) {
             String jwtToken =
                     jwtUtils.createAccessToken(enterpriseMemberDTO.getAdminNum(), enterpriseMemberDTO.getId(), enterpriseMemberDTO.getName());
@@ -137,35 +145,6 @@ public class LoginJoinController {
         } else {
             return null;
         }
-    }
-
-    //로그 아웃
-    @GetMapping("/logout")
-    public String logout(HttpSession session) {
-        session.removeAttribute("token"); // 세션에서 토큰 정보 제거
-
-        return "redirect:/home"; // 로그아웃 후 메인 홈페이지로 이동
-    }
-
-
-    // 아이디 찾기
-    @GetMapping("/loginjoin/Idfind")
-    public String idfind() {
-        return "html/loginJoin/Idfind";
-    }
-
-    // 아이디 찾기 기능을 처리하는 메서드 추가
-    @PostMapping("/findUserId")
-    public ResponseEntity<List<String>> findUserId(@RequestBody Map<String, String> params) {
-        String name = params.get("name");
-        String email = params.get("email");
-        List<String> userIds = userService.findUserIdsByNameAndEmail(name, email);
-        return ResponseEntity.ok(userIds);
-    }
-
-    @GetMapping("/loginjoin/Pwfind")
-    public String Pwfind() {
-        return "html/loginJoin/pwfind";
     }
 
     //회원가입
@@ -194,14 +173,112 @@ public class LoginJoinController {
             @RequestParam("genre") String genre,
             Model model) {
 
-
-        boolean result = userService.register(id, pwd, name, nid, sex, birth, email, phone, road, genre);
+        boolean result = commonService.register(id, pwd, name, nid, sex, birth, email, phone, road, genre);
         if (result) {
             return "redirect:/loginjoin/common/login";
         } else {
             return "redirect:/loginjoin/common/join?error";
         }
     }
+
+    //아티스트 회원가입
+    @GetMapping("/loginjoin/artist/join")
+    public String artistJoin() {
+        return "html/loginJoin/joinForm_2";
+    }
+
+    @PostMapping("/loginjoin/artist/join")
+    public String artistregister(
+            @RequestParam("id") String id,
+            @RequestParam("pwd") String pwd,
+            @RequestParam("name") String name,
+            @RequestParam("nid") String nid,
+            @RequestParam("sex") String sex,
+            @RequestParam("birth") String birth,
+            @RequestParam("email") String email,
+            @RequestParam("phone") String phone,
+            @RequestParam("genre") String genre,
+            Model model) {
+
+        boolean result = artistService.register(id, pwd, name, nid, sex, birth, email, phone, genre);
+        if (result) {
+            return "redirect:/loginjoin/artist/login";
+        } else {
+            return "redirect:/loginjoin/artist/join?error";
+        }
+    }
+
+
+    //기업 회원 가입
+    @GetMapping("/loginjoin/enterprise/join")
+    public String enterpriseJoin() {
+        return "html/loginJoin/joinForm_3";
+    }
+
+    @PostMapping("/loginjoin/enterprise/join")
+    public String enterregister(
+            @RequestParam("id") String id,
+            @RequestParam("pwd") String pwd,
+            @RequestParam("name") String name,
+            @RequestParam("num") String num,
+            @RequestParam("email") String email,
+            @RequestParam("phone") String phone,
+            Model model) {
+
+        boolean result = enterpriseService.register(id, pwd, name, num, email, phone);
+        if (result) {
+            return "redirect:/loginjoin/enterprise/login";
+        } else {
+            return "redirect:/loginjoin/enterprise/join?error";
+        }
+    }
+
+
+
+    //로그 아웃
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("token"); // 세션에서 토큰 정보 제거
+
+        return "redirect:/home"; // 로그아웃 후 메인 홈페이지로 이동
+    }
+
+
+    // 아이디 찾기
+    @GetMapping("/loginjoin/Idfind")
+    public String idfind() {
+        return "html/loginJoin/Idfind";
+    }
+
+    // 아이디 찾기 기능을 처리하는 메서드 추가
+    @PostMapping("/findUserId")
+    public ResponseEntity<List<String>> findUserId(@RequestBody Map<String, String> params) {
+        String name = params.get("name");
+        String email = params.get("email");
+        List<String> userIds = commonService.findUserIdsByNameAndEmail(name, email);
+        return ResponseEntity.ok(userIds);
+    }
+
+    @GetMapping("/loginjoin/Pwfind")
+    public String Pwfind() {
+        return "html/loginJoin/pwfind";
+    }
+
+
+/*
+    @PostMapping("/loginjoin/artist/join")
+    public String eRegister(ArtistMemberDTO dto,Model model) {
+        boolean result = userService.artistregister(dto, UserType.ARTIST);
+
+        if (result) {
+            return "redirect:/loginjoin/common/login";
+        } else {
+            model.addAttribute("error", "회원가입에 실패했습니다.");
+            return "redirect:/loginjoin/artist/join?error";
+        }
+    }
+*/
+
 
     //중복 확인
     @GetMapping("/checkIdDuplicate/{id}")
@@ -219,14 +296,30 @@ public class LoginJoinController {
     }
 
 
-    @GetMapping("/loginjoin/artist/join")
-    public String artist() {
-        return "html/loginJoin/joinForm_2";
-    }
+    @GetMapping("/mypage")
+    public String mypage(Model model, HttpSession session) {
+        Object loginUser = session.getAttribute("loginUser");
+        int adminNum = -1;
+        if (loginUser instanceof CommonMemberDTO) {
+            adminNum = ((CommonMemberDTO) loginUser).getAdminNum();
+        } else if (loginUser instanceof ArtistMemberDTO) {
+            adminNum = ((ArtistMemberDTO) loginUser).getAdminNum();
+        } else if (loginUser instanceof EnterpriseMemberDTO) {
+            adminNum = ((EnterpriseMemberDTO) loginUser).getAdminNum();
+        }
 
-    @GetMapping("/loginjoin/enterprise/join")
-    public String enterprise() {
-        return "html/loginJoin/joinForm_3";
+        switch (adminNum) {
+            case 0: // 관리자
+                return "redirect:/profile/admin/account";
+            case 1: // 일반 회원
+                return "redirect:/profile/admin/modify";
+            case 2: // 아티스트 회원
+                return "redirect:/profile/admin/management/view";
+            case 3: // 기업 회원
+                return "redirect:/enterprise-page";
+            default:
+                return "redirect:/login-common";
+        }
     }
 
 }

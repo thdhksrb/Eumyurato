@@ -1,12 +1,14 @@
 package com.e114.e114_eumyuratodemo1.controller;
 
 import com.e114.e114_eumyuratodemo1.dto.*;
+import com.e114.e114_eumyuratodemo1.jwt.JwtUtils;
 import com.e114.e114_eumyuratodemo1.service.MapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.net.MalformedURLException;
@@ -22,6 +24,9 @@ public class MapController {
 
     @Autowired
     private DataDTO dto;
+
+    @Autowired
+    private JwtUtils jwtUtils;
 
     @GetMapping("/map")
     public String smallConcert(){
@@ -227,7 +232,10 @@ public class MapController {
     }
 
     @PostMapping("/kakaopay/success/donation")
-    public ResponseEntity<Void> saveDonation(@RequestBody Map<String, String> data, HttpSession session) {
+    @ResponseBody
+    public ResponseEntity<Void> saveDonation(@RequestBody Map<String, String> data,HttpServletRequest request) {
+
+        System.out.println("시작");
 
         String priceStr = data.get("price");
         int price = Integer.parseInt(priceStr);
@@ -235,8 +243,11 @@ public class MapController {
         String idStr = data.get("id");
         int id = Integer.parseInt(idStr);
 
-        CommonMemberDTO loginUser = (CommonMemberDTO)session.getAttribute("loginUser");
-        String userId = loginUser.getId();
+        String token = jwtUtils.getAccessToken(request);
+
+        String userId = jwtUtils.getId(token);
+
+        System.out.println("userid: " + userId);
 
         mapService.saveDonation(price, id);
         mapService.saveDonationNum(price, id, userId);
