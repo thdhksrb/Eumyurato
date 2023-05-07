@@ -59,7 +59,7 @@ async function findUserId(event) {
     const email = formData.get("email");
 
     try {
-        const response = await fetch("/findUserId", {
+        const response = await fetch("/loginjoin/Pwfind", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

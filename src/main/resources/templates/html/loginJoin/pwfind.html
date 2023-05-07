@@ -74,7 +74,7 @@
                 <div class=" fv-row mb-5">
                     <label class="form-label fs-6 fw-bolder text-dark pt-5">이름</label>
                     <input class="form-control form-control-lg form-control-solid" type="text" placeholder=""
-                           name="fullname" required autocomplete="off" style="border-color: #0099FF;" maxLength="20"/>
+                           name="name" required autocomplete="off" style="border-color: #0099FF;" maxLength="20"/>
                     <div class="invalid-feedback">
                         이름을 입력해주세요.
                     </div>
@@ -97,12 +97,11 @@
                             th:onclick="|location.href='@{/loginjoin/common/login}'|">취소
                     </button>
                 </div>
-
                 <!--end::Action-->
             </form>
         </div>
     </div>
 </div>
-<script type="text/javascript" th:src="@{/js/loginJoin/Login1.js}"></script>
+<script type="text/javascript" th:src="@{/js/loginJoin/Pw.js}"></script>
 </body>
 </html>

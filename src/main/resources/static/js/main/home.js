@@ -56,10 +56,6 @@ window.onload = function() {
             xhr.setRequestHeader('Content-Type', 'application/json'); // 요청 헤더에 JSON 형태의 데이터를 전송한다고 명시
             xhr.setRequestHeader('Authorization', `Bearer ${jwtToken}`); // 요청 헤더에 JWT 토큰 추가
 
-            const data = {
-                'prevUrl': window.location.href // 사용자의 현재 URL 값을 추가
-            };
-
             xhr.onload = function () { // 요청이 끝난 후, 콜백 함수 실행
                 if (xhr.status === 200) { // 요청이 성공적으로 처리되었다면
                     const result = JSON.parse(xhr.responseText); // 서버로부터 받은 JSON 데이터를 객체로 변환

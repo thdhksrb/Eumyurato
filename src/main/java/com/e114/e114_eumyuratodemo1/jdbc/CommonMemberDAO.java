@@ -3,12 +3,16 @@ package com.e114.e114_eumyuratodemo1.jdbc;
 import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface CommonMemberDAO {
- CommonMemberDTO findById(@Param("id") String id);
+ CommonMemberDTO findById(String id);
  CommonMemberDTO findByPwd(String pwd);
  CommonMemberDTO findByName(String name);
  CommonMemberDTO findByNid(String nid);
@@ -22,12 +26,18 @@ public interface CommonMemberDAO {
  CommonMemberDTO findByImage(String image);
  CommonMemberDTO findByAdminNum(int adminNum);
 
- //회원 가입
+ // 회원 가입
  int insert(CommonMemberDTO commonMemberDTO);
 
- CommonMemberDTO useById(String id); // 아이디 중복 확인
- CommonMemberDTO useByNid(String nid); //비번 중복 확인
+ // 아이디 중복 확인
+ CommonMemberDTO useById(String id);
 
- //아이디 찾기
- List<String> findUserIdsByNameAndEmail(@Param("name") String name, @Param("email") String email);
+ // 비번 중복 확인
+ CommonMemberDTO useByNid(String nid);
+
+ // 아이디 찾기
+ List<String> findUserIdsByNameAndEmail(String name, String email);
+
+ // 비밀번호 변경
+ void updatePassword(@Param("id") String id, @Param("password") String password);
 }

@@ -3,11 +3,14 @@ package com.e114.e114_eumyuratodemo1.controller;
 import com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO;
+import com.e114.e114_eumyuratodemo1.jdbc.ArtistMemberDAO;
 import com.e114.e114_eumyuratodemo1.jdbc.CommonMemberDAO;
+import com.e114.e114_eumyuratodemo1.jdbc.EnterpriseMemberDAO;
 import com.e114.e114_eumyuratodemo1.jwt.JwtUtils;
 import com.e114.e114_eumyuratodemo1.service.ArtistService;
 import com.e114.e114_eumyuratodemo1.service.CommonService;
 import com.e114.e114_eumyuratodemo1.service.EnterpriseService;
+import com.e114.e114_eumyuratodemo1.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -39,7 +42,18 @@ public class LoginJoinController {
     private CommonMemberDAO commonMemberDAO;
 
     @Autowired
+    private ArtistMemberDAO artistMemberDAO;
+
+    @Autowired
+    private EnterpriseMemberDAO enterpriseMemberDAO;
+
+    @Autowired
     private JwtUtils jwtUtils;
+
+    @Autowired
+    private MemberService memberService;
+
+
 
     @GetMapping("/home")
     public String main(HttpSession session) {
@@ -262,6 +276,50 @@ public class LoginJoinController {
     @GetMapping("/loginjoin/Pwfind")
     public String Pwfind() {
         return "html/loginJoin/pwfind";
+    }
+
+    @PostMapping("/loginjoin/Pwfind")
+    public String findPassword(@RequestParam String id, @RequestParam String name, @RequestParam String email, Model model) {
+        // 입력받은 정보를 이용해 회원 정보를 조회합니다.
+        CommonMemberDTO member = commonMemberDAO.findById(id);
+        if (member == null || !member.getName().equals(name) || !member.getEmail().equals(email)) {
+            // CommonMemberDTO로 조회한 결과가 없는 경우
+            ArtistMemberDTO artistMember = artistMemberDAO.findById(id);
+            if (artistMember == null || !artistMember.getName().equals(name) || !artistMember.getEmail().equals(email)) {
+                // ArtistMemberDTO로 조회한 결과가 없는 경우
+                EnterpriseMemberDTO enterpriseMember = enterpriseMemberDAO.findById(id);
+                if (enterpriseMember == null || !enterpriseMember.getName().equals(name) || !enterpriseMember.getEmail().equals(email)) {
+                    // EnterpriseMemberDTO로 조회한 결과도 없는 경우
+                    model.addAttribute("errorMessage", "입력한 정보와 일치하는 회원이 존재하지 않습니다.");
+                    return "loginjoin/find_password_result";
+                } else {
+                    // EnterpriseMemberDTO로 조회한 결과가 있는 경우
+                    // 비밀번호 업데이트 및 임시 비밀번호 발급
+                    String tempPassword = memberService.generateTempPassword();
+                    enterpriseMemberDAO.updatePassword(enterpriseMember.getId(), tempPassword);
+                    memberService.sendTempPasswordByEmail(enterpriseMember.getEmail(), tempPassword);
+                    model.addAttribute("tempPasswordSent", true);
+                    return "loginjoin/find_password_result";
+                }
+            } else {
+                // ArtistMemberDTO로 조회한 결과가 있는 경우
+                // 비밀번호 업데이트 및 임시 비밀번호 발급
+                String tempPassword = memberService.generateTempPassword();
+                artistMemberDAO.updatePassword(artistMember.getId(), tempPassword);
+                memberService.sendTempPasswordByEmail(artistMember.getEmail(), tempPassword);
+                model.addAttribute("tempPasswordSent", true);
+                return "loginjoin/find_password_result";
+            }
+        } else {
+            // CommonMemberDTO로 조회한 결과가 있는 경우
+            // 비밀번호 업데이트 및 임시 비밀번호 발급
+            String tempPassword = memberService.generateTempPassword();
+            commonMemberDAO.updatePassword(member.getId(), tempPassword);
+            memberService.sendTempPasswordByEmail(member.getEmail(), tempPassword);
+            model.addAttribute("tempPasswordSent", true);
+            return "loginjoin/find_password_result";
+        }
+
     }
 
 

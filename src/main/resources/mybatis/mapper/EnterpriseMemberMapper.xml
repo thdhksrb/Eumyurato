@@ -44,9 +44,8 @@
     </select>
 
     <!--비밀번호 찾기-->
-    <update id="updatePw">
-        update member
-        set pw = #{pw}
-        where id = #{id}
+    <update id="updatePassword">
+        update enterprise_member set password = #{password} where id = #{id}
     </update>
+
 </mapper>
