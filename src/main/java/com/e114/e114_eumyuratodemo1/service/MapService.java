@@ -21,6 +21,9 @@ public class MapService {
     @Autowired
     private IDAO dao;
 
+    @Autowired
+    private MapServiceAsync mapServiceAsync;
+
     public List<SmallConcertDTO> viewSmallConcert(){
         return dao.viewSmallConcert();
     };
@@ -69,11 +72,6 @@ public class MapService {
         return dao.insertSeat(map);
     }
 
-    @Async
-    public void deleteSeatTemp(Map<String, Object> map) throws InterruptedException {
-        Thread.sleep(30000);
-        dao.deleteSeatTemp(map);
-    }
 
     public int insertSeatTemp(int conId, String conDate, List<String> seat) throws InterruptedException {
         Map<String, Object> map = new HashMap<>();
@@ -82,7 +80,7 @@ public class MapService {
         map.put("seat", seat);
 
         dao.insertSeatTemp(map);
-        deleteSeatTemp(map);
+        mapServiceAsync.deleteSeatTemp(map);
         System.out.println("========================================================================");
         return 0;
     }
