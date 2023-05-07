@@ -165,5 +165,13 @@ public class AdminService {
     public List<Map<String, Object>>  artistBuskingAll(){
         return dao.getArtistBuskingAll();
     }
+
+    //기업 회원
+    public List<Map<String, Object>>  enterConcertIng(){
+        return dao.getEnterConcertIng();
+    }
+    public List<Map<String, Object>>  enterConcertAll(){
+        return dao.getEnterConcertAll();
+    }
 }
 

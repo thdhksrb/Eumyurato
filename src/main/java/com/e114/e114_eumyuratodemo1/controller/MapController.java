@@ -3,6 +3,7 @@ package com.e114.e114_eumyuratodemo1.controller;
 import com.e114.e114_eumyuratodemo1.dto.*;
 import com.e114.e114_eumyuratodemo1.jwt.JwtUtils;
 import com.e114.e114_eumyuratodemo1.service.MapService;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -60,8 +61,19 @@ public class MapController {
 
     @GetMapping("/smallconcert/detail/{id}/json")
     @ResponseBody
-    public SmallConcertDTO smallConcertDetailJson(@PathVariable("id") int id) {
+    public SmallConcertDTO smallConcertDetailJson(@PathVariable("id") int id) throws IOException {
         SmallConcertDTO dto = mapService.selectConcert(id);
+
+        String imagePath = dto.getImage();
+        // 이미지 파일이 로컬에 저장된 파일인 경우
+        if (!imagePath.startsWith("https://")) {
+        //이미지 경로 바이트 형식으로 변환
+        InputStream inputStream = new FileInputStream(dto.getImage());
+        byte[] imageByteArray = IOUtils.toByteArray(inputStream);
+        inputStream.close();
+
+        dto.setImageByteArray(imageByteArray);
+        }
 
         return dto;
     }
@@ -125,6 +137,7 @@ public class MapController {
     public List<String> seat(@PathVariable("id")int id,@PathVariable("day")String day){
 
         System.out.println(mapService.selectBooked(id,day));
+
         return mapService.selectBooked(id,day);
     }
     //seated.js에서 좌석정보 넘겨줌
@@ -199,8 +212,6 @@ public class MapController {
 
     @GetMapping("/kakaopay/success")
     public String success(){
-
-
         return "html/pay/concertPaySuccess";
     }
 
@@ -208,22 +219,37 @@ public class MapController {
     @ResponseBody
     public ResponseEntity<Void> saveConcert(@RequestBody Map<String, String> data,HttpServletRequest request) {
 
-        System.out.println("시작");
+        String conDate = data.get("conDate");
 
-        String priceStr = data.get("price");
-        int price = Integer.parseInt(priceStr);
+        String conIdStr = data.get("conId");
+        int conId = Integer.parseInt(conIdStr);
 
-        String idStr = data.get("id");
-        int id = Integer.parseInt(idStr);
+        String conSeatStr = data.get("conSeat");
+        String[] conSeatArr = conSeatStr.split(",");
+        int memberNum = conSeatArr.length;
+
+        String conPriceStr = data.get("conPrice");
+        int conPrice = Integer.parseInt(conPriceStr);
 
         String token = jwtUtils.getAccessToken(request);
-
         String userId = jwtUtils.getId(token);
 
-        System.out.println("userid: " + userId);
+        //스케줄 아이디 가져오기
+        SchedulesDTO schedulesDTO = mapService.selectConcertTime(conId, conDate);
+        int sId = schedulesDTO.getId();
 
-        mapService.saveDonation(price, id);
-        mapService.saveDonationNum(price, id, userId);
+        //reservation 테이블에 저장
+        mapService.saveReservation(sId, userId, conDate, memberNum, conPrice);
+
+        //reservation id 가져오기
+        ReservationDTO reservationDTO = mapService.findReservId(sId, userId);
+        mapService.usedReserv(sId, userId);
+        int rId = reservationDTO.getId();
+
+        //ticket 테이블에 저장
+        mapService.saveTicket(rId, conSeatStr);
+
+        System.out.println("완료");
 
         return ResponseEntity.ok().build();
     }

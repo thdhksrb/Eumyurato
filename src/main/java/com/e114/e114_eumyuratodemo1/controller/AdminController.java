@@ -156,6 +156,19 @@ public class AdminController {
         return resultMap;
     }
 
+    @GetMapping("/profile/admin/total/enterMember")
+    @ResponseBody
+    public Map<String, Object> getEnterMember() {
+
+        List<Map<String, Object>> concertIng = adminService.enterConcertIng();
+        List<Map<String, Object>> concertAll = adminService.enterConcertAll();
+
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("concertIng", concertIng);
+        resultMap.put("concertAll", concertAll);
+
+        return resultMap;
+    }
 /*    @GetMapping("/logout")
     public String logout(HttpServletRequest request) {
         HttpSession session = request.getSession();

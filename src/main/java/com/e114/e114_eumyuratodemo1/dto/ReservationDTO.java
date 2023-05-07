@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class ReservationDTO {
-    private String id;
+    private int id;
     private int sid;
     private String cid;
     private String payTime;

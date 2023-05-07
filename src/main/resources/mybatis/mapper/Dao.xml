@@ -62,6 +62,7 @@
         WHERE conId = #{param1} AND DATE_FORMAT(conDate, '%Y-%m-%d') = #{param2}
 
     </select>
+
     <select id="selectBooked" resultType="String">
         SELECT booked.seatNum
         FROM schedules
@@ -69,6 +70,7 @@
                             ON schedules.id = booked.sId
         WHERE schedules.conId = #{param1} AND DATE_FORMAT(schedules.conDate, '%Y-%m-%d') = #{param2}
     </select>
+
     <insert id="insertSeat" parameterType="java.util.Map">
         <foreach collection="seat" item="seatNum" separator=";">
             INSERT INTO booked (sId, seatNum)
@@ -77,6 +79,7 @@
             WHERE conId = #{conId} AND DATE_FORMAT(schedules.conDate, '%Y-%m-%d') = #{conDate}
         </foreach>
     </insert>
+
     <delete id="deleteSeat" parameterType="java.util.Map">
         <foreach collection="seat" item="seatNum" separator=";">
         DELETE FROM booked
@@ -112,6 +115,23 @@
     <insert id="saveDonationNum">
         insert into artist_donation (buskId, comId, point)
         values (#{param2}, #{param3}, #{param1})
+    </insert>
+
+    <insert id="saveReservation">
+        INSERT INTO reservation (sId, cId, viewDate, memberNum, reservPay)
+        VALUES (#{param1}, #{param2}, #{param3}, #{param4}, #{param5})
+    </insert>
+
+    <select id="findReservId" resultType="com.e114.e114_eumyuratodemo1.dto.ReservationDTO">
+        SELECT * FROM reservation WHERE sId = #{param1} AND cId = #{param2} AND used = false
+    </select>
+
+    <update id="usedReserv">
+        UPDATE reservation SET used = true WHERE sId = #{param1} AND cId = #{param2}
+    </update>
+
+    <insert id="saveTicket">
+        INSERT INTO ticket (rId, seatNum) VALUES (#{param1}, #{param2})
     </insert>
 
 </mapper>

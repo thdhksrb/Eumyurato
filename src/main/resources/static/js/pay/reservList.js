@@ -84,6 +84,11 @@ $.ajax({
         var li = $('<li>');
         console.log(data);
 
+        window.localStorage.setItem("conDate",day);
+        window.localStorage.setItem("conId",id);
+        window.localStorage.setItem("conSeat",data.myData.seat);
+        window.localStorage.setItem("conPrice",data.myData.concert.price * data.myData.count);
+
         li.append($('<p>').html('<strong>'+ data.myData.concert.name+ '</strong>'));
         li.append($('<p>').html('<strong>공연 일자: </strong>' + data.myData.concert.startDate + ' ~ ' + data.myData.concert.lastDate));
         li.append($('<p>').html('<strong>장소: </strong>' + data.myData.concert.location));
