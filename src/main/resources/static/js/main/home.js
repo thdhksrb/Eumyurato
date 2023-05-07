@@ -64,7 +64,20 @@ window.onload = function() {
                 if (xhr.status === 200) { // 요청이 성공적으로 처리되었다면
                     const result = JSON.parse(xhr.responseText); // 서버로부터 받은 JSON 데이터를 객체로 변환
                     const pageUri = result.URI; // URI 값을 변수에 저장
-                    window.location.href = pageUri; // 받아온 페이지 URI로 이동
+                    //window.location.href = pageUri; // 받아온 페이지 URI로 이동
+                    const xhr2 = new XMLHttpRequest();
+                    xhr2.open("POST", pageUri);
+                    xhr2.setRequestHeader("Authorization", "Bearer " + jwtToken);
+                    xhr2.onload = function() {
+                        if (xhr2.status === 200) {
+                            console.log(xhr2.responseText);
+
+                            // 응답을 받은 후 페이지를 이동
+                            window.location.href = "/profile/admin/account";
+                        }
+                    };
+                    xhr2.send();
+
                 } else { // 요청이 처리되지 않았다면
                     console.log('Request failed.  Returned status of ' + xhr.status); // 콘솔에 에러 메시지 출력
                 }

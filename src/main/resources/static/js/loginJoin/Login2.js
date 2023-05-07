@@ -10,7 +10,7 @@ function submitForm(event) {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
                 // 폼 제출 성공
-                const jwtToken = xhr.getResponseHeader('Authorization').replace('Bearer ', '');
+                const jwtToken = xhr.getResponseHeader('Authorization').substring(7);
                 console.log(jwtToken);
                 sessionStorage.setItem('jwtToken', jwtToken);
                 window.location.href = '/home';

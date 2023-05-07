@@ -229,32 +229,6 @@ public class LoginJoinController {
         return "html/loginJoin/joinForm_3";
     }
 
-    @GetMapping("/mypage")
-    public String mypage(Model model, HttpSession session) {
-        Object loginUser = session.getAttribute("loginUser");
-        int adminNum = -1;
-        if (loginUser instanceof CommonMemberDTO) {
-            adminNum = ((CommonMemberDTO) loginUser).getAdminNum();
-        } else if (loginUser instanceof ArtistMemberDTO) {
-            adminNum = ((ArtistMemberDTO) loginUser).getAdminNum();
-        } else if (loginUser instanceof EnterpriseMemberDTO) {
-            adminNum = ((EnterpriseMemberDTO) loginUser).getAdminNum();
-        }
-
-        switch (adminNum) {
-            case 0: // 관리자
-                return "redirect:/profile/admin/account";
-            case 1: // 일반 회원
-                return "redirect:/profile/admin/modify";
-            case 2: // 아티스트 회원
-                return "redirect:/profile/admin/management/view";
-            case 3: // 기업 회원
-                return "redirect:/enterprise-page";
-            default:
-                return "redirect:/login-common";
-        }
-    }
-
 }
 
 /*    @GetMapping("/mypage")
