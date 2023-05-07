@@ -1,25 +1,16 @@
-const conId = window.localStorage.getItem("conId");
-const conDate = window.localStorage.getItem("conDate");
-const conSeat = window.localStorage.getItem("conSeat");
 const conPrice = window.localStorage.getItem("conPrice");
-const token = sessionStorage.getItem("jwtToken");
+const conId = window.localStorage.getItem("conId");
 
 window.localStorage.removeItem("conId");
-window.localStorage.removeItem("conDate");
-window.localStorage.removeItem("conSeat");
 window.localStorage.removeItem("conPrice");
 
 const data = {
-    conId: conId,
-    conDate: conDate,
-    conSeat : conSeat,
-    conPrice : conPrice
-};
+    conId: conId
+}
 
 const xhr = new XMLHttpRequest();
-xhr.open('POST', '/kakaopay/success');
+xhr.open('POST', '/kakaopay/fail');
 xhr.setRequestHeader('Content-Type', 'application/json');
-xhr.setRequestHeader('Authorization', `Bearer ${token}`);
 xhr.onload = function() {
     if (xhr.status === 200) {
         console.log(xhr.response); // 응답 데이터
@@ -27,14 +18,12 @@ xhr.onload = function() {
         console.log(response.message);
         console.log(response.message.name);
         const conName = response.message.name;
-        const payTimeElement = document.getElementById('payTime');
-        payTimeElement.innerText = '결제일시 : ' + new Date().toLocaleString();
 
         const conNameElement = document.getElementById('conName');
         conNameElement.innerText = '공연명 : ' + conName;
 
         const priceElement = document.getElementById('price');
-        priceElement.innerText = '결제금액 : ' + conPrice;
+        priceElement.innerText = '취소금액 : ' + conPrice;
     } else {
         console.error(xhr.statusText);
     }
