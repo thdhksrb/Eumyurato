@@ -212,7 +212,46 @@ public class MapController {
 
     @GetMapping("/kakaopay/success")
     public String success(){
-        return "html/pay/paySuccess";
+        return "html/pay/concertPaySuccess";
+    }
+
+    @PostMapping("/kakaopay/success")
+    @ResponseBody
+    public ResponseEntity<Void> saveConcert(@RequestBody Map<String, String> data,HttpServletRequest request) {
+
+        String conDate = data.get("conDate");
+
+        String conIdStr = data.get("conId");
+        int conId = Integer.parseInt(conIdStr);
+
+        String conSeatStr = data.get("conSeat");
+        String[] conSeatArr = conSeatStr.split(",");
+        int memberNum = conSeatArr.length;
+
+        String conPriceStr = data.get("conPrice");
+        int conPrice = Integer.parseInt(conPriceStr);
+
+        String token = jwtUtils.getAccessToken(request);
+        String userId = jwtUtils.getId(token);
+
+        //스케줄 아이디 가져오기
+        SchedulesDTO schedulesDTO = mapService.selectConcertTime(conId, conDate);
+        int sId = schedulesDTO.getId();
+
+        //reservation 테이블에 저장
+        mapService.saveReservation(sId, userId, conDate, memberNum, conPrice);
+
+        //reservation id 가져오기
+        ReservationDTO reservationDTO = mapService.findReservId(sId, userId);
+        mapService.usedReserv(sId, userId);
+        int rId = reservationDTO.getId();
+
+        //ticket 테이블에 저장
+        mapService.saveTicket(rId, conSeatStr);
+
+        System.out.println("완료");
+
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/kakaopay/fail")

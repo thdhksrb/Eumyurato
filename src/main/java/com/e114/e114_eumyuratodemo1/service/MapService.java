@@ -1,9 +1,6 @@
 package com.e114.e114_eumyuratodemo1.service;
 
-import com.e114.e114_eumyuratodemo1.dto.BuskingDTO;
-import com.e114.e114_eumyuratodemo1.dto.LocalFestivalDTO;
-import com.e114.e114_eumyuratodemo1.dto.SchedulesDTO;
-import com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO;
+import com.e114.e114_eumyuratodemo1.dto.*;
 import com.e114.e114_eumyuratodemo1.jdbc.IDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -135,4 +132,8 @@ public class MapService {
     }
     public int saveDonationNum(int price, int id, String userId) {return dao.saveDonationNum(price, id, userId);}
 
+    public int saveReservation(int sId, String cId, String conDate, int memberNum, int conPrice){return dao.saveReservation(sId, cId, conDate, memberNum, conPrice);}
+    public ReservationDTO findReservId(int sId, String cId) {return dao.findReservId(sId, cId);}
+    public int usedReserv (int sId, String cId) {return dao.usedReserv(sId, cId);}
+    public int saveTicket(int rId, String seatNum) {return dao.saveTicket(rId, seatNum);}
 }
