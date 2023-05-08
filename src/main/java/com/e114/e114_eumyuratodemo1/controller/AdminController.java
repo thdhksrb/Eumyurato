@@ -100,7 +100,7 @@ public class AdminController {
     @GetMapping("/profile/admin/info/view")
     public String admimInfoview() {
 
-        return "html/profile/profile_admin_borad";
+        return "html/profile/borard/profile_admin_borad";
     }
 
     @GetMapping("/profile/admin/total")

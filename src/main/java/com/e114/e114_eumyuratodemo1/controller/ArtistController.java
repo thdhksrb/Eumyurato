@@ -107,9 +107,15 @@ public class ArtistController {
     }
 
     @GetMapping("/profile/artist/total/view")
-    public String adminTotalsview() {
+    public String artistTotalsview() {
 
         return "html/profile/total/profile_artist_total";
+    }
+
+    @GetMapping("/profile/artist/info/view")
+    public String artistInfoview() {
+
+        return "html/profile/borard/profile_artist_borad";
     }
 
     @GetMapping("/profile/artist/total")

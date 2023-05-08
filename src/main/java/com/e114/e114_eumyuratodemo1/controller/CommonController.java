@@ -65,6 +65,12 @@ public class CommonController {
         return "html/profile/reservation/profile_common_reservation";
     }
 
+    @GetMapping("/profile/common/info/view")
+    public String commonInfoview() {
+
+        return "html/profile/borard/profile_common_borad";
+    }
+
     @GetMapping("/profile/common/reservation")
     public ResponseEntity<?> getCommonReservationList(HttpServletRequest request,
                                             @RequestParam(value = "column", required = false) String column,
