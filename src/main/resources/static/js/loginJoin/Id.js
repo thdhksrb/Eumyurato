@@ -13,7 +13,7 @@
                 }
                 const prevUrl = window.sessionStorage.getItem("prevUrl");
                 window.sessionStorage.removeItem("prevUrl");
-                form.setAttribute("action", "/loginjoin/common/login?prevUrl=" + encodeURIComponent(prevUrl));
+                form.setAttribute("action", "/login-common?prevUrl=" + encodeURIComponent(prevUrl));
 
                 form.classList.add("was-validated");
             },
@@ -59,7 +59,7 @@ async function findUserId(event) {
     const email = formData.get("email");
 
     try {
-        const response = await fetch("/loginjoin/Pwfind", {
+        const response = await fetch("/findUserId", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

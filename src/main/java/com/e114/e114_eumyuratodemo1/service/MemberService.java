@@ -1,12 +1,11 @@
 package com.e114.e114_eumyuratodemo1.service;
 
-import com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO;
-import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
-import com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO;
-import com.e114.e114_eumyuratodemo1.dto.Member;
+import com.e114.e114_eumyuratodemo1.dto.*;
 import com.e114.e114_eumyuratodemo1.jdbc.ArtistMemberDAO;
 import com.e114.e114_eumyuratodemo1.jdbc.CommonMemberDAO;
 import com.e114.e114_eumyuratodemo1.jdbc.EnterpriseMemberDAO;
+import com.e114.e114_eumyuratodemo1.mapper.ArtistMemberMapper;
+import com.e114.e114_eumyuratodemo1.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 
@@ -118,5 +118,15 @@ public class MemberService {
         }
     }
 
+    //공연 랭킹
+    private final MemberMapper memberMapper;
+
+    public MemberService(MemberMapper memberMapper) {
+        this.memberMapper = memberMapper;
+    }
+
+    public List<SmallConcertDTO> selectTop5concert() {
+        return memberMapper.selectTop5Concert();
+    }
 
 }

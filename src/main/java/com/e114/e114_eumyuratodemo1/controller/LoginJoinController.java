@@ -3,6 +3,7 @@ package com.e114.e114_eumyuratodemo1.controller;
 import com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO;
+import com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO;
 import com.e114.e114_eumyuratodemo1.jdbc.ArtistMemberDAO;
 import com.e114.e114_eumyuratodemo1.jdbc.CommonMemberDAO;
 import com.e114.e114_eumyuratodemo1.jdbc.EnterpriseMemberDAO;
@@ -67,6 +68,11 @@ public class LoginJoinController {
         return artistService.selectTop5Artists();
     }
 
+    @PostMapping("/top5concert")
+    @ResponseBody
+    public List<SmallConcertDTO> getTop5concert() {
+        return memberService.selectTop5concert();
+    }
 
     @PostMapping("/profile")
     @ResponseBody
@@ -261,7 +267,6 @@ public class LoginJoinController {
 
         return "redirect:/home"; // 로그아웃 후 메인 홈페이지로 이동
     }
-
 
     // 아이디 찾기
     @GetMapping("/loginjoin/Idfind")

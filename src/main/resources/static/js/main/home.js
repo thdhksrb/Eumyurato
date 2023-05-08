@@ -95,40 +95,72 @@ window.onload = function () {
         const navLogout = document.getElementById("navLogout");
         navLogout.style.display = "none";
     }
-
-    //랭킹
-    function loadArtists() {
-        $.ajax({
-            url: "/top5artists",
-            type: "POST",
-            dataType: "json",
-            success: function (data) {
-                // 받아온 데이터로 테이블을 생성
-                const tbody = $("#artistTableBody");
-
-                // 기존 테이블 내용 삭제
-                tbody.empty();
-
-                // 데이터를 이용하여 행 추가
-                data.forEach((artist, index) => {
-                    const row = $("<tr>");
-                    const rankCell = $("<td>").text(index + 1);
-                    const nameCell = $("<td>").text(artist.name);
-                    const genreCell = $("<td>").text(artist.genre);
-                    const pointCell = $("<td>").text(artist.point);
-
-                    row.append(rankCell);
-                    row.append(nameCell);
-                    row.append(genreCell);
-                    row.append(pointCell);
-                    tbody.append(row);
-                });
-            },
-            error: function (xhr, status, error) {
-                console.error(error);
-            },
-        });
-    }
-
 };
 
+fetch('/top5artists', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    }
+})
+    .then(response => response.json()) // JSON 형태로 응답 받기
+    .then(data => {
+        const tbody = document.querySelector('#artistTableBody'); // tbody 태그 선택
+
+        // 기존 테이블 내용 삭제
+        while (tbody.firstChild) {
+            tbody.removeChild(tbody.firstChild);
+        }
+
+        // 데이터를 이용하여 행 추가
+        data.forEach((artist, index) => {
+            const row = document.createElement('tr');
+            const rankCell = document.createElement('td');
+            const nameCell = document.createElement('td');
+            const genreCell = document.createElement('td');
+            const pointCell = document.createElement('td');
+
+            rankCell.textContent = index + 1;
+            nameCell.textContent = artist.name;
+            genreCell.textContent = artist.genre;
+            pointCell.textContent = artist.point;
+
+            row.appendChild(rankCell);
+            row.appendChild(nameCell);
+            row.appendChild(genreCell);
+            row.appendChild(pointCell);
+            tbody.appendChild(row);
+        });
+    })
+    .catch(error => console.error(error)); // 에러 처리하기
+
+fetch('/top5concert', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    }
+})
+    .then(response => response.json()) // JSON 형태로 응답 받기
+    .then(data => {
+        const tbody = document.querySelector('#concetTableBody'); // tbody 태그 선택
+
+        // 기존 테이블 내용 삭제
+        while (tbody.firstChild) {
+            tbody.removeChild(tbody.firstChild);
+        }
+
+        // 데이터를 이용하여 행 추가
+        data.forEach((concert, index) => {
+            const row = document.createElement('tr');
+            const rankCell = document.createElement('td');
+            const nameCell = document.createElement('td');
+
+            rankCell.textContent = index + 1;
+            nameCell.textContent = concert.name;
+
+            row.appendChild(rankCell);
+            row.appendChild(nameCell);
+            tbody.appendChild(row);
+        });
+    })
+    .catch(error => console.error(error)); // 에러

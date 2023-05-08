@@ -41,7 +41,7 @@ public class ArtistService {
         if (id == null || id.isEmpty() || pwd == null || pwd.isEmpty() || name == null || name.isEmpty()
                 || nid == null || nid.isEmpty() || birth == null || birth.isEmpty() || sex == null || sex.isEmpty()
                 || email == null || email.isEmpty() || phone == null || phone.isEmpty()) {
-            return false;
+            //return false;
         }
 
         // 이미 사용 중인 아이디인지 검사
