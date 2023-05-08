@@ -1,9 +1,6 @@
 package com.e114.e114_eumyuratodemo1.controller;
 
-import com.e114.e114_eumyuratodemo1.dto.BuskingDTO;
-import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
-import com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO;
-import com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO;
+import com.e114.e114_eumyuratodemo1.dto.*;
 import com.e114.e114_eumyuratodemo1.jdbc.CommonMemberDAO;
 import com.e114.e114_eumyuratodemo1.jdbc.EnterpriseMemberDAO;
 import com.e114.e114_eumyuratodemo1.jwt.JwtUtils;
@@ -151,10 +148,25 @@ public class EntController {
         return "html/profile/accountModify/profile_enterprise_accountModify";
     }
 
-    @GetMapping("/profile/ent/reservation")
-    public String commonReservationList() {
+    @GetMapping("/profile/ent/reservation/view")
+    public String enterReservationList() {
 
         return "html/profile/reservation/profile_enterprise_reservation";
+    }
+
+    @GetMapping("/profile/ent/reservation")
+    public ResponseEntity<?> getCommonReservationList(HttpServletRequest request,
+                                                      @RequestParam(value = "column", required = false) String column,
+                                                      @RequestParam(value = "keyword", required = false) String keyword) {
+
+        String token = jwtUtils.getAccessToken(request);
+        String id = jwtUtils.getId(token);
+
+        List<List<ReservationDTO>> reservationList = enterpriseService.getReservationsByEnter(id, column, keyword);
+
+        System.out.println("Reservation List: " + reservationList);
+
+        return ResponseEntity.ok(reservationList);
     }
 
     @GetMapping("/profile/ent/management/view")
