@@ -16,5 +16,5 @@ public class SmallConcertDTO {
     private String startDate;
     private String lastDate;
     private String image;
-
+    private byte[] imageByteArray;
 }

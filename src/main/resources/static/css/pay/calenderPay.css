@@ -90,3 +90,36 @@ td {
     background-color: transparent;
     cursor: pointer;
 }
+
+/* 버튼 1과 버튼 2의 공통 속성 */
+.plus, .minus {
+    border-radius: 20px;
+    padding: 10px 20px;
+    width: 73px;
+    text-align: center;
+    padding: 0 10px;
+}
+
+/* 버튼 1 */
+.plus {
+    background-color: #062d92;
+    color: #ffffff;
+    border: none;
+}
+
+.plus:hover {
+    background-color: #c4cee9;
+}
+
+/* 버튼 2 */
+.minus {
+    background-color: #ffffff;
+    color: #000000;
+    border: 2px solid #062d92;
+}
+
+.minus:hover {
+    background-color: #062d92;
+    color: #ffffff;
+    border: 2px solid #062d92;
+}

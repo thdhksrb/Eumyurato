@@ -3,15 +3,18 @@ package com.e114.e114_eumyuratodemo1.controller;
 import com.e114.e114_eumyuratodemo1.dto.*;
 import com.e114.e114_eumyuratodemo1.jwt.JwtUtils;
 import com.e114.e114_eumyuratodemo1.service.MapService;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.net.MalformedURLException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,8 +63,19 @@ public class MapController {
 
     @GetMapping("/smallconcert/detail/{id}/json")
     @ResponseBody
-    public SmallConcertDTO smallConcertDetailJson(@PathVariable("id") int id) {
+    public SmallConcertDTO smallConcertDetailJson(@PathVariable("id") int id) throws IOException {
         SmallConcertDTO dto = mapService.selectConcert(id);
+
+//        String imagePath = dto.getImage();
+//        // 이미지 파일이 로컬에 저장된 파일인 경우
+//        if (imagePath != null && !imagePath.startsWith("https://")) {
+//        //이미지 경로 바이트 형식으로 변환
+//        InputStream inputStream = new FileInputStream(dto.getImage());
+//        byte[] imageByteArray = IOUtils.toByteArray(inputStream);
+//        inputStream.close();
+//
+//        dto.setImageByteArray(imageByteArray);
+//        }
 
         return dto;
     }
@@ -122,10 +136,16 @@ public class MapController {
 
     @GetMapping("/smallconcert/detail/{id}/calendar/{day}/json")
     @ResponseBody
-    public List<String> seat(@PathVariable("id")int id,@PathVariable("day")String day){
+    public Map<String, List<String>> seat(@PathVariable("id")int id,@PathVariable("day")String day){
 
         System.out.println(mapService.selectBooked(id,day));
-        return mapService.selectBooked(id,day);
+
+        Map<String, List<String>> map = new HashMap<>();
+
+        map.put("temp",mapService.selectBookedTemp(id,day));
+        map.put("booked",mapService.selectBooked(id,day));
+
+        return map;
     }
     //seated.js에서 좌석정보 넘겨줌
     @PostMapping ("/smallconcert/detail/{id}/calendar/{day}/pay")
@@ -144,7 +164,7 @@ public class MapController {
 
         int result;
         try {
-            mapService.insertSeat(id, day, selectedSeats);
+            mapService.insertSeatTemp(id, day, selectedSeats);
             result = 1;
         } catch (Exception e) {
             e.printStackTrace();
@@ -199,18 +219,72 @@ public class MapController {
 
     @GetMapping("/kakaopay/success")
     public String success(){
-        return "html/pay/paySuccess";
+        return "html/pay/concertPaySuccess";
+    }
+
+    @PostMapping("/kakaopay/success")
+    @ResponseBody
+    public ResponseEntity<Map<String, SmallConcertDTO>> saveConcert(@RequestBody Map<String, String> data,HttpServletRequest request) {
+
+        String conDate = data.get("conDate");
+
+        String conIdStr = data.get("conId");
+        int conId = Integer.parseInt(conIdStr);
+
+        String conSeatStr = data.get("conSeat");
+        String[] conSeatArr = conSeatStr.split(",");
+        List<String> seletedSeats = Arrays.asList(conSeatArr);
+        int memberNum = conSeatArr.length;
+
+        String conPriceStr = data.get("conPrice");
+        int conPrice = Integer.parseInt(conPriceStr);
+
+        String token = jwtUtils.getAccessToken(request);
+        String userId = jwtUtils.getId(token);
+
+        //booked 테이블에 저장
+        mapService.insertSeat(conId, conDate, seletedSeats);
+
+        //스케줄 아이디 가져오기
+        SchedulesDTO schedulesDTO = mapService.selectConcertTime(conId, conDate);
+        int sId = schedulesDTO.getId();
+
+        //reservation 테이블에 저장
+        mapService.saveReservation(sId, userId, conDate, memberNum, conPrice);
+
+        //reservation id 가져오기
+        ReservationDTO reservationDTO = mapService.findReservId(sId, userId);
+        mapService.usedReserv(sId, userId);
+        int rId = reservationDTO.getId();
+
+        //ticket 테이블에 저장
+        mapService.saveTicket(rId, conSeatStr);
+
+        System.out.println("완료");
+
+        //콘서트 이름 보내주기
+        Map<String, SmallConcertDTO> response = new HashMap<>();
+        response.put("message", mapService.selectConcert(conId));
+
+        return ResponseEntity.ok().body(response);
     }
 
     @GetMapping("/kakaopay/fail")
     public String fail(){
-        List<String> seat = (List<String>) (dto.getMyData().get("seat"));
-        SchedulesDTO schedulesDTO = (SchedulesDTO)(dto.getMyData().get("schedule"));
-        int schedulesId = schedulesDTO.getId();
 
-        mapService.rollBackInsertSeat(schedulesId,seat);
+        return "html/pay/concertPayFail";
+    }
 
-        return "html/pay/payFail";
+    @PostMapping("/kakaopay/fail")
+    @ResponseBody
+    public ResponseEntity<Map<String, SmallConcertDTO>> failJson(@RequestBody Map<String, String> data){
+        String conIdStr = data.get("conId");
+        int conId = Integer.parseInt(conIdStr);
+
+        Map<String, SmallConcertDTO> response = new HashMap<>();
+        response.put("message", mapService.selectConcert(conId));
+
+        return ResponseEntity.ok().body(response);
     }
 
     @GetMapping("/pay/kakao/donation")
@@ -233,7 +307,7 @@ public class MapController {
 
     @PostMapping("/kakaopay/success/donation")
     @ResponseBody
-    public ResponseEntity<Void> saveDonation(@RequestBody Map<String, String> data,HttpServletRequest request) {
+    public ResponseEntity<Map<String, BuskingDTO>> saveDonation(@RequestBody Map<String, String> data,HttpServletRequest request) {
 
         System.out.println("시작");
 
@@ -252,7 +326,10 @@ public class MapController {
         mapService.saveDonation(price, id);
         mapService.saveDonationNum(price, id, userId);
 
-        return ResponseEntity.ok().build();
+        Map<String, BuskingDTO> response = new HashMap<>();
+        response.put("message", mapService.selectBusking(id));
+
+        return ResponseEntity.ok().body(response);
     }
 
     @GetMapping("/kakaopay/fail/donation")
@@ -261,6 +338,18 @@ public class MapController {
         return "html/pay/payFail";
     }
 
+    @PostMapping("/kakaopay/fail/donation")
+    @ResponseBody
+    public ResponseEntity<Map<String, BuskingDTO>> donationFailData(@RequestBody Map<String, String> data,HttpServletRequest request){
+
+        String idStr = data.get("id");
+        int id = Integer.parseInt(idStr);
+
+        Map<String, BuskingDTO> response = new HashMap<>();
+        response.put("message", mapService.selectBusking(id));
+
+        return ResponseEntity.ok().body(response);
+    }
 
 
 
