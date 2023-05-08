@@ -68,42 +68,6 @@ public class ArtistController {
         return "html/profile/reservation/profile_artist_reservation";
     }
 
-//    @GetMapping("/profile/artist/reservation/data")
-//    public ResponseEntity<List<ReservationDTO>> getArtistReservationData(HttpServletRequest request) {
-//        // 토큰에서 아티스트 아이디를 가져옵니다.
-//        String token = jwtUtils.getAccessToken(request);
-//        String artistId = jwtUtils.getId(token);
-//
-//        // 가져온 아티스트 아이디를 사용하여 예약 목록을 조회합니다.
-//        List<ReservationDTO> artistReservations = artistMemberDAO.getArtistReservationList(artistId);
-//
-//        return ResponseEntity.ok(artistReservations);
-//    }
-//
-//    @PostMapping("/profile/artist/reservation/search")
-//    public String searchArtReservation(@RequestParam("column") String column, @RequestParam("keyword") String keyword, Model model, HttpServletRequest request) {
-//        // 토큰에서 아티스트 아이디를 가져옵니다.
-//        String token = jwtUtils.getAccessToken(request);
-//        String artistId = jwtUtils.getId(token);
-//
-//        Map<String, String> params = new HashMap<>();
-//        params.put("column", column);
-//        params.put("keyword", keyword);
-//        params.put("id", artistId);
-//
-//        List<ReservationDTO> artReservations = artistMemberDAO.searchArtReservations(params);
-//
-//        model.addAttribute("reservations", artReservations);
-//
-//        return "html/profile/reservation/profile_artist_reservation";
-//    }
-//
-//    @GetMapping("/profile/artist/reservation/search")
-//    public String searchArtReservations() {
-//
-//        return "html/profile/reservation/profile_artist_reservation";
-//    }
-
     @GetMapping("/profile/artist/management/view")
     public String artistBuskingManagement() {
 
@@ -200,12 +164,12 @@ public class ArtistController {
     @ResponseBody
     public Map<String, Object> getArtistMember() {
 
-        List<Map<String, Object>> genderCounts = artistService.artistGenderCount();
-        List<Map<String, Object>> genreCounts = artistService.artistGenreCount();
-        List<Map<String, Object>> points = artistService.artistPointTop();
-        List<Map<String, Object>> pointAvg = artistService.artistPointAvg();
-        List<Map<String, Object>> buskingIng = artistService.artistBuskingIng();
-        List<Map<String, Object>> buskingAll = artistService.artistBuskingAll();
+        List<Map<String, Object>> genderCounts = artistService.artistGenderCount(); // 성별 체크
+        List<Map<String, Object>> genreCounts = artistService.artistGenreCount();   // 장르 체크
+        List<Map<String, Object>> points = artistService.artistPointTop();          // 보유 포인트 체크
+        List<Map<String, Object>> pointAvg = artistService.artistPointAvg();        // 포인트 평균
+        List<Map<String, Object>> buskingIng = artistService.artistBuskingIng();    // 진행중인 버스킹 목록 가져오기
+        List<Map<String, Object>> buskingAll = artistService.artistBuskingAll();    // 모든 버스킹 목록 가져오기
 
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("genderCounts", genderCounts);

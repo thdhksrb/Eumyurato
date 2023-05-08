@@ -55,4 +55,12 @@
         FROM enterprise_member
         WHERE id = #{id} AND adminNum = 3
     </select>
+
+    <select id="getEntSmallConcerts" resultType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
+        select * from small_concert where entId = #{entId}
+    </select>
+
+    <select id="searchEntSmallConcerts" resultType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
+        select * from small_concert where entId = #{entId} and ${column} LIKE CONCAT('%', #{keyword}, '%')
+    </select>
 </mapper>

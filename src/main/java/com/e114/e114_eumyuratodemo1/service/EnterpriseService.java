@@ -1,9 +1,13 @@
 package com.e114.e114_eumyuratodemo1.service;
 
+import com.e114.e114_eumyuratodemo1.dto.BuskingDTO;
 import com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO;
+import com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO;
 import com.e114.e114_eumyuratodemo1.jdbc.EnterpriseMemberDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 //로그인 요청 처리, 사용자 아이디에 해당하는 권한 정보 조회를 담당
@@ -70,6 +74,16 @@ public class EnterpriseService {
         // artistMemberDAO를 사용하여 회원 정보 저장
         int result = enterpriseMemberDAO.insert(enterpriseMemberDTO);
         return result == 3;
+    }
+
+    public List<SmallConcertDTO> viewEntSmallConcert(String smallConcertId) {
+
+        return enterpriseMemberDAO.getEntSmallConcerts(smallConcertId);
+    }
+
+    public List<SmallConcertDTO> searchEntSmallConcert(String smallConcertId, String column, String keyword) {
+
+        return enterpriseMemberDAO.searchEntSmallConcerts(smallConcertId, column, keyword);
     }
 
 }

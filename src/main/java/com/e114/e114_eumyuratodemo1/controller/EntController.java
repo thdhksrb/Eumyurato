@@ -1,25 +1,33 @@
 package com.e114.e114_eumyuratodemo1.controller;
 
+import com.e114.e114_eumyuratodemo1.dto.BuskingDTO;
 import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO;
+import com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO;
 import com.e114.e114_eumyuratodemo1.jdbc.CommonMemberDAO;
 import com.e114.e114_eumyuratodemo1.jdbc.EnterpriseMemberDAO;
 import com.e114.e114_eumyuratodemo1.jwt.JwtUtils;
+import com.e114.e114_eumyuratodemo1.service.EnterpriseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class EntController {
 
     @Autowired
     private EnterpriseMemberDAO enterpriseMemberDAO;
+
+    @Autowired
+    private EnterpriseService enterpriseService;
 
     @Autowired
     private JwtUtils jwtUtils;
@@ -60,8 +68,30 @@ public class EntController {
         return "html/profile/reservation/profile_enterprise_reservation";
     }
 
-    @GetMapping("/profile/ent/management")
-    public String artistAccountManagement(){
+    @GetMapping("/profile/ent/management/view")
+    public String entSmallConcertManagement() {
+
         return "html/profile/concertManagement/profile_enterprise_concertmanagement";
+    }
+
+    @GetMapping("/profile/ent/management")
+    public ResponseEntity<?> getSmallConcertList(HttpServletRequest request,
+                                            @RequestParam(value = "column", required = false) String column,
+                                            @RequestParam(value = "keyword", required = false) String keyword) {
+
+        String token = jwtUtils.getAccessToken(request);
+        String smallConcertId = jwtUtils.getId(token);
+
+        List<SmallConcertDTO> smallConcertList;
+
+        if (column != null && keyword != null) {
+            smallConcertList = enterpriseService.searchEntSmallConcert(smallConcertId, column, keyword);
+        } else {
+            smallConcertList = enterpriseService.viewEntSmallConcert(smallConcertId);
+        }
+
+        System.out.println("SmallConcert List: " + smallConcertList);
+
+        return ResponseEntity.ok(smallConcertList);
     }
 }
