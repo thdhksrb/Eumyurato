@@ -28,7 +28,7 @@
             <!--begin::Aside Top-->
             <div class="d-flex flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
                 <!--begin::Aside Logo-->
-                <a class="mb-6" th:href="@{/main}">
+                <a class="mb-6" th:href="@{/home}">
                     <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
                         <img alt="로고" id="logo1" th:src="@{/img/logo_name.png}" style="width: 400px; height: 70px;"/>
                     </div>
@@ -40,7 +40,7 @@
             <!--begin::Aside Top-->
             <div class="flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
                 <!--begin::Aside Logo-->
-                <a class="mb-6" th:href="@{/main}">
+                <a class="mb-6" th:href="@{/home}">
                     <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
                         <img alt="로고" id="logo2" th:src="@{/img/logo_name.png}" style="width: 400px; height: 70px; margin-top: 80px;"/>
                     </div>
@@ -114,239 +114,87 @@
                 </div>
                 <!--begin::Image input-->
                 <div class="image-input image-input-outline" data-kt-image-input="true"
-                     style="display: flex; justify-content: center; align-items: center">
-                    <!--begin::Image preview wrapper-->
-                    <div style="position: relative;">
-                        <img th:src="@{/img/default.jpg}" alt="프로필사진"/>
-                        <!--end::Image preview wrapper-->
+                     style="display: flex; justify-content: center; align-items: center;">
+                    <img alt="프로필사진" th:src="@{/img/default.jpg}"/>
+                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+                           data-kt-image-input-action="change"
+                           data-bs-toggle="tooltip"
+                           data-bs-dismiss="click"
+                           title="Change avatar"
+                           style="position: absolute; right: -10px; top: -10px;">
+                        <i class="bi bi-pencil-fill fs-7"></i>
+                        <!--begin::Inputs-->
+                        <input type="file" name="avatar" accept=".png, .jpg, .jpeg"/>
+                        <input type="hidden" name="avatar_remove"/>
+                        <!--end::Inputs-->
+                    </label>
+                    <!--end::Edit button-->
 
-                        <!--begin::Edit button-->
-                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
-                               data-kt-image-input-action="change"
-                               data-bs-toggle="tooltip"
-                               data-bs-dismiss="click"
-                               title="Change avatar"
-                               style="position: absolute; right: -10px; top: -10px;">
-                            <i class="bi bi-pencil-fill fs-7"></i>
-
-                            <!--begin::Inputs-->
-                            <input type="file" name="avatar" accept=".png, .jpg, .jpeg"/>
-                            <input type="hidden" name="avatar_remove"/>
-                            <!--end::Inputs-->
-                        </label>
-                        <!--end::Edit button-->
-
-                        <!--begin::Cancel button-->
-                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
-                              data-kt-image-input-action="cancel"
-                              data-bs-toggle="tooltip"
-                              data-bs-dismiss="click"
-                              title="Cancel avatar"
-                              style="position: absolute; left: -10px; top: -10px;">
+                    <!--begin::Cancel button-->
+                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+                          data-kt-image-input-action="cancel"
+                          data-bs-toggle="tooltip"
+                          data-bs-dismiss="click"
+                          title="Cancel avatar"
+                          style="position: absolute; left: -10px; top: -10px;">
 										<i class="bi bi-x fs-2"></i>
     								</span>
-                        <!--end::Cancel button-->
+                    <!--end::Cancel button-->
 
-                        <!--begin::Remove button-->
-                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
-                              data-kt-image-input-action="remove"
-                              data-bs-toggle="tooltip"
-                              data-bs-dismiss="click"
-                              title="Remove avatar"
-                              style="position: absolute; right: -10px; bottom: -10px;">
+                    <!--begin::Remove button-->
+                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+                          data-kt-image-input-action="remove"
+                          data-bs-toggle="tooltip"
+                          data-bs-dismiss="click"
+                          title="Remove avatar"
+                          style="position: absolute; right: -10px; bottom: -10px;">
       									<i class="bi bi-x fs-2"></i>
 									</span>
-                    </div>
-                    <!--end::Remove button-->
                 </div>
+
+
                 <!--end::Image input-->
-                <div class="text-end">
-                    <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
-                    <label class="form-label fs-8 fw-bolder pt-4" style="color: #AFB2C2">필수 입력
-                        정보입니다.</label>
-                </div>
-                <div class="fv-row mb-5">
+                <div class="mb-5 mw-450px text-center">
                     <label class="form-label fs-6 fw-bolder text-dark pt-5">아이디</label>
-                    <input class="form-control form-control-lg form-control-solid" type="text"
-                           placeholder=""
-                           name="id" autocomplete="off" style="border-color: #0099FF;" readonly />
+                    <input autocomplete="off" class="form-control form-control-lg form-control-solid"
+                           name="id" id="admin-id"
+                           placeholder="" style="border-color: #0099FF; font-weight: bold" type="text"  readonly/>
                 </div>
-
                 <div class="fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">비밀번호</label>
-                    <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
-                    <input class="form-control form-control-lg form-control-solid" type="password"
-                           placeholder=""
-                           name="password" autocomplete="off" style="border-color: #0099FF;"/>
-                </div>
-
-                <div class=" fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">비밀번호 재확인</label>
-                    <input class="form-control form-control-lg form-control-solid" type="password"
-                           placeholder=""
-                           name="cpassword" autocomplete="off" style="border-color: #0099FF;"/>
-                </div>
-
-                <div class=" fv-row mb-5">
                     <label class="form-label fs-6 fw-bolder text-dark pt-5">이름</label>
-                    <input class="form-control form-control-lg form-control-solid" type="text"
-                           placeholder=""
-                           name="fullname" autocomplete="off" style="border-color: #0099FF;"/>
-                </div>
-                <div class=" fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">생년월일</label>
-                    <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
-                    <!--                        <input class="form-control form-control-lg form-control-solid" type="text" placeholder=""
-                                                   name="fullname" autocomplete="off" style="border-color: #0099FF;"/>-->
-
-                    <div id="bir_wrap">
-
-                        <!-- BIRTH_YY -->
-                        <div id="bir_yy">
-                            			<span class="box">
-                                			<input type="text" id="yy"
-                                                   class="int form-control form-control-lg form-control-solid"
-                                                   maxlength="4" placeholder="년(4자)" style="border-color: #0099FF;">
-                            			</span>
-                        </div>
-
-                        <!-- BIRTH_MM -->
-                        <div id="bir_mm">
-										<span class="box ">
-                                			<select class="form-select" aria-label="Select example" id="mm"
-                                                    style="border-color: #0099FF;">
-                                    			<option>월</option>
-                                    			<option value="01">1</option>
-                                    			<option value="02">2</option>
-                                    			<option value="03">3</option>
-                                    			<option value="04">4</option>
-                                    			<option value="05">5</option>
-                                    			<option value="06">6</option>
-                                    			<option value="07">7</option>
-                                    			<option value="08">8</option>
-                                    			<option value="09">9</option>
-                                    			<option value="10">10</option>
-                                    			<option value="11">11</option>
-                                    			<option value="12">12</option>
-                                			</select>
-                            			</span>
-                        </div>
-
-                        <!-- BIRTH_DD -->
-                        <div id="bir_dd">
-                            			<span class="box">
-                                			<input type="text" id="dd"
-                                                   class="int form-control form-control-lg form-control-solid"
-                                                   maxlength="2" placeholder="일" style="border-color: #0099FF;">
-                            			</span>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">성별</label>
-                    <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
+                    <input autocomplete="off" class="form-control form-control-lg form-control-solid"
+                           name="fullname" id="admin-name"
+                           placeholder="" style="border-color: #0099FF; font-weight: bold" type="text" />
                 </div>
                 <div class="fv-row mb-5">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="sexRadioOptions" id="sexRadio1"
-                               value="option1">
-                        <label class="form-check-label" for="sexRadio1">남자</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="sexRadioOptions" id="sexRadio2"
-                               value="option2">
-                        <label class="form-check-label" for="sexRadio2">여자</label>
-                    </div>
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5">사업자 등록번호</label>
+                    <input autocomplete="off" class="form-control form-control-lg form-control-solid"
+                           name="num" id="admin-num"
+                           placeholder="" style="border-color: #0099FF; font-weight: bold" type="text" />
                 </div>
-
-                <div class=" fv-row mb-5">
+                <div class="fv-row mb-5">
                     <label class="form-label fs-6 fw-bolder text-dark pt-5">이메일</label>
-                    <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
-                    <input class="form-control form-control-lg form-control-solid" type="email"
-                           placeholder="you@example.com"
-                           name="email" autocomplete="off" style="border-color: #0099FF;"/>
-                </div>
-
-                <div class=" fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">휴대번호</label>
-                    <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
-
-                    <div class="d-flex align-items-center">
-                        <input class="form-control form-control-lg form-control-solid me-2" type="email"
-                               placeholder="000-0000-0000"
-                               name="email" autocomplete="off"
-                               style="border-color: #0099FF; width: 360px; height: 40px;">
-                        <button type="submit"
-                                class="btn btn-primary fw-bolder fs-6 px-2 py-3 my-3 text-center"
-                                style=" width: 200px; height: 50px;">인증번호 받기
-                        </button>
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <input class="form-control form-control-lg form-control-solid me-2" type="email"
-                               placeholder=""
-                               name="email" autocomplete="off"
-                               style="border-color: #0099FF; width: 360px; height: 40px;">
-                        <button type="submit"
-                                class="btn btn-primary fw-bolder fs-6 px-2 py-3 my-3 text-center"
-                                style=" width: 200px; height: 50px;">인증번호 인증
-                        </button>
-                    </div>
+                    <input autocomplete="off" class="form-control form-control-lg form-control-solid"
+                           name="email" id="admin-email"
+                           placeholder="" style="border-color: #0099FF; font-weight: bold" type="email" />
                 </div>
                 <div class="fv-row mb-5">
-                    <label class="form-label fs-5 fw-bolder text-dark pt-0">선호 장르</label>
-                    <div class="d-flex mt-3 mb-5">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions2"
-                                   id="Radio1" value="option1">
-                            <label class="form-check-label" for="Radio1">가요</label>
-                        </div>
-                        <div class="form-check form-check-inline ms-3 me-3">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions2"
-                                   id="Radio2" value="option2">
-                            <label class="form-check-label" for="Radio2">발라드</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions2"
-                                   id="Radio3" value="option3">
-                            <label class="form-check-label" for="Radio3">힙합</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions2"
-                                   id="Radio4" value="option4">
-                            <label class="form-check-label" for="Radio4">댄스</label>
-
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions2"
-                                   id="Radio5" value="option5">
-                            <label class="form-check-label" for="Radio5">기타</label>
-                        </div>
-                    </div>
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5">휴대번호</label>
+                    <input autocomplete="off" class="form-control form-control-lg form-control-solid"
+                           name="phone" id="admin-phone"
+                           placeholder="" style="border-color: #0099FF; font-weight: bold" type="text" />
                 </div>
-                <div class="separator border-dark my-10" style="border-width: 2px;"></div>
-
-                <div class="fv-row mb-10 mt-10"> <!-- mt-5를 추가하여 위쪽에 5단위의 빈 공간을 추가 -->
-                    <div class="form-check form-check-inline form-check-custom form-check-solid mb-5">
-                        <input class="form-check-input" type="checkbox" name="agree" id="kt_login_toc_agree"
-                               value="1"/>
-                        <label class="form-check-label fw-bold text-gray-600" for="kt_login_toc_agree">I
-                            Agree the
-                            <a href="#" class="ms-1">terms and conditions</a>.</label>
-
-                    </div>
-                    <div class="d-flex flex-wrap justify-content-center pb-lg-0 pb-5">
-                        <!-- justify-content-end 클래스를 추가하여 오른쪽으로 정렬 -->
-                        <button type="submit" class="btn btn-primary fw-bolder fs-4 px-8 py-4 my-3 me-4">회원
-                            정보 수정
-                        </button>
-                    </div>
+                <div class="d-flex flex-wrap justify-content-center pb-lg-0 pb-5">
+                    <!-- justify-content-end 클래스를 추가하여 오른쪽으로 정렬 -->
+                    <button type="submit" class="btn btn-primary fw-bolder fs-4 px-8 py-4 my-3 me-4">회원
+                        정보 수정
+                    </button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+<script src="/static/js/profile/profile_adminAccount.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jwt-decode/2.2.0/jwt-decode.min.js"></script>
 </body>
 </html>
