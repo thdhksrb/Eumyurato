@@ -127,9 +127,9 @@ public class AdminService {
         String fileExtension = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
         UUID uuid = UUID.randomUUID();
         String fileName = uuid.toString() + "_" + originalFileName;
-        File imageFile = new File(uploadPath, fileName);
-        imgFile.transferTo(imageFile);
-        smallConcertDTO.setImage(imageFile.getAbsolutePath());
+        Path filePath = Paths.get("src", "main", "resources", "static", "img", fileName);
+        imgFile.transferTo(filePath);
+        smallConcertDTO.setImage(String.valueOf(filePath));
         System.out.println("service DTO : " + smallConcertDTO);
         System.out.println(smallConcertDTO.getImage());
         dao.saveConcert(smallConcertDTO);
@@ -164,6 +164,14 @@ public class AdminService {
     }
     public List<Map<String, Object>>  artistBuskingAll(){
         return dao.getArtistBuskingAll();
+    }
+
+    //기업 회원
+    public List<Map<String, Object>>  enterConcertIng(){
+        return dao.getEnterConcertIng();
+    }
+    public List<Map<String, Object>>  enterConcertAll(){
+        return dao.getEnterConcertAll();
     }
 }
 

@@ -88,9 +88,13 @@ xhr.onload = function() {
     if (xhr.status === 200) {
         const response = JSON.parse(xhr.responseText);
         // 서버에서 받아온 데이터(response)를 처리하는 코드
-        response.forEach((item) => {
-            console.log(item);
+        console.log(response);
+        let seat = response.temp;
+        response.booked.forEach((item) => {
+            seat.push(item);
         });
+        console.log(seat);
+
         for (let i = 1; i <= 7; i++) {
             div = document.createElement("div");
             seatWrapper.append(div);
@@ -103,7 +107,7 @@ xhr.onload = function() {
                 mapping(input, i, j);
                 div.append(input);
 
-                if (response.includes(input.value)) {
+                if (seat.includes(input.value)) {
                     input.disabled = true;
                 }
 

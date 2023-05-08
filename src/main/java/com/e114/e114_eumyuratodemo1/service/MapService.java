@@ -1,26 +1,28 @@
 package com.e114.e114_eumyuratodemo1.service;
 
-import com.e114.e114_eumyuratodemo1.dto.BuskingDTO;
-import com.e114.e114_eumyuratodemo1.dto.LocalFestivalDTO;
-import com.e114.e114_eumyuratodemo1.dto.SchedulesDTO;
-import com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO;
+import com.e114.e114_eumyuratodemo1.dto.*;
 import com.e114.e114_eumyuratodemo1.jdbc.IDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-
-@org.springframework.stereotype.Service
+@EnableAsync
+@Service
 public class MapService {
 
     @Autowired
     private IDAO dao;
+
+    @Autowired
+    private MapServiceAsync mapServiceAsync;
 
     public List<SmallConcertDTO> viewSmallConcert(){
         return dao.viewSmallConcert();
@@ -45,6 +47,10 @@ public class MapService {
     public List<String> selectBooked(int conId,String conDate){
         return dao.selectBooked(conId,conDate);
     };
+    public List<String> selectBookedTemp(int conId,String conDate){
+        return dao.selectBookedTemp(conId,conDate);
+    };
+
     public LocalFestivalDTO selectLocal(int id){
         return dao.selectLocal(id);
     }
@@ -68,6 +74,19 @@ public class MapService {
         map.put("conDate", conDate);
         map.put("seat", seat);
         return dao.insertSeat(map);
+    }
+
+
+    public int insertSeatTemp(int conId, String conDate, List<String> seat) throws InterruptedException {
+        Map<String, Object> map = new HashMap<>();
+        map.put("conId", conId);
+        map.put("conDate", conDate);
+        map.put("seat", seat);
+
+        dao.insertSeatTemp(map);
+        mapServiceAsync.deleteSeatTemp(map);
+        System.out.println("========================================================================");
+        return 0;
     }
 
     public void rollBackInsertSeat(int schedulesId,List<String> seat){
@@ -135,4 +154,8 @@ public class MapService {
     }
     public int saveDonationNum(int price, int id, String userId) {return dao.saveDonationNum(price, id, userId);}
 
+    public int saveReservation(int sId, String cId, String conDate, int memberNum, int conPrice){return dao.saveReservation(sId, cId, conDate, memberNum, conPrice);}
+    public ReservationDTO findReservId(int sId, String cId) {return dao.findReservId(sId, cId);}
+    public int usedReserv (int sId, String cId) {return dao.usedReserv(sId, cId);}
+    public int saveTicket(int rId, String seatNum) {return dao.saveTicket(rId, seatNum);}
 }

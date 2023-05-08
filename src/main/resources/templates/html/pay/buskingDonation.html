@@ -47,7 +47,7 @@
             <!-- begin::Aside Top -->
             <div class="d-flex flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
                 <!-- begin::Aside Logo -->
-                <a th:href="@{../dist/index.html}" class="mb-6">
+                <a th:href="@{/home}" class="mb-6">
                     <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
                         <img alt="로고" th:src="@{/img/E114_logo.png}" class="h-450px h-lg-450px"/>
                     </div>
@@ -69,7 +69,7 @@
                             th:onclick="|location.href='@{/loginjoin/common/login}'|">로그인</button>
                 </div>
                 <div style="margin-right: 20px;" id="navLogout">
-                    <a id="mypageBtn" style="width: 150px; height: 30px;"><img th:src="@{/img/person.png}" style="width: 30px; height: 30px; cursor:pointer;"/>
+                    <a id="mypageBtn" style="width: 200px; height: 30px;"><img th:src="@{/img/person.png}" style="width: 30px; height: 30px; cursor:pointer;"/>
                         <span id="userName" style="display: inline-block; margin-left: 10px; font-weight: bold; font-size: large; cursor:pointer;"></span>님</a>
 
                     <a id="logoutBtn" href="/map" style="margin-left: 20px;"></a>
@@ -84,19 +84,34 @@
 
                 </div>
 
-                <div style="color:#000000; background-color:#ffffff; width: 500px; height: 300px; padding: 30px; margin:auto; margin-left: 50px; display: flex; flex-direction: column;">
-                    <div style="flex-basis: 70%; padding-bottom: 20px;">
-                        <h1 style="margin-bottom: 20px">지원할 공연</h1>
-                        <ul id="buskerInfo" style="list-style-type: none; font-size: 15px"></ul>
+                <div style="color:#000000; background-color:#ffffff; width: 600px; height: 400px; padding: 30px; margin:auto; margin-left: 50px; display: flex; flex-direction: column;">
+                    <div style="display: flex; margin-bottom: 25px;">
+                        <div style="flex-basis: 50%; padding-bottom: 20px;">
+                            <h1 style="margin-bottom: 20px">지원할 공연</h1>
+                            <ul id="buskerInfo" style="list-style-type: none; font-size: 15px"></ul>
+                        </div>
+                        <div id="posterContainer" style="width: 250px; height: 200px;"></div>
                     </div>
+
                     <div style="flex-basis: 30%; text-align: center;">
                         <input id="price" type="text" placeholder="후원금액 입력" style="margin-right: 10px;">
+
                         <button type="button" id="reset" class="btn btn-secondary fw-bolder px-2 py-3 text-center" style="width: 80px; height: 40px; font-size: 13px; margin-right: 10px;">
                             <span>초기화</span>
                         </button>
                         <button type="button" id="search-btn" class="btn btn-primary fw-bolder px-2 py-3 text-center" style="width: 80px; height: 40px; font-size: 13px;">
                             <span>선택</span>
                         </button>
+
+                        <div style="margin-top: 15px;">
+                            <button class="plus" id="plus1000" type="button">+1000</button>
+                            <button class="plus" id="plus5000" type="button">+5000</button>
+                            <button class="plus" id="plus10000" type="button">+10000</button>
+                            <button class="minus" id="minus1000" type="button">-1000</button>
+                            <button class="minus" id="minus5000" type="button">-5000</button>
+                            <button class="minus" id="minus10000" type="button">-10000</button>
+                        </div>
+
                     </div>
                 </div>
             </div>
