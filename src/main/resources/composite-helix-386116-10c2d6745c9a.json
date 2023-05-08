@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "composite-helix-386116",
+  "private_key_id": "10c2d6745c9a7b3a78516485fcf6d1be8eeb8fff",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCxec56HkNazYPe\nLKq042ngCbs+176hqRu8CDl/t+TtAZmRe9OHrYYdST0yTtk+ArsOIpkRa0iigJyv\nvxjffonyb7mHs3PtouyC/p7EqbyYhhkFVCkpb4nRcpojj/PUb+tDs8ghSbjrEyjk\n+UsZpZqcmpklVWR2QyjafNvFN3XzhK+GMbvYzOmoMqhe4MtZgPnZkcrxMOf4CDrH\nmxZFcDNE7r4BpiGls8bFPUsuOtjBwYGMIO+CT95dx1PSyS1UCAJR8KrXBqpkCyl7\nOM9tJ/++jPT3vDnR2uTjVzyuQx3jEX2trviBi4tVtQQ0NSL1sYypMHa+MaAjTPDF\nY5w6zmr7AgMBAAECggEAPZ6noIHSa/wQLXs/t/d/orBuSVb6EsIW5ZXLdPtB6kJU\ncg1Wt/R5LMDplQaIaf3juXgswj4IJZfXDzQf7DVQqxK8jY+ykA8x5BeIw4qVdzWU\nCWQbuI3IAaczOma4R4mmW0bYFSq2IDRyTfH6b8iuYnJQ+wPnkiImVJnmalajxu01\n6HZAgjVTfKJL9FaJ6iUCkUyYQqzpLsM0mRKfnEUFIA5VoEJx+6wtfapATRtv7L5p\ntnfdaBM6KDfpxbxAFlCBLz9XLaBuUPu8umnoctbgUUO0I9oaPjKmpL5NgKfZ6uQN\nTnbnF0/EJ7T9Job0z7WIJQQZXFrwgXss9dF44KtSdQKBgQDlBwMFnqxNDP+mlSq4\n9SgPgznAEOQLHoEdToGbY5bJcezzrAyr1dXndRpCwgiDyx3UGga1ps4JIUlpIYWY\nt6XVEmFpcZvWXgMUvhOui9nFyuZCWdBc1PK22F9zmH9curPY3FQM7CEglVhnwFx3\ncCXduItizO91tFUX4ei2KUElDQKBgQDGYI6G+D2V1AigEew6oJ4CERhaRJ/17Nig\ncV+hbX6yK3y3lwasApIr3QTPCnuvV6vbbYz9BVuLeQ15OT+wmId3dDHjYazekmda\nin/Ql/WzKz7RLaTfEk5/3+yMkDSraF7PyIm7qN6UOg0pXAiPRn5tH7m8OP0Iaaw4\nzKL7a6NeJwKBgAEkitBRXVy5DuF+5wqrNnr1ValurCSeD1jdFmp3Eb6JkfwZRKrq\n0zlnbS0eGLrHnat8QcJQRcDn6JzcrPT5HZu1jsTe6z8jkvJcjG6XhgulmoaEOjTs\nXxWoeLlz7lbBG7qeRtEVsIigFiPWYt+5sIatsAxbJ2q37qDC4M1f4VJVAoGBAKW1\n2LlEOmWjBkV4U0WyD+uYDiixdJHA9EAqFIFLbu80Rm0x2l/rkeDUMoUks6cH7EZS\n39goFo2OZEPkH6DL+TU+ucHAQOB3maBXW2eK2LJ/KG0h3Lx+lVZaXkYY2/ZnK/QU\nB4HcEXnueDoZaAkPEOLlAokJbc0OQM/9mRO+mWw3AoGBANWP+w3B+FRxL3qtBQ9r\nnuwV1O7ZW1IcsGNPibyVKTG00qUEJvL80T4Zhnsl7kob9zBciTD/q05gcCm49dAd\ncFkwi2pEfTw/AR7vZHsb+stu+CMJuPLlxh0K2trNXMFoDjMT4Cgr6bzLcBgAJeCd\nOTF0uwDCrtZZJUpz1FaS3dEq\n-----END PRIVATE KEY-----\n",
+  "client_email": "springboot-storage-access@composite-helix-386116.iam.gserviceaccount.com",
+  "client_id": "110541736337337777686",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/springboot-storage-access%40composite-helix-386116.iam.gserviceaccount.com"
+}

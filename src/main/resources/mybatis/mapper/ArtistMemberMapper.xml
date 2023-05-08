@@ -160,8 +160,8 @@
     </select>
 
     <insert id="saveBuskingWithoutImage" parameterType="com.e114.e114_eumyuratodemo1.dto.BuskingDTO">
-        INSERT INTO busking (name, artId, date, location, image)
-        VALUES (#{name}, #{artId}, #{date}, #{location}, 'src\main\resources\static\img\default.jpg')
+        INSERT INTO busking (name, artId, date, location)
+        VALUES (#{name}, #{artId}, #{date}, #{location})
     </insert>
 
     <insert id="saveBusking" parameterType="com.e114.e114_eumyuratodemo1.dto.BuskingDTO">
