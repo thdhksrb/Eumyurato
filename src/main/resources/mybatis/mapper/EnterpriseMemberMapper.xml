@@ -49,4 +49,10 @@
         set pw = #{pw}
         where id = #{id}
     </update>
+
+    <select id="getEntInfoById" resultType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
+        SELECT *
+        FROM enterprise_member
+        WHERE id = #{id} AND adminNum = 3
+    </select>
 </mapper>

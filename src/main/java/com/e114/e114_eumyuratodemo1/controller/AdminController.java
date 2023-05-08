@@ -89,12 +89,6 @@ public class AdminController {
         return "html/profile/accountModify/profile_admin_accountModify";
     }
 
-    @GetMapping("/profile/admin/management/view")
-    public String adminAccountManagement() {
-
-        return "html/profile/concertManagement/profile_admin_concertmanagement";
-    }
-
     @GetMapping("/profile/admin/register")
     public String adminAccountRegister() {
 
@@ -236,6 +230,13 @@ public class AdminController {
     public String searchReservations() {
 
         return "html/profile/reservation/profile_admin_reservation";
+    }
+
+
+    @GetMapping("/profile/admin/management/view")
+    public String adminAccountManagement() {
+
+        return "html/profile/concertManagement/profile_admin_concertmanagement";
     }
 
     @GetMapping("/profile/admin/management")

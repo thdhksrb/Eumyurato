@@ -116,22 +116,22 @@
 				<div class="container mt-5">
 					<div class="row">
 						<div class="col-md-12">
-							<form action="/profile/admin/reservation/search" method="post">
+							<form action="/profile/artist/reservation/search" method="post">
 								<!-- 검색 필드 드롭다운 -->
-								<select id="searchReservationDropdown" class="text-center" style="width: 10%; height: 40px; border-radius: 5px; ">
+								<select id="searchArtReservationDropdown" class="text-center" style="width: 10%; height: 40px; border-radius: 5px; ">
 									<option class="text-center" value="cid">회원 아이디</option>
 									<option class="text-center" value="sid">스케쥴 번호</option>
 								</select>
 
 								<!-- 검색창 -->
-								<input type="text" id="searchReservationValue" name="searchReservationValue" placeholder="" style="width: 30%; height: 40px; border-radius: 5px; border: 1px solid #cccad4">
+								<input type="text" id="searchArtReservationValue" name="searchArtReservationValue" placeholder="" style="width: 30%; height: 40px; border-radius: 5px; border: 1px solid #cccad4">
 
 								<!-- 검색 필드와 검색 값 전달용 hidden input -->
 								<input type="hidden" id="column" name="column">
 								<input type="hidden" id="keyword" name="keyword">
 
-								<button class="btn btn-primary" type="submit" onclick="setReservationsSearch()" style="width: 10%;">Search</button>
-								<button class="btn btn-primary" type="button" onclick="resetReservations()" style="width: 10%;">Reset</button>
+								<button class="btn btn-primary" type="submit" onclick="setArtReservationsSearch()" style="width: 10%;">Search</button>
+								<button class="btn btn-primary" type="button" onclick="resetArtReservations()" style="width: 10%;">Reset</button>
 							</form>
 						</div>
 					</div>
@@ -152,15 +152,15 @@
 							</tr>
 							</thead>
 							<tbody>
-							<tr th:each="reservation : ${reservations}">
-								<td th:text="${reservation.id}"></td>
-								<td th:text="${reservation.sid}"></td>
-								<td th:text="${reservation.cid}"></td>
-								<td th:text="${reservation.payTime}"></td>
-								<td th:text="${reservation.viewDate}"></td>
-								<td th:text="${reservation.memberNum}"></td>
-								<td th:text="${reservation.reservPay}"></td>
-							</tr>
+<!--							<tr th:each="reservation : ${reservations}">-->
+<!--								<td th:text="${reservation.id}"></td>-->
+<!--								<td th:text="${reservation.sid}"></td>-->
+<!--								<td th:text="${reservation.cid}"></td>-->
+<!--								<td th:text="${reservation.payTime}"></td>-->
+<!--								<td th:text="${reservation.viewDate}"></td>-->
+<!--								<td th:text="${reservation.memberNum}"></td>-->
+<!--								<td th:text="${reservation.reservPay}"></td>-->
+<!--							</tr>-->
 							</tbody>
 						</table>
 					</div>
@@ -173,6 +173,6 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript" th:src="@{/js/profile/profile_account.js}"></script>
+<script type="text/javascript" th:src="@{/js/profile/profile_artistReservation.js}"></script>
 </body>
 </html>

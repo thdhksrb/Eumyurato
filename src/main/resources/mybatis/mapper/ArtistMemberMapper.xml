@@ -47,4 +47,22 @@
     <update id="updatePw" >
         update artist_member set pw = #{pw} where id = #{id}
     </update>
+
+    <select id="getArtistInfoById" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
+        SELECT *
+        FROM artist_member
+        WHERE id = #{id} AND adminNum = 2
+    </select>
+
+    <select id="getArtistBuskings" resultType="com.e114.e114_eumyuratodemo1.dto.BuskingDTO">
+        select * from busking where artId = #{artId}
+    </select>
+
+    <select id="searchArtistBuskings" resultType="com.e114.e114_eumyuratodemo1.dto.BuskingDTO">
+        select * from busking where artId = #{artId} and ${column} LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+
+    <delete id="deleteArtistBusking">
+        DELETE FROM busking WHERE id = #{param1} AND date > CURRENT_DATE
+    </delete>
 </mapper>

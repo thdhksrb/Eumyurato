@@ -55,4 +55,9 @@
         update member set pw = #{pw} where id = #{id}
     </update>
 
+    <select id="getCommonInfoById" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
+        SELECT *
+        FROM common_member
+        WHERE id = #{id} AND adminNum = 1
+    </select>
 </mapper>

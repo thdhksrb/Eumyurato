@@ -1,11 +1,16 @@
 package com.e114.e114_eumyuratodemo1.service;
 
 import com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO;
+import com.e114.e114_eumyuratodemo1.dto.BuskingDTO;
 import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
 import com.e114.e114_eumyuratodemo1.jdbc.ArtistMemberDAO;
+import com.e114.e114_eumyuratodemo1.jwt.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 
 //로그인 요청 처리, 사용자 아이디에 해당하는 권한 정보 조회를 담당
@@ -17,6 +22,9 @@ public class ArtistService {
 
     @Autowired
     private  ArtistMemberDTO artistMemberDTO;
+
+    @Autowired
+    private JwtUtils jwtUtils;
 
     // 아티스트 회원용 로그인 요청 처리, 사용자 아이디와 비밀번호를 받아 DB에서 일치하는 사용자 정보를 찾습니다.
     // 찾은 경우 사용자 정보를 반환하고, 일치하는 정보가 없는 경우 null을 반환합니다.
@@ -91,6 +99,20 @@ public class ArtistService {
         // artistMemberDAO를 사용하여 회원 정보 저장
         int result = artistMemberDAO.insert(artistMemberDTO);
         return result == 2;
+    }
+
+    public List<BuskingDTO> viewArtistBusking(String artId) {
+
+        return artistMemberDAO.getArtistBuskings(artId);
+    }
+
+    public List<BuskingDTO> searchArtistBusking(String artistId, String column, String keyword) {
+
+        return artistMemberDAO.searchArtistBuskings(artistId, column, keyword);
+    }
+
+    public int deleteBusking(int id) {
+        return artistMemberDAO.deleteArtistBusking(id);
     }
 
 }

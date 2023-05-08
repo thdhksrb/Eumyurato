@@ -1,6 +1,7 @@
 package com.e114.e114_eumyuratodemo1.jdbc;
 
 import com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO;
+import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -27,4 +28,6 @@ public interface EnterpriseMemberDAO{
 
     //아이디 찾기
     List<String> findUserIdsByNameAndEmail(@Param("name") String name, @Param("email") String email);
+
+    EnterpriseMemberDTO getEntInfoById(String entId);
 }
