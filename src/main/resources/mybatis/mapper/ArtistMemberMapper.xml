@@ -47,4 +47,21 @@
     <update id="updatePassword">
         update artist_member set pwd = #{pwd} where id = #{id}
     </update>
+
+    <!--아티스트 랭킹-->
+    <!-- Result Map 정의 -->
+    <resultMap type="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO" id="artistMemberDTOResultMap">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="point" property="point"/>
+    </resultMap>
+
+    <!-- selectTop5Artists 쿼리 정의 -->
+    <select id="selectTop5Artists" resultMap="artistMemberDTOResultMap">
+        SELECT id, name, point
+        FROM artist_member
+        ORDER BY point DESC
+            LIMIT 5
+    </select>
+
 </mapper>

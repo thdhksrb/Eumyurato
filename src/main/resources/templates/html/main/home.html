@@ -11,9 +11,11 @@
     <!-- jQuery -->
     <script th:src="@{https://code.jquery.com/jquery-3.4.1.slim.min.js}" crossorigin="anonymous"></script>
     <!-- Popper.js -->
-    <script th:src="@{https://cdn.jsdelivr.net/npm/popperjs/core2.9.3/dist/umd/popper.min.js}" crossorigin="anonymous"></script>
+    <script th:src="@{https://cdn.jsdelivr.net/npm/popperjs/core2.9.3/dist/umd/popper.min.js}"
+            crossorigin="anonymous"></script>
     <!-- Bootstrap JavaScript -->
-    <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js}" crossorigin="anonymous"></script>
+    <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js}"
+            crossorigin="anonymous"></script>
 
 </head>
 <body id="page-top">
@@ -24,7 +26,8 @@
         <a class="navbar-brand" href="#page-top"><img th:src="@{/img/logo_name.png}"></a>
     </div>
     <button type="button" class="btn btn-primary fw-bolder fs-5 px-5 py-2 my-3 me-5" id="loginBtn"
-            th:onclick="|location.href='@{/loginjoin/common/login}'|">로그인</button>
+            th:onclick="|location.href='@{/loginjoin/common/login}'|">로그인
+    </button>
 </nav>
 
 <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="navLogout">
@@ -32,13 +35,12 @@
         <a class="navbar-brand" href="#page-top"><img th:src="@{/img/logo_name.png}"></a>
     </div>
     <div style="margin-right: 60px;">
-        <a id="mypageBtn" style="width: 30px; height: 30px;"><img th:src="@{/img/person.png}" style="width: 30px; height: 30px; cursor:pointer;"/>
-        <span id="userName" style="margin-left: 10px; font-weight: bold; font-size: large; cursor:pointer;"></span>님</a>
+        <a id="mypageBtn" style="width: 30px; height: 30px;"><img th:src="@{/img/person.png}"
+                                                                  style="width: 30px; height: 30px; cursor:pointer;"/>
+            <span id="userName" style="margin-left: 10px; font-weight: bold; font-size: large; cursor:pointer;"></span>님</a>
         <a id="logoutBtn" href="/logout" style="margin-left: 20px;"></a>
     </div>
 </nav>
-
-
 
 
 <!-- Masthead-->
@@ -75,19 +77,43 @@
         <div class="divider-custom divider-light mx-auto text-center">
             <div class="divider-custom divider-light">
                 <div class="divider-custom-line"></div>
-                <h3 class="masthead-heading text-uppercase mb-0 text-center">아티스트 랭킹</h3>
+                <h3 class="masthead-heading text-uppercase mb-0 text-center">이달의 아티스트</h3>
                 <div class="divider-custom-line"></div>
             </div>
         </div>
 
-        <div class="divider-custom divider-light mx-auto text-center">
-            <div class="divider-custom divider-light">
-                <div class="divider-custom-line"></div>
-                <h3 class="masthead-heading text-uppercase mb-0 text-center">공연 랭킹</h3>
-                <div class="divider-custom-line"></div>
+        <div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <table id="artistTable" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>순위</th>
+                            <th>아티스트명</th>
+                            <th>장르</th>
+                            <th>포인트</th>
+                        </tr>
+                        </thead>
+                        <tbody id="artistTableBody">
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+
+        <div class="divider-custom divider-light mx-auto text-center"> <!-- 수정된 부분 -->
+            <div class="divider-custom divider-light">
+                <div class="divider-custom-line"></div>
+                <h3 class="masthead-heading text-uppercase mb-0 text-center">이달의 랭킹</h3>
+                <div class="divider-custom-line"></div>
+            </div>
+        </div> <!-- 수정된 부분 -->
+
     </div>
+
+
+
+
 
 </div>
 <!-- Contact Section-->

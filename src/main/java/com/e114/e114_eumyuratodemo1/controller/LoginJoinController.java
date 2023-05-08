@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -53,14 +54,15 @@ public class LoginJoinController {
     @Autowired
     private MemberService memberService;
 
-
-
     @GetMapping("/home")
-    public String main(HttpSession session) {
-        System.out.println(session.getAttribute("loginUser"));
-
-        return "html/main/home";
+    public ModelAndView getTop5Artists() {
+        ModelAndView mav = new ModelAndView("html/main/home");
+        mav.addObject("top5Artists", artistService.selectTop5Artists());
+        return mav;
     }
+
+
+
 
     @PostMapping("/profile")
     @ResponseBody

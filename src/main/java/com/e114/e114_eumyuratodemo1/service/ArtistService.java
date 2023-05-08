@@ -3,9 +3,13 @@ package com.e114.e114_eumyuratodemo1.service;
 import com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
 import com.e114.e114_eumyuratodemo1.jdbc.ArtistMemberDAO;
+import com.e114.e114_eumyuratodemo1.mapper.ArtistMemberMapper;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 //로그인 요청 처리, 사용자 아이디에 해당하는 권한 정보 조회를 담당
@@ -93,4 +97,15 @@ public class ArtistService {
         return result == 2;
     }
 
-}
+
+    //아티스트 랭킹
+    private final ArtistMemberMapper artistMemberMapper;
+
+    public ArtistService(ArtistMemberMapper artistMemberMapper) {
+        this.artistMemberMapper = artistMemberMapper;
+    }
+
+    public List<ArtistMemberDTO> selectTop5Artists() {
+        return artistMemberMapper.selectTop5Artists();
+    }
+    }

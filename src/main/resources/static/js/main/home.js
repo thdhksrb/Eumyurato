@@ -95,8 +95,42 @@ window.onload = function() {
         const navLogout = document.getElementById("navLogout");
         navLogout.style.display = "none";
     }
+    
+    //랭킹
+// AJAX로 서버로부터 데이터를 받아와서 테이블을 생성하는 함수
+    function loadTop5Artists() {
+        $.ajax({
+            url: "/home",
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                // 받아온 데이터로 테이블을 생성
+                const tbody = $('#artistTableBody');
+
+                data.forEach((artist, index) => {
+                    const row = $('<tr>');
+                    const rankCell = $('<td>').text(index + 1);
+                    const nameCell = $('<td>').text(artist.name);
+                    const genreCell = $('<td>').text(artist.genre);
+                    const pointCell = $('<td>').text(artist.point);
+
+                    row.append(rankCell);
+                    row.append(nameCell);
+                    row.append(genreCell);
+                    row.append(pointCell);
+                    tbody.append(row);
+                });
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            }
+        });
+    }
+
+// 페이지가 로드될 때 데이터를 가져오도록 설정
+    $(document).ready(function () {
+        loadTop5Artists();
+    });
+
 };
-
-
-
 
