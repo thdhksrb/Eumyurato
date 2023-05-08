@@ -60,4 +60,8 @@ public interface ArtistMemberDAO{
     List<Map<String, Object>> getArtistBuskingIng();
     List<Map<String, Object>> getArtistBuskingAll();
 
+    //아티스트 버스킹 저장
+    void saveBuskingWithoutImage(BuskingDTO buskingDTO);
+    void saveBusking(BuskingDTO buskingDTO);
+
 }

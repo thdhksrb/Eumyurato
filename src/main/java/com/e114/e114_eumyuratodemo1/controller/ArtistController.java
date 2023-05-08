@@ -1,9 +1,6 @@
 package com.e114.e114_eumyuratodemo1.controller;
 
-import com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO;
-import com.e114.e114_eumyuratodemo1.dto.BuskingDTO;
-import com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO;
-import com.e114.e114_eumyuratodemo1.dto.ReservationDTO;
+import com.e114.e114_eumyuratodemo1.dto.*;
 import com.e114.e114_eumyuratodemo1.jdbc.ArtistMemberDAO;
 import com.e114.e114_eumyuratodemo1.jwt.JwtUtils;
 import com.e114.e114_eumyuratodemo1.service.ArtistService;
@@ -14,8 +11,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -187,4 +186,18 @@ public class ArtistController {
 
         return "html/profile/concertRegister/profile_artist_concertRegister";
     }
+
+    @PostMapping("/profile/artist/register")
+    public ResponseEntity<?> buskingRegister(@RequestPart("registerDTO") BuskingDTO buskingDTO, @RequestPart(value = "imgFile", required = false) MultipartFile imgFile) throws IOException{
+
+        if (imgFile == null) {
+            artistService.saveBuskingWithoutImage(buskingDTO);
+            System.out.println("img null");
+        } else {
+            artistService.saveBusking(buskingDTO, imgFile);
+        }
+        return ResponseEntity.ok().build();
+    }
+
+
 }
