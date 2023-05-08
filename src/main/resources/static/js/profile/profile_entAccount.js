@@ -1,15 +1,15 @@
 const jwtToken = sessionStorage.getItem("jwtToken");
 
-function getAdminData() {
+function getEntData() {
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", "/profile/admin/data");
+    xhr.open("GET", "/profile/ent/data");
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.setRequestHeader("Authorization", `Bearer ${jwtToken}`);
 
     xhr.onload = function () {
         if (xhr.status === 200) {
-            const admin = JSON.parse(xhr.responseText);
-            displayAdminData(admin);
+            const enterprise = JSON.parse(xhr.responseText);
+            displayEntData(enterprise);
         } else {
             console.log("Request failed. Returned status of " + xhr.status);
         }
@@ -18,14 +18,15 @@ function getAdminData() {
     xhr.send();
 }
 
-function displayAdminData(admin) {
-    document.getElementById("admin-id").value = admin.id;
-    document.getElementById("admin-name").value = admin.name;
-    document.getElementById("admin-num").value = admin.num;
-    document.getElementById("admin-email").value = admin.email;
-    document.getElementById("admin-phone").value = admin.phone;
+function displayEntData(enterprise) {
+    document.getElementById("enterprise-id").value = enterprise.id;
+    document.getElementById("enterprise-name").value = enterprise.name;
+    document.getElementById("enterprise-num").value = enterprise.num;
+    document.getElementById("enterprise-email").value = enterprise.email;
+    document.getElementById("enterprise-phone").value = enterprise.phone;
+
     // 이미지 URL을 가져온다.
-    var imageUrl = admin.image;
+    var imageUrl = enterprise.image;
 
     if (imageUrl !== null && imageUrl.startsWith("https://")) {
         // 이미지 요소를 생성한다.
@@ -73,6 +74,5 @@ function displayAdminData(admin) {
 
 // 페이지 로드 시 관리자 정보를 가져옵니다.
 window.onload = function () {
-    getAdminData();
+    getEntData();
 };
-

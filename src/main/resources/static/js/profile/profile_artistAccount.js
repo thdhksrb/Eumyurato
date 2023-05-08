@@ -1,15 +1,15 @@
 const jwtToken = sessionStorage.getItem("jwtToken");
 
-function getAdminData() {
+function getArtistData() {
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", "/profile/admin/data");
+    xhr.open("GET", "/profile/artist/data");
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.setRequestHeader("Authorization", `Bearer ${jwtToken}`);
 
     xhr.onload = function () {
         if (xhr.status === 200) {
-            const admin = JSON.parse(xhr.responseText);
-            displayAdminData(admin);
+            const artist = JSON.parse(xhr.responseText);
+            displayArtistData(artist);
         } else {
             console.log("Request failed. Returned status of " + xhr.status);
         }
@@ -18,14 +18,18 @@ function getAdminData() {
     xhr.send();
 }
 
-function displayAdminData(admin) {
-    document.getElementById("admin-id").value = admin.id;
-    document.getElementById("admin-name").value = admin.name;
-    document.getElementById("admin-num").value = admin.num;
-    document.getElementById("admin-email").value = admin.email;
-    document.getElementById("admin-phone").value = admin.phone;
+function displayArtistData(artist) {
+    document.getElementById("artist-id").value = artist.id;
+    document.getElementById("artist-name").value = artist.name;
+    document.getElementById("artist-nid").value = artist.nid;
+    document.getElementById("artist-sex").value = artist.sex;
+    document.getElementById("artist-birth").value = artist.birth;
+    document.getElementById("artist-email").value = artist.email;
+    document.getElementById("artist-phone").value = artist.phone;
+    document.getElementById("artist-genre").value = artist.genre;
+    document.getElementById("artist-point").value = artist.point;
     // 이미지 URL을 가져온다.
-    var imageUrl = admin.image;
+    var imageUrl = artist.image;
 
     if (imageUrl !== null && imageUrl.startsWith("https://")) {
         // 이미지 요소를 생성한다.
@@ -73,6 +77,5 @@ function displayAdminData(admin) {
 
 // 페이지 로드 시 관리자 정보를 가져옵니다.
 window.onload = function () {
-    getAdminData();
+    getArtistData();
 };
-

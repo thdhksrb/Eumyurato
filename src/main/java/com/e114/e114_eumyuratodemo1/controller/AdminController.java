@@ -67,32 +67,9 @@ public class AdminController {
         }
     }
 
-//    @PostMapping("/profile/admin/account")
-//    @ResponseBody
-//    public ResponseEntity<Map<String, EnterpriseMemberDTO>> adminAccountPost(@RequestBody Map<String, String> data,HttpServletRequest request) {
-//        String token = jwtUtils.getAccessToken(request);
-//        String adminUserId = jwtUtils.getId(token);
-//        System.out.println(adminUserId);
-//
-//        // 관리자 정보 가져오기
-//        EnterpriseMemberDTO admin = memberDAO.getAdminInfoById(adminUserId);
-//
-//        // 관리자 정보를 JSON 형태로 만들어 응답
-//        Map<String, EnterpriseMemberDTO> responseData = new HashMap<>();
-//        responseData.put("admin", admin);
-//
-//        return ResponseEntity.ok().body(responseData);
-//    }
-
     @GetMapping("/profile/admin/modify")
     public String adminAccountModify() {
         return "html/profile/accountModify/profile_admin_accountModify";
-    }
-
-    @GetMapping("/profile/admin/management/view")
-    public String adminAccountManagement() {
-
-        return "html/profile/concertManagement/profile_admin_concertmanagement";
     }
 
     @GetMapping("/profile/admin/register")
@@ -236,6 +213,13 @@ public class AdminController {
     public String searchReservations() {
 
         return "html/profile/reservation/profile_admin_reservation";
+    }
+
+
+    @GetMapping("/profile/admin/management/view")
+    public String adminAccountManagement() {
+
+        return "html/profile/concertManagement/profile_admin_concertmanagement";
     }
 
     @GetMapping("/profile/admin/management")

@@ -1,15 +1,15 @@
 const jwtToken = sessionStorage.getItem("jwtToken");
 
-function getAdminData() {
+function getCommonData() {
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", "/profile/admin/data");
+    xhr.open("GET", "/profile/common/data");
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.setRequestHeader("Authorization", `Bearer ${jwtToken}`);
 
     xhr.onload = function () {
         if (xhr.status === 200) {
-            const admin = JSON.parse(xhr.responseText);
-            displayAdminData(admin);
+            const common = JSON.parse(xhr.responseText);
+            displayCommonData(common);
         } else {
             console.log("Request failed. Returned status of " + xhr.status);
         }
@@ -18,14 +18,18 @@ function getAdminData() {
     xhr.send();
 }
 
-function displayAdminData(admin) {
-    document.getElementById("admin-id").value = admin.id;
-    document.getElementById("admin-name").value = admin.name;
-    document.getElementById("admin-num").value = admin.num;
-    document.getElementById("admin-email").value = admin.email;
-    document.getElementById("admin-phone").value = admin.phone;
+function displayCommonData(common) {
+    document.getElementById("common-id").value = common.id;
+    document.getElementById("common-name").value = common.name;
+    document.getElementById("common-nid").value = common.nid;
+    document.getElementById("common-sex").value = common.sex;
+    document.getElementById("common-birth").value = common.birth;
+    document.getElementById("common-email").value = common.email;
+    document.getElementById("common-phone").value = common.phone;
+    document.getElementById("common-road").value = common.road;
+    document.getElementById("common-genre").value = common.genre;
     // 이미지 URL을 가져온다.
-    var imageUrl = admin.image;
+    var imageUrl = common.image;
 
     if (imageUrl !== null && imageUrl.startsWith("https://")) {
         // 이미지 요소를 생성한다.
@@ -73,6 +77,5 @@ function displayAdminData(admin) {
 
 // 페이지 로드 시 관리자 정보를 가져옵니다.
 window.onload = function () {
-    getAdminData();
+    getCommonData();
 };
-
