@@ -66,7 +66,7 @@ window.onload = function () {
                 }
             };
 
-            xhr.send(JSON.stringify(data)); // 요청 전송, JSON 형태의 데이터로 바꿔서 보냅니다.
+            xhr.send(); // 요청 전송, JSON 형태의 데이터로 바꿔서 보냅니다.
         };
 
         // 로그아웃

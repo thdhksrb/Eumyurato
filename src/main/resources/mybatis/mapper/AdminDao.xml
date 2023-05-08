@@ -50,7 +50,7 @@
     </select>
     
     <select id="getAdminInfoById" resultType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
-        SELECT id, pwd, name, num, email, phone
+        SELECT *
         FROM enterprise_member
         WHERE id = #{id} AND adminNum = 0
     </select>

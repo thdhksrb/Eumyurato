@@ -5,7 +5,7 @@
     <title>Eumyurato</title>
     <link rel="icon" type="image/x-icon" th:href="@{/img/E114_logo.png}"/>
     <meta charset="utf-8" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Popper JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -49,7 +49,7 @@
                         <h1 class="menu-content mb-1 mt-10 text-center" style="font-weight: bold">마이페이지</h1>
                         <div class="separator border-dark my-1 mx-auto" style="width: 60%; border-width: 3px;"></div>
                         <div class="menu-item" style="margin: 3px">
-                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/admin}">
+                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/admin/account}">
                                 <span class="menu-title">내 계정</span>
                             </a>
                         </div>
@@ -111,43 +111,44 @@
                 <!--begin::Image input-->
                 <div class="image-input image-input-outline" data-kt-image-input="true"
                      style="display: flex; justify-content: center; align-items: center;">
-                    <img alt="프로필사진" th:src="@{/img/다운로드.jpg}"/>
+                    <img alt="프로필사진" th:src="@{/img/default.jpg}"/>
                 </div>
                 <!--end::Image input-->
                 <div class="mb-5 mw-450px text-center">
                     <label class="form-label fs-6 fw-bolder text-dark pt-5">아이디</label>
                     <input autocomplete="off" class="form-control form-control-lg form-control-solid"
-                           name="id"
-                           placeholder="" style="border-color: #0099FF; font-weight: bold" type="text" th:value="${admin.id}" readonly/>
+                           name="id" id="admin-id"
+                           placeholder="" style="border-color: #0099FF; font-weight: bold" type="text"  readonly/>
                 </div>
                 <div class="fv-row mb-5">
                     <label class="form-label fs-6 fw-bolder text-dark pt-5">이름</label>
                     <input autocomplete="off" class="form-control form-control-lg form-control-solid"
-                           name="fullname"
-                           placeholder="" style="border-color: #0099FF; font-weight: bold" type="text" th:value="${admin.name}" readonly/>
+                           name="fullname" id="admin-name"
+                           placeholder="" style="border-color: #0099FF; font-weight: bold" type="text" readonly/>
                 </div>
                 <div class="fv-row mb-5">
                     <label class="form-label fs-6 fw-bolder text-dark pt-5">사업자 등록번호</label>
                     <input autocomplete="off" class="form-control form-control-lg form-control-solid"
-                           name="num"
-                           placeholder="" style="border-color: #0099FF; font-weight: bold" type="text" th:value="${admin.num}" readonly/>
+                           name="num" id="admin-num"
+                           placeholder="" style="border-color: #0099FF; font-weight: bold" type="text" readonly/>
                 </div>
                 <div class="fv-row mb-5">
                     <label class="form-label fs-6 fw-bolder text-dark pt-5">이메일</label>
                     <input autocomplete="off" class="form-control form-control-lg form-control-solid"
-                           name="email"
-                           placeholder="" style="border-color: #0099FF; font-weight: bold" type="email" th:value="${admin.email}" readonly/>
+                           name="email" id="admin-email"
+                           placeholder="" style="border-color: #0099FF; font-weight: bold" type="email" readonly/>
                 </div>
                 <div class="fv-row mb-5">
                     <label class="form-label fs-6 fw-bolder text-dark pt-5">휴대번호</label>
                     <input autocomplete="off" class="form-control form-control-lg form-control-solid"
-                           name="phone"
-                           placeholder="" style="border-color: #0099FF; font-weight: bold" type="text" th:value="${admin.phone}" readonly/>
+                           name="phone" id="admin-phone"
+                           placeholder="" style="border-color: #0099FF; font-weight: bold" type="text" readonly/>
                 </div>
             </form>
         </div>
     </div>
 </div>
-<script src="/static/js/loginJoin/Login1.js" type="text/javascript"></script>
+<script src="/static/js/profile/profile_adminAccount.js" type="text/javascript"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jwt-decode/2.2.0/jwt-decode.min.js"></script> -->
 </body>
 </html>
