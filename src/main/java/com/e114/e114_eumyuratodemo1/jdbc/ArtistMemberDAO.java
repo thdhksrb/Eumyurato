@@ -1,9 +1,6 @@
 package com.e114.e114_eumyuratodemo1.jdbc;
 
-import com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO;
-import com.e114.e114_eumyuratodemo1.dto.BuskingDTO;
-import com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO;
-import com.e114.e114_eumyuratodemo1.dto.ReservationDTO;
+import com.e114.e114_eumyuratodemo1.dto.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -44,4 +41,23 @@ public interface ArtistMemberDAO{
     List<BuskingDTO> searchArtistBuskings(String artId, String column, String keyword);
 
     int deleteArtistBusking(int id);
+
+    List<ArtistMemberDTO> getArtistMembers();   // 아시트스 회원 목록 불러오기
+    List<CommonMemberDTO> getCommonMembers();   // 일반 회원 목록 불러오기
+
+    List<ArtistMemberDTO> searchArtistMembers(Map<String, String> params);  // 아티스트 회원 검색
+    List<CommonMemberDTO> searchCommonMembers(Map<String, String> params);  // 일반 회원 검색
+
+    // 일반회원 통계
+    List<Map<String, Object>> getCommonGender();
+    List<Map<String, Object>>  getCommonGenre();
+
+    // 아티스트 회원 통계
+    List<Map<String, Object>> getArtistGender();
+    List<Map<String, Object>> getArtistGenre();
+    List<Map<String, Object>> getArtistPoint();
+    List<Map<String, Object>> getArtistPointAvg();
+    List<Map<String, Object>> getArtistBuskingIng();
+    List<Map<String, Object>> getArtistBuskingAll();
+
 }

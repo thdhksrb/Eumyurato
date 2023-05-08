@@ -60,4 +60,17 @@
         FROM common_member
         WHERE id = #{id} AND adminNum = 1
     </select>
+
+    <select id="getCommonReservations" resultType="com.e114.e114_eumyuratodemo1.dto.ReservationDTO">
+        select * from reservation where cId = #{cId}
+    </select>
+
+    <select id="searchCommonReservations" resultType="com.e114.e114_eumyuratodemo1.dto.ReservationDTO">
+        select * from reservation where cId = #{cId} and ${column} LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+
+    <delete id="deleteCommonReservation">
+        DELETE FROM reservation WHERE id = #{param1} AND viewDate > CURRENT_DATE
+    </delete>
+
 </mapper>

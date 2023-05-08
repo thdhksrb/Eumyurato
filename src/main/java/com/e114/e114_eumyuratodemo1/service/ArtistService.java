@@ -10,7 +10,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 //로그인 요청 처리, 사용자 아이디에 해당하는 권한 정보 조회를 담당
@@ -101,6 +103,14 @@ public class ArtistService {
         return result == 2;
     }
 
+    public List<CommonMemberDTO> viewAllCommons(){
+        return artistMemberDAO.getCommonMembers();
+    };
+
+    public List<ArtistMemberDTO> viewAllArtists(){
+        return artistMemberDAO.getArtistMembers();
+    };
+
     public List<BuskingDTO> viewArtistBusking(String artId) {
 
         return artistMemberDAO.getArtistBuskings(artId);
@@ -110,6 +120,48 @@ public class ArtistService {
 
         return artistMemberDAO.searchArtistBuskings(artistId, column, keyword);
     }
+
+    public List<CommonMemberDTO> searchCommons(String column, String keyword){
+        Map<String, String> params = new HashMap<>();
+        params.put("column", column);
+        params.put("keyword", keyword);
+        return artistMemberDAO.searchCommonMembers(params);
+    };
+
+    public List<ArtistMemberDTO> searchArtists(String column, String keyword){
+        Map<String, String> params = new HashMap<>();
+        params.put("column", column);
+        params.put("keyword", keyword);
+        return artistMemberDAO.searchArtistMembers(params);
+    };
+
+    public List<Map<String, Object>>  commonGenderCount(){
+        return artistMemberDAO.getCommonGender();
+    }
+    public List<Map<String, Object>>  commonGenreCount(){
+        return artistMemberDAO.getCommonGenre();
+    }
+
+    public List<Map<String, Object>>  artistGenderCount(){
+        return artistMemberDAO.getArtistGender();
+    }
+    public List<Map<String, Object>>  artistGenreCount(){
+        return artistMemberDAO.getArtistGenre();
+    }
+    public List<Map<String, Object>>  artistPointTop(){
+        return artistMemberDAO.getArtistPoint();
+    }
+    public List<Map<String, Object>>  artistPointAvg(){
+        return artistMemberDAO.getArtistPointAvg();
+    }
+    public List<Map<String, Object>>  artistBuskingIng(){
+        return artistMemberDAO.getArtistBuskingIng();
+    }
+    public List<Map<String, Object>>  artistBuskingAll(){
+        return artistMemberDAO.getArtistBuskingAll();
+    }
+
+
 
     public int deleteBusking(int id) {
         return artistMemberDAO.deleteArtistBusking(id);

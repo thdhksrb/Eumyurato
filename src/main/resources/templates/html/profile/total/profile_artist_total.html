@@ -1,329 +1,227 @@
 <!DOCTYPE html>
-<!--
-Author: Keenthemes
-Product Name: Start - Bootstrap 5 HTML Multipurpose Admin Dashboard Template
-Purchase: https://themes.getbootstrap.com/product/start-multipurpose-admin-dashboard-theme/
-Website: http://www.keenthemes.com
-Contact: support@keenthemes.com
-Follow: www.twitter.com/keenthemes
-Dribbble: www.dribbble.com/keenthemes
-Like: www.facebook.com/keenthemes
-License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
--->
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <!--begin::Head-->
-<head><base href="../">
-	<title>profile_mainpage</title>
-	<meta charset="utf-8" />
-	<meta name="description" content="Check out all the features of the Start admin panel. A large number of templates, components and widgets." />
-	<meta name="keywords" content="Start, bootstrap, bootstrap 5, admin themes, free admin themes, bootstrap admin, bootstrap dashboard, html admin theme, html template" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta property="og:locale" content="en_US" />
-	<meta property="og:type" content="article" />
-	<meta property="og:title" content="Start - Bootstrap 5 HTML Multipurpose Admin Dashboard Template" />
-	<meta property="og:url" content="https://themes.getbootstrap.com/product/start-multipurpose-admin-dashboard-theme/" />
-	<meta property="og:site_name" content="Keenthemes | Start" />
-	<link rel="canonical" href="https://preview.keenthemes.com/start" />
-	<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+<head>
+	<base href="../">
+	<title>Eumyurato</title>
+	<link rel="icon" type="image/x-icon" th:href="@{/img/E114_logo.png}"/>
+	<meta charset="utf-8"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<!--graph-->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-	<!--begin::Fonts-->
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
-	<!--end::Fonts-->
-	<!--begin::Page Vendor Stylesheets(used by this page)-->
-	<link href="/static/css/profile/profile3.css" rel="stylesheet" type="text/css" />
-	<!--end::Page Vendor Stylesheets-->
 	<!--begin::Global Stylesheets Bundle(used by all pages)-->
-	<link href="/static/css/profile/profile1.css" rel="stylesheet" type="text/css" />
-	<link href="/static/css/profile/profile2.css" rel="stylesheet" type="text/css" />
-
+	<link th:href="@{/css/profile/profile1.css}" rel="stylesheet" type="text/css"/>
+	<link th:href="@{/css/profile/profile2.css}" rel="stylesheet" type="text/css"/>
+	<link th:href="@{/css/profile/profile3.css}" rel="stylesheet" type="text/css"/>
+	<link th:href="@{/css/profile/pagination.css}" rel="stylesheet" type="text/css"/>
 	<!--end::Global Stylesheets Bundle-->
+
 </head>
 <!--end::Head-->
 <!--begin::Body-->
-<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed aside-enabled aside-fixed aside-primary-disabled aside-secondary-enabled">
+
+<body class="bg-white" id="kt_body">
 <!--begin::Main-->
-
-<!--begin::Root-->
 <div class="d-flex flex-column flex-root">
-	<!--begin::Page-->
-	<div class="page d-flex flex-row flex-column-fluid">
-		<!--begin::Aside-->
-		<div id="kt_aside" class="aside bg-info" data-kt-drawer="true" data-kt-drawer-name="aside" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_toggler">
-			<!--begin::Secondary-->
-			<div class="aside-secondary d-flex flex-row-fluid bg-white">
-				<!--begin::Workspace-->
-				<div class="aside-workspace my-7 ps-5 pe-4 ps-lg-10 pe-lg-6" id="kt_aside_wordspace">
-					<!--begin::Aside Menu-->
-					<!--begin::Menu-->
-					<div class="menu menu-column menu-rounded menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500 fw-bold fs-6" data-kt-menu="true">
-						<div class="hover-scroll-y pe-4 pe-lg-5" id="kt_aside_menu_scroll" data-kt-scroll="true" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_aside_logo" data-kt-scroll-wrappers="#kt_aside_wordspace" data-kt-scroll-offset="10px">
-							<div class="menu-wrapper menu-column menu-fit">
-								<div class="menu-item here show">
-									<h4 class="menu-content mb-0 fs-6 fw-bold text-uppercase" style="color: black"><b>마이페이지</b></h4>
-									<div class="menu-sub menu-fit menu-sub-accordion show pb-10">
-										<div class="menu-item" style="margin: 3px">
-											<a class="text-dark text-hover-primary ms-3 py-2" href="../account/profile_admin_account.html">
-												<span class="menu-title">내 계정</span>
-											</a>
-										</div>
-										<div class="menu-item" style="margin: 3px">
-											<a class="text-dark text-hover-primary ms-3 py-2" href="../accountModify/profile_admin_accountModify.html">
-												<span class="menu-title">계정 정보 수정</span>
-											</a>
-										</div>
-										<div class="menu-item" style="margin: 3px">
-											<a class="text-dark text-hover-primary ms-3 py-2" href="../reservation/profile_admin_reservation.html">
-												<span class="menu-title">예약 내역</span>
-											</a>
-										</div>
-										<div class="menu-item" style="margin: 3px">
-											<a class="text-dark text-hover-primary ms-3 py-2" href="../concertManagement/profile_admin_concertmanagement.html">
-												<span class="menu-title">공연 관리</span>
-											</a>
-										</div>
-									</div>
-								</div>
-								<div class="menu-item">
-									<h4 class="menu-content mb-0 fs-6 fw-bold text-uppercase" style="color: black"><b>통합 정보 조회</b></h4>
-									<div class="menu-sub menu-fit menu-sub-accordion show pb-10">
-										<div class="menu-item" style="margin: 3px">
-											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
-												<span class="menu-title">종합</span>
-											</a>
-										</div>
-										<div class="menu-item" style="margin: 3px">
-											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
-												<span class="menu-title">접속률</span>
-											</a>
-										</div>
-										<div class="menu-item" style="margin: 3px">
-											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
-												<span class="menu-title">성별</span>
-											</a>
-										</div>
-										<div class="menu-item" style="margin: 3px">
-											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
-												<span class="menu-title">팔로우</span>
-											</a>
-										</div>
-										<div class="menu-item" style="margin: 3px">
-											<a target="_blank" class="text-dark text-hover-primary ms-3 py-2" href="../dist/index.html">
-												<span class="menu-title">즐겨찾기</span>
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+	<!--begin::Login-->
+	<div class="d-flex flex-column flex-lg-row flex-column-fluid" id="kt_login">
+		<div class="d-flex flex-column flex-lg-row-auto bg-primary pt-15 pt-lg-0 center" id="leftArea0">
+			<!--begin::Aside Top-->
+			<div class="d-flex flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
+				<!--begin::Aside Logo-->
+				<a class="mb-6" th:href="@{/home}">
+					<div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
+						<img alt="로고" id="logo1" th:src="@{/img/logo_name.png}" style="width: 400px; height: 70px;"/>
 					</div>
-					<!--end::Menu-->
-				</div>
-				<!--end::Workspace-->
+				</a>
 			</div>
-			<!--end::Secondary-->
 		</div>
-		<!--end::Aside-->
-		<!--begin::Wrapper-->
-		<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-			<!--begin::Header-->
-			<div id="kt_header" class="header" data-kt-sticky="true" data-kt-sticky-name="header" data-kt-sticky-offset="{default: '200px', lg: '300px'}">
-				<!--begin::Container-->
-				<div class="container-xxl d-flex align-items-stretch justify-content-between">
-					<!--begin::Left-->
-					<div class="container">
-						<a class="navbar-brand" href="/templates/html/main/main.html"><img src="/static/img/logo_name.png" width="250" height="45"></a>
+
+		<div class="flex-column flex-lg-row-auto bg-primary pt-15 pt-lg-0 center" id="leftArea1">
+			<!--begin::Aside Top-->
+			<div class="flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
+				<!--begin::Aside Logo-->
+				<a class="mb-6" th:href="@{/home}">
+					<div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
+						<img alt="로고" id="logo2" th:src="@{/img/logo_name.png}"
+							 style="width: 400px; height: 70px; margin-top: 80px;"/>
 					</div>
-					<!--end::Left-->
-					<!--begin::Right-->
-					<div class="d-flex align-items-center">
-						<!--begin::Message-->
-						<button class="btn btn-icon btn-sm btn-active-bg-accent ms-1 ms-lg-6" id="kt_drawer_chat_toggle">
-							<!--begin::Svg Icon | path: icons/duotune/communication/com003.svg-->
-							<span class="svg-icon svg-icon-1 svg-icon-dark">
-								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-									<path opacity="0.3" d="M2 4V16C2 16.6 2.4 17 3 17H13L16.6 20.6C17.1 21.1 18 20.8 18 20V17H21C21.6 17 22 16.6 22 16V4C22 3.4 21.6 3 21 3H3C2.4 3 2 3.4 2 4Z" fill="black" />
-									<path d="M18 9H6C5.4 9 5 8.6 5 8C5 7.4 5.4 7 6 7H18C18.6 7 19 7.4 19 8C19 8.6 18.6 9 18 9ZM16 12C16 11.4 15.6 11 15 11H6C5.4 11 5 11.4 5 12C5 12.6 5.4 13 6 13H15C15.6 13 16 12.6 16 12Z" fill="black" />
-								</svg>
-							</span>
-
-							<!--end::Svg Icon-->
-						</button>
-						<!--end::Message-->
-						<!--begin::User-->
-
-						<!--end::User-->
-						<!--begin::Notifications-->
-						<div class="ms-1 ms-lg-6">
-							<!--begin::Dropdown-->
-					<!--		<button class="btn btn-icon btn-sm btn-light-danger fw-bolder pulse pulse-danger" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" id="kt_activities_toggle">
-								<span class="position-absolute fs-6">3</span> -->
-					<!--		<span class="pulse-ring"></span>	-->
-						<!--	</button> -->
-						<!--	<button class="btn btn-icon fw-bolder" >
-								<img src="/static/img/logout.png" width="24" height="24" href="../main/main.html" />
-							</button> -->
-							<a href="main/resources/templates/html/main/main.html" height="2" width="5"/>
-								<img src="/static/img/logout.png" width="24" height="24">
+				</a>
+				<div class="menu-wrapper menu-column menu-fit mt-10">
+					<div class="menu-sub menu-fit menu-sub-accordion show mb-20">
+						<h1 class="menu-content mb-1 mt-10 text-center" style="font-weight: bold">마이페이지</h1>
+						<div class="separator border-dark my-1 mx-auto" style="width: 60%; border-width: 3px;"></div>
+						<div class="menu-item" style="margin: 3px">
+							<a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/artist/account}">
+								<span class="menu-title">내 계정</span>
 							</a>
 						</div>
-						<!--end::Notifications-->
-						<!--begin::Aside Toggler-->
-						<button class="btn btn-icon btn-sm btn-active-bg-accent d-lg-none ms-1 ms-lg-6" id="kt_aside_toggler">
-							<!--begin::Svg Icon | path: icons/duotune/abstract/abs015.svg-->
-							<span class="svg-icon svg-icon-1 svg-icon-dark">
-								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-									<path d="M21 7H3C2.4 7 2 6.6 2 6V4C2 3.4 2.4 3 3 3H21C21.6 3 22 3.4 22 4V6C22 6.6 21.6 7 21 7Z" fill="black" />
-									<path opacity="0.3" d="M21 14H3C2.4 14 2 13.6 2 13V11C2 10.4 2.4 10 3 10H21C21.6 10 22 10.4 22 11V13C22 13.6 21.6 14 21 14ZM22 20V18C22 17.4 21.6 17 21 17H3C2.4 17 2 17.4 2 18V20C2 20.6 2.4 21 3 21H21C21.6 21 22 20.6 22 20Z" fill="black" />
-								</svg>
-							</span>
-							<div id="sidebarContent">
-								<!-- 사이드바 내용을 이곳에 추가 -->
-
-							</div>
-							<!--end::Svg Icon-->
-						</button>
-
-						<!--end::Aside Toggler-->
-						<!--begin::Sidebar Toggler-->
-						<!--end::Sidebar Toggler-->
+						<div class="menu-item" style="margin: 3px">
+							<a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/artist/modify}">
+								<span class="menu-title">계정 정보 수정</span>
+							</a>
+						</div>
+						<div class="menu-item" style="margin: 3px">
+							<a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/artist/management/view}">
+								<span class="menu-title">공연 관리</span>
+							</a>
+						</div>
 					</div>
 
-					<!--end::Right-->
+					<div class="menu-wrapper menu-column menu-fit mt-1">
+						<div class="menu-sub menu-fit menu-sub-accordion show">
+							<h1 class="menu-content mb-1 mt-10 text-center" style="font-weight: bold">통합 정보 조회</h1>
+							<div class="separator border-dark my-1 mx-auto"
+								 style="width: 60%; border-width: 3px;"></div>
+							<div class="menu-item" style="margin: 3px">
+								<a class="text-dark text-hover-primary ms-3 py-2"
+								   th:href="@{/profile/artist/total/view}">
+									<span class="menu-title">종합</span>
+								</a>
+							</div>
+						</div>
+					</div>
 				</div>
-				<!--end::Container-->
 			</div>
-			<div>
+			<a class="ms-5 me-15" style="position: relative; top: 200px; left: 300px;" th:href="@{/logout}">
+				<img th:src="@{/img/logout.png}" style="height: 30px; width: 30px;">
+			</a>
+		</div>
+
+		<div class="d-flex flex-column flex-lg-row-auto bg-primary pt-15 pt-lg-0 d-none d-lg-flex" id="leftArea2">
+			<div class="d-flex flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
+				<!--begin::Aside Logo-->
+				<a class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
+					<img alt="로고" th:src="@{/img/logo_name.png}" style="width: 400px; height: 70px;">
+				</a>
+				<!--end::Aside Logo-->
+			</div>
+		</div>
+
+
+		<!--사이드-->
+		<!--begin::Aside-->
+		<!--begin::Content-->
+		<!--메인폼-->
+		<div class="login-content flex-lg-row-fluid d-flex flex-column overflow-hidden py-10 py-lg-20 px-10 p-lg-7 mx-auto mw-1000px w-100"
+			 style="display: flex">
+			<!--begin::Wrapper-->
+			<div class="form w-1000px  needs-validation text-center" id="graph" novalidate>
 				<div class="container">
-					<div style="color:#ffffff; background-color:#8ac297; padding:25px; height: 400px; margin-top: 30px; margin-bottom: 30px;">
-						검색영역~~
+					<div class="row">
+						<div class="col-md-8 mx-auto">
+							<canvas id="myChart"></canvas>
+							<div id="common" style="margin-top: 15px;">
+								<button id="genderButton">성별</button>
+								<button id="genreButton">선호 장르</button>
+							</div>
+							<div id="artist" style="display: none; margin-top: 15px;">
+								<button id="genderBtn">성별</button>
+								<button id="genreBtn">장르</button>
+								<button id="point">포인트</button>
+							</div>
+						</div>
 					</div>
 				</div>
-
-				<!-- 검색 영역과 카테고리 영역 사이에 공백을 추가 -->
-				<div class="mx-2" style="margin-top: 30px; margin-bottom: 30px;"></div>
-
-		<!--		<div class="container">
-					<div style="color:#000000; background-color:#FFFFFF; padding:25px;  height: 600px;">
-						<div style="display: flex; align-items: center; margin-bottom: 20px;">
-							<h4 style="font-size: 24px; flex-grow: 1;"><strong>종합 정보</strong></h4>
-						</div>
-						<div>
-							<div class="row mt-3">
-								<form action="/board/list" method="get">
-									<div class="col">
-										<input type="hidden" name="size" th:value="${pageRequestDTO.size}">
-										<div class="input-group">
-											<div class="input-group-prepend" style="margin-right: 3px">
-												<select class="form-select" name="type">
-													<option value="">---</option>
-													<option value="t" th:selected="${pageRequestDTO.type =='t'}">활동명</option>
-													<option value="c" th:selected="${pageRequestDTO.type =='c'}">공연명</option>
-													<option value="w" th:selected="${pageRequestDTO.type =='w'}">공연 일자</option>
-													<option value="tc" th:selected="${pageRequestDTO.type =='tc'}">제목 내용</option>
-													<option value="tcw" th:selected="${pageRequestDTO.type =='tcw'}">제목 내용 작성자</option>
-												</select>
-											</div>
-											<input type="text" class="form-control" name="keyword" style="margin-right: 10px;" th:value="${pageRequestDTO.keyword}">
-											<div class="input-group-append" style="margin-right: 3px">
-												<button class="btn btn-primary searchBtn" type="submit">Search</button>
-												<button class="btn btn-primary clearBtn" type="button">Clear</button>
-											</div>
-										</div>
-									</div>
-								</form>
-							</div>
-
-							<div class="row mt-3">
-								<div class="col">
-
-									<div class="card">
-										<div class="card-body" >
-											<h5 class="card-title">공연 정보 </h5>
-
-											<table class="table">
-												<thead>
-												<tr>
-													<th scope="col">활동명</th>
-													<th scope="col">공연명</th>
-													<th scope="col">공연 일자</th>
-													<th scope="col">공연 위치</th>
-													<th scope="col">조회수</th>
-												</tr>
-												</thead>
-
-												<tbody th:with="link = ${pageRequestDTO.getLink()}">
-												<tr th:each="dto:${responseDTO.dtoList}"  >
-													<td>[[${dto.bno}]]</td>
-													<td>
-														<a th:href="|@{/board/read(bno =${dto.bno})}&${link}|" class="text-decoration-none"> [[${dto.title}]] </a>
-														<span class="badge progress-bar-success" style="background-color: #0a53be">[[${dto.replyCount}]]</span>
-														<div th:if="${dto.boardImages != null && dto.boardImages.size() > 0}">
-															<img style="width:100px" th:each="boarImage: ${dto.boardImages}" th:src="|/view/s_${boarImage.uuid}_${boarImage.fileName}|">
-														</div>
-													</td>
-													<td>[[${dto.writer}]]</td>
-													<td>[[${#temporals.format(dto.regDate, 'yyyy-MM-dd')}]]</td>
-												</tr>
-												</tbody>
-
-
-											</table>
-
-											<div class="float-end">
-												<ul class="pagination flex-wrap">
-
-													<li class="page-item" th:if="${responseDTO.prev}">
-														<a class="page-link" th:data-num="${responseDTO.start -1}">Previous</a>
-													</li>
-
-													<th:block th:each="i: ${#numbers.sequence(responseDTO.start, responseDTO.end)}">
-														<li th:class="${responseDTO.page == i}?'page-item active':'page-item'" >
-															<a class="page-link"  th:data-num="${i}">[[${i}]]</a>
-														</li>
-													</th:block>
-
-													<li class="page-item" th:if="${responseDTO.next}">
-														<a class="page-link"  th:data-num="${responseDTO.end + 1}">Next</a>
-													</li>
-												</ul>
-											</div>
-
-
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div class="modal" tabindex="-1">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title">Modal title</h5>
-											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-										</div>
-										<div class="modal-body">
-											<p>Modal body text goes here.</p>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-											<button type="button" class="btn btn-primary">Save changes</button>
-										</div>
-									</div>
-								</div>
-							</div>
-
-
-
-						</div>
-						<div style="margin-top:20px;">
-
-						</div>
-					</div>-->
 			</div>
-			<!--end::Header-->
-			<!--begin::Main-->
+			<!--begin::Signin Form-->
+			<div class="form w-1000px  needs-validation text-center" id="kt_login_signin_form" novalidate>
+				<div style="color:#000000; background-color:#FFFFFF; padding:25px;  height: 600px;">
+					<div style="display: flex; align-items: center; margin-bottom: 20px;">
+						<h4 style="font-size: 24px; flex-grow: 1;"><strong>종합 정보</strong></h4>
+						<button class="text-gray-600 ms-3 fs-5" id="commonBtn">일반 회원</button>
+						<a target="_blank" class="text-gray-600 text-hover-primary ms-3">|</a>
+						<button class="text-gray-600 ms-3 fs-5" id="artistBtn">아티스트 회원</button>
+					</div>
+					<span class="search-container">
+                        <select id="searchColumn" style="width: 10%; height: 40px; border-radius: 5px;">
+                            <!-- 일반 회원 옵션 -->
+                            <option class="common" value="id">아이디</option>
+                            <option class="common" value="name">성명</option>
+                            <option class="common" value="nid">닉네임</option>
+                            <option class="common" value="sex">성별</option>
+                            <option class="common" value="birth">생년월일</option>
+                            <option class="common" value="email">이메일</option>
+                            <option class="common" value="road">유입 경로</option>
+                            <option class="common" value="genre">선호 장르</option>
+
+							<!-- 아티스트 회원 옵션 -->
+                            <option class="artist" value="id">아이디</option>
+                            <option class="artist" value="name">성명</option>
+                            <option class="artist" value="nid">활동명</option>
+                            <option class="artist" value="sex">성별</option>
+                            <option class="artist" value="birth">생년월일</option>
+                            <option class="artist" value="email">이메일</option>
+                            <option class="artist" value="genre">장르</option>
+                            <option class="artist" value="point">포인트</option>
+                        </select>
+                        <input type="text" id="searchKeyword" placeholder="검색어 입력" style="width: 30%; height: 40px; border-radius: 5px; border: 1px solid #cccad4">
+                        <button class="btn btn-primary" id="searchBtn" style="width: 10%;" >Search</button>
+                    </span>
+					<!--아티스트 스팬-->
+					<div id="artistSpan" style="display: none; margin-top: 15px;">
+						<span id="afterTodayBusking" style="font-size: 20px; margin-left: 10px; font-weight:bold;"></span>
+						<span id="buskingCount" style="font-size: 20px; margin-left: 10px; font-weight:bold;"></span>
+						<span id="avg" style="font-size: 20px; margin-left: 10px; display: none; font-weight:bold;"></span>
+					</div>
+
+					<div>
+						<div class="container mt-5">
+							<div class="row">
+								<div class="col-md-12">
+									<table class="table table-rounded table-striped border gy-7 gs-7" id="memberTable">
+										<thead id="memberThead">
+										<tr class="fw-bold fs-6 text-gray-800 border-bottom border-gray-200">
+											<!-- 기본 공통 컬럼 -->
+
+											<!-- 일반 회원 컬럼 -->
+											<th class="common" style="display: none">아이디</th>
+											<th class="common" style="display: none">성명</th>
+											<th class="common" style="display: none">닉네임</th>
+											<th class="common" style="display: none">성별</th>
+											<th class="common" style="display: none">생년월일</th>
+											<th class="common" style="display: none">이메일</th>
+											<th class="common" style="display: none">번호</th>
+											<th class="common" style="display: none">유입 경로</th>
+											<th class="common" style="display: none">선호 장르</th>
+
+											<!-- 아티스트 회원 컬럼 -->
+											<th class="artist" style="display: none">아이디</th>
+											<th class="artist" style="display: none">성명</th>
+											<th class="artist" style="display: none">활동명</th>
+											<th class="artist" style="display: none">성별</th>
+											<th class="artist" style="display: none">생년월일</th>
+											<th class="artist" style="display: none">이메일</th>
+											<th class="artist" style="display: none">번호</th>
+											<th class="artist" style="display: none">장르</th>
+											<th class="artist" style="display: none">포인트</th>
+										</tr>
+										</thead>
+										<tbody id="memberTbody">
+										</tbody>
+										<tfoot>
+										<tr>
+											<td colspan="16">
+												<ul class="pagination"></ul>
+											</td>
+										</tr>
+										</tfoot>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
+</div>
+<script type="text/javascript" th:src="@{/js/profile/profile_member_artist.js}"></script>
+<script type="text/javascript" th:src="@{/js/profile/profile_artistGraph.js}"></script>
 </body>
 </html>
