@@ -103,7 +103,7 @@ public class JwtUtils {
             return null;
         }else if(getRole(token).equals("1")){
             return commonURI;
-        }else if(getRole(token).equals("2")) {
+        }else if(getRole(token).equals("2")){
             return artistURI;
         }else if(getRole(token).equals("3")){
                 return enterURI;

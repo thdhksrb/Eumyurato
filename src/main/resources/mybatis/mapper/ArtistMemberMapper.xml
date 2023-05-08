@@ -47,4 +47,101 @@
     <update id="updatePw" >
         update artist_member set pw = #{pw} where id = #{id}
     </update>
+
+    <select id="getArtistMembers" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
+        select *
+        from artist_member
+    </select>
+
+    <select id="getCommonMembers" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
+        select *
+        from common_member
+    </select>
+
+    <select id="searchCommonMembers" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
+        SELECT * FROM common_member
+        WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+
+    <select id="searchArtistMembers" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
+        SELECT * FROM artist_member
+        WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+
+    <select id="getArtistInfoById" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
+        SELECT *
+        FROM artist_member
+        WHERE id = #{id} AND adminNum = 2
+    </select>
+
+    <select id="getArtistBuskings" resultType="com.e114.e114_eumyuratodemo1.dto.BuskingDTO">
+        select * from busking where artId = #{artId}
+    </select>
+
+    <select id="searchArtistBuskings" resultType="com.e114.e114_eumyuratodemo1.dto.BuskingDTO">
+        select * from busking where artId = #{artId} and ${column} LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+
+    <delete id="deleteArtistBusking">
+        DELETE FROM busking WHERE id = #{param1} AND date > CURRENT_DATE
+    </delete>
+
+    <select id="getCommonGender" resultType="map">
+        SELECT sex, COUNT(*) as count
+        FROM common_member
+        GROUP BY sex;
+    </select>
+
+    <select id="getCommonGenre" resultType="map">
+        SELECT genre, COUNT(*) as count
+        FROM common_member
+        GROUP BY genre;
+    </select>
+
+    <select id="getArtistGender" resultType="map">
+        SELECT sex, COUNT(*) as count
+        FROM artist_member
+        GROUP BY sex;
+    </select>
+
+    <select id="getArtistGenre" resultType="map">
+        SELECT genre, COUNT(*) as count
+        FROM artist_member
+        GROUP BY genre;
+    </select>
+
+    <select id="getArtistPoint" resultType="map">
+        SELECT id, nid, point
+        FROM artist_member
+        ORDER BY point DESC
+            LIMIT 10;
+    </select>
+
+    <select id="getArtistPointAvg" resultType="map">
+        SELECT CAST(ROUND(AVG(point)) AS SIGNED) AS avg_point
+        FROM artist_member;
+    </select>
+
+    <select id="getArtistBuskingIng" resultType="map">
+        <![CDATA[
+        SELECT COUNT(*) AS busking_ing
+        FROM busking
+        WHERE date >= CURDATE();
+        ]]>
+    </select>
+
+    <select id="getArtistBuskingAll" resultType="map">
+        SELECT COUNT(*) AS all_busking
+        FROM busking;
+    </select>
+
+    <insert id="saveBuskingWithoutImage" parameterType="com.e114.e114_eumyuratodemo1.dto.BuskingDTO">
+        INSERT INTO busking (name, artId, date, location, image)
+        VALUES (#{name}, #{artId}, #{date}, #{location}, 'src\main\resources\static\img\default.jpg')
+    </insert>
+
+    <insert id="saveBusking" parameterType="com.e114.e114_eumyuratodemo1.dto.BuskingDTO">
+        INSERT INTO busking (name, artId, date, location, image)
+        VALUES (#{name}, #{artId}, #{date}, #{location}, #{image})
+    </insert>
 </mapper>

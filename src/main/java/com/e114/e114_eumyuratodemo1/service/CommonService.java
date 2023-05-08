@@ -1,6 +1,8 @@
 package com.e114.e114_eumyuratodemo1.service;
 
+import com.e114.e114_eumyuratodemo1.dto.BuskingDTO;
 import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
+import com.e114.e114_eumyuratodemo1.dto.ReservationDTO;
 import com.e114.e114_eumyuratodemo1.jdbc.ArtistMemberDAO;
 import com.e114.e114_eumyuratodemo1.jdbc.CommonMemberDAO;
 import com.e114.e114_eumyuratodemo1.jdbc.EnterpriseMemberDAO;
@@ -115,6 +117,20 @@ public class CommonService {
         userIds.addAll(artistMemberDAO.findUserIdsByNameAndEmail(name, email));
         userIds.addAll(enterpriseMemberDAO.findUserIdsByNameAndEmail(name, email));
         return userIds;
+    }
+
+    public List<ReservationDTO> viewCommonReservations(String cId) {
+
+        return commonMemberDAO.getCommonReservations(cId);
+    }
+
+    public List<ReservationDTO> searchCommonReservations(String cId, String column, String keyword) {
+
+        return commonMemberDAO.searchCommonReservations(cId, column, keyword);
+    }
+
+    public int deleteReservation(int id) {
+        return commonMemberDAO.deleteCommonReservation(id);
     }
 }
 

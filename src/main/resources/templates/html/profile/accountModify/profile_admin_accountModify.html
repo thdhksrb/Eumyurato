@@ -50,7 +50,7 @@
                         <h1 class="menu-content mb-1 mt-10 text-center" style="font-weight: bold">마이페이지</h1>
                         <div class="separator border-dark my-1 mx-auto" style="width: 60%; border-width: 3px;"></div>
                         <div class="menu-item" style="margin: 3px">
-                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/admin}">
+                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/admin/account}">
                                 <span class="menu-title">내 계정</span>
                             </a>
                         </div>
@@ -110,14 +110,14 @@
             <!--begin::Signin Form-->
             <form class="form w-450px  needs-validation text-center" id="kt_login_signin_form" novalidate>
                 <div class="pb-5 pb-lg-1">
-                    <h3 class="fw-bolder text-dark display-6 text-center">내 계정</h3>
+                    <h3 class="fw-bolder text-dark display-6 text-center">계정 정보 수정</h3>
                 </div>
                 <!--begin::Image input-->
                 <div class="image-input image-input-outline" data-kt-image-input="true"
                      style="display: flex; justify-content: center; align-items: center">
                     <!--begin::Image preview wrapper-->
                     <div style="position: relative;">
-                        <img th:src="@{/img/다운로드.jpg}" alt="프로필사진"/>
+                        <img th:src="@{/img/default.jpg}" alt="프로필사진"/>
                         <!--end::Image preview wrapper-->
 
                         <!--begin::Edit button-->
@@ -169,7 +169,7 @@
                     <label class="form-label fs-6 fw-bolder text-dark pt-5">아이디</label>
                     <input class="form-control form-control-lg form-control-solid" type="text"
                            placeholder=""
-                           name="id" autocomplete="off" style="border-color: #0099FF;"/>
+                           name="id" autocomplete="off" style="border-color: #0099FF;" readonly />
                 </div>
 
                 <div class="fv-row mb-5">
@@ -347,5 +347,6 @@
         </div>
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jwt-decode/2.2.0/jwt-decode.min.js"></script>
 </body>
 </html>

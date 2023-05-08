@@ -1,3 +1,26 @@
+const jwtToken = sessionStorage.getItem("jwtToken");
+
+const xhr = new XMLHttpRequest();
+xhr.open("POST", "/profile/admin/account");
+xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+xhr.setRequestHeader("Authorization", "Bearer " + jwtToken);
+xhr.onload = function() {
+    if (xhr.status === 200) {
+        const responseData = JSON.parse(xhr.responseText);
+        const admin = responseData.admin;
+
+        // HTML 요소 선택 후 값 변경
+        document.querySelector('input[name="id"]').value = admin.id;
+        document.querySelector('input[name="fullname"]').value = admin.name;
+        document.querySelector('input[name="num"]').value = admin.num;
+        document.querySelector('input[name="email"]').value = admin.email;
+        document.querySelector('input[name="phone"]').value = admin.phone;
+
+    } else {
+        console.error('Request failed.  Returned status of ' + xhr.status);
+    }
+};
+xhr.send();
 
 // 회원정보 조회 기능
 function setCommonMemberSearch() {
@@ -73,16 +96,17 @@ document.getElementById("showEnterprises").addEventListener("click", function() 
 
 
 // 예약내역 조회 기능
-function setReservationsSearch() {
-    const searchReservationDropdown = document.getElementById("searchReservationDropdown");
+function setArtReservationsSearch() {
+    const searchArtReservationDropdown = document.getElementById("searchArtReservationDropdown");
     const column = document.getElementById("column");
     const keyword = document.getElementById("keyword");
-    const searchReservationValue = document.getElementById("searchReservationValue");
+    const searchArtReservationValue = document.getElementById("searchArtReservationValue");
 
-    column.value = searchReservationDropdown.value;
-    keyword.value = searchReservationValue.value;
+    column.value = searchArtReservationDropdown.value;
+    keyword.value = searchArtReservationValue.value;
 };
 
 function resetReservations() {
-    window.location.href = "/profile/admin/reservation";
+    window.location.href = "/profile/artist/reservation";
 };
+

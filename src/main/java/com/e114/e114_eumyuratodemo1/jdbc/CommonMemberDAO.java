@@ -1,9 +1,13 @@
 package com.e114.e114_eumyuratodemo1.jdbc;
 
+import com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO;
+import com.e114.e114_eumyuratodemo1.dto.BuskingDTO;
 import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
+import com.e114.e114_eumyuratodemo1.dto.ReservationDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import javax.naming.spi.ResolveResult;
 import java.util.List;
 
 @Mapper
@@ -30,4 +34,14 @@ public interface CommonMemberDAO {
 
  //아이디 찾기
  List<String> findUserIdsByNameAndEmail(@Param("name") String name, @Param("email") String email);
+
+ CommonMemberDTO getCommonInfoById(String commonId);
+
+ // 일반회원 예약 목록 불러오기
+ List<ReservationDTO> getCommonReservations(String cId);
+ // 일반회원 예약 목록 검색
+ List<ReservationDTO> searchCommonReservations(String cId, String column, String keyword);
+
+ // 일반회원 예약 목록 삭제
+ int deleteCommonReservation(int id);
 }

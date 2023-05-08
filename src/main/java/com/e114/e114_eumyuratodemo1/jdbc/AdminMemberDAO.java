@@ -21,7 +21,7 @@ public interface AdminMemberDAO {
     List<ReservationDTO> getReservationList();  // 예약 내역 목록 불러오기
     List<ReservationDTO> searchReservations(Map<String, String> params  );  // 예약 내역 검색
 
-    EnterpriseMemberDTO getAdminInfoById(String adminId);   // 내 계정 정보 불러오기 기능 (test용)
+    EnterpriseMemberDTO getAdminInfoById(String adminId);   // 내 계정 정보 불러오기
 
     List<BuskingDTO> getBuskings();     // 버스킹 목록 불러오기
     List<SmallConcertDTO> getSmallConcerts();   // 소규모 공연 불러오기
