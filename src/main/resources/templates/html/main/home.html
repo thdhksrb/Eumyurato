@@ -73,7 +73,7 @@
     </div>
 
     <!-- HTML -->
-    <div class="divider-custom1 divider-light1 text-center">
+    <div class="divider-custom1 divider-light1 text-center" style="margin-bottom: -50px;">
         <div class="divider-custom divider-light mx-auto text-center">
             <div class="divider-custom divider-light">
                 <div class="divider-custom-line"></div>
@@ -82,10 +82,19 @@
             </div>
         </div>
 
-        <div>
-            <div class="row justify-content-center">
+        <div class="divider-custom divider-light mx-auto text-center"> <!-- 수정된 부분 -->
+            <div class="divider-custom divider-light">
+                <div class="divider-custom-line"></div>
+                <h3 class="masthead-heading text-uppercase mb-0 text-center">이달의 공연</h3>
+                <div class="divider-custom-line"></div>
+            </div>
+        </div> <!-- 수정된 부분 -->
+    </div>
+    <div class="divider-custom1 divider-light1 text-center">
+        <div class="divider-custom divider-light mx-auto text-center">
+            <div class="divider-custom divider-light">
                 <div class="col-lg-8 text-center">
-                    <table id="artistTable" class="table table-bordered table-hover">
+                    <table id="artistTable" class="table table-bordered table-hover" style="width: 400px;">
                         <thead>
                         <tr>
                             <th>순위</th>
@@ -101,18 +110,55 @@
             </div>
         </div>
 
-        <div class="divider-custom divider-light mx-auto text-center"> <!-- 수정된 부분 -->
-            <div class="divider-custom divider-light">
-                <div class="divider-custom-line"></div>
-                <h3 class="masthead-heading text-uppercase mb-0 text-center">이달의 랭킹</h3>
-                <div class="divider-custom-line"></div>
+        <div>
+            <div class="divider-custom divider-light mx-auto text-center"> <!-- 수정된 부분 -->
+                <div class="divider-custom divider-light">
+                    <table id="concertTable" class="table table-bordered table-hover" style="width: 400px;">
+                        <thead>
+                        <tr>
+                            <th>순위</th>
+                            <th>아티스트명</th>
+                            <th>장르</th>
+                            <th>포인트</th>
+                        </tr>
+                        </thead>
+                        <tbody id="concertTableBody">
+                        <tr>
+                            <td>1</td>
+                            <td>아티스트1</td>
+                            <td>장르1</td>
+                            <td>100</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>아티스트2</td>
+                            <td>장르2</td>
+                            <td>90</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>아티스트3</td>
+                            <td>장르3</td>
+                            <td>80</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>아티스트4</td>
+                            <td>장르4</td>
+                            <td>70</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>아티스트5</td>
+                            <td>장르5</td>
+                            <td>60</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div> <!-- 수정된 부분 -->
-
+        </div>
     </div>
-
-
-
 
 
 </div>

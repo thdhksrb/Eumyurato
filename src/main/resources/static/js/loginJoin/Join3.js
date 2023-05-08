@@ -1,3 +1,4 @@
+/*
 const form = document.querySelector("form");
 const idInput = document.getElementById("id");
 const pwdInput = document.getElementById("pwd");
@@ -201,6 +202,7 @@ duplicateBtn2.addEventListener("click", function() {
             .catch(error => console.error(error));
     }
 });
+*/
 
 // 회원가입 이벤트 핸들러
 const joinButton = document.getElementById('joinButton');

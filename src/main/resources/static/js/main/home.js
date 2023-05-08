@@ -34,7 +34,7 @@
     }
 };*/
 
-window.onload = function() {
+window.onload = function () {
     const jwtToken = window.sessionStorage.getItem("jwtToken");
     if (jwtToken !== null) {
         // 로그인 상태인 경우
@@ -50,7 +50,7 @@ window.onload = function() {
         userNameElem.innerText = decodedName;
 
         const mypageBtn = document.getElementById("mypageBtn");
-        mypageBtn.onclick = function (){
+        mypageBtn.onclick = function () {
             const xhr = new XMLHttpRequest(); // 새로운 XMLHttpRequest 객체 생성
             xhr.open('POST', '/profile'); // POST 요청, /profile 엔드포인트로 요청
             xhr.setRequestHeader('Content-Type', 'application/json'); // 요청 헤더에 JSON 형태의 데이터를 전송한다고 명시
@@ -72,7 +72,7 @@ window.onload = function() {
         // 로그아웃
         const logoutBtn = document.createElement("a");
         logoutBtn.setAttribute("href", "/logout");
-        logoutBtn.onclick = function() {
+        logoutBtn.onclick = function () {
             window.sessionStorage.removeItem("jwtToken");
         };
 
@@ -95,24 +95,27 @@ window.onload = function() {
         const navLogout = document.getElementById("navLogout");
         navLogout.style.display = "none";
     }
-    
+
     //랭킹
-// AJAX로 서버로부터 데이터를 받아와서 테이블을 생성하는 함수
-    function loadTop5Artists() {
+    function loadArtists() {
         $.ajax({
-            url: "/home",
-            type: "GET",
+            url: "/top5artists",
+            type: "POST",
             dataType: "json",
             success: function (data) {
                 // 받아온 데이터로 테이블을 생성
-                const tbody = $('#artistTableBody');
+                const tbody = $("#artistTableBody");
 
+                // 기존 테이블 내용 삭제
+                tbody.empty();
+
+                // 데이터를 이용하여 행 추가
                 data.forEach((artist, index) => {
-                    const row = $('<tr>');
-                    const rankCell = $('<td>').text(index + 1);
-                    const nameCell = $('<td>').text(artist.name);
-                    const genreCell = $('<td>').text(artist.genre);
-                    const pointCell = $('<td>').text(artist.point);
+                    const row = $("<tr>");
+                    const rankCell = $("<td>").text(index + 1);
+                    const nameCell = $("<td>").text(artist.name);
+                    const genreCell = $("<td>").text(artist.genre);
+                    const pointCell = $("<td>").text(artist.point);
 
                     row.append(rankCell);
                     row.append(nameCell);
@@ -123,14 +126,9 @@ window.onload = function() {
             },
             error: function (xhr, status, error) {
                 console.error(error);
-            }
+            },
         });
     }
-
-// 페이지가 로드될 때 데이터를 가져오도록 설정
-    $(document).ready(function () {
-        loadTop5Artists();
-    });
 
 };
 

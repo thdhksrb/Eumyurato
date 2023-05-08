@@ -55,13 +55,17 @@ public class LoginJoinController {
     private MemberService memberService;
 
     @GetMapping("/home")
-    public ModelAndView getTop5Artists() {
+    public ModelAndView getHomePage() {
         ModelAndView mav = new ModelAndView("html/main/home");
         mav.addObject("top5Artists", artistService.selectTop5Artists());
         return mav;
     }
 
-
+    @PostMapping("/top5artists")
+    @ResponseBody
+    public List<ArtistMemberDTO> getTop5Artists() {
+        return artistService.selectTop5Artists();
+    }
 
 
     @PostMapping("/profile")
@@ -248,7 +252,6 @@ public class LoginJoinController {
             return "redirect:/loginjoin/enterprise/join?error";
         }
     }
-
 
 
     //로그 아웃
