@@ -39,9 +39,6 @@ public interface CommonMemberDAO {
  // 비번 중복 확인
  CommonMemberDTO useByNid(String nid);
 
- // 아이디 찾기
- List<String> findUserIdsByNameAndEmail(String name, String email);
-
  // 비밀번호 변경
  void updatePassword(@Param("id") String id, @Param("pwd") String password);
  //아이디 찾기
