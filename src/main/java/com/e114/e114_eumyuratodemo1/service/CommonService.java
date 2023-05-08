@@ -44,7 +44,7 @@ public class CommonService {
                             String email, String phone, String road,String genre) {
         // 회원 정보 유효성 검사
         if (id == null || id.isEmpty() || pwd == null || pwd.isEmpty() || name == null || name.isEmpty()
-                || nid == null || nid.isEmpty() || birth == null
+                || nid == null || nid.isEmpty() || birth == null || birth.isEmpty() || sex == null || sex.isEmpty()
                 || email == null || email.isEmpty() || phone == null || phone.isEmpty()) {
             return false;
         }

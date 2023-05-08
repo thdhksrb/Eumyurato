@@ -13,10 +13,12 @@
 
     <!--begin::Global Stylesheets Bundle(used by all pages)-->
     <link type="text/css" th:href="@{https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css}" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css}" />
     <link th:href="@{/css/profile/profile1.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{/css/profile/profile2.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{/css/profile/profile3.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{/css/profile/datepicker.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/profile/timepicker.css}" rel="stylesheet" type="text/css"/>
     <!--end::Global Stylesheets Bundle-->
 </head>
 <!--end::Head-->
@@ -100,7 +102,6 @@
             </div>
         </div>
 
-
         <!--사이드-->
         <!--begin::Aside-->
         <!--begin::Content-->
@@ -110,7 +111,7 @@
             <!--begin::Signin Form-->
             <form class="form w-450px  needs-validation text-center" id="kt_login_signin_form" novalidate>
                 <div class="pb-5 pb-lg-1">
-                    <h3 class="fw-bolder text-dark display-6 text-center">소규모 공연 등록</h3>
+                    <h3 class="fw-bolder text-dark display-6 text-center">버스킹 등록</h3>
                 </div>
                 <!--begin::Image input-->
                 <div class="image-input image-input-outline" data-kt-image-input="true"
@@ -170,8 +171,8 @@
                     <label class="form-label fs-6 fw-bolder text-dark pt-5">공연자</label>
                     <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
                     <input class="form-control form-control-lg form-control-solid" type="text"
-                           placeholder=""
-                           name="nid" autocomplete="off" style="border-color: #0099FF;"/>
+                           placeholder="" readonly
+                           name="nid" id="nid" autocomplete="off" style="border-color: #0099FF;"/>
                 </div>
                 <div class="fv-row mb-5">
                     <label class="form-label fs-6 fw-bolder text-dark pt-5">주소</label>
@@ -188,19 +189,13 @@
                 </div>
 
                 <div class=" fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">기업 ID</label>
-                    <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
-                    <input class="form-control form-control-lg form-control-solid" type="text"
-                           name="enterId" id="enterId" autocomplete="off" style="border-color: #0099FF;"/>
-                </div>
-                <div class=" fv-row mb-5">
                     <div>
 
                         <div class=" fv-row mb-5">
-                            <label class="form-label fs-6 fw-bolder text-dark pt-5">공연 시작 일자</label>
+                            <label class="form-label fs-6 fw-bolder text-dark pt-5">공연 일자</label>
                             <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
                             <input autocomplete="off" class="form-control form-control-lg form-control-solid datepicker"
-                                   id="startDate" name="startDate" placeholder="" required
+                                   id="buskingDate" name="buskingDate" placeholder="" required
                                    style="border-color: #0099FF;" type="text"/>
                         </div>
 
@@ -210,7 +205,7 @@
                     <div class="d-flex flex-wrap justify-content-center pb-lg-0 pb-5">
                         <!-- justify-content-end 클래스를 추가하여 오른쪽으로 정렬 -->
                         <button type="submit" class="btn btn-primary fw-bolder fs-4 px-8 py-4 my-3 me-4"
-                                 id="concertRegister">공연 등록
+                                 id="buskingRegister">버스킹 등록
                         </button>
                     </div>
                 </div>
@@ -224,36 +219,28 @@
 <!--datepicker용-->
 <script type="text/javascript" th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/1.12.1/jquery.min.js}"></script>
 <script type="text/javascript" th:src="@{https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js}"></script>
-<script type="text/javascript" th:src="@{/js/profile/profile_concert_register.js}"></script>
+<script th:src="@{//code.jquery.com/ui/1.11.4/jquery-ui.js}"></script>
+<script type="text/javascript" th:src="@{/js/profile/timepicker.js}"></script>
+<!--js-->
+<script type="text/javascript" th:src="@{/js/profile/profile_artist_buskingRegister.js}"></script>
 <!-- 캘린더 옵션 { -->
 <script>
-    $.datepicker.setDefaults({
-        closeText: "닫기",
-        prevText: "이전달",
-        nextText: "다음달",
-        currentText: "오늘",
-        monthNames: ["1월", "2월", "3월", "4월", "5월", "6월",
-            "7월", "8월", "9월", "10월", "11월", "12월"
-        ],
-        monthNamesShort: ["1월", "2월", "3월", "4월", "5월", "6월",
-            "7월", "8월", "9월", "10월", "11월", "12월"
-        ],
-        dayNames: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"],
-        dayNamesShort: ["일", "월", "화", "수", "목", "금", "토"],
-        dayNamesMin: ["일", "월", "화", "수", "목", "금", "토"],
-        weekHeader: "주",
-        dateFormat: "yy.m.d", // 날짜형태 예)yy년 m월 d일
-        firstDay: 0,
-        isRTL: false,
-        showMonthAfterYear: true,
-        yearSuffix: "년"
-    })
+    $("#buskingDate").datetimepicker({
 
-    $(".datepicker").datepicker({
-        minDate: 0
-    })
+        dateFormat:'yy-mm-dd',
+        monthNamesShort:[ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월' ],
+        dayNamesMin:[ '일', '월', '화', '수', '목', '금', '토' ],
+        changeMonth:true,
+        changeYear:true,
+        showMonthAfterYear:true,
 
-    $('#startDate, #lastDate').datepicker('setDate', 'today');
+        // timepicker 설정
+        timeFormat:'HH:mm',
+        controlType:'select',
+        oneLine:true,
+
+        minDate: new Date()
+    });
 </script>
 <!-- } -->
 </body>

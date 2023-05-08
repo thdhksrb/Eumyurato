@@ -28,11 +28,14 @@ public class WebConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/findUserId")
                 .excludePathPatterns("/checkIdDuplicate/{id}")
                 .excludePathPatterns("/checkNidDuplicate/{nid}")
+                .excludePathPatterns("/top5artists")
+                .excludePathPatterns("/top5concert")
                 .excludePathPatterns("/static/**")
                 .excludePathPatterns("/js/**")
                 .excludePathPatterns("/css/**")
                 .excludePathPatterns("/assets/**")
                 .excludePathPatterns("/img/**")
+
 
         ;
     }

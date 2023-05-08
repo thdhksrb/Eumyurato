@@ -464,7 +464,7 @@ function getContent(record) {
 
     // 공연 이름을 가운데로 정렬
     const titleStyle = "text-align: center;";
-    result = result.replace('class="infowindow-title"', `class="infowindow-title" style="${titleStyle}"`);
+    result = result.replace('class="infowindow-title"', `class="infowindow-title" style="${titleStyle}; margin-top:10px;"`);
 
     return result;
 }

@@ -11,4 +11,5 @@ public class ReservationDTO {
     private String viewDate;
     private int memberNum;
     private int reservPay;
+    private String name;
 }

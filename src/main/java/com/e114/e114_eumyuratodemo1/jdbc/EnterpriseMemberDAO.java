@@ -28,6 +28,9 @@ public interface EnterpriseMemberDAO{
     //아이디 찾기
     List<String> findUserIdsByNameAndEmail(@Param("name") String name, @Param("email") String email);
 
+    // 비밀번호 변경
+    void updatePassword(@Param("id") String id, @Param("pwd") String password);
+
     List<CommonMemberDTO> getCommonMembers();   // 일반 회원 목록 불러오기
     List<ArtistMemberDTO> getArtistMembers();   // 아시트스 회원 목록 불러오기
     List<EnterpriseMemberDTO> getEntMembers();  // 기업 회원 목록 불러오기
