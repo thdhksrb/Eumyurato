@@ -460,11 +460,11 @@ function getContent(record) {
 
     // 이미지 크기를 작게 조정
     const imgStyle = "max-width: 150px; max-height: 150px;";
-    result = result.replace('class="infowindow-img"', `class="infowindow-img" style="${imgStyle}"`);
+    result = result.replace('class="infowindow-img"', `class="infowindow-img" style="${imgStyle}; margin-top:10px;"`);
 
     // 공연 이름을 가운데로 정렬
     const titleStyle = "text-align: center;";
-    result = result.replace('class="infowindow-title"', `class="infowindow-title" style="${titleStyle}; margin-top:10px;"`);
+    result = result.replace('class="infowindow-title"', `class="infowindow-title" style="${titleStyle}; margin-top:10px; margin-bottom:10px;"`);
 
     return result;
 }
