@@ -50,19 +50,19 @@ function displayReservationList(reservationList, currentPage) {
         const reservationRow = reservationTbody.insertRow();
 
         const deleteButton = document.createElement('button');
-        deleteButton.textContent = '삭제';
+        deleteButton.textContent = '취소';
         deleteButton.classList.add('btn');
         deleteButton.addEventListener('click', () => {
             deleteReservation(reservation.id);
         });
-
+        console.log(reservation);
         reservationRow.insertCell().textContent = reservation.id;
-        reservationRow.insertCell().textContent = reservation.sid;
+        reservationRow.insertCell().textContent = reservation.name;
         reservationRow.insertCell().textContent = reservation.cid;
         reservationRow.insertCell().textContent = reservation.payTime;
         reservationRow.insertCell().textContent = reservation.viewDate;
         reservationRow.insertCell().textContent = reservation.memberNum;
-        reservationRow.insertCell().textContent = reservation.reservPay;
+        reservationRow.insertCell().textContent = reservation.reservPay.toLocaleString() + '원';
         reservationRow.insertCell().appendChild(deleteButton);
     });
 
@@ -96,7 +96,7 @@ function createPagination(totalItems, perPage, currentPage) {
 }
 
 function deleteReservation(reservationId) {
-    if (!confirm('정말로 이 공연을 삭제하시겠습니까?')) {
+    if (!confirm('정말로 이 공연을 취소하시겠습니까?')) {
         return;
     }
 
@@ -112,12 +112,12 @@ function deleteReservation(reservationId) {
     })
         .then((response) => {
             if (response.ok) {
-                alert('공연이 성공적으로 삭제되었습니다.');
+                alert('공연이 성공적으로 취소되었습니다.');
                 const searchColumn = document.getElementById('searchColumn').value;
                 const searchKeyword = document.getElementById('searchKeyword').value;
                 getReservationList(token, searchColumn, searchKeyword, currentPage);
             } else if (response.status === 403) {
-                alert('현재 날짜 이전의 내용은 삭제하지 못합니다.');
+                alert('현재 날짜 이전의 내용은 취소하지 못합니다.');
             } else {
                 throw new Error('응답에 문제가 있습니다.');
             }

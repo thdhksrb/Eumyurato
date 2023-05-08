@@ -107,12 +107,24 @@ $.ajax({
 
             // div에 이미지 요소를 추가한다.
             posterContainer.appendChild(img);
-        }else{
+        }else if(imageUrl !== null && !imageUrl.startsWith("https://")){
             var replacedImageUrl = imageUrl.replace(/\\/g, "/").replace("src/main/resources/static", "");
             console.log(replacedImageUrl);
             // 이미지 요소를 생성한다.
             var img = document.createElement("img");
             img.src = replacedImageUrl;
+            img.style.objectFit = "contain";
+            img.style.width = "100%";
+            img.style.height = "100%";
+
+            // 이미지 요소를 포함할 div를 찾는다.
+            var posterContainer = document.getElementById("posterContainer");
+
+            // div에 이미지 요소를 추가한다.
+            posterContainer.appendChild(img);
+        }else{
+            var img = document.createElement("img");
+            img.src = "/img/default.jpg";
             img.style.objectFit = "contain";
             img.style.width = "100%";
             img.style.height = "100%";
