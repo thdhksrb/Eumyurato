@@ -1,9 +1,13 @@
 package com.e114.e114_eumyuratodemo1.service;
 
-import com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO;
+import com.e114.e114_eumyuratodemo1.dto.*;
 import com.e114.e114_eumyuratodemo1.jdbc.EnterpriseMemberDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 //로그인 요청 처리, 사용자 아이디에 해당하는 권한 정보 조회를 담당
@@ -70,6 +74,73 @@ public class EnterpriseService {
         // artistMemberDAO를 사용하여 회원 정보 저장
         int result = enterpriseMemberDAO.insert(enterpriseMemberDTO);
         return result == 3;
+    }
+
+    public List<CommonMemberDTO> viewAllCommons(){
+        return enterpriseMemberDAO.getCommonMembers();
+    };
+
+    public List<ArtistMemberDTO> viewAllArtists(){
+        return enterpriseMemberDAO.getArtistMembers();
+    };
+
+    public List<EnterpriseMemberDTO> viewAllEnters(){
+        return enterpriseMemberDAO.getEntMembers();
+    };
+
+    public List<CommonMemberDTO> searchCommons(String column, String keyword){
+        Map<String, String> params = new HashMap<>();
+        params.put("column", column);
+        params.put("keyword", keyword);
+        return enterpriseMemberDAO.searchCommonMembers(params);
+    };
+
+    public List<ArtistMemberDTO> searchArtists(String column, String keyword){
+        Map<String, String> params = new HashMap<>();
+        params.put("column", column);
+        params.put("keyword", keyword);
+        return enterpriseMemberDAO.searchArtistMembers(params);
+    };
+
+    public List<EnterpriseMemberDTO> searchEnters(String column, String keyword){
+        Map<String, String> params = new HashMap<>();
+        params.put("column", column);
+        params.put("keyword", keyword);
+        return enterpriseMemberDAO.searchEntMembers(params);
+    };
+
+    public List<SmallConcertDTO> viewEntSmallConcert(String smallConcertId) {
+
+        return enterpriseMemberDAO.getEntSmallConcerts(smallConcertId);
+    }
+
+    public List<SmallConcertDTO> searchEntSmallConcert(String enterId, String column, String keyword) {
+
+        return enterpriseMemberDAO.searchEntSmallConcerts(enterId, column, keyword);
+    }
+
+    //일반 회원
+    public List<Map<String, Object>>  commonGenderCount(){
+        return enterpriseMemberDAO.getCommonGender();
+    }
+    public List<Map<String, Object>>  commonGenreCount(){
+        return enterpriseMemberDAO.getCommonGenre();
+    }
+
+    //아티스트 회원
+    public List<Map<String, Object>>  artistGenderCount(){
+        return enterpriseMemberDAO.getArtistGender();
+    }
+    public List<Map<String, Object>>  artistGenreCount(){
+        return enterpriseMemberDAO.getArtistGenre();
+    }
+
+    //기업 회원
+    public List<Map<String, Object>>  enterConcertIng(){
+        return enterpriseMemberDAO.getEnterConcertIng();
+    }
+    public List<Map<String, Object>>  enterConcertAll(){
+        return enterpriseMemberDAO.getEnterConcertAll();
     }
 
 }

@@ -51,8 +51,34 @@
     </select>
 
     <!--비밀번호 찾기-->
-    <update id="updatePw" >
-        update member set pw = #{pw} where id = #{id}
+    <update id="updatePassword">
+        update common_member set pwd = #{pwd} where id = #{id}
     </update>
+
+    <select id="getCommonInfoById" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
+        SELECT *
+        FROM common_member
+        WHERE id = #{id} AND adminNum = 1
+    </select>
+
+    <select id="getCommonReservations" resultType="com.e114.e114_eumyuratodemo1.dto.ReservationDTO">
+        SELECT r.*, sc.name
+        FROM reservation AS r
+                 INNER JOIN schedules AS s ON r.sId = s.id
+                 INNER JOIN small_concert AS sc ON s.conId = sc.id
+        WHERE r.cId = #{cId}
+    </select>
+
+    <select id="searchCommonReservations" resultType="com.e114.e114_eumyuratodemo1.dto.ReservationDTO">
+        SELECT r.*, sc.name
+        FROM reservation AS r
+                 INNER JOIN schedules AS s ON r.sId = s.id
+                 INNER JOIN small_concert AS sc ON s.conId = sc.id
+        WHERE cId = #{cId} and ${column} LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+
+    <delete id="deleteCommonReservation">
+        DELETE FROM reservation WHERE id = #{param1} AND viewDate > CURRENT_DATE
+    </delete>
 
 </mapper>

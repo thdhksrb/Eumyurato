@@ -1,6 +1,8 @@
 package com.e114.e114_eumyuratodemo1.service;
 
+import com.e114.e114_eumyuratodemo1.dto.BuskingDTO;
 import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
+import com.e114.e114_eumyuratodemo1.dto.ReservationDTO;
 import com.e114.e114_eumyuratodemo1.jdbc.ArtistMemberDAO;
 import com.e114.e114_eumyuratodemo1.jdbc.CommonMemberDAO;
 import com.e114.e114_eumyuratodemo1.jdbc.EnterpriseMemberDAO;
@@ -42,7 +44,7 @@ public class CommonService {
                             String email, String phone, String road,String genre) {
         // 회원 정보 유효성 검사
         if (id == null || id.isEmpty() || pwd == null || pwd.isEmpty() || name == null || name.isEmpty()
-                || nid == null || nid.isEmpty() || birth == null
+                || nid == null || nid.isEmpty() || birth == null || birth.isEmpty() || sex == null || sex.isEmpty()
                 || email == null || email.isEmpty() || phone == null || phone.isEmpty()) {
             return false;
         }
@@ -115,6 +117,20 @@ public class CommonService {
         userIds.addAll(artistMemberDAO.findUserIdsByNameAndEmail(name, email));
         userIds.addAll(enterpriseMemberDAO.findUserIdsByNameAndEmail(name, email));
         return userIds;
+    }
+
+    public List<ReservationDTO> viewCommonReservations(String cId) {
+
+        return commonMemberDAO.getCommonReservations(cId);
+    }
+
+    public List<ReservationDTO> searchCommonReservations(String cId, String column, String keyword) {
+
+        return commonMemberDAO.searchCommonReservations(cId, column, keyword);
+    }
+
+    public int deleteReservation(int id) {
+        return commonMemberDAO.deleteCommonReservation(id);
     }
 }
 

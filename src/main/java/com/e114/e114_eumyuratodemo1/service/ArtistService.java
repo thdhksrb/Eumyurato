@@ -1,11 +1,28 @@
 package com.e114.e114_eumyuratodemo1.service;
 
 import com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO;
+import com.e114.e114_eumyuratodemo1.dto.BuskingDTO;
 import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
+import com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO;
 import com.e114.e114_eumyuratodemo1.jdbc.ArtistMemberDAO;
+import com.e114.e114_eumyuratodemo1.mapper.ArtistMemberMapper;
+import org.apache.ibatis.session.SqlSession;
+import com.e114.e114_eumyuratodemo1.jwt.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import java.util.List;
 
 
 //로그인 요청 처리, 사용자 아이디에 해당하는 권한 정보 조회를 담당
@@ -17,6 +34,9 @@ public class ArtistService {
 
     @Autowired
     private  ArtistMemberDTO artistMemberDTO;
+
+    @Autowired
+    private JwtUtils jwtUtils;
 
     // 아티스트 회원용 로그인 요청 처리, 사용자 아이디와 비밀번호를 받아 DB에서 일치하는 사용자 정보를 찾습니다.
     // 찾은 경우 사용자 정보를 반환하고, 일치하는 정보가 없는 경우 null을 반환합니다.
@@ -35,9 +55,9 @@ public class ArtistService {
                             String email, String phone, String genre) {
         // 회원 정보 유효성 검사
         if (id == null || id.isEmpty() || pwd == null || pwd.isEmpty() || name == null || name.isEmpty()
-                || nid == null || nid.isEmpty() || birth == null
+                || nid == null || nid.isEmpty() || birth == null || birth.isEmpty() || sex == null || sex.isEmpty()
                 || email == null || email.isEmpty() || phone == null || phone.isEmpty()) {
-            return false;
+            //return false;
         }
 
         // 이미 사용 중인 아이디인지 검사
@@ -91,6 +111,99 @@ public class ArtistService {
         // artistMemberDAO를 사용하여 회원 정보 저장
         int result = artistMemberDAO.insert(artistMemberDTO);
         return result == 2;
+    }
+
+
+    //아티스트 랭킹
+    private final ArtistMemberMapper artistMemberMapper;
+
+    public ArtistService(ArtistMemberMapper artistMemberMapper) {
+        this.artistMemberMapper = artistMemberMapper;
+    }
+
+    public List<ArtistMemberDTO> selectTop5Artists() {
+        return artistMemberMapper.selectTop5Artists();
+    }
+
+
+    public List<CommonMemberDTO> viewAllCommons(){
+        return artistMemberDAO.getCommonMembers();
+    };
+
+    public List<ArtistMemberDTO> viewAllArtists(){
+        return artistMemberDAO.getArtistMembers();
+    };
+
+    public List<BuskingDTO> viewArtistBusking(String artId) {
+
+        return artistMemberDAO.getArtistBuskings(artId);
+    }
+
+    public List<BuskingDTO> searchArtistBusking(String artistId, String column, String keyword) {
+
+        return artistMemberDAO.searchArtistBuskings(artistId, column, keyword);
+    }
+
+    public List<CommonMemberDTO> searchCommons(String column, String keyword){
+        Map<String, String> params = new HashMap<>();
+        params.put("column", column);
+        params.put("keyword", keyword);
+        return artistMemberDAO.searchCommonMembers(params);
+    };
+
+    public List<ArtistMemberDTO> searchArtists(String column, String keyword){
+        Map<String, String> params = new HashMap<>();
+        params.put("column", column);
+        params.put("keyword", keyword);
+        return artistMemberDAO.searchArtistMembers(params);
+    };
+
+    public List<Map<String, Object>>  commonGenderCount(){
+        return artistMemberDAO.getCommonGender();
+    }
+    public List<Map<String, Object>>  commonGenreCount(){
+        return artistMemberDAO.getCommonGenre();
+    }
+
+    public List<Map<String, Object>>  artistGenderCount(){
+        return artistMemberDAO.getArtistGender();
+    }
+    public List<Map<String, Object>>  artistGenreCount(){
+        return artistMemberDAO.getArtistGenre();
+    }
+    public List<Map<String, Object>>  artistPointTop(){
+        return artistMemberDAO.getArtistPoint();
+    }
+    public List<Map<String, Object>>  artistPointAvg(){
+        return artistMemberDAO.getArtistPointAvg();
+    }
+    public List<Map<String, Object>>  artistBuskingIng(){
+        return artistMemberDAO.getArtistBuskingIng();
+    }
+    public List<Map<String, Object>>  artistBuskingAll(){
+        return artistMemberDAO.getArtistBuskingAll();
+    }
+
+    public int deleteBusking(int id) {
+        return artistMemberDAO.deleteArtistBusking(id);
+    }
+
+    //버스킹 저장
+    public void saveBuskingWithoutImage(BuskingDTO buskingDTO){
+        artistMemberDAO.saveBuskingWithoutImage(buskingDTO);
+    }
+
+    public void saveBusking(BuskingDTO buskingDTO, MultipartFile imgFile) throws IOException {
+        String originalFileName = imgFile.getOriginalFilename();
+        String fileExtension = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
+        UUID uuid = UUID.randomUUID();
+        String fileName = uuid.toString() + "_" + originalFileName;
+        Path filePath = Paths.get("src", "main", "resources", "static", "img", fileName);
+        imgFile.transferTo(filePath);
+        buskingDTO.setImage(String.valueOf(filePath));
+        System.out.println("service DTO : " + buskingDTO);
+        System.out.println(buskingDTO.getImage());
+        artistMemberDAO.saveBusking(buskingDTO);
     }
 
 }

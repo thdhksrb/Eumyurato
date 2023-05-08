@@ -27,7 +27,7 @@
             <!--begin::Aside Top-->
             <div class="d-flex flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
                 <!--begin::Aside Logo-->
-                <a class="mb-6" th:href="@{/main}">
+                <a class="mb-6" th:href="@{/home}">
                     <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
                         <img alt="로고" id="logo1" th:src="@{/img/logo_name.png}" style="width: 400px; height: 70px;"/>
                     </div>
@@ -39,7 +39,7 @@
             <!--begin::Aside Top-->
             <div class="flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
                 <!--begin::Aside Logo-->
-                <a class="mb-6" th:href="@{/main}">
+                <a class="mb-6" th:href="@{/home}">
                     <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
                         <img alt="로고" id="logo2" th:src="@{/img/logo_name.png}" style="width: 400px; height: 70px; margin-top: 80px;"/>
                     </div>
@@ -110,8 +110,7 @@
                 </div>
                 <!--begin::Image input-->
                 <div class="image-input image-input-outline" data-kt-image-input="true"
-                     style="display: flex; justify-content: center; align-items: center;">
-                    <img alt="프로필사진" th:src="@{/img/default.jpg}"/>
+                     style="display: flex; justify-content: center; align-items: center;" id="profileImg">
                 </div>
                 <!--end::Image input-->
                 <div class="mb-5 mw-450px text-center">
