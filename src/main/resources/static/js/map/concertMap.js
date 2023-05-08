@@ -72,15 +72,12 @@ window.onload = function() {
     }
 };
 
-
-
 //toggler
 $(document).ready(function(){
     $('#kt_mega_menu_toggle').on('click', function(){
         $('.mapWrap, .sideMenu').toggleClass('active');
     });
 });
-
 
 // 지도 객체 생성
 var container = document.getElementById('map');
@@ -421,14 +418,45 @@ function goToBuskingDetail(id){
 
 function getContent(record) {
 
-    let result = `<div class="infowindow" style="width: 200px; height: 200px; overflow: auto;">
+    let result;
+
+    // 이미지 URL을 가져온다.
+    const imageUrl = record.image;
+    console.log(imageUrl);
+
+    if(imageUrl !== null && imageUrl.startsWith("https://")){
+        // 이미지 src
+        result = `<div class="infowindow" style="width: 200px; height: 200px; overflow: auto;">
     <div class="infowindow-img-container" style="display: flex; justify-content: center; align-items: center;">
-      <img src="${record.image}" class="infowindow-img" alt="...">
+      <img src="${imageUrl}" class="infowindow-img" alt="...">
     </div>
     <div class="infowindow-body">
       <h2 class="infowindow-title">${record.name}</h2>
     </div>
   </div>`;
+
+    }else if(imageUrl !== null && !imageUrl.startsWith("https://")){
+        const replacedImageUrl = imageUrl.replace(/\\/g, "/").replace("src/main/resources/static", "");
+        // 이미지 src
+        result = `<div class="infowindow" style="width: 200px; height: 200px; overflow: auto;">
+    <div class="infowindow-img-container" style="display: flex; justify-content: center; align-items: center;">
+      <img src="${replacedImageUrl}" class="infowindow-img" alt="...">
+    </div>
+    <div class="infowindow-body">
+      <h2 class="infowindow-title">${record.name}</h2>
+    </div>
+  </div>`;
+
+    }else{
+        result = `<div class="infowindow" style="width: 200px; height: 200px; overflow: auto;">
+    <div class="infowindow-img-container" style="display: flex; justify-content: center; align-items: center;">
+      <img src="/img/default.jpg" class="infowindow-img" alt="...">
+    </div>
+    <div class="infowindow-body">
+      <h2 class="infowindow-title">${record.name}</h2>
+    </div>
+  </div>`;
+    }
 
     // 이미지 크기를 작게 조정
     const imgStyle = "max-width: 150px; max-height: 150px;";
@@ -440,5 +468,7 @@ function getContent(record) {
 
     return result;
 }
+
+
 
 

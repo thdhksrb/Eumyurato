@@ -96,8 +96,8 @@
     </delete>
 
     <insert id="saveConcertWithoutImage" parameterType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
-        INSERT INTO small_concert (name, pname, location, enterId, startDate, lastDate, price)
-        VALUES (#{name}, #{pname}, #{location}, #{enterId}, #{startDate}, #{lastDate}, #{price})
+        INSERT INTO small_concert (name, pname, location, enterId, startDate, lastDate, price, image)
+        VALUES (#{name}, #{pname}, #{location}, #{enterId}, #{startDate}, #{lastDate}, #{price}, 'src\main\resources\static\img\default.jpg')
     </insert>
 
     <insert id="saveConcert" parameterType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
