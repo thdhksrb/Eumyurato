@@ -436,7 +436,7 @@ function getContent(record) {
   </div>`;
 
     }else if(imageUrl !== null && !imageUrl.startsWith("https://")){
-        const replacedImageUrl = imageUrl.replace(/\\/g, "/").replace("src/main/resources/static", "");
+        const replacedImageUrl = 'https://storage.googleapis.com/eumyurato/' + imageUrl;
         // 이미지 src
         result = `<div class="infowindow" style="width: 200px; height: 200px; overflow: auto;">
     <div class="infowindow-img-container" style="display: flex; justify-content: center; align-items: center;">

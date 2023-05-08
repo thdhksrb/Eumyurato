@@ -6,7 +6,10 @@ import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO;
 import com.e114.e114_eumyuratodemo1.jdbc.ArtistMemberDAO;
 import com.e114.e114_eumyuratodemo1.jwt.JwtUtils;
+import com.google.cloud.storage.BlobInfo;
+import com.google.cloud.storage.Storage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,6 +33,12 @@ public class ArtistService {
 
     @Autowired
     private  ArtistMemberDTO artistMemberDTO;
+
+    @Autowired
+    private Storage storage;
+
+    @Value("${spring.cloud.gcp.storage.bucket}")
+    private String bucketName;
 
     @Autowired
     private JwtUtils jwtUtils;
@@ -177,16 +186,18 @@ public class ArtistService {
     }
 
     public void saveBusking(BuskingDTO buskingDTO, MultipartFile imgFile) throws IOException {
-        String originalFileName = imgFile.getOriginalFilename();
-        String fileExtension = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
-        UUID uuid = UUID.randomUUID();
-        String fileName = uuid.toString() + "_" + originalFileName;
-        Path filePath = Paths.get("src", "main", "resources", "static", "img", fileName);
-        imgFile.transferTo(filePath);
-        buskingDTO.setImage(String.valueOf(filePath));
-        System.out.println("service DTO : " + buskingDTO);
-        System.out.println(buskingDTO.getImage());
+        String uuid = UUID.randomUUID().toString();
+        String ext = imgFile.getContentType();
+
+        //이미지 업로드
+        BlobInfo blobInfo = storage.create(
+                BlobInfo.newBuilder(bucketName, uuid)
+                        .setContentType(ext)
+                        .build(),
+                imgFile.getInputStream()
+        );
+
+        buskingDTO.setImage(uuid);
         artistMemberDAO.saveBusking(buskingDTO);
     }
-
 }
