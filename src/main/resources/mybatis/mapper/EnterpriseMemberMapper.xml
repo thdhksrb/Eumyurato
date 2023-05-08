@@ -56,11 +56,78 @@
         WHERE id = #{id} AND adminNum = 3
     </select>
 
+    <select id="getArtistMembers" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
+        select *
+        from artist_member
+    </select>
+
+    <select id="getCommonMembers" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
+        select *
+        from common_member
+    </select>
+
+    <select id="getEntMembers" resultType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
+        select *
+        from enterprise_member
+    </select>
+
+    <select id="searchCommonMembers" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
+        SELECT * FROM common_member
+        WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+
+    <select id="searchArtistMembers" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
+        SELECT * FROM artist_member
+        WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+
+    <select id="searchEntMembers" resultType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
+        SELECT * FROM enterprise_member
+        WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+
     <select id="getEntSmallConcerts" resultType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
-        select * from small_concert where entId = #{entId}
+        select * from small_concert where enterId = #{enterId}
     </select>
 
     <select id="searchEntSmallConcerts" resultType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
-        select * from small_concert where entId = #{entId} and ${column} LIKE CONCAT('%', #{keyword}, '%')
+        select * from small_concert where enterId = #{enterId} AND ${column} LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+
+    <select id="getCommonGender" resultType="map">
+        SELECT sex, COUNT(*) as count
+        FROM common_member
+        GROUP BY sex;
+    </select>
+
+    <select id="getCommonGenre" resultType="map">
+        SELECT genre, COUNT(*) as count
+        FROM common_member
+        GROUP BY genre;
+    </select>
+
+    <select id="getArtistGender" resultType="map">
+        SELECT sex, COUNT(*) as count
+        FROM artist_member
+        GROUP BY sex;
+    </select>
+
+    <select id="getArtistGenre" resultType="map">
+        SELECT genre, COUNT(*) as count
+        FROM artist_member
+        GROUP BY genre;
+    </select>
+
+    <select id="getEnterConcertIng" resultType="map">
+        <![CDATA[
+        SELECT COUNT(*) AS concert_ing
+        FROM small_concert
+        WHERE startDate <= CURDATE() AND lastDate >= CURDATE();
+        ]]>
+    </select>
+
+    <select id="getEnterConcertAll" resultType="map">
+        SELECT COUNT(*) AS concert_all
+        FROM small_concert;
     </select>
 </mapper>

@@ -11,6 +11,11 @@ document.getElementById('artistBtn').addEventListener('click', () => {
     getMembers(currentCategory);
 });
 
+document.getElementById('enterpriseBtn').addEventListener('click', () => {
+    currentCategory = 'enterprise';
+    getMembers(currentCategory);
+});
+
 document.getElementById('searchBtn').addEventListener('click', () => {
     const searchColumn = document.getElementById('searchColumn').value;
     const searchKeyword = document.getElementById('searchKeyword').value;
@@ -19,7 +24,7 @@ document.getElementById('searchBtn').addEventListener('click', () => {
 });
 
 function getMembers(category, page = 1, searchColumn = null, searchKeyword = '') {
-    let url = `/profile/admin/total?category=${category}&page=${page}`;
+    let url = `/profile/ent/total?category=${category}&page=${page}`;
     if (searchColumn && searchKeyword) {
         url += `&column=${searchColumn}&keyword=${searchKeyword}`;
     }
@@ -56,14 +61,13 @@ function getMembers(category, page = 1, searchColumn = null, searchKeyword = '')
         members.slice(start, end).forEach((member) => {
             const memberRow = memberTbody.insertRow();
 
-            // 기본 공통 컬럼
-
             switch (category) {
                 case 'common':
                     // 일반 회원에 대한 데이터를 생성
                     memberRow.insertCell().textContent = member.id;
                     memberRow.insertCell().textContent = member.nid;
                     memberRow.insertCell().textContent = member.sex;
+                    memberRow.insertCell().textContent = member.birth;
                     memberRow.insertCell().textContent = member.genre;
                     break;
 
@@ -72,8 +76,17 @@ function getMembers(category, page = 1, searchColumn = null, searchKeyword = '')
                     memberRow.insertCell().textContent = member.id;
                     memberRow.insertCell().textContent = member.nid;
                     memberRow.insertCell().textContent = member.sex;
+                    memberRow.insertCell().textContent = member.birth;
                     memberRow.insertCell().textContent = member.genre;
                     memberRow.insertCell().textContent = member.point;
+                    break;
+
+                case 'enterprise':
+                    // 기업 회원에 대한 데이터를 생성
+                    memberRow.insertCell().textContent = member.id;
+                    memberRow.insertCell().textContent = member.name;
+                    memberRow.insertCell().textContent = member.email;
+                    memberRow.insertCell().textContent = member.phone;
                     break;
 
                 default:
