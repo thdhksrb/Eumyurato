@@ -26,12 +26,12 @@ function getReservationList(token, searchColumn = null, searchKeyword = null, pa
     })
         .then((response) => {
             if (response.ok) {
-                console.log(response.json());
-                return response.json();
+                return response.json(); // response.json()을 실행한 Promise 객체 반환
             }
             throw new Error('응답에 문제가 있습니다.');
         })
         .then((reservationList) => {
+            console.log(reservationList); // 응답 데이터 출력
             displayReservationList(reservationList, page);
         })
         .catch((error) => {
@@ -50,24 +50,18 @@ function displayReservationList(reservationList, currentPage) {
     reservationList.slice(start, end).forEach((reservation) => {
         const reservationRow = reservationTbody.insertRow();
 
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = '삭제';
-        deleteButton.classList.add('btn');
-        deleteButton.addEventListener('click', () => {
-            deleteReservation(reservation.id);
-        });
-
         reservationRow.insertCell().textContent = reservation.id;
-        reservationRow.insertCell().textContent = reservation.sid;
+        reservationRow.insertCell().textContent = reservation.name;
         reservationRow.insertCell().textContent = reservation.cid;
         reservationRow.insertCell().textContent = reservation.payTime;
         reservationRow.insertCell().textContent = reservation.viewDate;
         reservationRow.insertCell().textContent = reservation.memberNum;
         reservationRow.insertCell().textContent = reservation.reservPay;
-        reservationRow.insertCell().appendChild(deleteButton);
+         // 공연명 추가
     });
 
-    createPagination(reservationList.length, perPage, currentPage);
+    const totalItems = reservationList.length;
+    createPagination(totalItems, perPage, currentPage);
 }
 
 function createPagination(totalItems, perPage, currentPage) {
@@ -95,36 +89,3 @@ function createPagination(totalItems, perPage, currentPage) {
         paginationEl.appendChild(li);
     }
 }
-
-function deleteReservation(reservationId) {
-    if (!confirm('정말로 이 공연을 삭제하시겠습니까?')) {
-        return;
-    }
-
-    const token = sessionStorage.getItem('jwtToken');
-    const url = `/profile/ent/reservation?id=${reservationId}`;
-
-    fetch(url, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-        },
-    })
-        .then((response) => {
-            if (response.ok) {
-                alert('공연이 성공적으로 삭제되었습니다.');
-                const searchColumn = document.getElementById('searchColumn').value;
-                const searchKeyword = document.getElementById('searchKeyword').value;
-                getReservationList(token, searchColumn, searchKeyword, currentPage);
-            } else if (response.status === 403) {
-                alert('현재 날짜 이전의 내용은 삭제하지 못합니다.');
-            } else {
-                throw new Error('응답에 문제가 있습니다.');
-            }
-        })
-        .catch((error) => {
-            console.error('fetch 작동에 문제가 있습니다.', error);
-        });
-}
-

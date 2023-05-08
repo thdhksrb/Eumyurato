@@ -160,13 +160,18 @@ public class EntController {
                                                       @RequestParam(value = "keyword", required = false) String keyword) {
 
         String token = jwtUtils.getAccessToken(request);
-        String id = jwtUtils.getId(token);
+        String enterId = jwtUtils.getId(token);
 
-        List<List<ReservationDTO>> reservationList = enterpriseService.getReservationsByEnter(id, column, keyword);
+        List<ReservationDTO> reservations;
+        if (column != null && keyword != null) {
+            reservations = enterpriseService.searchReservationsByEnterId(enterId, column, keyword);
+        } else {
+            reservations = enterpriseService.getReservationsByEnterId(enterId);
+        }
 
-        System.out.println("Reservation List: " + reservationList);
+        System.out.println("Reservations: " + reservations);
 
-        return ResponseEntity.ok(reservationList);
+        return ResponseEntity.ok(reservations);
     }
 
     @GetMapping("/profile/ent/management/view")

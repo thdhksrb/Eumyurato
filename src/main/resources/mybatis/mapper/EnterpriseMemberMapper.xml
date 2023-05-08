@@ -129,15 +129,20 @@
         FROM small_concert;
     </select>
 
-    <select id="getSmallConcertId" resultType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
-        SELECT * FROM small_concert where enterId = #{param1};
+    <select id="searchReservationsByEnterId" resultType="com.e114.e114_eumyuratodemo1.dto.ReservationDTO">
+        SELECT r.*, sc.name
+        FROM reservation r
+                 JOIN schedules s ON r.sid = s.id
+                 JOIN small_concert sc ON s.conId = sc.id
+        WHERE sc.enterId = #{enterId}
+          AND ${column} LIKE CONCAT('%', #{keyword}, '%')
     </select>
 
-    <select id="getScheduleId" resultType="com.e114.e114_eumyuratodemo1.dto.SchedulesDTO">
-        SELECT * FROM schedules where conId = #{param1};
-    </select>
-
-    <select id="getReservationId" resultType="com.e114.e114_eumyuratodemo1.dto.ReservationDTO">
-        SELECT * FROM reservation where sId = #{param1};
+    <select id="getReservationsByEnterId" resultType="com.e114.e114_eumyuratodemo1.dto.ReservationDTO">
+        SELECT r.*, sc.name
+        FROM reservation r
+                 JOIN schedules s ON r.sid = s.id
+                 JOIN small_concert sc ON s.conId = sc.id
+        WHERE sc.enterId = #{enterId}
     </select>
 </mapper>

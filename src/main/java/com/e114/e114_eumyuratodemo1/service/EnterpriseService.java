@@ -144,31 +144,12 @@ public class EnterpriseService {
         return enterpriseMemberDAO.getEnterConcertAll();
     }
 
-    public List<List<ReservationDTO>> getReservationsByEnter(String enterId, String colume, String keyword){
+    public List<ReservationDTO> searchReservationsByEnterId(String enterId, String column, String keyword) {
+        return enterpriseMemberDAO.searchReservationsByEnterId(enterId, column, keyword);
+    }
 
-        List<SmallConcertDTO> smallconcertId = enterpriseMemberDAO.getSmallConcertId(enterId);
-        List<Integer> conIdList = new ArrayList<>();
-        for (SmallConcertDTO smallConcertDTO : smallconcertId) {
-            int id = smallConcertDTO.getId();
-            conIdList.add(id);
-        }
-        System.out.println("1 : " + conIdList);
-        List<Integer> scheduleIdList = new ArrayList<>();
-        for (int conId : conIdList) {
-            List<SchedulesDTO> scheduleList = enterpriseMemberDAO.getScheduleId(conId);
-            for (SchedulesDTO schedule : scheduleList) {
-                int scheduleId = schedule.getId();
-                scheduleIdList.add(scheduleId);
-            }
-        }
-        System.out.println("2 : " + scheduleIdList);
-
-        List<List<ReservationDTO>> reservationList = new ArrayList<>();
-        for (int scheduleId : scheduleIdList) {
-            reservationList.add(enterpriseMemberDAO.getReservationId(scheduleId));
-        }
-
-        return reservationList;
+    public List<ReservationDTO> getReservationsByEnterId(String enterId) {
+        return enterpriseMemberDAO.getReservationsByEnterId(enterId);
     }
 }
 

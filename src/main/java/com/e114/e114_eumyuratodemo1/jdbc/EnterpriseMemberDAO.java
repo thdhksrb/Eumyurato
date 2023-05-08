@@ -59,7 +59,6 @@ public interface EnterpriseMemberDAO{
 
     List<ReservationDTO> searchReservations(Map<String, String> params  );
 
-    List<SmallConcertDTO> getSmallConcertId(String enterId);
-    List<SchedulesDTO> getScheduleId(int conId);
-    List<ReservationDTO> getReservationId(int sid);
+    List<ReservationDTO> searchReservationsByEnterId(String enterId, String column, String keyword);
+    List<ReservationDTO> getReservationsByEnterId(String enterId);
 }
