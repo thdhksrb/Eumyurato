@@ -81,4 +81,17 @@
         DELETE FROM reservation WHERE id = #{param1} AND viewDate > CURRENT_DATE
     </delete>
 
+    <!--회원정보 수정-->
+    <select id="selectCommonMemberById" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
+        SELECT *
+        FROM common_member
+        WHERE id = #{id}
+    </select>
+
+    <update id="updateCommonMember" parameterType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
+        UPDATE common_member
+        SET nid = #{nid}, phone = #{phone}, email = #{email}
+        WHERE id = #{id}
+    </update>
+
 </mapper>

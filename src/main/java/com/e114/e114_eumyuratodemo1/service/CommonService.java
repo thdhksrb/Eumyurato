@@ -132,6 +132,16 @@ public class CommonService {
     public int deleteReservation(int id) {
         return commonMemberDAO.deleteCommonReservation(id);
     }
+
+    //회원정보 수정
+    public CommonMemberDTO getCommonMemberById(String id) {
+        return commonMemberDAO.findById(id);
+    }
+
+    public boolean updateCommonMember(CommonMemberDTO commonMember) {
+        int affectedRows = commonMemberDAO.updateCommonMember(commonMember);
+        return affectedRows > 0;
+    }
 }
 
 
