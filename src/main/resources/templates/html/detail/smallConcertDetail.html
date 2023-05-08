@@ -47,7 +47,7 @@
             <!-- begin::Aside Top -->
             <div class="d-flex flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
                 <!-- begin::Aside Logo -->
-                <a th:href="@{../dist/index.html}" class="mb-6">
+                <a th:href="@{/home}" class="mb-6">
                     <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
                         <img alt="로고" th:src="@{/img/E114_logo.png}" class="h-450px h-lg-450px"/>
                     </div>
@@ -69,7 +69,7 @@
                             th:onclick="|location.href='@{/loginjoin/common/login}'|">로그인</button>
                 </div>
                 <div style="margin-right: 20px;" id="navLogout">
-                    <a id="mypageBtn" style="width: 150px; height: 30px;"><img th:src="@{/img/person.png}" style="width: 30px; height: 30px; cursor:pointer;"/>
+                    <a id="mypageBtn" style="width: 200px; height: 30px;"><img th:src="@{/img/person.png}" style="width: 30px; height: 30px; cursor:pointer;"/>
                         <span id="userName" style="display: inline-block; margin-left: 10px; font-weight: bold; font-size: large; cursor:pointer;"></span>님</a>
 
                     <a id="logoutBtn" href="/map" style="margin-left: 20px;"></a>
@@ -78,7 +78,9 @@
             </div>
             <div class="d-flex justify-content-center align-items-center"
                  style="width: 100%; height: 600px; background-color:#ffffff; margin-bottom: 0; position: relative;">
-                <div id="posterContainer" style="width: 300px; height: 500px;"></div>
+                <div id="posterContainer" style="width: 300px; height: 500px;">
+<!--                    <img id="posterImg" style="object-fit: contain; width: 100%; height: 100%;">-->
+                </div>
                 <ul id="detailList" style="list-style-type: none; padding:0; margin-left: 30px; font-size:30px; width: 70%;"></ul>
                 <div id="heartContainer" style="position: absolute; top: 0; right: 0; margin-right: 30px;">
                     <button id="star" alt="star icon" style="border:none;background-color:transparent;" onclick="changeStar()">

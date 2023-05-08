@@ -3,7 +3,7 @@
 <!--begin::Head-->
 
 <head>
-    <title>Eumyurato :: PaySuccess</title>
+    <title>Eumyurato :: PayFail</title>
     <link rel="icon" type="image/x-icon" th:href="@{/img/E114_logo.png}"/>
     <meta charset="utf-8"/>
     <meta name="description"
@@ -28,7 +28,7 @@
     <link th:href="@{/css/pay/pay1.css}" rel="stylesheet" type="text/css" />
     <link th:href="@{/css/pay/pay2.css}" rel="stylesheet" type="text/css" />
     <link th:href="@{/css/pay/calenderPay.css}" rel="stylesheet" type="text/css" />
-    <!--    jQuery UI CSS파일-->
+<!--    jQuery UI CSS파일-->
     <link rel="stylesheet" th:href="@{http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css}" type="text/css"/>
     <!--end::Global Stylesheets Bundle-->
     <script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
@@ -40,13 +40,13 @@
 <!-- begin::Main -->
 <div class="d-flex justify-content-center align-items-center flex-column flex-root">
     <img th:src="@{/img/E114_logo.png}" width="400px" height="400px">
-    <p style="font-size: 30px"><strong>결제가 완료되었습니다.</strong></p>
+    <p style="font-size: 30px"><strong>결제가 실패하였습니다.</strong></p>
     <br>
     <br>
     <div style ="display:flex; flex-direction:column; align-items:flex-start">
-    <p id="payTime" style="font-size: 15px; font-weight: bold"></p>
-    <p id="conName" style="font-size: 15px; font-weight: bold"></p>
-    <p id="price" style="font-size: 15px; font-weight: bold"></p>
+        <p id="payTime" style="font-size: 15px; font-weight: bold">결제상태 : FAIL_PAYMENT</p>
+        <p id="conName" style="font-size: 15px; font-weight: bold"></p>
+        <p id="price" style="font-size: 15px; font-weight: bold"></p>
     </div>
     <button type="button" class="btn btn-primary fw-bolder fs-1 px-2 py-3 my-3 text-center" style="width: 200px; height: 50px; margin-left: auto; margin-right: 50px;"
             onclick="window.location.href='/home';">홈으로</button>
@@ -56,6 +56,6 @@
 <script th:src="@{http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js}"></script>
 <!--jQuery UI 라이브러리 js파일-->
 <script th:src="@{http://code.jquery.com/ui/1.8.18/jquery-ui.min.js}"></script>
-<script type="text/javascript" th:src="@{/js/pay/paySuccess.js}"></script>
+<script type="text/javascript" th:src="@{/js/pay/concertPayFail.js}"></script>
 </body>
 </html>

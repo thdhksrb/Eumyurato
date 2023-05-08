@@ -91,6 +91,39 @@ $.ajax({
 
         buskerInfo.append(li);
 
+        // 이미지 URL을 가져온다.
+        var imageUrl = data.image;
+
+        if(imageUrl !== null && imageUrl.startsWith("https://")){
+            // 이미지 요소를 생성한다.
+            var img = document.createElement("img");
+            img.src = imageUrl;
+            img.style.objectFit = "contain";
+            img.style.width = "100%";
+            img.style.height = "100%";
+
+            // 이미지 요소를 포함할 div를 찾는다.
+            var posterContainer = document.getElementById("posterContainer");
+
+            // div에 이미지 요소를 추가한다.
+            posterContainer.appendChild(img);
+        }else{
+            var replacedImageUrl = imageUrl.replace(/\\/g, "/").replace("src/main/resources/static", "");
+            console.log(replacedImageUrl);
+            // 이미지 요소를 생성한다.
+            var img = document.createElement("img");
+            img.src = replacedImageUrl;
+            img.style.objectFit = "contain";
+            img.style.width = "100%";
+            img.style.height = "100%";
+
+            // 이미지 요소를 포함할 div를 찾는다.
+            var posterContainer = document.getElementById("posterContainer");
+
+            // div에 이미지 요소를 추가한다.
+            posterContainer.appendChild(img);
+        }
+
         // 첫 번째 Ajax 호출이 완료된 후에 두 번째 Ajax 호출을 실행
         $('#pay').click(function (){
             localStorage.setItem('price',priceValue);
@@ -133,4 +166,48 @@ const searchButton = document.querySelector("#search-btn");
 searchButton.addEventListener('click', function (){
     priceValue = price.value;
     output.textContent = '후원금액 : ' + priceValue + '원';
+});
+
+document.querySelector('#plus1000').addEventListener('click',function(){
+    const currentValue = parseInt(price.value);
+    if(isNaN(currentValue)){
+        price.value=1000
+    }else{
+        price.value = currentValue + 1000;
+    }
+});
+document.querySelector('#plus5000').addEventListener('click',function(){
+    const currentValue = parseInt(price.value);
+    if(isNaN(currentValue)){
+        price.value=5000
+    }else{
+        price.value = currentValue + 5000;
+    }
+});
+document.querySelector('#plus10000').addEventListener('click',function(){
+    const currentValue = parseInt(price.value);
+    if(isNaN(currentValue)){
+        price.value=10000
+    }else{
+        price.value = currentValue + 10000;
+    }
+});
+document.querySelector('#minus1000').addEventListener('click',function(){
+    const currentValue = parseInt(price.value);
+    if(!isNaN(currentValue) && currentValue>=1000){
+        price.value = currentValue - 1000;
+    }
+
+});
+document.querySelector('#minus5000').addEventListener('click',function(){
+    const currentValue = parseInt(price.value);
+    if(!isNaN(currentValue) && currentValue>=5000){
+        price.value = currentValue - 5000;
+    }
+});
+document.querySelector('#minus10000').addEventListener('click',function(){
+    const currentValue = parseInt(price.value);
+    if(!isNaN(currentValue) && currentValue>=10000){
+        price.value = currentValue - 10000;
+    }
 });
