@@ -68,7 +68,7 @@ public class MapController {
 
 //        String imagePath = dto.getImage();
 //        // 이미지 파일이 로컬에 저장된 파일인 경우
-//        if (!imagePath.startsWith("https://")) {
+//        if (imagePath != null && !imagePath.startsWith("https://")) {
 //        //이미지 경로 바이트 형식으로 변환
 //        InputStream inputStream = new FileInputStream(dto.getImage());
 //        byte[] imageByteArray = IOUtils.toByteArray(inputStream);

@@ -91,18 +91,37 @@ $.ajax({
 
         detailList.append(li);
 
-        if(data.imageByteArray === null) {
-            var imageUrl = data.image;
-            var img = document.getElementById("posterImg");
+        // 이미지 URL을 가져온다.
+        var imageUrl = data.image;
+
+        if(imageUrl !== null && imageUrl.startsWith("https://")){
+            // 이미지 요소를 생성한다.
+            var img = document.createElement("img");
             img.src = imageUrl;
-            img.style.display = "block";
-        } else {
-            var imageByteArray = data.imageByteArray;
-            var base64 = btoa(String.fromCharCode(...imageByteArray));
-            var imageUrl = "data:image/jpeg;base64," + base64;
-            var img = document.getElementById("posterImg");
-            img.src = imageUrl;
-            img.style.display = "block";
+            img.style.objectFit = "contain";
+            img.style.width = "100%";
+            img.style.height = "100%";
+
+            // 이미지 요소를 포함할 div를 찾는다.
+            var posterContainer = document.getElementById("posterContainer");
+
+            // div에 이미지 요소를 추가한다.
+            posterContainer.appendChild(img);
+        }else{
+            var replacedImageUrl = imageUrl.replace(/\\/g, "/").replace("src/main/resources/static", "");
+            console.log(replacedImageUrl);
+            // 이미지 요소를 생성한다.
+            var img = document.createElement("img");
+            img.src = replacedImageUrl;
+            img.style.objectFit = "contain";
+            img.style.width = "100%";
+            img.style.height = "100%";
+
+            // 이미지 요소를 포함할 div를 찾는다.
+            var posterContainer = document.getElementById("posterContainer");
+
+            // div에 이미지 요소를 추가한다.
+            posterContainer.appendChild(img);
         }
 
         price.append($('<p>').html('<strong>티켓가격: </strong><span style="color:red">' + data.price.toLocaleString() + '</span>원'));
@@ -131,3 +150,4 @@ function changeStar() {
         starImg.setAttribute("src", "/assets/star.png");
     }
 }
+
