@@ -66,8 +66,37 @@ $(document).ready(function() {
         $('#previewImage').attr('src', imageUrl);
     });
 
+    //시작일 검사
+    $('#startDate').on('change', function() {
+        const startDate = $(this).val();
+        const regex = /^\d{4}[.-](0?[1-9]|1[012])[.-](0?[1-9]|[12][0-9]|3[01])$/;
+        var isValid = regex.test(startDate); // 입력 값이 정규식 패턴과 일치하는지 검증
+
+        if (!isValid) {
+            alert('입력값이 유효하지 않습니다.');
+            $(this).val('');
+        } else {
+            var inputDate = new Date(startDate); // 입력된 값으로부터 Date 객체 생성
+            inputDate.setHours(23, 59, 59); // 시간을 23:59:59로 설정
+            var now = new Date(); // 현재 시간을 나타내는 Date 객체 생성
+
+            if (inputDate <= now) { // 입력된 값이 현재 시간보다 이전인 경우
+                alert('오늘 이후의 날짜를 입력해주세요.');
+                $(this).val('');
+            }
+        }
+    });
+
     //마감일 검사
     $('#lastDate').on('change', function() {
+        const lastDate = $(this).val();
+        const regex = /^\d{4}[.-](0?[1-9]|1[012])[.-](0?[1-9]|[12][0-9]|3[01])$/;
+        var isValid = regex.test(lastDate); // 입력 값이 정규식 패턴과 일치하는지 검증
+
+        if (!isValid) {
+            alert('입력값이 유효하지 않습니다.');
+            $(this).val('');
+        }
         checkEndDate();
     });
 

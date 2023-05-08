@@ -35,7 +35,7 @@ function displayArtistData(artist) {
         // 이미지 요소를 생성한다.
         var img = document.createElement("img");
         img.src = imageUrl;
-        img.style.objectFit = "contain";
+        img.style.objectFit = "cover";
         img.style.width = "100%";
         img.style.height = "100%";
 
@@ -50,7 +50,7 @@ function displayArtistData(artist) {
         // 이미지 요소를 생성한다.
         var img = document.createElement("img");
         img.src = replacedImageUrl;
-        img.style.objectFit = "contain";
+        img.style.objectFit = "cover";
         img.style.width = "100%";
         img.style.height = "100%";
 
@@ -63,7 +63,7 @@ function displayArtistData(artist) {
         // 이미지 요소를 생성한다.
         var img = document.createElement("img");
         img.src = "/img/default.jpg";
-        img.style.objectFit = "contain";
+        img.style.objectFit = "cover";
         img.style.width = "100%";
         img.style.height = "100%";
 
