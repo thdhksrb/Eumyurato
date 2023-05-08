@@ -38,6 +38,10 @@ dependencies {
     implementation 'commons-fileupload:commons-fileupload:1.4'
     implementation 'commons-io:commons-io:2.11.0'
 
+    //파일 저장소
+    implementation group: 'org.springframework.cloud', name: 'spring-cloud-gcp-starter', version: '1.2.5.RELEASE'
+    implementation group: 'org.springframework.cloud', name: 'spring-cloud-gcp-storage', version: '1.2.5.RELEASE'
+
     //mail
     //implementation 'org.springframework.boot:spring-boot-starter-mail'
 
@@ -47,6 +51,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
 }
 
 tasks.named('test') {
