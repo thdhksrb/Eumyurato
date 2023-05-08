@@ -51,8 +51,8 @@
     </select>
 
     <!--비밀번호 찾기-->
-    <update id="updatePw" >
-        update member set pw = #{pw} where id = #{id}
+    <update id="updatePassword">
+        update common_member set pwd = #{pwd} where id = #{id}
     </update>
 
     <select id="getCommonInfoById" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">

@@ -75,3 +75,4 @@ function displayAdminData(admin) {
 window.onload = function () {
     getAdminData();
 };
+
