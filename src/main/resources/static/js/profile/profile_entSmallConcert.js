@@ -49,7 +49,7 @@ function displaySmallConcertList(smallConcertList, currentPage) {
     smallConcertList.slice(start, end).forEach((smallConcert) => {
         const smallConcertRow = smallConcertTbody.insertRow();
 
-        smallConcertRow.insertCell().textContent = smallConcert.entId;
+        smallConcertRow.insertCell().textContent = smallConcert.enterId;
         smallConcertRow.insertCell().textContent = smallConcert.name;
         smallConcertRow.insertCell().textContent = smallConcert.location;
         smallConcertRow.insertCell().textContent = smallConcert.regDate;

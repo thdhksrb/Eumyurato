@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class EntController {
@@ -57,6 +59,93 @@ public class EntController {
         }
     }
 
+    @GetMapping("/profile/ent/total/view")
+    public String enterpriseTotalsview() {
+
+        return "html/profile/total/profile_enterprise_total";
+    }
+
+    @GetMapping("/profile/ent/total")
+    public ResponseEntity<?> getMemberList(@RequestParam("category") String category,
+                                           @RequestParam(value = "column", required = false) String column,
+                                           @RequestParam(value = "keyword", required = false) String keyword) {
+        List<?> memberList;
+
+        if (column != null && keyword != null) {
+            switch (category) {
+                case "common":
+                    memberList = enterpriseService.searchCommons(column, keyword);
+                    break;
+                case "artist":
+                    memberList = enterpriseService.searchArtists(column, keyword);
+                    break;
+                case "enterprise":
+                    memberList = enterpriseService.searchEnters(column, keyword);
+                    break;
+                default:
+                    return ResponseEntity.badRequest().body("잘못된 카테고리입니다.");
+            }
+        } else {
+            switch (category) {
+                case "common":
+                    memberList = enterpriseService.viewAllCommons();
+                    break;
+                case "artist":
+                    memberList = enterpriseService.viewAllArtists();
+                    break;
+                case "enterprise":
+                    memberList = enterpriseService.viewAllEnters();
+                    break;
+                default:
+                    return ResponseEntity.badRequest().body("잘못된 카테고리입니다.");
+            }
+        }
+
+        return ResponseEntity.ok(memberList);
+    }
+
+    @GetMapping("/profile/ent/total/commonMember")
+    @ResponseBody
+    public Map<String, Object> getCommonMember() {
+
+        List<Map<String, Object>> genderCounts = enterpriseService.commonGenderCount();
+        List<Map<String, Object>> genreCounts = enterpriseService.commonGenreCount();
+
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("genderCounts", genderCounts);
+        resultMap.put("genreCounts", genreCounts);
+
+        return resultMap;
+    }
+
+    @GetMapping("/profile/ent/total/artistMember")
+    @ResponseBody
+    public Map<String, Object> getArtistMember() {
+
+        List<Map<String, Object>> genderCounts = enterpriseService.artistGenderCount();
+        List<Map<String, Object>> genreCounts = enterpriseService.artistGenreCount();
+
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("genderCounts", genderCounts);
+        resultMap.put("genreCounts", genreCounts);
+
+        return resultMap;
+    }
+
+    @GetMapping("/profile/ent/total/enterMember")
+    @ResponseBody
+    public Map<String, Object> getEnterMember() {
+
+        List<Map<String, Object>> concertIng = enterpriseService.enterConcertIng();
+        List<Map<String, Object>> concertAll = enterpriseService.enterConcertAll();
+
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("concertIng", concertIng);
+        resultMap.put("concertAll", concertAll);
+
+        return resultMap;
+    }
+
     @GetMapping("/profile/ent/modify")
     public String artistAccountModify(){
         return "html/profile/accountModify/profile_enterprise_accountModify";
@@ -80,14 +169,14 @@ public class EntController {
                                             @RequestParam(value = "keyword", required = false) String keyword) {
 
         String token = jwtUtils.getAccessToken(request);
-        String smallConcertId = jwtUtils.getId(token);
+        String enterId = jwtUtils.getId(token);
 
         List<SmallConcertDTO> smallConcertList;
 
         if (column != null && keyword != null) {
-            smallConcertList = enterpriseService.searchEntSmallConcert(smallConcertId, column, keyword);
+            smallConcertList = enterpriseService.searchEntSmallConcert(enterId, column, keyword);
         } else {
-            smallConcertList = enterpriseService.viewEntSmallConcert(smallConcertId);
+            smallConcertList = enterpriseService.viewEntSmallConcert(enterId);
         }
 
         System.out.println("SmallConcert List: " + smallConcertList);
