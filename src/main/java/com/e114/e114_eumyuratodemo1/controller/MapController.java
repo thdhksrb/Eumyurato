@@ -204,6 +204,7 @@ public class MapController {
         return dto;
     }
 
+    //small_cocnert 결제
     @GetMapping("/pay/kakao")
     @ResponseBody
     public String kakaoPay(){
@@ -287,6 +288,7 @@ public class MapController {
         return ResponseEntity.ok().body(response);
     }
 
+    //도네이션 결제
     @GetMapping("/pay/kakao/donation")
     @ResponseBody
     public String kakaoDonation(){
@@ -323,9 +325,11 @@ public class MapController {
 
         System.out.println("userid: " + userId);
 
+        //성공 시 artist_donation 테이블에 저장
         mapService.saveDonation(price, id);
         mapService.saveDonationNum(price, id, userId);
 
+        //성공 페이지 출력 내용
         Map<String, BuskingDTO> response = new HashMap<>();
         response.put("message", mapService.selectBusking(id));
 
@@ -345,6 +349,7 @@ public class MapController {
         String idStr = data.get("id");
         int id = Integer.parseInt(idStr);
 
+        //실패 페이지 출력 내용
         Map<String, BuskingDTO> response = new HashMap<>();
         response.put("message", mapService.selectBusking(id));
 
