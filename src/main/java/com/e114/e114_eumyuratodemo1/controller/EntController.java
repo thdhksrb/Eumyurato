@@ -68,7 +68,7 @@ public class EntController {
     @GetMapping("/profile/ent/info/view")
     public String enterpriseInfoview() {
 
-        return "html/profile/borard/profile_enterprise_borad";
+        return "html/profile/board/profile_enterprise_board";
     }
 
     @GetMapping("/profile/ent/total")

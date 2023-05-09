@@ -124,13 +124,13 @@ public class AdminController {
     @GetMapping("/profile/admin/info/view")
     public String admimInfoview() {
 
-        return "html/profile/borard/profile_admin_borad";
+        return "html/profile/board/profile_admin_board";
     }
 
     @GetMapping("/profile/admin/info/modify")
     public String admimInfomodify() {
 
-        return "html/profile/borardModify/profile_admin_boradModify";
+        return "html/profile/boardModify/profile_admin_boardModify";
     }
 
     @GetMapping("/profile/admin/total")
