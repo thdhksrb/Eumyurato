@@ -284,4 +284,10 @@ public class AdminController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/profile/admin/total/chart")
+    public String adminGraph() {
+
+        return "html/profile/totalChart/profile_admin_totalChart";
+    }
+
 }

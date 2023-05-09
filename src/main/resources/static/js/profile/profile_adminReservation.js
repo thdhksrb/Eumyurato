@@ -52,7 +52,7 @@ function displayReservationList(reservationList, currentPage) {
 
         const deleteButton = document.createElement('button');
         deleteButton.textContent = '취소';
-        deleteButton.classList.add('btn');
+        deleteButton.classList.add('delete-btn');
         deleteButton.addEventListener('click', () => {
             deleteReservation(reservation.id);
         });

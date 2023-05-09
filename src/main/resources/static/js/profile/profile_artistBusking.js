@@ -46,12 +46,16 @@ function displayBuskingList(buskingList, currentPage) {
     const start = (currentPage - 1) * perPage;
     const end = start + perPage;
 
+    const currentDate = new Date();
+
     buskingList.slice(start, end).forEach((busking) => {
         const buskingRow = buskingTbody.insertRow();
+        
+        const startBuskingDate = new Date(busking.date);
 
         const deleteButton = document.createElement('button');
-        deleteButton.textContent = '삭제';
-        deleteButton.classList.add('btn');
+        deleteButton.textContent = '취소';
+        deleteButton.classList.add('delete-btn');
         deleteButton.addEventListener('click', () => {
             deleteBusking(busking.id);
         });
@@ -61,7 +65,14 @@ function displayBuskingList(buskingList, currentPage) {
         buskingRow.insertCell().textContent = busking.location;
         buskingRow.insertCell().textContent = busking.date;
         buskingRow.insertCell().textContent = busking.regDate;
-        buskingRow.insertCell().appendChild(deleteButton);
+
+        // 현재 날짜 이전 예약은 취소 불가
+        if (startBuskingDate >= currentDate) {
+            buskingRow.insertCell().appendChild(deleteButton);
+        } else {
+            buskingRow.insertCell().textContent = '취소 불가';
+        }
+
     });
 
     createPagination(buskingList.length, perPage, currentPage);
@@ -110,12 +121,10 @@ function deleteBusking(buskingId) {
     })
         .then((response) => {
             if (response.ok) {
-                alert('공연이 성공적으로 삭제되었습니다.');
+                alert('공연이 성공적으로 취소되었습니다.');
                 const searchColumn = document.getElementById('searchColumn').value;
                 const searchKeyword = document.getElementById('searchKeyword').value;
                 getBuskingList(token, searchColumn, searchKeyword, currentPage);
-            } else if (response.status === 403) {
-                alert('현재 날짜 이전의 내용은 삭제하지 못합니다.');
             } else {
                 throw new Error('응답에 문제가 있습니다.');
             }
