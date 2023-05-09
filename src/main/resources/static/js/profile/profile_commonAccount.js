@@ -75,13 +75,8 @@ function displayCommonData(common) {
     }
 }
 
-// 페이지 로드 시 관리자 정보를 가져옵니다.
-window.onload = function () {
-    getCommonData();
-
-};
-
-const logoutBtn = document.createElement("a");
+// 로그아웃
+const logoutBtn = document.getElementById("logoutBtn");
 logoutBtn.setAttribute("href", "/logout");
 logoutBtn.onclick = function () {
     fetch('/logout', { method: 'POST', credentials: 'include' })
@@ -89,6 +84,7 @@ logoutBtn.onclick = function () {
             if (response.ok) {
                 // 세션 스토리지에서 토큰 제거
                 window.sessionStorage.removeItem("jwtToken");
+                console.log("로그아웃")
                 // 홈페이지로 이동
                 window.location.href = "/home";
             } else {
@@ -99,4 +95,10 @@ logoutBtn.onclick = function () {
             console.error(error);
             alert(error.message);
         });
+};
+
+// 페이지 로드 시 관리자 정보를 가져옵니다.
+window.onload = function () {
+    getCommonData();
+
 };

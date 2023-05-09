@@ -92,7 +92,7 @@
                     </div>
                 </div>
             </div>
-            <a class="ms-5 me-15" style="position: relative; top: 200px; left: 300px;" th:href="@{/logout}">
+            <a id="logoutBtn" class="ms-5 me-15" style="position: relative; top: 200px; left: 300px;">
                 <img th:src="@{/img/logout.png}" style="height: 30px; width: 30px;">
             </a>
         </div>
@@ -148,29 +148,21 @@
                         <select id="searchColumn" style="width: 10%; height: 40px; border-radius: 5px;">
                             <!-- 일반 회원 옵션 -->
                             <option class="common" value="id">아이디</option>
-                            <option class="common" value="name">성명</option>
                             <option class="common" value="nid">닉네임</option>
                             <option class="common" value="sex">성별</option>
                             <option class="common" value="birth">생년월일</option>
-                            <option class="common" value="email">이메일</option>
-                            <option class="common" value="road">유입 경로</option>
                             <option class="common" value="genre">선호 장르</option>
 
                             <!-- 아티스트 회원 옵션 -->
                             <option class="artist" value="id">아이디</option>
-                            <option class="artist" value="name">성명</option>
                             <option class="artist" value="nid">활동명</option>
                             <option class="artist" value="sex">성별</option>
                             <option class="artist" value="birth">생년월일</option>
-                            <option class="artist" value="email">이메일</option>
                             <option class="artist" value="genre">장르</option>
-                            <option class="artist" value="point">포인트</option>
 
                             <!-- 기업 회원 옵션 -->
                             <option class="enterprise" value="id">아이디</option>
                             <option class="enterprise" value="name">기업명</option>
-                            <option class="enterprise" value="email">이메일</option>
-                            <option class="enterprise" value="phone">대표번호</option>
                         </select>
                         <input type="text" id="searchKeyword" placeholder="검색어 입력" style="width: 30%; height: 40px; border-radius: 5px; border: 1px solid #cccad4">
                         <button class="btn btn-primary" id="searchBtn" style="width: 10%;" >Search</button>

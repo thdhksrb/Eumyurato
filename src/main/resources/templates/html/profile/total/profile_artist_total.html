@@ -87,7 +87,7 @@
 					</div>
 				</div>
 			</div>
-			<a class="ms-5 me-15" style="position: relative; top: 200px; left: 300px;" th:href="@{/logout}">
+			<a id="logoutBtn" class="ms-5 me-15" style="position: relative; top: 200px; left: 300px;">
 				<img th:src="@{/img/logout.png}" style="height: 30px; width: 30px;">
 			</a>
 		</div>
@@ -142,13 +142,11 @@
                             <!-- 일반 회원 옵션 -->
                             <option class="common" value="id">아이디</option>
                             <option class="common" value="nid">닉네임</option>
-                            <option class="common" value="sex">성별</option>
                             <option class="common" value="genre">선호 장르</option>
 
 							<!-- 아티스트 회원 옵션 -->
                             <option class="artist" value="id">아이디</option>
                             <option class="artist" value="nid">활동명</option>
-                            <option class="artist" value="sex">성별</option>
                             <option class="artist" value="genre">장르</option>
                             <option class="artist" value="point">포인트</option>
                         </select>

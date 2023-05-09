@@ -87,7 +87,7 @@
 					</div>
 				</div>
 			</div>
-			<a class="ms-5 me-15" style="position: relative; top: 200px; left: 300px;" th:href="@{/logout}">
+			<a id="logoutBtn" class="ms-5 me-15" style="position: relative; top: 200px; left: 300px;">
 				<img th:src="@{/img/logout.png}" style="height: 30px; width: 30px;">
 			</a>
 		</div>
@@ -118,7 +118,6 @@
 					<div class="search-container">
 						<select id="searchColumn" style="width: 10%; height: 40px; border-radius: 5px;">
 							<option value="name">공연명</option>
-							<option value="viewDate">관람 일자</option>
 							<option value="cid">회원아이디</option>
 						</select>
 						<input type="text" id="searchKeyword" placeholder="관람 일자 예시) 2023-01-01" style="width: 30%; height: 40px; border-radius: 5px; border: 1px solid #cccad4">
