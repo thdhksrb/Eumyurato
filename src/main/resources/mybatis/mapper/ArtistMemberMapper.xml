@@ -114,18 +114,18 @@
     </select>
 
     <select id="getArtistBuskings" resultType="com.e114.e114_eumyuratodemo1.dto.BuskingDTO">
-        select * from busking where artId = #{artId} ORDER BY regDate DESC
         select *
         from busking
         where artId = #{artId}
+        ORDER BY regDate DESC
     </select>
 
     <select id="searchArtistBuskings" resultType="com.e114.e114_eumyuratodemo1.dto.BuskingDTO">
-        select * from busking where artId = #{artId} and ${column} LIKE CONCAT('%', #{keyword}, '%') ORDER BY regDate DESC
         select *
         from busking
         where artId = #{artId}
           and ${column} LIKE CONCAT('%', #{keyword}, '%')
+        ORDER BY regDate DESC
     </select>
 
     <delete id="deleteArtistBusking">
