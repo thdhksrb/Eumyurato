@@ -65,6 +65,12 @@ public class EntController {
         return "html/profile/total/profile_enterprise_total";
     }
 
+    @GetMapping("/profile/ent/info/view")
+    public String enterpriseInfoview() {
+
+        return "html/profile/borard/profile_enterprise_borad";
+    }
+
     @GetMapping("/profile/ent/total")
     public ResponseEntity<?> getMemberList(@RequestParam("category") String category,
                                            @RequestParam(value = "column", required = false) String column,
