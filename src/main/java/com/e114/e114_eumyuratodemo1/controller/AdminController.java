@@ -34,16 +34,6 @@ public class AdminController {
     @Autowired
     private JwtUtils jwtUtils;
 
-    @GetMapping("/profile/admin/root")
-    public String adminRoot() {
-        return "html/profile/root/profile_admin_root";
-    }
-
-    @PostMapping("/profile/admin/root")
-    public String adminRootPost() {
-        return "redirect:/board/admin";
-    }
-
     @GetMapping("/profile/admin/account")
     public String adminAccount() {
 
