@@ -72,4 +72,7 @@ public interface ArtistMemberDAO{
     void saveBuskingWithoutImage(BuskingDTO buskingDTO);
     void saveBusking(BuskingDTO buskingDTO);
 
+    //정보 수정
+    void modifyArtistWithoutImage(ArtistMemberDTO artistMemberDTO);
+    void artistModify(ArtistMemberDTO artistMemberDTO);
 }

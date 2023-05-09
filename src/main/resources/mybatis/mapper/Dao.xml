@@ -47,7 +47,7 @@
     </select>
     <select id="selectBusking" resultType="com.e114.e114_eumyuratodemo1.dto.BuskingDTO">
         <![CDATA[
-        SELECT b.*, a.nid
+        SELECT b.*, a.nid, a.image artImg
         FROM busking AS b
                  INNER JOIN artist_member AS a
                             ON b.artId = a.id

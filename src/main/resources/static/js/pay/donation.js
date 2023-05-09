@@ -92,7 +92,7 @@ $.ajax({
         buskerInfo.append(li);
 
         // 이미지 URL을 가져온다.
-        var imageUrl = data.image;
+        var imageUrl = data.artImg;
 
         if(imageUrl !== null && imageUrl.startsWith("https://")){
             // 이미지 요소를 생성한다.

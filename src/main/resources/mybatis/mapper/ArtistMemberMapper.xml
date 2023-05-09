@@ -185,4 +185,27 @@
         INSERT INTO busking (name, artId, date, location, image)
         VALUES (#{name}, #{artId}, #{date}, #{location}, #{image})
     </insert>
+
+    <update id="modifyArtistWithoutImage" parameterType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
+        UPDATE artist_member
+        SET
+            pwd = #{pwd},
+            nid = #{nid},
+            phone = #{phone},
+            email = #{email},
+            genre = #{genre}
+        WHERE id = #{id}
+    </update>
+
+    <update id="artistModify" parameterType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
+        UPDATE artist_member
+        SET
+            pwd = #{pwd},
+            nid = #{nid},
+            phone = #{phone},
+            email = #{email},
+            genre = #{genre},
+            image = #{image}
+        WHERE id = #{id}
+    </update>
 </mapper>

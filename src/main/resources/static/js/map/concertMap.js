@@ -190,7 +190,18 @@ function viewBusking(data){
                         '<p><strong>장소: </strong>' + record.location + '</p>' +
                         '<p><strong>공연 일자: </strong>' + record.date + '</p>' +
                         '<p><strong>공연자: </strong>' + record.nid + '</p>';
+
+                    var imageWrapper = document.createElement('div');
+                    imageWrapper.classList.add('image-wrapper');
+                    var image = document.createElement('img');
+                    image.src = record.image;//이미지 링크 넣는곳
+                    image.alt = '이미지공간';
+                    imageWrapper.appendChild(image);
+                    li.appendChild(imageWrapper);
+
+
                     li.style.padding='18px';
+
                     li.style.borderTop = '1px solid #ccc';
                     concert.appendChild(li);
 
@@ -450,7 +461,7 @@ function getContent(record) {
     }else{
         result = `<div class="infowindow" style="width: 200px; height: 200px; overflow: auto;">
     <div class="infowindow-img-container" style="display: flex; justify-content: center; align-items: center;">
-      <img src="/img/default.jpg" class="infowindow-img" alt="...">
+      <img src="/img/mapDefaultImg.png" class="infowindow-img" alt="...">
     </div>
     <div class="infowindow-body">
       <h2 class="infowindow-title">${record.name}</h2>

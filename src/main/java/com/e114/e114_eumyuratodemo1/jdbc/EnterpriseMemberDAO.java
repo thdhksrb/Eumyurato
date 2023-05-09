@@ -60,4 +60,8 @@ public interface EnterpriseMemberDAO{
     // 기업회원 소규모공연 목록 가져오기
     List<SmallConcertDTO> getEntSmallConcerts(String enterId);     // 소규모 공연 목록 불러오기
     List<SmallConcertDTO> searchEntSmallConcerts(String enterId, String column, String keyword); // 소규모 공연 검색
+
+    //정보 수정
+    void modifyEnterWithoutImage(EnterpriseMemberDTO enterpriseMemberDTO);
+    void enterModify(EnterpriseMemberDTO enterpriseMemberDTO);
 }
