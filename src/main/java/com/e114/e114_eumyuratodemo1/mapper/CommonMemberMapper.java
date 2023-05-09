@@ -13,7 +13,12 @@ public interface CommonMemberMapper {
     @Select("SELECT * FROM common_member WHERE id = #{id}")
     CommonMemberDTO selectCommonMemberById(String id);
 
-    @Update("UPDATE common_member SET nid = #{nid}, phone = #{phone}, email = #{email} WHERE id = #{id}")
+    // 회원 정보 수정 처리
+    @Update("UPDATE common_member SET "
+            + "<if test='nid != null'>nid = #{nid},</if>"
+            + "<if test='phone != null'>phone = #{phone},</if>"
+            + "<if test='email != null'>email = #{email},</if>"
+            + "WHERE id = #{id}")
     int updateCommonMember(CommonMemberDTO commonMemberDTO);
 
 }

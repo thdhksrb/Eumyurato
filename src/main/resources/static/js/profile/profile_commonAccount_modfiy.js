@@ -19,11 +19,12 @@ function getCommonData() {
 }
 
 function displayCommonData(common) {
-    document.getElementById("common-id").value = common.id;
-    document.getElementById("common-name").value = common.name;
-    document.getElementById("common-nid").value = common.nid;
-    document.getElementById("common-email").value = common.email;
-    document.getElementById("common-phone").value = common.phone;
+    document.getElementById("id").value = common.id;
+    document.getElementById("pwd").value = common.pwd;
+    document.getElementById("name").value = common.name;
+    document.getElementById("nid").value = common.nid;
+    document.getElementById("email").value = common.email;
+    document.getElementById("phone").value = common.phone;
 
 // 이미지 URL을 가져온다.
     var imageUrl = common.image;
@@ -42,7 +43,7 @@ function displayCommonData(common) {
         // div에 이미지 요소를 추가한다.
         profileImg.appendChild(img);
     } else if(imageUrl !== null && !imageUrl.startsWith("https://")) {
-        var replacedImageUrl = imageUrl.replace(/\\/g, "/").replace("src/main/resources/static", "");
+        var replacedImageUrl = 'https://storage.googleapis.com/eumyurato/' + imageUrl;
         console.log(replacedImageUrl);
         // 이미지 요소를 생성한다.
         var img = document.createElement("img");
@@ -76,21 +77,26 @@ document.getElementById("kt_login_signin_form").addEventListener("submit", funct
     event.preventDefault(); // 기본 동작 중단
 
     // 수정된 정보 가져오기
-    const nid = document.getElementById("common-nid").value;
-    const email = document.getElementById("common-email").value;
-    const phone = document.getElementById("common-phone").value;
+    const pwd = document.getElementById("pwd").value;
+    const nid = document.getElementById("nid").value;
+    const email = document.getElementById("email").value;
+    const phone = document.getElementById("phone").value;
+
+    // 이미지 파일 가져오기
+    const avatarInput = document.querySelector('input[name="avatar"]');
+    const avatarFile = avatarInput.files[0];
 
     // 서버로 전송할 데이터 생성
-    const data = {
-        nid: nid,
-        email: email,
-        phone: phone,
-    };
+    const data = new FormData();
+    data.append('pwd', pwd);
+    data.append('nid', nid);
+    data.append('email', email);
+    data.append('phone', phone);
+    data.append('avatar', avatarFile);
 
     // 서버로 데이터 전송
     const xhr = new XMLHttpRequest();
     xhr.open("PUT", "/profile/common");
-    xhr.setRequestHeader("Content-Type", "application/json");
     xhr.setRequestHeader("Authorization", `Bearer ${jwtToken}`);
     xhr.onload = function () {
         if (xhr.status === 200) {
@@ -99,8 +105,43 @@ document.getElementById("kt_login_signin_form").addEventListener("submit", funct
             alert("회원 정보 수정에 실패했습니다.");
         }
     };
-    xhr.send(JSON.stringify(data));
+    xhr.send(data);
 });
+
+function concertRegister() {
+    var formData = new FormData();
+    var fileInput = document.querySelector('input[name="avatar"]');
+    var file = fileInput.files[0];
+    formData.append('imgFile', file);
+    var data = {
+        name: $("input[name='name']").val(),
+        pname: $("input[name='pname']").val(),
+        location: $("input[name='sample4_roadAddress']").val(),
+        enterId: $("input[name='enterId']").val(),
+        startDate: $("input[name='startDate']").val(),
+        lastDate: $("input[name='lastDate']").val(),
+        price: $("input[name='price']").val()
+    };
+
+    formData.append('registerDTO', new Blob([JSON.stringify(data)], { type: 'application/json' }));
+    console.log(formData);
+    $.ajax({
+        type: 'POST',
+        url: '/profile/admin/register',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function() {
+            alert('공연등록 성공');
+            window.location.href = '/profile/admin/management/view';
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(textStatus + ': ' + errorThrown);
+        }
+    });
+}
+
+
 
 window.onload = function () {
     getCommonData();

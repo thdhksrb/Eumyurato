@@ -56,4 +56,5 @@ public interface CommonMemberDAO {
 
  //회원정보 수정
  int updateCommonMember(CommonMemberDTO commonMember);
+ void saveCommonMember(CommonMemberDTO commonMemberDTO);
 }

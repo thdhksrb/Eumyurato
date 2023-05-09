@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -65,21 +66,26 @@ public class CommonController {
         return "html/profile/accountModify/profile_common_accountModify";
     }
 
-    // 회원 정보 수정 처리
+// 회원 정보 수정 처리
     @PutMapping("/profile/common")
-    public ResponseEntity<String> updateCommonMember(@RequestBody CommonMemberDTO commonMemberDTO, HttpServletRequest request) {
+    public ResponseEntity<String> updateCommonMember(@ModelAttribute CommonMemberDTO commonMemberDTO, @RequestParam("imgFile") MultipartFile imgFile, HttpServletRequest request) {
         try {
             String id = request.getUserPrincipal().getName();
             CommonMemberDTO currentCommonMember = commonMemberMapper.selectCommonMemberById(id);
             if (!currentCommonMember.getId().equals(commonMemberDTO.getId())) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("현재 로그인한 사용자와 다른 사용자의 정보는 수정할 수 없습니다.");
             }
-            commonMemberMapper.updateCommonMember(commonMemberDTO);
+            if (!imgFile.isEmpty()) {
+                commonService.saveCommonMember(commonMemberDTO, imgFile);
+            } else {
+                commonService.updateCommonMember(commonMemberDTO.getId(), commonMemberDTO.getNid(), commonMemberDTO.getPhone(), commonMemberDTO.getEmail());
+            }
             return ResponseEntity.ok("개인 정보가 수정되었습니다.");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("개인 정보 수정에 실패했습니다.");
         }
     }
+
 
 
     @GetMapping("/profile/common/reservation/view")

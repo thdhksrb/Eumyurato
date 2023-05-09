@@ -90,7 +90,13 @@
 
     <update id="updateCommonMember" parameterType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
         UPDATE common_member
-        SET nid = #{nid}, phone = #{phone}, email = #{email}
+        <set>
+            <if test="pwd != null">pwd = #{pwd},</if>
+            <if test="nid != null">nid = #{nid},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="image != null">image = #{image},</if>
+        </set>
         WHERE id = #{id}
     </update>
 

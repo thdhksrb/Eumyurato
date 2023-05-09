@@ -118,55 +118,66 @@
                 </div>
                 <!--begin::Image input-->
                 <div class="image-input image-input-outline" data-kt-image-input="true"
-                     style="display: flex; justify-content: center; align-items: center;">
-                    <img alt="프로필사진" th:src="@{/img/default.jpg}"/>
-                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
-                           data-kt-image-input-action="change"
-                           data-bs-toggle="tooltip"
-                           data-bs-dismiss="click"
-                           title="Change avatar"
-                           style="position: absolute; right: -10px; top: -10px;">
-                        <i class="bi bi-pencil-fill fs-7"></i>
-                        <!--begin::Inputs-->
-                        <input type="file" name="avatar" accept=".png, .jpg, .jpeg"/>
-                        <input type="hidden" name="avatar_remove"/>
-                        <!--end::Inputs-->
-                    </label>
-                    <!--end::Edit button-->
+                     style="display: flex; justify-content: center; align-items: center">
+                    <!--begin::Image preview wrapper-->
+                    <div style="width:350px; height:400px; overflow: hidden; display: flex; justify-content: center; align-items: center; position: relative;">
+                        <img id="previewImage" src="#" alt="프로필사진" style="max-width: 100%; max-height: 100%; object-fit: cover;"/>
+                        <!--end::Image preview wrapper-->
 
-                    <!--begin::Cancel button-->
-                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
-                          data-kt-image-input-action="cancel"
-                          data-bs-toggle="tooltip"
-                          data-bs-dismiss="click"
-                          title="Cancel avatar"
-                          style="position: absolute; left: -10px; top: -10px;">
-										<i class="bi bi-x fs-2"></i>
-    								</span>
-                    <!--end::Cancel button-->
-
-                    <!--begin::Remove button-->
-                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
-                          data-kt-image-input-action="remove"
-                          data-bs-toggle="tooltip"
-                          data-bs-dismiss="click"
-                          title="Remove avatar"
-                          style="position: absolute; right: -10px; bottom: -10px;">
-      									<i class="bi bi-x fs-2"></i>
-									</span>
+                        <!--begin::Edit button-->
+                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
+                               data-kt-image-input-action="change"
+                               data-bs-toggle="tooltip"
+                               data-bs-dismiss="click"
+                               title="Change avatar"
+                               style="position: absolute; right: 10px; top: 10px;">
+                            <i class="bi bi-pencil-fill fs-7"></i>
+                            <!--begin::Inputs-->
+                            <input type="file" name="avatar" accept=".jpg, .png"/>
+                            <input type="hidden" name="avatar_remove"/>
+                            <!--end::Inputs-->
+                        </label>
+                        <!--end::Edit button-->
+                    </div>
                 </div>
+
                 <div class="fv-row mb-5">
                     <label class="form-label fs-6 fw-bolder text-dark pt-5">아이디</label>
                     <div class="d-flex align-items-center position-relative">
                         <input autocomplete="off" class="form-control form-control-lg form-control-solid me-2"
-                               id="common-id" name="id" placeholder="" required
+                               id="id" name="id" placeholder="" required
                                style="border-color: #0099FF;" type="text" readonly>
+                    </div>
+                </div>
+
+                <div class="fv-row mb-5">
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5">비밀번호</label>
+                    <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
+                    <input autocomplete="off" class="form-control form-control-lg form-control-solid"
+                           id="pwd" name="pwd" placeholder="대소문자, 숫자, 특수문자를 포함한 8자 이상 20자" required
+                           style="border-color: #0099FF;" type="password"/>
+                    <div>
+                        <div class="invalid-feedback" id="password-empty">필수 입력 정보입니다.</div>
+                        <div class="invalid-feedback" id="password-invalid">비밀번호는 대소문자, 숫자, 특수문자를 포함한 8자 이상 20자
+                            이하이어야
+                            합니다.
+                        </div>
+                    </div>
+                </div>
+
+                <div class=" fv-row mb-5">
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5">비밀번호 재확인</label>
+                    <input autocomplete="off" class="form-control form-control-lg form-control-solid" id="cpassword"
+                           name="cpassword" placeholder="" required style="border-color: #0099FF;"
+                           type="password"/>
+                    <div>
+                        <div class="invalid-feedback" id="cpassword-mismatch">비밀번호가 일치하지 않습니다.</div>
                     </div>
                 </div>
 
                 <div class=" fv-row mb-5">
                     <label class="form-label fs-6 fw-bolder text-dark pt-5">이름</label>
-                    <input autocomplete="off" class="form-control form-control-lg form-control-solid" id="common-name"
+                    <input autocomplete="off" class="form-control form-control-lg form-control-solid" id="name"
                            name="name" placeholder="" required
                            style="border-color: #0099FF;" type="text" readonly/>
                 </div>
@@ -175,7 +186,7 @@
                     <label class="form-label fs-6 fw-bolder text-dark pt-5">닉네임</label>
                     <div class="d-flex align-items-center">
                         <input autocomplete="off" class="form-control form-control-lg form-control-solid me-2"
-                               id="common-nid" name="nid" placeholder=""
+                               id="nid" name="nid" placeholder="한글 1자 이상 20자 이하이어야 합니다"
                                required
                                style="border-color: #0099FF; width: 350px; height: 40px;" type="text"/>
                         <button class="btn btn-primary fw-bolder fs-5 px-2 py-3 my-3 text-center"
@@ -197,20 +208,19 @@
                     <div class=" fv-row mb-5">
                         <label class="form-label fs-6 fw-bolder text-dark pt-5">이메일</label>
                         <input autocomplete="off" class="form-control form-control-lg form-control-solid"
-                               id="common-email" name="email" placeholder="" required
+                               id="email" name="email" placeholder="you@example.com" required
                                style="border-color: #0099FF;" type="email"/>
                         <div>
                             <div class="invalid-feedback" id="email-invalid">이메일 형식이 아닙니다.</div>
                         </div>
                     </div>
-
                 </div>
 
                 <div>
                     <div class=" fv-row mb-5">
                         <label class="form-label fs-6 fw-bolder text-dark pt-5">휴대번호</label>
                         <input autocomplete="off" class="form-control form-control-lg form-control-solid"
-                               id="common-phone" name="phone" placeholder=""
+                               id="phone" name="phone" placeholder="-제외 입력하시오"
                                required style="border-color: #0099FF;" type="tel"/>
                         <div>
                             <div class="invalid-feedback" id="num1-invalid">숫자만 입력 가능합니다.</div>
