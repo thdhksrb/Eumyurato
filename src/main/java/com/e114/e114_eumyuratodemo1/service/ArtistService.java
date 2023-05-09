@@ -5,6 +5,8 @@ import com.e114.e114_eumyuratodemo1.dto.BuskingDTO;
 import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO;
 import com.e114.e114_eumyuratodemo1.jdbc.ArtistMemberDAO;
+import com.e114.e114_eumyuratodemo1.mapper.ArtistMemberMapper;
+import org.apache.ibatis.session.SqlSession;
 import com.e114.e114_eumyuratodemo1.jwt.JwtUtils;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
@@ -22,6 +24,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
+import java.util.List;
 
 
 //로그인 요청 처리, 사용자 아이디에 해당하는 권한 정보 조회를 담당
@@ -60,9 +64,9 @@ public class ArtistService {
                             String email, String phone, String genre) {
         // 회원 정보 유효성 검사
         if (id == null || id.isEmpty() || pwd == null || pwd.isEmpty() || name == null || name.isEmpty()
-                || nid == null || nid.isEmpty() || birth == null
+                || nid == null || nid.isEmpty() || birth == null || birth.isEmpty() || sex == null || sex.isEmpty()
                 || email == null || email.isEmpty() || phone == null || phone.isEmpty()) {
-            return false;
+            //return false;
         }
 
         // 이미 사용 중인 아이디인지 검사
@@ -117,6 +121,19 @@ public class ArtistService {
         int result = artistMemberDAO.insert(artistMemberDTO);
         return result == 2;
     }
+
+
+    //아티스트 랭킹
+    private final ArtistMemberMapper artistMemberMapper;
+
+    public ArtistService(ArtistMemberMapper artistMemberMapper) {
+        this.artistMemberMapper = artistMemberMapper;
+    }
+
+    public List<ArtistMemberDTO> selectTop5Artists() {
+        return artistMemberMapper.selectTop5Artists();
+    }
+
 
     public List<CommonMemberDTO> viewAllCommons(){
         return artistMemberDAO.getCommonMembers();

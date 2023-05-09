@@ -97,6 +97,12 @@ public class AdminController {
         return "html/profile/total/profile_admin_total";
     }
 
+    @GetMapping("/profile/admin/info/view")
+    public String admimInfoview() {
+
+        return "html/profile/profile_admin_borad";
+    }
+
     @GetMapping("/profile/admin/total")
     public ResponseEntity<?> getMemberList(@RequestParam("category") String category,
                                            @RequestParam(value = "column", required = false) String column,

@@ -1,17 +1,23 @@
 package com.e114.e114_eumyuratodemo1.service;
 
-import com.e114.e114_eumyuratodemo1.dto.BuskingDTO;
 import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.ReservationDTO;
+import com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO;
 import com.e114.e114_eumyuratodemo1.jdbc.ArtistMemberDAO;
 import com.e114.e114_eumyuratodemo1.jdbc.CommonMemberDAO;
 import com.e114.e114_eumyuratodemo1.jdbc.EnterpriseMemberDAO;
+import com.google.cloud.storage.BlobInfo;
+import com.google.cloud.storage.Storage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 
 //로그인 요청 처리, 사용자 아이디에 해당하는 권한 정보 조회를 담당
@@ -28,6 +34,14 @@ public class CommonService {
     private EnterpriseMemberDAO enterpriseMemberDAO;
 
 
+    //파일 저장
+    @Autowired
+    private Storage storage;
+
+    @Value("${spring.cloud.gcp.storage.bucket}")
+    private String bucketName;
+
+
     // 로그인 요청 처리, 사용자 아이디와 비밀번호를 받아 DB에서 일치하는 사용자 정보를 찾습니다.
     // 찾은 경우 사용자 정보를 반환하고, 일치하는 정보가 없는 경우 null을 반환합니다.
     public CommonMemberDTO login(String id, String pwd) {
@@ -41,10 +55,10 @@ public class CommonService {
 
     //일반 회원가입
     public boolean register(String id, String pwd, String name, String nid, String sex, String birth,
-                            String email, String phone, String road,String genre) {
+                            String email, String phone, String road, String genre) {
         // 회원 정보 유효성 검사
         if (id == null || id.isEmpty() || pwd == null || pwd.isEmpty() || name == null || name.isEmpty()
-                || nid == null || nid.isEmpty() || birth == null
+                || nid == null || nid.isEmpty() || birth == null || birth.isEmpty() || sex == null || sex.isEmpty()
                 || email == null || email.isEmpty() || phone == null || phone.isEmpty()) {
             return false;
         }
@@ -132,7 +146,43 @@ public class CommonService {
     public int deleteReservation(int id) {
         return commonMemberDAO.deleteCommonReservation(id);
     }
-}
+
+    //회원정보 수정
+    public boolean updateCommonMember(String id, String nid, String phone, String email) {
+        CommonMemberDTO commonMember = commonMemberDAO.findById(id);
+        if (commonMember == null) {
+            return false;
+        }
+        if (nid != null) {
+            commonMember.setNid(nid);
+        }
+        if (phone != null) {
+            commonMember.setPhone(phone);
+        }
+        if (email != null) {
+            commonMember.setEmail(email);
+        }
+        int affectedRows = commonMemberDAO.updateCommonMember(commonMember);
+        return affectedRows > 0;
+    }
+
+    public void saveCommonMember(CommonMemberDTO commonMemberDTO, MultipartFile imgFile) throws IOException {
+        String uuid = UUID.randomUUID().toString();
+        String ext = imgFile.getContentType();
+
+        //이미지 업로드
+        BlobInfo blobInfo = storage.create(
+                BlobInfo.newBuilder(bucketName, uuid)
+                        .setContentType(ext)
+                        .build(),
+                imgFile.getInputStream()
+        );
+        commonMemberDTO.setImage(uuid);
+        commonMemberDAO.saveCommonMember(commonMemberDTO);
+    }
+
+    }
+
 
 
 

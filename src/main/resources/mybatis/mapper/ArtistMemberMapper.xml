@@ -3,11 +3,16 @@
 <!-- ArtistMapper.xml -->
 <mapper namespace="com.e114.e114_eumyuratodemo1.jdbc.ArtistMemberDAO">
     <select id="findById" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
-        SELECT * FROM artist_member WHERE id=#{id}
+        SELECT *
+        FROM artist_member
+        WHERE id = #{id}
     </select>
 
-    <select id="findByPwd" parameterType="java.lang.String" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
-        SELECT pwd FROM artist_member WHERE pwd=#{pwd}
+    <select id="findByPwd" parameterType="java.lang.String"
+            resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
+        SELECT pwd
+        FROM artist_member
+        WHERE pwd = #{pwd}
     </select>
     <!--회원가입-->
     <insert id="insert" parameterType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
@@ -30,7 +35,8 @@
         WHERE id = #{id}
     </select>
 
-    <select id="useByNid" parameterType="java.lang.String" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
+    <select id="useByNid" parameterType="java.lang.String"
+            resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
         SELECT *
         FROM artist_member
         WHERE nid = #{nid}
@@ -40,13 +46,31 @@
     <select id="findUserIdsByNameAndEmail" resultType="String">
         SELECT id
         FROM artist_member
-        WHERE name = #{name} AND email = #{email}
+        WHERE name = #{name}
+          AND email = #{email}
     </select>
 
     <!--비밀번호 찾기-->
-    <update id="updatePw" >
-        update artist_member set pw = #{pw} where id = #{id}
+    <update id="updatePassword">
+        update artist_member
+        set pwd = #{pwd}
+        where id = #{id}
     </update>
+
+    <!--아티스트 랭킹-->
+    <!-- Result Map 정의 -->
+    <resultMap type="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO" id="artistMemberDTOResultMap">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="point" property="point"/>
+    </resultMap>
+
+    <!-- selectTop5Artists 쿼리 정의 -->
+    <select id="selectTop5Artists" resultMap="artistMemberDTOResultMap">
+        SELECT id, name, point
+        FROM artist_member
+        ORDER BY point DESC LIMIT 5
+    </select>
 
     <select id="getArtistMembers" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
         select *

@@ -13,7 +13,7 @@
                 }
                 const prevUrl = window.sessionStorage.getItem("prevUrl");
                 window.sessionStorage.removeItem("prevUrl");
-                form.setAttribute("action", "/loginjoin/common/login?prevUrl=" + encodeURIComponent(prevUrl));
+                form.setAttribute("action", "/login-common?prevUrl=" + encodeURIComponent(prevUrl));
 
                 form.classList.add("was-validated");
             },
