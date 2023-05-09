@@ -264,7 +264,7 @@ public class LoginJoinController {
     //로그 아웃
     @GetMapping("/logout")
     public String logout(HttpSession session) {
-        session.removeAttribute("jwtToken");
+        session.removeAttribute("jwtToken"); // 세션에서 토큰 정보 제거
 
         return "redirect:/home"; // 로그아웃 후 메인 홈페이지로 이동
     }
@@ -285,6 +285,7 @@ public class LoginJoinController {
         }
         return ResponseEntity.ok().build();
     }
+
 
     // 아이디 찾기
     @GetMapping("/loginjoin/Idfind")
