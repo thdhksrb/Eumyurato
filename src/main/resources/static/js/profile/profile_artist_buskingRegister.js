@@ -59,7 +59,7 @@ $(document).ready(function() {
     getArtistData();
 
     //프로필 이미지 사용자가 업로드한 이미지로 변경
-    var defaultImage = '/img/default.jpg';
+    var defaultImage = '/img/buskingDefaultImg.jpg';
     $('#previewImage').attr('src', defaultImage);
     $('input[type="file"]').on('change', function(event) {
         var file = event.target.files[0];

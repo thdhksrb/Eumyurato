@@ -29,11 +29,27 @@
         WHERE admin_num = #{adminNum}
     </select>
 
-    <!--중복체크-->
+    <!-- 중복체크 -->
+    <select id="isIdDuplicated" parameterType="java.lang.String" resultType="java.lang.Boolean">
+        SELECT COUNT(*) > 0
+        FROM common_member
+        WHERE id = #{id}
+    </select>
+
+    <!-- 아이디로 회원 정보 가져오기(중복) -->
     <select id="useById" parameterType="java.lang.String" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
         SELECT *
         FROM common_member
         WHERE id = #{id}
+    </select>
+
+
+    <!-- 아이디 찾기 -->
+    <select id="findUserIdsByNameAndEmail" resultType="String">
+        SELECT id
+        FROM common_member
+        WHERE name = #{name}
+          AND email = #{email}
     </select>
 
     <select id="useByNid" parameterType="java.lang.String" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
@@ -42,17 +58,11 @@
         WHERE nid = #{nid}
     </select>
 
-
-    <!--아이디 찾기-->
-    <select id="findUserIdsByNameAndEmail" resultType="String">
-        SELECT id
-        FROM common_member
-        WHERE name = #{name} AND email = #{email}
-    </select>
-
     <!--비밀번호 찾기-->
     <update id="updatePassword">
-        update common_member set pwd = #{pwd} where id = #{id}
+        update common_member
+        set pwd = #{pwd}
+        where id = #{id}
     </update>
 
     <select id="getCommonInfoById" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
@@ -93,16 +103,30 @@
         WHERE id = #{id}
     </select>
 
-    <update id="updateCommonMember" parameterType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
+    <update id="modifyCommonWithoutImage" parameterType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
         UPDATE common_member
-        <set>
-            <if test="pwd != null">pwd = #{pwd},</if>
-            <if test="nid != null">nid = #{nid},</if>
-            <if test="phone != null">phone = #{phone},</if>
-            <if test="email != null">email = #{email},</if>
-            <if test="image != null">image = #{image},</if>
-        </set>
+        SET
+            pwd = #{pwd},
+            nid = #{nid},
+            phone = #{phone},
+            email = #{email},
+            genre = #{genre}
         WHERE id = #{id}
     </update>
 
+    <update id="commonModify" parameterType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
+        UPDATE common_member
+        SET
+            pwd = #{pwd},
+            nid = #{nid},
+            phone = #{phone},
+            email = #{email},
+            image = #{image},
+            genre = #{genre}
+        WHERE id = #{id}
+    </update>
+
+    <select id="commonNid" resultType="int">
+        SELECT COUNT(*) AS cnt FROM common_member WHERE nid = #{param1};
+    </select>
 </mapper>

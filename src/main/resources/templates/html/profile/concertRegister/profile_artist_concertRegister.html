@@ -75,12 +75,15 @@
                     <div class="menu-wrapper menu-column menu-fit mt-1">
                         <div class="menu-sub menu-fit menu-sub-accordion show">
                             <h1 class="menu-content mb-1 mt-10 text-center" style="font-weight: bold">통합 정보 조회</h1>
-                            <div class="separator border-dark my-1 mx-auto"
-                                 style="width: 60%; border-width: 3px;"></div>
+                            <div class="separator border-dark my-1 mx-auto" style="width: 60%; border-width: 3px;"></div>
                             <div class="menu-item" style="margin: 3px">
                                 <a class="text-dark text-hover-primary ms-3 py-2"
                                    th:href="@{/profile/artist/total/view}">
                                     <span class="menu-title">종합</span>
+                                </a>
+                                <a class="text-dark text-hover-primary ms-3 py-2"
+                                   th:href="@{/profile/artist/info/view}">
+                                    <span class="menu-title">공지사항</span>
                                 </a>
                             </div>
                         </div>
@@ -140,20 +143,22 @@
                 <!--end::Image input-->
 
                 <div class="fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">공연명</label>
-                    <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5 " style="float: left; margin-right:5px;">공연명</label>
+                    <label class="form-label fs-8 fw-bolder pt-4" style="float: left; color: #ff0000">*</label>
                     <input class="form-control form-control-lg form-control-solid" type="text"
                            placeholder=""
                            name="name" autocomplete="off" style="border-color: #0099FF;"/>
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">공연자</label>
-                    <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5" style="float: left; margin-right:5px;">공연자</label>
+                    <label class="form-label fs-8 fw-bolder pt-4" style="float: left; color: #ff0000">*</label>
                     <input class="form-control form-control-lg form-control-solid" type="text"
                            placeholder="" readonly
                            name="nid" id="nid" autocomplete="off" style="border-color: #0099FF;"/>
                 </div>
                 <div class="fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">주소</label>
-                    <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
+                    <div style="display: flex; align-items: center;">
+                        <label class="form-label fs-6 fw-bolder text-dark pt-5" style="float: left; margin-right:5px;">주소</label>
+                        <label class="form-label fs-8 fw-bolder pt-4" style="float: left; color: #ff0000">*</label>
+                    </div>
                     <div style="display: flex; align-items: center;">
                         <input type="text" id="sample4_postcode" class="form-control form-control-lg form-control-solid" placeholder="우편번호"
                                autocomplete="off" style="border-color: #0099FF; width: 250px; margin-right: 50px;" readonly>
@@ -169,8 +174,8 @@
                     <div>
 
                         <div class=" fv-row mb-5">
-                            <label class="form-label fs-6 fw-bolder text-dark pt-5">공연 일자</label>
-                            <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
+                            <label class="form-label fs-6 fw-bolder text-dark pt-5" style="float: left; margin-right:5px;">공연 일자</label>
+                            <label class="form-label fs-8 fw-bolder pt-4" style="float: left; color: #ff0000">*</label>
                             <input autocomplete="off" class="form-control form-control-lg form-control-solid datepicker"
                                    id="buskingDate" name="buskingDate" placeholder="" required
                                    style="border-color: #0099FF;" type="text"/>

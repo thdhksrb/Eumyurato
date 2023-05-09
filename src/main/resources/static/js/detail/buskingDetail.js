@@ -124,7 +124,7 @@ $.ajax({
             posterContainer.appendChild(img);
         }else{
             var img = document.createElement("img");
-            img.src = "/img/default.jpg";
+            img.src = "/img/buskingDefaultImg.jpg";
             img.style.objectFit = "contain";
             img.style.width = "100%";
             img.style.height = "100%";

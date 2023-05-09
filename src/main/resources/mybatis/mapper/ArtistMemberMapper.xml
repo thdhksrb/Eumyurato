@@ -28,12 +28,20 @@
         WHERE admin_num = #{adminNum}
     </select>
 
-    <!--중복체크-->
-    <select id="useById" parameterType="java.lang.String" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
+    <!-- 중복체크 -->
+    <select id="isIdDuplicated" parameterType="java.lang.String" resultType="java.lang.Boolean">
+        SELECT COUNT(*) > 0
+        FROM artist_member
+        WHERE id = #{id}
+    </select>
+
+    <!-- 아이디로 회원 정보 가져오기(중복) -->
+    <select id="useById" parameterType="java.lang.String" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
         SELECT *
         FROM artist_member
         WHERE id = #{id}
     </select>
+
 
     <select id="useByNid" parameterType="java.lang.String"
             resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
@@ -85,13 +93,15 @@
     </select>
 
     <select id="searchCommonMembers" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
-        SELECT * FROM common_member
+        SELECT *
+        FROM common_member
         WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
         ORDER BY name ASC;
     </select>
 
     <select id="searchArtistMembers" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
-        SELECT * FROM artist_member
+        SELECT *
+        FROM artist_member
         WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
         ORDER BY name ASC;
     </select>
@@ -99,19 +109,29 @@
     <select id="getArtistInfoById" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
         SELECT *
         FROM artist_member
-        WHERE id = #{id} AND adminNum = 2
+        WHERE id = #{id}
+          AND adminNum = 2
     </select>
 
     <select id="getArtistBuskings" resultType="com.e114.e114_eumyuratodemo1.dto.BuskingDTO">
         select * from busking where artId = #{artId} ORDER BY regDate DESC
+        select *
+        from busking
+        where artId = #{artId}
     </select>
 
     <select id="searchArtistBuskings" resultType="com.e114.e114_eumyuratodemo1.dto.BuskingDTO">
         select * from busking where artId = #{artId} and ${column} LIKE CONCAT('%', #{keyword}, '%') ORDER BY regDate DESC
+        select *
+        from busking
+        where artId = #{artId}
+          and ${column} LIKE CONCAT('%', #{keyword}, '%')
     </select>
 
     <delete id="deleteArtistBusking">
-        DELETE FROM busking WHERE id = #{param1} AND date > CURRENT_DATE
+        DELETE
+        FROM busking
+        WHERE id = #{param1} AND date > CURRENT_DATE
     </delete>
 
     <select id="getCommonGender" resultType="map">
@@ -141,8 +161,7 @@
     <select id="getArtistPoint" resultType="map">
         SELECT id, nid, point
         FROM artist_member
-        ORDER BY point DESC
-            LIMIT 10;
+        ORDER BY point DESC LIMIT 10;
     </select>
 
     <select id="getArtistPointAvg" resultType="map">
@@ -172,4 +191,27 @@
         INSERT INTO busking (name, artId, date, location, image)
         VALUES (#{name}, #{artId}, #{date}, #{location}, #{image})
     </insert>
+
+    <update id="modifyArtistWithoutImage" parameterType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
+        UPDATE artist_member
+        SET
+            pwd = #{pwd},
+            nid = #{nid},
+            phone = #{phone},
+            email = #{email},
+            genre = #{genre}
+        WHERE id = #{id}
+    </update>
+
+    <update id="artistModify" parameterType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
+        UPDATE artist_member
+        SET
+            pwd = #{pwd},
+            nid = #{nid},
+            phone = #{phone},
+            email = #{email},
+            genre = #{genre},
+            image = #{image}
+        WHERE id = #{id}
+    </update>
 </mapper>

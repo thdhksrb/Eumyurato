@@ -217,4 +217,25 @@ public class ArtistService {
         buskingDTO.setImage(uuid);
         artistMemberDAO.saveBusking(buskingDTO);
     }
+
+    //회원정보 수정
+    public void modifyArtistWithoutImage(ArtistMemberDTO artistMemberDTO){
+        artistMemberDAO.modifyArtistWithoutImage(artistMemberDTO);
+    }
+
+    public void artistModify(ArtistMemberDTO artistMemberDTO, MultipartFile imgFile) throws IOException {
+        String uuid = UUID.randomUUID().toString();
+        String ext = imgFile.getContentType();
+
+        //이미지 업로드
+        BlobInfo blobInfo = storage.create(
+                BlobInfo.newBuilder(bucketName, uuid)
+                        .setContentType(ext)
+                        .build(),
+                imgFile.getInputStream()
+        );
+        artistMemberDTO.setImage(uuid);
+
+        artistMemberDAO.artistModify(artistMemberDTO);
+    }
 }

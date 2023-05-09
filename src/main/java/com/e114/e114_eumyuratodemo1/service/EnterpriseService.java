@@ -2,13 +2,19 @@ package com.e114.e114_eumyuratodemo1.service;
 
 import com.e114.e114_eumyuratodemo1.dto.*;
 import com.e114.e114_eumyuratodemo1.jdbc.EnterpriseMemberDAO;
+import com.google.cloud.storage.BlobInfo;
+import com.google.cloud.storage.Storage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 
 //로그인 요청 처리, 사용자 아이디에 해당하는 권한 정보 조회를 담당
@@ -17,6 +23,13 @@ public class EnterpriseService {
 
     @Autowired
     private EnterpriseMemberDAO enterpriseMemberDAO;
+
+    @Autowired
+    private Storage storage;
+
+    @Value("${spring.cloud.gcp.storage.bucket}")
+    private String bucketName;
+
 
     // 기업 회원용 로그인 요청 처리, 사용자 아이디와 비밀번호를 받아 DB에서 일치하는 사용자 정보를 찾습니다.
     // 찾은 경우 사용자 정보를 반환하고, 일치하는 정보가 없는 경우 null을 반환합니다.
@@ -142,6 +155,27 @@ public class EnterpriseService {
     }
     public List<Map<String, Object>>  enterConcertAll(){
         return enterpriseMemberDAO.getEnterConcertAll();
+    }
+
+    //회원정보 수정
+    public void modifyEnterWithoutImage(EnterpriseMemberDTO enterpriseMemberDTO){
+        enterpriseMemberDAO.modifyEnterWithoutImage(enterpriseMemberDTO);
+    }
+
+    public void enterModify(EnterpriseMemberDTO enterpriseMemberDTO, MultipartFile imgFile) throws IOException {
+        String uuid = UUID.randomUUID().toString();
+        String ext = imgFile.getContentType();
+
+        //이미지 업로드
+        BlobInfo blobInfo = storage.create(
+                BlobInfo.newBuilder(bucketName, uuid)
+                        .setContentType(ext)
+                        .build(),
+                imgFile.getInputStream()
+        );
+        enterpriseMemberDTO.setImage(uuid);
+
+        enterpriseMemberDAO.enterModify(enterpriseMemberDTO);
     }
 
     public List<ReservationDTO> searchReservationsByEnterId(String enterId, String column, String keyword) {

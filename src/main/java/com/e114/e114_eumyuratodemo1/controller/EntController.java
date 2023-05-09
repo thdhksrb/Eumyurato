@@ -10,11 +10,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,6 +60,12 @@ public class EntController {
     public String enterpriseTotalsview() {
 
         return "html/profile/total/profile_enterprise_total";
+    }
+
+    @GetMapping("/profile/ent/info/view")
+    public String enterpriseInfoview() {
+
+        return "html/profile/board/profile_enterprise_board";
     }
 
     @GetMapping("/profile/ent/total")
@@ -146,6 +152,21 @@ public class EntController {
     @GetMapping("/profile/ent/modify")
     public String artistAccountModify(){
         return "html/profile/accountModify/profile_enterprise_accountModify";
+    }
+
+    //기업회원 정보 수정 처리
+    @PostMapping("/profile/ent/modify")
+    public ResponseEntity<?> updateEnterMember(@RequestPart("enterDTO") EnterpriseMemberDTO enterpriseMemberDTO, @RequestPart(value = "imgFile", required = false) MultipartFile imgFile) throws IOException {
+
+        if(imgFile == null){
+            System.out.println(enterpriseMemberDTO);
+            enterpriseService.modifyEnterWithoutImage(enterpriseMemberDTO);
+        }else{
+            System.out.println(enterpriseMemberDTO);
+            enterpriseService.enterModify(enterpriseMemberDTO, imgFile);
+        }
+
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/profile/ent/reservation/view")

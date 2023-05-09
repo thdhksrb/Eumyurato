@@ -73,7 +73,7 @@
                         </div>
                     </div>
 
-                    <div class="menu-wrapper menu-column menu-fit mt-1">
+                    <div class="menu-wrapper menu-column menu-fit mt-5">
                         <div class="menu-sub menu-fit menu-sub-accordion show">
                             <h1 class="menu-content mb-1 mt-10 text-center" style="font-weight: bold">통합 정보 조회</h1>
                             <div class="separator border-dark my-1 mx-auto" style="width: 60%; border-width: 3px;"></div>
@@ -87,6 +87,13 @@
                                 <a class="text-dark text-hover-primary ms-3 py-2"
                                    th:href="@{/profile/admin/total/chart}">
                                     <span class="menu-title">회원 종합 차트</span>
+                                    <span class="menu-title">종합</span>
+                                </a>
+                            </div>
+                            <div class="menu-item" style="margin: 3px">
+                                <a class="text-dark text-hover-primary ms-3 py-2"
+                                   th:href="@{/profile/admin/info/view}">
+                                    <span class="menu-title">공지사항</span>
                                 </a>
                             </div>
                         </div>
@@ -126,7 +133,7 @@
                             <option value="name">공연명</option>
                             <option value="cid">회원 아이디</option>
                         </select>
-                        <input type="text" id="searchKeyword" placeholder="관람 일자 예시) 2023-01-01" style="width: 30%; height: 40px; border-radius: 5px; border: 1px solid #cccad4">
+                        <input type="text" id="searchKeyword" placeholder="" style="width: 30%; height: 40px; border-radius: 5px; border: 1px solid #cccad4">
                         <button class="btn btn-primary" id="searchBtn" style="width: 10%;" >Search</button>
                     </div>
                     <div>
