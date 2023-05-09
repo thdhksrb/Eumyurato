@@ -97,7 +97,7 @@ public class CommonController {
     @GetMapping("/profile/common/info/view")
     public String commonInfoview() {
 
-        return "html/profile/borard/profile_common_borad";
+        return "html/profile/board/profile_common_board";
     }
 
     @GetMapping("/profile/common/reservation")

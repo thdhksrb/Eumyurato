@@ -188,6 +188,14 @@ document.querySelector('#plus1000').addEventListener('click',function(){
         price.value = currentValue + 1000;
     }
 });
+document.querySelector('#plus3000').addEventListener('click',function(){
+    const currentValue = parseInt(price.value);
+    if(isNaN(currentValue)){
+        price.value=3000
+    }else{
+        price.value = currentValue + 3000;
+    }
+});
 document.querySelector('#plus5000').addEventListener('click',function(){
     const currentValue = parseInt(price.value);
     if(isNaN(currentValue)){
@@ -202,24 +210,5 @@ document.querySelector('#plus10000').addEventListener('click',function(){
         price.value=10000
     }else{
         price.value = currentValue + 10000;
-    }
-});
-document.querySelector('#minus1000').addEventListener('click',function(){
-    const currentValue = parseInt(price.value);
-    if(!isNaN(currentValue) && currentValue>=1000){
-        price.value = currentValue - 1000;
-    }
-
-});
-document.querySelector('#minus5000').addEventListener('click',function(){
-    const currentValue = parseInt(price.value);
-    if(!isNaN(currentValue) && currentValue>=5000){
-        price.value = currentValue - 5000;
-    }
-});
-document.querySelector('#minus10000').addEventListener('click',function(){
-    const currentValue = parseInt(price.value);
-    if(!isNaN(currentValue) && currentValue>=10000){
-        price.value = currentValue - 10000;
     }
 });
