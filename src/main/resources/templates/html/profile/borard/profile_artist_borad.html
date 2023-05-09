@@ -10,12 +10,10 @@
     <!-- Popper JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
     <!--begin::Global Stylesheets Bundle(used by all pages)-->
     <link th:href="@{/css/profile/profile1.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{/css/profile/profile2.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{/css/profile/profile3.css}" rel="stylesheet" type="text/css"/>
-    <link th:href="@{/css/profile/pagination.css}" rel="stylesheet" type="text/css"/>
     <!--end::Global Stylesheets Bundle-->
 </head>
 <!--end::Head-->
@@ -30,7 +28,7 @@
             <!--begin::Aside Top-->
             <div class="d-flex flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
                 <!--begin::Aside Logo-->
-                <a class="mb-6" th:href="@{/main}">
+                <a class="mb-6" th:href="@{/home}">
                     <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
                         <img alt="로고" id="logo1" th:src="@{/img/logo_name.png}" style="width: 400px; height: 70px;"/>
                     </div>
@@ -42,7 +40,7 @@
             <!--begin::Aside Top-->
             <div class="flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
                 <!--begin::Aside Logo-->
-                <a class="mb-6" th:href="@{/main}">
+                <a class="mb-6" th:href="@{/home}">
                     <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
                         <img alt="로고" id="logo2" th:src="@{/img/logo_name.png}" style="width: 400px; height: 70px; margin-top: 80px;"/>
                     </div>
@@ -52,29 +50,38 @@
                         <h1 class="menu-content mb-1 mt-10 text-center" style="font-weight: bold">마이페이지</h1>
                         <div class="separator border-dark my-1 mx-auto" style="width: 60%; border-width: 3px;"></div>
                         <div class="menu-item" style="margin: 3px">
-                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/common/account}">
+                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/artist/account}">
                                 <span class="menu-title">내 계정</span>
                             </a>
                         </div>
                         <div class="menu-item" style="margin: 3px">
-                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/common/modify}">
+                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/artist/modify}">
                                 <span class="menu-title">계정 정보 수정</span>
                             </a>
                         </div>
                         <div class="menu-item" style="margin: 3px">
-                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/common/reservation/view}">
+                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/artist/reservation}">
                                 <span class="menu-title">예약 내역</span>
                             </a>
                         </div>
+                        <div class="menu-item" style="margin: 3px">
+                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/artist/management/view}">
+                                <span class="menu-title">공연 관리</span>
+                            </a>
+                        </div>
                     </div>
+
                     <div class="menu-wrapper menu-column menu-fit mt-1">
                         <div class="menu-sub menu-fit menu-sub-accordion show">
                             <h1 class="menu-content mb-1 mt-10 text-center" style="font-weight: bold">통합 정보 조회</h1>
                             <div class="separator border-dark my-1 mx-auto" style="width: 60%; border-width: 3px;"></div>
                             <div class="menu-item" style="margin: 3px">
-
                                 <a class="text-dark text-hover-primary ms-3 py-2"
-                                   th:href="@{/profile/common/info/view}">
+                                   th:href="@{/profile/artist/total/view}">
+                                    <span class="menu-title">종합</span>
+                                </a>
+                                <a class="text-dark text-hover-primary ms-3 py-2"
+                                   th:href="@{/profile/artist/info/view}">
                                     <span class="menu-title">공지사항</span>
                                 </a>
                             </div>
@@ -96,8 +103,6 @@
                 <!--end::Aside Logo-->
             </div>
         </div>
-
-
         <!--사이드-->
         <!--begin::Aside-->
         <!--begin::Content-->
@@ -106,53 +111,60 @@
             <!--begin::Wrapper-->
             <!--begin::Signin Form-->
             <div class="form w-1000px  needs-validation text-center" id="kt_login_signin_form" novalidate>
-                <div style="color:#000000; background-color:#FFFFFF; padding:25px;  height: 600px;">
-                    <div style="display: flex; align-items: center; margin-bottom: 20px;">
-                        <h4 style="font-size: 24px; flex-grow: 1;"><strong>예약 내역</strong></h4>
-                    </div>
-                    <div class="search-container">
-                        <select id="searchColumn" style="width: 10%; height: 40px; border-radius: 5px;">
-                            <option value="sid">공연 번호</option>
-                            <option value="viewDate">관람 일자</option>
-                        </select>
-                        <input type="text" id="searchKeyword" placeholder="관람 일자 예시) 2023-01-01" style="width: 30%; height: 40px; border-radius: 5px; border: 1px solid #cccad4">
-                        <button class="btn btn-primary" id="searchBtn" style="width: 10%;" >Search</button>
-                    </div>
-                    <div>
-                        <div class="container mt-5">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <table class="table table-rounded table-striped border gy-7 gs-7" id="eventTable">
-                                        <thead id="eventThead" style="position: sticky; top: 0">
-                                        <tr class="fw-bold fs-6 text-gray-800 border-bottom border-gray-200">
-                                            <th>예약 번호</th>
-                                            <th>공연명</th>
-                                            <th>회원 아이디</th>
-                                            <th>결제 시간</th>
-                                            <th>관람 일자</th>
-                                            <th>예약인원 수</th>
-                                            <th>예매 금액</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody id="reservationTbody"></tbody>
-                                        </tbody>
-                                        <tfoot>
-                                        <tr>
-                                            <td colspan="16">
-                                                <ul class="pagination"></ul>
-                                            </td>
-                                        </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
-                            </div>
+                <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                    <h1 style="font-size: 24px; flex-grow: 1;"><strong>공지 사항</strong></h1>
+                </div>
+                <div class="container mt-5">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form action="/profile/artist/reservation/search" method="post">
+                                <!-- 검색창 -->
+                                <input type="text" id="searchReservationValue" name="searchReservationValue" placeholder="" style="width: 30%; height: 40px; border-radius: 5px; border: 1px solid #cccad4">
+
+                                <!-- 검색 필드와 검색 값 전달용 hidden input -->
+                                <input type="hidden" id="column" name="column">
+                                <input type="hidden" id="keyword" name="keyword">
+
+                                <button class="btn btn-primary" type="submit" onclick="setReservationsSearch()" style="width: 10%;">Search</button>
+                                <button class="btn btn-primary" type="button" onclick="resetReservations()" style="width: 10%;">Reset</button>
+                            </form>
                         </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div style="color:#000000; background-color:#FFFFFF; padding:25px;  height: 600px;">
+                        <table class="table table-rounded table-striped border gy-7 gs-7">
+                            <thead>
+                            <tr class="fw-bold fs-6 text-gray-800 border-bottom border-gray-200">
+                                <th>NO</th>
+                                <th>제목</th>
+                                <th>조회수</th>
+                                <th>등록일</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="reservation : ${reservations}">
+                                <td th:text="${reservation.id}"></td>
+                                <td th:text="${reservation.sid}"></td>
+                                <td th:text="${reservation.cid}"></td>
+                                <td th:text="${reservation.payTime}"></td>
+                                <td th:text="${reservation.viewDate}"></td>
+                                <td th:text="${reservation.memberNum}"></td>
+                                <td th:text="${reservation.reservPay}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div style="margin-top:20px;">
+                        <!-- 리스트 내용 -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script th:src="@{/static/js/profile/profile_commonReservation.js}" type="text/javascript"></script>
+<script type="text/javascript" th:src="@{/js/profile/profile_account.js}"></script>
 </body>
 </html>

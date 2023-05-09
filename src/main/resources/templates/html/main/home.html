@@ -94,13 +94,13 @@
         <div class="divider-custom divider-light mx-auto text-center">
             <div class="divider-custom divider-light">
                 <div class="col-lg-8 text-center">
-                    <table id="artistTable" class="table table-bordered table-hover" style="width: 400px;">
+                    <table id="artistTable" class="table table-borderless fade-in">
                         <thead>
                         <tr>
-                            <th>순위</th>
-                            <th>아티스트명</th>
-                            <th>장르</th>
-                            <th>포인트</th>
+                            <th></th><!--순위-->
+                            <th></th><!--이미지-->
+                            <th></th><!--아티스트-->
+                            <th></th><!--장르-->
                         </tr>
                         </thead>
                         <tbody id="artistTableBody">
@@ -117,6 +117,7 @@
                         <thead>
                         <tr>
                             <th>순위</th>
+                            <th><img src="image_url" alt="artist_image" width="180" height="180"></th>
                             <th>공연명</th>
                         </tr>
                         </thead>
@@ -195,29 +196,27 @@
         <div class="row">
             <!-- Footer Location-->
             <div class="col-lg-4 mb-5 mb-lg-0">
-                <h4 class="text-uppercase mb-4">Location</h4>
+                <h4 class="text-uppercase mb-4">TEAM E114</h4>
                 <p class="lead mb-0">
-                    2215 John Daniel Drive
+                    외향인 한명과 내향인 4명 모인 팀
                     <br/>
-                    Clark, MO 65243
+                    인생에 있어서 최고의 행복은 우리가 사랑받고 있다는 확신이다.
                 </p>
             </div>
             <!-- Footer Social Icons-->
             <div class="col-lg-4 mb-5 mb-lg-0">
-                <h4 class="text-uppercase mb-4">Around the Web</h4>
-                <a class="btn btn-outline-light btn-social mx-1" th:href="@{#}"><i class="fab fa-fw fa-facebook-f"></i></a>
+                <h4 class="text-uppercase mb-4">Our Github</h4>
+                <a class="btn btn-outline-light btn-social mx-1" th:href="@{https://github.com/bomin1996}"><i class="fab fa-fw fa-facebook-f"></i></a>
                 <a class="btn btn-outline-light btn-social mx-1" th:href="@{#}"><i class="fab fa-fw fa-twitter"></i></a>
                 <a class="btn btn-outline-light btn-social mx-1" th:href="@{#}"><i class="fab fa-fw fa-linkedin-in"></i></a>
-                <a class="btn btn-outline-light btn-social mx-1" th:href="@{#}"><i
-                        class="fab fa-fw fa-dribbble"></i></a>
+                <a class="btn btn-outline-light btn-social mx-1" th:href="@{#}"><i class="fab fa-fw fa-dribbble"></i></a>
+                <a class="btn btn-outline-light btn-social mx-1" th:href="@{#}"><i class="fab fa-fw fa-dribbble"></i></a>
             </div>
             <!-- Footer About Text-->
             <div class="col-lg-4">
-                <h4 class="text-uppercase mb-4">About Freelancer</h4>
+                <h4 class="text-uppercase mb-4">TEAM INTRO</h4>
                 <p class="lead mb-0">
-                    Freelance is a free to use, MIT licensed Bootstrap theme created by
-                    <a th:href="@{http://startbootstrap.com}">Start Bootstrap</a>
-                    .
+                    같이 성장할 기업의 연락을 기다립니다.
                 </p>
             </div>
         </div>
@@ -225,7 +224,8 @@
 </footer>
 <!-- Copyright Section-->
 <div class="copyright py-4 text-center text-white">
-    <div class="container"><small>Copyright &copy; Your Website 2023</small></div>
+    <div class="container"><small>본 페이지는 상업적 목적이 아닌 개인 포트폴리오용으로 제작되었습니다.</small></div>
+    <div class="container"><small>© 2023 TEAM E114. All Rights Reserved.</small></div>
 </div>
 <!-- Portfolio Modals-->
 <!-- Portfolio Modal 1-->

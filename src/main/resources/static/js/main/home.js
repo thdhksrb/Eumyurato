@@ -115,24 +115,27 @@ fetch('/top5artists', {
         // 데이터를 이용하여 행 추가
         data.forEach((artist, index) => {
             const row = document.createElement('tr');
+            const imgCell = document.createElement('td');//랭킹 이미지 크기는 100x100
             const rankCell = document.createElement('td');
             const nameCell = document.createElement('td');
             const genreCell = document.createElement('td');
-            const pointCell = document.createElement('td');
 
             rankCell.textContent = index + 1;
+            imgCell.textContent = artist.img;//랭킹 이미지 100x100
             nameCell.textContent = artist.name;
             genreCell.textContent = artist.genre;
-            pointCell.textContent = artist.point;
 
             row.appendChild(rankCell);
+            row.appendChild(imgCell);//랭킹 이미지
             row.appendChild(nameCell);
             row.appendChild(genreCell);
-            row.appendChild(pointCell);
             tbody.appendChild(row);
         });
     })
     .catch(error => console.error(error)); // 에러 처리하기
+
+
+
 
 fetch('/top5concert', {
     method: 'POST',
@@ -164,3 +167,19 @@ fetch('/top5concert', {
         });
     })
     .catch(error => console.error(error)); // 에러
+
+
+const rows = document.querySelectorAll('#artistTableBody tr');
+
+rows.forEach(row => {
+    row.addEventListener('click', function() {
+        // 기존에 확대된 행이 있을 경우, 확대를 원래 크기로 되돌립니다.
+        const activeRow = document.querySelector('#artistTableBody .active');
+        if (activeRow) {
+            activeRow.classList.remove('active');
+        }
+
+        // 현재 클릭한 행의 크기를 확대합니다.
+        this.classList.add('active');
+    });
+});

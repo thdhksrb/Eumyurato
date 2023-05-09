@@ -190,7 +190,18 @@ function viewBusking(data){
                         '<p><strong>장소: </strong>' + record.location + '</p>' +
                         '<p><strong>공연 일자: </strong>' + record.date + '</p>' +
                         '<p><strong>공연자: </strong>' + record.nid + '</p>';
+
+                    var imageWrapper = document.createElement('div');
+                    imageWrapper.classList.add('image-wrapper');
+                    var image = document.createElement('img');
+                    image.src = record.image;//이미지 링크 넣는곳
+                    image.alt = '이미지공간';
+                    imageWrapper.appendChild(image);
+                    li.appendChild(imageWrapper);
+
+
                     li.style.padding='18px';
+
                     li.style.borderTop = '1px solid #ccc';
                     concert.appendChild(li);
 
