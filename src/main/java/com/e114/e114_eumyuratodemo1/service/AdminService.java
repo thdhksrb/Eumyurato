@@ -173,5 +173,15 @@ public class AdminService {
     public List<Map<String, Object>>  enterConcertAll(){
         return dao.getEnterConcertAll();
     }
+
+    public List<ReservationDTO> viewAllReservations() {
+
+        return dao.getReservationList();
+    }
+
+    public List<ReservationDTO> searchReservations(String column, String keyword) {
+
+        return dao.searchReservations(column, keyword);
+    }
 }
 

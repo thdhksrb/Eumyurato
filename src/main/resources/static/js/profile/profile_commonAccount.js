@@ -78,4 +78,25 @@ function displayCommonData(common) {
 // 페이지 로드 시 관리자 정보를 가져옵니다.
 window.onload = function () {
     getCommonData();
+
+};
+
+const logoutBtn = document.createElement("a");
+logoutBtn.setAttribute("href", "/logout");
+logoutBtn.onclick = function () {
+    fetch('/logout', { method: 'POST', credentials: 'include' })
+        .then(response => {
+            if (response.ok) {
+                // 세션 스토리지에서 토큰 제거
+                window.sessionStorage.removeItem("jwtToken");
+                // 홈페이지로 이동
+                window.location.href = "/home";
+            } else {
+                throw new Error("로그아웃 처리에 실패하였습니다.");
+            }
+        })
+        .catch(error => {
+            console.error(error);
+            alert(error.message);
+        });
 };

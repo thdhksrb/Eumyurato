@@ -6,35 +6,41 @@
     <select id="getArtistMembers" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
         select *
         from artist_member
+        ORDER BY name ASC;
     </select>
 
     <select id="getCommonMembers" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
         select *
         from common_member
+        ORDER BY name ASC;
     </select>
 
     <select id="getEntMembers" resultType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
         select *
         from enterprise_member
+        ORDER BY name ASC;
     </select>
 
     <select id="searchCommonMembers" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
         SELECT * FROM common_member
         WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
+        ORDER BY name ASC;
     </select>
 
     <select id="searchArtistMembers" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
         SELECT * FROM artist_member
         WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
+        ORDER BY name ASC;
     </select>
 
     <select id="searchEntMembers" resultType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
         SELECT * FROM enterprise_member
         WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
+        ORDER BY name ASC;
     </select>
 
     <select id="getReservationList" resultType="com.e114.e114_eumyuratodemo1.dto.ReservationDTO">
-        SELECT * FROM reservation
+        SELECT * FROM reservation ORDER BY payTime DESC
     </select>
 
     <select id="searchReservations" parameterType="map" resultType="com.e114.e114_eumyuratodemo1.dto.ReservationDTO">
@@ -47,6 +53,7 @@
         <if test="column == 'sid'">
             AND sid = #{keyword}
         </if>
+        ORDER BY payTime DESC
     </select>
     
     <select id="getAdminInfoById" resultType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
@@ -56,27 +63,27 @@
     </select>
 
     <select id="getBuskings" resultType="com.e114.e114_eumyuratodemo1.dto.BuskingDTO">
-        select * from busking
+        select * from busking ORDER BY regDate DESC
     </select>
 
     <select id="getSmallConcerts" resultType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
-        select * from small_concert
+        select * from small_concert ORDER BY regDate DESC
     </select>
 
     <select id="getLocalFestivals" resultType="com.e114.e114_eumyuratodemo1.dto.LocalFestivalDTO">
-        select * from local_festival
+        select * from local_festival ORDER BY id DESC
     </select>
 
     <select id="searchBuskings" resultType="com.e114.e114_eumyuratodemo1.dto.BuskingDTO">
-        SELECT * FROM busking WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
+        SELECT * FROM busking WHERE ${column} LIKE CONCAT('%', #{keyword}, '%') ORDER BY regDate DESC
     </select>
 
     <select id="searchSmallConcerts" resultType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
-        SELECT * FROM small_concert WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
+        SELECT * FROM small_concert WHERE ${column} LIKE CONCAT('%', #{keyword}, '%') ORDER BY regDate DESC
     </select>
 
     <select id="searchLocalFestivals" resultType="com.e114.e114_eumyuratodemo1.dto.LocalFestivalDTO">
-        SELECT * FROM local_festival WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
+        SELECT * FROM local_festival WHERE ${column} LIKE CONCAT('%', #{keyword}, '%') ORDER BY id DESC
     </select>
 
     <insert id="registerSmallConcert">

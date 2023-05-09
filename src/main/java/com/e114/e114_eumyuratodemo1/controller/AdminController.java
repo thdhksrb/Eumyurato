@@ -188,31 +188,29 @@ public class AdminController {
         return resultMap;
     }
 
+    @GetMapping("/profile/admin/reservation/view")
+    public String reservationList() {
+        //List<ReservationDTO> reservations = memberDAO.getReservationList();
+        //model.addAttribute("reservations", reservations);
+
+        return "html/profile/reservation/profile_admin_reservation";
+    }
+
     @GetMapping("/profile/admin/reservation")
-    public String reservationList(Model model) {
-        List<ReservationDTO> reservations = memberDAO.getReservationList();
-        model.addAttribute("reservations", reservations);
+    public ResponseEntity<?> getCommonReservationList(@RequestParam(value = "column", required = false) String column,
+                                                      @RequestParam(value = "keyword", required = false) String keyword) {
 
-        return "html/profile/reservation/profile_admin_reservation";
-    }
+        List<ReservationDTO> reservationList;
 
-    @PostMapping("/profile/admin/reservation/search")
-    public String searchReservation(@RequestParam("column") String column, @RequestParam("keyword") String keyword, Model model) {
-        Map<String, String> params = new HashMap<>();
-        params.put("column", column);
-        params.put("keyword", keyword);
+        if (column != null && keyword != null) {
+            reservationList = adminService.searchReservations(column, keyword);
+        } else {
+            reservationList = adminService.viewAllReservations();
+        }
 
-        List<ReservationDTO> reservations = memberDAO.searchReservations(params);
+        System.out.println("Reservation List: " + reservationList);
 
-        model.addAttribute("reservations", reservations);
-
-        return "html/profile/reservation/profile_admin_reservation";
-    }
-
-    @GetMapping("/profile/admin/reservation/search")
-    public String searchReservations() {
-
-        return "html/profile/reservation/profile_admin_reservation";
+        return ResponseEntity.ok(reservationList);
     }
 
 

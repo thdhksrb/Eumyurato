@@ -96,17 +96,16 @@ document.getElementById("showEnterprises").addEventListener("click", function() 
 
 
 // 예약내역 조회 기능
-function setArtReservationsSearch() {
-    const searchArtReservationDropdown = document.getElementById("searchArtReservationDropdown");
-    const column = document.getElementById("column");
-    const keyword = document.getElementById("keyword");
-    const searchArtReservationValue = document.getElementById("searchArtReservationValue");
-
-    column.value = searchArtReservationDropdown.value;
-    keyword.value = searchArtReservationValue.value;
-};
-
-function resetReservations() {
-    window.location.href = "/profile/artist/reservation";
-};
-
+// function setArtReservationsSearch() {
+//     const searchArtReservationDropdown = document.getElementById("searchArtReservationDropdown");
+//     const column = document.getElementById("column");
+//     const keyword = document.getElementById("keyword");
+//     const searchArtReservationValue = document.getElementById("searchArtReservationValue");
+//
+//     column.value = searchArtReservationDropdown.value;
+//     keyword.value = searchArtReservationValue.value;
+// };
+//
+// function resetReservations() {
+//     window.location.href = "/profile/artist/reservation";
+// };
