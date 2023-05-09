@@ -103,6 +103,12 @@ public class AdminController {
         return "html/profile/borard/profile_admin_borad";
     }
 
+    @GetMapping("/profile/admin/info/modify")
+    public String admimInfomodify() {
+
+        return "html/profile/borardModify/profile_admin_boradModify";
+    }
+
     @GetMapping("/profile/admin/total")
     public ResponseEntity<?> getMemberList(@RequestParam("category") String category,
                                            @RequestParam(value = "column", required = false) String column,

@@ -114,56 +114,92 @@
             <!--begin::Signin Form-->
             <div class="form w-1000px  needs-validation text-center" id="kt_login_signin_form" novalidate>
                 <div style="display: flex; align-items: center; margin-bottom: 20px;">
-                    <h1 style="font-size: 24px; flex-grow: 1;"><strong>공지 사항</strong></h1>
+                    <h1 style="font-size: 24px; flex-grow: 1;"><strong>공지 사항 수정</strong></h1>
                 </div>
-                <div class="container mt-5">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <form action="/profile/admin/reservation/search" method="post">
-                                <!-- 검색창 -->
-                                <input type="text" id="searchReservationValue" name="searchReservationValue" placeholder="" style="width: 30%; height: 40px; border-radius: 5px; border: 1px solid #cccad4">
 
-                                <!-- 검색 필드와 검색 값 전달용 hidden input -->
-                                <input type="hidden" id="column" name="column">
-                                <input type="hidden" id="keyword" name="keyword">
+                <div class="row content">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                <form action="/todo/modify" method="post">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">글 번호</span>
+                                        <input type="text" name="tno" class="form-control" value="tno_value" readonly>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">글 제목</span>
+                                        <input type="text" name="title" class="form-control" value="title_value">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">글내용</span>
+                                        <textarea name="content" class="form-control" rows="5"></textarea>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">작성날짜</span>
+                                        <input type="date" name="dueDate" class="form-control" value="due_date_value">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">작성자</span>
+                                        <input type="text" name="writer" class="form-control" value="writer_value" readonly>
+                                    </div>
+                                    <div class="my-4">
+                                        <div class="float-end">
+                                            <button type="button" class="btn btn-danger">Remove</button>
+                                            <button type="button" class="btn btn-primary">Modify</button>
+                                            <button type="button" class="btn btn-secondary">List</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <script>
+                                    const serverValidResult = {};
 
-                                <button class="btn btn-primary" type="submit" onclick="setReservationsSearch()" style="width: 10%;">Search</button>
-                                <button class="btn btn-primary" type="button" onclick="resetReservations()" style="width: 10%;">Reset</button>
-                                <button class="btn btn-primary" type="button" th:href="@{/profile/admin/info/modify}" style="width: 10%;">글 작성</button>
-                            </form>
+                                    console.log(serverValidResult);
+                                </script>
+                            </div>
+                            <script>
+                                const formObj = document.querySelector("form");
+
+                                document.querySelector(".btn-danger").addEventListener("click", function(e) {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+
+                                    formObj.action = "/todo/remove";
+                                    formObj.method = "post";
+
+                                    formObj.submit();
+                                }, false);
+
+                                document.querySelector(".btn-danger").addEventListener("click", function(e) {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+
+                                    formObj.action = `/todo/remove?${pageRequestDTO.link}`;
+                                    formObj.method = "post";
+
+                                    formObj.submit();
+                                }, false);
+
+                                document.querySelector(".btn-primary").addEventListener("click", function(e) {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+
+                                    formObj.action = "/todo/modify";
+                                    formObj.method = "post";
+
+                                    formObj.submit();
+                                }, false);
+
+                                document.querySelector(".btn-secondary").addEventListener("click", function(e) {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+
+                                    self.location = "/todo/list";
+                                }, false);
+                            </script>
                         </div>
                     </div>
                 </div>
 
-                <div class="container">
-                    <div style="color:#000000; background-color:#FFFFFF; padding:25px;  height: 600px;">
-                        <table class="table table-rounded table-striped border gy-7 gs-7">
-                            <thead>
-                            <tr class="fw-bold fs-6 text-gray-800 border-bottom border-gray-200">
-                                <th>NO</th>
-                                <th>제목</th>
-                                <th>조회수</th>
-                                <th>등록일</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="reservation : ${reservations}">
-                                <td th:text="${reservation.id}"></td>
-                                <td th:text="${reservation.sid}"></td>
-                                <td th:text="${reservation.cid}"></td>
-                                <td th:text="${reservation.payTime}"></td>
-                                <td th:text="${reservation.viewDate}"></td>
-                                <td th:text="${reservation.memberNum}"></td>
-                                <td th:text="${reservation.reservPay}"></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div style="margin-top:20px;">
-                        <!-- 리스트 내용 -->
-                    </div>
-                </div>
             </div>
         </div>
     </div>
