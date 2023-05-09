@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -66,27 +67,20 @@ public class CommonController {
         return "html/profile/accountModify/profile_common_accountModify";
     }
 
-// 회원 정보 수정 처리
-    @PutMapping("/profile/common")
-    public ResponseEntity<String> updateCommonMember(@ModelAttribute CommonMemberDTO commonMemberDTO, @RequestParam("imgFile") MultipartFile imgFile, HttpServletRequest request) {
-        try {
-            String id = request.getUserPrincipal().getName();
-            CommonMemberDTO currentCommonMember = commonMemberMapper.selectCommonMemberById(id);
-            if (!currentCommonMember.getId().equals(commonMemberDTO.getId())) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("현재 로그인한 사용자와 다른 사용자의 정보는 수정할 수 없습니다.");
-            }
-            if (!imgFile.isEmpty()) {
-                commonService.saveCommonMember(commonMemberDTO, imgFile);
-            } else {
-                commonService.updateCommonMember(commonMemberDTO.getId(), commonMemberDTO.getNid(), commonMemberDTO.getPhone(), commonMemberDTO.getEmail());
-            }
-            return ResponseEntity.ok("개인 정보가 수정되었습니다.");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("개인 정보 수정에 실패했습니다.");
+    // 회원 정보 수정 처리
+    @PostMapping("/profile/common/modify")
+    public ResponseEntity<?> updateCommonMember(@RequestPart("commonDTO") CommonMemberDTO commonMemberDTO,  @RequestPart(value = "imgFile", required = false) MultipartFile imgFile) throws IOException {
+
+        if(imgFile == null){
+            System.out.println(commonMemberDTO);
+            commonService.modifyCommonWithoutImage(commonMemberDTO);
+        }else{
+            System.out.println(commonMemberDTO);
+            commonService.modifyCommon(commonMemberDTO, imgFile);
         }
+
+        return ResponseEntity.ok().build();
     }
-
-
 
     @GetMapping("/profile/common/reservation/view")
     public String getCommonReservations() {

@@ -1,5 +1,33 @@
 const jwtToken = sessionStorage.getItem("jwtToken");
 
+$(document).ready(function() {
+    getCommonData(); //정보 불러옴
+
+    //프로필 이미지 사용자가 업로드한 이미지로 변경
+    $('input[type="file"]').on('change', function(event) {
+        var file = event.target.files[0];
+        var imageUrl = URL.createObjectURL(file);
+        $('#previewImage').attr('src', imageUrl);
+    });
+
+    $('#cpassword').on('change', function() {
+        var cpassword = $("input[name='cpassword']").val();
+        var pwd = $("input[name='pwd']").val();
+
+        if (cpassword !== pwd) {
+            alert("비밀번호가 다릅니다.");
+            cpassword = '';
+        }
+    });
+
+    $('#modify').on('click', function(event) {
+        event.preventDefault(); // 기본 동작(페이지 이동) 방지
+        clickCheck();
+        commonModify(); // 데이터 보내는 함수 실행
+    });
+});
+
+//정보 불러오기
 function getCommonData() {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", "/profile/common/data");
@@ -18,6 +46,9 @@ function getCommonData() {
     xhr.send();
 }
 
+var comId;
+
+//정보 input창에 띄워주기
 function displayCommonData(common) {
     document.getElementById("id").value = common.id;
     document.getElementById("pwd").value = common.pwd;
@@ -26,114 +57,49 @@ function displayCommonData(common) {
     document.getElementById("email").value = common.email;
     document.getElementById("phone").value = common.phone;
 
+    comId = common.id;
+    console.log(comId);
+
 // 이미지 URL을 가져온다.
     var imageUrl = common.image;
 
     if (imageUrl !== null && imageUrl.startsWith("https://")) {
-        // 이미지 요소를 생성한다.
-        var img = document.createElement("img");
-        img.src = imageUrl;
-        img.style.objectFit = "contain";
-        img.style.width = "100%";
-        img.style.height = "100%";
+        $('#previewImage').attr('src', imageUrl);
 
-        // 이미지 요소를 포함할 div를 찾는다.
-        var profileImg = document.getElementById("profileImg");
-
-        // div에 이미지 요소를 추가한다.
-        profileImg.appendChild(img);
     } else if(imageUrl !== null && !imageUrl.startsWith("https://")) {
         var replacedImageUrl = 'https://storage.googleapis.com/eumyurato/' + imageUrl;
-        console.log(replacedImageUrl);
-        // 이미지 요소를 생성한다.
-        var img = document.createElement("img");
-        img.src = replacedImageUrl;
-        img.style.objectFit = "contain";
-        img.style.width = "100%";
-        img.style.height = "100%";
-
-        // 이미지 요소를 포함할 div를 찾는다.
-        var profileImg = document.getElementById("profileImg");
-
-        // div에 이미지 요소를 추가한다.
-        profileImg.appendChild(img);
+        $('#previewImage').attr('src', replacedImageUrl);
     }else{
-        // 이미지 요소를 생성한다.
-        var img = document.createElement("img");
-        img.src = "/img/default.jpg";
-        img.style.objectFit = "contain";
-        img.style.width = "100%";
-        img.style.height = "100%";
-
-        // 이미지 요소를 포함할 div를 찾는다.
-        var profileImg = document.getElementById("profileImg");
-
-        // div에 이미지 요소를 추가한다.
-        profileImg.appendChild(img);
+        var defaultImage = '/img/default.jpg';
+        $('#previewImage').attr('src', defaultImage);
     }
 }
-// 회원 정보 수정 폼 제출 이벤트 핸들러
-document.getElementById("kt_login_signin_form").addEventListener("submit", function (event) {
-    event.preventDefault(); // 기본 동작 중단
 
-    // 수정된 정보 가져오기
-    const pwd = document.getElementById("pwd").value;
-    const nid = document.getElementById("nid").value;
-    const email = document.getElementById("email").value;
-    const phone = document.getElementById("phone").value;
-
-    // 이미지 파일 가져오기
-    const avatarInput = document.querySelector('input[name="avatar"]');
-    const avatarFile = avatarInput.files[0];
-
-    // 서버로 전송할 데이터 생성
-    const data = new FormData();
-    data.append('pwd', pwd);
-    data.append('nid', nid);
-    data.append('email', email);
-    data.append('phone', phone);
-    data.append('avatar', avatarFile);
-
-    // 서버로 데이터 전송
-    const xhr = new XMLHttpRequest();
-    xhr.open("PUT", "/profile/common");
-    xhr.setRequestHeader("Authorization", `Bearer ${jwtToken}`);
-    xhr.onload = function () {
-        if (xhr.status === 200) {
-            alert("회원 정보가 수정되었습니다.");
-        } else {
-            alert("회원 정보 수정에 실패했습니다.");
-        }
-    };
-    xhr.send(data);
-});
-
-function concertRegister() {
+//회원정보 수정값 받아서 서버로 보내기
+function commonModify() {
     var formData = new FormData();
     var fileInput = document.querySelector('input[name="avatar"]');
     var file = fileInput.files[0];
     formData.append('imgFile', file);
     var data = {
-        name: $("input[name='name']").val(),
-        pname: $("input[name='pname']").val(),
-        location: $("input[name='sample4_roadAddress']").val(),
-        enterId: $("input[name='enterId']").val(),
-        startDate: $("input[name='startDate']").val(),
-        lastDate: $("input[name='lastDate']").val(),
-        price: $("input[name='price']").val()
+        id: comId,
+        pwd: $("input[name='pwd']").val(),
+        nid: $("input[name='nid']").val(),
+        email: $("input[name='email']").val(),
+        phone: $("input[name='phone']").val()
     };
 
-    formData.append('registerDTO', new Blob([JSON.stringify(data)], { type: 'application/json' }));
+    formData.append('commonDTO', new Blob([JSON.stringify(data)], { type: 'application/json' }));
     console.log(formData);
     $.ajax({
         type: 'POST',
-        url: '/profile/admin/register',
+        url: '/profile/common/modify',
         data: formData,
         processData: false,
         contentType: false,
         success: function() {
-            alert('공연등록 성공');
-            window.location.href = '/profile/admin/management/view';
+            alert('회원정보가 수정되었습니다.');
+            location.reload();
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(textStatus + ': ' + errorThrown);
@@ -141,9 +107,15 @@ function concertRegister() {
     });
 }
 
+function clickCheck(){
+    var cpassword = $("input[name='cpassword']").val();
 
+    // 값이 비어있을 경우 경고창 출력
+    if (!cpassword) {
+        alert("비밀번호 재확인이 필요합니다.");
+        event.preventDefault();
+        return;
+    }
 
-window.onload = function () {
-    getCommonData();
-};
+}
 

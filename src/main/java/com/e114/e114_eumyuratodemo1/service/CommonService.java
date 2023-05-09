@@ -147,26 +147,11 @@ public class CommonService {
         return commonMemberDAO.deleteCommonReservation(id);
     }
 
-    //회원정보 수정
-    public boolean updateCommonMember(String id, String nid, String phone, String email) {
-        CommonMemberDTO commonMember = commonMemberDAO.findById(id);
-        if (commonMember == null) {
-            return false;
-        }
-        if (nid != null) {
-            commonMember.setNid(nid);
-        }
-        if (phone != null) {
-            commonMember.setPhone(phone);
-        }
-        if (email != null) {
-            commonMember.setEmail(email);
-        }
-        int affectedRows = commonMemberDAO.updateCommonMember(commonMember);
-        return affectedRows > 0;
+    public void modifyCommonWithoutImage(CommonMemberDTO commonMemberDTO){
+        commonMemberDAO.modifyCommonWithoutImage(commonMemberDTO);
     }
 
-    public void saveCommonMember(CommonMemberDTO commonMemberDTO, MultipartFile imgFile) throws IOException {
+    public void modifyCommon(CommonMemberDTO commonMemberDTO, MultipartFile imgFile) throws IOException {
         String uuid = UUID.randomUUID().toString();
         String ext = imgFile.getContentType();
 
@@ -178,10 +163,11 @@ public class CommonService {
                 imgFile.getInputStream()
         );
         commonMemberDTO.setImage(uuid);
-        commonMemberDAO.saveCommonMember(commonMemberDTO);
+
+        commonMemberDAO.commonModify(commonMemberDTO);
     }
 
-    }
+}
 
 
 
