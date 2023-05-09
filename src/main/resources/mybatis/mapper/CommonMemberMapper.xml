@@ -94,7 +94,8 @@
             pwd = #{pwd},
             nid = #{nid},
             phone = #{phone},
-            email = #{email}
+            email = #{email},
+            genre = #{genre}
         WHERE id = #{id}
     </update>
 
@@ -105,7 +106,8 @@
             nid = #{nid},
             phone = #{phone},
             email = #{email},
-            image = #{image}
+            image = #{image},
+            genre = #{genre}
         WHERE id = #{id}
     </update>
 

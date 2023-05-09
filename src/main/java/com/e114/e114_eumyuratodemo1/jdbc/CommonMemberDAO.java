@@ -55,8 +55,6 @@ public interface CommonMemberDAO {
  int deleteCommonReservation(int id);
 
  //회원정보 수정
-// int updateCommonMember(CommonMemberDTO commonMember);
-// void saveCommonMember(CommonMemberDTO commonMemberDTO);
  void modifyCommonWithoutImage(CommonMemberDTO commonMemberDTO);
  void commonModify(CommonMemberDTO commonMemberDTO);
  //닉네임 반환

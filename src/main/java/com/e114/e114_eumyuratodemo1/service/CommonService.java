@@ -147,6 +147,7 @@ public class CommonService {
         return commonMemberDAO.deleteCommonReservation(id);
     }
 
+    //회원정보 수정
     public void modifyCommonWithoutImage(CommonMemberDTO commonMemberDTO){
         commonMemberDAO.modifyCommonWithoutImage(commonMemberDTO);
     }
@@ -167,6 +168,7 @@ public class CommonService {
         commonMemberDAO.commonModify(commonMemberDTO);
     }
 
+    //회원 아이디 가져오기
     public int commonNid(String nid){
         int nidNum = commonMemberDAO.commonNid(nid);
         return nidNum;
