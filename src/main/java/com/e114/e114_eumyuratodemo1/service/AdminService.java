@@ -191,8 +191,27 @@ public class AdminService {
     public List<Map<String, Object>>  enterConcertIng(){
         return dao.getEnterConcertIng();
     }
+
     public List<Map<String, Object>>  enterConcertAll(){
         return dao.getEnterConcertAll();
+    }
+
+    public List<ReservationDTO> viewAllReservations() {
+
+        return dao.getReservationList();
+    }
+
+    public List<ReservationDTO> searchReservations(String column, String keyword) {
+
+        return dao.searchReservations(column, keyword);
+    }
+
+    public int deleteReservation(int id) {
+        return dao.deleteReservation(id);
+    }
+
+    public int deleteTicket(int rid){
+        return dao.deleteTicket(rid);
     }
 }
 

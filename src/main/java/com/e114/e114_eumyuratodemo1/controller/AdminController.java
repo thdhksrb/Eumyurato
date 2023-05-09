@@ -224,31 +224,41 @@ public class AdminController {
         return resultMap;
     }
 
+    @GetMapping("/profile/admin/reservation/view")
+    public String reservationList() {
+
+        return "html/profile/reservation/profile_admin_reservation";
+    }
+
     @GetMapping("/profile/admin/reservation")
-    public String reservationList(Model model) {
-        List<ReservationDTO> reservations = memberDAO.getReservationList();
-        model.addAttribute("reservations", reservations);
+    public ResponseEntity<?> getCommonReservationList(@RequestParam(value = "column", required = false) String column,
+                                                      @RequestParam(value = "keyword", required = false) String keyword) {
 
-        return "html/profile/reservation/profile_admin_reservation";
+        List<ReservationDTO> reservationList;
+
+        if (column != null && keyword != null) {
+            reservationList = adminService.searchReservations(column, keyword);
+        } else {
+            reservationList = adminService.viewAllReservations();
+        }
+
+        System.out.println("Reservation List: " + reservationList);
+
+        return ResponseEntity.ok(reservationList);
     }
 
-    @PostMapping("/profile/admin/reservation/search")
-    public String searchReservation(@RequestParam("column") String column, @RequestParam("keyword") String keyword, Model model) {
-        Map<String, String> params = new HashMap<>();
-        params.put("column", column);
-        params.put("keyword", keyword);
+    @DeleteMapping("/profile/admin/reservation")
+    public ResponseEntity<String> deleteReservation(@RequestParam("id") int id) {
 
-        List<ReservationDTO> reservations = memberDAO.searchReservations(params);
+        int ticketResult = adminService.deleteTicket(id);
 
-        model.addAttribute("reservations", reservations);
+        int reservationResult = adminService.deleteReservation(id);
 
-        return "html/profile/reservation/profile_admin_reservation";
-    }
-
-    @GetMapping("/profile/admin/reservation/search")
-    public String searchReservations() {
-
-        return "html/profile/reservation/profile_admin_reservation";
+        if (ticketResult > 0 && reservationResult > 0) { // 삭제 성공
+            return ResponseEntity.ok("success");
+        } else { // 삭제 실패
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to delete reservation.");
+        }
     }
 
 
@@ -302,6 +312,12 @@ public class AdminController {
         System.out.println(category + "," + id);
         adminService.deleteEvent(category, id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/profile/admin/total/chart")
+    public String adminGraph() {
+
+        return "html/profile/totalChart/profile_admin_totalChart";
     }
 
 }

@@ -169,10 +169,30 @@ public class EntController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/profile/ent/reservation")
-    public String commonReservationList() {
+    @GetMapping("/profile/ent/reservation/view")
+    public String enterReservationList() {
 
         return "html/profile/reservation/profile_enterprise_reservation";
+    }
+
+    @GetMapping("/profile/ent/reservation")
+    public ResponseEntity<?> getCommonReservationList(HttpServletRequest request,
+                                                      @RequestParam(value = "column", required = false) String column,
+                                                      @RequestParam(value = "keyword", required = false) String keyword) {
+
+        String token = jwtUtils.getAccessToken(request);
+        String enterId = jwtUtils.getId(token);
+
+        List<ReservationDTO> reservations;
+        if (column != null && keyword != null) {
+            reservations = enterpriseService.searchReservationsByEnterId(enterId, column, keyword);
+        } else {
+            reservations = enterpriseService.getReservationsByEnterId(enterId);
+        }
+
+        System.out.println("Reservations: " + reservations);
+
+        return ResponseEntity.ok(reservations);
     }
 
     @GetMapping("/profile/ent/management/view")

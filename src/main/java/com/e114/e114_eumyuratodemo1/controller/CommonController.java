@@ -118,12 +118,14 @@ public class CommonController {
     @DeleteMapping("/profile/common/reservation")
     public ResponseEntity<String> deleteReservation(@RequestParam("id") int id) {
 
-        int result = commonService.deleteReservation(id);
+        int ticketResult = commonService.deleteTicket(id);
 
-        if (result > 0) {
-            return ResponseEntity.ok().body("success");
-        } else {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("past");
+        int reservationResult = commonService.deleteReservation(id);
+
+        if (ticketResult > 0 && reservationResult > 0) { // 삭제 성공
+            return ResponseEntity.ok("success");
+        } else { // 삭제 실패
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to delete reservation.");
         }
     }
 

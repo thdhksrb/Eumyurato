@@ -63,7 +63,7 @@
 							</a>
 						</div>
 						<div class="menu-item" style="margin: 3px">
-							<a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/ent/reservation}">
+							<a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/ent/reservation/view}">
 								<span class="menu-title">예약 내역</span>
 							</a>
 						</div>
@@ -92,7 +92,7 @@
 					</div>
 				</div>
 			</div>
-			<a class="ms-5 me-15" style="position: relative; top: 200px; left: 300px;" th:href="@{/logout}">
+			<a id="logoutBtn" class="ms-5 me-15" style="position: relative; top: 200px; left: 300px;">
 				<img th:src="@{/img/logout.png}" style="height: 30px; width: 30px;">
 			</a>
 		</div>
@@ -126,10 +126,8 @@
 							<option value="name">공연명</option>
 							<option value="location">위치</option>
 							<option value="pname">공연자명</option>
-							<option value="startDate">시작 일자</option>
-							<option value="lastDate">마감 일자</option>
 						</select>
-						<input type="text" id="searchKeyword" placeholder="날짜 입력 예시) 2023-01-01" style="width: 30%; height: 40px; border-radius: 5px; border: 1px solid #cccad4">
+						<input type="text" id="searchKeyword" placeholder="검색어 입력" style="width: 30%; height: 40px; border-radius: 5px; border: 1px solid #cccad4">
 						<button class="btn btn-primary" id="searchBtn" style="width: 10%;" >Search</button>
 					</div>
 					<div>

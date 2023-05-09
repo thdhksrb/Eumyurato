@@ -98,4 +98,3 @@ logoutBtn.onclick = function () {
 window.onload = function () {
     getAdminData();
 };
-
