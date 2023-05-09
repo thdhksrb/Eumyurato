@@ -27,7 +27,11 @@ public interface ArtistMemberDAO{
     //회원 가입
     int insert(ArtistMemberDTO artistMemberDTO);
 
-    ArtistMemberDTO useById(String id); // 아이디 중복 확인
+    // 아이디 중복 확인
+    ArtistMemberDTO useById(String id);
+    boolean isIdDuplicated(String id);
+
+    //닉네임 중복 확인
     ArtistMemberDTO useByNid(String nid); // 중복 확인
 
     //아이디 찾기
@@ -68,4 +72,7 @@ public interface ArtistMemberDAO{
     void saveBuskingWithoutImage(BuskingDTO buskingDTO);
     void saveBusking(BuskingDTO buskingDTO);
 
+    //정보 수정
+    void modifyArtistWithoutImage(ArtistMemberDTO artistMemberDTO);
+    void artistModify(ArtistMemberDTO artistMemberDTO);
 }

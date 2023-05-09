@@ -59,11 +59,6 @@
                             </a>
                         </div>
                         <div class="menu-item" style="margin: 3px">
-                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/admin/modify}">
-                                <span class="menu-title">계정 정보 수정</span>
-                            </a>
-                        </div>
-                        <div class="menu-item" style="margin: 3px">
                             <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/admin/reservation}">
                                 <span class="menu-title">예약 내역</span>
                             </a>
@@ -126,8 +121,8 @@
                 <div class="image-input image-input-outline" data-kt-image-input="true"
                      style="display: flex; justify-content: center; align-items: center">
                     <!--begin::Image preview wrapper-->
-                    <div style="position: relative;">
-                        <img id="previewImage" src="#" alt="프로필사진"/>
+                    <div style="width:350px; height:400px; overflow: hidden; display: flex; justify-content: center; align-items: center; position: relative;">
+                        <img id="previewImage" src="#" alt="프로필사진" style="max-width: 100%; max-height: 100%; object-fit: cover;"/>
                         <!--end::Image preview wrapper-->
 
                         <!--begin::Edit button-->
@@ -136,56 +131,35 @@
                                data-bs-toggle="tooltip"
                                data-bs-dismiss="click"
                                title="Change avatar"
-                               style="position: absolute; right: -10px; top: -10px;">
+                               style="position: absolute; right: 10px; top: 10px;">
                             <i class="bi bi-pencil-fill fs-7"></i>
-
                             <!--begin::Inputs-->
                             <input type="file" name="avatar" accept=".jpg, .png"/>
                             <input type="hidden" name="avatar_remove"/>
                             <!--end::Inputs-->
                         </label>
                         <!--end::Edit button-->
-
-                        <!--begin::Cancel button-->
-                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
-                              data-kt-image-input-action="cancel"
-                              data-bs-toggle="tooltip"
-                              data-bs-dismiss="click"
-                              title="Cancel avatar"
-                              style="position: absolute; left: -10px; top: -10px;">
-										<i class="bi bi-x fs-2"></i>
-    								</span>
-                        <!--end::Cancel button-->
-
-                        <!--begin::Remove button-->
-                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow"
-                              data-kt-image-input-action="remove"
-                              data-bs-toggle="tooltip"
-                              data-bs-dismiss="click"
-                              title="Remove avatar"
-                              style="position: absolute; right: -10px; bottom: -10px;">
-      									<i class="bi bi-x fs-2"></i>
-									</span>
                     </div>
-                    <!--end::Remove button-->
                 </div>
                 <!--end::Image input-->
 
                 <div class="fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">공연명</label>
-                    <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5" style="float: left; margin-right:5px;" >공연명</label>
+                    <label class="form-label fs-8 fw-bolder pt-4" style="float: left; color: #ff0000">*</label>
                     <input class="form-control form-control-lg form-control-solid" type="text"
                            placeholder=""
                            name="name" autocomplete="off" style="border-color: #0099FF;"/>
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">공연자</label>
-                    <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5" style="float: left; margin-right:5px;">공연자</label>
+                    <label class="form-label fs-8 fw-bolder pt-4" style="float: left; color: #ff0000">*</label>
                     <input class="form-control form-control-lg form-control-solid" type="text"
                            placeholder=""
                            name="pname" autocomplete="off" style="border-color: #0099FF;"/>
                 </div>
                 <div class="fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">주소</label>
-                    <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
+                    <div style="display: flex; align-items: center;">
+                        <label class="form-label fs-6 fw-bolder text-dark pt-5" style="float: left; margin-right:5px;">주소</label>
+                        <label class="form-label fs-8 fw-bolder pt-4" style="float: left; color: #ff0000">*</label>
+                    </div>
                     <div style="display: flex; align-items: center;">
                         <input type="text" id="sample4_postcode" class="form-control form-control-lg form-control-solid" placeholder="우편번호"
                                autocomplete="off" style="border-color: #0099FF; width: 250px; margin-right: 50px;" readonly>
@@ -198,8 +172,8 @@
                 </div>
 
                 <div class=" fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">기업 ID</label>
-                    <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5" style="float: left; margin-right:5px;">기업 ID</label>
+                    <label class="form-label fs-8 fw-bolder pt-4" style="float: left; color: #ff0000">*</label>
                     <input class="form-control form-control-lg form-control-solid" type="text"
                            name="enterId" id="enterId" autocomplete="off" style="border-color: #0099FF;"/>
                 </div>
@@ -207,14 +181,14 @@
                     <div>
 
                         <div class=" fv-row mb-5">
-                            <label class="form-label fs-6 fw-bolder text-dark pt-5">공연 시작 일자</label>
-                            <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
+                            <label class="form-label fs-6 fw-bolder text-dark pt-5" style="float: left; margin-right:5px;">공연 시작 일자</label>
+                            <label class="form-label fs-8 fw-bolder pt-4" style="float: left; color: #ff0000">*</label>
                             <input autocomplete="off" class="form-control form-control-lg form-control-solid datepicker"
                                    id="startDate" name="startDate" placeholder="" required
                                    style="border-color: #0099FF;" type="text"/>
 
-                            <label class="form-label fs-6 fw-bolder text-dark pt-5">공연 마감 일자</label>
-                            <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
+                            <label class="form-label fs-6 fw-bolder text-dark pt-5" style="float: left; margin-right:5px;">공연 마감 일자</label>
+                            <label class="form-label fs-8 fw-bolder pt-4" style="float: left; color: #ff0000">*</label>
                             <input autocomplete="off" class="form-control form-control-lg form-control-solid datepicker"
                                    id="lastDate" name="lastDate" placeholder="" required
                                    style="border-color: #0099FF;" type="text"/>
@@ -223,8 +197,8 @@
                     </div>
                 </div>
                 <div class=" fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">가격</label>
-                    <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5" style="float: left; margin-right:5px;">가격</label>
+                    <label class="form-label fs-8 fw-bolder pt-4" style="float: left; color: #ff0000">*</label>
                     <input class="form-control form-control-lg form-control-solid" type="text"
                            name="price" id="price" autocomplete="off" style="border-color: #0099FF;"/>
                 </div>

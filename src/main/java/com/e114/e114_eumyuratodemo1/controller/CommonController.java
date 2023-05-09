@@ -6,15 +6,19 @@ import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.ReservationDTO;
 import com.e114.e114_eumyuratodemo1.jdbc.CommonMemberDAO;
 import com.e114.e114_eumyuratodemo1.jwt.JwtUtils;
+import com.e114.e114_eumyuratodemo1.mapper.CommonMemberMapper;
 import com.e114.e114_eumyuratodemo1.service.CommonService;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -28,6 +32,9 @@ public class CommonController {
 
     @Autowired
     private JwtUtils jwtUtils;
+
+    @Autowired
+    private CommonMemberMapper commonMemberMapper;
 
     @GetMapping("/profile/common/account")
     public String commontAccount(){
@@ -54,9 +61,25 @@ public class CommonController {
         }
     }
 
+    // 회원 정보 수정 폼 요청 처리
     @GetMapping("/profile/common/modify")
-    public String commonAccountModify(){
+    public String commonAccountModify() {
         return "html/profile/accountModify/profile_common_accountModify";
+    }
+
+    // 회원 정보 수정 처리
+    @PostMapping("/profile/common/modify")
+    public ResponseEntity<?> updateCommonMember(@RequestPart("commonDTO") CommonMemberDTO commonMemberDTO,  @RequestPart(value = "imgFile", required = false) MultipartFile imgFile) throws IOException {
+
+        if(imgFile == null){
+            System.out.println(commonMemberDTO);
+            commonService.modifyCommonWithoutImage(commonMemberDTO);
+        }else{
+            System.out.println(commonMemberDTO);
+            commonService.modifyCommon(commonMemberDTO, imgFile);
+        }
+
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/profile/common/reservation/view")
@@ -68,7 +91,7 @@ public class CommonController {
     @GetMapping("/profile/common/info/view")
     public String commonInfoview() {
 
-        return "html/profile/borard/profile_common_borad";
+        return "html/profile/board/profile_common_board";
     }
 
     @GetMapping("/profile/common/reservation")
@@ -101,6 +124,16 @@ public class CommonController {
             return ResponseEntity.ok().body("success");
         } else {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("past");
+        }
+    }
+
+    @PostMapping("/profile/common/nidcheck")
+    public String  commonNidCheck(@RequestParam("nid") String nid){
+        System.out.println(nid);
+        if(commonService.commonNid(nid) > 0) { //닉네임이 있는 경우
+            return "duplicate";
+        }else{
+            return "available";
         }
     }
 }

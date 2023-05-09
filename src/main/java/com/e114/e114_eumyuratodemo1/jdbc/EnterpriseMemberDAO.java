@@ -22,8 +22,12 @@ public interface EnterpriseMemberDAO{
     //회원 가입
     int insert(EnterpriseMemberDTO enterpriseMemberDTO);
 
-    EnterpriseMemberDTO useById(String id); // 아이디 중복 확인
+    // 아이디 중복 확인
+    EnterpriseMemberDTO useById(String id);
+    boolean isIdDuplicated(String id);
 
+    // 닉네임 중복 확인
+    EnterpriseMemberDTO useByNid(String nid);
 
     //아이디 찾기
     List<String> findUserIdsByNameAndEmail(@Param("name") String name, @Param("email") String email);
@@ -56,4 +60,8 @@ public interface EnterpriseMemberDAO{
     // 기업회원 소규모공연 목록 가져오기
     List<SmallConcertDTO> getEntSmallConcerts(String enterId);     // 소규모 공연 목록 불러오기
     List<SmallConcertDTO> searchEntSmallConcerts(String enterId, String column, String keyword); // 소규모 공연 검색
+
+    //정보 수정
+    void modifyEnterWithoutImage(EnterpriseMemberDTO enterpriseMemberDTO);
+    void enterModify(EnterpriseMemberDTO enterpriseMemberDTO);
 }

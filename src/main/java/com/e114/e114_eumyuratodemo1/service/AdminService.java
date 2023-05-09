@@ -3,6 +3,9 @@ package com.e114.e114_eumyuratodemo1.service;
 
 import com.e114.e114_eumyuratodemo1.dto.*;
 import com.e114.e114_eumyuratodemo1.jdbc.AdminMemberDAO;
+
+import com.google.cloud.storage.BlobInfo;
+import com.google.cloud.storage.Storage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -23,11 +26,14 @@ import java.util.Map;
 @Service
 public class AdminService {
 
-    @Value("${spring.servlet.multipart.location}")
-    private String uploadPath;
-
     @Autowired
     AdminMemberDAO dao;
+
+    @Autowired
+    private Storage storage;
+
+    @Value("${spring.cloud.gcp.storage.bucket}")
+    private String bucketName;
 
     public List<CommonMemberDTO> viewAllCommons(){
         return dao.getCommonMembers();
@@ -79,6 +85,15 @@ public class AdminService {
     }
 
     ;
+
+
+    public SmallConcertDTO getSmallConcertByAll(String name,int price,String startDate,String lastDate){
+        return dao.getSmallConcertByAll(name,price,startDate,lastDate);
+    };
+
+
+
+
     public List<BuskingDTO> searchBuskings(String column, String keyword) {
         Map<String, String> params = new HashMap<>();
         params.put("column", column);
@@ -123,17 +138,23 @@ public class AdminService {
     }
 
     public void saveConcert(SmallConcertDTO smallConcertDTO, MultipartFile imgFile) throws IOException {
-        String originalFileName = imgFile.getOriginalFilename();
-        String fileExtension = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
-        UUID uuid = UUID.randomUUID();
-        String fileName = uuid.toString() + "_" + originalFileName;
-        Path filePath = Paths.get("src", "main", "resources", "static", "img", fileName);
-        imgFile.transferTo(filePath);
-        smallConcertDTO.setImage(String.valueOf(filePath));
-        System.out.println("service DTO : " + smallConcertDTO);
-        System.out.println(smallConcertDTO.getImage());
+        String uuid = UUID.randomUUID().toString();
+        String ext = imgFile.getContentType();
+
+        //이미지 업로드
+        BlobInfo blobInfo = storage.create(
+                BlobInfo.newBuilder(bucketName, uuid)
+                        .setContentType(ext)
+                        .build(),
+                imgFile.getInputStream()
+        );
+        smallConcertDTO.setImage(uuid);
         dao.saveConcert(smallConcertDTO);
     }
+
+    public void saveSchedules(int conId,String conDate){
+        dao.saveSchedules(conId,conDate);
+    };
 
     //일반 회원
     public List<Map<String, Object>>  commonGenderCount(){

@@ -108,7 +108,7 @@ $.ajax({
             // div에 이미지 요소를 추가한다.
             posterContainer.appendChild(img);
         }else if(imageUrl !== null && !imageUrl.startsWith("https://")){
-            var replacedImageUrl = imageUrl.replace(/\\/g, "/").replace("src/main/resources/static", "");
+            var replacedImageUrl = 'https://storage.googleapis.com/eumyurato/' + imageUrl;
             console.log(replacedImageUrl);
             // 이미지 요소를 생성한다.
             var img = document.createElement("img");
@@ -124,7 +124,7 @@ $.ajax({
             posterContainer.appendChild(img);
         }else{
             var img = document.createElement("img");
-            img.src = "/img/default.jpg";
+            img.src = "/img/buskingDefaultImg.jpg";
             img.style.objectFit = "contain";
             img.style.width = "100%";
             img.style.height = "100%";

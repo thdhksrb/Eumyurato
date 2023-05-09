@@ -32,7 +32,7 @@ function displayEntData(enterprise) {
         // 이미지 요소를 생성한다.
         var img = document.createElement("img");
         img.src = imageUrl;
-        img.style.objectFit = "contain";
+        img.style.objectFit = "cover";
         img.style.width = "100%";
         img.style.height = "100%";
 
@@ -42,12 +42,12 @@ function displayEntData(enterprise) {
         // div에 이미지 요소를 추가한다.
         profileImg.appendChild(img);
     } else if(imageUrl !== null && !imageUrl.startsWith("https://")) {
-        var replacedImageUrl = imageUrl.replace(/\\/g, "/").replace("src/main/resources/static", "");
+        var replacedImageUrl = 'https://storage.googleapis.com/eumyurato/' + imageUrl;
         console.log(replacedImageUrl);
         // 이미지 요소를 생성한다.
         var img = document.createElement("img");
         img.src = replacedImageUrl;
-        img.style.objectFit = "contain";
+        img.style.objectFit = "cover";
         img.style.width = "100%";
         img.style.height = "100%";
 
@@ -59,8 +59,8 @@ function displayEntData(enterprise) {
     }else{
         // 이미지 요소를 생성한다.
         var img = document.createElement("img");
-        img.src = "/img/default.jpg";
-        img.style.objectFit = "contain";
+        img.src = "/img/memberDefaultImg.jpg";
+        img.style.objectFit = "cover";
         img.style.width = "100%";
         img.style.height = "100%";
 

@@ -15,6 +15,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,12 +85,33 @@ public class AdminController {
     public ResponseEntity<?> concertRegister(@RequestPart("registerDTO") SmallConcertDTO smallConcertDTO, @RequestPart(value = "imgFile", required = false) MultipartFile imgFile) throws IOException {
         System.out.println(smallConcertDTO);
         System.out.println("controller img:" + imgFile);
+
+        String name = smallConcertDTO.getName();
+        int price = smallConcertDTO.getPrice();
+        String startDate = smallConcertDTO.getStartDate();
+        String lastDate = smallConcertDTO.getLastDate();
         if (imgFile == null) {
             adminService.saveConcertWithoutImage(smallConcertDTO);
             System.out.println("img null");
         } else {
             adminService.saveConcert(smallConcertDTO, imgFile);
         }
+
+        int conId = adminService.getSmallConcertByAll(name,price,startDate,lastDate).getId();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.M.d");
+        LocalDate start = LocalDate.parse(startDate, formatter);
+        LocalDate end = LocalDate.parse(lastDate, formatter);
+
+        LocalDate datetime = start;
+
+        while (!datetime.isAfter(end)) {
+            adminService.saveSchedules(conId,datetime.toString());
+            datetime = datetime.plusDays(1);
+        }
+
+
+
         return ResponseEntity.ok().build();
     }
 
@@ -100,13 +124,13 @@ public class AdminController {
     @GetMapping("/profile/admin/info/view")
     public String admimInfoview() {
 
-        return "html/profile/borard/profile_admin_borad";
+        return "html/profile/board/profile_admin_board";
     }
 
     @GetMapping("/profile/admin/info/modify")
     public String admimInfomodify() {
 
-        return "html/profile/borardModify/profile_admin_boradModify";
+        return "html/profile/boardModify/profile_admin_boardModify";
     }
 
     @GetMapping("/profile/admin/total")

@@ -478,7 +478,7 @@ function getContent(record) {
   </div>`;
 
     }else if(imageUrl !== null && !imageUrl.startsWith("https://")){
-        const replacedImageUrl = imageUrl.replace(/\\/g, "/").replace("src/main/resources/static", "");
+        const replacedImageUrl = 'https://storage.googleapis.com/eumyurato/' + imageUrl;
         // 이미지 src
         result = `<div class="infowindow" style="width: 200px; height: 200px; overflow: auto;">
     <div class="infowindow-img-container" style="display: flex; justify-content: center; align-items: center;">
@@ -492,7 +492,7 @@ function getContent(record) {
     }else{
         result = `<div class="infowindow" style="width: 200px; height: 200px; overflow: auto;">
     <div class="infowindow-img-container" style="display: flex; justify-content: center; align-items: center;">
-      <img src="/img/default.jpg" class="infowindow-img" alt="...">
+      <img src="/img/mapDefaultImg.png" class="infowindow-img" alt="...">
     </div>
     <div class="infowindow-body">
       <h2 class="infowindow-title">${record.name}</h2>
@@ -502,11 +502,11 @@ function getContent(record) {
 
     // 이미지 크기를 작게 조정
     const imgStyle = "max-width: 150px; max-height: 150px;";
-    result = result.replace('class="infowindow-img"', `class="infowindow-img" style="${imgStyle}"`);
+    result = result.replace('class="infowindow-img"', `class="infowindow-img" style="${imgStyle}; margin-top:10px;"`);
 
     // 공연 이름을 가운데로 정렬
     const titleStyle = "text-align: center;";
-    result = result.replace('class="infowindow-title"', `class="infowindow-title" style="${titleStyle}; margin-top:10px;"`);
+    result = result.replace('class="infowindow-title"', `class="infowindow-title" style="${titleStyle}; margin-top:10px; margin-bottom:10px;"`);
 
     return result;
 }

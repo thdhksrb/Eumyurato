@@ -62,6 +62,21 @@ public class ArtistController {
         return "html/profile/accountModify/profile_artist_accountModify";
     }
 
+    //아티스트회원 정보 수정 처리
+    @PostMapping("/profile/artist/modify")
+    public ResponseEntity<?> updateCommonMember(@RequestPart("artistDTO") ArtistMemberDTO artistMemberDTO,  @RequestPart(value = "imgFile", required = false) MultipartFile imgFile) throws IOException {
+
+        if(imgFile == null){
+            System.out.println(artistMemberDTO);
+            artistService.modifyArtistWithoutImage(artistMemberDTO);
+        }else{
+            System.out.println(artistMemberDTO);
+            artistService.artistModify(artistMemberDTO, imgFile);
+        }
+
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping("/profile/artist/reservation")
     public String artistReservationListPage() {
         return "html/profile/reservation/profile_artist_reservation";
@@ -115,7 +130,7 @@ public class ArtistController {
     @GetMapping("/profile/artist/info/view")
     public String artistInfoview() {
 
-        return "html/profile/borard/profile_artist_borad";
+        return "html/profile/board/profile_artist_board";
     }
 
     @GetMapping("/profile/artist/total")
