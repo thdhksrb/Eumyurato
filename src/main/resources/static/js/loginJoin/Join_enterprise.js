@@ -1,208 +1,200 @@
-/*
-const form = document.querySelector("form");
-const idInput = document.getElementById("id");
-const pwdInput = document.getElementById("pwd");
-const cpasswordInput = document.getElementById("cpassword");
-const nameInput = document.getElementById("name");
-const nidInput = document.getElementById("nid");
-const emailInput = document.getElementById("email");
-const phoneInput = document.getElementById("phone");
+(function () {
+    'use strict';
 
-const idRegex = /^(?=.*[a-zA-Z])[a-zA-Z0-9]{5,20}$/;
-const pwdRegex = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@#$%^&+=!])(?=\S+$).{8,20}$/;
-const nameRegex = /^[가-힣]{1,20}$/u; // 이름 정규식 패턴
-const nidRegex = /^[가-힣]{1,20}$/u; // 이름 정규식 패턴
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{1,30}$/;
-const phoneRegex = /^\d{1,20}$/;
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation');
 
-// 아이디 유효성 검사
-idInput.addEventListener("input", function () {
-    const idValue = idInput.value.trim();
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms).forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
 
-    if (idValue === "") {
-        document.getElementById("uid-empty").style.display = "block";
-    } else if (idValue.length < 5 || idValue.length > 20) {
-        document.getElementById("uid-length").style.display = "block";
-        document.getElementById("uid-empty").style.display = "none";
-        document.getElementById("uid-alphanumeric").style.display = "none";
-    } else if (!idRegex.test(idValue)) {
-        document.getElementById("uid-alphanumeric").style.display = "block";
-        document.getElementById("uid-empty").style.display = "none";
-        document.getElementById("uid-length").style.display = "none";
-    } else {
-        document.getElementById("uid-empty").style.display = "none";
-        document.getElementById("uid-length").style.display = "none";
-        document.getElementById("uid-alphanumeric").style.display = "none";
-    }
-});
+            form.classList.add('was-validated');
+        }, false);
 
+        // 아이디 유효성 검사
+        const uidInput = document.querySelector('input[name="id"]');
+        const uidRegex = /^[a-zA-Z0-9]{5,20}$/;
+        uidInput.addEventListener('blur', function () {
+            const uidValue = uidInput.value.trim();
+            const uidEmptyFeedback = document.getElementById("uid-empty");
+            const uidLengthFeedback = document.getElementById("uid-length");
+            const uidAlphanumericFeedback = document.getElementById("uid-alphanumeric");
+            const uidAvailableFeedback = document.getElementById("uid-available");
+            const uidDuplicateFeedback = document.getElementById("uid-duplicate");
 
-// 아이디 중복 버튼 이벤트 핸들러
-const duplicateBtn1 = document.querySelector("#id ~ button[type='button']");
-duplicateBtn1.addEventListener("click", function() {
-    const idInput = document.getElementById("id");
-    const idValue = idInput.value.trim();
-    if (idValue !== "") {
-        // 서버로 중복 검사 요청
-        fetch(`/checkIdDuplicate/${idValue}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.duplicate) {
-                    document.getElementById("uid-duplicate").style.display = "block";
-                    document.getElementById(`uid-available`).style.display = "none";
-                } else if (!data.duplicate){
-                    document.getElementById(`uid-available`).style.display = "block";
-                    document.getElementById("uid-duplicate").style.display = "none";
-                } else{
-                    document.getElementById(`uid-available`).style.display = "none";
-                    document.getElementById("uid-duplicate").style.display = "none";
-                }
-            })
-            .catch(error => console.error(error));
-    }
-});
+            if (uidValue === "") {
+                uidEmptyFeedback.style.display = "block";
+                uidLengthFeedback.style.display = "none";
+                uidAlphanumericFeedback.style.display = "none";
+                uidAvailableFeedback.style.display = "none";
+                uidDuplicateFeedback.style.display = "none";
+            } else if (!uidRegex.test(uidValue)) {
+                uidEmptyFeedback.style.display = "none";
+                uidLengthFeedback.style.display = "block";
+                uidAlphanumericFeedback.style.display = "block";
+                uidAvailableFeedback.style.display = "none";
+                uidDuplicateFeedback.style.display = "none";
+            } else {
+                uidEmptyFeedback.style.display = "none";
+                uidLengthFeedback.style.display = "none";
+                uidAlphanumericFeedback.style.display = "none";
+
+                // 중복 검사 요청
+                const xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            const response = JSON.parse(xhr.responseText);
+                            if (response.exists) {
+                                uidAvailableFeedback.style.display = "none";
+                                uidDuplicateFeedback.style.display = "block";
+                            } else {
+                                uidAvailableFeedback.style.display = "block";
+                                uidDuplicateFeedback.style.display = "none";
+                            }
+                        } else {
+                            // 처리 실패 시 메시지 표시
+                            console.error(xhr.responseText);
+                            uidAvailableFeedback.style.display = "none";
+                            uidDuplicateFeedback.style.display = "none";
+                        }
+                    }
+                };
+                xhr.open('GET', '/check-uid?uid=' + uidValue, true);
+                xhr.send();
+            }
+        });
+
 
 // 비밀번호 유효성 검사
-pwdInput.addEventListener("input", function () {
-    const pwdValue = pwdInput.value.trim();
+        const pwdInput = document.querySelector('input[name="pwd"]');
+        const pwdRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
+        pwdInput.addEventListener("blur'", function () {
+            const pwdValue = pwdInput.value.trim();
 
-    if (pwdValue === "") {
-        document.getElementById("password-empty").style.display = "block";
-    } else if (!pwdRegex.test(pwdValue)) {
-        document.getElementById("password-invalid").style.display = "block";
-        document.getElementById("password-empty").style.display = "none";
-    } else {
-        document.getElementById("password-empty").style.display = "none";
-        document.getElementById("password-invalid").style.display = "none";
-    }
-});
+            if (pwdValue === "") {
+                document.getElementById("password-empty").style.display = "block";
+            } else if (!pwdRegex.test(pwdValue)) {
+                document.getElementById("password-invalid").style.display = "block";
+                document.getElementById("password-empty").style.display = "none";
+            } else {
+                document.getElementById("password-empty").style.display = "none";
+                document.getElementById("password-invalid").style.display = "none";
+            }
+        });
 
 // 비밀번호 확인 유효성 검사
-cpasswordInput.addEventListener("input", function () {
-    const pwdValue = pwdInput.value.trim();
-    const cpasswordValue = cpasswordInput.value.trim();
+        const cpasswordInput = document.querySelector('input[name="cpassword"]');
+        cpasswordInput.addEventListener("input", function () {
+            const pwdValue = pwdInput.value.trim();
+            const cpasswordValue = cpasswordInput.value.trim();
 
-    if (pwdValue !== cpasswordValue) {
-        document.getElementById("cpassword-mismatch").style.display = "block";
-    } else {
-        document.getElementById("cpassword-mismatch").style.display = "none";
-    }
-});
+            if (pwdValue !== cpasswordValue) {
+                document.getElementById("cpassword-mismatch").style.display = "block";
+                document.getElementById("cpassword-match").style.display = "none";
+            } else {
+                document.getElementById("cpassword-match").style.display = "block";
+                document.getElementById("cpassword-match").style.color = "green";
+                document.getElementById("cpassword-mismatch").style.display = "none";
 
-// 이름 유효성 검사
-nameInput.addEventListener("input", function () {
-    const nameValue = nameInput.value.trim();
+            }
+        });
 
-    if (nameValue === "") {
-        document.getElementById("name-empty").style.display = "block";
-        document.getElementById("name-invalid").style.display = "none";
-        document.getElementById("name-vowel").style.display = "none";
-    } else if (!/^[^A-Za-z]*$/.test(nameValue)) {
-        document.getElementById("name-vowel").style.display = "block";
-        document.getElementById("name-empty").style.display = "none";
-        document.getElementById("name-invalid").style.display = "none";
-    } else if (!nameRegex.test(nameValue)) {
-        document.getElementById("name-invalid").style.display = "block";
-        document.getElementById("name-empty").style.display = "none";
-        document.getElementById("name-vowel").style.display = "none";
-    } else {
-        document.getElementById("name-empty").style.display = "none";
-        document.getElementById("name-invalid").style.display = "none";
-        document.getElementById("name-vowel").style.display = "none";
-    }
-});
+        // 닉네임 / 아티스트명 유효성 검사
+        const nidInput = document.querySelector('input[name="nid"]');
+        const nidRegExp = /^[a-zA-Z0-9가-힣]{1,20}$/;
+        nidInput.addEventListener("input", function () {
+            const nidValue = nidInput.value.trim();
 
-
-// 닉네임 / 아티스트명 유효성 검사
-nameInput.addEventListener("input", function () {
-    const nidValue = nidInput.value.trim();
-
-    if (nidValue === "") { // 수정된 부분
-        document.getElementById("nid-empty").style.display = "block";
-    } else if (!nidRegex.test(nidValue)) {
-        // 이름이 한글 1자 이상 20자 이하가 아닌 경우
-        document.getElementById("nid-invalid").style.display = "block";
-        document.getElementById("nid-empty").style.display = "none";
-    } else {
-        // 유효한 이름인 경우
-        document.getElementById("nid-empty").style.display = "none";
-        document.getElementById("nid-invalid").style.display = "none";
-    }
-});
-
+            if (nidValue === "") {
+                document.getElementById("nid-empty").style.display = "block";
+            } else if (!nidRegExp.test(nidValue)) {
+                document.getElementById("nid-invalid").style.display = "block";
+                document.getElementById("nid-empty").style.display = "none";
+            } else {
+                document.getElementById("nid-empty").style.display = "none";
+                document.getElementById("nid-invalid").style.display = "none";
+            }
+        });
 
 // 이메일 유효성 검사
-nameInput.addEventListener("input", function () {
-    const emailValue = emailInput.value.trim();
+        const emailInput = document.querySelector('input[name="email"]');
+        const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,30}$/;
+        emailInput.addEventListener('blur', function (event) {
+            const emailValue = emailInput.value.trim();
+            if (emailValue === "") {
+                // 이메일이 빈 문자열일 경우
+                document.getElementById("email-empty").style.display = "block";
+            } else if (!emailRegex.test(emailValue)) {
+                // 이메일 형식이 올바르지 않을 경우
+                document.getElementById("email-invalid").style.display = "block";
+                document.getElementById("email-empty").style.display = "none";
+            } else {
+                document.getElementById("email-empty").style.display = "none";
+                document.getElementById("email-invalid").style.display = "none";
+            }
+        });
 
-    if (emailValue === "") {
-        // 이메일이 빈 문자열일 경우
-        document.getElementById("email-empty").style.display = "block";
-    } else if (!emailRegex.test(emailValue)) {
-        // 이메일 형식이 올바르지 않을 경우
-        document.getElementById("email-invalid").style.display = "block";
-        document.getElementById("email-empty").style.display = "none";
-    } else {
-        document.getElementById("email-empty").style.display = "none";
-        document.getElementById("email-invalid").style.display = "none";
-    }
-});
+// 휴대폰 유효성 검사
+        const phoneInput = document.querySelector('input[name="phone"]');
+        const phoneRegex = /^\d{1,20}$/;
+        phoneInput.addEventListener('blur', function (event) {
+            const phoneValue = phoneInput.value.trim();
 
-// 휴대폰 번호 유효성 검사
-nameInput.addEventListener("input", function () {
-    const phoneValue = phoneInput.value.trim();
+            if (phoneValue === "") {
+                // 휴대폰 번호가 빈 문자열일 경우
+                document.getElementById("num1-empty").style.display = "block";
+                document.getElementById("num1-invalid").style.display = "none";
+            } else if (!phoneRegex.test(phoneValue)) {
+                // 휴대폰 번호 형식이 올바르지 않을 경우
+                document.getElementById("num1-invalid").style.display = "block";
+                document.getElementById("num1-empty").style.display = "none";
+            } else {
+                document.getElementById("num1-empty").style.display = "none";
+                document.getElementById("num1-invalid").style.display = "none";
+            }
+        });
 
-    if (phoneValue === "") {
-        // 휴대폰 번호가 빈 문자열일 경우
-        document.getElementById("num1-empty").style.display = "block";
-        document.getElementById("num1-invalid").style.display = "none";
-    } else if (!phoneRegex.test(phoneValue)) {
-        // 휴대폰 번호 형식이 올바르지 않을 경우
-        document.getElementById("num1-invalid").style.display = "block";
-        document.getElementById("num1-empty").style.display = "none";
-    } else {
-        document.getElementById("num1-empty").style.display = "none";
-        document.getElementById("num1-invalid").style.display = "none";
-    }
-});
+        // 사업자등록번호 유효성 검사
+        const numInput = document.querySelector('input[name="phone"]');
+        const numRegex = /^\d{1,40}$/;
+        numInput.addEventListener('blur', function (event) {
+            const numValue = numInput.value.trim();
+
+            if (numValue === "") {
+                // 휴대폰 번호가 빈 문자열일 경우
+                document.getElementById("enter-empty").style.display = "block";
+                document.getElementById("enter-invalid").style.display = "none";
+            } else if (!numRegex.test(numValue)) {
+                // 휴대폰 번호 형식이 올바르지 않을 경우
+                document.getElementById("enter-invalid").style.display = "block";
+                document.getElementById("enter-empty").style.display = "none";
+            } else {
+                document.getElementById("enter-empty").style.display = "none";
+                document.getElementById("enter-invalid").style.display = "none";
+            }
+        });
+
 
 // 약관 동의 체크박스 유효성 검사
-nameInput.addEventListener("checkbox", function () {
+        const agreeCheckbox = document.getElementById("chk_agree");
+        const agreeCheckboxCheck = document.getElementById("chk_agree-invalid");
 
-    if (!document.getElementById("chk_agree").checked) {
-        // 체크박스가 체크되지 않았을 경우
-        document.getElementById("chk_agree-invalid").style.display = "block";
-        return false;
-    } else {
-        document.getElementById("chk_agree-invalid").style.display = "none";
-    }
+        agreeCheckbox.addEventListener("input", function () {
+            if (!agreeCheckbox.checked) {
+                agreeCheckboxCheck.style.display = "block";
+                return false;
+            } else {
+                agreeCheckboxCheck.style.display = "none";
+            }
+        });
+    });
+})();
 
-});
-
-
-
-// 닉네임 중복 검사 버튼 이벤트 핸들러
-const duplicateBtn2 = document.querySelector("#duplicateBtn2");
-duplicateBtn2.addEventListener("click", function() {
-    const nidInput = document.getElementById("nid");
-    const nidValue = nidInput.value.trim();
-    if (nidValue !== "") {
-        // 서버로 중복 검사 요청
-        fetch(`/checkNidDuplicate/${nidValue}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.duplicate) {
-                    document.getElementById("nid-duplicate").style.display = "block";
-                    document.getElementById(`nid-available`).style.display = "none";
-                } else {
-                    document.getElementById(`nid-available`).style.display = "block";
-                    document.getElementById("nid-duplicate").style.display = "none";
-                }
-            })
-            .catch(error => console.error(error));
-    }
-});
-*/
 
 // 회원가입 이벤트 핸들러
 const joinButton = document.getElementById('joinButton');
