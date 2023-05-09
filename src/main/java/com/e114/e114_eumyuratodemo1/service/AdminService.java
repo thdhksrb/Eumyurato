@@ -85,6 +85,15 @@ public class AdminService {
     }
 
     ;
+
+
+    public SmallConcertDTO getSmallConcertByAll(String name,int price,String startDate,String lastDate){
+        return dao.getSmallConcertByAll(name,price,startDate,lastDate);
+    };
+
+
+
+
     public List<BuskingDTO> searchBuskings(String column, String keyword) {
         Map<String, String> params = new HashMap<>();
         params.put("column", column);
@@ -142,6 +151,10 @@ public class AdminService {
         smallConcertDTO.setImage(uuid);
         dao.saveConcert(smallConcertDTO);
     }
+
+    public void saveSchedules(int conId,String conDate){
+        dao.saveSchedules(conId,conDate);
+    };
 
     //일반 회원
     public List<Map<String, Object>>  commonGenderCount(){

@@ -130,7 +130,7 @@ public class ArtistController {
     @GetMapping("/profile/artist/info/view")
     public String artistInfoview() {
 
-        return "html/profile/borard/profile_artist_borad";
+        return "html/profile/board/profile_artist_board";
     }
 
     @GetMapping("/profile/artist/total")

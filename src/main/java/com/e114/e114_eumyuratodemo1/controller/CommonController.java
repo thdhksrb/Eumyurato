@@ -63,7 +63,7 @@ public class CommonController {
 
     // 회원 정보 수정 폼 요청 처리
     @GetMapping("/profile/common/modify")
-    public String commonAccountModify(Model model, HttpServletRequest request) {
+    public String commonAccountModify() {
         return "html/profile/accountModify/profile_common_accountModify";
     }
 
@@ -91,7 +91,7 @@ public class CommonController {
     @GetMapping("/profile/common/info/view")
     public String commonInfoview() {
 
-        return "html/profile/borard/profile_common_borad";
+        return "html/profile/board/profile_common_board";
     }
 
     @GetMapping("/profile/common/reservation")
