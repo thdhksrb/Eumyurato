@@ -13,12 +13,14 @@ import com.e114.e114_eumyuratodemo1.service.CommonService;
 import com.e114.e114_eumyuratodemo1.service.EnterpriseService;
 import com.e114.e114_eumyuratodemo1.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -99,24 +101,22 @@ public class LoginJoinController {
     //일반 로그인
     @GetMapping("/loginjoin/common/login")
     public String login() {
-        return "html/loginJoin/loginForm1";
+        return "html/loginJoin/loginForm_common";
     }
 
     @PostMapping("/loginjoin/common/login-token")
     @ResponseBody
-    public Map<String, String> login(@RequestParam("id") String id,
-                                     @RequestParam("pwd") String pwd, HttpServletResponse response) throws IOException {
+    public Map<String, String> login(@RequestParam("id") String id, @RequestParam("pwd") String pwd, HttpServletResponse response) throws IOException {
         CommonMemberDTO commonMemberDTO = commonService.login(id, pwd);
         if (commonMemberDTO != null) {
-
-            String accessToken =
-                    jwtUtils.createAccessToken(commonMemberDTO.getAdminNum(), commonMemberDTO.getId(), commonMemberDTO.getName());
+            String accessToken = jwtUtils.createAccessToken(commonMemberDTO.getAdminNum(), commonMemberDTO.getId(), commonMemberDTO.getName());
             response.setHeader("Authorization", "Bearer " + accessToken);
 
             Map<String, String> result = new HashMap<>();
             result.put("jwtToken", accessToken);
             return result;
         } else {
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
             return null;
         }
     }
@@ -125,7 +125,7 @@ public class LoginJoinController {
     //아티스트 로그인
     @GetMapping("/loginjoin/artist/login")
     public String login_art() {
-        return "html/loginJoin/loginForm2";
+        return "html/loginJoin/loginForm_artist";
     }
 
     @PostMapping("/loginjoin/artist/login-token")
@@ -143,6 +143,7 @@ public class LoginJoinController {
             result.put("jwtToken", jwtToken);
             return result;
         } else {
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
             return null;
         }
     }
@@ -151,7 +152,7 @@ public class LoginJoinController {
     //기업 로그인
     @GetMapping("/loginjoin/enterprise/login")
     public String login_enter() {
-        return "html/loginJoin/loginForm3";
+        return "html/loginJoin/loginForm_enterprise";
     }
 
     @PostMapping("/loginjoin/enterprise/login-token")
@@ -169,6 +170,7 @@ public class LoginJoinController {
             result.put("jwtToken", jwtToken);
             return result;
         } else {
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
             return null;
         }
     }
@@ -182,7 +184,7 @@ public class LoginJoinController {
     //일반 회원가입
     @GetMapping("/loginjoin/common/join")
     public String commonJoin() {
-        return "html/loginJoin/joinForm_1";
+        return "html/loginJoin/joinForm_common";
     }
 
     @PostMapping("/loginjoin/common/join")
@@ -203,14 +205,14 @@ public class LoginJoinController {
         if (result) {
             return "redirect:/loginjoin/common/login";
         } else {
-            return "redirect:/loginjoin/common/join?error";
+            return "redirect:/loginjoin/common/join";
         }
     }
 
     //아티스트 회원가입
     @GetMapping("/loginjoin/artist/join")
     public String artistJoin() {
-        return "html/loginJoin/joinForm_2";
+        return "html/loginJoin/joinForm_artist";
     }
 
     @PostMapping("/loginjoin/artist/join")
@@ -230,7 +232,7 @@ public class LoginJoinController {
         if (result) {
             return "redirect:/loginjoin/artist/login";
         } else {
-            return "redirect:/loginjoin/artist/join?error";
+            return "redirect:/loginjoin/artist/join";
         }
     }
 
@@ -238,7 +240,7 @@ public class LoginJoinController {
     //기업 회원 가입
     @GetMapping("/loginjoin/enterprise/join")
     public String enterpriseJoin() {
-        return "html/loginJoin/joinForm_3";
+        return "html/loginJoin/joinForm_enterprise";
     }
 
     @PostMapping("/loginjoin/enterprise/join")
@@ -255,7 +257,7 @@ public class LoginJoinController {
         if (result) {
             return "redirect:/loginjoin/enterprise/login";
         } else {
-            return "redirect:/loginjoin/enterprise/join?error";
+            return "redirect:/loginjoin/enterprise/join";
         }
     }
 
@@ -263,10 +265,28 @@ public class LoginJoinController {
     //로그 아웃
     @GetMapping("/logout")
     public String logout(HttpSession session) {
-        session.removeAttribute("token"); // 세션에서 토큰 정보 제거
+        session.removeAttribute("jwtToken"); // 세션에서 토큰 정보 제거
 
         return "redirect:/home"; // 로그아웃 후 메인 홈페이지로 이동
     }
+
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate(); // 세션 무효화
+        }
+        // 쿠키 무효화
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                cookie.setMaxAge(0);
+                response.addCookie(cookie);
+            }
+        }
+        return ResponseEntity.ok().build();
+    }
+
 
     // 아이디 찾기
     @GetMapping("/loginjoin/Idfind")
@@ -283,6 +303,7 @@ public class LoginJoinController {
         return ResponseEntity.ok(userIds);
     }
 
+    //비밀번호 찾기(임시번호 발급)
     @GetMapping("/loginjoin/Pwfind")
     public String Pwfind() {
         return "html/loginJoin/pwfind";
@@ -291,8 +312,8 @@ public class LoginJoinController {
     @PostMapping("/loginjoin/Pwfind")
     public String findPassword(@RequestParam String id, @RequestParam String name, @RequestParam String email, Model model) {
         // 입력받은 정보를 이용해 회원 정보를 조회합니다.
-        CommonMemberDTO member = commonMemberDAO.findById(id);
-        if (member == null || !member.getName().equals(name) || !member.getEmail().equals(email)) {
+        CommonMemberDTO commonMember = commonMemberDAO.findById(id);
+        if (commonMember == null || !commonMember.getName().equals(name) || !commonMember.getEmail().equals(email)) {
             // CommonMemberDTO로 조회한 결과가 없는 경우
             ArtistMemberDTO artistMember = artistMemberDAO.findById(id);
             if (artistMember == null || !artistMember.getName().equals(name) || !artistMember.getEmail().equals(email)) {
@@ -324,45 +345,31 @@ public class LoginJoinController {
             // CommonMemberDTO로 조회한 결과가 있는 경우
             // 비밀번호 업데이트 및 임시 비밀번호 발급
             String tempPassword = memberService.generateTempPassword();
-            commonMemberDAO.updatePassword(member.getId(), tempPassword);
-            memberService.sendTempPasswordByEmail(member.getEmail(), tempPassword);
+            commonMemberDAO.updatePassword(commonMember.getId(), tempPassword);
+            memberService.sendTempPasswordByEmail(commonMember.getEmail(), tempPassword);
             model.addAttribute("tempPasswordSent", true);
             return "redirect:/loginjoin/common/login";
         }
-
     }
 
 
-/*
-    @PostMapping("/loginjoin/artist/join")
-    public String eRegister(ArtistMemberDTO dto,Model model) {
-        boolean result = userService.artistregister(dto, UserType.ARTIST);
-
-        if (result) {
-            return "redirect:/loginjoin/common/login";
-        } else {
-            model.addAttribute("error", "회원가입에 실패했습니다.");
-            return "redirect:/loginjoin/artist/join?error";
-        }
-    }
-*/
-
-
-    //중복 확인
+    //아이디 중복 확인
     @GetMapping("/checkIdDuplicate/{id}")
     public ResponseEntity<Map<String, Boolean>> checkIdDuplicate(@PathVariable String id) {
-        boolean duplicate = commonMemberDAO.useById(id) != null;
+        boolean duplicate = commonMemberDAO.isIdDuplicated(id) || artistMemberDAO.isIdDuplicated(id) || enterpriseMemberDAO.isIdDuplicated(id);
         Map<String, Boolean> response = Collections.singletonMap("duplicate", duplicate);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/checkNidDuplicate/{nid}")
     public ResponseEntity<Map<String, Boolean>> checkNidDuplicate(@PathVariable String nid) {
-        boolean duplicate = commonMemberDAO.useByNid(nid) != null;
+        boolean commonDuplicate = commonMemberDAO.useByNid(nid) != null;
+        boolean artistDuplicate = artistMemberDAO.useByNid(nid) != null;
+        boolean enterpriseDuplicate = enterpriseMemberDAO.useByNid(nid) != null;
+        boolean duplicate = commonDuplicate || artistDuplicate || enterpriseDuplicate;
         Map<String, Boolean> response = Collections.singletonMap("duplicate", duplicate);
         return ResponseEntity.ok(response);
     }
-
 
     @GetMapping("/mypage")
     public String mypage(Model model, HttpSession session) {
@@ -391,52 +398,3 @@ public class LoginJoinController {
     }
 
 }
-
-/*    @GetMapping("/mypage")
-    public String mypage(HttpSession session, Model model) {
-        // 세션에서 현재 로그인된 사용자 정보를 가져온다
-        CommonMemberDTO user = (CommonMemberDTO) session.getAttribute("user");
-        if (user == null) { // 로그인되어있지 않으면 로그인 페이지로 이동
-            return "redirect:/login?error";
-        } else {
-            // 현재 사용자가 가진 권한 정보를 가져와 사용자 객체에 추가
-            List<String> roles = userService.getUserRoles(user.getId());
-            user.setRoles(roles);
-            // 모델에 사용자 정보를 담아 마이페이지 화면을 반환
-            model.addAttribute("user", user);
-            return "html/loginJoin/mypage";
-        }
-    }
-
-    // 토큰 정보를 반환하는 API
-    @GetMapping("/token")
-    @ResponseBody
-    public String getToken(HttpSession session) {
-        // 세션에서 현재 로그인된 사용자 정보를 가져온다
-        CommonMemberDTO user = (CommonMemberDTO) session.getAttribute("user");
-        if (user == null) { // 로그인되어있지 않으면 에러 메시지 반환
-            return "로그인 후 이용해주세요.";
-        } else {
-            // 현재 사용자가 가진 권한 정보를 가져와 JWT 토큰을 생성
-            List<String> roles = userService.getUserRoles(user.getId());
-            String token = jwtTokenProvider.createToken(user.getId(), roles);
-            // 생성된 토큰 값 반환
-            return "발행된 토큰 값: " + token;
-        }
-    }
-
-        @PostMapping("/login")
-    public String login(@RequestParam("id") String id, @RequestParam("pwd") String pwd, HttpSession session) {
-            CommonMemberDTO commonMemberDTO = userService.login(id, pwd); // 사용자 정보 조회
-            if (commonMemberDTO != null) {
-                List<String> roles = userService.getUserRoles(id); // 사용자의 권한 정보 조회
-                String token = jwtTokenProvider.createToken(commonMemberDTO.getId(), roles); // JWT 토큰 생성
-                commonMemberDTO.setRoles(roles); // 사용자 정보에 권한 정보 추가
-                session.setAttribute("user", commonMemberDTO); // HttpSession에 사용자 정보 저장
-                return "redirect:/mypage"; // 마이페이지로 이동
-            } else {
-                return "redirect:/login?error"; // 에러 페이지로 이동
-            }
-        }*/
-
-

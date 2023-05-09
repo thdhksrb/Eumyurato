@@ -22,8 +22,12 @@ public interface EnterpriseMemberDAO{
     //회원 가입
     int insert(EnterpriseMemberDTO enterpriseMemberDTO);
 
-    EnterpriseMemberDTO useById(String id); // 아이디 중복 확인
+    // 아이디 중복 확인
+    EnterpriseMemberDTO useById(String id);
+    boolean isIdDuplicated(String id);
 
+    // 닉네임 중복 확인
+    EnterpriseMemberDTO useByNid(String nid);
 
     //아이디 찾기
     List<String> findUserIdsByNameAndEmail(@Param("name") String name, @Param("email") String email);

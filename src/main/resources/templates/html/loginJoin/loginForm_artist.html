@@ -65,14 +65,14 @@ l
                            style="font-weight: bold; background-color: #294ba1; color: #FFFFFF"
                            th:href="@{/loginjoin/common/login}">일반 회원</a>
 
-                        <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off">
+                        <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off" checked>
                         <a class="btn btn-secondary ms-3" for="option2"
-                           style="font-weight: bold; background-color: #294ba1; color: #FFFFFF"
-                           th:href="@{/loginjoin/artist/login}">아티스트 회원</a>
+                           style="font-weight: bold; background-color: #294ba1; color: #FFFFFF">아티스트 회원</a>
 
-                        <input type="radio" class="btn-check" name="options" id="option3" autocomplete="off" checked>
+                        <input type="radio" class="btn-check" name="options" id="option3" autocomplete="off">
                         <a class="btn btn-secondary ms-3" for="option3"
-                           style="font-weight: bold; background-color: #294ba1; color: #FFFFFF">기업 회원</a>
+                           style="font-weight: bold; background-color: #294ba1; color: #FFFFFF"
+                           th:href="@{/loginjoin/enterprise/login}">기업 회원</a>
                     </div>
                 </div>
 
@@ -136,6 +136,6 @@ l
         </div>
     </div>
 </div>
-<script type="text/javascript" th:src="@{/js/loginJoin/Login3.js}"></script>
+<script type="text/javascript" th:src="@{/js/loginJoin/Login_artist.js}"></script>
 </body>
 </html>
