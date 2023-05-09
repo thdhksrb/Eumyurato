@@ -31273,3 +31273,7 @@ body {
 .main-content {
     margin-top: 500rem; /* Adjust this value to provide more or less space below the navbar */
 }
+
+ .chart-container {
+     display: inline-block;
+ }

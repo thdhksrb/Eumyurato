@@ -76,7 +76,7 @@
         FROM reservation AS r
                  INNER JOIN schedules AS s ON r.sId = s.id
                  INNER JOIN small_concert AS sc ON s.conId = sc.id
-        WHERE r.cId = #{cId}
+        WHERE r.cId = #{cId} ORDER BY payTime DESC
     </select>
 
     <select id="searchCommonReservations" resultType="com.e114.e114_eumyuratodemo1.dto.ReservationDTO">
@@ -85,10 +85,15 @@
                  INNER JOIN schedules AS s ON r.sId = s.id
                  INNER JOIN small_concert AS sc ON s.conId = sc.id
         WHERE cId = #{cId} and ${column} LIKE CONCAT('%', #{keyword}, '%')
+        ORDER BY payTime DESC
     </select>
 
     <delete id="deleteCommonReservation">
-        DELETE FROM reservation WHERE id = #{param1} AND viewDate > CURRENT_DATE
+        DELETE FROM reservation WHERE id = #{param1}
+    </delete>
+
+    <delete id="deleteCommonTicket">
+        DELETE FROM ticket WHERE rid = #{param1}
     </delete>
 
     <!--회원정보 수정-->

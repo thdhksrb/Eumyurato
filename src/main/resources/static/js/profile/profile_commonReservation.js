@@ -46,12 +46,16 @@ function displayReservationList(reservationList, currentPage) {
     const start = (currentPage - 1) * perPage;
     const end = start + perPage;
 
+    const currentDate = new Date();
+
     reservationList.slice(start, end).forEach((reservation) => {
         const reservationRow = reservationTbody.insertRow();
 
+        const reservationDate = new Date(reservation.viewDate);
+
         const deleteButton = document.createElement('button');
         deleteButton.textContent = '취소';
-        deleteButton.classList.add('btn');
+        deleteButton.classList.add('delete-btn');
         deleteButton.addEventListener('click', () => {
             deleteReservation(reservation.id);
         });
@@ -63,7 +67,13 @@ function displayReservationList(reservationList, currentPage) {
         reservationRow.insertCell().textContent = reservation.viewDate;
         reservationRow.insertCell().textContent = reservation.memberNum;
         reservationRow.insertCell().textContent = reservation.reservPay.toLocaleString() + '원';
-        reservationRow.insertCell().appendChild(deleteButton);
+
+        // 현재 날짜 이전 예약은 취소 불가
+        if (reservationDate >= currentDate) {
+            reservationRow.insertCell().appendChild(deleteButton);
+        } else {
+            reservationRow.insertCell().textContent = '취소 불가';
+        }
     });
 
     createPagination(reservationList.length, perPage, currentPage);
@@ -116,8 +126,6 @@ function deleteReservation(reservationId) {
                 const searchColumn = document.getElementById('searchColumn').value;
                 const searchKeyword = document.getElementById('searchKeyword').value;
                 getReservationList(token, searchColumn, searchKeyword, currentPage);
-            } else if (response.status === 403) {
-                alert('현재 날짜 이전의 내용은 취소하지 못합니다.');
             } else {
                 throw new Error('응답에 문제가 있습니다.');
             }
@@ -127,3 +135,24 @@ function deleteReservation(reservationId) {
         });
 }
 
+// 로그아웃
+const logoutBtn = document.getElementById("logoutBtn");
+logoutBtn.setAttribute("href", "/logout");
+logoutBtn.onclick = function () {
+    fetch('/logout', { method: 'POST', credentials: 'include' })
+        .then(response => {
+            if (response.ok) {
+                // 세션 스토리지에서 토큰 제거
+                window.sessionStorage.removeItem("jwtToken");
+                console.log("로그아웃")
+                // 홈페이지로 이동
+                window.location.href = "/home";
+            } else {
+                throw new Error("로그아웃 처리에 실패하였습니다.");
+            }
+        })
+        .catch(error => {
+            console.error(error);
+            alert(error.message);
+        });
+};

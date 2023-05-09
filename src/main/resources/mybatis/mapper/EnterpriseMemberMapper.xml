@@ -66,40 +66,47 @@
     <select id="getArtistMembers" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
         select *
         from artist_member
+        ORDER BY name ASC
     </select>
 
     <select id="getCommonMembers" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
         select *
         from common_member
+        ORDER BY name ASC
     </select>
 
     <select id="getEntMembers" resultType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
         select *
         from enterprise_member
+        ORDER BY name ASC
     </select>
 
     <select id="searchCommonMembers" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
         SELECT *
         FROM common_member
         WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
+        ORDER BY name ASC
     </select>
 
     <select id="searchArtistMembers" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
         SELECT *
         FROM artist_member
         WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
+        ORDER BY name ASC
     </select>
 
     <select id="searchEntMembers" resultType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
         SELECT *
         FROM enterprise_member
         WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
+        ORDER BY name ASC
     </select>
 
     <select id="getEntSmallConcerts" resultType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
         select *
         from small_concert
         where enterId = #{enterId}
+        ORDER BY regDate DESC
     </select>
 
     <select id="searchEntSmallConcerts" resultType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
@@ -107,6 +114,7 @@
         from small_concert
         where enterId = #{enterId}
           AND ${column} LIKE CONCAT('%', #{keyword}, '%')
+        ORDER BY regDate DESC
     </select>
 
     <select id="getCommonGender" resultType="map">
@@ -165,4 +173,23 @@
             image = #{image}
         WHERE id = #{id}
     </update>
+
+    <select id="searchReservationsByEnterId" resultType="com.e114.e114_eumyuratodemo1.dto.ReservationDTO">
+        SELECT r.*, sc.name
+        FROM reservation r
+                 JOIN schedules s ON r.sid = s.id
+                 JOIN small_concert sc ON s.conId = sc.id
+        WHERE sc.enterId = #{enterId}
+          AND ${column} LIKE CONCAT('%', #{keyword}, '%')
+        ORDER BY payTime DESC
+    </select>
+
+    <select id="getReservationsByEnterId" resultType="com.e114.e114_eumyuratodemo1.dto.ReservationDTO">
+        SELECT r.*, sc.name
+        FROM reservation r
+                 JOIN schedules s ON r.sid = s.id
+                 JOIN small_concert sc ON s.conId = sc.id
+        WHERE sc.enterId = #{enterId}
+        ORDER BY payTime DESC
+    </select>
 </mapper>

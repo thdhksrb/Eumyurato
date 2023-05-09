@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -177,6 +178,13 @@ public class EnterpriseService {
         enterpriseMemberDAO.enterModify(enterpriseMemberDTO);
     }
 
+    public List<ReservationDTO> searchReservationsByEnterId(String enterId, String column, String keyword) {
+        return enterpriseMemberDAO.searchReservationsByEnterId(enterId, column, keyword);
+    }
+
+    public List<ReservationDTO> getReservationsByEnterId(String enterId) {
+        return enterpriseMemberDAO.getReservationsByEnterId(enterId);
+    }
 }
 
 

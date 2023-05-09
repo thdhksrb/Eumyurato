@@ -79,7 +79,13 @@
                             <div class="menu-item" style="margin: 3px">
                                 <a class="text-dark text-hover-primary ms-3 py-2"
                                    th:href="@{/profile/admin/total/view}">
-                                    <span class="menu-title">종합</span>
+                                    <span class="menu-title">회원 정보</span>
+                                </a>
+                            </div>
+                            <div class="menu-item" style="margin: 3px">
+                                <a class="text-dark text-hover-primary ms-3 py-2"
+                                   th:href="@{/profile/admin/total/chart}">
+                                    <span class="menu-title">회원 종합 차트</span>
                                 </a>
                             </div>
                             <div class="menu-item" style="margin: 3px">
@@ -92,7 +98,7 @@
                     </div>
                 </div>
             </div>
-            <a class="ms-5 me-15" style="position: relative; top: 200px; left: 300px;" th:href="@{/logout}">
+            <a id="logoutBtn" class="ms-5 me-15" style="position: relative; top: 200px; left: 300px;">
                 <img th:src="@{/img/logout.png}" style="height: 30px; width: 30px;">
             </a>
         </div>
@@ -115,29 +121,11 @@
         <div class="login-content flex-lg-row-fluid d-flex flex-column overflow-hidden py-10 py-lg-20 px-10 p-lg-7 mx-auto mw-1000px w-100"
              style="display: flex">
             <!--begin::Wrapper-->
-            <div class="form w-1000px  needs-validation text-center" id="graph" novalidate>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-8 mx-auto">
-                            <canvas id="myChart"></canvas>
-                            <div id="common" style="margin-top: 15px;">
-                            <button id="genderButton">성별</button>
-                            <button id="genreButton">선호 장르</button>
-                            </div>
-                            <div id="artist" style="display: none; margin-top: 15px;">
-                                <button id="genderBtn">성별</button>
-                                <button id="genreBtn">장르</button>
-                                <button id="point">포인트</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <!--begin::Signin Form-->
             <div class="form w-1000px  needs-validation text-center" id="kt_login_signin_form" novalidate>
                 <div style="color:#000000; background-color:#FFFFFF; padding:25px;  height: 600px;">
                     <div style="display: flex; align-items: center; margin-bottom: 20px;">
-                        <h4 style="font-size: 24px; flex-grow: 1;"><strong>종합 정보</strong></h4>
+                        <h4 style="font-size: 24px; flex-grow: 1;"><strong>회원 정보</strong></h4>
                         <button class="text-gray-600 ms-3 fs-5" id="commonBtn">일반 회원</button>
                         <a target="_blank" class="text-gray-600 text-hover-primary ms-3">|</a>
                         <button class="text-gray-600 ms-3 fs-5" id="artistBtn">아티스트 회원</button>
@@ -148,45 +136,25 @@
                         <select id="searchColumn" style="width: 10%; height: 40px; border-radius: 5px;">
                             <!-- 일반 회원 옵션 -->
                             <option class="common" value="id">아이디</option>
-                            <option class="common" value="name">성명</option>
                             <option class="common" value="nid">닉네임</option>
                             <option class="common" value="sex">성별</option>
                             <option class="common" value="birth">생년월일</option>
-                            <option class="common" value="email">이메일</option>
-                            <option class="common" value="road">유입 경로</option>
                             <option class="common" value="genre">선호 장르</option>
 
                             <!-- 아티스트 회원 옵션 -->
                             <option class="artist" value="id">아이디</option>
-                            <option class="artist" value="name">성명</option>
                             <option class="artist" value="nid">활동명</option>
                             <option class="artist" value="sex">성별</option>
                             <option class="artist" value="birth">생년월일</option>
-                            <option class="artist" value="email">이메일</option>
                             <option class="artist" value="genre">장르</option>
-                            <option class="artist" value="point">포인트</option>
 
                             <!-- 기업 회원 옵션 -->
                             <option class="enterprise" value="id">아이디</option>
                             <option class="enterprise" value="name">기업명</option>
-                            <option class="enterprise" value="email">이메일</option>
-                            <option class="enterprise" value="phone">대표번호</option>
                         </select>
                         <input type="text" id="searchKeyword" placeholder="검색어 입력" style="width: 30%; height: 40px; border-radius: 5px; border: 1px solid #cccad4">
                         <button class="btn btn-primary" id="searchBtn" style="width: 10%;" >Search</button>
                     </span>
-                    <!--아티스트 스팬-->
-                    <div id="artistSpan" style="display: none; margin-top: 15px;">
-                    <span id="afterTodayBusking" style="font-size: 20px; margin-left: 10px; font-weight:bold;"></span>
-                    <span id="buskingCount" style="font-size: 20px; margin-left: 10px; font-weight:bold;"></span>
-                    <span id="avg" style="font-size: 20px; margin-left: 10px; display: none; font-weight:bold;"></span>
-                    </div>
-                    <!--기업 스팬-->
-                    <div id="enterSpan" style="display: none; margin-top: 15px;">
-                        <span id="afterTodayConcert" style="font-size: 20px; margin-left: 10px; font-weight:bold;"></span>
-                        <span id="concertCount" style="font-size: 20px; margin-left: 10px; font-weight:bold;"></span>
-                    </div>
-
                     <div>
                         <div class="container mt-5">
                             <div class="row">
@@ -248,6 +216,5 @@
 </div>
 </div>
 <script type="text/javascript" th:src="@{/js/profile/profile_member.js}"></script>
-<script type="text/javascript" th:src="@{/js/profile/profile_graph.js}"></script>
 </body>
 </html>

@@ -1,18 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const token = sessionStorage.getItem('jwtToken');
-    getBuskingList(token);
+    getReservationList();
 });
 
 document.getElementById('searchBtn').addEventListener('click', (event) => {
     event.preventDefault();
-    const token = sessionStorage.getItem('jwtToken');
     const searchColumn = document.getElementById('searchColumn').value;
     const searchKeyword = document.getElementById('searchKeyword').value;
-    getBuskingList(token, searchColumn, searchKeyword);
+    getReservationList(searchColumn, searchKeyword);
 });
 
-function getBuskingList(token, searchColumn = null, searchKeyword = null, page = 1) {
-    let url = '/profile/artist/management';
+function getReservationList(searchColumn = null, searchKeyword = null, page = 1) {
+    let url = '/profile/admin/reservation';
     if (searchColumn && searchKeyword) {
         url += `?column=${searchColumn}&keyword=${searchKeyword}`;
     }
@@ -21,7 +19,6 @@ function getBuskingList(token, searchColumn = null, searchKeyword = null, page =
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
         },
     })
         .then((response) => {
@@ -30,52 +27,54 @@ function getBuskingList(token, searchColumn = null, searchKeyword = null, page =
             }
             throw new Error('응답에 문제가 있습니다.');
         })
-        .then((buskingList) => {
-            displayBuskingList(buskingList, page);
+        .then((reservationList) => {
+            displayReservationList(reservationList, page);
         })
         .catch((error) => {
             console.error('fetch 작동에 문제가 있습니다.', error);
         });
 }
 
-function displayBuskingList(buskingList, currentPage) {
+function displayReservationList(reservationList, currentPage) {
     const perPage = 5;
-    const buskingTbody = document.getElementById('buskingTbody');
-    buskingTbody.innerHTML = '';
+    const reservationTbody = document.getElementById('reservationTbody');
+    reservationTbody.innerHTML = '';
 
     const start = (currentPage - 1) * perPage;
     const end = start + perPage;
 
     const currentDate = new Date();
 
-    buskingList.slice(start, end).forEach((busking) => {
-        const buskingRow = buskingTbody.insertRow();
-        
-        const startBuskingDate = new Date(busking.date);
+    reservationList.slice(start, end).forEach((reservation) => {
+        const reservationRow = reservationTbody.insertRow();
+
+        const reservationDate = new Date(reservation.viewDate);
 
         const deleteButton = document.createElement('button');
         deleteButton.textContent = '취소';
         deleteButton.classList.add('delete-btn');
         deleteButton.addEventListener('click', () => {
-            deleteBusking(busking.id);
+            deleteReservation(reservation.id);
         });
 
-        buskingRow.insertCell().textContent = busking.name;
-        buskingRow.insertCell().textContent = busking.artId;
-        buskingRow.insertCell().textContent = busking.location;
-        buskingRow.insertCell().textContent = busking.date;
-        buskingRow.insertCell().textContent = busking.regDate;
+        console.log(reservation);
+        reservationRow.insertCell().textContent = reservation.id;
+        reservationRow.insertCell().textContent = reservation.name;
+        reservationRow.insertCell().textContent = reservation.cid;
+        reservationRow.insertCell().textContent = reservation.payTime;
+        reservationRow.insertCell().textContent = reservation.viewDate;
+        reservationRow.insertCell().textContent = reservation.memberNum;
+        reservationRow.insertCell().textContent = reservation.reservPay.toLocaleString() + '원';
 
         // 현재 날짜 이전 예약은 취소 불가
-        if (startBuskingDate >= currentDate) {
-            buskingRow.insertCell().appendChild(deleteButton);
+        if (reservationDate >= currentDate) {
+            reservationRow.insertCell().appendChild(deleteButton);
         } else {
-            buskingRow.insertCell().textContent = '취소 불가';
+            reservationRow.insertCell().textContent = '취소 불가';
         }
-
     });
 
-    createPagination(buskingList.length, perPage, currentPage);
+    createPagination(reservationList.length, perPage, currentPage);
 }
 
 function createPagination(totalItems, perPage, currentPage) {
@@ -94,29 +93,26 @@ function createPagination(totalItems, perPage, currentPage) {
         }
         a.addEventListener('click', (event) => {
             event.preventDefault();
-            const token = sessionStorage.getItem('jwtToken');
             const searchColumn = document.getElementById('searchColumn').value;
             const searchKeyword = document.getElementById('searchKeyword').value;
-            getBuskingList(token, searchColumn, searchKeyword, i); // i를 페이지 인수로 전달합니다.
+            getReservationList(searchColumn, searchKeyword, i); // i를 페이지 인수로 전달합니다.
         });
         li.appendChild(a);
         paginationEl.appendChild(li);
     }
 }
 
-function deleteBusking(buskingId) {
-    if (!confirm('정말로 이 공연을 삭제하시겠습니까?')) {
+function deleteReservation(reservationId) {
+    if (!confirm('정말로 이 공연을 취소하시겠습니까?')) {
         return;
     }
 
-    const token = sessionStorage.getItem('jwtToken');
-    const url = `/profile/artist/management?id=${buskingId}`;
+    const url = `/profile/admin/reservation?id=${reservationId}`;
 
     fetch(url, {
         method: 'DELETE',
         headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
         },
     })
         .then((response) => {
@@ -124,7 +120,7 @@ function deleteBusking(buskingId) {
                 alert('공연이 성공적으로 취소되었습니다.');
                 const searchColumn = document.getElementById('searchColumn').value;
                 const searchKeyword = document.getElementById('searchKeyword').value;
-                getBuskingList(token, searchColumn, searchKeyword, currentPage);
+                getReservationList(searchColumn, searchKeyword, currentPage);
             } else {
                 throw new Error('응답에 문제가 있습니다.');
             }

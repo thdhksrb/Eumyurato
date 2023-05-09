@@ -58,6 +58,8 @@ function getEvents(category, page = 1, searchColumn = null, searchKeyword = '') 
         const start = (currentPage - 1) * eventsPerPage;
         const end = start + eventsPerPage;
 
+        const currentDate = new Date();
+
         events.slice(start, end).forEach((event) => {
             const eventRow = eventTbody.insertRow();
             const eventId = event.id;
@@ -77,17 +79,28 @@ function getEvents(category, page = 1, searchColumn = null, searchKeyword = '') 
 
             switch (category) {
                 case 'busking':
+
+                    const startBuskingDate = new Date(event.date);
+
                     // 버스킹 공연에 대한 데이터를 생성
                     eventRow.insertCell().textContent = event.name;
                     eventRow.insertCell().textContent = event.artId;
                     eventRow.insertCell().textContent = event.location;
                     eventRow.insertCell().textContent = event.date;
                     eventRow.insertCell().textContent = event.regDate;
-                    eventRow.insertCell().appendChild(deleteButton);
+
+                    // 현재 날짜 이전 예약은 취소 불가
+                    if (startBuskingDate >= currentDate) {
+                        eventRow.insertCell().appendChild(deleteButton);
+                    } else {
+                        eventRow.insertCell().textContent = '취소 불가';
+                    }
                     break;
 
                 case 'smallconcert':
                     // 소규모 공연에 대한 데이터를 생성
+                    const startConcertDate = new Date(event.startDate);
+
                     eventRow.insertCell().textContent = event.name;
                     eventRow.insertCell().textContent = event.enterId;
                     eventRow.insertCell().textContent = event.pname;
@@ -95,17 +108,34 @@ function getEvents(category, page = 1, searchColumn = null, searchKeyword = '') 
                     eventRow.insertCell().textContent = event.startDate;
                     eventRow.insertCell().textContent = event.lastDate;
                     eventRow.insertCell().textContent = event.price;
-                    eventRow.insertCell().appendChild(deleteButton);
+
+                    // 현재 날짜 이전 예약은 취소 불가
+                    if (startConcertDate >= currentDate) {
+                        eventRow.insertCell().appendChild(deleteButton);
+                    } else {
+                        eventRow.insertCell().textContent = '취소 불가';
+                    }
+
                     break;
 
                 case 'localfestival':
                     // 지역 축제에 대한 데이터를 생성
+
+                    const startDate = new Date(event.startDate);
+
                     eventRow.insertCell().textContent = event.name;
                     eventRow.insertCell().textContent = event.org;
                     eventRow.insertCell().textContent = event.location;
                     eventRow.insertCell().textContent = event.startDate;
                     eventRow.insertCell().textContent = event.lastDate;
-                    eventRow.insertCell().appendChild(deleteButton);
+
+                    // 현재 날짜 이전 예약은 취소 불가
+                    if (startDate >= currentDate) {
+                        eventRow.insertCell().appendChild(deleteButton);
+                    } else {
+                        eventRow.insertCell().textContent = '취소 불가';
+                    }
+
                     break;
 
                 default:
@@ -139,11 +169,11 @@ function getEvents(category, page = 1, searchColumn = null, searchKeyword = '') 
             },
         })
             .then(() => {
-                alert('이벤트 삭제가 완료되었습니다.');
+                alert('행사 삭제가 완료되었습니다.');
                 getEvents(category);
             })
             .catch((error) => {
-                console.error('이벤트 삭제 중 에러가 발생했습니다.', error);
+                console.error('행사 삭제 중 에러가 발생했습니다.', error);
             });
     }
 
@@ -209,4 +239,26 @@ function updateDropdownOptions(category) {
         firstVisibleOption.selected = true;
     }
 }
+
+// 로그아웃
+const logoutBtn = document.getElementById("logoutBtn");
+logoutBtn.setAttribute("href", "/logout");
+logoutBtn.onclick = function () {
+    fetch('/logout', { method: 'POST', credentials: 'include' })
+        .then(response => {
+            if (response.ok) {
+                // 세션 스토리지에서 토큰 제거
+                window.sessionStorage.removeItem("jwtToken");
+                console.log("로그아웃")
+                // 홈페이지로 이동
+                window.location.href = "/home";
+            } else {
+                throw new Error("로그아웃 처리에 실패하였습니다.");
+            }
+        })
+        .catch(error => {
+            console.error(error);
+            alert(error.message);
+        });
+};
 
