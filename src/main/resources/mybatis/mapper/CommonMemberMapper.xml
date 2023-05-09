@@ -109,4 +109,7 @@
         WHERE id = #{id}
     </update>
 
+    <select id="commonNid" resultType="int">
+        SELECT COUNT(*) AS cnt FROM common_member WHERE nid = #{param1};
+    </select>
 </mapper>

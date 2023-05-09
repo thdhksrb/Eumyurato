@@ -167,6 +167,10 @@ public class CommonService {
         commonMemberDAO.commonModify(commonMemberDTO);
     }
 
+    public int commonNid(String nid){
+        int nidNum = commonMemberDAO.commonNid(nid);
+        return nidNum;
+    }
 }
 
 

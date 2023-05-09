@@ -120,4 +120,14 @@ public class CommonController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("past");
         }
     }
+
+    @PostMapping("/profile/common/nidcheck")
+    public String  commonNidCheck(@RequestParam("nid") String nid){
+        System.out.println(nid);
+        if(commonService.commonNid(nid) > 0) { //닉네임이 있는 경우
+            return "duplicate";
+        }else{
+            return "available";
+        }
+    }
 }

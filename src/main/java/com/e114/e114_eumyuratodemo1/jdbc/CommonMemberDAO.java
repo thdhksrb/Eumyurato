@@ -59,4 +59,6 @@ public interface CommonMemberDAO {
 // void saveCommonMember(CommonMemberDTO commonMemberDTO);
  void modifyCommonWithoutImage(CommonMemberDTO commonMemberDTO);
  void commonModify(CommonMemberDTO commonMemberDTO);
+ //닉네임 반환
+ int commonNid(String nid);
 }
