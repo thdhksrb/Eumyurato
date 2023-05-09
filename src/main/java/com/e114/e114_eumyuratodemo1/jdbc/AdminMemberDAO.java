@@ -18,12 +18,12 @@ public interface AdminMemberDAO {
 
     String logout(HttpServletRequest request);  // 로그아웃 기능 설정
 
-    //List<ReservationDTO> getReservationList();  // 예약 내역 목록 불러오기
-    //List<ReservationDTO> searchReservations(Map<String, String> params  );  // 예약 내역 검색
-
     List<ReservationDTO> getReservationList();
     // 일반회원 예약 목록 검색
     List<ReservationDTO> searchReservations(String column, String keyword);
+
+    int deleteReservation(int id);
+    int deleteTicket(int rid);
 
     EnterpriseMemberDTO getAdminInfoById(String adminId);   // 내 계정 정보 불러오기
 

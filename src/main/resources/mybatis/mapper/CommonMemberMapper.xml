@@ -79,7 +79,11 @@
     </select>
 
     <delete id="deleteCommonReservation">
-        DELETE FROM reservation WHERE id = #{param1} AND viewDate > CURRENT_DATE
+        DELETE FROM reservation WHERE id = #{param1}
+    </delete>
+
+    <delete id="deleteCommonTicket">
+        DELETE FROM ticket WHERE rid = #{param1}
     </delete>
 
     <!--회원정보 수정-->

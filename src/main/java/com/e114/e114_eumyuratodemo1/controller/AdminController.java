@@ -196,8 +196,6 @@ public class AdminController {
 
     @GetMapping("/profile/admin/reservation/view")
     public String reservationList() {
-        //List<ReservationDTO> reservations = memberDAO.getReservationList();
-        //model.addAttribute("reservations", reservations);
 
         return "html/profile/reservation/profile_admin_reservation";
     }
@@ -217,6 +215,20 @@ public class AdminController {
         System.out.println("Reservation List: " + reservationList);
 
         return ResponseEntity.ok(reservationList);
+    }
+
+    @DeleteMapping("/profile/admin/reservation")
+    public ResponseEntity<String> deleteReservation(@RequestParam("id") int id) {
+
+        int ticketResult = adminService.deleteTicket(id);
+
+        int reservationResult = adminService.deleteReservation(id);
+
+        if (ticketResult > 0 && reservationResult > 0) { // 삭제 성공
+            return ResponseEntity.ok("success");
+        } else { // 삭제 실패
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to delete reservation.");
+        }
     }
 
 

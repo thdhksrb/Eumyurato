@@ -40,21 +40,29 @@
     </select>
 
     <select id="getReservationList" resultType="com.e114.e114_eumyuratodemo1.dto.ReservationDTO">
-        SELECT * FROM reservation ORDER BY payTime DESC
+        SELECT r.*, sc.name
+        FROM reservation r
+                 JOIN schedules s ON r.sid = s.id
+                 JOIN small_concert sc ON s.conId = sc.id
+        ORDER BY payTime DESC
     </select>
 
     <select id="searchReservations" parameterType="map" resultType="com.e114.e114_eumyuratodemo1.dto.ReservationDTO">
-        SELECT id, sid, cid, payTime, viewDate, memberNum, reservPay
-        FROM reservation
-        WHERE 1 = 1
-        <if test="column == 'cid'">
-            AND cid = #{keyword}
-        </if>
-        <if test="column == 'sid'">
-            AND sid = #{keyword}
-        </if>
+        SELECT r.*, sc.name
+        FROM reservation r
+                 JOIN schedules s ON r.sid = s.id
+                 JOIN small_concert sc ON s.conId = sc.id
+        WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
         ORDER BY payTime DESC
     </select>
+
+    <delete id="deleteReservation">
+        DELETE FROM reservation WHERE id = #{param1}
+    </delete>
+
+    <delete id="deleteTicket">
+        DELETE FROM ticket WHERE rid = #{param1}
+    </delete>
     
     <select id="getAdminInfoById" resultType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
         SELECT *

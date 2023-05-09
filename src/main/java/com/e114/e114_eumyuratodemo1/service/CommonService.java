@@ -147,6 +147,10 @@ public class CommonService {
         return commonMemberDAO.deleteCommonReservation(id);
     }
 
+    public int deleteTicket(int rid){
+        return commonMemberDAO.deleteCommonTicket(rid);
+    }
+
     //회원정보 수정
     public boolean updateCommonMember(String id, String nid, String phone, String email) {
         CommonMemberDTO commonMember = commonMemberDAO.findById(id);

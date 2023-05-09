@@ -99,8 +99,7 @@
                     </div>
                     <div class="search-container">
                         <select id="searchColumn" style="width: 10%; height: 40px; border-radius: 5px;">
-                            <option value="sid">공연 번호</option>
-                            <option value="viewDate">관람 일자</option>
+                            <option value="name">공연명</option>
                         </select>
                         <input type="text" id="searchKeyword" placeholder="관람 일자 예시) 2023-01-01" style="width: 30%; height: 40px; border-radius: 5px; border: 1px solid #cccad4">
                         <button class="btn btn-primary" id="searchBtn" style="width: 10%;" >Search</button>
@@ -119,6 +118,7 @@
                                             <th>관람 일자</th>
                                             <th>예약인원 수</th>
                                             <th>예매 금액</th>
+                                            <th>예약 취소</th>
                                         </tr>
                                         </thead>
                                         <tbody id="reservationTbody"></tbody>

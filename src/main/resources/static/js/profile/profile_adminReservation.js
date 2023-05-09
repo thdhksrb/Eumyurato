@@ -43,8 +43,12 @@ function displayReservationList(reservationList, currentPage) {
     const start = (currentPage - 1) * perPage;
     const end = start + perPage;
 
+    const currentDate = new Date();
+
     reservationList.slice(start, end).forEach((reservation) => {
         const reservationRow = reservationTbody.insertRow();
+
+        const reservationDate = new Date(reservation.viewDate);
 
         const deleteButton = document.createElement('button');
         deleteButton.textContent = '취소';
@@ -52,6 +56,7 @@ function displayReservationList(reservationList, currentPage) {
         deleteButton.addEventListener('click', () => {
             deleteReservation(reservation.id);
         });
+
         console.log(reservation);
         reservationRow.insertCell().textContent = reservation.id;
         reservationRow.insertCell().textContent = reservation.name;
@@ -60,7 +65,13 @@ function displayReservationList(reservationList, currentPage) {
         reservationRow.insertCell().textContent = reservation.viewDate;
         reservationRow.insertCell().textContent = reservation.memberNum;
         reservationRow.insertCell().textContent = reservation.reservPay.toLocaleString() + '원';
-        reservationRow.insertCell().appendChild(deleteButton);
+
+        // 현재 날짜 이전 예약은 취소 불가
+        if (reservationDate >= currentDate) {
+            reservationRow.insertCell().appendChild(deleteButton);
+        } else {
+            reservationRow.insertCell().textContent = '취소 불가';
+        }
     });
 
     createPagination(reservationList.length, perPage, currentPage);
@@ -84,7 +95,7 @@ function createPagination(totalItems, perPage, currentPage) {
             event.preventDefault();
             const searchColumn = document.getElementById('searchColumn').value;
             const searchKeyword = document.getElementById('searchKeyword').value;
-            getReservationList(token, searchColumn, searchKeyword, i); // i를 페이지 인수로 전달합니다.
+            getReservationList(searchColumn, searchKeyword, i); // i를 페이지 인수로 전달합니다.
         });
         li.appendChild(a);
         paginationEl.appendChild(li);
@@ -102,8 +113,7 @@ function deleteReservation(reservationId) {
     fetch(url, {
         method: 'DELETE',
         headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
         },
     })
         .then((response) => {
@@ -111,9 +121,7 @@ function deleteReservation(reservationId) {
                 alert('공연이 성공적으로 취소되었습니다.');
                 const searchColumn = document.getElementById('searchColumn').value;
                 const searchKeyword = document.getElementById('searchKeyword').value;
-                getReservationList(token, searchColumn, searchKeyword, currentPage);
-            } else if (response.status === 403) {
-                alert('현재 날짜 이전의 내용은 취소하지 못합니다.');
+                getReservationList(searchColumn, searchKeyword, currentPage);
             } else {
                 throw new Error('응답에 문제가 있습니다.');
             }
