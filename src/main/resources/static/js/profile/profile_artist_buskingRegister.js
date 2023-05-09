@@ -73,6 +73,26 @@ $(document).ready(function() {
         clickCheck();
         buskingRegister(); // 함수 실행
     });
+
+    //날짜 형식 맞는지 검사
+    $('#buskingDate').on('change', function() {
+        var inputValue = $(this).val(); // buskingDate 입력 필드에 입력된 값 가져오기
+        var pattern = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/; // 검증할 정규식 패턴
+        var isValid = pattern.test(inputValue); // 입력 값이 정규식 패턴과 일치하는지 검증
+
+        if (!isValid) {
+            alert('올바른 형식으로 입력해주세요. (yyyy-MM-dd HH:mm)');
+            $(this).val('');
+        } else {
+            var inputDate = new Date(inputValue); // 입력된 값으로부터 Date 객체 생성
+            var now = new Date(); // 현재 시간을 나타내는 Date 객체 생성
+
+            if (inputDate <= now) { // 입력된 값이 현재 시간보다 이전인 경우
+                alert('현재 이후의 날짜와 시간을 입력해주세요.');
+                $(this).val('');
+            }
+        }
+    });
 });
 
 const jwtToken = sessionStorage.getItem("jwtToken");
