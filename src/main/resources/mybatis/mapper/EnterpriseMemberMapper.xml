@@ -128,4 +128,23 @@
         SELECT COUNT(*) AS concert_all
         FROM small_concert;
     </select>
+
+    <update id="modifyEnterWithoutImage" parameterType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
+        UPDATE enterprise_member
+        SET
+            pwd = #{pwd},
+            phone = #{phone},
+            email = #{email}
+        WHERE id = #{id}
+    </update>
+
+    <update id="enterModify" parameterType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
+        UPDATE enterprise_member
+        SET
+            pwd = #{pwd},
+            phone = #{phone},
+            email = #{email},
+            image = #{image}
+        WHERE id = #{id}
+    </update>
 </mapper>

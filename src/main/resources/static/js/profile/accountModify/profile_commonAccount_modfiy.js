@@ -78,7 +78,7 @@ function displayCommonData(common) {
         var replacedImageUrl = 'https://storage.googleapis.com/eumyurato/' + imageUrl;
         $('#previewImage').attr('src', replacedImageUrl);
     }else{
-        var defaultImage = '/img/default.jpg';
+        var defaultImage = '/img/memberDefaultImg.jpg';
         $('#previewImage').attr('src', defaultImage);
     }
 }

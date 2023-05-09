@@ -450,7 +450,7 @@ function getContent(record) {
     }else{
         result = `<div class="infowindow" style="width: 200px; height: 200px; overflow: auto;">
     <div class="infowindow-img-container" style="display: flex; justify-content: center; align-items: center;">
-      <img src="/img/default.jpg" class="infowindow-img" alt="...">
+      <img src="/img/mapDefaultImg.png" class="infowindow-img" alt="...">
     </div>
     <div class="infowindow-body">
       <h2 class="infowindow-title">${record.name}</h2>

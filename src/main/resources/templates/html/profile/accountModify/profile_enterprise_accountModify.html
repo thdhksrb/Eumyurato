@@ -51,17 +51,17 @@
                         <h1 class="menu-content mb-1 mt-10 text-center" style="font-weight: bold">마이페이지</h1>
                         <div class="separator border-dark my-1 mx-auto" style="width: 60%; border-width: 3px;"></div>
                         <div class="menu-item" style="margin: 3px">
-                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/admin/account}">
+                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/ent/account}">
                                 <span class="menu-title">내 계정</span>
                             </a>
                         </div>
                         <div class="menu-item" style="margin: 3px">
-                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/admin/modify}">
+                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/ent/modify}">
                                 <span class="menu-title">계정 정보 수정</span>
                             </a>
                         </div>
                         <div class="menu-item" style="margin: 3px">
-                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/admin/reservation}">
+                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/ent/reservation}">
                                 <span class="menu-title">예약 내역</span>
                             </a>
                         </div>
@@ -102,7 +102,6 @@
                 <!--end::Aside Logo-->
             </div>
         </div>
-
 
         <!--사이드-->
         <!--begin::Aside-->
@@ -175,35 +174,13 @@
                 </div>
 
                 <div class=" fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">이름</label>
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5">기업명</label>
                     <input autocomplete="off" class="form-control form-control-lg form-control-solid" id="name"
                            name="name" placeholder="" required
                            style="border-color: #0099FF;" type="text" readonly/>
                 </div>
 
-                <div class="fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">닉네임</label>
-                    <div class="d-flex align-items-center">
-                        <input autocomplete="off" class="form-control form-control-lg form-control-solid me-2"
-                               id="nid" name="nid" placeholder="한글 1자 이상 20자 이하이어야 합니다"
-                               required readonly
-                               style="border-color: #0099FF; width: 350px; height: 40px;" type="text"/>
-                        <button class="btn btn-primary fw-bolder fs-5 px-2 py-3 my-3 text-center"
-                                id="nidBtn"
-                                style="width: 150px; height: 45px;" type="button" onclick="openNidPopup()">변경하기
-                        </button>
-                    </div>
-                    <div>
-                        <div class="invalid-feedback" id="nid-invalid">특수문자 공백 제외 1자 이상 20자 이하이어야 합니다.</div>
-                        <!-- 한글만 입력 가능하도록 정규식 패턴 수정 -->
-                        <div class="invalid-feedback" id="nid-non-korean">한글만 입력 가능합니다.</div>
-                        <div class="invalid-feedback" id="nid-duplicate" style="display: none;">중복된 닉네임입니다.</div>
-                        <div class="valid-feedback" id="nid-available" style="display: none;">사용 가능한 닉네임입니다.</div>
-                    </div>
-                </div>
-
                 <div>
-
                     <div class=" fv-row mb-5">
                         <label class="form-label fs-6 fw-bolder text-dark pt-5">이메일</label>
                         <div class="d-flex align-items-center">
@@ -223,7 +200,7 @@
 
                 <div>
                     <div class=" fv-row mb-5">
-                        <label class="form-label fs-6 fw-bolder text-dark pt-5">휴대번호</label>
+                        <label class="form-label fs-6 fw-bolder text-dark pt-5">전화번호</label>
                         <div class="d-flex align-items-center">
                             <input autocomplete="off" class="form-control form-control-lg form-control-solid me-2"
                                    id="phone" name="phone" placeholder="-제외 입력하시오" readonly

@@ -62,7 +62,7 @@ function displayCommonData(common) {
     }else{
         // 이미지 요소를 생성한다.
         var img = document.createElement("img");
-        img.src = "/img/default.jpg";
+        img.src = "/img/memberDefaultImg.jpg";
         img.style.objectFit = "cover";
         img.style.width = "100%";
         img.style.height = "100%";
