@@ -80,8 +80,8 @@ public class MemberService {
 
 
     public void sendTempPasswordByEmail(String email, String tempPassword) {
-        String from = ""; // 발신자 이메일 주소
-        String pwd = ""; // 발신자 이메일 비밀번호
+        String from = "jisushin128@gmail.com"; // 발신자 이메일 주소
+        String pwd = "qxlupnuhkleqwxad"; // 발신자 이메일 비밀번호
         String to = email; // 수신자 이메일 주소
 
         Properties properties = new Properties();

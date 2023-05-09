@@ -94,6 +94,7 @@ cpasswordInput.addEventListener("input", function () {
 // 이름 유효성 검사
 nameInput.addEventListener("input", function () {
     const nameValue = nameInput.value.trim();
+    const nameRegex = /^[가-힣]{1,20}$/u; // 이름 정규식 패턴
 
     if (nameValue === "") {
         document.getElementById("name-empty").style.display = "block";
@@ -158,7 +159,7 @@ nameInput.addEventListener("date", function () {
 // 이메일 유효성 검사
 nameInput.addEventListener("input", function () {
     const emailValue = emailInput.value.trim();
-
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{1,30}$/;
     if (emailValue === "") {
         // 이메일이 빈 문자열일 경우
         document.getElementById("email-empty").style.display = "block";
@@ -174,6 +175,7 @@ nameInput.addEventListener("input", function () {
 
 // 휴대폰 번호 유효성 검사
 nameInput.addEventListener("input", function () {
+    const phoneRegex = /^\d{1,20}$/;
     const phoneValue = phoneInput.value.trim();
 
     if (phoneValue === "") {
@@ -230,11 +232,34 @@ duplicateBtn2.addEventListener("click", function() {
 // 회원가입 이벤트 핸들러
 const joinButton = document.getElementById('joinButton');
 joinButton.addEventListener('click', function (e) {
-    e.preventDefault(); // 기본 이벤트 동작(폼 전송) 중단
+    // 기본 이벤트 동작(폼 전송) 중단
+    e.preventDefault();
 
     // 모든 유효성 검사 통과 여부 확인
     const allValidationsPassed = !document.querySelectorAll('.validation-message.show').length;
+
     if (allValidationsPassed) {
-        document.getElementById('myForm').submit(); // 폼 전송 실행
+        // 폼 데이터 가져오기
+        const form = document.getElementById('myForm');
+        const formData = new FormData(form);
+
+        // 서버로 데이터 전송
+        fetch('/loginjoin/artist/join', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (response.ok) {
+                    // 회원 가입 성공 시 페이지 이동
+                    window.location.href = '/loginjoin/artist/login';
+                } else {
+                    // 회원 가입 실패 시 메시지 표시
+                    alert('회원 가입에 실패했습니다.');
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                alert('회원 가입에 실패했습니다.');
+            });
     }
 });
