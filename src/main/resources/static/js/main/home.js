@@ -69,12 +69,28 @@ window.onload = function () {
             xhr.send(); // 요청 전송, JSON 형태의 데이터로 바꿔서 보냅니다.
         };
 
+
         // 로그아웃
         const logoutBtn = document.createElement("a");
         logoutBtn.setAttribute("href", "/logout");
         logoutBtn.onclick = function () {
-            window.sessionStorage.removeItem("jwtToken");
+            fetch('/logout', { method: 'POST', credentials: 'include' })
+                .then(response => {
+                    if (response.ok) {
+                        // 세션 스토리지에서 토큰 제거
+                        window.sessionStorage.removeItem("jwtToken");
+                        // 홈페이지로 이동
+                        window.location.href = "/home";
+                    } else {
+                        throw new Error("로그아웃 처리에 실패하였습니다.");
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                    alert(error.message);
+                });
         };
+
 
         const logoutIcon = document.createElement("img");
         logoutIcon.setAttribute("src", "/img/logout.png");

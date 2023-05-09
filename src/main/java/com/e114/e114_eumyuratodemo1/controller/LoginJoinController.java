@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -263,10 +264,28 @@ public class LoginJoinController {
     //로그 아웃
     @GetMapping("/logout")
     public String logout(HttpSession session) {
-        session.removeAttribute("token"); // 세션에서 토큰 정보 제거
+        session.removeAttribute("jwtToken"); // 세션에서 토큰 정보 제거
 
         return "redirect:/home"; // 로그아웃 후 메인 홈페이지로 이동
     }
+
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate(); // 세션 무효화
+        }
+        // 쿠키 무효화
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                cookie.setMaxAge(0);
+                response.addCookie(cookie);
+            }
+        }
+        return ResponseEntity.ok().build();
+    }
+
 
     // 아이디 찾기
     @GetMapping("/loginjoin/Idfind")

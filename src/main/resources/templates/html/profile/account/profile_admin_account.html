@@ -84,7 +84,7 @@
                     </div>
                 </div>
             </div>
-            <a class="ms-5 me-15" style="position: relative; top: 200px; left: 300px;" th:href="@{/logout}">
+            <a id="logoutBtn" class="ms-5 me-15" style="position: relative; top: 200px; left: 300px;">
                 <img th:src="@{/img/logout.png}" style="height: 30px; width: 30px;">
             </a>
         </div>
@@ -92,7 +92,7 @@
         <div class="d-flex flex-column flex-lg-row-auto bg-primary pt-15 pt-lg-0 d-none d-lg-flex" id="leftArea2">
                 <!--begin::Aside Logo-->
                 <a class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
-                    <img alt="로고" th:src="@{/img/logo_name.png}" style="width: 400px; height: 70px;">
+                    <img alt="로고" th:src="@{/img/logo_name.png}" style="width: 400px; height: 70px;"/>
                 </a>
                 <!--end::Aside Logo-->
         </div>
@@ -150,6 +150,6 @@
     </div>
 </div>
 <script src="/static/js/profile/profile_adminAccount.js" type="text/javascript"></script>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jwt-decode/2.2.0/jwt-decode.min.js"></script> -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jwt-decode/2.2.0/jwt-decode.min.js"></script>
 </body>
 </html>

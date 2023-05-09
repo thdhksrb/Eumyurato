@@ -82,21 +82,18 @@ document.getElementById("kt_login_signin_form").addEventListener("submit", funct
     const email = document.getElementById("email").value;
     const phone = document.getElementById("phone").value;
 
-    // 이미지 파일 가져오기
-    const avatarInput = document.querySelector('input[name="avatar"]');
-    const avatarFile = avatarInput.files[0];
-
     // 서버로 전송할 데이터 생성
-    const data = new FormData();
-    data.append('pwd', pwd);
-    data.append('nid', nid);
-    data.append('email', email);
-    data.append('phone', phone);
-    data.append('avatar', avatarFile);
+    const data = {
+        pwd: pwd,
+        nid: nid,
+        email: email,
+        phone: phone,
+    };
 
     // 서버로 데이터 전송
     const xhr = new XMLHttpRequest();
     xhr.open("PUT", "/profile/common");
+    xhr.setRequestHeader("Content-Type", "application/json");
     xhr.setRequestHeader("Authorization", `Bearer ${jwtToken}`);
     xhr.onload = function () {
         if (xhr.status === 200) {
@@ -105,7 +102,7 @@ document.getElementById("kt_login_signin_form").addEventListener("submit", funct
             alert("회원 정보 수정에 실패했습니다.");
         }
     };
-    xhr.send(data);
+    xhr.send(JSON.stringify(data));
 });
 
 function concertRegister() {
