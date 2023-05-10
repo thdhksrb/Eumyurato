@@ -64,23 +64,6 @@
                             </a>
                         </div>
                     </div>
-
-                    <div class="menu-wrapper menu-column menu-fit mt-1">
-                        <div class="menu-sub menu-fit menu-sub-accordion show">
-                            <h1 class="menu-content mb-1 mt-10 text-center" style="font-weight: bold">통합 정보 조회</h1>
-                            <div class="separator border-dark my-1 mx-auto" style="width: 60%; border-width: 3px;"></div>
-                            <div class="menu-item" style="margin: 3px">
-                                <a class="text-dark text-hover-primary ms-3 py-2"
-                                   th:href="@{/profile/artist/total/view}">
-                                    <span class="menu-title">종합</span>
-                                </a>
-                                <a class="text-dark text-hover-primary ms-3 py-2"
-                                   th:href="@{/profile/artist/info/view}">
-                                    <span class="menu-title">공지사항</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
             <a id="logoutBtn" class="ms-5 me-15" style="position: relative; top: 200px; left: 300px;">
@@ -105,7 +88,7 @@
             <!--begin::Signin Form-->
             <form class="form w-450px  needs-validation text-center" id="kt_login_signin_form" novalidate>
                 <div class="pb-5 pb-lg-1">
-                    <h3 class="fw-bolder text-dark display-6 text-center">내 계정</h3>
+                    <h3 class="fw-bolder text-dark display-6 text-start">내 계정</h3>
                 </div>
                 <!--begin::Image input-->
                 <div class="image-input image-input-outline"
@@ -115,55 +98,55 @@
                 </div>
                 <!--end::Image input-->
                 <div class="mb-5 mw-450px text-center">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">아이디</label>
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5" style="float:left;">아이디</label>
                     <input autocomplete="off" class="form-control form-control-lg form-control-solid"
                            name="id" id="artist-id"
                            placeholder="" style="border-color: #0099FF; font-weight: bold" type="text"  readonly/>
                 </div>
                 <div class="fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">이름</label>
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5" style="float:left;">이름</label>
                     <input autocomplete="off" class="form-control form-control-lg form-control-solid"
                            name="fullname" id="artist-name"
                            placeholder="" style="border-color: #0099FF; font-weight: bold" type="text" readonly/>
                 </div>
                 <div class="fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">활동명</label>
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5" style="float:left;">활동명</label>
                     <input autocomplete="off" class="form-control form-control-lg form-control-solid"
                            name="nid" id="artist-nid"
                            placeholder="" style="border-color: #0099FF; font-weight: bold" type="text" readonly/>
                 </div>
                 <div class="fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">성별</label>
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5" style="float:left;">성별</label>
                     <input autocomplete="off" class="form-control form-control-lg form-control-solid"
                            name="sex" id="artist-sex"
                            placeholder="" style="border-color: #0099FF; font-weight: bold" type="text" readonly/>
                 </div>
                 <div class="fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">생년월일</label>
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5" style="float:left;">생년월일</label>
                     <input autocomplete="off" class="form-control form-control-lg form-control-solid"
                            name="birth" id="artist-birth"
                            placeholder="" style="border-color: #0099FF; font-weight: bold" type="text" readonly/>
                 </div>
                 <div class="fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">이메일</label>
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5" style="float:left;">이메일</label>
                     <input autocomplete="off" class="form-control form-control-lg form-control-solid"
                            name="email" id="artist-email"
                            placeholder="" style="border-color: #0099FF; font-weight: bold" type="text" readonly/>
                 </div>
                 <div class="fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">휴대번호</label>
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5" style="float:left;">휴대번호</label>
                     <input autocomplete="off" class="form-control form-control-lg form-control-solid"
                            name="phone" id="artist-phone"
                            placeholder="" style="border-color: #0099FF; font-weight: bold" type="text" readonly/>
                 </div>
                 <div class="fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">장르</label>
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5" style="float:left;">장르</label>
                     <input autocomplete="off" class="form-control form-control-lg form-control-solid"
                            name="genre" id="artist-genre"
                            placeholder="" style="border-color: #0099FF; font-weight: bold" type="text" readonly/>
                 </div>
                 <div class="fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">보유 포인트</label>
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5" style="float:left;">보유 포인트</label>
                     <input autocomplete="off" class="form-control form-control-lg form-control-solid"
                            name="point" id="artist-point"
                            placeholder="" style="border-color: #0099FF; font-weight: bold" type="text" readonly/>

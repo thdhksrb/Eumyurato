@@ -127,6 +127,12 @@
     </update>
 
     <select id="commonNid" resultType="int">
-        SELECT COUNT(*) AS cnt FROM common_member WHERE nid = #{param1};
+        SELECT COUNT(*) AS cnt
+        FROM (
+                 SELECT nid FROM common_member
+                 UNION
+                 SELECT nid FROM artist_member
+             ) AS combined_tables
+        WHERE nid = #{param1}
     </select>
 </mapper>

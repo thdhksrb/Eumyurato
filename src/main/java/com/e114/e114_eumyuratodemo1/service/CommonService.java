@@ -172,7 +172,7 @@ public class CommonService {
         commonMemberDAO.commonModify(commonMemberDTO);
     }
 
-    //회원 아이디 가져오기
+    //회원 닉네임 중복 체크
     public int commonNid(String nid){
         int nidNum = commonMemberDAO.commonNid(nid);
         return nidNum;
