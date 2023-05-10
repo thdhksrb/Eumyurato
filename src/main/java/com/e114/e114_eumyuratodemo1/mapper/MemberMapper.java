@@ -13,6 +13,6 @@ public interface MemberMapper {
     List<String> findUserIdsByNameAndEmail(@Param("name") String name, @Param("email") String email);
 
     // 공연 랭킹
-    @Select("SELECT id, name, viewCount FROM small_concert ORDER BY viewCount DESC LIMIT 5")
+    @Select("SELECT id, name, viewCount, image FROM small_concert ORDER BY viewCount DESC LIMIT 5")
     List<SmallConcertDTO> selectTop5Concert();
 }

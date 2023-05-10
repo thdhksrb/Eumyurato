@@ -137,9 +137,25 @@ fetch('/top5artists', {
             const genreCell = document.createElement('td');
 
             rankCell.textContent = index + 1;
-            imgCell.textContent = artist.img;//랭킹 이미지 100x100
             nameCell.textContent = artist.name;
             genreCell.textContent = artist.genre;
+
+            //이미지
+            const img = document.createElement('img')
+            img.style.width = '100px';
+            img.style.height = '100px';
+            const imgUrl = artist.image;
+            const replacedImgUrl = 'https://storage.googleapis.com/eumyurato/' + imgUrl;
+
+            if(imgUrl !== null && imgUrl.startsWith("https://")){
+                img.src = imgUrl;
+            }else if(imgUrl !== null && !imgUrl.startsWith("https://")){
+                img.src = replacedImgUrl;
+            }else{
+                img.src = "/img/memberDefaultImg.jpg";
+            }
+
+            imgCell.appendChild(img);
 
             row.appendChild(rankCell);
             row.appendChild(imgCell);//랭킹 이미지
@@ -176,6 +192,22 @@ fetch('/top5concert', {
 
             rankCell.textContent = index + 1;
             nameCell.textContent = concert.name;
+
+            //이미지
+            const img = document.createElement('img');
+            img.style.width = '100px';
+            img.style.height = '100px';
+            const imgUrl = concert.image;
+            const replacedImgUrl = 'https://storage.googleapis.com/eumyurato/' + imgUrl;
+
+            if(imgUrl !== null && imgUrl.startsWith("https://")){
+                img.src = imgUrl;
+            }else if(imgUrl !== null && !imgUrl.startsWith("https://")){
+                img.src = replacedImgUrl;
+            }else{
+                img.src = "/img/concertDefaultImg.jpg";
+            }
+
 
             row.appendChild(rankCell);
             row.appendChild(nameCell);

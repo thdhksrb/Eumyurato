@@ -215,7 +215,7 @@
         WHERE id = #{id}
     </update>
 
-    <select id="artistNid" resultType="map">
+    <select id="artistNid" parameterType="String" resultType="map">
         SELECT COUNT(*) AS cnt
         FROM (
                  SELECT nid FROM common_member
