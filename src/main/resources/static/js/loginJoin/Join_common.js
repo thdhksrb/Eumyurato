@@ -62,6 +62,7 @@
                                     document.getElementById("id-available").style.color = "green";
                                 } else {
                                     uidAvailableFeedback.style.display = "block";
+                                    document.getElementById("id-available").style.color = "green";
                                     uidDuplicateFeedback.style.display = "none";
                                 }
                             })
@@ -132,21 +133,22 @@
                 nidInvalidFeedback.style.display = "none";
 
                 // 닉네임 중복 검사 버튼 이벤트 핸들러
+// 닉네임 중복 검사 버튼 이벤트 핸들러
                 const duplicateBtn2 = document.querySelector("#duplicateBtn2");
                 duplicateBtn2.addEventListener("click", function () {
-                    const nidValue = nidInput.value.trim();
                     if (nidValue !== "") {
                         // 서버로 중복 검사 요청
-                        fetch(`/checkNidDuplicate/${nidValue}`)
-                            .then(response => response.json())
+                        fetch(`/checkNidDuplicate?nid=${nidValue}`)
+                            .then(response => response.text())
                             .then(data => {
-                                if (data.duplicate) {
-                                    nidAvailableFeedback.style.display = "none";
-                                    nidDuplicateFeedback.style.display = "block";
+                                if (data === "duplicate") {
+                                    document.getElementById("nid-available").style.display = "none";
+                                    document.getElementById("nid-available").style.color = "red";
+                                    document.getElementById("nid-duplicate").style.display = "block";
                                 } else {
-                                    nidAvailableFeedback.style.display = "block";
+                                    document.getElementById("nid-available").style.display = "block";
                                     document.getElementById("nid-available").style.color = "green";
-                                    nidDuplicateFeedback.style.display = "none";
+                                    document.getElementById("nid-duplicate").style.display = "none";
                                 }
                             })
                             .catch(error => console.error(error));
@@ -290,10 +292,6 @@
 })();
 
 
-
-/*
-*/
-
 // 회원가입 이벤트 핸들러
 const joinButton = document.getElementById('joinButton');
 joinButton.addEventListener('click', async function (e) {
@@ -319,7 +317,7 @@ joinButton.addEventListener('click', async function (e) {
         if (response.ok) {
             // 회원가입 성공 시 모달 팝업 띄우기
             $('#result_modal').modal('show');
-            setTimeout(function() {
+            setTimeout(function () {
                 window.location.href = "/loginjoin/common/login";
             }, 3000); // 3초 후 로그인 페이지로 이동
         } else {
