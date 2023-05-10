@@ -115,11 +115,11 @@ public class ArtistService {
         artistMemberDTO.setEmail(email);
         artistMemberDTO.setPhone(phone);
         artistMemberDTO.setGenre(genre);
-        artistMemberDTO.setAdminNum(2);  // 아티스트 회원의 경우 adminNum 값을 1로 설정
+        artistMemberDTO.setAdminNum(2);  // 아티스트 회원의 경우 adminNum 값을 2로 설정
 
         // artistMemberDAO를 사용하여 회원 정보 저장
         int result = artistMemberDAO.insert(artistMemberDTO);
-        return result == 2;
+        return result == 1;
     }
 
 
