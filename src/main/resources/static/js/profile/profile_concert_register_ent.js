@@ -126,8 +126,15 @@ $(document).ready(function() {
     //등록 버튼 클릭 시 실행
     $('#concertRegister').on('click', function(event) {
         event.preventDefault(); // 기본 동작(페이지 이동) 방지
-        clickCheck();
-        concertRegister(); // 함수 실행
+
+        var startDate = $("input[name='startDate']").val();
+        var lastDate = $("input[name='lastDate']").val();
+
+        if(lastDate < startDate){
+            alert('마감일자는 시작일자 이후여야 합니다.');
+        }else if(clickCheck()) {
+            concertRegister();
+        }
     });
 });
 
@@ -197,39 +204,35 @@ function clickCheck(){
     // 값이 비어있을 경우 경고창 출력
     if (!name) {
         alert("공연명은 필수 입력입니다.");
-        event.preventDefault();
-        return;
+        return false; // false 반환
     }
     if (!pname) {
         alert("공연자명은 필수 입력입니다.");
-        event.preventDefault();
-        return;
+        return false; // false 반환
     }
     if (!location) {
         alert("주소는 필수 입력입니다.");
-        event.preventDefault();
-        return;
+        return false; // false 반환
     }
     if (!enterId) {
         alert("기업명은 필수 입력입니다.");
-        event.preventDefault();
-        return;
+        return false; // false 반환
     }
     if (!startDate) {
         alert("시작일은 필수 입력입니다.");
-        event.preventDefault();
-        return;
+        return false; // false 반환
     }
     if (!lastDate) {
         alert("종료일은 필수 입력입니다.");
-        event.preventDefault();
-        return;
+        return false; // false 반환
     }
     if (!price) {
         alert("가격은 필수 입력입니다.");
-        event.preventDefault();
-        return;
+        return false; // false 반환
     }
+
+    // 모든 검사를 통과한 경우 true 반환
+    return true;
 }
 
 //마감일이 시작일 이전이 될 수 없게함
