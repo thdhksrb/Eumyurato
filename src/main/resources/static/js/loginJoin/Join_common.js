@@ -294,8 +294,6 @@
 // 회원가입 이벤트 핸들러
 const joinButton = document.getElementById('joinButton');
 joinButton.addEventListener('click', async function (e) {
-    e.preventDefault(); // 기본 이벤트 동작(폼 전송) 중단
-
     const form = document.getElementById('myForm');
 
     // 유효성 검사
