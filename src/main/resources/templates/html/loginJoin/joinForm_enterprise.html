@@ -44,6 +44,39 @@
             </div>
         </div>
 
+        <div class="modal fade" id="result_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="margin-left: 220px;">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title text-center">회원가입 성공</h1>
+                    </div>
+                    <div class="modal-body">
+                        <p id="result_message" style="font-size: larger;">환영합니다!
+                            <br>Eumyurato에 어서오세요:)</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="error_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="margin-left: 220px;">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title text-center">회원가입 실패</h1>
+                    </div>
+                    <div class="modal-body">
+                        <p id="error_message" style="font-size: larger;">필수입력 정보 확인 부탁드립니다.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <div class="login-content flex-lg-row-fluid d-flex flex-column position-relative overflow-hidden py-10 py-lg-20 px-10 p-lg-7 mw-550px w-100">
             <!--begin::Wrapper-->
@@ -66,7 +99,7 @@
                         <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000" for="id">*</label>
                         <div class="d-flex align-items-center position-relative">
                             <input class="form-control form-control-lg form-control-solid me-2" type="text"
-                                   placeholder="" name="id" id="id" autocomplete="off"
+                                  name="id" id="id" placeholder="5~20자의 영문, 숫자만 사용 가능" autocomplete="off"
                                    style="border-color: #0099FF; width: 350px; height: 40px;" required>
                             <button type="button" class="btn btn-primary fw-bolder fs-5 px-2 py-3 my-3 text-center"
                                     style="width: 150px; height: 45px;">중복 확인
@@ -84,7 +117,7 @@
                         <label class="form-label fs-6 fw-bolder text-dark pt-5">비밀번호</label>
                         <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
                         <input class="form-control form-control-lg form-control-solid" type="password"
-                               placeholder="" name="pwd" id="pwd" autocomplete="off"
+                               placeholder="" name="pwd" id="pwd" placeholder="대소문자, 숫자, 특수문자를 포함한 8자 이상 20자" autocomplete="off"
                                style="border-color: #0099FF;" required/>
                         <div>
                             <div id="password-empty" class="invalid-feedback">필수 입력 정보입니다.</div>
@@ -109,7 +142,7 @@
                     <div class="fv-row mb-5" required>
                         <label class="form-label fs-6 fw-bolder text-dark pt-5">기업 명</label>
                         <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
-                        <input class="form-control form-control-lg form-control-solid" type="text" placeholder=""
+                        <input class="form-control form-control-lg form-control-solid" type="text" placeholder="한글 1자 이상 20자 이하이어야 합니다."
                                name="name" id="name" autocomplete="off" style="border-color: #0099FF;"
                                required/>
                         <div>
@@ -153,7 +186,7 @@
                         <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
                         <div class="d-flex align-items-center">
                             <input class="form-control form-control-lg form-control-solid me-2" type="tel"
-                                   placeholder=" - 없이 입력" name="num" id="num" autocomplete="off"
+                                   placeholder=" - 없이 입력 및 10자리" name="num" id="num" autocomplete="off"
                                    style="border-color: #0099FF;">
                         </div>
                         <div class="position-relative">
