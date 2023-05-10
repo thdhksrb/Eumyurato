@@ -133,15 +133,14 @@
                 nidInvalidFeedback.style.display = "none";
 
                 // 닉네임 중복 검사 버튼 이벤트 핸들러
-// 닉네임 중복 검사 버튼 이벤트 핸들러
                 const duplicateBtn2 = document.querySelector("#duplicateBtn2");
                 duplicateBtn2.addEventListener("click", function () {
                     if (nidValue !== "") {
                         // 서버로 중복 검사 요청
-                        fetch(`/checkNidDuplicate?nid=${nidValue}`)
-                            .then(response => response.text())
+                        fetch(`/checkNidDuplicate/${nidValue}`)
+                            .then(response => response.json())
                             .then(data => {
-                                if (data === "duplicate") {
+                                if (data.duplicate > 0) {
                                     document.getElementById("nid-available").style.display = "none";
                                     document.getElementById("nid-available").style.color = "red";
                                     document.getElementById("nid-duplicate").style.display = "block";

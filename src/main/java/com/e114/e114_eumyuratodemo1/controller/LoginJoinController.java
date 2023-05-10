@@ -371,15 +371,14 @@ public class LoginJoinController {
         return ResponseEntity.ok(response);
     }*/
 
-    @GetMapping("/checkNidDuplicate")
-    public ResponseEntity<String> commonNidCheck(@RequestParam("nid") String nid) {
+    @GetMapping("/checkNidDuplicate/{nid}")
+    public ResponseEntity<Map<String, Object>> commonNidCheck(@PathVariable String nid) {
         System.out.println(nid);
         System.out.println(commonService.commonNid(nid));
-        if (commonService.commonNid(nid) == 0) { // 닉네임이 없는 경우
-            return ResponseEntity.ok("success");
-        } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("duplicate");
-        }
+        int result = commonService.commonNid(nid);
+        Map<String, Object> response = new HashMap<>();
+        response.put("duplicate", result);
+        return ResponseEntity.ok(response);
     }
 
 
