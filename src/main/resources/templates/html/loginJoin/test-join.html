@@ -183,19 +183,65 @@
                     <div>
 
                         <div class=" fv-row mb-5">
-                            <div class=" fv-row mb-5">
-                                <label class="form-label fs-6 fw-bolder text-dark pt-5">이메일</label>
-                                <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
-                                <input autocomplete="off" class="form-control form-control-lg form-control-solid"
-                                       id="email" name="email" placeholder="you@example.com" required
-                                       style="border-color: #0099FF;" type="email"/>
-                                <div>
-                                    <div class="invalid-feedback" id="email-empty">필수 입력 정보입니다.</div>
-                                    <div class="invalid-feedback" id="email-invalid">이메일 형식이 아닙니다.</div>
+                            <label class="form-label fs-6 fw-bolder text-dark pt-5">이메일</label>
+                            <label class="form-label fs-8 fw-bolder pt-4" style="color: #ff0000">*</label>
+                            <div class="d-flex align-items-center">
+                                <input autocomplete="off" class="form-control form-control-lg form-control-solid me-2 input_email"
+                                       id="email" name="email" placeholder="인증할 이메일을 입력해주세요."
+                                       required
+                                       style="border-color: #0099FF; width: 350px; height: 40px;" type="email"/>
+                                <button class="btn btn-primary fw-bolder fs-5 px-2 py-3 my-3 text-center RFCBtn"
+                                        style="width: 150px; height: 45px;" type="button" disabled>인증코드 발송
+                                </button>
+
+                                <p class="email_msg msg">
+                                    [email 메세지]
+                                </p>
+
+                                <!-- 이메일 변경 -->
+                                <div class="misspell_box">
+                                    <span>이메일을 잘못 입력하셨나요?</span>
+                                    <button class="email_change">[이메일 변경]</button>
                                 </div>
                             </div>
 
-                        </div>
+                            <div class="auth_container">
+
+                                <h3>인증 코드</h3>
+
+                                <!-- 인증 코드 -->
+                                <div class="auth_box">
+
+                                    <!-- 인증코드 입력창 컨테이너 -->
+                                    <div class="input_container">
+                                        <!-- 입력창 -->
+                                        <input type="text" class="input input_auth" placeholder="받은 인증코드를 입력해주세요.">
+                                        <!-- 유효시간 타이머 -->
+                                        <span class="timer"></span>
+                                    </div>
+
+                                    <button class="AuthBtn" disabled>인증코드 확인</button>
+
+                                </div>
+
+                                <!-- 인증코드 재발송 -->
+                                <div class="ReRFCBox">
+                                    <span>인증코드를 받지 못하셨나요?</span>
+                                    <button class="ReRFCBtn">[인증코드 재발송]</button>
+
+                                </div>
+
+                                <!-- 인증코드 상태 메세지 -->
+                                <p class="auth_msg msg">
+                                    [인증코드 메세지]
+                                </p>
+
+                            </div>
+
+                            <div>
+                                <div class="invalid-feedback" id="email-empty">필수 입력 정보입니다.</div>
+                                <div class="invalid-feedback" id="email-invalid">이메일 형식이 아닙니다.</div>
+                            </div>
                         </div>
 
                         <div>
@@ -289,7 +335,7 @@
                                     id="joinButton">회원 가입 완료
                             </button>
                         </div>
-
+                        </div>
                 </form>
             </div>
         </div>

@@ -51,52 +51,19 @@
                         <h1 class="menu-content mb-1 mt-10 text-center" style="font-weight: bold">마이페이지</h1>
                         <div class="separator border-dark my-1 mx-auto" style="width: 60%; border-width: 3px;"></div>
                         <div class="menu-item" style="margin: 3px">
-                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/admin/account}">
+                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/common/account}">
                                 <span class="menu-title">내 계정</span>
                             </a>
                         </div>
                         <div class="menu-item" style="margin: 3px">
-                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/admin/modify}">
+                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/common/modify}">
                                 <span class="menu-title">계정 정보 수정</span>
                             </a>
                         </div>
                         <div class="menu-item" style="margin: 3px">
-                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/admin/reservation}">
+                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/common/reservation/view}">
                                 <span class="menu-title">예약 내역</span>
                             </a>
-                        </div>
-                        <div class="menu-item" style="margin: 3px">
-                            <a class="text-dark text-hover-primary ms-3 py-2"
-                               th:href="@{/profile/admin/management/view}">
-                                <span class="menu-title">공연 관리</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="menu-wrapper menu-column menu-fit mt-1">
-                        <div class="menu-sub menu-fit menu-sub-accordion show">
-                            <h1 class="menu-content mb-1 mt-10 text-center" style="font-weight: bold">통합 정보 조회</h1>
-                            <div class="separator border-dark my-1 mx-auto"
-                                 style="width: 60%; border-width: 3px;"></div>
-                            <div class="menu-item" style="margin: 3px">
-                                <a class="text-dark text-hover-primary ms-3 py-2"
-                                   th:href="@{/profile/admin/total/view}">
-                                    <span class="menu-title">종합</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="menu-wrapper menu-column menu-fit mt-1">
-                        <div class="menu-sub menu-fit menu-sub-accordion show">
-                            <h1 class="menu-content mb-1 mt-10 text-center" style="font-weight: bold">통합 정보 조회</h1>
-                            <div class="separator border-dark my-1 mx-auto" style="width: 60%; border-width: 3px;"></div>
-                            <div class="menu-item" style="margin: 3px">
-
-                                <a class="text-dark text-hover-primary ms-3 py-2"
-                                   th:href="@{/profile/common/info/view}">
-                                    <span class="menu-title">공지사항</span>
-                                </a>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -127,7 +94,7 @@
             <!--begin::Signin Form-->
             <form class="form w-450px  needs-validation text-center" id="kt_login_signin_form" novalidate>
                 <div class="pb-5 pb-lg-1">
-                    <h2 class="fw-bolder text-dark display-6 text-center">계정 정보 수정</h2>
+                    <h2 class="fw-bolder text-dark display-6 text-start">계정 정보 수정</h2>
                 </div>
                 <!--begin::Image input-->
                 <div class="image-input image-input-outline" data-kt-image-input="true"
@@ -155,16 +122,14 @@
                 </div>
 
                 <div class="fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">아이디</label>
-                    <div class="d-flex align-items-center position-relative">
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5" style="float:left;">아이디</label>
                         <input autocomplete="off" class="form-control form-control-lg form-control-solid me-2"
                                id="id" name="id" placeholder="" required
                                style="border-color: #0099FF;" type="text" readonly>
-                    </div>
                 </div>
 
                 <div class="fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">비밀번호</label>
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5" style="float:left;">비밀번호</label>
                     <input autocomplete="off" class="form-control form-control-lg form-control-solid"
                            id="pwd" name="pwd" placeholder="대소문자, 숫자, 특수문자를 포함한 8자 이상 20자" required
                            style="border-color: #0099FF;" type="password"/>
@@ -178,7 +143,7 @@
                 </div>
 
                 <div class=" fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">비밀번호 재확인</label>
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5" style="float:left;">비밀번호 재확인</label>
                     <input autocomplete="off" class="form-control form-control-lg form-control-solid" id="cpassword"
                            name="cpassword" placeholder="" required style="border-color: #0099FF;"
                            type="password"/>
@@ -188,14 +153,14 @@
                 </div>
 
                 <div class=" fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">이름</label>
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5" style="float:left;">이름</label>
                     <input autocomplete="off" class="form-control form-control-lg form-control-solid" id="name"
                            name="name" placeholder="" required
                            style="border-color: #0099FF;" type="text" readonly/>
                 </div>
 
                 <div class="fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">닉네임</label>
+                    <div style="text-align: left; margin-top: 15px;"><strong>닉네임</strong></div>
                     <div class="d-flex align-items-center">
                         <input autocomplete="off" class="form-control form-control-lg form-control-solid me-2"
                                id="nid" name="nid" placeholder="한글 1자 이상 20자 이하이어야 합니다"
@@ -218,7 +183,7 @@
                 <div>
 
                     <div class=" fv-row mb-5">
-                        <label class="form-label fs-6 fw-bolder text-dark pt-5">이메일</label>
+                        <div style="text-align: left; margin-top: 15px;"><strong>이메일</strong></div>
                         <div class="d-flex align-items-center">
                         <input autocomplete="off" class="form-control form-control-lg form-control-solid me-2"
                                id="email" name="email" placeholder="you@example.com" required readonly
@@ -236,7 +201,7 @@
 
                 <div>
                     <div class=" fv-row mb-5">
-                        <label class="form-label fs-6 fw-bolder text-dark pt-5">휴대번호</label>
+                        <div style="text-align: left; margin-top: 15px;"><strong>휴대번호</strong></div>
                         <div class="d-flex align-items-center">
                         <input autocomplete="off" class="form-control form-control-lg form-control-solid me-2"
                                id="phone" name="phone" placeholder="-제외 입력하시오" readonly
@@ -253,7 +218,7 @@
                 </div>
 
                 <div class="fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5" for="genre">선호장르</label>
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5" for="genre" style="float: left;">선호장르</label>
                     <select id="genre" name="genre" class="form-control form-control-lg form-control-solid" style="border-color: #0099FF;" required>
                         <option value="">-- 선택하세요 --</option>
                         <option value="발라드">발라드</option>
