@@ -192,7 +192,7 @@ function nidCheck(){
         data: { nid: nickname },
         success: function(response) {
             console.log(response);
-            if (response === 'available') {
+            if (response === 'success') {
                 alert('사용 가능한 닉네임입니다.');
             } else if (response === 'duplicate') {
                 alert('이미 사용 중인 닉네임입니다.');
