@@ -189,10 +189,10 @@ function viewBusking(data){
                     li.style.display = 'flex';
                     li.style.alignItems = 'center';
 
-// 왼쪽 div 생성
+                    // 왼쪽 div 생성
                     var contentWrapper = document.createElement('div');
                     contentWrapper.style.flexGrow = '1';
-// 왼쪽 div 내용 추가
+                    // 왼쪽 div 내용 추가
                     var name = document.createElement('h3');
                     name.innerText = record.name;
                     var location = document.createElement('p');
@@ -215,17 +215,25 @@ function viewBusking(data){
                     imageWrapper.style.marginLeft = 'auto';
                     // 오른쪽 이미지 div 내용 추가
                     var image = document.createElement('img');
-                    image.src = record.image;
+                    var imgUrl = record.image;
+                    var replacedImgUrl = 'https://storage.googleapis.com/eumyurato/' + imgUrl;
+
+                    if(imgUrl !== null && imgUrl.startsWith("https://")){
+                        image.src = imgUrl;
+                    }else if(imgUrl !== null && !imgUrl.startsWith("https://")){
+                        image.src = replacedImgUrl;
+                    }else{
+                        image.src = "/img/buskingDefaultImg.jpg";
+                    }
+
                     image.alt = '이미지공간';
                     imageWrapper.appendChild(image);
+
                     // 왼쪽 div과 오른쪽 이미지 div을 li에 추가
                     li.appendChild(contentWrapper);
                     li.appendChild(imageWrapper);
 
-
-
                     li.style.padding='18px';
-
                     li.style.borderTop = '1px solid #ccc';
                     concert.appendChild(li);
 
@@ -266,18 +274,58 @@ function viewSmallConcert(data){
                     kakao.maps.event.addListener(marker, 'click', modalSmall(record));
 
                     var li = document.createElement('li');
-                    li.id=record.id;
                     var startDate = new Date(record.startDate);
                     var lastDate = new Date(record.lastDate);
-                    li.innerHTML = '<h3>' + record.name + '</h3>' +
-                        '<p><strong>장소: </strong>' + record.location + '</p>' +
-                        '<p><strong>공연 일자: </strong>' + formatDate(startDate) + ' ~ ' + formatDate(lastDate) + '</p>' +
-                        '<p><strong>공연자: </strong>' + record.pname + '</p>';
+                    li.id = record.id;
 
+                    li.style.padding = '18px';
+                    li.style.borderTop = '1px solid rgb(204, 204, 204)';
+                    li.style.display = 'flex';
+                    li.style.alignItems = 'center';
 
+                    // 왼쪽 div 생성
+                    var contentWrapper = document.createElement('div');
+                    contentWrapper.style.flexGrow = '1';
+                    // 왼쪽 div 내용 추가
+                    var name = document.createElement('h3');
+                    name.innerText = record.name;
+                    var location = document.createElement('p');
+                    location.innerHTML = '<strong>장소: </strong>' + record.location;
+                    var date = document.createElement('p');
+                    date.innerHTML = '<strong>공연 일자: </strong>' + formatDate(startDate) + ' ~ ' + formatDate(lastDate);
+                    var artist = document.createElement('p');
+                    artist.innerHTML = '<strong>공연자: </strong>' + record.pname;
+                    contentWrapper.appendChild(name);
+                    contentWrapper.appendChild(location);
+                    contentWrapper.appendChild(date);
+                    contentWrapper.appendChild(artist);
 
+                    // 오른쪽 이미지 div 생성
+                    var imageWrapper = document.createElement('div');
+                    imageWrapper.classList.add('image-wrapper');
+                    imageWrapper.style.width = '100px';
+                    imageWrapper.style.height = '100px';
+                    imageWrapper.style.flexShrink = '0';
+                    imageWrapper.style.marginLeft = 'auto';
+                    // 오른쪽 이미지 div 내용 추가
+                    var image = document.createElement('img');
+                    var imgUrl = record.image;
+                    var replacedImgUrl = 'https://storage.googleapis.com/eumyurato/' + imgUrl;
 
+                    if(imgUrl !== null && imgUrl.startsWith("https://")){
+                        image.src = imgUrl;
+                    }else if(imgUrl !== null && !imgUrl.startsWith("https://")){
+                        image.src = replacedImgUrl;
+                    }else{
+                        image.src = "/img/concertDefaultImg.jpg";
+                    }
 
+                    image.alt = '이미지공간';
+                    imageWrapper.appendChild(image);
+
+                    // 왼쪽 div과 오른쪽 이미지 div을 li에 추가
+                    li.appendChild(contentWrapper);
+                    li.appendChild(imageWrapper);
 
                     li.style.padding='18px';
                     li.style.borderTop = '1px solid #ccc';
@@ -320,13 +368,50 @@ function viewLocalFest(data){
                     kakao.maps.event.addListener(marker, 'click', modalLocal(record));
 
                     var li = document.createElement('li');
-                    li.id=record.id;
                     var startDate = new Date(record.startDate);
                     var lastDate = new Date(record.lastDate);
-                    li.innerHTML = '<h3>' + record.name + '</h3>' +
-                        '<p><strong>장소: </strong>' + record.location + '</p>' +
-                        '<p><strong>개최 일자: </strong>' + formatDate(startDate) + ' ~ ' + formatDate(lastDate) + '</p>' +
-                        '<p><strong>주최측: </strong>' + record.org + '</p>';
+                    li.id = record.id;
+
+                    li.style.padding = '18px';
+                    li.style.borderTop = '1px solid rgb(204, 204, 204)';
+                    li.style.display = 'flex';
+                    li.style.alignItems = 'center';
+
+                    // 왼쪽 div 생성
+                    var contentWrapper = document.createElement('div');
+                    contentWrapper.style.flexGrow = '1';
+                    // 왼쪽 div 내용 추가
+                    var name = document.createElement('h3');
+                    name.innerText = record.name;
+                    var location = document.createElement('p');
+                    location.innerHTML = '<strong>장소: </strong>' + record.location;
+                    var date = document.createElement('p');
+                    date.innerHTML = '<strong>개최 일자: </strong>' + formatDate(startDate) + ' ~ ' + formatDate(lastDate);
+                    var artist = document.createElement('p');
+                    artist.innerHTML = '<strong>주최측: </strong>' + record.org;
+                    contentWrapper.appendChild(name);
+                    contentWrapper.appendChild(location);
+                    contentWrapper.appendChild(date);
+                    contentWrapper.appendChild(artist);
+
+                    // 오른쪽 이미지 div 생성
+                    var imageWrapper = document.createElement('div');
+                    imageWrapper.classList.add('image-wrapper');
+                    imageWrapper.style.width = '100px';
+                    imageWrapper.style.height = '100px';
+                    imageWrapper.style.flexShrink = '0';
+                    imageWrapper.style.marginLeft = 'auto';
+                    // 오른쪽 이미지 div 내용 추가
+                    var image = document.createElement('img');
+                    var imgUrl = record.image;
+                    image.src = imgUrl;
+                    image.alt = '이미지공간';
+                    imageWrapper.appendChild(image);
+
+                    // 왼쪽 div과 오른쪽 이미지 div을 li에 추가
+                    li.appendChild(contentWrapper);
+                    li.appendChild(imageWrapper);
+
                     li.style.padding='18px';
                     li.style.borderTop = '1px solid #ccc';
                     concert.appendChild(li);

@@ -10,6 +10,29 @@ $(document).ready(function() {
         $('#previewImage').attr('src', imageUrl);
     });
 
+    //비밀번호 검사
+    $('#pwd').on('change', function (){
+        var password = $("input[name='pwd']").val();
+
+        //비밀번호가 이전 것과 동일한 지
+        if(password === artPwd){
+            alert("최근 사용한 비밀번호입니다. 다른 비밀번호를 선택해 주세요.")
+            $("input[name='pwd']").val("");
+            $("input[name='pwd']").focus();
+            return false;
+        }
+
+        // 비밀번호 형식 검사
+        var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[~․!@#\$%\^&\*\(\)_\-\+=\[\]\{\}\|\;:'"<>,\./\?]).{8,20}$/;
+        if (!regex.test(password)) {
+            // 비밀번호가 요구사항에 부합하지 않을 경우 처리
+            alert("비밀번호는 영어 대소문자, 숫자, 특수문자를 포함하고, 8자 이상 20자 이하이어야 합니다.");
+            $("input[name='pwd']").val("");
+            $("input[name='pwd']").focus();
+            return false;
+        }
+    });
+
     //비밀번호 재확인이 비밀번호와 같은지 검사
     $('#cpassword').on('change', function() {
         var cpassword = $("input[name='cpassword']").val();
@@ -20,11 +43,6 @@ $(document).ready(function() {
             cpassword = '';
         }
     });
-
-    //닉네임 중복 검사
-    $('#nid').on('change',function (){
-        nidCheck();
-   });
 
     //수정 버튼
     $('#modify').on('click', function(event) {
@@ -268,8 +286,12 @@ function openPhonePopup() {
                 const phone3 = document.querySelector('input[name="phone3"]').value;
                 const phoneNumber = phone1 + phone2 + phone3;
                 
-                opener.document.getElementById("phone").value = phoneNumber;
-                window.close();
+                if(phoneNumber.length !== 11){
+                    alert("휴대번호를 다시 확인해주세요.");
+                }else{
+                    opener.document.getElementById("phone").value = phoneNumber;
+                    window.close(); 
+                }
             });
             </script>
         </body>
