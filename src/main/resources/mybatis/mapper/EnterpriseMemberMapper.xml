@@ -186,7 +186,8 @@
     </select>
 
     <select id="getReservationId" resultType="String">
-        SELECT id FROM reservation
+        SELECT id
+        FROM reservation
         WHERE sId IN
         <foreach item="item" collection="sId" open="(" separator="," close=")">
             #{item}
@@ -194,24 +195,28 @@
     </select>
 
     <delete id="deleteTickets">
-        DELETE FROM ticket WHERE rId IN
+        DELETE FROM ticket
+        WHERE rId IN
         <foreach item="item" collection="rId" open="(" separator="," close=")">
             #{item}
         </foreach>
     </delete>
 
     <delete id="deleteReservations">
-        DELETE FROM reservation WHERE sId IN
+        DELETE FROM reservation
+        WHERE sId IN
         <foreach item="item" collection="sId" open="(" separator="," close=")">
             #{item}
         </foreach>
     </delete>
 
     <delete id="deleteSchedules">
-        DELETE FROM schedules WHERE conId = #{param1}
+        DELETE FROM schedules
+        WHERE conId = #{param1}
     </delete>
 
     <delete id="deleteDonation">
-        DELETE FROM artist_donation WHERE buskId = #{param1}
+        DELETE FROM artist_donation
+        WHERE buskId = #{param1}
     </delete>
 </mapper>
