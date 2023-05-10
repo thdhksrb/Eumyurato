@@ -35,8 +35,8 @@
         <a class="navbar-brand" href="#page-top"><img th:src="@{/img/logo_name.png}"></a>
     </div>
     <div style="margin-right: 60px;">
-        <a id="mypageBtn" style="width: 30px; height: 30px;"><img th:src="@{/img/person.png}"
-                                                                  style="width: 30px; height: 30px; cursor:pointer;"/>
+        <a id="mypageBtn" style="width: 30px; height: 30px; font-size: large;">
+            <img th:src="@{/img/person.png}"style="width: 30px; height: 30px; cursor:pointer;"/>
             <span id="userName" style="margin-left: 10px; font-weight: bold; font-size: large; cursor:pointer;"></span>님</a>
         <a id="logoutBtn" href="/logout" style="margin-left: 20px;"></a>
     </div>
@@ -73,7 +73,7 @@
     </div>
 
     <!-- HTML -->
-    <div class="divider-custom1 divider-light1 text-center" style="margin-bottom: -50px;">
+    <div class="divider-custom1 divider-light1 text-center" style="margin-bottom: -30px;">
         <div class="divider-custom divider-light mx-auto text-center">
             <div class="divider-custom divider-light">
                 <div class="divider-custom-line"></div>
@@ -113,12 +113,12 @@
         <div class="divider-custom divider-light mx-auto text-center">
             <div class="divider-custom divider-light">
                 <div class="col-lg-8 text-center">
-                    <table id="concetTable" class="table table-bordered table-hover" style="width: 400px;">
+                    <table id="concetTable" class="table table-borderless fade-in">
                         <thead>
                         <tr>
-                            <th>순위</th>
-                            <th><img src="image_url" alt="artist_image" width="180" height="180"></th>
-                            <th>공연명</th>
+                            <th></th><!--순위-->
+                            <th></th><!--이미지-->
+                            <th></th><!--공연명-->
                         </tr>
                         </thead>
                         <tbody id="concetTableBody">
@@ -127,6 +127,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 
 
