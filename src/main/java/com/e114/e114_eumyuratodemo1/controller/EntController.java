@@ -58,12 +58,6 @@ public class EntController {
         }
     }
 
-    @GetMapping("/profile/ent/total/view")
-    public String enterpriseTotalsview() {
-
-        return "html/profile/total/profile_enterprise_total";
-    }
-
     @GetMapping("/profile/ent/info/view")
     public String enterpriseInfoview() {
 
@@ -107,48 +101,6 @@ public class EntController {
         }
 
         return ResponseEntity.ok(memberList);
-    }
-
-    @GetMapping("/profile/ent/total/commonMember")
-    @ResponseBody
-    public Map<String, Object> getCommonMember() {
-
-        List<Map<String, Object>> genderCounts = enterpriseService.commonGenderCount();
-        List<Map<String, Object>> genreCounts = enterpriseService.commonGenreCount();
-
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("genderCounts", genderCounts);
-        resultMap.put("genreCounts", genreCounts);
-
-        return resultMap;
-    }
-
-    @GetMapping("/profile/ent/total/artistMember")
-    @ResponseBody
-    public Map<String, Object> getArtistMember() {
-
-        List<Map<String, Object>> genderCounts = enterpriseService.artistGenderCount();
-        List<Map<String, Object>> genreCounts = enterpriseService.artistGenreCount();
-
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("genderCounts", genderCounts);
-        resultMap.put("genreCounts", genreCounts);
-
-        return resultMap;
-    }
-
-    @GetMapping("/profile/ent/total/enterMember")
-    @ResponseBody
-    public Map<String, Object> getEnterMember() {
-
-        List<Map<String, Object>> concertIng = enterpriseService.enterConcertIng();
-        List<Map<String, Object>> concertAll = enterpriseService.enterConcertAll();
-
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("concertIng", concertIng);
-        resultMap.put("concertAll", concertAll);
-
-        return resultMap;
     }
 
     @GetMapping("/profile/ent/modify")
@@ -266,7 +218,7 @@ public class EntController {
     @DeleteMapping("/profile/ent/management")
     public ResponseEntity<String> deleteSmallConcert(@RequestParam("id") int id) {
 
-        int result = enterpriseService.deleteSmallConcert(id);
+        int result = enterpriseService.deleteSmallConcertByEnt(id);
 
         if (result > 0) {
             return ResponseEntity.ok().body("success");

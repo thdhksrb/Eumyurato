@@ -18,10 +18,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class AdminService {
@@ -107,23 +104,23 @@ public class AdminService {
         return dao.searchLocalFestivals(params);
     }
 
-    public void deleteEvent(String category, int id) {
-        String query = null;
-        switch (category) {
-            case "busking":
-                dao.deleteBusking(id);
-                break;
-            case "smallconcert":
-                dao.deleteSmallConcert(id);
-                break;
-            case "localfestival":
-                dao.deleteLocalFestival(id);
-                break;
-            default:
-                // 지정되지 않은 카테고리에 대한 처리
-                break;
-        }
-    }
+//    public void deleteEvent(String category, int id) {
+//        String query = null;
+//        switch (category) {
+//            case "busking":
+//                dao.deleteBusking(id);
+//                break;
+//            case "smallconcert":
+//                dao.deleteSmallConcert(id);
+//                break;
+//            case "localfestival":
+//                dao.deleteLocalFestival(id);
+//                break;
+//            default:
+//                // 지정되지 않은 카테고리에 대한 처리
+//                break;
+//        }
+//    }
 
     //일반 회원
     public List<Map<String, Object>>  commonGenderCount(){
@@ -182,5 +179,34 @@ public class AdminService {
     public int deleteTicket(int rid){
         return dao.deleteTicket(rid);
     }
+
+    public void deleteBusking(int id) {
+        dao.deleteBusking(id);
+    }
+
+    public void deleteDonation(int buskId){
+        dao.deleteDonation(buskId);
+    }
+
+    public void deleteLocalFestival(int id){
+        dao.deleteLocalFestival(id);
+    }
+
+    public void deleteSmallConcert(int conId){
+
+        List<String> sId = dao.getScheduleId(conId);
+        System.out.println("1");
+        List<String> rid = dao.getReservationId(sId);
+        System.out.println("2");
+        dao.deleteTickets(rid);
+        System.out.println("3");
+        dao.deleteReservations(sId);
+        System.out.println("4");
+        dao.deleteSchedules(conId);
+        System.out.println("5");
+        dao.deleteSmallConcert(conId);
+        System.out.println("6");
+    }
+
 }
 

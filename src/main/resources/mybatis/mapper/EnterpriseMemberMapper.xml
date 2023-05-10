@@ -117,44 +117,6 @@
         ORDER BY regDate DESC
     </select>
 
-    <select id="getCommonGender" resultType="map">
-        SELECT sex, COUNT(*) as count
-        FROM common_member
-        GROUP BY sex;
-    </select>
-
-    <select id="getCommonGenre" resultType="map">
-        SELECT genre, COUNT(*) as count
-        FROM common_member
-        GROUP BY genre;
-    </select>
-
-    <select id="getArtistGender" resultType="map">
-        SELECT sex, COUNT(*) as count
-        FROM artist_member
-        GROUP BY sex;
-    </select>
-
-    <select id="getArtistGenre" resultType="map">
-        SELECT genre, COUNT(*) as count
-        FROM artist_member
-        GROUP BY genre;
-    </select>
-
-    <select id="getEnterConcertIng" resultType="map">
-        <![CDATA[
-        SELECT COUNT(*) AS concert_ing
-        FROM small_concert
-        WHERE startDate <= CURDATE()
-          AND lastDate >= CURDATE();
-        ]]>
-    </select>
-
-    <select id="getEnterConcertAll" resultType="map">
-        SELECT COUNT(*) AS concert_all
-        FROM small_concert;
-    </select>
-
     <update id="modifyEnterWithoutImage" parameterType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
         UPDATE enterprise_member
         SET
@@ -215,5 +177,41 @@
 
     <delete id="deleteSmallConcert">
         DELETE FROM small_concert WHERE id = #{param1}
+    </delete>
+
+    <select id="getScheduleId" resultType="String">
+        SELECT id
+        FROM schedules
+        WHERE conId = #{param1}
+    </select>
+
+    <select id="getReservationId" resultType="String">
+        SELECT id FROM reservation
+        WHERE sId IN
+        <foreach item="item" collection="sId" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <delete id="deleteTickets">
+        DELETE FROM ticket WHERE rId IN
+        <foreach item="item" collection="rId" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <delete id="deleteReservations">
+        DELETE FROM reservation WHERE sId IN
+        <foreach item="item" collection="sId" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <delete id="deleteSchedules">
+        DELETE FROM schedules WHERE conId = #{param1}
+    </delete>
+
+    <delete id="deleteDonation">
+        DELETE FROM artist_donation WHERE buskId = #{param1}
     </delete>
 </mapper>

@@ -133,30 +133,6 @@ public class EnterpriseService {
         return enterpriseMemberDAO.searchEntSmallConcerts(enterId, column, keyword);
     }
 
-    //일반 회원
-    public List<Map<String, Object>>  commonGenderCount(){
-        return enterpriseMemberDAO.getCommonGender();
-    }
-    public List<Map<String, Object>>  commonGenreCount(){
-        return enterpriseMemberDAO.getCommonGenre();
-    }
-
-    //아티스트 회원
-    public List<Map<String, Object>>  artistGenderCount(){
-        return enterpriseMemberDAO.getArtistGender();
-    }
-    public List<Map<String, Object>>  artistGenreCount(){
-        return enterpriseMemberDAO.getArtistGenre();
-    }
-
-    //기업 회원
-    public List<Map<String, Object>>  enterConcertIng(){
-        return enterpriseMemberDAO.getEnterConcertIng();
-    }
-    public List<Map<String, Object>>  enterConcertAll(){
-        return enterpriseMemberDAO.getEnterConcertAll();
-    }
-
     //회원정보 수정
     public void modifyEnterWithoutImage(EnterpriseMemberDTO enterpriseMemberDTO){
         enterpriseMemberDAO.modifyEnterWithoutImage(enterpriseMemberDTO);
@@ -213,9 +189,22 @@ public class EnterpriseService {
         enterpriseMemberDAO.saveConcert(smallConcertDTO);
     }
 
-    public int deleteSmallConcert(int id) {
+    public int deleteSmallConcertByEnt(int conId){
 
-        return enterpriseMemberDAO.deleteSmallConcert(id);
+        List<String> sId = enterpriseMemberDAO.getScheduleId(conId);
+        System.out.println("1");
+        List<String> rid = enterpriseMemberDAO.getReservationId(sId);
+        System.out.println("2");
+        enterpriseMemberDAO.deleteTickets(rid);
+        System.out.println("3");
+        enterpriseMemberDAO.deleteReservations(sId);
+        System.out.println("4");
+        enterpriseMemberDAO.deleteSchedules(conId);
+        System.out.println("5");
+        enterpriseMemberDAO.deleteSmallConcert(conId);
+        System.out.println("6");
+
+        return 1;
     }
 }
 

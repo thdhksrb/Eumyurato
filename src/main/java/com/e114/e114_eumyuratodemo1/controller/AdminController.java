@@ -212,7 +212,6 @@ public class AdminController {
         }
     }
 
-
     @GetMapping("/profile/admin/management/view")
     public String adminAccountManagement() {
 
@@ -261,7 +260,22 @@ public class AdminController {
     @DeleteMapping("/profile/admin/management")
     public ResponseEntity<Void> deleteConcert(@RequestParam("category") String category, @RequestParam("id") int id) {
         System.out.println(category + "," + id);
-        adminService.deleteEvent(category, id);
+        switch (category) {
+            case "busking":
+                adminService.deleteDonation(id);
+                adminService.deleteBusking(id);
+                break;
+            case "localfestival":
+                adminService.deleteLocalFestival(id);
+                break;
+            case "smallconcert":
+                adminService.deleteSmallConcert(id);
+                break;
+            default:
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+
+      //  adminService.deleteEvent(category, id);
         return ResponseEntity.ok().build();
     }
 

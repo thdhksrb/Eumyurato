@@ -18,13 +18,6 @@ public interface AdminMemberDAO {
 
     String logout(HttpServletRequest request);  // 로그아웃 기능 설정
 
-    List<ReservationDTO> getReservationList();
-    // 일반회원 예약 목록 검색
-    List<ReservationDTO> searchReservations(String column, String keyword);
-
-    int deleteReservation(int id);
-    int deleteTicket(int rid);
-
     EnterpriseMemberDTO getAdminInfoById(String adminId);   // 내 계정 정보 불러오기
 
     List<BuskingDTO> getBuskings();     // 버스킹 목록 불러오기
@@ -32,6 +25,7 @@ public interface AdminMemberDAO {
     List<LocalFestivalDTO> getLocalFestivals(); // 지역축제 불러오기
 
     void deleteBusking(int id);
+    void deleteDonation(int buskId);
     void deleteSmallConcert(int id);
     void deleteLocalFestival(int id);
 
@@ -52,7 +46,27 @@ public interface AdminMemberDAO {
     List<Map<String, Object>> getArtistBuskingIng();
     List<Map<String, Object>> getArtistBuskingAll();
 
+
+    List<ReservationDTO> getReservationList();
+    // 일반회원 예약 목록 검색
+    List<ReservationDTO> searchReservations(String column, String keyword);
+
+    int deleteReservation(int id);
+    int deleteTicket(int rid);
+
+
     //기업 회원
     List<Map<String, Object>> getEnterConcertIng();
     List<Map<String, Object>> getEnterConcertAll();
+
+    List<String> getScheduleId(int conId);
+    List<String> getReservationId(List<String> sId);
+
+    int deleteReservations(List<String> sId);
+    int deleteTickets(List<String> rId);
+    int deleteSchedules(int id);
+
+
+
+
 }

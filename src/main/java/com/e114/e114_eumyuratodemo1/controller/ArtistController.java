@@ -121,85 +121,10 @@ public class ArtistController {
         }
     }
 
-    @GetMapping("/profile/artist/total/view")
-    public String artistTotalsview() {
-
-        return "html/profile/total/profile_artist_total";
-    }
-
     @GetMapping("/profile/artist/info/view")
     public String artistInfoview() {
 
         return "html/profile/board/profile_artist_board";
-    }
-
-    @GetMapping("/profile/artist/total")
-    public ResponseEntity<?> getMemberList(@RequestParam("category") String category,
-                                           @RequestParam(value = "column", required = false) String column,
-                                           @RequestParam(value = "keyword", required = false) String keyword) {
-        List<?> memberList;
-
-        if (column != null && keyword != null) {
-            switch (category) {
-                case "common":
-                    memberList = artistService.searchCommons(column, keyword);
-                    break;
-                case "artist":
-                    memberList = artistService.searchArtists(column, keyword);
-                    break;
-                default:
-                    return ResponseEntity.badRequest().body("잘못된 카테고리입니다.");
-            }
-        } else {
-            switch (category) {
-                case "common":
-                    memberList = artistService.viewAllCommons();
-                    break;
-                case "artist":
-                    memberList = artistService.viewAllArtists();
-                    break;
-                default:
-                    return ResponseEntity.badRequest().body("잘못된 카테고리입니다.");
-            }
-        }
-
-        return ResponseEntity.ok(memberList);
-    }
-
-    @GetMapping("/profile/artist/total/commonMember")
-    @ResponseBody
-    public Map<String, Object> getCommonMember() {
-
-        List<Map<String, Object>> genderCounts = artistService.commonGenderCount();
-        List<Map<String, Object>> genreCounts = artistService.commonGenreCount();
-
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("genderCounts", genderCounts);
-        resultMap.put("genreCounts", genreCounts);
-
-        return resultMap;
-    }
-
-    @GetMapping("/profile/artist/total/artistMember")
-    @ResponseBody
-    public Map<String, Object> getArtistMember() {
-
-        List<Map<String, Object>> genderCounts = artistService.artistGenderCount(); // 성별 체크
-        List<Map<String, Object>> genreCounts = artistService.artistGenreCount();   // 장르 체크
-        List<Map<String, Object>> points = artistService.artistPointTop();          // 보유 포인트 체크
-        List<Map<String, Object>> pointAvg = artistService.artistPointAvg();        // 포인트 평균
-        List<Map<String, Object>> buskingIng = artistService.artistBuskingIng();    // 진행중인 버스킹 목록 가져오기
-        List<Map<String, Object>> buskingAll = artistService.artistBuskingAll();    // 모든 버스킹 목록 가져오기
-
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("genderCounts", genderCounts);
-        resultMap.put("genreCounts", genreCounts);
-        resultMap.put("points", points);
-        resultMap.put("pointAvg", pointAvg);
-        resultMap.put("buskingIng", buskingIng);
-        resultMap.put("buskingAll", buskingAll);
-
-        return resultMap;
     }
 
     @GetMapping("/profile/artist/register")
