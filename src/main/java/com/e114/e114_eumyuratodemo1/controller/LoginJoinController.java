@@ -20,10 +20,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.sound.midi.Soundbank;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
@@ -188,7 +190,8 @@ public class LoginJoinController {
     }
 
     @PostMapping("/loginjoin/common/join")
-    public String commonJoinRegister(
+    @ResponseBody
+    public  ResponseEntity<Void> commonJoinRegister(
             @RequestParam("id") String id,
             @RequestParam("pwd") String pwd,
             @RequestParam("name") String name,
@@ -198,14 +201,14 @@ public class LoginJoinController {
             @RequestParam("email") String email,
             @RequestParam("phone") String phone,
             @RequestParam("road") String road,
-            @RequestParam("genre") String genre,
-            Model model) {
+            @RequestParam("genre") String genre) {
 
         boolean result = commonService.register(id, pwd, name, nid, sex, birth, email, phone, road, genre);
+        System.out.println("result="+result);
         if (result) {
-            return "redirect:/loginjoin/common/login";
+            return ResponseEntity.ok().build();
         } else {
-            return "redirect:/loginjoin/common/join";
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
@@ -229,6 +232,7 @@ public class LoginJoinController {
             Model model) {
 
         boolean result = artistService.register(id, pwd, name, nid, sex, birth, email, phone, genre);
+        System.out.println("result="+result);
         if (result) {
             return "redirect:/loginjoin/artist/login";
         } else {
