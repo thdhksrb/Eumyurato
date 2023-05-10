@@ -211,4 +211,9 @@ public class ArtistService {
 
         artistMemberDAO.artistModify(artistMemberDTO);
     }
+
+    //회원 닉네임 중복 체크
+    public List<Map<String, Object>> artistNid(String nid){
+        return artistMemberDAO.artistNid(nid);
+    }
 }

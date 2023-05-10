@@ -145,5 +145,13 @@ public class ArtistController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping("/profile/artist/nidcheck")
+    public Map<String,Object> artistNidCheck(@RequestParam("nid") String nid){
+        System.out.println(nid);
+        Map<String, Object> nidResult = new HashMap<>();
+        nidResult.put("nid", artistService.artistNid(nid));
+        return nidResult;
+    }
+
 
 }

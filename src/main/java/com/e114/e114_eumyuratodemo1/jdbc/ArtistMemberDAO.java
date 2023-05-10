@@ -63,4 +63,7 @@ public interface ArtistMemberDAO{
     //정보 수정
     void modifyArtistWithoutImage(ArtistMemberDTO artistMemberDTO);
     void artistModify(ArtistMemberDTO artistMemberDTO);
+
+    //닉네임 반환
+    List<Map<String, Object>> artistNid(String nid);
 }
