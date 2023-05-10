@@ -69,5 +69,13 @@ public interface EnterpriseMemberDAO{
     void modifyEnterWithoutImage(EnterpriseMemberDTO enterpriseMemberDTO);
     void enterModify(EnterpriseMemberDTO enterpriseMemberDTO);
 
+    SmallConcertDTO getSmallConcertByAll(String name,int price,String startDate,String lastDate);
+
+    void saveSchedules(int conId,String conDate);
+
+    void saveConcertWithoutImage(SmallConcertDTO smallConcertDTO);
+    void saveConcert(SmallConcertDTO smallConcertDTO);
+
+    int deleteSmallConcert(int id);
 
 }

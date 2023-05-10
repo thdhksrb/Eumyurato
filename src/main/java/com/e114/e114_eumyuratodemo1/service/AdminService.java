@@ -86,14 +86,6 @@ public class AdminService {
 
     ;
 
-
-    public SmallConcertDTO getSmallConcertByAll(String name,int price,String startDate,String lastDate){
-        return dao.getSmallConcertByAll(name,price,startDate,lastDate);
-    };
-
-
-
-
     public List<BuskingDTO> searchBuskings(String column, String keyword) {
         Map<String, String> params = new HashMap<>();
         params.put("column", column);
@@ -132,29 +124,6 @@ public class AdminService {
                 break;
         }
     }
-
-    public void saveConcertWithoutImage(SmallConcertDTO smallConcertDTO){
-        dao.saveConcertWithoutImage(smallConcertDTO);
-    }
-
-    public void saveConcert(SmallConcertDTO smallConcertDTO, MultipartFile imgFile) throws IOException {
-        String uuid = UUID.randomUUID().toString();
-        String ext = imgFile.getContentType();
-
-        //이미지 업로드
-        BlobInfo blobInfo = storage.create(
-                BlobInfo.newBuilder(bucketName, uuid)
-                        .setContentType(ext)
-                        .build(),
-                imgFile.getInputStream()
-        );
-        smallConcertDTO.setImage(uuid);
-        dao.saveConcert(smallConcertDTO);
-    }
-
-    public void saveSchedules(int conId,String conDate){
-        dao.saveSchedules(conId,conDate);
-    };
 
     //일반 회원
     public List<Map<String, Object>>  commonGenderCount(){

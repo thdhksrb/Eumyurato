@@ -80,10 +80,6 @@
 							<div class="separator border-dark my-1 mx-auto" style="width: 60%; border-width: 3px;"></div>
 							<div class="menu-item" style="margin: 3px">
 								<a class="text-dark text-hover-primary ms-3 py-2"
-								   th:href="@{/profile/ent/total/view}">
-									<span class="menu-title">종합</span>
-								</a>
-								<a class="text-dark text-hover-primary ms-3 py-2"
 								   th:href="@{/profile/ent/info/view}">
 									<span class="menu-title">공지사항</span>
 								</a>
@@ -120,6 +116,7 @@
 				<div style="color:#000000; background-color:#FFFFFF; padding:25px;  height: 600px;">
 					<div style="display: flex; align-items: center; margin-bottom: 20px;">
 						<h4 style="font-size: 24px; flex-grow: 1;"><strong>공연 정보</strong></h4>
+						<a th:href="@{/profile/ent/register}" class="text-gray-600 text-hover-primary ms-3">공연 등록</a>
 					</div>
 					<div class="search-container">
 						<select id="searchColumn" style="width: 10%; height: 40px; border-radius: 5px;">

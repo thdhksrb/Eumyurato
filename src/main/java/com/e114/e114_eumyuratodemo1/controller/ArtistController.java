@@ -45,7 +45,7 @@ public class ArtistController {
         System.out.println("id : " + artistUserId);
 
         if (artistUserId != null) {
-            // ID를 이용해 관리자 정보를 가져옵니다.
+            // ID를 이용해 아티스트 정보 가져오기
             ArtistMemberDTO artist = artistMemberDAO.getArtistInfoById(artistUserId);
             if (artist != null) {
                 return ResponseEntity.ok(artist);

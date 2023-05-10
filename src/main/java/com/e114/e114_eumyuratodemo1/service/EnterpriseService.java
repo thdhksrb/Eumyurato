@@ -185,6 +185,38 @@ public class EnterpriseService {
     public List<ReservationDTO> getReservationsByEnterId(String enterId) {
         return enterpriseMemberDAO.getReservationsByEnterId(enterId);
     }
+
+    public SmallConcertDTO getSmallConcertByAll(String name,int price,String startDate,String lastDate){
+        return enterpriseMemberDAO.getSmallConcertByAll(name,price,startDate,lastDate);
+    };
+
+    public void saveSchedules(int conId,String conDate){
+        enterpriseMemberDAO.saveSchedules(conId,conDate);
+    };
+
+    public void saveConcertWithoutImage(SmallConcertDTO smallConcertDTO){
+        enterpriseMemberDAO.saveConcertWithoutImage(smallConcertDTO);
+    }
+
+    public void saveConcert(SmallConcertDTO smallConcertDTO, MultipartFile imgFile) throws IOException {
+        String uuid = UUID.randomUUID().toString();
+        String ext = imgFile.getContentType();
+
+        //이미지 업로드
+        BlobInfo blobInfo = storage.create(
+                BlobInfo.newBuilder(bucketName, uuid)
+                        .setContentType(ext)
+                        .build(),
+                imgFile.getInputStream()
+        );
+        smallConcertDTO.setImage(uuid);
+        enterpriseMemberDAO.saveConcert(smallConcertDTO);
+    }
+
+    public int deleteSmallConcert(int id) {
+
+        return enterpriseMemberDAO.deleteSmallConcert(id);
+    }
 }
 
 

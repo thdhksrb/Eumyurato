@@ -35,15 +35,9 @@ public interface AdminMemberDAO {
     void deleteSmallConcert(int id);
     void deleteLocalFestival(int id);
 
-    SmallConcertDTO getSmallConcertByAll(String name,int price,String startDate,String lastDate);
-
     List<BuskingDTO> searchBuskings(Map<String, String> params);
     List<SmallConcertDTO> searchSmallConcerts(Map<String, String> params);
     List<LocalFestivalDTO> searchLocalFestivals(Map<String, String> params);
-    void saveConcertWithoutImage(SmallConcertDTO smallConcertDTO);
-    void saveConcert(SmallConcertDTO smallConcertDTO);
-
-    void saveSchedules(int conId,String conDate);
 
     //일반 회원
     List<Map<String, Object>> getCommonGender();

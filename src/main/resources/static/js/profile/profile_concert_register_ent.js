@@ -56,6 +56,7 @@ function sample4_execDaumPostcode() {
 }
 
 $(document).ready(function() {
+    getEnterpriseData();
 
     //프로필 이미지 사용자가 업로드한 이미지로 변경
     var defaultImage = '/img/concertDefaultImg.jpg';
@@ -130,6 +131,26 @@ $(document).ready(function() {
     });
 });
 
+const jwtToken = sessionStorage.getItem("jwtToken");
+//기업회원 이름(공연자) 가져오기
+function getEnterpriseData() {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "/profile/ent/data");
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("Authorization", `Bearer ${jwtToken}`);
+
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            const enterprise = JSON.parse(xhr.responseText);
+            console.log(enterprise);
+            document.getElementById("enterId").value = enterprise.id;
+        } else {
+            console.log("Request failed. Returned status of " + xhr.status);
+        }
+    };
+    xhr.send();
+}
+
 //폼 데이터 넘기는 부분
 function concertRegister() {
     var formData = new FormData();
@@ -149,13 +170,13 @@ function concertRegister() {
     console.log(formData);
     $.ajax({
         type: 'POST',
-        url: '/profile/admin/register',
+        url: '/profile/ent/register',
         data: formData,
         processData: false,
         contentType: false,
         success: function() {
             alert('공연등록 성공');
-            window.location.href = '/profile/admin/management/view';
+            window.location.href = '/profile/ent/management/view';
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(textStatus + ': ' + errorThrown);
