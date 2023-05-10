@@ -15,7 +15,6 @@
             form.classList.add('was-validated');
         }, false);
 
-
         // 아이디 유효성 검사
         const uidInput = document.querySelector('input[name="id"]');
         const uidRegex = /^[a-zA-Z0-9]{5,20}$/;
@@ -63,6 +62,7 @@
                                     document.getElementById("id-available").style.color = "green";
                                 } else {
                                     uidAvailableFeedback.style.display = "block";
+                                    document.getElementById("id-available").style.color = "green";
                                     uidDuplicateFeedback.style.display = "none";
                                 }
                             })
@@ -71,6 +71,7 @@
                 });
             }
         });
+
 
 // 비밀번호 유효성 검사
         const pwdInput = document.querySelector('input[name="pwd"]');
@@ -132,6 +133,7 @@
             }
         });
 
+
         // 이메일 유효성 검사
         const emailInput = document.querySelector('input[name="email"]');
         const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,30}$/;
@@ -173,24 +175,23 @@
 
         // 사업자등록번호 유효성 검사
         const numInput = document.querySelector('input[name="num"]');
-        const numRegex = /^\d{1,10}$/;
+        const numRegex = /^\d{1,20}$/;
         numInput.addEventListener('blur', function (event) {
             const numValue = numInput.value.trim();
 
             if (numValue === "") {
                 // 휴대폰 번호가 빈 문자열일 경우
-                document.getElementById("enter-empty").style.display = "block";
-                document.getElementById("enter-invalid").style.display = "none";
+                document.getElementById("num1-empty").style.display = "block";
+                document.getElementById("num1-invalid").style.display = "none";
             } else if (!numRegex.test(numValue)) {
                 // 휴대폰 번호 형식이 올바르지 않을 경우
-                document.getElementById("enter-invalid").style.display = "block";
-                document.getElementById("enter-empty").style.display = "none";
+                document.getElementById("num1-invalid").style.display = "block";
+                document.getElementById("num1-empty").style.display = "none";
             } else {
-                document.getElementById("enter-empty").style.display = "none";
-                document.getElementById("enter-invalid").style.display = "none";
+                document.getElementById("num1-empty").style.display = "none";
+                document.getElementById("num1-invalid").style.display = "none";
             }
         });
-
 
 
         // 약관 동의 체크박스 유효성 검사
@@ -208,15 +209,14 @@
     });
 })();
 
+
 // 회원가입 이벤트 핸들러
 const joinButton = document.getElementById('joinButton');
 joinButton.addEventListener('click', async function (e) {
-    e.preventDefault(); // 기본 이벤트 동작(폼 전송) 중단
-
     const form = document.getElementById('myForm');
 
     // 유효성 검사
-    if (form.checkValidity() === false) {
+    if (!form.checkValidity()) {
         form.classList.add('was-validated');
         $('#error_modal').modal('show');
         return;
@@ -232,16 +232,19 @@ joinButton.addEventListener('click', async function (e) {
 
         if (response.ok) {
             // 회원가입 성공 시 모달 팝업 띄우기
+            $('#result_message').text(resultMessage);
             $('#result_modal').modal('show');
-            setTimeout(function() {
-                window.location.href = "/loginjoin/common/login";
+            setTimeout(function () {
+                window.location.href = "/loginjoin/enterprise/login";
             }, 3000); // 3초 후 로그인 페이지로 이동
         } else {
             // 회원가입 실패 시 모달 팝업 띄우기
+            $('#error_message').text(errorMessage);
             $('#error_modal').modal('show');
         }
     } catch (error) {
         // 회원가입 실패 시 모달 팝업 띄우기
+        $('#error_message').text(errorMessage);
         $('#error_modal').modal('show');
     }
 });

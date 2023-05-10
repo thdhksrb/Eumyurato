@@ -62,6 +62,7 @@
                                     document.getElementById("id-available").style.color = "green";
                                 } else {
                                     uidAvailableFeedback.style.display = "block";
+                                    document.getElementById("id-available").style.color = "green";
                                     uidDuplicateFeedback.style.display = "none";
                                 }
                             })
@@ -134,19 +135,19 @@
                 // 닉네임 중복 검사 버튼 이벤트 핸들러
                 const duplicateBtn2 = document.querySelector("#duplicateBtn2");
                 duplicateBtn2.addEventListener("click", function () {
-                    const nidValue = nidInput.value.trim();
                     if (nidValue !== "") {
                         // 서버로 중복 검사 요청
                         fetch(`/checkNidDuplicate/${nidValue}`)
                             .then(response => response.json())
                             .then(data => {
-                                if (data.duplicate) {
-                                    nidAvailableFeedback.style.display = "none";
-                                    nidDuplicateFeedback.style.display = "block";
+                                if (data.duplicate > 0) {
+                                    document.getElementById("nid-available").style.display = "none";
+                                    document.getElementById("nid-available").style.color = "red";
+                                    document.getElementById("nid-duplicate").style.display = "block";
                                 } else {
-                                    nidAvailableFeedback.style.display = "block";
+                                    document.getElementById("nid-available").style.display = "block";
                                     document.getElementById("nid-available").style.color = "green";
-                                    nidDuplicateFeedback.style.display = "none";
+                                    document.getElementById("nid-duplicate").style.display = "none";
                                 }
                             })
                             .catch(error => console.error(error));
@@ -169,7 +170,7 @@
             });
         }
 
-    // 생년월일 유효성 검사
+// 생년월일 유효성 검사
         const birthInput = document.querySelector('input[name="birth"]');
         birthInput.addEventListener('input', function () {
             const birthValue = birthInput.value.trim();
@@ -248,7 +249,7 @@
             }
         });
 
-        // 선호 장르 라디오 버튼 유효성 검사
+        // 장르 라디오 버튼 유효성 검사
         const genreRadio = document.querySelectorAll('input[name="genre"]');
         const genreRadioCheck = document.getElementById('genreRadio_check');
 
@@ -279,35 +280,36 @@
 
 // 회원가입 이벤트 핸들러
 const joinButton = document.getElementById('joinButton');
-joinButton.addEventListener('click', function (e) {
-    // 기본 이벤트 동작(폼 전송) 중단
-    e.preventDefault();
+joinButton.addEventListener('click', async function (e) {
+    const form = document.getElementById('myForm');
 
-    // 모든 유효성 검사 통과 여부 확인
-    const allValidationsPassed = !document.querySelectorAll('.validation-message.show').length;
+    // 유효성 검사
+    if (form.checkValidity() === false) {
+        form.classList.add('was-validated');
+        $('#error_modal').modal('show');
+        return;
+    }
 
-    if (allValidationsPassed) {
-        // 폼 데이터 가져오기
-        const form = document.getElementById('myForm');
-        const formData = new FormData(form);
+    const formData = new FormData(form);
 
-        // 서버로 데이터 전송
-        fetch('/loginjoin/artist/join', {
+    try {
+        const response = await fetch('/loginjoin/artist/join', {
             method: 'POST',
             body: formData
-        })
-            .then(response => {
-                if (response.ok) {
-                    // 회원 가입 성공 시 페이지 이동
-                    window.location.href = '/loginjoin/artist/login';
-                } else {
-                    // 회원 가입 실패 시 메시지 표시
-                    alert('회원 가입에 실패했습니다.');
-                }
-            })
-            .catch(error => {
-                console.error(error);
-                alert('회원 가입에 실패했습니다.');
-            });
+        });
+
+        if (response.ok) {
+            // 회원가입 성공 시 모달 팝업 띄우기
+            $('#result_modal').modal('show');
+            setTimeout(function () {
+                window.location.href = "/loginjoin/artist/login";
+            }, 3000); // 3초 후 로그인 페이지로 이동
+        } else {
+            // 회원가입 실패 시 모달 팝업 띄우기
+            $('#error_modal').modal('show');
+        }
+    } catch (error) {
+        // 회원가입 실패 시 모달 팝업 띄우기
+        $('#error_modal').modal('show');
     }
 });

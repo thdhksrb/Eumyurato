@@ -361,16 +361,6 @@ public class LoginJoinController {
         return ResponseEntity.ok(response);
     }
 
-/*    @GetMapping("/checkNidDuplicate/{nid}")
-    public ResponseEntity<Map<String, Boolean>> checkNidDuplicate(@PathVariable String nid) {
-        boolean commonDuplicate = commonMemberDAO.useByNid(nid) != null;
-        boolean artistDuplicate = artistMemberDAO.useByNid(nid) != null;
-        boolean enterpriseDuplicate = enterpriseMemberDAO.useByNid(nid) != null;
-        boolean duplicate = commonDuplicate || artistDuplicate || enterpriseDuplicate;
-        Map<String, Boolean> response = Collections.singletonMap("duplicate", duplicate);
-        return ResponseEntity.ok(response);
-    }*/
-
     @GetMapping("/checkNidDuplicate/{nid}")
     public ResponseEntity<Map<String, Object>> commonNidCheck(@PathVariable String nid) {
         System.out.println(nid);
