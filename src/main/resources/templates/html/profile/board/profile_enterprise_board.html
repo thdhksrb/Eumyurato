@@ -62,7 +62,7 @@
                         </div>
                         <div class="menu-item" style="margin: 3px">
                             <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/ent/reservation/view}">
-                                <span class="menu-title">예약 내역</span>
+                                <span class="menu-title">사용자 예약 내역</span>
                             </a>
                         </div>
                         <div class="menu-item" style="margin: 3px">
@@ -105,8 +105,8 @@
         <!--begin::Content-->
         <!--메인폼-->
         <!--<div class="login-content flex-lg-row-fluid d-flex flex-column overflow-hidden py-10 py-lg-20 px-10 p-lg-7 mx-auto mw-1000px w-100" style="display: flex">
-            &lt;!&ndash;begin::Wrapper&ndash;&gt;
-            &lt;!&ndash;begin::Signin Form&ndash;&gt;
+            begin::Wrapper-->
+            <!--begin::Signin Form-->
             <div class="form w-1000px  needs-validation text-center" id="kt_login_signin_form" novalidate>
                 <div style="display: flex; align-items: center; margin-bottom: 20px;">
                     <h1 style="font-size: 24px; flex-grow: 1;"><strong>공지 사항</strong></h1>
@@ -115,10 +115,10 @@
                     <div class="row">
                         <div class="col-md-12">
                             <form action="/profile/ent/reservation/search" method="post">
-                                &lt;!&ndash; 검색창 &ndash;&gt;
+                                <!-- 검색창 -->
                                 <input type="text" id="searchReservationValue" name="searchReservationValue" placeholder="" style="width: 30%; height: 40px; border-radius: 5px; border: 1px solid #cccad4">
 
-                                &lt;!&ndash; 검색 필드와 검색 값 전달용 hidden input &ndash;&gt;
+                                <!-- 검색 필드와 검색 값 전달용 hidden input -->
                                 <input type="hidden" id="column" name="column">
                                 <input type="hidden" id="keyword" name="keyword">
 
@@ -155,7 +155,7 @@
                     </div>
 
                     <div style="margin-top:20px;">
-                        &lt;!&ndash; 리스트 내용 &ndash;&gt;
+                        <!-- 리스트 내용 -->
                     </div>
                 </div>
             </div>

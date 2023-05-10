@@ -193,16 +193,22 @@ public class EnterpriseService {
 
         List<String> sId = enterpriseMemberDAO.getScheduleId(conId);
         
-        List<String> rid = enterpriseMemberDAO.getReservationId(sId);
-        
-        enterpriseMemberDAO.deleteTickets(rid);
-        
-        enterpriseMemberDAO.deleteReservations(sId);
-        
-        enterpriseMemberDAO.deleteSchedules(conId);
-        
-        enterpriseMemberDAO.deleteSmallConcert(conId);
-        
+        List<String> rId = enterpriseMemberDAO.getReservationId(sId);
+
+        if(rId.toArray().length != 0){
+            enterpriseMemberDAO.deleteTickets(rId);
+
+            enterpriseMemberDAO.deleteReservations(sId);
+
+            enterpriseMemberDAO.deleteSchedules(conId);
+
+            enterpriseMemberDAO.deleteSmallConcert(conId);
+        }else{
+            enterpriseMemberDAO.deleteSchedules(conId);
+
+            enterpriseMemberDAO.deleteSmallConcert(conId);
+        }
+
 
         return 1;
     }
