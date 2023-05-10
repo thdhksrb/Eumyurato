@@ -130,12 +130,13 @@ public class CommonController {
     }
 
     @PostMapping("/profile/common/nidcheck")
-    public String  commonNidCheck(@RequestParam("nid") String nid){
+    public ResponseEntity<String> commonNidCheck(@RequestParam("nid") String nid){
         System.out.println(nid);
-        if(commonService.commonNid(nid) > 0) { //닉네임이 있는 경우
-            return "duplicate";
+        System.out.println(commonService.commonNid(nid));
+        if(commonService.commonNid(nid) == 0) { //닉네임이 없는 경우
+            return ResponseEntity.ok("success");
         }else{
-            return "available";
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("duplicate");
         }
     }
 }

@@ -47,8 +47,11 @@ $(document).ready(function() {
     //수정 버튼
     $('#modify').on('click', function(event) {
         event.preventDefault(); // 기본 동작(페이지 이동) 방지
-        clickCheck();
-        enterModify(); // 데이터 보내는 함수 실행
+        if ($("input[name='cpassword']").val() === ""){
+            alert("비밀번호를 다시 입력해주세요.");
+        }else{
+            enterModify();
+        }
     });
 });
 
@@ -127,18 +130,6 @@ function enterModify() {
             console.log(textStatus + ': ' + errorThrown);
         }
     });
-}
-
-//비밀번호 재확인 비어있는지 확인
-function clickCheck(){
-    var cpassword = $("input[name='cpassword']").val();
-
-    // 값이 비어있을 경우 경고창 출력
-    if (!cpassword) {
-        alert("비밀번호 재확인이 필요합니다.");
-        event.preventDefault();
-        return;
-    }
 }
 
 //이메일 팝업창

@@ -47,8 +47,11 @@ $(document).ready(function() {
     //수정 버튼
     $('#modify').on('click', function(event) {
         event.preventDefault(); // 기본 동작(페이지 이동) 방지
-        clickCheck();
-        commonModify(); // 데이터 보내는 함수 실행
+        if ($("input[name='cpassword']").val() === ""){
+            alert("비밀번호를 다시 입력해주세요.");
+        }else{
+            commonModify();
+        }
     });
 });
 
@@ -134,18 +137,6 @@ function commonModify() {
     });
 }
 
-//비밀번호 재확인 비어있는지 확인
-function clickCheck(){
-    var cpassword = $("input[name='cpassword']").val();
-
-    // 값이 비어있을 경우 경고창 출력
-    if (!cpassword) {
-        alert("비밀번호 재확인이 필요합니다.");
-        event.preventDefault();
-        return;
-    }
-}
-
 //닉네임 팝업창
 function openNidPopup() {
     var _width = '500';
@@ -192,7 +183,7 @@ function nidCheck(){
         data: { nid: nickname },
         success: function(response) {
             console.log(response);
-            if (response === 'available') {
+            if (response === 'success') {
                 alert('사용 가능한 닉네임입니다.');
             } else if (response === 'duplicate') {
                 alert('이미 사용 중인 닉네임입니다.');
