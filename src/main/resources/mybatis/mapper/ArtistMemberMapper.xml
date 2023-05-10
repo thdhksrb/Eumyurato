@@ -83,23 +83,27 @@
     <select id="getArtistMembers" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
         select *
         from artist_member
+        ORDER BY name ASC;
     </select>
 
     <select id="getCommonMembers" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
         select *
         from common_member
+        ORDER BY name ASC;
     </select>
 
     <select id="searchCommonMembers" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
         SELECT *
         FROM common_member
         WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
+        ORDER BY name ASC;
     </select>
 
     <select id="searchArtistMembers" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
         SELECT *
         FROM artist_member
         WHERE ${column} LIKE CONCAT('%', #{keyword}, '%')
+        ORDER BY name ASC;
     </select>
 
     <select id="getArtistInfoById" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
@@ -113,6 +117,7 @@
         select *
         from busking
         where artId = #{artId}
+        ORDER BY regDate DESC
     </select>
 
     <select id="searchArtistBuskings" resultType="com.e114.e114_eumyuratodemo1.dto.BuskingDTO">
@@ -120,6 +125,7 @@
         from busking
         where artId = #{artId}
           and ${column} LIKE CONCAT('%', #{keyword}, '%')
+        ORDER BY regDate DESC
     </select>
 
     <delete id="deleteArtistBusking">

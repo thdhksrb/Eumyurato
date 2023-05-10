@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const token = sessionStorage.getItem('jwtToken');
-    getSmallConcertList(token);
+    getReservationList(token);
 });
 
 document.getElementById('searchBtn').addEventListener('click', (event) => {
@@ -8,11 +8,11 @@ document.getElementById('searchBtn').addEventListener('click', (event) => {
     const token = sessionStorage.getItem('jwtToken');
     const searchColumn = document.getElementById('searchColumn').value;
     const searchKeyword = document.getElementById('searchKeyword').value;
-    getSmallConcertList(token, searchColumn, searchKeyword);
+    getReservationList(token, searchColumn, searchKeyword);
 });
 
-function getSmallConcertList(token, searchColumn = null, searchKeyword = null, page = 1) {
-    let url = '/profile/ent/management';
+function getReservationList(token, searchColumn = null, searchKeyword = null, page = 1) {
+    let url = '/profile/ent/reservation';
     if (searchColumn && searchKeyword) {
         url += `?column=${searchColumn}&keyword=${searchKeyword}`;
     }
@@ -26,40 +26,42 @@ function getSmallConcertList(token, searchColumn = null, searchKeyword = null, p
     })
         .then((response) => {
             if (response.ok) {
-                return response.json();
+                return response.json(); // response.json()을 실행한 Promise 객체 반환
             }
             throw new Error('응답에 문제가 있습니다.');
         })
-        .then((smallConcertList) => {
-            displaySmallConcertList(smallConcertList, page);
+        .then((reservationList) => {
+            console.log(reservationList); // 응답 데이터 출력
+            displayReservationList(reservationList, page);
         })
         .catch((error) => {
             console.error('fetch 작동에 문제가 있습니다.', error);
         });
 }
 
-function displaySmallConcertList(smallConcertList, currentPage) {
+function displayReservationList(reservationList, currentPage) {
     const perPage = 5;
-    const smallConcertTbody = document.getElementById('smallConcertTbody');
-    smallConcertTbody.innerHTML = '';
+    const reservationTbody = document.getElementById('reservationTbody');
+    reservationTbody.innerHTML = '';
 
     const start = (currentPage - 1) * perPage;
     const end = start + perPage;
 
-    smallConcertList.slice(start, end).forEach((smallConcert) => {
-        const smallConcertRow = smallConcertTbody.insertRow();
+    reservationList.slice(start, end).forEach((reservation) => {
+        const reservationRow = reservationTbody.insertRow();
 
-        smallConcertRow.insertCell().textContent = smallConcert.enterId;
-        smallConcertRow.insertCell().textContent = smallConcert.name;
-        smallConcertRow.insertCell().textContent = smallConcert.location;
-        smallConcertRow.insertCell().textContent = smallConcert.regDate;
-        smallConcertRow.insertCell().textContent = smallConcert.pname;
-        smallConcertRow.insertCell().textContent = smallConcert.price;
-        smallConcertRow.insertCell().textContent = smallConcert.startDate;
-        smallConcertRow.insertCell().textContent = smallConcert.lastDate;
+        reservationRow.insertCell().textContent = reservation.id;
+        reservationRow.insertCell().textContent = reservation.name;
+        reservationRow.insertCell().textContent = reservation.cid;
+        reservationRow.insertCell().textContent = reservation.payTime;
+        reservationRow.insertCell().textContent = reservation.viewDate;
+        reservationRow.insertCell().textContent = reservation.memberNum;
+        reservationRow.insertCell().textContent = reservation.reservPay;
+         // 공연명 추가
     });
 
-    createPagination(smallConcertList.length, perPage, currentPage);
+    const totalItems = reservationList.length;
+    createPagination(totalItems, perPage, currentPage);
 }
 
 function createPagination(totalItems, perPage, currentPage) {
@@ -81,7 +83,7 @@ function createPagination(totalItems, perPage, currentPage) {
             const token = sessionStorage.getItem('jwtToken');
             const searchColumn = document.getElementById('searchColumn').value;
             const searchKeyword = document.getElementById('searchKeyword').value;
-            getSmallConcertList(token, searchColumn, searchKeyword, i); // i를 페이지 인수로 전달합니다.
+            getReservationList(token, searchColumn, searchKeyword, i); // i를 페이지 인수로 전달합니다.
         });
         li.appendChild(a);
         paginationEl.appendChild(li);

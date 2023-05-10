@@ -31,7 +31,7 @@
             <!--begin::Aside Top-->
             <div class="d-flex flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
                 <!--begin::Aside Logo-->
-                <a class="mb-6" th:href="@{/main}">
+                <a class="mb-6" th:href="@{/home}">
                     <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
                         <img alt="로고" id="logo1" th:src="@{/img/logo_name.png}" style="width: 400px; height: 70px;"/>
                     </div>
@@ -43,7 +43,7 @@
             <!--begin::Aside Top-->
             <div class="flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
                 <!--begin::Aside Logo-->
-                <a class="mb-6" th:href="@{/main}">
+                <a class="mb-6" th:href="@{/home}">
                     <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
                         <img alt="로고" id="logo2" th:src="@{/img/logo_name.png}"
                              style="width: 400px; height: 70px; margin-top: 80px;"/>
@@ -59,7 +59,7 @@
                             </a>
                         </div>
                         <div class="menu-item" style="margin: 3px">
-                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/admin/reservation}">
+                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/admin/reservation/view}">
                                 <span class="menu-title">예약 내역</span>
                             </a>
                         </div>
@@ -77,7 +77,13 @@
                             <div class="menu-item" style="margin: 3px">
                                 <a class="text-dark text-hover-primary ms-3 py-2"
                                    th:href="@{/profile/admin/total/view}">
-                                    <span class="menu-title">종합</span>
+                                    <span class="menu-title">회원 정보</span>
+                                </a>
+                            </div>
+                            <div class="menu-item" style="margin: 3px">
+                                <a class="text-dark text-hover-primary ms-3 py-2"
+                                   th:href="@{/profile/admin/total/chart}">
+                                    <span class="menu-title">회원 종합 차트</span>
                                 </a>
                             </div>
                             <div class="menu-item" style="margin: 3px">
@@ -90,7 +96,7 @@
                     </div>
                 </div>
             </div>
-            <a class="ms-5 me-15" style="position: relative; top: 200px; left: 300px;" th:href="@{/logout}">
+            <a id="logoutBtn" class="ms-5 me-15" style="position: relative; top: 200px; left: 300px;">
                 <img th:src="@{/img/logout.png}" style="height: 30px; width: 30px;">
             </a>
         </div>

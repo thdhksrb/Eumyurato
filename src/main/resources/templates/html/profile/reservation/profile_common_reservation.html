@@ -30,7 +30,7 @@
             <!--begin::Aside Top-->
             <div class="d-flex flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
                 <!--begin::Aside Logo-->
-                <a class="mb-6" th:href="@{/main}">
+                <a class="mb-6" th:href="@{/home}">
                     <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
                         <img alt="로고" id="logo1" th:src="@{/img/logo_name.png}" style="width: 400px; height: 70px;"/>
                     </div>
@@ -42,7 +42,7 @@
             <!--begin::Aside Top-->
             <div class="flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
                 <!--begin::Aside Logo-->
-                <a class="mb-6" th:href="@{/main}">
+                <a class="mb-6" th:href="@{/home}">
                     <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
                         <img alt="로고" id="logo2" th:src="@{/img/logo_name.png}" style="width: 400px; height: 70px; margin-top: 80px;"/>
                     </div>
@@ -82,7 +82,7 @@
                     </div>
                 </div>
             </div>
-            <a class="ms-5 me-15" style="position: relative; top: 200px; left: 300px;" th:href="@{/logout}">
+            <a id="logoutBtn" class="ms-5 me-15" style="position: relative; top: 200px; left: 300px;">
                 <img th:src="@{/img/logout.png}" style="height: 30px; width: 30px;">
             </a>
         </div>
@@ -112,10 +112,9 @@
                     </div>
                     <div class="search-container">
                         <select id="searchColumn" style="width: 10%; height: 40px; border-radius: 5px;">
-                            <option value="sid">공연 번호</option>
-                            <option value="viewDate">관람 일자</option>
+                            <option value="name">공연명</option>
                         </select>
-                        <input type="text" id="searchKeyword" placeholder="관람 일자 예시) 2023-01-01" style="width: 30%; height: 40px; border-radius: 5px; border: 1px solid #cccad4">
+                        <input type="text" id="searchKeyword" placeholder="검색어 입력" style="width: 30%; height: 40px; border-radius: 5px; border: 1px solid #cccad4">
                         <button class="btn btn-primary" id="searchBtn" style="width: 10%;" >Search</button>
                     </div>
                     <div>
@@ -132,6 +131,7 @@
                                             <th>관람 일자</th>
                                             <th>예약인원 수</th>
                                             <th>예매 금액</th>
+                                            <th>예약 취소</th>
                                         </tr>
                                         </thead>
                                         <tbody id="reservationTbody"></tbody>
