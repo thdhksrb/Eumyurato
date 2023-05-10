@@ -192,17 +192,17 @@ public class EnterpriseService {
     public int deleteSmallConcertByEnt(int conId){
 
         List<String> sId = enterpriseMemberDAO.getScheduleId(conId);
-        System.out.println("1");
+        
         List<String> rid = enterpriseMemberDAO.getReservationId(sId);
-        System.out.println("2");
+        
         enterpriseMemberDAO.deleteTickets(rid);
-        System.out.println("3");
+        
         enterpriseMemberDAO.deleteReservations(sId);
-        System.out.println("4");
+        
         enterpriseMemberDAO.deleteSchedules(conId);
-        System.out.println("5");
+        
         enterpriseMemberDAO.deleteSmallConcert(conId);
-        System.out.println("6");
+        
 
         return 1;
     }
