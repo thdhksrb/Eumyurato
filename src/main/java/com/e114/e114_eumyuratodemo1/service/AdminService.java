@@ -32,38 +32,50 @@ public class AdminService {
     @Value("${spring.cloud.gcp.storage.bucket}")
     private String bucketName;
 
-    public List<CommonMemberDTO> viewAllCommons(){
+    public List<CommonMemberDTO> viewAllCommons() {
         return dao.getCommonMembers();
-    };
+    }
 
-    public List<ArtistMemberDTO> viewAllArtists(){
+    ;
+
+    public List<ArtistMemberDTO> viewAllArtists() {
         return dao.getArtistMembers();
-    };
+    }
 
-    public List<EnterpriseMemberDTO> viewAllEnters(){
+    ;
+
+    public List<EnterpriseMemberDTO> viewAllEnters() {
         return dao.getEntMembers();
-    };
+    }
 
-    public List<CommonMemberDTO> searchCommons(String column, String keyword){
+    ;
+
+    public List<CommonMemberDTO> searchCommons(String column, String keyword) {
         Map<String, String> params = new HashMap<>();
         params.put("column", column);
         params.put("keyword", keyword);
         return dao.searchCommonMembers(params);
-    };
+    }
 
-    public List<ArtistMemberDTO> searchArtists(String column, String keyword){
+    ;
+
+    public List<ArtistMemberDTO> searchArtists(String column, String keyword) {
         Map<String, String> params = new HashMap<>();
         params.put("column", column);
         params.put("keyword", keyword);
         return dao.searchArtistMembers(params);
-    };
+    }
 
-    public List<EnterpriseMemberDTO> searchEnters(String column, String keyword){
+    ;
+
+    public List<EnterpriseMemberDTO> searchEnters(String column, String keyword) {
         Map<String, String> params = new HashMap<>();
         params.put("column", column);
         params.put("keyword", keyword);
         return dao.searchEntMembers(params);
-    };
+    }
+
+    ;
 
     public List<BuskingDTO> viewAllBusking() {
         return dao.getBuskings();
@@ -105,42 +117,49 @@ public class AdminService {
     }
 
     //일반 회원
-    public List<Map<String, Object>>  commonGenderCount(){
+    public List<Map<String, Object>> commonGenderCount() {
         return dao.getCommonGender();
     }
-    public List<Map<String, Object>>  commonGenreCount(){
+
+    public List<Map<String, Object>> commonGenreCount() {
         return dao.getCommonGenre();
     }
-    public List<Map<String, Object>>  commonRoadCount(){
+
+    public List<Map<String, Object>> commonRoadCount() {
         return dao.getCommonRoad();
     }
 
     //아티스트 회원
-    public List<Map<String, Object>>  artistGenderCount(){
+    public List<Map<String, Object>> artistGenderCount() {
         return dao.getArtistGender();
     }
-    public List<Map<String, Object>>  artistGenreCount(){
+
+    public List<Map<String, Object>> artistGenreCount() {
         return dao.getArtistGenre();
     }
-    public List<Map<String, Object>>  artistPointTop(){
+
+    public List<Map<String, Object>> artistPointTop() {
         return dao.getArtistPoint();
     }
-    public List<Map<String, Object>>  artistPointAvg(){
+
+    public List<Map<String, Object>> artistPointAvg() {
         return dao.getArtistPointAvg();
     }
-    public List<Map<String, Object>>  artistBuskingIng(){
+
+    public List<Map<String, Object>> artistBuskingIng() {
         return dao.getArtistBuskingIng();
     }
-    public List<Map<String, Object>>  artistBuskingAll(){
+
+    public List<Map<String, Object>> artistBuskingAll() {
         return dao.getArtistBuskingAll();
     }
 
     //기업 회원
-    public List<Map<String, Object>>  enterConcertIng(){
+    public List<Map<String, Object>> enterConcertIng() {
         return dao.getEnterConcertIng();
     }
 
-    public List<Map<String, Object>>  enterConcertAll(){
+    public List<Map<String, Object>> enterConcertAll() {
         return dao.getEnterConcertAll();
     }
 
@@ -158,7 +177,7 @@ public class AdminService {
         return dao.deleteReservation(id);
     }
 
-    public int deleteTicket(int rid){
+    public int deleteTicket(int rid) {
         return dao.deleteTicket(rid);
     }
 
@@ -166,28 +185,35 @@ public class AdminService {
         dao.deleteBusking(id);
     }
 
-    public void deleteDonation(int buskId){
+    public void deleteDonation(int buskId) {
         dao.deleteDonation(buskId);
     }
 
-    public void deleteLocalFestival(int id){
+    public void deleteLocalFestival(int id) {
         dao.deleteLocalFestival(id);
     }
 
-    public void deleteSmallConcert(int conId){
+    public void deleteSmallConcert(int conId) {
 
         List<String> sId = dao.getScheduleId(conId);
-        
-        List<String> rid = dao.getReservationId(sId);
-        
-        dao.deleteTickets(rid);
-        
-        dao.deleteReservations(sId);
-        
-        dao.deleteSchedules(conId);
-        
-        dao.deleteSmallConcert(conId);
-       
+
+        List<String> rId = dao.getReservationId(sId);
+
+        if (rId.toArray().length != 0) {
+            dao.deleteTickets(rId);
+
+            dao.deleteReservations(sId);
+
+            dao.deleteSchedules(conId);
+
+            dao.deleteSmallConcert(conId);
+
+        } else {
+            dao.deleteSchedules(conId);
+
+            dao.deleteSmallConcert(conId);
+        }
+
     }
 
 }

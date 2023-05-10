@@ -234,8 +234,8 @@ function clickCheck(){
 
 //마감일이 시작일 이전이 될 수 없게함
 function checkEndDate() {
-    var startDate = $('#startDate').datepicker('getDate');
-    var lastDate = $('#lastDate').datepicker('getDate');
+    var startDate = $('#startDate').val();
+    var lastDate = $('#lastDate').val();
 
     if (lastDate < startDate) {
         alert('마감일자는 시작일자 이후여야 합니다.');

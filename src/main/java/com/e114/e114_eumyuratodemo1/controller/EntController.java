@@ -146,7 +146,7 @@ public class EntController {
             enterpriseService.saveConcert(smallConcertDTO, imgFile);
         }
 
-        int conId = enterpriseService.getSmallConcertByAll(name,price,startDate,lastDate).getId();
+        int conId = enterpriseService.getSmallConcertByAll(name,price,startDate,lastDate + " 23:59:59").getId();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.M.d");
         LocalDate start = LocalDate.parse(startDate, formatter);

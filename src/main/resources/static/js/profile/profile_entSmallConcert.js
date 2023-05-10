@@ -126,6 +126,7 @@ function deleteSmallConcert(smallConcertId) {
                 alert('공연이 성공적으로 취소되었습니다.');
                 const searchColumn = document.getElementById('searchColumn').value;
                 const searchKeyword = document.getElementById('searchKeyword').value;
+                location.reload();
                 getSmallConcertList(token, searchColumn, searchKeyword, currentPage);
             } else {
                 throw new Error('응답에 문제가 있습니다.');
