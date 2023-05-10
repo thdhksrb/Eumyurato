@@ -69,22 +69,6 @@
                             </a>
                         </div>
                     </div>
-                    <div class="menu-wrapper menu-column menu-fit mt-1">
-                        <div class="menu-sub menu-fit menu-sub-accordion show">
-                            <h1 class="menu-content mb-1 mt-10 text-center" style="font-weight: bold">통합 정보 조회</h1>
-                            <div class="separator border-dark my-1 mx-auto" style="width: 60%; border-width: 3px;"></div>
-                            <div class="menu-item" style="margin: 3px">
-                                <a class="text-dark text-hover-primary ms-3 py-2"
-                                   th:href="@{/profile/ent/total/view}">
-                                    <span class="menu-title">종합</span>
-                                </a>
-                                <a class="text-dark text-hover-primary ms-3 py-2"
-                                   th:href="@{/profile/ent/info/view}">
-                                    <span class="menu-title">공지사항</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
             <a id="logoutBtn" class="ms-5 me-15" style="position: relative; top: 200px; left: 300px;">
@@ -109,7 +93,7 @@
             <!--begin::Signin Form-->
             <form class="form w-450px  needs-validation text-center" id="kt_login_signin_form" novalidate>
                 <div class="pb-5 pb-lg-1">
-                    <h3 class="fw-bolder text-dark display-6 text-center">내 계정</h3>
+                    <h3 class="fw-bolder text-dark display-6 text-start">내 계정</h3>
                 </div>
                 <!--begin::Image input-->
                 <div class="image-input image-input-outline"
@@ -119,31 +103,31 @@
                 </div>
                 <!--end::Image input-->
                 <div class="mb-5 mw-450px text-center">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">아이디</label>
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5" style="float:left;">아이디</label>
                     <input autocomplete="off" class="form-control form-control-lg form-control-solid"
                            name="id" id="enterprise-id"
                            placeholder="" style="border-color: #0099FF; font-weight: bold" type="text" readonly/>
                 </div>
                 <div class="fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">이름</label>
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5" style="float:left;">이름</label>
                     <input autocomplete="off" class="form-control form-control-lg form-control-solid"
                            name="fullname" id="enterprise-name"
                            placeholder="" style="border-color: #0099FF; font-weight: bold" type="text" readonly/>
                 </div>
                 <div class="fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">사업자 등록번호</label>
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5" style="float:left;">사업자 등록번호</label>
                     <input autocomplete="off" class="form-control form-control-lg form-control-solid"
                            name="num" id="enterprise-num"
                            placeholder="" style="border-color: #0099FF; font-weight: bold" type="text" readonly/>
                 </div>
                 <div class="fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">이메일</label>
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5" style="float:left;">이메일</label>
                     <input autocomplete="off" class="form-control form-control-lg form-control-solid"
                            name="email" id="enterprise-email"
                            placeholder="" style="border-color: #0099FF; font-weight: bold" type="email" readonly/>
                 </div>
                 <div class="fv-row mb-5">
-                    <label class="form-label fs-6 fw-bolder text-dark pt-5">휴대번호</label>
+                    <label class="form-label fs-6 fw-bolder text-dark pt-5" style="float:left;">전화번호</label>
                     <input autocomplete="off" class="form-control form-control-lg form-control-solid"
                            name="phone" id="enterprise-phone"
                            placeholder="" style="border-color: #0099FF; font-weight: bold" type="text" readonly/>

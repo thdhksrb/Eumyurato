@@ -214,4 +214,14 @@
             image = #{image}
         WHERE id = #{id}
     </update>
+
+    <select id="artistNid" resultType="map">
+        SELECT COUNT(*) AS cnt
+        FROM (
+                 SELECT nid FROM common_member
+                 UNION
+                 SELECT nid FROM artist_member
+             ) AS combined_tables
+        WHERE nid = #{param1}
+    </select>
 </mapper>
