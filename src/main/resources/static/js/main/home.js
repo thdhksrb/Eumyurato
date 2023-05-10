@@ -187,6 +187,7 @@ fetch('/top5concert', {
         // 데이터를 이용하여 행 추가
         data.forEach((concert, index) => {
             const row = document.createElement('tr');
+            const imgCell = document.createElement('td');//랭킹 이미지 크기는 100x100
             const rankCell = document.createElement('td');
             const nameCell = document.createElement('td');
 
@@ -196,7 +197,7 @@ fetch('/top5concert', {
             //이미지
             const img = document.createElement('img');
             img.style.width = '100px';
-            img.style.height = '100px';
+            img.style.height = '160px';
             const imgUrl = concert.image;
             const replacedImgUrl = 'https://storage.googleapis.com/eumyurato/' + imgUrl;
 
@@ -208,8 +209,11 @@ fetch('/top5concert', {
                 img.src = "/img/concertDefaultImg.jpg";
             }
 
+            imgCell.appendChild(img);
+
 
             row.appendChild(rankCell);
+            row.appendChild(imgCell);//랭킹 이미지
             row.appendChild(nameCell);
             tbody.appendChild(row);
         });
@@ -226,7 +230,6 @@ rows.forEach(row => {
         if (activeRow) {
             activeRow.classList.remove('active');
         }
-
         // 현재 클릭한 행의 크기를 확대합니다.
         this.classList.add('active');
     });
