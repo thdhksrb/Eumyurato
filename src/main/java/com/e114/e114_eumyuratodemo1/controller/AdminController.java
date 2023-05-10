@@ -65,45 +65,6 @@ public class AdminController {
         return "html/profile/accountModify/profile_admin_accountModify";
     }
 
-    @GetMapping("/profile/admin/register")
-    public String adminAccountRegister() {
-
-        return "html/profile/concertRegister/profile_admin_concertRegister";
-    }
-
-    @PostMapping("/profile/admin/register")
-    public ResponseEntity<?> concertRegister(@RequestPart("registerDTO") SmallConcertDTO smallConcertDTO, @RequestPart(value = "imgFile", required = false) MultipartFile imgFile) throws IOException {
-        System.out.println(smallConcertDTO);
-        System.out.println("controller img:" + imgFile);
-
-        String name = smallConcertDTO.getName();
-        int price = smallConcertDTO.getPrice();
-        String startDate = smallConcertDTO.getStartDate();
-        String lastDate = smallConcertDTO.getLastDate();
-        if (imgFile == null) {
-            adminService.saveConcertWithoutImage(smallConcertDTO);
-            System.out.println("img null");
-        } else {
-            adminService.saveConcert(smallConcertDTO, imgFile);
-        }
-
-        int conId = adminService.getSmallConcertByAll(name,price,startDate,lastDate).getId();
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.M.d");
-        LocalDate start = LocalDate.parse(startDate, formatter);
-        LocalDate end = LocalDate.parse(lastDate, formatter);
-
-        LocalDate datetime = start;
-
-        while (!datetime.isAfter(end)) {
-            adminService.saveSchedules(conId,datetime.toString());
-            datetime = datetime.plusDays(1);
-        }
-
-
-
-        return ResponseEntity.ok().build();
-    }
 
     @GetMapping("/profile/admin/total/view")
     public String adminTotalsview() {
@@ -251,7 +212,6 @@ public class AdminController {
         }
     }
 
-
     @GetMapping("/profile/admin/management/view")
     public String adminAccountManagement() {
 
@@ -300,7 +260,22 @@ public class AdminController {
     @DeleteMapping("/profile/admin/management")
     public ResponseEntity<Void> deleteConcert(@RequestParam("category") String category, @RequestParam("id") int id) {
         System.out.println(category + "," + id);
-        adminService.deleteEvent(category, id);
+        switch (category) {
+            case "busking":
+                adminService.deleteDonation(id);
+                adminService.deleteBusking(id);
+                break;
+            case "localfestival":
+                adminService.deleteLocalFestival(id);
+                break;
+            case "smallconcert":
+                adminService.deleteSmallConcert(id);
+                break;
+            default:
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+
+      //  adminService.deleteEvent(category, id);
         return ResponseEntity.ok().build();
     }
 

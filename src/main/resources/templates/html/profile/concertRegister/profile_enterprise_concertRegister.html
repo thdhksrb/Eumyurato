@@ -54,17 +54,22 @@
                         <h1 class="menu-content mb-1 mt-10 text-center" style="font-weight: bold">마이페이지</h1>
                         <div class="separator border-dark my-1 mx-auto" style="width: 60%; border-width: 3px;"></div>
                         <div class="menu-item" style="margin: 3px">
-                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/admin/account}">
+                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/ent/account}">
                                 <span class="menu-title">내 계정</span>
                             </a>
                         </div>
                         <div class="menu-item" style="margin: 3px">
-                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/admin/reservation/view}">
+                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/ent/modify}">
+                                <span class="menu-title">계정 정보 수정</span>
+                            </a>
+                        </div>
+                        <div class="menu-item" style="margin: 3px">
+                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/ent/reservation/view}">
                                 <span class="menu-title">예약 내역</span>
                             </a>
                         </div>
                         <div class="menu-item" style="margin: 3px">
-                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/admin/management/view}">
+                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/ent/management/view}">
                                 <span class="menu-title">공연 관리</span>
                             </a>
                         </div>
@@ -76,19 +81,7 @@
                             <div class="separator border-dark my-1 mx-auto" style="width: 60%; border-width: 3px;"></div>
                             <div class="menu-item" style="margin: 3px">
                                 <a class="text-dark text-hover-primary ms-3 py-2"
-                                   th:href="@{/profile/admin/total/view}">
-                                    <span class="menu-title">회원 정보</span>
-                                </a>
-                            </div>
-                            <div class="menu-item" style="margin: 3px">
-                                <a class="text-dark text-hover-primary ms-3 py-2"
-                                   th:href="@{/profile/admin/total/chart}">
-                                    <span class="menu-title">회원 종합 차트</span>
-                                </a>
-                            </div>
-                            <div class="menu-item" style="margin: 3px">
-                                <a class="text-dark text-hover-primary ms-3 py-2"
-                                   th:href="@{/profile/admin/info/view}">
+                                   th:href="@{/profile/ent/info/view}">
                                     <span class="menu-title">공지사항</span>
                                 </a>
                             </div>
@@ -181,7 +174,7 @@
                     <label class="form-label fs-6 fw-bolder text-dark pt-5" style="float: left; margin-right:5px;">기업 ID</label>
                     <label class="form-label fs-8 fw-bolder pt-4" style="float: left; color: #ff0000">*</label>
                     <input class="form-control form-control-lg form-control-solid" type="text"
-                           name="enterId" id="enterId" autocomplete="off" style="border-color: #0099FF;"/>
+                           name="enterId" id="enterId" autocomplete="off" style="border-color: #0099FF;" readonly/>
                 </div>
                 <div class=" fv-row mb-5">
                     <div>
@@ -226,7 +219,7 @@
 <!--datepicker용-->
 <script type="text/javascript" th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/1.12.1/jquery.min.js}"></script>
 <script type="text/javascript" th:src="@{https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js}"></script>
-<script type="text/javascript" th:src="@{/js/profile/profile_concert_register.js}"></script>
+<script type="text/javascript" th:src="@{/js/profile/profile_concert_register_ent.js}"></script>
 <!-- 캘린더 옵션 { -->
 <script>
     $.datepicker.setDefaults({

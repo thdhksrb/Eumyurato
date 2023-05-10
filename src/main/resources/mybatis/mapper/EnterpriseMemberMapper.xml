@@ -106,7 +106,7 @@
         select *
         from small_concert
         where enterId = #{enterId}
-        ORDER BY regDate DESC
+        ORDER BY startDate DESC
     </select>
 
     <select id="searchEntSmallConcerts" resultType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
@@ -115,44 +115,6 @@
         where enterId = #{enterId}
           AND ${column} LIKE CONCAT('%', #{keyword}, '%')
         ORDER BY regDate DESC
-    </select>
-
-    <select id="getCommonGender" resultType="map">
-        SELECT sex, COUNT(*) as count
-        FROM common_member
-        GROUP BY sex;
-    </select>
-
-    <select id="getCommonGenre" resultType="map">
-        SELECT genre, COUNT(*) as count
-        FROM common_member
-        GROUP BY genre;
-    </select>
-
-    <select id="getArtistGender" resultType="map">
-        SELECT sex, COUNT(*) as count
-        FROM artist_member
-        GROUP BY sex;
-    </select>
-
-    <select id="getArtistGenre" resultType="map">
-        SELECT genre, COUNT(*) as count
-        FROM artist_member
-        GROUP BY genre;
-    </select>
-
-    <select id="getEnterConcertIng" resultType="map">
-        <![CDATA[
-        SELECT COUNT(*) AS concert_ing
-        FROM small_concert
-        WHERE startDate <= CURDATE()
-          AND lastDate >= CURDATE();
-        ]]>
-    </select>
-
-    <select id="getEnterConcertAll" resultType="map">
-        SELECT COUNT(*) AS concert_all
-        FROM small_concert;
     </select>
 
     <update id="modifyEnterWithoutImage" parameterType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
@@ -192,4 +154,64 @@
         WHERE sc.enterId = #{enterId}
         ORDER BY payTime DESC
     </select>
+
+    <insert id="saveConcertWithoutImage" parameterType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
+        INSERT INTO small_concert (name, pname, location, enterId, startDate, lastDate, price)
+        VALUES (#{name}, #{pname}, #{location}, #{enterId}, #{startDate}, #{lastDate}, #{price})
+    </insert>
+
+    <insert id="saveConcert" parameterType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
+        INSERT INTO small_concert (enterId, name, location, pname, price, startDate, lastDate, image)
+        VALUES (#{enterId}, #{name}, #{location}, #{pname}, #{price}, #{startDate}, #{lastDate}, #{image})
+    </insert>
+
+    <select id="getSmallConcertByAll" resultType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
+        select * from small_concert
+        WHERE name = #{param1} AND price = #{param2} AND startDate = #{param3} AND lastDate = #{param4}
+    </select>
+
+    <insert id="saveSchedules">
+        INSERT INTO schedules (hId,conId,conDate)
+            VALUE (5000,#{param1},CONCAT(#{param2}, ' 14:30:00'))
+    </insert>
+
+    <delete id="deleteSmallConcert">
+        DELETE FROM small_concert WHERE id = #{param1}
+    </delete>
+
+    <select id="getScheduleId" resultType="String">
+        SELECT id
+        FROM schedules
+        WHERE conId = #{param1}
+    </select>
+
+    <select id="getReservationId" resultType="String">
+        SELECT id FROM reservation
+        WHERE sId IN
+        <foreach item="item" collection="sId" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <delete id="deleteTickets">
+        DELETE FROM ticket WHERE rId IN
+        <foreach item="item" collection="rId" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <delete id="deleteReservations">
+        DELETE FROM reservation WHERE sId IN
+        <foreach item="item" collection="sId" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <delete id="deleteSchedules">
+        DELETE FROM schedules WHERE conId = #{param1}
+    </delete>
+
+    <delete id="deleteDonation">
+        DELETE FROM artist_donation WHERE buskId = #{param1}
+    </delete>
 </mapper>

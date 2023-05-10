@@ -134,7 +134,6 @@ public class ArtistService {
         return artistMemberMapper.selectTop5Artists();
     }
 
-
     public List<CommonMemberDTO> viewAllCommons(){
         return artistMemberDAO.getCommonMembers();
     };
@@ -166,32 +165,6 @@ public class ArtistService {
         params.put("keyword", keyword);
         return artistMemberDAO.searchArtistMembers(params);
     };
-
-    public List<Map<String, Object>>  commonGenderCount(){
-        return artistMemberDAO.getCommonGender();
-    }
-    public List<Map<String, Object>>  commonGenreCount(){
-        return artistMemberDAO.getCommonGenre();
-    }
-
-    public List<Map<String, Object>>  artistGenderCount(){
-        return artistMemberDAO.getArtistGender();
-    }
-    public List<Map<String, Object>>  artistGenreCount(){
-        return artistMemberDAO.getArtistGenre();
-    }
-    public List<Map<String, Object>>  artistPointTop(){
-        return artistMemberDAO.getArtistPoint();
-    }
-    public List<Map<String, Object>>  artistPointAvg(){
-        return artistMemberDAO.getArtistPointAvg();
-    }
-    public List<Map<String, Object>>  artistBuskingIng(){
-        return artistMemberDAO.getArtistBuskingIng();
-    }
-    public List<Map<String, Object>>  artistBuskingAll(){
-        return artistMemberDAO.getArtistBuskingAll();
-    }
 
     public int deleteBusking(int id) {
         return artistMemberDAO.deleteArtistBusking(id);

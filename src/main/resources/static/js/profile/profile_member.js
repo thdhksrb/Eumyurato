@@ -60,18 +60,6 @@ function getMembers(category, page = 1, searchColumn = null, searchKeyword = '')
 
         members.slice(start, end).forEach((member) => {
             const memberRow = memberTbody.insertRow();
-            const memberId = member.id;
-
-            // 각 이벤트 행에 삭제 버튼 추가
-            const deleteButton = document.createElement('button');
-            deleteButton.textContent = '삭제';
-            deleteButton.classList.add('delete-btn'); //버튼 class 지정
-            deleteButton.setAttribute('data-category', category);
-            deleteButton.setAttribute('data-id', memberId);
-            deleteButton.addEventListener('click', () => {
-                console.log(category, memberId);
-                deleteConcert(category,memberId);
-            });
 
             // 기본 공통 컬럼
 
@@ -87,7 +75,6 @@ function getMembers(category, page = 1, searchColumn = null, searchKeyword = '')
                     memberRow.insertCell().textContent = member.phone;
                     memberRow.insertCell().textContent = member.road;
                     memberRow.insertCell().textContent = member.genre;
-                    memberRow.insertCell().appendChild(deleteButton);
                     break;
 
                 case 'artist':
@@ -101,7 +88,6 @@ function getMembers(category, page = 1, searchColumn = null, searchKeyword = '')
                     memberRow.insertCell().textContent = member.phone;
                     memberRow.insertCell().textContent = member.genre;
                     memberRow.insertCell().textContent = member.point;
-                    memberRow.insertCell().appendChild(deleteButton);
                     break;
 
                 case 'enterprise':
@@ -111,7 +97,6 @@ function getMembers(category, page = 1, searchColumn = null, searchKeyword = '')
                     memberRow.insertCell().textContent = member.num;
                     memberRow.insertCell().textContent = member.email;
                     memberRow.insertCell().textContent = member.phone;
-                    memberRow.insertCell().appendChild(deleteButton);
                     break;
 
                 default:
@@ -135,22 +120,6 @@ function getMembers(category, page = 1, searchColumn = null, searchKeyword = '')
         for (let i = 0; i < categoryColumns.length; i++) {
             categoryColumns[i].style.display = 'table-cell';
         }
-    }
-
-    function deleteConcert(category,memberId){
-        fetch(`/profile/admin/total?category=${category.toLowerCase()}&id=${memberId}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-            .then(() => {
-                alert('이벤트 삭제가 완료되었습니다.');
-                getMembers(category);
-            })
-            .catch((error) => {
-                console.error('이벤트 삭제 중 에러가 발생했습니다.', error);
-            });
     }
 
     function createPagination(totalMembers, membersPerPage, currentPage, category) {

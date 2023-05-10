@@ -133,30 +133,6 @@ public class EnterpriseService {
         return enterpriseMemberDAO.searchEntSmallConcerts(enterId, column, keyword);
     }
 
-    //일반 회원
-    public List<Map<String, Object>>  commonGenderCount(){
-        return enterpriseMemberDAO.getCommonGender();
-    }
-    public List<Map<String, Object>>  commonGenreCount(){
-        return enterpriseMemberDAO.getCommonGenre();
-    }
-
-    //아티스트 회원
-    public List<Map<String, Object>>  artistGenderCount(){
-        return enterpriseMemberDAO.getArtistGender();
-    }
-    public List<Map<String, Object>>  artistGenreCount(){
-        return enterpriseMemberDAO.getArtistGenre();
-    }
-
-    //기업 회원
-    public List<Map<String, Object>>  enterConcertIng(){
-        return enterpriseMemberDAO.getEnterConcertIng();
-    }
-    public List<Map<String, Object>>  enterConcertAll(){
-        return enterpriseMemberDAO.getEnterConcertAll();
-    }
-
     //회원정보 수정
     public void modifyEnterWithoutImage(EnterpriseMemberDTO enterpriseMemberDTO){
         enterpriseMemberDAO.modifyEnterWithoutImage(enterpriseMemberDTO);
@@ -184,6 +160,51 @@ public class EnterpriseService {
 
     public List<ReservationDTO> getReservationsByEnterId(String enterId) {
         return enterpriseMemberDAO.getReservationsByEnterId(enterId);
+    }
+
+    public SmallConcertDTO getSmallConcertByAll(String name,int price,String startDate,String lastDate){
+        return enterpriseMemberDAO.getSmallConcertByAll(name,price,startDate,lastDate);
+    };
+
+    public void saveSchedules(int conId,String conDate){
+        enterpriseMemberDAO.saveSchedules(conId,conDate);
+    };
+
+    public void saveConcertWithoutImage(SmallConcertDTO smallConcertDTO){
+        enterpriseMemberDAO.saveConcertWithoutImage(smallConcertDTO);
+    }
+
+    public void saveConcert(SmallConcertDTO smallConcertDTO, MultipartFile imgFile) throws IOException {
+        String uuid = UUID.randomUUID().toString();
+        String ext = imgFile.getContentType();
+
+        //이미지 업로드
+        BlobInfo blobInfo = storage.create(
+                BlobInfo.newBuilder(bucketName, uuid)
+                        .setContentType(ext)
+                        .build(),
+                imgFile.getInputStream()
+        );
+        smallConcertDTO.setImage(uuid);
+        enterpriseMemberDAO.saveConcert(smallConcertDTO);
+    }
+
+    public int deleteSmallConcertByEnt(int conId){
+
+        List<String> sId = enterpriseMemberDAO.getScheduleId(conId);
+        
+        List<String> rid = enterpriseMemberDAO.getReservationId(sId);
+        
+        enterpriseMemberDAO.deleteTickets(rid);
+        
+        enterpriseMemberDAO.deleteReservations(sId);
+        
+        enterpriseMemberDAO.deleteSchedules(conId);
+        
+        enterpriseMemberDAO.deleteSmallConcert(conId);
+        
+
+        return 1;
     }
 }
 

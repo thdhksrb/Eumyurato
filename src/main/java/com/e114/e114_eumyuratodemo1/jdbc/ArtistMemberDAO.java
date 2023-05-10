@@ -56,18 +56,6 @@ public interface ArtistMemberDAO{
     List<ArtistMemberDTO> searchArtistMembers(Map<String, String> params);  // 아티스트 회원 검색
     List<CommonMemberDTO> searchCommonMembers(Map<String, String> params);  // 일반 회원 검색
 
-    // 일반회원 통계
-    List<Map<String, Object>> getCommonGender();
-    List<Map<String, Object>>  getCommonGenre();
-
-    // 아티스트 회원 통계
-    List<Map<String, Object>> getArtistGender();
-    List<Map<String, Object>> getArtistGenre();
-    List<Map<String, Object>> getArtistPoint();
-    List<Map<String, Object>> getArtistPointAvg();
-    List<Map<String, Object>> getArtistBuskingIng();
-    List<Map<String, Object>> getArtistBuskingAll();
-
     //아티스트 버스킹 저장
     void saveBuskingWithoutImage(BuskingDTO buskingDTO);
     void saveBusking(BuskingDTO buskingDTO);

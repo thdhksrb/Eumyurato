@@ -15,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,28 +40,22 @@ public class EntController {
 
     @GetMapping("/profile/ent/data")
     @ResponseBody
-    public ResponseEntity<?> getArtistData(HttpServletRequest request) {
+    public ResponseEntity<?> getEnterpriseData(HttpServletRequest request) {
         String token = jwtUtils.getAccessToken(request);
         String entUserId = jwtUtils.getId(token);
         System.out.println("id : " + entUserId);
 
         if (entUserId != null) {
-            // ID를 이용해 관리자 정보를 가져옵니다.
-            EnterpriseMemberDTO common = enterpriseMemberDAO.getEntInfoById(entUserId);
-            if (common != null) {
-                return ResponseEntity.ok(common);
+            // ID를 이용해 기업회원 정보를 가져오기
+            EnterpriseMemberDTO enter = enterpriseMemberDAO.getEntInfoById(entUserId);
+            if (enter != null) {
+                return ResponseEntity.ok(enter);
             } else {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized request");
             }
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized request");
         }
-    }
-
-    @GetMapping("/profile/ent/total/view")
-    public String enterpriseTotalsview() {
-
-        return "html/profile/total/profile_enterprise_total";
     }
 
     @GetMapping("/profile/ent/info/view")
@@ -107,48 +103,6 @@ public class EntController {
         return ResponseEntity.ok(memberList);
     }
 
-    @GetMapping("/profile/ent/total/commonMember")
-    @ResponseBody
-    public Map<String, Object> getCommonMember() {
-
-        List<Map<String, Object>> genderCounts = enterpriseService.commonGenderCount();
-        List<Map<String, Object>> genreCounts = enterpriseService.commonGenreCount();
-
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("genderCounts", genderCounts);
-        resultMap.put("genreCounts", genreCounts);
-
-        return resultMap;
-    }
-
-    @GetMapping("/profile/ent/total/artistMember")
-    @ResponseBody
-    public Map<String, Object> getArtistMember() {
-
-        List<Map<String, Object>> genderCounts = enterpriseService.artistGenderCount();
-        List<Map<String, Object>> genreCounts = enterpriseService.artistGenreCount();
-
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("genderCounts", genderCounts);
-        resultMap.put("genreCounts", genreCounts);
-
-        return resultMap;
-    }
-
-    @GetMapping("/profile/ent/total/enterMember")
-    @ResponseBody
-    public Map<String, Object> getEnterMember() {
-
-        List<Map<String, Object>> concertIng = enterpriseService.enterConcertIng();
-        List<Map<String, Object>> concertAll = enterpriseService.enterConcertAll();
-
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("concertIng", concertIng);
-        resultMap.put("concertAll", concertAll);
-
-        return resultMap;
-    }
-
     @GetMapping("/profile/ent/modify")
     public String artistAccountModify(){
         return "html/profile/accountModify/profile_enterprise_accountModify";
@@ -164,6 +118,45 @@ public class EntController {
         }else{
             System.out.println(enterpriseMemberDTO);
             enterpriseService.enterModify(enterpriseMemberDTO, imgFile);
+        }
+
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/profile/ent/register")
+    public String adminAccountRegister() {
+
+        return "html/profile/concertRegister/profile_enterprise_concertRegister";
+    }
+
+    @PostMapping("/profile/ent/register")
+    public ResponseEntity<?> concertRegister(@RequestPart("registerDTO") SmallConcertDTO smallConcertDTO, @RequestPart(value = "imgFile", required = false) MultipartFile imgFile) throws IOException {
+
+        System.out.println(smallConcertDTO);
+        System.out.println("controller img:" + imgFile);
+
+        String name = smallConcertDTO.getName();
+        int price = smallConcertDTO.getPrice();
+        String startDate = smallConcertDTO.getStartDate();
+        String lastDate = smallConcertDTO.getLastDate();
+        if (imgFile == null) {
+            enterpriseService.saveConcertWithoutImage(smallConcertDTO);
+            System.out.println("img null");
+        } else {
+            enterpriseService.saveConcert(smallConcertDTO, imgFile);
+        }
+
+        int conId = enterpriseService.getSmallConcertByAll(name,price,startDate,lastDate).getId();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.M.d");
+        LocalDate start = LocalDate.parse(startDate, formatter);
+        LocalDate end = LocalDate.parse(lastDate, formatter);
+
+        LocalDate datetime = start;
+
+        while (!datetime.isAfter(end)) {
+            enterpriseService.saveSchedules(conId,datetime.toString());
+            datetime = datetime.plusDays(1);
         }
 
         return ResponseEntity.ok().build();
@@ -220,5 +213,17 @@ public class EntController {
         System.out.println("SmallConcert List: " + smallConcertList);
 
         return ResponseEntity.ok(smallConcertList);
+    }
+
+    @DeleteMapping("/profile/ent/management")
+    public ResponseEntity<String> deleteSmallConcert(@RequestParam("id") int id) {
+
+        int result = enterpriseService.deleteSmallConcertByEnt(id);
+
+        if (result > 0) {
+            return ResponseEntity.ok().body("success");
+        } else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("past");
+        }
     }
 }

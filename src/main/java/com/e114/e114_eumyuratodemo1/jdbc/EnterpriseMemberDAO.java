@@ -43,18 +43,6 @@ public interface EnterpriseMemberDAO{
     List<ArtistMemberDTO> searchArtistMembers(Map<String, String> params);  // 아티스트 회원 검색
     List<EnterpriseMemberDTO> searchEntMembers(Map<String, String> params); // 기업 회원 검색
 
-    //일반 회원
-    List<Map<String, Object>> getCommonGender();    // 일반회원 성별
-    List<Map<String, Object>>  getCommonGenre();    // 일반회원 선호 장르
-
-    //아티스트 회원
-    List<Map<String, Object>> getArtistGender();    // 아티스트 회원 성별
-    List<Map<String, Object>> getArtistGenre();     // 아티스트 회원 장르
-
-    //기업 회원
-    List<Map<String, Object>> getEnterConcertIng(); // 기업회원 진행 중인 소규모 공연 수
-    List<Map<String, Object>> getEnterConcertAll(); // 기업회원 모든 소규모 공연 수
-
     EnterpriseMemberDTO getEntInfoById(String entId);   // 기업회원 정보 가져오기
 
     // 기업회원 소규모공연 목록 가져오기
@@ -69,5 +57,20 @@ public interface EnterpriseMemberDAO{
     void modifyEnterWithoutImage(EnterpriseMemberDTO enterpriseMemberDTO);
     void enterModify(EnterpriseMemberDTO enterpriseMemberDTO);
 
+    SmallConcertDTO getSmallConcertByAll(String name,int price,String startDate,String lastDate);
+
+    void saveSchedules(int conId,String conDate);   // 스케쥴 저장
+
+    void saveConcertWithoutImage(SmallConcertDTO smallConcertDTO); // 소규모 공연 등록(이미지 x)
+    void saveConcert(SmallConcertDTO smallConcertDTO);              //소규모 공연 등록(이미지 o)
+
+    int deleteSmallConcert(int id);             // 소규모 공연 삭제
+
+    List<String> getScheduleId(int conId);
+    List<String> getReservationId(List<String> sId);
+
+    int deleteReservations(List<String> sId);
+    int deleteTickets(List<String> rId);
+    int deleteSchedules(int id);
 
 }
