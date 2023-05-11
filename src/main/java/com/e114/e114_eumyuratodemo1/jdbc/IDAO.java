@@ -39,4 +39,6 @@ public interface IDAO {
     public int usedReserv (int sId, String cId);
     public int saveTicket(int rId, String seatNum);
 
+    public List<SchedulesDTO> selectConcertTimeAll(int id);
+
 }
