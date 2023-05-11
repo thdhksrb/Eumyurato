@@ -196,6 +196,7 @@ public class EnterpriseService {
         List<String> rId = enterpriseMemberDAO.getReservationId(sId);
 
         if(rId.toArray().length != 0){
+
             enterpriseMemberDAO.deleteTickets(rId);
 
             enterpriseMemberDAO.deleteReservations(sId);
