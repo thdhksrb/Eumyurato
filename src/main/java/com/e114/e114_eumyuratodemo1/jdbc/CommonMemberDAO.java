@@ -1,6 +1,7 @@
 package com.e114.e114_eumyuratodemo1.jdbc;
 
 import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
+import com.e114.e114_eumyuratodemo1.dto.InfoDTO;
 import com.e114.e114_eumyuratodemo1.dto.ReservationDTO;
 import com.e114.e114_eumyuratodemo1.dto.TicketDTO;
 import org.apache.ibatis.annotations.Mapper;
@@ -64,5 +65,7 @@ public interface CommonMemberDAO {
  void commonModify(CommonMemberDTO commonMemberDTO);
  //닉네임 반환
  int commonNid(String nid);
+
+ List<InfoDTO> getInfo();
 
 }

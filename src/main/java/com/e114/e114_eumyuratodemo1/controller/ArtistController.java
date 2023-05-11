@@ -122,8 +122,10 @@ public class ArtistController {
     }
 
     @GetMapping("/profile/artist/info/view")
-    public String artistInfoview() {
+    public String artistInfoview(Model model) {
+        List<InfoDTO> infos =  artistMemberDAO.getInfo();
 
+        model.addAttribute("infos", infos);
         return "html/profile/board/profile_artist_board";
     }
 

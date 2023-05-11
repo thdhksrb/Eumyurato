@@ -74,7 +74,10 @@ public class AdminController {
     }
 
     @GetMapping("/profile/admin/info/view")
-    public String admimInfoview() {
+    public String admimInfoview(Model model) {
+        List<InfoDTO> infos =  memberDAO.getInfo();
+
+        model.addAttribute("infos", infos);
 
         return "html/profile/board/profile_admin_board";
     }

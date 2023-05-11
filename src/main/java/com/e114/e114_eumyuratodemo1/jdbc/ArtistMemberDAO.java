@@ -66,4 +66,6 @@ public interface ArtistMemberDAO{
 
     //닉네임 반환
     List<Map<String, Object>> artistNid(String nid);
+
+    List<InfoDTO> getInfo();
 }
