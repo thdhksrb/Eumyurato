@@ -20,8 +20,7 @@
 </head>
 <body id="page-top">
 
-
-<nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="navLogin">
+<nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="navLogin" style="margin-right: 150px;">
     <div class="container" style="margin-left: 10px;">
         <a class="navbar-brand" href="#page-top"><img th:src="@{/img/logo_name.png}"></a>
     </div>
@@ -30,19 +29,17 @@
     </button>
 </nav>
 
-<nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="navLogout">
+<nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="navLogout" style="margin-right: 150px;">
     <div class="container" style="margin-left: 10px;">
         <a class="navbar-brand" href="#page-top"><img th:src="@{/img/logo_name.png}"></a>
     </div>
-    <div style="margin-right: 60px;">
-        <a id="mypageBtn" style="width: 30px; height: 30px; font-size: large;">
-            <img th:src="@{/img/person.png}" style="width: 30px; height: 30px; cursor:pointer;"/>
-            <span id="userName" style="margin-left: 10px; font-weight: bold; font-size: large; cursor:pointer;"></span>님</a>
+    <div>
+        <a id="mypageBtn" style="width: 30px; height: 30px; font-size: 20px;">
+            <img th:src="@{/img/person.png}" style="width: 40px; height: 40px; margin-bottom: 15px; cursor:pointer;"/>
+            <span id="userName" style="margin-left: 10px; font-weight: bold; font-size: 30px; cursor:pointer;"></span>님</a>
         <a id="logoutBtn" href="/logout" style="margin-left: 20px;"></a>
     </div>
 </nav>
-
-
 <!-- Masthead-->
 <header class="masthead bg-primary text-white text-center">
     <div class="container d-flex align-items-center flex-column">

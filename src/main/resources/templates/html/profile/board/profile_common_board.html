@@ -101,11 +101,12 @@
         <div class="login-content flex-lg-row-fluid d-flex flex-column overflow-hidden py-10 py-lg-20 px-10 p-lg-7 mx-auto mw-1000px w-100" style="display: flex">
             <!--begin::Wrapper-->
             <!--begin::Signin Form-->
-            <div class="form w-1000px  needs-validation text-center" id="kt_login_signin_form" novalidate>
-                <div style="display: flex; align-items: center; margin-bottom: 20px;">
-                    <h1 style="font-size: 24px; flex-grow: 1;"><strong>공지 사항</strong></h1>
+            <div class="form w-1000px  needs-validation text-center" style="margin-top: 200px; margin-left: 50px;" id="kt_login_signin_form" novalidate>
+
+                <div  class="text-start" style="display: flex; margin-bottom: 15px;">
+                    <p style="font-size: 50px; font-weight: bold; flex-grow: 1; ">공지 사항</p>
                 </div>
-                <div class="container mt-5">
+                <div class="container" style="margin-top: 23px;">
                     <div class="row">
                         <div class="col-md-12">
                             <form action="/profile/common/reservation/search" method="post">
@@ -137,7 +138,7 @@
                             <tbody>
                             <tr th:each="info : ${infos}">
                                 <td th:text="${info.no}"></td>
-                                <td th:text="${info.title}"></td>
+                                <td class="text-start" th:text="${info.title}"></td>
                                 <td th:text="${info.date_created}"></td>
                             </tr>
                             </tbody>
