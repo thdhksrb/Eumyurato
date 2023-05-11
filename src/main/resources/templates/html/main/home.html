@@ -49,19 +49,22 @@
         <!-- Masthead Avatar Image-->
         <a th:href="@{/map}">
             <img class="masthead-avatar mb-5" th:src="@{/img/logo_CLICK.PNG}" alt="..."
-                 style="width: 400px; height: 400px;"/></a>
+                 style="width: 400px; height: 400px;"/>
+        </a>
         <!-- Masthead Heading-->
-        <h1 class="masthead-heading text-uppercase mb-0" style="color: #000000">음 유 라 토</h1>
-        <!-- Icon Divider-->
-        <div class="divider-custom divider-light">
-            <div class="divider-custom-line"></div>
-            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-            <div class="divider-custom-line"></div>
+        <div class="animate-slide-in">
+            <h1 class="masthead-heading text-uppercase mb-0" style="color: #000000; opacity: 0;">음 유 라 토</h1>
+            <!-- Icon Divider-->
+            <div class="divider-custom divider-light">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <!-- Masthead Subheading-->
+            <p class="masthead-subheading font-weight-light mb-0" style="color: #000000; opacity: 0;">사용자들에게 다양한 소규모 공연과 버스킹의 정보 및 기회를
+                제공하여
+                <br>예술과 문화를 즐길 수 있는 경험을 제공하는 서비스</p>
         </div>
-        <!-- Masthead Subheading-->
-        <p class="masthead-subheading font-weight-light mb-0" style="color: #000000">사용자들에게 다양한 소규모 공연과 버스킹의 정보 및 기회를
-            제공하여
-            <br>예술과 문화를 즐길 수 있는 경험을 제공하는 서비스</p>
     </div>
 </header>
 <!-- Portfolio Section-->
@@ -139,7 +142,7 @@
     </div>
     <div class="divider-custom-line"></div>
     <!--begin::Accordion-->
-    <div class="accordion" id="kt_accordion_1">
+    <div class="accordion mx-n5 mx-auto" style="max-width: 700px;" id="kt_accordion_1">
         <div class="accordion-item">
             <h2 class="accordion-header" id="kt_accordion_1_header_1">
                 <button class="accordion-button fs-4 fw-bold" type="button" data-toggle="collapse"
