@@ -216,5 +216,17 @@ public class AdminService {
 
     }
 
+    public TicketDTO findTicketByRid(int rid){
+        return dao.findTicketByRid(rid);
+    };
+
+    public ReservationDTO findReservationById(int id){
+        return dao.findReservationById(id);
+    };
+
+    public int deleteBooked(int sId, List<String> seatNumList){
+        return dao.deleteBooked(sId,seatNumList);
+    };
+
 }
 

@@ -6,5 +6,5 @@ import lombok.Data;
 public class TicketDTO {
     private int id;
     private int rid;
-    private String searNum;
+    private String seatNum;
 }

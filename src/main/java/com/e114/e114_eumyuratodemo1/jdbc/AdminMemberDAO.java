@@ -66,6 +66,12 @@ public interface AdminMemberDAO {
     int deleteTickets(List<String> rId);
     int deleteSchedules(int id);
 
+    TicketDTO findTicketByRid(int rid); //추가
+
+    ReservationDTO findReservationById(int id); //추가
+
+    int deleteBooked(int sId, List<String> seatNumList); //추가
+
 
 
 

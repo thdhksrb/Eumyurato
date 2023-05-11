@@ -210,4 +210,22 @@
     <delete id="deleteDonation">
         DELETE FROM artist_donation WHERE buskId = #{param1}
     </delete>
+
+    <select id="findTicketByRid" resultType="com.e114.e114_eumyuratodemo1.dto.TicketDTO">
+        SELECT *
+        FROM ticket
+        WHERE rid = #{param1}
+    </select>
+
+    <select id="findReservationById" resultType="com.e114.e114_eumyuratodemo1.dto.ReservationDTO">
+        SELECT *
+        FROM reservation
+        WHERE id = #{param1}
+    </select>
+
+    <delete id="deleteBooked" parameterType="java.util.Map">
+        <foreach collection="seatNumList" item="seatNum" open="" separator=";" close="">
+            DELETE FROM booked WHERE sId = #{param1} AND seatNum = #{seatNum}
+        </foreach>
+    </delete>
 </mapper>
