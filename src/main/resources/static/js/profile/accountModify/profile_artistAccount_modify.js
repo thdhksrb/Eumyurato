@@ -146,17 +146,17 @@ function openNidPopup() {
     var _top = Math.ceil(( window.screen.height - _height )/2);
 
     // 팝업창 생성
-    const popup = window.open('', '닉네임 변경하기', 'width='+ _width +', height='+ _height +', left=' + _left + ', top='+ _top );
+    const popup = window.open('', '활동명 변경하기', 'width='+ _width +', height='+ _height +', left=' + _left + ', top='+ _top );
 
     const html = `
     <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>닉네임 변경하기</title>
+    <title>활동명 변경하기</title>
     <script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
 </head>
 <body>
 <div style="display:flex; justify-content:center; align-items:center; flex-direction:column;">
-    <h2>닉네임 변경</h2>
+    <h2>활동명 변경</h2>
     <input type="text" name="nickname" placeholder="공백 및 특수문자 제외 20자 이하"
            style="width: 60%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #0099ff;">
     <br>
@@ -188,7 +188,7 @@ function nidCheck(){
             console.log(response);
             console.log(response.nid);
             if (parseInt(response.nid) > 0) {// 중복되는 경우 처리
-                alert('이미 사용 중인 닉네임입니다. 다른 닉네임을 선택해주세요.');
+                alert('이미 사용 중인 활동명입니다. 다른 활동명을 입력해주세요.');
                 nickname = '';
             }
         },

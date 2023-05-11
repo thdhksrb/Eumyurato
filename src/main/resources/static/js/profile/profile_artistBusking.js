@@ -105,7 +105,7 @@ function createPagination(totalItems, perPage, currentPage) {
 }
 
 function deleteBusking(buskingId) {
-    if (!confirm('정말로 이 공연을 삭제하시겠습니까?')) {
+    if (!confirm('정말로 이 버스킹을 삭제하시겠습니까?')) {
         return;
     }
 
@@ -121,7 +121,7 @@ function deleteBusking(buskingId) {
     })
         .then((response) => {
             if (response.ok) {
-                alert('공연이 성공적으로 취소되었습니다.');
+                alert('버스킹이 성공적으로 취소되었습니다.');
                 const searchColumn = document.getElementById('searchColumn').value;
                 const searchKeyword = document.getElementById('searchKeyword').value;
                 location.reload();
