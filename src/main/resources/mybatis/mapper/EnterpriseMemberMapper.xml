@@ -35,7 +35,7 @@
     </select>
 
     <!-- 아이디로 회원 정보 가져오기(중복) -->
-    <select id="useById" parameterType="java.lang.String" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
+    <select id="useById" parameterType="java.lang.String" resultType="com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO">
         SELECT *
         FROM enterprise_member
         WHERE id = #{id}
@@ -157,12 +157,12 @@
 
     <insert id="saveConcertWithoutImage" parameterType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
         INSERT INTO small_concert (name, pname, location, enterId, startDate, lastDate, price)
-        VALUES (#{name}, #{pname}, #{location}, #{enterId}, #{startDate}, #{lastDate}, #{price})
+        VALUES (#{name}, #{pname}, #{location}, #{enterId}, #{startDate}, CONCAT(#{lastDate}, ' 23:59:59'), #{price})
     </insert>
 
     <insert id="saveConcert" parameterType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
         INSERT INTO small_concert (enterId, name, location, pname, price, startDate, lastDate, image)
-        VALUES (#{enterId}, #{name}, #{location}, #{pname}, #{price}, #{startDate}, #{lastDate}, #{image})
+        VALUES (#{enterId}, #{name}, #{location}, #{pname}, #{price}, #{startDate}, CONCAT(#{lastDate}, ' 23:59:59'), #{image})
     </insert>
 
     <select id="getSmallConcertByAll" resultType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
@@ -186,7 +186,8 @@
     </select>
 
     <select id="getReservationId" resultType="String">
-        SELECT id FROM reservation
+        SELECT id
+        FROM reservation
         WHERE sId IN
         <foreach item="item" collection="sId" open="(" separator="," close=")">
             #{item}
@@ -194,24 +195,28 @@
     </select>
 
     <delete id="deleteTickets">
-        DELETE FROM ticket WHERE rId IN
+        DELETE FROM ticket
+        WHERE rId IN
         <foreach item="item" collection="rId" open="(" separator="," close=")">
             #{item}
         </foreach>
     </delete>
 
     <delete id="deleteReservations">
-        DELETE FROM reservation WHERE sId IN
+        DELETE FROM reservation
+        WHERE sId IN
         <foreach item="item" collection="sId" open="(" separator="," close=")">
             #{item}
         </foreach>
     </delete>
 
     <delete id="deleteSchedules">
-        DELETE FROM schedules WHERE conId = #{param1}
+        DELETE FROM schedules
+        WHERE conId = #{param1}
     </delete>
 
     <delete id="deleteDonation">
-        DELETE FROM artist_donation WHERE buskId = #{param1}
+        DELETE FROM artist_donation
+        WHERE buskId = #{param1}
     </delete>
 </mapper>

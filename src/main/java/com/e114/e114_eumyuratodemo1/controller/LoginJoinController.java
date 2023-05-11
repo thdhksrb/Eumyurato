@@ -20,10 +20,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.sound.midi.Soundbank;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
@@ -188,7 +190,8 @@ public class LoginJoinController {
     }
 
     @PostMapping("/loginjoin/common/join")
-    public String commonJoinRegister(
+    @ResponseBody
+    public ResponseEntity<Void> commonJoinRegister(
             @RequestParam("id") String id,
             @RequestParam("pwd") String pwd,
             @RequestParam("name") String name,
@@ -198,14 +201,13 @@ public class LoginJoinController {
             @RequestParam("email") String email,
             @RequestParam("phone") String phone,
             @RequestParam("road") String road,
-            @RequestParam("genre") String genre,
-            Model model) {
+            @RequestParam("genre") String genre) {
 
         boolean result = commonService.register(id, pwd, name, nid, sex, birth, email, phone, road, genre);
         if (result) {
-            return "redirect:/loginjoin/common/login";
+            return ResponseEntity.ok().build();
         } else {
-            return "redirect:/loginjoin/common/join";
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
@@ -216,7 +218,8 @@ public class LoginJoinController {
     }
 
     @PostMapping("/loginjoin/artist/join")
-    public String artistregister(
+    @ResponseBody
+    public ResponseEntity<Void> artistregister(
             @RequestParam("id") String id,
             @RequestParam("pwd") String pwd,
             @RequestParam("name") String name,
@@ -225,17 +228,16 @@ public class LoginJoinController {
             @RequestParam("birth") String birth,
             @RequestParam("email") String email,
             @RequestParam("phone") String phone,
-            @RequestParam("genre") String genre,
-            Model model) {
+            @RequestParam("genre") String genre) {
 
         boolean result = artistService.register(id, pwd, name, nid, sex, birth, email, phone, genre);
+        System.out.println("result="+result);
         if (result) {
-            return "redirect:/loginjoin/artist/login";
+            return ResponseEntity.ok().build();
         } else {
-            return "redirect:/loginjoin/artist/join";
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
 
     //기업 회원 가입
     @GetMapping("/loginjoin/enterprise/join")
@@ -244,20 +246,20 @@ public class LoginJoinController {
     }
 
     @PostMapping("/loginjoin/enterprise/join")
-    public String enterregister(
+    public ResponseEntity<Void> enterregister(
             @RequestParam("id") String id,
             @RequestParam("pwd") String pwd,
             @RequestParam("name") String name,
             @RequestParam("num") String num,
             @RequestParam("email") String email,
-            @RequestParam("phone") String phone,
-            Model model) {
+            @RequestParam("phone") String phone) {
 
         boolean result = enterpriseService.register(id, pwd, name, num, email, phone);
+        System.out.println("result="+result);
         if (result) {
-            return "redirect:/loginjoin/enterprise/login";
+            return ResponseEntity.ok().build();
         } else {
-            return "redirect:/loginjoin/enterprise/join";
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
@@ -369,33 +371,6 @@ public class LoginJoinController {
         Map<String, Object> response = new HashMap<>();
         response.put("duplicate", result);
         return ResponseEntity.ok(response);
-    }
-
-
-    @GetMapping("/mypage")
-    public String mypage(Model model, HttpSession session) {
-        Object loginUser = session.getAttribute("loginUser");
-        int adminNum = -1;
-        if (loginUser instanceof CommonMemberDTO) {
-            adminNum = ((CommonMemberDTO) loginUser).getAdminNum();
-        } else if (loginUser instanceof ArtistMemberDTO) {
-            adminNum = ((ArtistMemberDTO) loginUser).getAdminNum();
-        } else if (loginUser instanceof EnterpriseMemberDTO) {
-            adminNum = ((EnterpriseMemberDTO) loginUser).getAdminNum();
-        }
-
-        switch (adminNum) {
-            case 0: // 관리자
-                return "redirect:/profile/admin/account";
-            case 1: // 일반 회원
-                return "redirect:/profile/admin/modify";
-            case 2: // 아티스트 회원
-                return "redirect:/profile/admin/management/view";
-            case 3: // 기업 회원
-                return "redirect:/enterprise-page";
-            default:
-                return "redirect:/login-common";
-        }
     }
 
 }
