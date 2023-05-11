@@ -73,4 +73,5 @@ public interface EnterpriseMemberDAO{
     int deleteTickets(List<String> rId);
     int deleteSchedules(int id);
 
+    List<InfoDTO> getInfo();
 }

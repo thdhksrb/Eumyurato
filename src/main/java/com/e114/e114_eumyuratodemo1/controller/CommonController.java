@@ -1,9 +1,6 @@
 package com.e114.e114_eumyuratodemo1.controller;
 
-import com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO;
-import com.e114.e114_eumyuratodemo1.dto.BuskingDTO;
-import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
-import com.e114.e114_eumyuratodemo1.dto.ReservationDTO;
+import com.e114.e114_eumyuratodemo1.dto.*;
 import com.e114.e114_eumyuratodemo1.jdbc.CommonMemberDAO;
 import com.e114.e114_eumyuratodemo1.jwt.JwtUtils;
 import com.e114.e114_eumyuratodemo1.mapper.CommonMemberMapper;
@@ -90,8 +87,10 @@ public class CommonController {
     }
 
     @GetMapping("/profile/common/info/view")
-    public String commonInfoview() {
+    public String commonInfoview(Model model) {
+        List<InfoDTO> infos =  commonMemberDAO.getInfo();
 
+        model.addAttribute("infos", infos);
         return "html/profile/board/profile_common_board";
     }
 

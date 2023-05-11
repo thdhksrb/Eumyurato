@@ -143,24 +143,18 @@
                             <tr class="fw-bold fs-6 text-gray-800 border-bottom border-gray-200">
                                 <th>NO</th>
                                 <th>제목</th>
-                                <th>조회수</th>
                                 <th>등록일</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="reservation : ${reservations}">
-                                <td th:text="${reservation.id}"></td>
-                                <td th:text="${reservation.sid}"></td>
-                                <td th:text="${reservation.cid}"></td>
-                                <td th:text="${reservation.payTime}"></td>
-                                <td th:text="${reservation.viewDate}"></td>
-                                <td th:text="${reservation.memberNum}"></td>
-                                <td th:text="${reservation.reservPay}"></td>
+                            <tr th:each="info : ${infos}">
+                                <td th:text="${info.no}"></td>
+                                <td th:text="${info.title}"></td>
+                                <td th:text="${info.date_created}"></td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
-
                     <div style="margin-top:20px;">
                         <!-- 리스트 내용 -->
                     </div>

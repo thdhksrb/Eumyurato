@@ -153,4 +153,9 @@
             DELETE FROM booked WHERE sId = #{param1} AND seatNum = #{seatNum}
         </foreach>
     </delete>
+
+    <select id="getInfo" resultType="com.e114.e114_eumyuratodemo1.dto.InfoDTO">
+        SELECT no, title, date_created
+        FROM info
+    </select>
 </mapper>

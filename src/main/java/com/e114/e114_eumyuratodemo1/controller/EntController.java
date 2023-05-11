@@ -59,8 +59,10 @@ public class EntController {
     }
 
     @GetMapping("/profile/ent/info/view")
-    public String enterpriseInfoview() {
+    public String enterpriseInfoview(Model model) {
+        List<InfoDTO> infos =  enterpriseMemberDAO.getInfo();
 
+        model.addAttribute("infos", infos);
         return "html/profile/board/profile_enterprise_board";
     }
 

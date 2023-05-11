@@ -176,4 +176,9 @@
              ) AS combined_tables
         WHERE nid = #{param1}
     </select>
+
+    <select id="getInfo" resultType="com.e114.e114_eumyuratodemo1.dto.InfoDTO">
+        SELECT no, title, date_created
+        FROM info
+    </select>
 </mapper>

@@ -73,6 +73,6 @@ public interface AdminMemberDAO {
     int deleteBooked(int sId, List<String> seatNumList); //추가
 
 
-
+    List<InfoDTO> getInfo();
 
 }
