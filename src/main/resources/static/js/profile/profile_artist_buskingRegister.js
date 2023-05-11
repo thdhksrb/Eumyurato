@@ -155,7 +155,7 @@ function clickCheck(){
 
     // 값이 비어있을 경우 경고창 출력
     if (!name) {
-        alert("공연명은 필수 입력입니다.");
+        alert("버스킹 명은 필수 입력입니다.");
         event.preventDefault();
         return;
     }
@@ -165,7 +165,7 @@ function clickCheck(){
         return;
     }
     if (!buskingDate) {
-        alert("공연 일자는 필수 입력입니다.");
+        alert("버스킹 일자는 필수 입력입니다.");
         event.preventDefault();
         return;
     }
