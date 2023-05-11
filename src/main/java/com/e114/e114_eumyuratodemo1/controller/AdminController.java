@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -201,10 +202,17 @@ public class AdminController {
     @DeleteMapping("/profile/admin/reservation")
     public ResponseEntity<String> deleteReservation(@RequestParam("id") int id) {
 
+        String seatNum = adminService.findTicketByRid(id).getSeatNum();  //추가
+        System.out.println("seatNum: " +seatNum);
+        List<String> seatNumList = Arrays.asList(seatNum.split(","));
+        System.out.println(seatNumList);
+        System.out.println("---------------");
+        int schedulesId = adminService.findReservationById(id).getSid();
         int ticketResult = adminService.deleteTicket(id);
 
         int reservationResult = adminService.deleteReservation(id);
-
+        int result = adminService.deleteBooked(schedulesId,seatNumList);
+        System.out.println("result: "+ result);
         if (ticketResult > 0 && reservationResult > 0) { // 삭제 성공
             return ResponseEntity.ok("success");
         } else { // 삭제 실패

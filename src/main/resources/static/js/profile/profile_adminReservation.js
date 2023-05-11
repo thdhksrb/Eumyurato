@@ -55,6 +55,7 @@ function displayReservationList(reservationList, currentPage) {
         deleteButton.classList.add('delete-btn');
         deleteButton.addEventListener('click', () => {
             deleteReservation(reservation.id);
+            window.location.reload();
         });
 
         console.log(reservation);

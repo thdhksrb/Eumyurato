@@ -3,6 +3,7 @@ package com.e114.e114_eumyuratodemo1.service;
 import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.ReservationDTO;
 import com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO;
+import com.e114.e114_eumyuratodemo1.dto.TicketDTO;
 import com.e114.e114_eumyuratodemo1.jdbc.ArtistMemberDAO;
 import com.e114.e114_eumyuratodemo1.jdbc.CommonMemberDAO;
 import com.e114.e114_eumyuratodemo1.jdbc.EnterpriseMemberDAO;
@@ -150,6 +151,19 @@ public class CommonService {
     public int deleteTicket(int rid){
         return commonMemberDAO.deleteCommonTicket(rid);
     }
+
+    public TicketDTO findTicketByRid(int rid){
+        return commonMemberDAO.findTicketByRid(rid);
+    };
+
+    public ReservationDTO findReservationById(int id){
+        return commonMemberDAO.findReservationById(id);
+    };
+
+    public int deleteBooked(int sId, List<String> seatNumList){
+        return commonMemberDAO.deleteBooked(sId,seatNumList);
+    };
+
 
     //회원정보 수정
     public void modifyCommonWithoutImage(CommonMemberDTO commonMemberDTO){

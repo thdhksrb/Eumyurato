@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -118,9 +119,19 @@ public class CommonController {
     @DeleteMapping("/profile/common/reservation")
     public ResponseEntity<String> deleteReservation(@RequestParam("id") int id) {
 
-        int ticketResult = commonService.deleteTicket(id);
 
+        String seatNum = commonService.findTicketByRid(id).getSeatNum();  //추가
+        System.out.println("seatNum: " +seatNum);
+        List<String> seatNumList = Arrays.asList(seatNum.split(","));
+        System.out.println(seatNumList);
+        System.out.println("---------------");
+        int schedulesId = commonService.findReservationById(id).getSid();
+
+        int ticketResult = commonService.deleteTicket(id);
         int reservationResult = commonService.deleteReservation(id);
+
+        int result = commonService.deleteBooked(schedulesId,seatNumList);
+        System.out.println("result: "+ result);
 
         if (ticketResult > 0 && reservationResult > 0) { // 삭제 성공
             return ResponseEntity.ok("success");
