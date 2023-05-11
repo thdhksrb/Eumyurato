@@ -118,6 +118,18 @@ public class MapController {
         return "html/pay/pay1";
     }
 
+    @PostMapping("/smallconcert/detail/{id}/calendar/all")
+    @ResponseBody
+    public ResponseEntity<Map<String, List<SchedulesDTO>>> calendarAll(@PathVariable("id") int id){
+
+        System.out.println("체크");
+        Map<String, List<SchedulesDTO>> response = new HashMap<>();
+        List<SchedulesDTO> list = mapService.selectConcertTimeAll(id);
+        System.out.println(list);
+        response.put("message", list);
+        return ResponseEntity.ok().body(response);
+    }
+
     @PostMapping("/smallconcert/detail/{id}/calendar")
     @ResponseBody
     public ResponseEntity<Map<String, SchedulesDTO>> calendarJson(@PathVariable("id") int id, @RequestBody Map<String, String> data){

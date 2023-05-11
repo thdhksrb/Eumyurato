@@ -85,6 +85,40 @@ window.onload = function() {
         const navLogout = document.getElementById("navLogout");
         navLogout.style.display = "none";
     }
+
+
+    // Send AJAX request
+    fetch('/smallconcert/detail/' + id + '/calendar/all', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+    })
+        .then(response => response.json())
+        .then(schedules => {
+            // Clear current schedules
+            schedulesUl.innerHTML = '';
+
+            // If there are no schedules, show message
+            if (schedules.message == null) {
+                const li = document.createElement('li');
+                li.textContent = '해당하는 회차 정보가 없습니다.';
+                schedulesUl.appendChild(li);
+                console.log(schedules);
+                selectSeat.disabled = true;
+            } else {
+                // Add schedules to list
+                const scheduleList = schedules.message;
+                scheduleList.forEach(schedule => {
+                    const li = document.createElement('li');
+                    li.textContent = schedule.conDate;
+                    schedulesUl.appendChild(li);
+                });
+                selectSeat.disabled = true;
+            }
+
+        })
+        .catch(error => console.error(error));
+
+
 };
 
 const selectSeat = document.querySelector('#selectSeat');

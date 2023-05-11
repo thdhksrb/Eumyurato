@@ -177,4 +177,11 @@
         ORDER BY viewCount DESC LIMIT 5
     </select>
 
+    <select id="selectConcertTimeAll" resultType="com.e114.e114_eumyuratodemo1.dto.SchedulesDTO">
+        SELECT *
+        FROM schedules
+        WHERE conId = #{param1}
+
+    </select>
+
 </mapper>

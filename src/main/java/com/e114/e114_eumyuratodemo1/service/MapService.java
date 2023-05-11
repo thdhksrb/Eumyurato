@@ -158,4 +158,8 @@ public class MapService {
     public ReservationDTO findReservId(int sId, String cId) {return dao.findReservId(sId, cId);}
     public int usedReserv (int sId, String cId) {return dao.usedReserv(sId, cId);}
     public int saveTicket(int rId, String seatNum) {return dao.saveTicket(rId, seatNum);}
+
+    public List<SchedulesDTO> selectConcertTimeAll(int id){
+        return dao.selectConcertTimeAll(id);
+    };
 }
