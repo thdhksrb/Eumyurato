@@ -4,15 +4,15 @@
 <head>
     <title>Eumyurato</title>
     <link rel="icon" type="image/x-icon" th:href="@{/img/E114_logo.png}"/>
-    <meta charset="utf-8" />
-    <script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta charset="utf-8"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Popper JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!--begin::Global Stylesheets Bundle(used by all pages)-->
-    <link th:href="@{/css/profile/profile1.css}" rel="stylesheet" type="text/css" />
-    <link th:href="@{/css/profile/profile2.css}" rel="stylesheet" type="text/css" />
-    <link th:href="@{/css/profile/profile3.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/profile/profile1.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/profile/profile2.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/profile/profile3.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{/css/profile/pagination.css}" rel="stylesheet" type="text/css"/>
     <!--end::Global Stylesheets Bundle-->
 </head>
@@ -42,7 +42,8 @@
                 <!--begin::Aside Logo-->
                 <a class="mb-6" th:href="@{/home}">
                     <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
-                        <img alt="로고" id="logo2" th:src="@{/img/logo_name.png}" style="width: 400px; height: 70px; margin-top: 80px;"/>
+                        <img alt="로고" id="logo2" th:src="@{/img/logo_name.png}"
+                             style="width: 400px; height: 70px; margin-top: 80px;"/>
                     </div>
                 </a>
                 <div class="menu-wrapper menu-column menu-fit mt-10">
@@ -55,12 +56,14 @@
                             </a>
                         </div>
                         <div class="menu-item" style="margin: 3px">
-                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/admin/reservation/view}">
+                            <a class="text-dark text-hover-primary ms-3 py-2"
+                               th:href="@{/profile/admin/reservation/view}">
                                 <span class="menu-title">사용자 예약 내역</span>
                             </a>
                         </div>
                         <div class="menu-item" style="margin: 3px">
-                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/admin/management/view}">
+                            <a class="text-dark text-hover-primary ms-3 py-2"
+                               th:href="@{/profile/admin/management/view}">
                                 <span class="menu-title">공연 관리</span>
                             </a>
                         </div>
@@ -69,7 +72,8 @@
                     <div class="menu-wrapper menu-column menu-fit mt-5">
                         <div class="menu-sub menu-fit menu-sub-accordion show">
                             <h1 class="menu-content mb-1 mt-10 text-center" style="font-weight: bold">통합 정보 조회</h1>
-                            <div class="separator border-dark my-1 mx-auto" style="width: 60%; border-width: 3px;"></div>
+                            <div class="separator border-dark my-1 mx-auto"
+                                 style="width: 60%; border-width: 3px;"></div>
                             <div class="menu-item" style="margin: 3px">
                                 <a class="text-dark text-hover-primary ms-3 py-2"
                                    th:href="@{/profile/admin/total/view}">
@@ -98,36 +102,40 @@
         </div>
 
         <div class="d-flex flex-column flex-lg-row-auto bg-primary pt-15 pt-lg-0 d-none d-lg-flex" id="leftArea2">
-                <!--begin::Aside Logo-->
-                <a class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
-                    <img alt="로고" th:src="@{/img/logo_name.png}" style="width: 400px; height: 70px;"/>
-                </a>
-                <!--end::Aside Logo-->
+            <!--begin::Aside Logo-->
+            <a class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
+                <img alt="로고" th:src="@{/img/logo_name.png}" style="width: 400px; height: 70px;"/>
+            </a>
+            <!--end::Aside Logo-->
         </div>
 
         <!--사이드-->
         <!--begin::Aside-->
         <!--begin::Content-->
         <!--메인폼-->
-        <div class="login-content flex-lg-row-fluid d-flex flex-column overflow-hidden py-10 py-lg-20 px-10 p-lg-7 mx-auto mw-1000px w-100" style="display: flex">
+        <div class="login-content flex-lg-row-fluid d-flex flex-column overflow-hidden py-10 py-lg-20 p-lg-7 mx-auto mw-1000px w-100"
+             style="display: flex">
             <!--begin::Wrapper-->
             <!--begin::Signin Form-->
-            <form class="form w-450px  needs-validation text-center" id="kt_login_signin_form" novalidate>
+            <div style="display: flex;">
+            <span class="form w-450px  needs-validation text-center" id="kt_login_signin_form1" novalidate>
                 <div class="pb-5 pb-lg-1">
                     <h3 class="fw-bolder text-dark display-6 text-start">내 계정</h3>
                 </div>
                 <!--begin::Image input-->
                 <div class="image-input image-input-outline"
                      data-kt-image-input="true"
-                     style="display: flex; justify-content: center; align-items: center; width: 350px; height: 400px; margin-left: 50px; margin-right: 50px;"
+                     style="display: flex; justify-content: center; align-items: center; width: 350px; height: 400px; margin-right: 50px; margin-top: 50px"
                      id="profileImg">
                 </div>
                 <!--end::Image input-->
-                <div class="mb-5 mw-450px text-center">
+            </span>
+                <span class="form w-400px  needs-validation text-center" id="kt_login_signin_form2" novalidate>
+                <div class="mb-5 mw-450px text-center" style="margin-top: 55px">
                     <label class="form-label fs-6 fw-bolder text-dark pt-5" style="float:left;">아이디</label>
                     <input autocomplete="off" class="form-control form-control-lg form-control-solid"
                            name="id" id="admin-id"
-                           placeholder="" style="border-color: #0099FF; font-weight: bold" type="text"  readonly/>
+                           placeholder="" style="border-color: #0099FF; font-weight: bold" type="text" readonly/>
                 </div>
                 <div class="fv-row mb-5">
                     <label class="form-label fs-6 fw-bolder text-dark pt-5" style="float:left;">이름</label>
@@ -153,11 +161,12 @@
                            name="phone" id="admin-phone"
                            placeholder="" style="border-color: #0099FF; font-weight: bold" type="text" readonly/>
                 </div>
-            </form>
+            </span>
+            </div>
         </div>
     </div>
 </div>
 <script src="/static/js/profile/profile_adminAccount.js" type="text/javascript"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/jwt-decode/2.2.0/jwt-decode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jwt-decode/2.2.0/jwt-decode.min.js"></script>
 </body>
 </html>
