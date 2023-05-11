@@ -2,6 +2,7 @@ package com.e114.e114_eumyuratodemo1.jdbc;
 
 import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.ReservationDTO;
+import com.e114.e114_eumyuratodemo1.dto.TicketDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -50,6 +51,13 @@ public interface CommonMemberDAO {
  int deleteCommonReservation(int id);
 
  int deleteCommonTicket(int rid);
+
+ TicketDTO findTicketByRid(int rid); //추가
+
+ ReservationDTO findReservationById(int id); //추가
+
+ int deleteBooked(int sId, List<String> seatNumList); //추가
+
 
  //회원정보 수정
  void modifyCommonWithoutImage(CommonMemberDTO commonMemberDTO);
