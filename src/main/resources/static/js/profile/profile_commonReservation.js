@@ -106,7 +106,7 @@ function createPagination(totalItems, perPage, currentPage) {
 }
 
 function deleteReservation(reservationId) {
-    if (!confirm('정말로 이 공연을 취소하시겠습니까?')) {
+    if (!confirm('정말로 이 예약을 취소하시겠습니까?')) {
         return;
     }
 
@@ -122,9 +122,10 @@ function deleteReservation(reservationId) {
     })
         .then((response) => {
             if (response.ok) {
-                alert('공연이 성공적으로 취소되었습니다.');
+                alert('예약이 성공적으로 취소되었습니다.');
                 const searchColumn = document.getElementById('searchColumn').value;
                 const searchKeyword = document.getElementById('searchKeyword').value;
+                location.reload();
                 getReservationList(token, searchColumn, searchKeyword, currentPage);
             } else {
                 throw new Error('응답에 문제가 있습니다.');

@@ -83,11 +83,11 @@ public class EnterpriseService {
         enterpriseMemberDTO.setNum(num);
         enterpriseMemberDTO.setEmail(email);
         enterpriseMemberDTO.setPhone(phone);
-        enterpriseMemberDTO.setAdminNum(3);  // 아티스트 회원의 경우 adminNum 값을 1로 설정
+        enterpriseMemberDTO.setAdminNum(3);  // 기업 회원의 경우 adminNum 값을 3로 설정
 
         // artistMemberDAO를 사용하여 회원 정보 저장
         int result = enterpriseMemberDAO.insert(enterpriseMemberDTO);
-        return result == 3;
+        return result == 1;
     }
 
     public List<CommonMemberDTO> viewAllCommons(){

@@ -36,7 +36,7 @@
     </select>
 
     <!-- 아이디로 회원 정보 가져오기(중복) -->
-    <select id="useById" parameterType="java.lang.String" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
+    <select id="useById" parameterType="java.lang.String" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
         SELECT *
         FROM artist_member
         WHERE id = #{id}
