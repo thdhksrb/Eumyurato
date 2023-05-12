@@ -293,11 +293,12 @@
 
 // 회원가입 이벤트 핸들러
 const joinButton = document.getElementById('joinButton');
-joinButton.addEventListener('click', async function (event) {
-    const form = document.getElementById('myForm');
+joinButton.addEventListener('click', async function (e) {
     event.preventDefault();
+    const form = document.getElementById('myForm');
+
     // 유효성 검사
-    if (form.checkValidity() === false) {
+    if (!form.checkValidity()) {
         form.classList.add('was-validated');
         $('#error_modal').modal('show');
         return;
@@ -310,15 +311,16 @@ joinButton.addEventListener('click', async function (event) {
             method: 'POST',
             body: formData
         });
+
         if (response.ok) {
             // 회원가입 성공 시 모달 팝업 띄우기
-           $('#result_modal').modal('show');
+            $('#result_modal').modal('show');
             setTimeout(function () {
                 window.location.href = "/loginjoin/common/login";
             }, 3000); // 3초 후 로그인 페이지로 이동
         } else {
             // 회원가입 실패 시 모달 팝업 띄우기
-         $('#error_modal').modal('show');
+            $('#error_modal').modal('show');
         }
     } catch (error) {
         // 회원가입 실패 시 모달 팝업 띄우기

@@ -285,7 +285,7 @@ joinButton.addEventListener('click', async function (e) {
     const form = document.getElementById('myForm');
 
     // 유효성 검사
-    if (form.checkValidity() === false) {
+    if (!form.checkValidity()) {
         form.classList.add('was-validated');
         $('#error_modal').modal('show');
         return;
