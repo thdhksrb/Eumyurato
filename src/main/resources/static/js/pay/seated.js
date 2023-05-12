@@ -139,14 +139,14 @@ xhr.onload = function() {
         console.error('Error: ' + xhr.status);
     }
 };
-xhr.open('GET', 'http://localhost:8081/smallconcert/detail/'+id+'/calendar/'+day+'/json');
+xhr.open('GET', '/smallconcert/detail/'+id+'/calendar/'+day+'/json');
 xhr.send();
 
 const selectCompletedButton = document.querySelector('#selectCompleted');
 selectCompletedButton.disabled = true;
 selectCompletedButton.addEventListener('click', function() {
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://localhost:8081/smallconcert/detail/' +id+ '/calendar/' +day+ '/pay' );
+    xhr.open('POST', '/smallconcert/detail/' +id+ '/calendar/' +day+ '/pay' );
     xhr.setRequestHeader('Content-Type', 'application/json');
 
     xhr.onload = function() {
