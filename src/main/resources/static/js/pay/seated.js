@@ -70,7 +70,6 @@ window.onload = function() {
         navLogin.style.display = "none";
 
         const navLogout = document.getElementById("navLogout");
-        navLogout.style.display = "flex";
         navLogout.querySelector("#logoutBtn").appendChild(logoutBtn);
     } else {
         // 로그인 상태가 아닌 경우
