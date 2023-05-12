@@ -50,7 +50,8 @@
                 </a>
                 <div class="menu-wrapper menu-column menu-fit mt-10">
                     <div class="menu-sub menu-fit menu-sub-accordion show mb-20">
-                        <h1 class="menu-content mb-1 mt-10 text-center" style="font-weight: bold; font-size: 30px;">마이페이지</h1>
+                        <h1 class="menu-content mb-1 mt-10 text-center" style="font-weight: bold; font-size: 30px;">
+                            마이페이지</h1>
                         <div class="separator border-dark my-1 mx-auto" style="width: 60%; border-width: 3px;"></div>
                         <div class="menu-item" style="margin: 3px">
                             <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/admin/account}">
@@ -58,12 +59,14 @@
                             </a>
                         </div>
                         <div class="menu-item" style="margin: 3px">
-                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/admin/reservation/view}">
+                            <a class="text-dark text-hover-primary ms-3 py-2"
+                               th:href="@{/profile/admin/reservation/view}">
                                 <span class="menu-title" style="font-size: 20px;">사용자 예약 내역</span>
                             </a>
                         </div>
                         <div class="menu-item" style="margin: 3px">
-                            <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/admin/management/view}">
+                            <a class="text-dark text-hover-primary ms-3 py-2"
+                               th:href="@{/profile/admin/management/view}">
                                 <span class="menu-title" style="font-size: 20px;">공연 관리</span>
                             </a>
                         </div>
@@ -71,8 +74,10 @@
 
                     <div class="menu-wrapper menu-column menu-fit mt-5">
                         <div class="menu-sub menu-fit menu-sub-accordion show">
-                            <h1 class="menu-content mb-1 mt-10 text-center" style="font-weight: bold; font-size: 30px;">통합 정보 조회</h1>
-                            <div class="separator border-dark my-1 mx-auto" style="width: 60%; border-width: 3px;"></div>
+                            <h1 class="menu-content mb-1 mt-10 text-center" style="font-weight: bold; font-size: 30px;">
+                                통합 정보 조회</h1>
+                            <div class="separator border-dark my-1 mx-auto"
+                                 style="width: 60%; border-width: 3px;"></div>
                             <div class="menu-item" style="margin: 3px">
                                 <a class="text-dark text-hover-primary ms-3 py-2"
                                    th:href="@{/profile/admin/total/view}">
@@ -121,12 +126,21 @@
             <!--begin::Signin Form-->
             <div class="form w-1000px  needs-validation text-center" id="kt_login_signin_form" novalidate>
                 <div style="color:#000000; background-color:#FFFFFF; padding:25px;  height: 600px;">
-                    <div style="display: flex; align-items: center; margin-bottom: 20px;">
-                        <h4 style="font-size: 24px; flex-grow: 1;"><strong>공연 정보</strong></h4>
-                        <button class="text-gray-600 text-hover-primary ms-3" id="buskingBtn">버스킹 공연</button>
-                        <button class="text-gray-600 text-hover-primary ms-3" id="smallConcertBtn">소규모 공연</button>
-                        <button class="text-gray-600 text-hover-primary ms-3" id="localFestivalBtn">지역 축제</button>
+                    <div style="display: flex; align-items: center; margin-bottom: 5px;">
+                        <div class="text-start" style="display: flex; margin-bottom: 20px;">
+                            <p style="font-size: 50px; font-weight: bold; flex-grow: 1; ">공연 정보</p>
+                        </div>
+                        <a class="text-gray-600 text-hover-primary" style="font-size: 20px; margin-left: 350px; cursor:pointer;" id="buskingBtn">버스킹 공연</a>
+                        <a target="_blank"
+                           class="text-gray-600 text-hover-primary ms-3" style=" font-size: 20px;">|</a>
+                        <a class="text-gray-600 text-hover-primary ms-3"
+                                id="smallConcertBtn" style=" font-size: 20px; cursor:pointer;">소규모 공연</a>
+
+                        <a target="_blank"
+                           class="text-gray-600 text-hover-primary ms-3" style=" font-size: 20px;">|</a>
+                        <a class="text-gray-600 text-hover-primary ms-3" style=" font-size: 20px; cursor:pointer;" id="localFestivalBtn">지역 축제</a>
                     </div>
+
                     <div class="search-container">
                         <select id="searchColumn" style="width: 10%; height: 40px; border-radius: 5px;">
                             <!-- 버스킹 공연 옵션 -->
@@ -145,8 +159,9 @@
                             <option class="localfestival" value="org">주최 기관</option>
                             <option class="localfestival" value="location">위치</option>
                         </select>
-                        <input type="text" id="searchKeyword" placeholder="검색어 입력" style="width: 30%; height: 40px; border-radius: 5px; border: 1px solid #cccad4">
-                        <button class="btn btn-primary" id="searchBtn" style="width: 10%;" >Search</button>
+                        <input type="text" id="searchKeyword" placeholder="검색어 입력"
+                               style="width: 30%; height: 40px; border-radius: 5px; border: 1px solid #cccad4">
+                        <button class="btn btn-primary" id="searchBtn" style="width: 10%;">Search</button>
                     </div>
                     <div>
                         <div class="container mt-5">

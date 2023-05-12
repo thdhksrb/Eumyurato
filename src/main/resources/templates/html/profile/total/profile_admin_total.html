@@ -122,14 +122,21 @@
             <!--begin::Signin Form-->
             <div class="form w-1000px  needs-validation text-center" id="kt_login_signin_form" novalidate>
                 <div style="color:#000000; background-color:#FFFFFF; padding:25px;  height: 600px;">
-                    <div style="display: flex; align-items: center; margin-bottom: 20px;">
-                        <h4 style="font-size: 24px; flex-grow: 1;"><strong>회원 정보</strong></h4>
-                        <button class="text-gray-600 ms-3 fs-5" id="commonBtn">일반 회원</button>
-                        <a target="_blank" class="text-gray-600 text-hover-primary ms-3">|</a>
-                        <button class="text-gray-600 ms-3 fs-5" id="artistBtn">아티스트 회원</button>
-                        <a target="_blank" class="text-gray-600 text-hover-primary ms-3">|</a>
-                        <button class="text-gray-600 ms-3 fs-5" id="enterpriseBtn">기업 회원</button>
+                    <div style="display: flex; align-items: center; margin-bottom: 5px;">
+                        <div class="text-start" style="display: flex; margin-bottom: 20px;">
+                            <p style="font-size: 50px; font-weight: bold; flex-grow: 1; ">회원 정보</p>
+                        </div>
+                        <a class="text-gray-600 text-hover-primary" style=" font-size: 20px; margin-left: 350px; cursor:pointer;" id="commonBtn">일반 회원</a>
+                        <a target="_blank"
+                           class="text-gray-600 text-hover-primary ms-3" style=" font-size: 20px;">|</a>
+                        <a class="text-gray-600 text-hover-primary ms-3"
+                           id="artistBtn" style=" font-size: 20px; cursor:pointer;">아티스트 회원</a>
+
+                        <a target="_blank"
+                           class="text-gray-600 text-hover-primary ms-3" style=" font-size: 20px;">|</a>
+                        <a class="text-gray-600 text-hover-primary ms-3" style=" font-size: 20px; cursor:pointer;" id="enterpriseBtn">기업 회원</a>
                     </div>
+
                     <span class="search-container">
                         <select id="searchColumn" style="width: 10%; height: 40px; border-radius: 5px;">
                             <!-- 일반 회원 옵션 -->
