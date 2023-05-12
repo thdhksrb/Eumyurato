@@ -226,7 +226,7 @@ public class AdminController {
     @GetMapping("/profile/admin/management/view")
     public String adminAccountManagement() {
 
-        return "html/profile/concertManagement/profile_admin_concertmanagement";
+        return "html/profile/concertManagement/profile_admin_concertManagement";
     }
 
     @GetMapping("/profile/admin/management")

@@ -85,7 +85,7 @@ public class ArtistController {
     @GetMapping("/profile/artist/management/view")
     public String artistBuskingManagement() {
 
-        return "html/profile/concertManagement/profile_artist_concertmanagement";
+        return "html/profile/concertManagement/profile_artist_concertManagement";
     }
 
     @GetMapping("/profile/artist/management")
