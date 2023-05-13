@@ -240,6 +240,19 @@ function viewBusking(data){
                     li.addEventListener('click',function(){
                         goToBuskingDetail(record.id);
                     })
+
+                    li.addEventListener('mouseover',function(){
+                        var position = marker.getPosition();
+                        map.setCenter(position);
+                        clickMakerListener(map, marker, infowindow)();
+
+                    })
+
+                    li.addEventListener('mouseout',function(){
+                        clickMapListener(infowindow)();
+                    })
+
+
                 }
             });
         })(record);
@@ -334,6 +347,15 @@ function viewSmallConcert(data){
                     li.addEventListener('click',function(){
                         goToSmallConcertDetail(record.id);
                     })
+
+                    li.addEventListener('mouseover',function(){
+                        var position = marker.getPosition();
+                        map.setCenter(position);
+                        clickMakerListener(map, marker, infowindow)();
+                    })
+                    li.addEventListener('mouseout',function(){
+                        clickMapListener(infowindow)();
+                    })
                 }
             });
         })(record);
@@ -419,6 +441,15 @@ function viewLocalFest(data){
                     li.addEventListener('click',function(){
                         goToLocalDetail(record.id);
                     })
+
+                    li.addEventListener('mouseover',function(){
+                        var position = marker.getPosition();
+                        map.setCenter(position);
+                        clickMakerListener(map, marker, infowindow)();
+                    })
+                    li.addEventListener('mouseout',function(){
+                        clickMapListener(infowindow)();
+                    })
                 }
             });
         })(record);
@@ -499,6 +530,9 @@ function modalSmall(record) {
 // 인포윈도우를 표시하는 클로저를 만드는 함수
 function clickMakerListener(map, marker, infowindow) {
     return function() {
+
+
+
         infowindow.open(map, marker);
     };
 }
