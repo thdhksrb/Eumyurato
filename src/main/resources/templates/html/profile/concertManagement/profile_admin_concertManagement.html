@@ -55,7 +55,7 @@
                         <div class="separator border-dark my-1 mx-auto" style="width: 60%; border-width: 3px;"></div>
                         <div class="menu-item" style="margin: 3px">
                             <a class="text-dark text-hover-primary ms-3 py-2" th:href="@{/profile/admin/account}">
-                                <span class="menu-title" style="font-size: 20px;">내 계정</span>
+                                <span class="menu-title" style="font-size: 20px; margin-right: 85px;">내 계정</span>
                             </a>
                         </div>
                         <div class="menu-item" style="margin: 3px">
@@ -67,7 +67,7 @@
                         <div class="menu-item" style="margin: 3px">
                             <a class="text-dark text-hover-primary ms-3 py-2"
                                th:href="@{/profile/admin/management/view}">
-                                <span class="menu-title" style="font-size: 20px;">공연 관리</span>
+                                <span class="menu-title" style="font-size: 20px; margin-right: 65px;">공연 관리</span>
                             </a>
                         </div>
                     </div>
@@ -81,19 +81,19 @@
                             <div class="menu-item" style="margin: 3px">
                                 <a class="text-dark text-hover-primary ms-3 py-2"
                                    th:href="@{/profile/admin/total/view}">
-                                    <span class="menu-title" style="font-size: 20px;">회원 정보</span>
+                                    <span class="menu-title" style="font-size: 20px; margin-right: 65px;">회원 정보</span>
                                 </a>
                             </div>
                             <div class="menu-item" style="margin: 3px">
                                 <a class="text-dark text-hover-primary ms-3 py-2"
                                    th:href="@{/profile/admin/total/chart}">
-                                    <span class="menu-title" style="font-size: 20px;">회원 종합 차트</span>
+                                    <span class="menu-title" style="font-size: 20px; margin-right: 20px;">회원 종합 차트</span>
                                 </a>
                             </div>
                             <div class="menu-item" style="margin: 3px">
                                 <a class="text-dark text-hover-primary ms-3 py-2"
                                    th:href="@{/profile/admin/info/view}">
-                                    <span class="menu-title" style="font-size: 20px;">공지사항</span>
+                                    <span class="menu-title" style="font-size: 20px; margin-right: 70px;">공지사항</span>
                                 </a>
                             </div>
                         </div>
@@ -120,14 +120,13 @@
         <!--begin::Aside-->
         <!--begin::Content-->
         <!--메인폼-->
-        <div class="login-content flex-lg-row-fluid d-flex flex-column overflow-auto py-10 py-lg-20 px-10 p-lg-7 mx-auto mw-1000px w-100"
-             style="display: flex">
+        <div class="login-content flex-lg-row-fluid d-flex flex-column overflow-hidden py-10 py-lg-20 px-5 p-lg-5" style="max-width: 1300px; width: 1200px;">
             <!--begin::Wrapper-->
             <!--begin::Signin Form-->
-            <div class="form w-1000px h-1000px needs-validation text-center" id="kt_login_signin_form" novalidate>
-                <div style="color:#000000; background-color:#FFFFFF; padding:25px;  height: 600px;">
+            <div class="form needs-validation text-center" id="kt_login_signin_form" style="height: 700px;"novalidate>
+                <div style="color:#000000; background-color:#FFFFFF; padding:15px;  height: 550px;">
                     <div style="display: flex; align-items: center; margin-bottom: 5px;">
-                        <div class="text-start" style="display: flex; margin-bottom: 20px;">
+                        <div class="text-start" style="display: flex; margin-bottom: 15px;">
                             <p style="font-size: 50px; font-weight: bold; flex-grow: 1; ">공연 정보</p>
                         </div>
                         <a class="text-gray-600 text-hover-primary" style="font-size: 20px; margin-left: 350px; cursor:pointer;" id="buskingBtn">버스킹 공연</a>
@@ -167,7 +166,7 @@
                         <div class="container mt-5">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <table class="table table-rounded table-striped border gy-7 gs-7" id="eventTable">
+                                    <table class="table table-rounded table-striped border gy-7 gs-7" id="eventTable" style="width: 1200px;">
                                         <thead id="eventThead" style="position: sticky; top: 0">
                                         <tr class="fw-bold fs-6 text-gray-800 border-bottom border-gray-200">
                                             <!-- 기본 공통 컬럼 -->
