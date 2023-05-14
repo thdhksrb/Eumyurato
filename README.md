@@ -35,6 +35,7 @@ Spring boot를 활용한 버스킹/소규모 공연과 지역축제 위치 기�
 * 신민채
 
 ## 개발환경
-![image](https://github.com/bomin1996/E114_Eumyurato/assets/126555995/38960ed8-06e3-4c31-a9c1-4bcb9a222796)
+
+<img src="https://github.com/bomin1996/E114_Eumyurato/assets/126555995/38960ed8-06e3-4c31-a9c1-4bcb9a222796" width="50%">
 
 ## 구조도
