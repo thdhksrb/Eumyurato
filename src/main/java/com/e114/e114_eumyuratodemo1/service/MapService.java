@@ -104,7 +104,7 @@ public class MapService {
         connection.setRequestProperty("Authorization","KakaoAK 51728ed0dc1cc881ebce676fb8920a0c");
         connection.setRequestProperty("Content-type","application/x-www-form-urlencoded;charset=utf-8");
         connection.setDoOutput(true);
-        String param = "cid=TC0ONETIME&partner_order_id=partner_order_id&partner_user_id=partner_user_id&item_name=초코파이&quantity=1&total_amount=2200&tax_free_amount=0&approval_url=http://49.50.161.65:8081/kakaopay/success&cancel_url=http://49.50.161.65:8081/kakaopay/fail&fail_url=http://49.50.161.65:8081/kakaopay/fail";
+        String param = "cid=TC0ONETIME&partner_order_id=partner_order_id&partner_user_id=partner_user_id&item_name=초코파이&quantity=1&total_amount=2200&tax_free_amount=0&approval_url=http://localhost:8081/kakaopay/success&cancel_url=http://localhost:8081/kakaopay/fail&fail_url=http://localhost:8081/kakaopay/fail";
         OutputStream outputStream = connection.getOutputStream();
         DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
         dataOutputStream.writeBytes(param);
@@ -130,7 +130,7 @@ public class MapService {
         connection.setRequestProperty("Authorization","KakaoAK 51728ed0dc1cc881ebce676fb8920a0c");
         connection.setRequestProperty("Content-type","application/x-www-form-urlencoded;charset=utf-8");
         connection.setDoOutput(true);
-        String param = "cid=TC0ONETIME&partner_order_id=partner_order_id&partner_user_id=partner_user_id&item_name=초코파이&quantity=1&total_amount=2200&tax_free_amount=0&approval_url=http://49.50.161.65:8081/kakaopay/success/donation&cancel_url=http://49.50.161.65:8081/kakaopay/fail/donation&fail_url=http://49.50.161.65:8081/kakaopay/fail/donation";
+        String param = "cid=TC0ONETIME&partner_order_id=partner_order_id&partner_user_id=partner_user_id&item_name=초코파이&quantity=1&total_amount=2200&tax_free_amount=0&approval_url=http://localhost:8081/kakaopay/success/donation&cancel_url=http://localhost:8081/kakaopay/fail/donation&fail_url=http://localhost:8081/kakaopay/fail/donation";
         OutputStream outputStream = connection.getOutputStream();
         DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
         dataOutputStream.writeBytes(param);
