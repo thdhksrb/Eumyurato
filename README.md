@@ -32,7 +32,11 @@ Spring boot를 활용한 버스킹/소규모 공연과 지역축제 위치 기�
 
 ## :pushpin: 담당 기능
 
-![image](https://github.com/bomin1996/E114_Eumyurato/assets/126555995/b3ac4bcb-f943-49c7-9841-a9f03c8976f8)
+![image](https://github.com/Minchae128/Eumyurato/assets/122027566/e3e5c1cd-d9c6-46f0-aa8e-2170305b2a6a)
+<br>
+<img src="https://github.com/Minchae128/Eumyurato/assets/122027566/a4e6c133-cd93-462a-be64-de1ebafbfe78" width = 90%/>
+
+<br>
 
 ## :pushpin: 개발환경
 
