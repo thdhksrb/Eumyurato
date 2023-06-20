@@ -2,11 +2,10 @@ package com.e114.e114_eumyuratodemo1.service;
 
 import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.ReservationDTO;
-import com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO;
 import com.e114.e114_eumyuratodemo1.dto.TicketDTO;
-import com.e114.e114_eumyuratodemo1.jdbc.ArtistMemberDAO;
-import com.e114.e114_eumyuratodemo1.jdbc.CommonMemberDAO;
-import com.e114.e114_eumyuratodemo1.jdbc.EnterpriseMemberDAO;
+import com.e114.e114_eumyuratodemo1.dao.ArtistMemberDAO;
+import com.e114.e114_eumyuratodemo1.dao.CommonMemberDAO;
+import com.e114.e114_eumyuratodemo1.dao.EnterpriseMemberDAO;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
 import org.springframework.beans.factory.annotation.Autowired;

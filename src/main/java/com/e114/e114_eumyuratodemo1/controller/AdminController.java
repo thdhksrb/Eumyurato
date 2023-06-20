@@ -1,7 +1,7 @@
 package com.e114.e114_eumyuratodemo1.controller;
 
 import com.e114.e114_eumyuratodemo1.dto.*;
-import com.e114.e114_eumyuratodemo1.jdbc.AdminMemberDAO;
+import com.e114.e114_eumyuratodemo1.dao.AdminMemberDAO;
 import com.e114.e114_eumyuratodemo1.jwt.JwtUtils;
 import com.e114.e114_eumyuratodemo1.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,19 +10,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+//관리자 계정 페이지 컨트롤러
 @Controller
 public class AdminController {
 
@@ -49,7 +44,7 @@ public class AdminController {
         System.out.println("id : " + adminUserId);
 
         if (adminUserId != null) {
-            // ID를 이용해 관리자 정보를 가져옵니다.
+            // ID를 이용해 관리자 정보를 가져오기
             EnterpriseMemberDTO admin = memberDAO.getAdminInfoById(adminUserId);
             if (admin != null) {
                 return ResponseEntity.ok(admin);

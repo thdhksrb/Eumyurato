@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- CommonMemberMapper.xml -->
-<mapper namespace="com.e114.e114_eumyuratodemo1.jdbc.CommonMemberDAO">
+<mapper namespace="com.e114.e114_eumyuratodemo1.dao.CommonMemberDAO">
 
     <select id="findById" parameterType="java.lang.String" resultType="com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO">
         SELECT *

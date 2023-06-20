@@ -1,11 +1,10 @@
 package com.e114.e114_eumyuratodemo1.controller;
 
 import com.e114.e114_eumyuratodemo1.dto.*;
-import com.e114.e114_eumyuratodemo1.jdbc.ArtistMemberDAO;
+import com.e114.e114_eumyuratodemo1.dao.ArtistMemberDAO;
 import com.e114.e114_eumyuratodemo1.jwt.JwtUtils;
 import com.e114.e114_eumyuratodemo1.service.ArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -19,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+//아티스트 회원 페이지 컨트롤러
 @Controller
 public class ArtistController {
 

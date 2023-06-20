@@ -1,4 +1,4 @@
-package com.e114.e114_eumyuratodemo1.jdbc;
+package com.e114.e114_eumyuratodemo1.dao;
 
 import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.InfoDTO;
@@ -67,5 +67,8 @@ public interface CommonMemberDAO {
  int commonNid(String nid);
 
  List<InfoDTO> getInfo();
+
+
+ CommonMemberDTO selectCommonMemberById(String id);
 
 }

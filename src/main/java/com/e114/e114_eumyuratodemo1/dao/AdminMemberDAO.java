@@ -1,4 +1,4 @@
-package com.e114.e114_eumyuratodemo1.jdbc;
+package com.e114.e114_eumyuratodemo1.dao;
 
 import com.e114.e114_eumyuratodemo1.dto.*;
 import org.apache.ibatis.annotations.Mapper;

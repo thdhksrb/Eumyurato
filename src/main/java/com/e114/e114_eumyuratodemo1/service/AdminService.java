@@ -2,22 +2,11 @@ package com.e114.e114_eumyuratodemo1.service;
 
 
 import com.e114.e114_eumyuratodemo1.dto.*;
-import com.e114.e114_eumyuratodemo1.jdbc.AdminMemberDAO;
+import com.e114.e114_eumyuratodemo1.dao.AdminMemberDAO;
 
-import com.google.cloud.storage.BlobInfo;
-import com.google.cloud.storage.Storage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.*;
 
 @Service
@@ -25,12 +14,6 @@ public class AdminService {
 
     @Autowired
     AdminMemberDAO dao;
-
-    @Autowired
-    private Storage storage;
-
-    @Value("${spring.cloud.gcp.storage.bucket}")
-    private String bucketName;
 
     public List<CommonMemberDTO> viewAllCommons() {
         return dao.getCommonMembers();

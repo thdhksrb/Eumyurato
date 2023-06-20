@@ -9,6 +9,7 @@ import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
 
+//사진 파일 저장용 구글클라우드 스토리지 설정
 @Configuration
 public class GoogleCloudStorageConfig {
     @Bean

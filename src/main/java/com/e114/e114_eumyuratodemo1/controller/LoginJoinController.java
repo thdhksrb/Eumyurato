@@ -4,9 +4,9 @@ import com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO;
-import com.e114.e114_eumyuratodemo1.jdbc.ArtistMemberDAO;
-import com.e114.e114_eumyuratodemo1.jdbc.CommonMemberDAO;
-import com.e114.e114_eumyuratodemo1.jdbc.EnterpriseMemberDAO;
+import com.e114.e114_eumyuratodemo1.dao.ArtistMemberDAO;
+import com.e114.e114_eumyuratodemo1.dao.CommonMemberDAO;
+import com.e114.e114_eumyuratodemo1.dao.EnterpriseMemberDAO;
 import com.e114.e114_eumyuratodemo1.jwt.JwtUtils;
 import com.e114.e114_eumyuratodemo1.service.ArtistService;
 import com.e114.e114_eumyuratodemo1.service.CommonService;
@@ -20,18 +20,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.sound.midi.Soundbank;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+//로그인 회원가입 컨트롤러
 @Controller
 public class LoginJoinController {
 

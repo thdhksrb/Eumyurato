@@ -1,13 +1,10 @@
 package com.e114.e114_eumyuratodemo1.service;
 
 import com.e114.e114_eumyuratodemo1.dto.*;
-import com.e114.e114_eumyuratodemo1.jdbc.ArtistMemberDAO;
-import com.e114.e114_eumyuratodemo1.jdbc.CommonMemberDAO;
-import com.e114.e114_eumyuratodemo1.jdbc.EnterpriseMemberDAO;
-import com.e114.e114_eumyuratodemo1.mapper.ArtistMemberMapper;
-import com.e114.e114_eumyuratodemo1.mapper.MemberMapper;
+import com.e114.e114_eumyuratodemo1.dao.ArtistMemberDAO;
+import com.e114.e114_eumyuratodemo1.dao.CommonMemberDAO;
+import com.e114.e114_eumyuratodemo1.dao.EnterpriseMemberDAO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import javax.mail.*;
@@ -30,8 +27,6 @@ public class MemberService {
     @Autowired
     private EnterpriseMemberDAO enterpriseMemberDAO;
 
-    @Autowired
-    private JavaMailSender emailSender;
 
     public Member findMemberByEmail(String email) {
         CommonMemberDTO commonMember = commonMemberDAO.findByEmail(email);
@@ -119,14 +114,9 @@ public class MemberService {
     }
 
     //공연 랭킹
-    private final MemberMapper memberMapper;
-
-    public MemberService(MemberMapper memberMapper) {
-        this.memberMapper = memberMapper;
-    }
 
     public List<SmallConcertDTO> selectTop5concert() {
-        return memberMapper.selectTop5Concert();
+        return artistMemberDAO.selectTop5concert();
     }
 
 }

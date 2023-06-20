@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- ArtistMapper.xml -->
-<mapper namespace="com.e114.e114_eumyuratodemo1.jdbc.ArtistMemberDAO">
+<mapper namespace="com.e114.e114_eumyuratodemo1.dao.ArtistMemberDAO">
     <select id="findById" resultType="com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO">
         SELECT *
         FROM artist_member
@@ -75,7 +75,7 @@
 
     <!-- selectTop5Artists 쿼리 정의 -->
     <select id="selectTop5Artists" resultMap="artistMemberDTOResultMap">
-        SELECT id, name, point
+        SELECT id, name, point, image
         FROM artist_member
         ORDER BY point DESC LIMIT 5
     </select>
@@ -180,5 +180,12 @@
     <select id="getInfo" resultType="com.e114.e114_eumyuratodemo1.dto.InfoDTO">
         SELECT no, title, date_created
         FROM info
+    </select>
+
+    <!-- selectTop5Artists 쿼리 정의 -->
+    <select id="selectTop5concert" resultType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
+        SELECT id, name, viewCount, image
+        FROM small_concert
+        ORDER BY viewCount DESC LIMIT 5
     </select>
 </mapper>

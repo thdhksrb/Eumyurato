@@ -3,15 +3,12 @@ package com.e114.e114_eumyuratodemo1.controller;
 import com.e114.e114_eumyuratodemo1.dto.*;
 import com.e114.e114_eumyuratodemo1.jwt.JwtUtils;
 import com.e114.e114_eumyuratodemo1.service.MapService;
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.util.Arrays;
@@ -19,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+//지도 및 메인페이지 컨트롤러
 @Controller
 public class MapController {
 
@@ -65,17 +63,6 @@ public class MapController {
     @ResponseBody
     public SmallConcertDTO smallConcertDetailJson(@PathVariable("id") int id) throws IOException {
         SmallConcertDTO dto = mapService.selectConcert(id);
-
-//        String imagePath = dto.getImage();
-//        // 이미지 파일이 로컬에 저장된 파일인 경우
-//        if (imagePath != null && !imagePath.startsWith("https://")) {
-//        //이미지 경로 바이트 형식으로 변환
-//        InputStream inputStream = new FileInputStream(dto.getImage());
-//        byte[] imageByteArray = IOUtils.toByteArray(inputStream);
-//        inputStream.close();
-//
-//        dto.setImageByteArray(imageByteArray);
-//        }
 
         return dto;
     }

@@ -3,29 +3,20 @@ package com.e114.e114_eumyuratodemo1.service;
 import com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.BuskingDTO;
 import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
-import com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO;
-import com.e114.e114_eumyuratodemo1.jdbc.ArtistMemberDAO;
-import com.e114.e114_eumyuratodemo1.mapper.ArtistMemberMapper;
-import org.apache.ibatis.session.SqlSession;
+import com.e114.e114_eumyuratodemo1.dao.ArtistMemberDAO;
 import com.e114.e114_eumyuratodemo1.jwt.JwtUtils;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
-import java.util.List;
 
 
 //로그인 요청 처리, 사용자 아이디에 해당하는 권한 정보 조회를 담당
@@ -35,8 +26,6 @@ public class ArtistService {
     @Autowired
     private ArtistMemberDAO artistMemberDAO;
 
-    @Autowired
-    private  ArtistMemberDTO artistMemberDTO;
 
     @Autowired
     private Storage storage;
@@ -44,8 +33,6 @@ public class ArtistService {
     @Value("${spring.cloud.gcp.storage.bucket}")
     private String bucketName;
 
-    @Autowired
-    private JwtUtils jwtUtils;
 
     // 아티스트 회원용 로그인 요청 처리, 사용자 아이디와 비밀번호를 받아 DB에서 일치하는 사용자 정보를 찾습니다.
     // 찾은 경우 사용자 정보를 반환하고, 일치하는 정보가 없는 경우 null을 반환합니다.
@@ -123,15 +110,12 @@ public class ArtistService {
     }
 
 
-    //아티스트 랭킹
-    private final ArtistMemberMapper artistMemberMapper;
 
-    public ArtistService(ArtistMemberMapper artistMemberMapper) {
-        this.artistMemberMapper = artistMemberMapper;
-    }
+
+
 
     public List<ArtistMemberDTO> selectTop5Artists() {
-        return artistMemberMapper.selectTop5Artists();
+        return artistMemberDAO.selectTop5Artists();
     }
 
     public List<CommonMemberDTO> viewAllCommons(){

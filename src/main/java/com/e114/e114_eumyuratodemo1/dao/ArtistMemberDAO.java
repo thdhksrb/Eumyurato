@@ -1,4 +1,4 @@
-package com.e114.e114_eumyuratodemo1.jdbc;
+package com.e114.e114_eumyuratodemo1.dao;
 
 import com.e114.e114_eumyuratodemo1.dto.*;
 import org.apache.ibatis.annotations.Mapper;
@@ -10,19 +10,12 @@ import java.util.Map;
 @Mapper
 public interface ArtistMemberDAO{
     ArtistMemberDTO  findById(@Param("id") String id);
-    String findPwdById(@Param("id") String id);
-    ArtistMemberDTO findByPwd(String pwd);
-    ArtistMemberDTO findByName(String name);
     ArtistMemberDTO findNid(String nid);
     ArtistMemberDTO findSex(String sex);
     ArtistMemberDTO findBrith(String brith);
     ArtistMemberDTO findByEmail(String email);
-    ArtistMemberDTO findByPhone(String phone);
     ArtistMemberDTO findGenre(String genre);
-    ArtistMemberDTO findByAdminNum(String adminNum);
     ArtistMemberDTO findRegistCon(String registCon);
-    ArtistMemberDTO findPoint(String point);
-    ArtistMemberDTO findIByImage(String image);
 
     //회원 가입
     int insert(ArtistMemberDTO artistMemberDTO);
@@ -68,4 +61,9 @@ public interface ArtistMemberDAO{
     List<Map<String, Object>> artistNid(String nid);
 
     List<InfoDTO> getInfo();
+
+    //아티스트 랭킹
+    List<ArtistMemberDTO> selectTop5Artists();
+
+    List<SmallConcertDTO> selectTop5concert();
 }

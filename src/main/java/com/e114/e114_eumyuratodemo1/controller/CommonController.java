@@ -1,11 +1,9 @@
 package com.e114.e114_eumyuratodemo1.controller;
 
 import com.e114.e114_eumyuratodemo1.dto.*;
-import com.e114.e114_eumyuratodemo1.jdbc.CommonMemberDAO;
+import com.e114.e114_eumyuratodemo1.dao.CommonMemberDAO;
 import com.e114.e114_eumyuratodemo1.jwt.JwtUtils;
-import com.e114.e114_eumyuratodemo1.mapper.CommonMemberMapper;
 import com.e114.e114_eumyuratodemo1.service.CommonService;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +17,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+//일반회원 페이지 컨트롤러
 @Controller
 public class CommonController {
 
@@ -31,8 +30,6 @@ public class CommonController {
     @Autowired
     private JwtUtils jwtUtils;
 
-    @Autowired
-    private CommonMemberMapper commonMemberMapper;
 
     @GetMapping("/profile/common/account")
     public String commontAccount(){
