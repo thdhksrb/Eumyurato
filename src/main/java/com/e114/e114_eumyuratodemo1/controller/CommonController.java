@@ -1,7 +1,6 @@
 package com.e114.e114_eumyuratodemo1.controller;
 
 import com.e114.e114_eumyuratodemo1.dto.*;
-import com.e114.e114_eumyuratodemo1.dao.CommonMemberDAO;
 import com.e114.e114_eumyuratodemo1.jwt.JwtUtils;
 import com.e114.e114_eumyuratodemo1.service.CommonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +19,6 @@ import java.util.List;
 //일반회원 페이지 컨트롤러
 @Controller
 public class CommonController {
-
-    @Autowired
-    private CommonMemberDAO commonMemberDAO;
 
     @Autowired
     private CommonService commonService;
@@ -45,7 +41,7 @@ public class CommonController {
 
         if (commonUserId != null) {
             // ID를 이용해 관리자 정보를 가져옵니다.
-            CommonMemberDTO common = commonMemberDAO.getCommonInfoById(commonUserId);
+            CommonMemberDTO common = commonService.getCommonInfoById(commonUserId);
             if (common != null) {
                 return ResponseEntity.ok(common);
             } else {
@@ -85,7 +81,7 @@ public class CommonController {
 
     @GetMapping("/profile/common/info/view")
     public String commonInfoview(Model model) {
-        List<InfoDTO> infos =  commonMemberDAO.getInfo();
+        List<InfoDTO> infos =  commonService.getInfo();
 
         model.addAttribute("infos", infos);
         return "html/profile/board/profile_common_board";

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 @Mapper
-public interface IDAO {
+public interface MapDAO {
     public List<SmallConcertDTO> viewSmallConcert();
     public List<BuskingDTO> viewBusking();
     public List<LocalFestivalDTO> viewLocalFestival();

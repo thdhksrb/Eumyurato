@@ -1,6 +1,6 @@
 package com.e114.e114_eumyuratodemo1.service;
 
-import com.e114.e114_eumyuratodemo1.dao.IDAO;
+import com.e114.e114_eumyuratodemo1.dao.MapDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -14,7 +14,7 @@ public class MapServiceAsync {
 
 
     @Autowired
-    private IDAO dao;
+    private MapDAO dao;
 
     @Async
     public void deleteSeatTemp(Map<String, Object> map) throws InterruptedException {

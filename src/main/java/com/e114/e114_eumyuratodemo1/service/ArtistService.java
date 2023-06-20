@@ -4,9 +4,11 @@ import com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.BuskingDTO;
 import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
 import com.e114.e114_eumyuratodemo1.dao.ArtistMemberDAO;
+import com.e114.e114_eumyuratodemo1.dto.InfoDTO;
 import com.e114.e114_eumyuratodemo1.jwt.JwtUtils;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -200,4 +202,24 @@ public class ArtistService {
     public List<Map<String, Object>> artistNid(String nid){
         return artistMemberDAO.artistNid(nid);
     }
+
+    public ArtistMemberDTO getArtistInfoById(String artistId){
+        return artistMemberDAO.getArtistInfoById(artistId);
+    };
+
+    public List<InfoDTO> getInfo(){
+        return artistMemberDAO.getInfo();
+    };
+
+    public ArtistMemberDTO  findById(String id){
+        return artistMemberDAO.findById(id);
+    };
+
+    public void updatePassword(String id, String password){
+        artistMemberDAO.updatePassword(id, password);
+    };
+
+    public boolean isIdDuplicated(String id){
+        return artistMemberDAO.isIdDuplicated(id);
+    };
 }

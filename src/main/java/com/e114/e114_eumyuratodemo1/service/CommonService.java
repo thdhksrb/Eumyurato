@@ -1,6 +1,7 @@
 package com.e114.e114_eumyuratodemo1.service;
 
 import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
+import com.e114.e114_eumyuratodemo1.dto.InfoDTO;
 import com.e114.e114_eumyuratodemo1.dto.ReservationDTO;
 import com.e114.e114_eumyuratodemo1.dto.TicketDTO;
 import com.e114.e114_eumyuratodemo1.dao.ArtistMemberDAO;
@@ -8,6 +9,7 @@ import com.e114.e114_eumyuratodemo1.dao.CommonMemberDAO;
 import com.e114.e114_eumyuratodemo1.dao.EnterpriseMemberDAO;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -190,6 +192,26 @@ public class CommonService {
         int nidNum = commonMemberDAO.commonNid(nid);
         return nidNum;
     }
+
+    public CommonMemberDTO getCommonInfoById(String commonId){
+        return commonMemberDAO.getCommonInfoById(commonId);
+    };
+
+    public List<InfoDTO> getInfo(){
+        return commonMemberDAO.getInfo();
+    };
+
+    public CommonMemberDTO findById(String id){
+        return commonMemberDAO.findById(id);
+    }
+
+    public void updatePassword(String id, String password){
+        commonMemberDAO.updatePassword(id,password);
+    };
+
+    public boolean isIdDuplicated(String id){
+        return commonMemberDAO.isIdDuplicated(id);
+    };
 }
 
 

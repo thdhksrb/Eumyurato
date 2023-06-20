@@ -9,7 +9,7 @@ import java.util.Map;
 
 @Mapper
 public interface AdminMemberDAO {
-    List<ArtistMemberDTO> getArtistMembers();   // 아시트스 회원 목록 불러오기
+    List<ArtistMemberDTO> getArtistMembers();   // 아티스트 회원 목록 불러오기
     List<CommonMemberDTO> getCommonMembers();   // 일반 회원 목록 불러오기
     List<EnterpriseMemberDTO> getEntMembers();  // 기업 회원 목록 불러오기
     List<ArtistMemberDTO> searchArtistMembers(Map<String, String> params);  // 아티스트 회원 검색

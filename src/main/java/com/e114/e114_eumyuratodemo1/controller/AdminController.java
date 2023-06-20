@@ -1,7 +1,6 @@
 package com.e114.e114_eumyuratodemo1.controller;
 
 import com.e114.e114_eumyuratodemo1.dto.*;
-import com.e114.e114_eumyuratodemo1.dao.AdminMemberDAO;
 import com.e114.e114_eumyuratodemo1.jwt.JwtUtils;
 import com.e114.e114_eumyuratodemo1.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +20,6 @@ import java.util.Map;
 @Controller
 public class AdminController {
 
-    @Autowired
-    private AdminMemberDAO memberDAO;
 
     @Autowired
     private AdminService adminService;
@@ -45,7 +42,7 @@ public class AdminController {
 
         if (adminUserId != null) {
             // ID를 이용해 관리자 정보를 가져오기
-            EnterpriseMemberDTO admin = memberDAO.getAdminInfoById(adminUserId);
+            EnterpriseMemberDTO admin = adminService.getAdminInfoById(adminUserId);
             if (admin != null) {
                 return ResponseEntity.ok(admin);
             } else {
@@ -70,7 +67,7 @@ public class AdminController {
 
     @GetMapping("/profile/admin/info/view")
     public String admimInfoview(Model model) {
-        List<InfoDTO> infos =  memberDAO.getInfo();
+        List<InfoDTO> infos =  adminService.getInfo();
 
         model.addAttribute("infos", infos);
 

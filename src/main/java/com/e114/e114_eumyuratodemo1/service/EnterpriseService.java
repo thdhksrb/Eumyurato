@@ -4,6 +4,7 @@ import com.e114.e114_eumyuratodemo1.dto.*;
 import com.e114.e114_eumyuratodemo1.dao.EnterpriseMemberDAO;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -212,6 +213,26 @@ public class EnterpriseService {
 
         return 1;
     }
+
+    public EnterpriseMemberDTO getEntInfoById(String entId){
+        return enterpriseMemberDAO.getEntInfoById(entId);
+    };
+
+    public List<InfoDTO> getInfo(){
+        return enterpriseMemberDAO.getInfo();
+    };
+
+    public EnterpriseMemberDTO findById(String id){
+        return enterpriseMemberDAO.findById(id);
+    };
+
+    public void updatePassword(String id, String password){
+        enterpriseMemberDAO.updatePassword(id, password);
+    };
+
+    public boolean isIdDuplicated(String id){
+        return enterpriseMemberDAO.isIdDuplicated(id);
+    };
 }
 
 

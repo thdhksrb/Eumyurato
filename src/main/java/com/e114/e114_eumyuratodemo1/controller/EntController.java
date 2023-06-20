@@ -1,7 +1,6 @@
 package com.e114.e114_eumyuratodemo1.controller;
 
 import com.e114.e114_eumyuratodemo1.dto.*;
-import com.e114.e114_eumyuratodemo1.dao.EnterpriseMemberDAO;
 import com.e114.e114_eumyuratodemo1.jwt.JwtUtils;
 import com.e114.e114_eumyuratodemo1.service.EnterpriseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +22,6 @@ import java.util.List;
 public class EntController {
 
     @Autowired
-    private EnterpriseMemberDAO enterpriseMemberDAO;
-
-    @Autowired
     private EnterpriseService enterpriseService;
 
     @Autowired
@@ -45,7 +41,7 @@ public class EntController {
 
         if (entUserId != null) {
             // ID를 이용해 기업회원 정보를 가져오기
-            EnterpriseMemberDTO enter = enterpriseMemberDAO.getEntInfoById(entUserId);
+            EnterpriseMemberDTO enter = enterpriseService.getEntInfoById(entUserId);
             if (enter != null) {
                 return ResponseEntity.ok(enter);
             } else {
@@ -58,7 +54,7 @@ public class EntController {
 
     @GetMapping("/profile/ent/info/view")
     public String enterpriseInfoview(Model model) {
-        List<InfoDTO> infos =  enterpriseMemberDAO.getInfo();
+        List<InfoDTO> infos =  enterpriseService.getInfo();
 
         model.addAttribute("infos", infos);
         return "html/profile/board/profile_enterprise_board";

@@ -4,9 +4,6 @@ import com.e114.e114_eumyuratodemo1.dto.ArtistMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.CommonMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.EnterpriseMemberDTO;
 import com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO;
-import com.e114.e114_eumyuratodemo1.dao.ArtistMemberDAO;
-import com.e114.e114_eumyuratodemo1.dao.CommonMemberDAO;
-import com.e114.e114_eumyuratodemo1.dao.EnterpriseMemberDAO;
 import com.e114.e114_eumyuratodemo1.jwt.JwtUtils;
 import com.e114.e114_eumyuratodemo1.service.ArtistService;
 import com.e114.e114_eumyuratodemo1.service.CommonService;
@@ -42,15 +39,6 @@ public class LoginJoinController {
 
     @Autowired
     private EnterpriseService enterpriseService;
-
-    @Autowired
-    private CommonMemberDAO commonMemberDAO;
-
-    @Autowired
-    private ArtistMemberDAO artistMemberDAO;
-
-    @Autowired
-    private EnterpriseMemberDAO enterpriseMemberDAO;
 
     @Autowired
     private JwtUtils jwtUtils;
@@ -313,13 +301,13 @@ public class LoginJoinController {
     @PostMapping("/loginjoin/Pwfind")
     public String findPassword(@RequestParam String id, @RequestParam String name, @RequestParam String email, Model model) {
         // 입력받은 정보를 이용해 회원 정보를 조회합니다.
-        CommonMemberDTO commonMember = commonMemberDAO.findById(id);
+        CommonMemberDTO commonMember = commonService.findById(id);
         if (commonMember == null || !commonMember.getName().equals(name) || !commonMember.getEmail().equals(email)) {
             // CommonMemberDTO로 조회한 결과가 없는 경우
-            ArtistMemberDTO artistMember = artistMemberDAO.findById(id);
+            ArtistMemberDTO artistMember = artistService.findById(id);
             if (artistMember == null || !artistMember.getName().equals(name) || !artistMember.getEmail().equals(email)) {
                 // ArtistMemberDTO로 조회한 결과가 없는 경우
-                EnterpriseMemberDTO enterpriseMember = enterpriseMemberDAO.findById(id);
+                EnterpriseMemberDTO enterpriseMember = enterpriseService.findById(id);
                 if (enterpriseMember == null || !enterpriseMember.getName().equals(name) || !enterpriseMember.getEmail().equals(email)) {
                     // EnterpriseMemberDTO로 조회한 결과도 없는 경우
                     model.addAttribute("errorMessage", "입력한 정보와 일치하는 회원이 존재하지 않습니다.");
@@ -328,7 +316,7 @@ public class LoginJoinController {
                     // EnterpriseMemberDTO로 조회한 결과가 있는 경우
                     // 비밀번호 업데이트 및 임시 비밀번호 발급
                     String tempPassword = memberService.generateTempPassword();
-                    enterpriseMemberDAO.updatePassword(enterpriseMember.getId(), tempPassword);
+                    enterpriseService.updatePassword(enterpriseMember.getId(), tempPassword);
                     memberService.sendTempPasswordByEmail(enterpriseMember.getEmail(), tempPassword);
                     model.addAttribute("tempPasswordSent", true);
                     return "redirect:/loginjoin/enterprise/login";
@@ -337,7 +325,7 @@ public class LoginJoinController {
                 // ArtistMemberDTO로 조회한 결과가 있는 경우
                 // 비밀번호 업데이트 및 임시 비밀번호 발급
                 String tempPassword = memberService.generateTempPassword();
-                artistMemberDAO.updatePassword(artistMember.getId(), tempPassword);
+                artistService.updatePassword(artistMember.getId(), tempPassword);
                 memberService.sendTempPasswordByEmail(artistMember.getEmail(), tempPassword);
                 model.addAttribute("tempPasswordSent", true);
                 return "redirect:/loginjoin/artist/login";
@@ -346,7 +334,7 @@ public class LoginJoinController {
             // CommonMemberDTO로 조회한 결과가 있는 경우
             // 비밀번호 업데이트 및 임시 비밀번호 발급
             String tempPassword = memberService.generateTempPassword();
-            commonMemberDAO.updatePassword(commonMember.getId(), tempPassword);
+            commonService.updatePassword(commonMember.getId(), tempPassword);
             memberService.sendTempPasswordByEmail(commonMember.getEmail(), tempPassword);
             model.addAttribute("tempPasswordSent", true);
             return "redirect:/loginjoin/common/login";
@@ -357,7 +345,7 @@ public class LoginJoinController {
     //아이디 중복 확인
     @GetMapping("/checkIdDuplicate/{id}")
     public ResponseEntity<Map<String, Boolean>> checkIdDuplicate(@PathVariable String id) {
-        boolean duplicate = commonMemberDAO.isIdDuplicated(id) || artistMemberDAO.isIdDuplicated(id) || enterpriseMemberDAO.isIdDuplicated(id);
+        boolean duplicate = commonService.isIdDuplicated(id) || artistService.isIdDuplicated(id) || enterpriseService.isIdDuplicated(id);
         Map<String, Boolean> response = Collections.singletonMap("duplicate", duplicate);
         return ResponseEntity.ok(response);
     }

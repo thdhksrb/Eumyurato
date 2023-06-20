@@ -211,5 +211,12 @@ public class AdminService {
         return dao.deleteBooked(sId,seatNumList);
     };
 
+    public EnterpriseMemberDTO getAdminInfoById(String adminId){
+        return dao.getAdminInfoById(adminId);
+    };
+
+    public List<InfoDTO> getInfo(){
+        return dao.getInfo();
+    };
 }
 

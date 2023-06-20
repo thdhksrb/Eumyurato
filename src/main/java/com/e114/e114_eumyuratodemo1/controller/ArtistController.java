@@ -1,7 +1,6 @@
 package com.e114.e114_eumyuratodemo1.controller;
 
 import com.e114.e114_eumyuratodemo1.dto.*;
-import com.e114.e114_eumyuratodemo1.dao.ArtistMemberDAO;
 import com.e114.e114_eumyuratodemo1.jwt.JwtUtils;
 import com.e114.e114_eumyuratodemo1.service.ArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +21,6 @@ import java.util.Map;
 @Controller
 public class ArtistController {
 
-    @Autowired
-    private ArtistMemberDAO artistMemberDAO;
 
     @Autowired
     private ArtistService artistService;
@@ -46,7 +43,7 @@ public class ArtistController {
 
         if (artistUserId != null) {
             // ID를 이용해 아티스트 정보 가져오기
-            ArtistMemberDTO artist = artistMemberDAO.getArtistInfoById(artistUserId);
+            ArtistMemberDTO artist = artistService.getArtistInfoById(artistUserId);
             if (artist != null) {
                 return ResponseEntity.ok(artist);
             } else {
@@ -123,7 +120,7 @@ public class ArtistController {
 
     @GetMapping("/profile/artist/info/view")
     public String artistInfoview(Model model) {
-        List<InfoDTO> infos =  artistMemberDAO.getInfo();
+        List<InfoDTO> infos =  artistService.getInfo();
 
         model.addAttribute("infos", infos);
         return "html/profile/board/profile_artist_board";

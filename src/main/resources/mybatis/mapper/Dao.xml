@@ -7,7 +7,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.e114.e114_eumyuratodemo1.dao.IDAO">
+<mapper namespace="com.e114.e114_eumyuratodemo1.dao.MapDAO">
     <select id="viewSmallConcert" resultType="com.e114.e114_eumyuratodemo1.dto.SmallConcertDTO">
         <![CDATA[
         SELECT *
