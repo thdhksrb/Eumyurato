@@ -22,14 +22,14 @@ li {
 }
 
 .left-side {
-    width: 70%;
+    width: 73%;
     height: 100vh;
     background: #888;
 }
 
 .sideMenu {
     position: relative;
-    width: 30%;
+    width: 27%;
     height: 100vh;
     display: flex;
     flex-flow: column nowrap;
@@ -55,9 +55,9 @@ li {
 
 
 .nav_top {
-    background: #c4cee9;
+    background: #258fff;
     width: 100%;
-    height: 20%;
+    height: 15%;
     display: flex;
     flex-flow: column;
     align-items: center;
@@ -66,7 +66,7 @@ li {
 
 .nav_top > div {
     width: 100%;
-    height: 33.33%;
+    height: 50%;
     display: flex;
     align-items: center;
 }
@@ -74,6 +74,7 @@ li {
 .nav_hd {
     justify-content: space-between;
     padding: 0% 5%;
+    margin-bottom : 20px;
 }
 
 .nav_srBox {
@@ -94,9 +95,10 @@ li {
 .categoryWrap {
     justify-content: center;
     gap: 25px;
+    border: 2px solid #CCCCCC;
 }
 #loginBtn {
-    background-color: #3662cf;
+    background-color: #062d92;
     color: #fff;
 }
 #loginBtn:hover {
@@ -106,24 +108,31 @@ li {
 
 .categoryWrap > a {
     display: block;
-    width: 18%;
-    padding: 2% 2%;
-    background: #3662cf;
+    width: 14%;
+    padding: 4px 0 7px;
     text-align: center;
-    border-radius: 10px;
-    font-size: 12px;
+    border-radius: 3px;
     color: #fff;
+    font : 14px/1.5 'Malgun Gothic','돋움',dotum,sans-serif;
+    letter-spacing : -1px;
     transition: background-color 0.3s ease-in-out;
+    margin : 6px 6px;
 }
 
-.categoryWrap > a:hover {
-    background: #062d92;
+/*.categoryWrap > a:hover {*/
+/*    background: #062d92;*/
+/*    transform: scale(1.15);*/
+/*}*/
+
+.categoryWrap a.active {
+    background: rgba(13,91,212,.8);
     transform: scale(1.15);
+    font-weight: bold;
 }
 
 .nav_bt {
     width: 100%;
-    height: 80%;
+    height: 85%;
     background: #ffffff;
 }
 
@@ -209,6 +218,6 @@ li:hover p {
 }
 
 .conInfo {
-    height: 637px; /* 스크롤바가 나타날 최대 높이 */
+    height: 770px; /* 스크롤바가 나타날 최대 높이 */
     overflow-y: scroll; /* 세로 스크롤바를 보이게 한다. */
 }
