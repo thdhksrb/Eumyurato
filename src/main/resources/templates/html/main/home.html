@@ -16,307 +16,58 @@
     <!-- Bootstrap JavaScript -->
     <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js}"
             crossorigin="anonymous"></script>
-
 </head>
-<body id="page-top">
+<body class="linear-gradient">
+<div id="page-view">
+    <div class="layout">
+        <div style="position: absolute;    /*절대값으로 위치를 설정*/
+        left: 250px;    /* x축 */
+        top: 160px;">
 
-<nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="navLogin" style="margin-right: 150px;">
-    <div class="container" style="margin-left: 10px;">
-        <a class="navbar-brand" href="#page-top"><img th:src="@{/img/logo_name.png}"></a>
-    </div>
-    <button type="button" class="btn btn-primary fw-bolder fs-5 px-5 py-2 my-3 me-5" id="loginBtn"
-            th:onclick="|location.href='@{/loginjoin/common/login}'|">로그인
-    </button>
-</nav>
+            <div class="txt-intro">
+                <a style="font-size: 35px">지역 축제 및 소규모 공연 위치 기반 서비스</a>
+                <br>
+                <br>
+                <p style="font-size: 55px"><b>음유라토</b></p>
+            </div>
 
-<nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="navLogout" style="margin-right: 150px;">
-    <div class="container" style="margin-left: 10px;">
-        <a class="navbar-brand" href="#page-top"><img th:src="@{/img/logo_name.png}"></a>
+            <div>
+                <div style="flex-grow:1;position:relative">
+                    <a href="/map"> <img src="/static/img/poster.png"
+                                         style="width:400px;height:980px;position:absolute;top:150px;left:175%;transform:translate(-50%, -50%)"/>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <a id="mypageBtn" style="width: 30px; height: 30px; font-size: 20px;">
-            <img th:src="@{/img/person.png}" style="width: 40px; height: 40px; margin-bottom: 15px; cursor:pointer;"/>
-            <span id="userName" style="margin-left: 10px; font-weight: bold; font-size: 30px; cursor:pointer;"></span>님</a>
-        <a id="logoutBtn" href="/logout" style="margin-left: 20px;"></a>
-    </div>
-</nav>
-<!-- Masthead-->
-<header class="masthead bg-primary text-white text-center">
-    <div class="container d-flex align-items-center flex-column">
-        <!-- Masthead Avatar Image-->
-        <a th:href="@{/map}">
-            <img class="masthead-avatar mb-5" th:src="@{/img/logo_CLICK.png}" alt="..."
-                 style="width: 400px; height: 400px;"/>
-        </a>
-        <!-- Masthead Heading-->
-        <div class="animate-slide-in">
-            <h1 class="masthead-heading text-uppercase mb-0" style="color: #000000; opacity: 0;">음 유 라 토</h1>
-            <!-- Icon Divider-->
+    <div class="layout">
+        <div style="position: absolute;    /*절대값으로 위치를 설정*/
+        left: 280px;    /* x축 */
+        top: 600px;">
             <div class="divider-custom divider-light">
-                <div class="divider-custom-line"></div>
-                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                <div class="divider-custom-line"></div>
+                <h2 class="masthead-heading text-uppercase mb-0">공 지 사 항 </h2>
             </div>
-            <!-- Masthead Subheading-->
-            <p class="masthead-subheading font-weight-light mb-0" style="color: #000000; opacity: 0;">사용자들에게 다양한 소규모 공연과
-                버스킹의 정보 및 기회를
-                제공하여
-                <br>예술과 문화를 즐길 수 있는 경험을 제공하는 서비스</p>
-        </div>
-    </div>
-</header>
-<!-- Portfolio Section-->
-<div class="container d-flex align-items-center flex-column">
-    <!-- Masthead Heading-->
-    <!-- Icon Divider-->
-    <div class="divider-custom divider-light">
-        <h2 class="masthead-heading text-uppercase mb-0">주 간 차 트</h2>
-    </div>
-
-    <!-- HTML -->
-    <div class="divider-custom1 divider-light1 text-center" style="margin-bottom: -30px;">
-        <div class="divider-custom divider-light mx-auto text-center">
-            <div class="divider-custom divider-light">
-                <div class="divider-custom-line"></div>
-                <h3 class="masthead-heading text-uppercase mb-0 text-center">이달의 아티스트</h3>
-                <div class="divider-custom-line"></div>
-            </div>
-        </div>
-
-        <div class="divider-custom divider-light mx-auto text-center"> <!-- 수정된 부분 -->
-            <div class="divider-custom divider-light">
-                <div class="divider-custom-line"></div>
-                <h3 class="masthead-heading text-uppercase mb-0 text-center">이달의 공연</h3>
-                <div class="divider-custom-line"></div>
-            </div>
-        </div> <!-- 수정된 부분 -->
-    </div>
-    <div class="divider-custom1 divider-light1 text-center" >
-        <div class="divider-custom divider-light mx-auto text-center">
-            <div class="divider-custom divider-light">
-                <div class="col-lg-8 text-center">
-                    <table id="artistTable" class="table table-borderless fade-in">
-                        <thead>
-                        <tr>
-                            <th></th><!--순위-->
-                            <th></th><!--이미지-->
-                            <th></th><!--아티스트-->
-                            <th></th><!--장르-->
-                        </tr>
-                        </thead>
-                        <tbody id="artistTableBody">
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <div class="divider-custom divider-light mx-auto text-center">
-            <div class="divider-custom divider-light">
-                <div class="col-lg-8 text-center">
-                    <table id="concetTable" class="table table-borderless fade-in">
-                        <thead>
-                        <tr>
-                            <th></th><!--순위-->
-                            <th></th><!--이미지-->
-                            <th></th><!--공연명-->
-                        </tr>
-                        </thead>
-                        <tbody id="concetTableBody">
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-
-</div>
-<!-- Contact Section-->
-<section class="page-section" id="contact">
-    <div class="divider-custom divider-light">
-        <h2 class="masthead-heading text-uppercase mb-0">공 지 사 항 </h2>
-    </div>
-    <div class="divider-custom-line"></div>
-    <!--begin::Accordion-->
-    <div class="accordion mx-n5 mx-auto" style="max-width: 700px;" id="kt_accordion_1">
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="kt_accordion_1_header_1">
-                <button class="accordion-button fs-4 fw-bold" type="button" data-toggle="collapse"
-                        data-target="#kt_accordion_1_body_1" aria-expanded="true"
-                        aria-controls="kt_accordion_1_body_1">
-                    [공지] 시스템 개선작업으로 인한 서비스 일시중지 안내
-                </button>
-            </h2>
-            <div id="kt_accordion_1_body_1" class="accordion-collapse collapse show"
-                 aria-labelledby="kt_accordion_1_header_1" data-bs-parent="#kt_accordion_1">
-                <div class="accordion-body">
-                    안녕하세요 :) "Eumyurato"입니다.
-                    <br>
-                    언제나 "Eumyurato"을 이용해 주시는 고객님께 감사드립니다.
-                    <br>
-                    "Eumyurato"는 더 나은 사이트 운영 및 서비스 개선을 위해 아래와 같이
-                    <br>시스템 작업을 진행할 예정이며,
-                    <br>
-                    이에따라 작업 시간중 "Eumyurato"전체 또는 일부기능의 정상적인 서비스가 잠시중단될
-                    <br>예정이오니
-                    회원님의 양해 부탁 드립니다.
-                    <br>
-                    <br>
-                    <br>
-                    <p style="font-weight: bold">작업일시: 2023년 5월 17일 0시 부터 ~ 2023년 5월 31일 0시 까지
-                        <br>
-                        작업내용: "Eumyurato" 시스템 개선을 위한 재보수</p>
-                    <br>
-                    "Eumyurato"시스템 개선 작업으로 일시적으로 서비스가 중지됨을 양해바라며,
-                    <br>
-                    최대한 빠른 시간내에 작업을 완료하여 속히 정상화 될 수 있도록 하겠습니다.
-                    <br>
-                    다시한번 불편을 드려 대단히 죄송합니다.
-                    <br>
-                    감사합니다.
-                </div>
-            </div>
-        </div>
-
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="kt_accordion_1_header_2">
-                <button class="accordion-button fs-4 fw-bold collapsed" type="button" data-toggle="collapse"
-                        data-target="#kt_accordion_1_body_2" aria-expanded="false"
-                        aria-controls="kt_accordion_1_body_2">
-                    [공지] 저작권 안내
-                </button>
-            </h2>
-            <div id="kt_accordion_1_body_2" class="accordion-collapse collapse"
-                 aria-labelledby="kt_accordion_1_header_2" data-bs-parent="#kt_accordion_1">
-                <div class="accordion-body">
-                    소중한 "Eumyurato"의 저작권을 지켜주세요!
-                    <br>
-                    2023년부터 공개된 지적재산권과 특허권이 없는 사이트입니다.
-                    <br>
-                    이에 따라 무단 사용, 무단 복제, 유사캐릭터 제작을 금하며,
-                    <br>
-                    "Eumyurato"의 불법 굿즈 제품은 모두 법적 처벌을 받을 수 없는 점 유의 바랍니다.
-                    <br>
-                    <br>
-                    <p style="color: red; font-weight: bold;">* 현재 유사 사이트 제작 업체 찾아보고 있습니다.</p>
-                    <br>
-                    아름다운 저작권 문화를 만들어 나가길 바랍니다.
-                    <br>
-                    "Eumyurato"저작권을 지켜주세요.
-                </div>
-            </div>
-        </div>
-
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="kt_accordion_1_header_3">
-                <button class="accordion-button fs-4 fw-bold collapsed" type="button" data-toggle="collapse"
-                        data-target="#kt_accordion_1_body_3" aria-expanded="false"
-                        aria-controls="kt_accordion_1_body_3">
-                    [공지] "Eumyurato" 오픈 합니다!
-                </button>
-            </h2>
-            <div id="kt_accordion_1_body_3" class="accordion-collapse collapse"
-                 aria-labelledby="kt_accordion_1_header_3" data-bs-parent="#kt_accordion_1">
-                <div class="accordion-body">
-                    <p style="font-weight: bold; font-size: 15px;">"Eumyurato"는</p>
-                    <br>
-                    사용자들에게 다양한 소규모 공연과 버스킹의 정보 및 기회를 제공하여
-                    <br>
-                    예술과 문화를 즐길 수 있는 경험을 제공하는 서비스 입니다.
-                    <br>
-                    여러분의 많은 사랑과 관심 부탁드립니다.
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--end::Accordion-->
-</section>
-
-<!-- Footer-->
-<footer class="footer text-center">
-    <div class="container">
-        <div class="row">
-            <!-- Footer Location-->
-            <div class="col-lg-4 mb-5 mb-lg-0">
-                <h4 class="text-uppercase mb-4">TEAM E114</h4>
-                <p class="lead mb-0">
-                    외향인 한명과 내향인 4명 모인 팀
-                    <br/>
-                    인생에 있어서 최고의 행복은 우리가 사랑받고 있다는 확신이다.
-                </p>
-            </div>
-            <!-- Footer Social Icons-->
-            <div class="col-lg-4 mb-5 mb-lg-0">
-                <h4 class="text-uppercase mb-4">Our Github</h4>
-                <a class="btn btn-outline-light btn-social mx-1" th:href="@{https://github.com/bomin1996}">
-                    <img th:src="@{/img/bom.png}" alt="GitHub Profile"
-                         style="width: 3.25rem; height: 3.25rem; border-radius: 50%;"/>
-                </a>
-                <a class="btn btn-outline-light btn-social mx-1" th:href="@{https://github.com/thdhksrb}">
-                    <img th:src="@{/img/swk.jpg}" alt="GitHub Profile"
-                         style="width: 3.25rem; height: 3.25rem; border-radius: 50%;"/>
-                </a>
-                <a class="btn btn-outline-light btn-social mx-1" th:href="@{https://github.com/noeypark}">
-                    <img th:src="@{/img/noey.jpg}" alt="GitHub Profile"
-                         style="width: 3.25rem; height: 3.25rem; border-radius: 50%;"/>
-                </a>
-                <a class="btn btn-outline-light btn-social mx-1" th:href="@{https://github.com/Minchae128}">
-                    <img th:src="@{/img/smc.jpg}" alt="GitHub Profile"
-                         style="width: 3.25rem; height: 3.25rem; border-radius: 50%;"/>
-                </a>
-                <a class="btn btn-outline-light btn-social mx-1" th:href="@{https://github.com/hwewon}">
-                    <img th:src="@{/img/hea.jpg}" alt="GitHub Profile"
-                         style="width: 3.25rem; height: 3.25rem; border-radius: 50%;"/>
-                </a>
-            </div>
-            <!-- Footer About Text-->
-            <div class="col-lg-4">
-                <h4 class="text-uppercase mb-4">TEAM INTRO</h4>
-                <p class="lead mb-0">
-                    같이 성장할 기업의 연락을 기다립니다.
-                </p>
-            </div>
-        </div>
-    </div>
-</footer>
-<!-- Copyright Section-->
-<div class="copyright py-4 text-center text-white">
-    <div class="container"><small>본 페이지는 상업적 목적이 아닌 개인 포트폴리오용으로 제작되었습니다.</small></div>
-    <div class="container"><small>© 2023 TEAM E114. All Rights Reserved.</small></div>
-</div>
-<!-- Portfolio Modals-->
-<!-- Portfolio Modal 1-->
-<div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" aria-labelledby="portfolioModal1"
-     aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header border-0">
-                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center pb-5">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            <!-- Portfolio Modal - Title-->
-                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Log Cabin</h2>
-                            <!-- Icon Divider-->
-                            <div class="divider-custom">
-                                <div class="divider-custom-line"></div>
-                                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                <div class="divider-custom-line"></div>
-                            </div>
-                            <!-- Portfolio Modal - Image-->
-                            <img class="img-fluid rounded mb-5" th:src="@{/assets/img/portfolio/cabin.png}" alt="..."/>
-                            <!-- Portfolio Modal - Text-->
-                            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque
-                                assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit
-                                asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                            <button class="btn btn-primary" data-bs-dismiss="modal">
-                                <i class="fas fa-xmark fa-fw"></i>
-                                Close Window
-                            </button>
+            <div class="divider-custom-line"></div>
+            <!--begin::Accordion-->
+            <div class="accordion mx-n5 mx-auto" style="max-width: 700px;" id="kt_accordion_1">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="kt_accordion_1_header_1">
+                        <button class="accordion-button fs-4 fw-bold" type="button" data-toggle="collapse"
+                                data-target="#kt_accordion_1_body_1" aria-expanded="true"
+                                aria-controls="kt_accordion_1_body_1">
+                            [공지] "Eumyurato" 오픈 합니다!
+                        </button>
+                    </h2>
+                    <div id="kt_accordion_1_body_1" class="accordion-collapse collapse show"
+                         aria-labelledby="kt_accordion_1_header_1" data-bs-parent="#kt_accordion_1">
+                        <div class="accordion-body">
+                            <p style="font-weight: bold; font-size: 15px;">"Eumyurato"는</p>
+                            <br>
+                            사용자들에게 다양한 소규모 공연과 버스킹의 정보 및 기회를 제공하여
+                            <br>
+                            예술과 문화를 즐길 수 있는 경험을 제공하는 서비스 입니다.
+                            <br>
+                            여러분의 많은 사랑과 관심 부탁드립니다.
                         </div>
                     </div>
                 </div>
@@ -324,199 +75,5 @@
         </div>
     </div>
 </div>
-<!-- Portfolio Modal 2-->
-<div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" aria-labelledby="portfolioModal2"
-     aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header border-0">
-                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center pb-5">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            <!-- Portfolio Modal - Title-->
-                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Tasty Cake</h2>
-                            <!-- Icon Divider-->
-                            <div class="divider-custom">
-                                <div class="divider-custom-line"></div>
-                                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                <div class="divider-custom-line"></div>
-                            </div>
-                            <!-- Portfolio Modal - Image-->
-                            <img class="img-fluid rounded mb-5" th:src="@{/assets/img/portfolio/cake.png}" alt="..."/>
-                            <!-- Portfolio Modal - Text-->
-                            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque
-                                assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit
-                                asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                            <button class="btn btn-primary" data-bs-dismiss="modal">
-                                <i class="fas fa-xmark fa-fw"></i>
-                                Close Window
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Portfolio Modal 3-->
-<div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" aria-labelledby="portfolioModal3"
-     aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header border-0">
-                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center pb-5">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            <!-- Portfolio Modal - Title-->
-                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Circus Tent</h2>
-                            <!-- Icon Divider-->
-                            <div class="divider-custom">
-                                <div class="divider-custom-line"></div>
-                                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                <div class="divider-custom-line"></div>
-                            </div>
-                            <!-- Portfolio Modal - Image-->
-                            <img class="img-fluid rounded mb-5" th:src="@{/assets/img/portfolio/circus.png}" alt="..."/>
-                            <!-- Portfolio Modal - Text-->
-                            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque
-                                assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit
-                                asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                            <button class="btn btn-primary" data-bs-dismiss="modal">
-                                <i class="fas fa-xmark fa-fw"></i>
-                                Close Window
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Portfolio Modal 4-->
-<div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" aria-labelledby="portfolioModal4"
-     aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header border-0">
-                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center pb-5">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            <!-- Portfolio Modal - Title-->
-                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Controller</h2>
-                            <!-- Icon Divider-->
-                            <div class="divider-custom">
-                                <div class="divider-custom-line"></div>
-                                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                <div class="divider-custom-line"></div>
-                            </div>
-                            <!-- Portfolio Modal - Image-->
-                            <img class="img-fluid rounded mb-5" th:src="@{/assets/img/portfolio/game.png}" alt="..."/>
-                            <!-- Portfolio Modal - Text-->
-                            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque
-                                assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit
-                                asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                            <button class="btn btn-primary" data-bs-dismiss="modal">
-                                <i class="fas fa-xmark fa-fw"></i>
-                                Close Window
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Portfolio Modal 5-->
-<div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" aria-labelledby="portfolioModal5"
-     aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header border-0">
-                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center pb-5">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            <!-- Portfolio Modal - Title-->
-                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Locked Safe</h2>
-                            <!-- Icon Divider-->
-                            <div class="divider-custom">
-                                <div class="divider-custom-line"></div>
-                                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                <div class="divider-custom-line"></div>
-                            </div>
-                            <!-- Portfolio Modal - Image-->
-                            <img class="img-fluid rounded mb-5" th:src="@{/assets/img/portfolio/safe.png}" alt="..."/>
-                            <!-- Portfolio Modal - Text-->
-                            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque
-                                assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit
-                                asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                            <button class="btn btn-primary" data-bs-dismiss="modal">
-                                <i class="fas fa-xmark fa-fw"></i>
-                                Close Window
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Portfolio Modal 6-->
-<div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" aria-labelledby="portfolioModal6"
-     aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header border-0">
-                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center pb-5">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            <!-- Portfolio Modal - Title-->
-                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Submarine</h2>
-                            <!-- Icon Divider-->
-                            <div class="divider-custom">
-                                <div class="divider-custom-line"></div>
-                                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                <div class="divider-custom-line"></div>
-                            </div>
-                            <!-- Portfolio Modal - Image-->
-                            <img class="img-fluid rounded mb-5" src="assets/img/portfolio/submarine.png" alt="..."/>
-                            <!-- Portfolio Modal - Text-->
-                            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque
-                                assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit
-                                asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                            <button class="btn btn-primary" data-bs-dismiss="modal">
-                                <i class="fas fa-xmark fa-fw"></i>
-                                Close Window
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<script th:inline="javascript">
-    const loginUserJson = /*[[${loginUserJson}]]*/ null;
-    if (loginUserJson !== null) {
-        const loginUser = JSON.parse(loginUserJson);
-        window.sessionStorage.setItem("loginUser", loginUserJson);
-    }
-</script>
-<script th:src="@{/js/main/home.js}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jwt-decode/2.2.0/jwt-decode.min.js"></script>
 </body>
 </html>
