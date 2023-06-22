@@ -109,6 +109,12 @@ window.onload = function() {
                 scheduleList.forEach(schedule => {
                     const li = document.createElement('li');
                     li.textContent = schedule.conDate;
+                    li.style.border = "1px solid rgb(212, 211, 201)";
+                    li.style.height = "25px";
+                    li.style.marginBottom = '5px';
+                    li.style.weight = "200px";
+                    li.style.fontWeight = 'bold';
+                    li.style.fontFamily = 'Verdana';
                     schedulesUl.appendChild(li);
                 });
                 selectSeat.disabled = true;
@@ -157,6 +163,14 @@ searchBtn.addEventListener('click', () => {
                 const schedule = schedules.message;
                 const li = document.createElement('li');
                 li.textContent = schedule.conDate;
+
+                li.style.border = "1px solid rgb(212, 211, 201)";
+                li.style.height = "25px";
+                li.style.weight = "200px";
+                li.style.fontFamily = 'Verdana';
+                li.style.fontWeight = 'bold';
+
+
                 schedulesUl.appendChild(li);
                 console.log(schedules);
                 selectSeat.disabled = false;
