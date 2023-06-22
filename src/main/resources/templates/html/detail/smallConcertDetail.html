@@ -43,13 +43,13 @@
     <div class="d-flex flex-column flex-lg-row flex-column-fluid" id="kt_login">
         <!-- begin::Aside -->
         <!-- 사이드 -->
-        <div class="d-flex flex-column flex-lg-row-auto bg-primary pt-15 pt-lg-0" id="leftArea">
+        <div>
             <!-- begin::Aside Top -->
-            <div class="d-flex flex-row-fluid flex-center flex-column-auto flex-column text-center mb-5 align-items-center">
+            <div style="margin-top: 20px;">
                 <!-- begin::Aside Logo -->
                 <a th:href="@{/home}" class="mb-6">
-                    <div class="d-flex justify-content-center align-items-center" style="height: 100%; width: 100%;">
-                        <img alt="로고" th:src="@{/img/E114_logo.png}" class="h-450px h-lg-450px"/>
+                    <div style="height: 100%; width: 100%;">
+                        <img alt="로고" th:src="@{/img/logo_name.png}" />
                     </div>
                 </a>
                 <!-- end::Aside Logo -->
@@ -57,28 +57,30 @@
         </div>
         <!-- end::Aside -->
         <div class="d-flex flex-column flex-lg-row-auto flex-column-fluid" id="rightArea"
-             style="display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; max-width: 75.8%; overflow-x: hidden;">
+             style="display: flex; flex-direction: column; width: 100%; max-width: 75.8%; overflow-x: hidden;">
             <div class="d-flex flex-wrap"
-                 style="width: 100%; height: 188px; background-color:#ffffff; margin-bottom: 0; justify-content: center; align-items: center;">
-                <div style="color:#000000; background-color:#ffffff; width: 800px; height: 100px; font-size: 40px">
+                 style="width: 100%; height: 188px; background-color:#ffffff; margin-bottom: 0;">
+                <div style="color:#000000; background-color:#ffffff; width: 800px; height: 100px; margin-top:100px; font-size: 40px">
                     <strong>소규모 공연</strong>
                 </div>
 
-                <div id="navLogin">
-                    <button type="button" class="btn btn-primary fw-bolder fs-5 px-5 py-2 my-3 me-5" id="loginBtn"
+                <div style="width: 400px;  height: 60px; margin-top: 20px;"id="navLogin">
+                    <button type="button" style="margin-left:300px" class="btn btn-primary fw-bolder fs-5 px-5 py-2 my-3 me-5" id="loginBtn"
                             th:onclick="|location.href='@{/loginjoin/common/login}'|">로그인</button>
                 </div>
-                <div style="margin-right: 20px;" id="navLogout">
-                    <a id="mypageBtn" style="width: 200px; height: 30px;font-size: large;"><img th:src="@{/img/person.png}" style="width: 30px; height: 30px; cursor:pointer;"/>
-                        <span id="userName" style="display: inline-block; margin-left: 10px; font-weight: bold; font-size: large; cursor:pointer;"></span>님</a>
+                <div style="margin-left:200px;margin-right: 20px;" id="navLogout">
+                    <div style="margin-top:50px;">
+                        <a id="mypageBtn" style="width: 200px; height: 30px;font-size: large;"><img th:src="@{/img/person.png}" style="width: 30px; height: 30px; cursor:pointer;"/>
+                            <span id="userName" style="display: inline-block; margin-left: 10px; font-weight: bold; font-size: large; cursor:pointer;"></span>님</a>
 
-                    <a id="logoutBtn" href="/map" style="margin-left: 20px;"></a>
+                        <a id="logoutBtn" href="/map" style="margin-left: 20px;"></a>
+                    </div>
                 </div>
 
             </div>
             <div class="d-flex justify-content-center align-items-center"
-                 style="width: 100%; height: 600px; background-color:#ffffff; margin-bottom: 0; position: relative;">
-                <div id="posterContainer" style="width: 300px; height: 500px;">
+                 style="width: 1100px; height: 600px; background-color:rgb(242, 240, 229); border: 2px solid rgb(212, 211, 201); position: relative;">
+                <div id="posterContainer" style="width: 300px; height: 500px; margin-left:50px">
 <!--                    <img id="posterImg" style="object-fit: contain; width: 100%; height: 100%;">-->
                 </div>
                 <ul id="detailList" style="list-style-type: none; padding:0; margin-left: 30px; font-size:30px; width: 70%;"></ul>
@@ -87,16 +89,17 @@
                         <img id="star-img" th:src="@{/assets/star.png}" alt="star icon" style="width:40px;height:40px;">
                     </button>
                 </div>
-            </div>
-            <div class="d-flex flex-wrap" style="width: 100%; height: 188px; background-color:#ffffff; margin-bottom: 0;">
-                <div id="price" class="fs-3" style="color:#000000; background-color:#ffffff; width: 150px; height: 50px; margin-top: 10px; margin-left: 72%;">
+                <div class="d-flex flex-wrap" style="width: 100%;position: absolute; bottom: 0; right: 0; height: 80px;">
+                    <div id="price" class="fs-3" style="color:#000000; width: 160px; height: 50px; margin-top: 10px; margin-left: 63%;">
 
+                    </div>
+                    <button type="button" id="reservation"
+                            class="btn btn-primary fw-bolder fs-1 px-2 py-3 my-3 text-center"
+                            style=" width: 200px; height: 50px; margin-left: auto; margin-right: 30px;">예매하기
+                    </button>
                 </div>
-                <button type="button" id="reservation"
-                        class="btn btn-primary fw-bolder fs-1 px-2 py-3 my-3 text-center"
-                        style=" width: 200px; height: 50px; margin-left: auto; margin-right: 30px;">예매하기
-                </button>
             </div>
+
         </div>
     </div>
 </div>
