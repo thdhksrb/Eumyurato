@@ -97,6 +97,7 @@ xhr.onload = function() {
         for (let i = 1; i <= 7; i++) {
             div = document.createElement("div");
             seatWrapper.append(div);
+
             for (let j = 1; j <= 7; j++) {
                 const input = document.createElement('input');
                 input.type = "button";
@@ -108,7 +109,14 @@ xhr.onload = function() {
 
                 if (seat.includes(input.value)) {
                     input.disabled = true;
+                    input.style.backgroundColor = "#777";
                 }
+
+                input.style.border = "1px solid #ccc";
+                input.style.borderRadius = "5px";
+                input.style.padding = "10px";
+                input.style.margin = "5px";
+                input.style.cursor = "pointer";
 
                 input.addEventListener('click', function(e) {
                     console.log(e.target.value);
@@ -220,6 +228,5 @@ function mapping(input, i, j) {
         input.value = "G" + j;
     }
 }
-
 
 
