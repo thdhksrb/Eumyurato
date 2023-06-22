@@ -89,7 +89,6 @@ $.ajax({
         window.localStorage.setItem("conPrice",data.myData.concert.price * data.myData.count);
 
         li.append($('<p>').html('<strong>'+ data.myData.concert.name+ '</strong>'));
-        li.append($('<p>').html('<strong>공연 일자: </strong>' + data.myData.concert.startDate + ' ~ ' + data.myData.concert.lastDate));
         li.append($('<p>').html('<strong>장소: </strong>' + data.myData.concert.location));
         li.append($('<p>').html('<strong>공연자: </strong>' + data.myData.concert.pname));
         li.append($('<h2 style="margin-top: 20px; margin-bottom: 20px;">').html('<strong>*선택내역*</strong>'));
