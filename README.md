@@ -2,10 +2,12 @@
 
 ### Spring boot를 활용한 버스킹/소규모 공연과 지역축제 위치 기반 정보 서비스 및 티켓팅/결제 기능 구현
 
-![image](https://github.com/bomin1996/E114_Eumyurato/assets/126555995/61a14e01-7142-4c95-9ecb-5aa58fe47c03)
+![image (3)](https://github.com/thdhksrb/Eumyurato/assets/121412330/5145dc1d-bc37-4590-9046-8c0a483e2d7a)
+
+![image (2)](https://github.com/thdhksrb/Eumyurato/assets/121412330/625c0a2e-dafa-4ced-a701-91b90fbe2ff5)
 
 
-![image](https://github.com/bomin1996/E114_Eumyurato/assets/121412330/f0373202-1a25-433b-96a5-bd435d275c2d)
+
 
 팀명: 음유라토
 
