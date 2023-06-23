@@ -103,13 +103,6 @@
         </div>
     </div>
 </div>
-<script th:inline="javascript">
-    const loginUserJson = /*[[${loginUserJson}]]*/ null;
-    if (loginUserJson !== null) {
-        const loginUser = JSON.parse(loginUserJson);
-        window.sessionStorage.setItem("loginUser", loginUserJson);
-    }
-</script>
 <script type="text/javascript" th:src="@{/js/detail/smallConcertDetail.js}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jwt-decode/2.2.0/jwt-decode.min.js"></script>
 

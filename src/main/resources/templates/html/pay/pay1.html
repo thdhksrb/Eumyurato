@@ -115,13 +115,6 @@
         </div>
     </div>
 </div>
-<script th:inline="javascript">
-    const loginUserJson = /*[[${loginUserJson}]]*/ null;
-    if (loginUserJson !== null) {
-        const loginUser = JSON.parse(loginUserJson);
-        window.sessionStorage.setItem("loginUser", loginUserJson);
-    }
-</script>
 <!--jQuery 기본 js파일-->
 <script th:src="@{http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js}"></script>
 <!--jQuery UI 라이브러리 js파일-->

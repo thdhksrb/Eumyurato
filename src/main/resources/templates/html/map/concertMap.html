@@ -11,6 +11,13 @@
     <!--end::Global Stylesheets Bundle-->
     <title>EUMYURATO :: MAP</title>
     <link rel="icon" type="image/x-icon" th:href="@{/img/E114_logo.png}"/>
+    <script type="text/javascript">             //window.performance.timing.navigation 을 이용한 사용자가 느끼는 페이지 로딩 시간 값구하기
+        function onLoad() { //함수 정의
+            var now = new Date().getTime(); //현재시간 기록
+            var page_load_time = now - performance.timing.navigationStart; //현재시간에서 로딩시간 차이
+            console.log("사용자 인식 페이지 로딩시간 : " + page_load_time);
+        }
+    </script>
 </head>
 <body>
 <div class="wrap">
@@ -91,13 +98,6 @@
         </div>
     </div>
 </div>
-<script th:inline="javascript">
-    const loginUserJson = /*[[${loginUserJson}]]*/ null;
-    if (loginUserJson !== null) {
-        const loginUser = JSON.parse(loginUserJson);
-        window.sessionStorage.setItem("loginUser", loginUserJson);
-    }
-</script>
 
 <!--begin::Global Javascript Bundle(used by all pages)-->
 <script th:src="@{/js/plugins_bundle.js}"></script>
@@ -107,6 +107,9 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8e0cac0abc5f71a7357818037fc4b48c&libraries=services"></script>
 <script th:src="@{/js/map/concertMap.js}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jwt-decode/2.2.0/jwt-decode.min.js"></script>
+<script>
+    onLoad(); //onLoad 함수 실행 , 사용자가 인식하는 페이지 로딩시간 구하기.
+</script>
 </body>
 </html>
 
